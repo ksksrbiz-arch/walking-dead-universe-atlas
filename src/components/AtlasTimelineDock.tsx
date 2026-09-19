@@ -36,7 +36,7 @@ export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,se
    <div className="atlasTimelineLanes">
     {ORDER.map(key=>{const meta=META[key];const items=visible.filter(x=>x.seriesId===meta.id);const active=activeSeries.has(meta.id);return <div className={"atlasTimelineLane "+(active?"active":"")} key={key}>
       <button className="atlasTimelineLaneLabel" onClick={()=>onYearChange(items.find(x=>x.start>=year)?.start??year)} style={{"--lane":meta.color} as CSSProperties}>{meta.short}</button>
-      <div className="atlasTimelineTrack">{items.map(item=>{const left=pos(item.start);const width=Math.max(.42,pos(item.end)-left);const isSelected=item.id===selectedEpisode;return <button key={item.id} className={"atlasTimelineItem "+(item.kind==="event"?"event":"episode")+(isSelected?" selected":"")} style={{left:left+"%",width:Math.min(18,Math.max(width,item.kind==="event"?.55:.62))+"%","--item":meta.color} as CSSProperties} title={item.title} onClick={()=>onEpisode(item.id)} aria-label={item.title}><i/></button>})}</div>
+      <div className="atlasTimelineTrack">{items.map(item=>{const left=pos(item.start);const width=Math.max(.42,pos(item.end)-left);const isSelected=item.id===selectedEpisode;return <button key={item.id} className={"atlasTimelineItem "+(item.kind==="event"?"event":"episode")+(isSelected?" selected":"")} style={{left:left+"%",width:Math.min(18,Math.max(width,item.kind==="event" ? .55 : .62))+"%","--item":meta.color} as CSSProperties} title={item.title} onClick={()=>onEpisode(item.id)} aria-label={item.title}><i/></button>})}</div>
      </div>})}
     <div className="atlasTimelineCursor" style={{left:pos(year)+"%"}} aria-hidden="true"><span/></div>
    </div>
