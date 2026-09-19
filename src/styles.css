@@ -675,3 +675,80 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
   .entityHero{height:98px;min-height:98px}
   .detailGrid>div{min-height:43px}
 }
+
+
+/* --- Synchronized Atlas chronology: timeline spine over the cinematic map --- */
+.atlasTimelineDock{
+  position:absolute;
+  z-index:52;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  width:min(900px,calc(100% - 360px));
+  min-width:620px;
+  color:#e8edeb;
+  border:1px solid #ffffff18;
+  border-radius:18px;
+  background:linear-gradient(180deg,#0a0f10ee,#080c0df5);
+  box-shadow:0 20px 60px #0009;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  overflow:hidden;
+}
+.atlasTimelineHead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 12px;border-bottom:1px solid #ffffff0d}
+.atlasTimelineTitle{display:flex;align-items:center;gap:8px;min-width:0}
+.timelineLiveDot{width:6px;height:6px;border-radius:50%;background:#cbd3d1;box-shadow:0 0 12px #dce4e277}
+.atlasTimelineTitle>div{display:flex;align-items:baseline;gap:7px}
+.atlasTimelineTitle small{font-size:6px;letter-spacing:.16em;color:#778284;font-weight:900}
+.atlasTimelineTitle b{font-size:16px;font-variant-numeric:tabular-nums}
+.timelineCount{font-size:6px;color:#7d898a;border:1px solid #ffffff12;border-radius:999px;padding:4px 6px;white-space:nowrap}
+.atlasTimelineActions{display:flex;align-items:center;gap:8px;min-width:0}
+.atlasTimelineActions button{width:26px;height:26px;border:1px solid #ffffff18;border-radius:8px;background:#151b1c;color:#e9eeec;font-size:9px}
+.atlasTimelineActions button.playing{background:#e7ece9;color:#101617}
+.atlasTimelineActions output{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#7e898b;font-size:7px}
+.atlasTimelineBody{position:relative;padding:22px 12px 8px}
+.atlasTimelineScale{position:absolute;left:66px;right:12px;top:3px;height:15px;pointer-events:none}
+.atlasTimelineScale button{position:absolute;transform:translateX(-50%);border:0;background:transparent;color:#687375;font-size:6px;padding:2px;pointer-events:auto}
+.atlasTimelineLanes{position:relative}
+.atlasTimelineLane{display:grid;grid-template-columns:54px 1fr;align-items:center;height:16px;opacity:.45}
+.atlasTimelineLane.active{opacity:1}
+.atlasTimelineLaneLabel{height:14px;border:0;background:transparent;color:#7b8687;font-size:6px;font-weight:900;letter-spacing:.08em;text-align:left;padding:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.atlasTimelineLane.active .atlasTimelineLaneLabel{color:var(--lane)}
+.atlasTimelineTrack{position:relative;height:8px;border-top:1px solid #ffffff0b}
+.atlasTimelineItem{position:absolute;top:-3px;height:7px;min-width:2px;padding:0;border:0;border-radius:99px;background:var(--item);opacity:.48;box-shadow:0 0 0 1px #0003;cursor:pointer}
+.atlasTimelineItem.episode{border-radius:2px}
+.atlasTimelineItem.event{height:8px;width:8px!important;border-radius:50%;transform:translateX(-50%);opacity:.72}
+.atlasTimelineItem:hover,.atlasTimelineItem.selected{opacity:1;z-index:3;box-shadow:0 0 0 1px #fff8,0 0 12px var(--item)}
+.atlasTimelineItem i{display:block;width:100%;height:100%}
+.atlasTimelineCursor{position:absolute;top:-2px;bottom:0;width:1px;background:#f1f3efaa;pointer-events:none;z-index:5}
+.atlasTimelineCursor span{position:absolute;top:-5px;left:-3px;width:7px;height:7px;border-radius:50%;background:#edf1ee;box-shadow:0 0 12px #fff8}
+.atlasTimelineFooter{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:7px;margin-top:6px;color:#697577;font-size:6px}
+.atlasTimelineFooter input{width:100%;accent-color:#dfe5e2;height:12px}
+@media(max-width:699px){
+ .atlasTimelineDock{left:8px;right:8px;bottom:calc(61px + env(safe-area-inset-bottom));transform:none;width:auto;min-width:0;border-radius:17px;background:#080d0ef2;box-shadow:0 18px 55px #000b}
+ .atlasTimelineHead{padding:8px 10px;gap:8px}
+ .atlasTimelineTitle>div{gap:5px}
+ .atlasTimelineTitle small{font-size:5px}
+ .atlasTimelineTitle b{font-size:14px}
+ .timelineCount{font-size:5.5px;padding:3px 5px}
+ .atlasTimelineActions output{display:none}
+ .atlasTimelineActions button{width:30px;height:30px;border-radius:9px}
+ .atlasTimelineBody{padding:19px 8px 7px}
+ .atlasTimelineScale{left:52px;right:8px}
+ .atlasTimelineLane{grid-template-columns:46px 1fr;height:14px}
+ .atlasTimelineLaneLabel{font-size:5px}
+ .atlasTimelineTrack{height:7px}
+ .atlasTimelineItem{top:-3px;height:6px}
+ .atlasTimelineItem.event{height:7px;width:7px!important}
+ .atlasTimelineFooter{font-size:5px;gap:5px;margin-top:5px}
+ .timeMachine{display:none}
+}
+@media(max-width:430px){
+ .atlasTimelineDock{bottom:calc(59px + env(safe-area-inset-bottom));}
+ .atlasTimelineTitle small{display:none}
+ .atlasTimelineBody{padding-top:18px}
+ .atlasTimelineLane{height:13px}
+ .atlasTimelineFooter span:first-child{display:none}
+ .atlasTimelineFooter{grid-template-columns:1fr auto}
+}
+@media(prefers-reduced-motion:reduce){.atlasTimelineItem{transition:none}}
