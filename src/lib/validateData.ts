@@ -27,6 +27,19 @@ export function validateAtlasData(){
     for(const id of episode.factionIds??[]) if(!factionIds.has(id)) errors.push(`Episode ${episode.id} references missing faction ${id}`);
     for(const id of episode.connectionIds??[]) if(!connectionIds.has(id)) errors.push(`Episode ${episode.id} references missing connection ${id}`);
   }
+  const charIndex=(atlasData as any).characterEpisodes?.episodesByCharacter||{};
+  const locIndex=(atlasData as any).locationEpisodes?.episodesByLocation||{};
+  for(const [characterId,episodeIds] of Object.entries(charIndex)){
+    if(!characterIds.has(characterId))errors.push(`Character index references missing character ${characterId}`);
+    for(const episodeId of (episodeIds as string[]))if(!(atlasData as any).episodes.some((e:any)=>e.id===episodeId))errors.push(`Character index ${characterId} references missing episode ${episodeId}`);
+  }
+  for(const [locationId,episodeIds] of Object.entries(locIndex)){
+    if(!locationIds.has(locationId))errors.push(`Location index references missing location ${locationId}`);
+    for(const episodeId of (episodeIds as string[]))if(!(atlasData as any).episodes.some((e:any)=>e.id===episodeId))errors.push(`Location index ${locationId} references missing episode ${episodeId}`);
+  }
+  for(const episode of (atlasData as any).episodes){
+    for(const characterId of episode.characterIds||[])if(!(charIndex[characterId]||[]).includes(episode.id))errors.push(`Episode ${episode.id} missing reverse character index for ${characterId}`);
+  }
   void seasonIds; void locationIds;
-  return errors;
+  return [...new Set(errors)];
 }
