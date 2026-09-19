@@ -96,6 +96,27 @@ export function getLocationEpisodeIds(locationId:string){
 
 export const entityGraph=buildEntityGraph();
 
+export function getEpisodeConnectionIds(episodeId:string):string[]{
+ const episode=atlasData.episodes.find((e:any)=>e.id===episodeId) as any;
+ if(!episode)return [];
+ const has=(kind:EntityKind,id:string)=>{
+  if(kind==="episode")return episode.id===id;
+  if(kind==="series")return episode.seriesId===id;
+  if(kind==="character")return (episode.characterIds??[]).includes(id);
+  if(kind==="location")return (episode.locationIds??[]).includes(id);
+  if(kind==="community")return (episode.communityIds??[]).includes(id);
+  if(kind==="faction")return (episode.factionIds??[]).includes(id);
+  return false;
+ };
+ const direct=new Set<string>(episode.connectionIds??[]);
+ for(const connection of atlasData.connections as any[]){
+  const fromKind=resolveEntityKind(connection.fromId);
+  const toKind=resolveEntityKind(connection.toId);
+  if(fromKind&&toKind&&has(fromKind,connection.fromId)&&has(toKind,connection.toId))direct.add(connection.id);
+ }
+ return [...direct];
+}
+
 export function getEntityNeighborhood(kind:EntityKind,id:string){
   const nodeKey=key(kind,id);
   const edges=entityGraph.adjacency.get(nodeKey)||[];
