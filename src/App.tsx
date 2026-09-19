@@ -11,6 +11,8 @@ import episodeMedia from "../data/episodeMedia.json";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
 import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
+import {getCharacterEpisodeIds,getLocationEpisodeIds} from "./lib/entityGraph";
+import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
 
 type View="map"|"timeline"|"people"|"guide";
 type SearchKind="location"|"character"|"community"|"faction"|"episode";
@@ -34,7 +36,7 @@ const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:
 const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
 const MOBILE_HOME_X=-80;
 const MOBILE_HOME_Y=85;
-const onAtlasImageError=(e:React.SyntheticEvent<HTMLImageElement>,source:string)=>{const img=e.currentTarget;if(!source||img.dataset.fallback==="1")return;img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;};
+const onAtlasImageError=(e:React.SyntheticEvent<HTMLImageElement>,source:string)=>{const img=e.currentTarget;if(!source||img.dataset.fallback==="1")return;observeImageError(source);img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;};
 const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
 const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
 
@@ -76,6 +78,8 @@ export default function App(){
  const [timeOpen,setTimeOpen]=useState(false);
  const [playing,setPlaying]=useState(false);
  const drag=useRef({x:0,y:0,px:0,py:0,moved:false});
+ const gestureStart=useRef<number|null>(null);
+ const gestureDistance=useRef(0);
  const pointers=useRef(new Map<number,{x:number;y:number}>());
  const pinch=useRef<{distance:number;zoom:number;x:number;y:number;midX:number;midY:number}|null>(null);
  const mapSvgRef=useRef<SVGSVGElement|null>(null);
@@ -84,6 +88,7 @@ export default function App(){
  const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
 
  useEffect(()=>setDataErrors(validateAtlasData()),[]);
+ useEffect(()=>{initAtlasPerformance()},[]);
  useEffect(()=>{const onResize=()=>setIsMobileMap(window.innerWidth<700);window.addEventListener("resize",onResize);return()=>window.removeEventListener("resize",onResize)},[]);
  const applyMapTransform=(x:number,y:number,z:number,animate=false)=>{
    const el=mapSvgRef.current;
@@ -135,9 +140,9 @@ export default function App(){
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
  const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,vbW=1000,vbH=600,scale=Math.max(w/vbW,h/vbH)*visual.current.zoom;return {x:Math.max(0,(vbW*scale-w)/2),y:Math.max(0,(vbH*scale-h)/2)}};
- const resetMap=()=>{const homeX=isMobileMap?MOBILE_HOME_X:0;const homeY=isMobileMap?MOBILE_HOME_Y:0;visual.current={x:homeX,y:homeY,zoom:1};setZoom(1);setPan({x:homeX,y:homeY});};
- const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const eps=atlasData.episodes.filter((e:any)=>e.characterIds?.includes(id)).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))] as string[];const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("people");setSheet("open")};
- const selectLocation=(l:Location)=>{
+ const resetMap=()=>{const homeX=isMobileMap?MOBILE_HOME_X:0;const homeY=isMobileMap?MOBILE_HOME_Y:0;visual.current={x:homeX,y:homeY,zoom:1};setZoom(1);setPan({x:homeX,y:homeY});trackAtlasMetric("map-reset",1,{mobile:isMobileMap});};
+ const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const ids=getCharacterEpisodeIds(id);const eps=ids.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("people");setSheet("open");trackAtlasMetric("character-select",eps.length,{character:id});};
+ const selectLocation=(l:Location)=>{ const focusStarted=performance.now();
    setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
    window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
      const surface=mapSvgRef.current;
@@ -155,12 +160,12 @@ export default function App(){
      const nextY=clamp(visual.current.y+dy,-limit,limit);
      visual.current={...visual.current,x:nextX,y:nextY};
      applyMapTransform(nextX,nextY,visual.current.zoom,true);
-     setPan({x:nextX,y:nextY});
+     setPan({x:nextX,y:nextY});trackAtlasMetric("location-focus",performance.now()-focusStarted,{location:l.id,linkedEpisodes:getLocationEpisodeIds(l.id).length});
    }));
  };
  const setYearForEpisode=(raw:any)=>{const storyYear=raw?.timelineStart ?? raw?.timelineEnd ?? raw?.airDate?.slice(0,4);if(storyYear)setYear(Number(storyYear))};
  const selectEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;setYearForEpisode(raw);setSelectedEpisode(id);setSelectedLocation(null);setView("timeline");setSheet("open")};
- const focusEpisodeGeography=(raw:any)=>{
+ const focusEpisodeGeography=(raw:any)=>{ const focusStarted=performance.now();
    const ids=(raw?.locationIds??[]) as string[];
    if(!ids.length)return;
    window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
@@ -181,7 +186,7 @@ export default function App(){
      const nextY=clamp(visual.current.y+(targetY-markerY),-nextYLimit,nextYLimit);
      visual.current={...visual.current,x:nextX,y:nextY};
      applyMapTransform(nextX,nextY,visual.current.zoom,true);
-     setPan({x:nextX,y:nextY});
+     setPan({x:nextX,y:nextY});trackAtlasMetric("episode-geography-focus",performance.now()-focusStarted,{episode:raw?.id||"",locations:ids.length});
    }));
  };
  const selectAtlasEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;setYearForEpisode(raw);setSelectedEpisode(id);setSelectedLocation(null);setView("map");setSheet("open");focusEpisodeGeography(raw)};
@@ -190,6 +195,7 @@ export default function App(){
    e.preventDefault();
    e.currentTarget.setPointerCapture?.(e.pointerId);
    pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(gestureStart.current===null)gestureStart.current=performance.now();
    if(pointers.current.size===2){
      const p=[...pointers.current.values()];
      pinch.current={distance:Math.max(1,Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)),zoom:visual.current.zoom,x:visual.current.x,y:visual.current.y,midX:(p[0].x+p[1].x)/2,midY:(p[0].y+p[1].y)/2};
@@ -211,22 +217,19 @@ export default function App(){
      nextZoom=clamp(pinch.current.zoom*d/pinch.current.distance,1,5);
      const rect=mapSvgRef.current?.getBoundingClientRect();
      if(rect){
-       const centerX=rect.left+rect.width/2;
-       const centerY=rect.top+rect.height/2;
-       const midX=(p[0].x+p[1].x)/2;
-       const midY=(p[0].y+p[1].y)/2;
+       const centerX=rect.left+rect.width/2,centerY=rect.top+rect.height/2;
+       const midX=(p[0].x+p[1].x)/2,midY=(p[0].y+p[1].y)/2;
        const ratio=nextZoom/pinch.current.zoom;
        nextX=(midX-centerX)*(1-ratio)+ratio*pinch.current.x;
        nextY=(midY-centerY)*(1-ratio)+ratio*pinch.current.y;
        const limits=getMapPanLimits();
-       nextX=clamp(nextX,-limits.x,limits.x);
-       nextY=clamp(nextY,-limits.y,limits.y);
+       nextX=clamp(nextX,-limits.x,limits.x);nextY=clamp(nextY,-limits.y,limits.y);
      }
+     gestureDistance.current+=d;
      drag.current.moved=true;
    }else{
      const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
      if(Math.abs(dx)+Math.abs(dy)>4)drag.current.moved=true;
-     visual.current.zoom=nextZoom;
      const limits=getMapPanLimits();
      nextX=clamp(drag.current.px+dx,-limits.x,limits.x);
      nextY=clamp(drag.current.py+dy,-limits.y,limits.y);
@@ -238,12 +241,20 @@ export default function App(){
  const pointerUp=(e:React.PointerEvent<SVGSVGElement>)=>{
    pointers.current.delete(e.pointerId);
    try{e.currentTarget.releasePointerCapture?.(e.pointerId)}catch{}
+   if(pointers.current.size===1){
+     const p=[...pointers.current.entries()][0];
+     pinch.current=null;
+     drag.current={x:p[1].x,y:p[1].y,px:visual.current.x,py:visual.current.y,moved:true};
+     return;
+   }
    if(pointers.current.size===0){
+     const duration=gestureStart.current===null?0:performance.now()-gestureStart.current;
+     if(drag.current.moved)trackAtlasMetric("map-gesture",duration,{zoom:visual.current.zoom,distance:gestureDistance.current});
+     trackAtlasMetric("map-gesture-distance",gestureDistance.current,{zoom:visual.current.zoom});
+     gestureStart.current=null;gestureDistance.current=0;
      pinch.current=null;
      const final=visual.current;
-     setPan({x:final.x,y:final.y});
-     setZoom(final.zoom);
-     setIsDragging(false);
+     setPan({x:final.x,y:final.y});setZoom(final.zoom);setIsDragging(false);
    }
  };
  const wheel=(e:React.WheelEvent<SVGSVGElement>)=>{e.preventDefault();const next=clamp(visual.current.zoom*(e.deltaY<0?1.12:.89),1,5);visual.current.zoom=next;applyMapTransform(visual.current.x,visual.current.y,next,false);setZoom(next)};
