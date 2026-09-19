@@ -12,7 +12,7 @@ import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
 import EntityGraphView from "./components/EntityGraphView";
 import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
-import {getCharacterEpisodeIds,getLocationEpisodeIds,getEntityNeighborhood,getEpisodeConnectionIds,entityGraph} from "./lib/entityGraph";
+import {getCharacterEpisodeIds,getLocationEpisodeIds,getEpisodeConnectionIds} from "./lib/entityGraph";
 import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
 
 type View="map"|"timeline"|"people"|"guide";
@@ -137,7 +137,6 @@ export default function App(){
  const episodes=useMemo(()=>chronology.filter(e=>e.kind==="episode"),[chronology]);
  const selectedLoc=atlasData.locations.find(l=>l.id===selectedLocation)??null;
  const selectedEp=episodes.find(e=>e.id===selectedEpisode)??null;
- const mediaCoverage=Object.values((episodeMedia as any).episodes||{}).filter((m:any)=>m.status==="verified").length;
 
  const searchResults=useMemo(()=>{
    const q=query.trim().toLowerCase();
