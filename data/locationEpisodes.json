@@ -602,7 +602,28 @@
       "twd-s05-e15",
       "twd-s05-e16"
     ],
-    "grady-memorial": [],
+    "grady-memorial": [
+      "twd-s07-e06",
+      "twd-s07-e15",
+      "twd-s08-e08",
+      "twd-s08-e10",
+      "twd-s08-e15",
+      "twd-s08-e16",
+      "twd-s09-e01",
+      "twd-s09-e02",
+      "twd-s09-e03",
+      "twd-s09-e04",
+      "twd-s09-e05",
+      "twd-s09-e15",
+      "twd-s10-e01",
+      "twd-s10-e08",
+      "twd-s10-e15",
+      "twd-s10-e16",
+      "twd-s11-e12",
+      "twd-s11-e16",
+      "twd-s11-e17",
+      "twd-s11-e24"
+    ],
     "oceanside": [],
     "whisperer-woods": [
       "twd-s09-e01",
@@ -704,7 +725,15 @@
       "owl-s01-e05",
       "owl-s01-e06"
     ],
-    "campus-colony": [],
+    "campus-colony": [
+      "wb-s01-e01",
+      "wb-s01-e02",
+      "wb-s01-e03",
+      "wb-s01-e04",
+      "wb-s01-e09",
+      "wb-s01-e10",
+      "wb-s02-e01"
+    ],
     "philadelphia-crm": [],
     "mont-saint-michel": [
       "daryl-s01-e01",
@@ -981,15 +1010,13 @@
     "version": 1,
     "generatedAt": "2026-09-19T21:35:57.670Z",
     "locationCount": 51,
-    "locationsWithEpisodeLinks": 42,
+    "locationsWithEpisodeLinks": 44,
     "unlinkedLocations": [
-      "grady-memorial",
       "oceanside",
       "cumberland",
       "clark-home",
       "mexico-baja",
       "truck-stop",
-      "campus-colony",
       "philadelphia-crm",
       "marseille"
     ],
@@ -1001,6 +1028,10 @@
       "tales-s01-e04",
       "tales-s01-e05",
       "tales-s01-e06"
-    ]
+    ],
+    "verifiedLocationLinks": {
+      "grady-memorial": "Walking Dead Wiki Grady Memorial Hospital episode list",
+      "campus-colony": "Walking Dead Wiki Campus Colony episode appearance list"
+    }
   }
 }
