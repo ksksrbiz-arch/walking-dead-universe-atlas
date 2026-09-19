@@ -5,6 +5,22 @@
 [build.environment]
   NODE_VERSION = "22"
 
+[images]
+  remote_images = [
+    'https://images\.amcnetworks\.com/.*',
+    'https://images\.cds\.amcn\.com/.*'
+  ]
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
