@@ -1,4 +1,5 @@
 import {useEffect,useMemo,useRef,useState} from "react";
+import type {CSSProperties} from "react";
 import {atlasData,Location,SeriesKey} from "./data";
 import {validateAtlasData} from "./lib/validateData";
 
@@ -82,7 +83,7 @@ export default function App(){
    return result.slice(0,10);
  },[query]);
 
- const setMapZoom=(next:number)=>setZoom(z=>clamp(typeof next==="function"?(next as (v:number)=>number)(z):next,1,5));
+ const setMapZoom=(next:number|((v:number)=>number))=>setZoom(z=>clamp(typeof next==="function"?next(z):next,1,5));
  const resetMap=()=>{setZoom(1);setPan({x:0,y:0})};
  const selectLocation=(l:Location)=>{setSelectedId(l.id);setView("map");setMobilePanel("open")};
 
@@ -195,7 +196,7 @@ export default function App(){
 
 function LocationDetail({location}:{location:Location}){
  const meta=SERIES_BY_ID[location.seriesId];
- return <div className="detailBody"><div className="entityHero" style={{"--accent":meta.color} as React.CSSProperties}><span className="eyebrow">{meta.short} · {location.year}</span><h3>{location.name}</h3><p>{location.type} · {location.certainty}</p></div><div className="detailGrid"><div><small>TYPE</small><b>{location.type}</b></div><div><small>ERA</small><b>{location.year}+</b></div><div><small>SERIES</small><b>{meta.short}</b></div></div><div className="sectionTitle">Atlas status</div><p className="muted">This location is connected to the canonical data layer. Episode-level source references will progressively increase its chronology precision.</p></div>
+ return <div className="detailBody"><div className="entityHero" style={{"--accent":meta.color} as CSSProperties}><span className="eyebrow">{meta.short} · {location.year}</span><h3>{location.name}</h3><p>{location.type} · {location.certainty}</p></div><div className="detailGrid"><div><small>TYPE</small><b>{location.type}</b></div><div><small>ERA</small><b>{location.year}+</b></div><div><small>SERIES</small><b>{meta.short}</b></div></div><div className="sectionTitle">Atlas status</div><p className="muted">This location is connected to the canonical data layer. Episode-level source references will progressively increase its chronology precision.</p></div>
 }
 function MapContent({locations,onSelect}:{locations:Location[];onSelect:(l:Location)=>void}){return <div className="contentScroll"><div className="sectionTitle">Locations <span>{locations.length}</span></div><div className="cards">{locations.map(l=><button className="entityCard" key={l.id} onClick={()=>onSelect(l)}><div><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><span>{l.type} · {l.certainty}</span></div><Icon name="chevron"/></button>)}</div></div>}
 function TimelineContent({events}:{events:typeof atlasData.events}){return <div className="contentScroll"><div className="sectionTitle">Timeline events <span>{events.length}</span></div><div className="timelineList">{events.map(e=><article key={e.id}><div className="eventYear">{e.year}</div><div><small>{SERIES_BY_ID[e.seriesId]?.short}</small><b>{e.title}</b><span>{e.certainty}</span></div></article>)}</div></div>}
