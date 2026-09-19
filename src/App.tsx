@@ -68,7 +68,7 @@ export default function App(){
  const [zoom,setZoom]=useState(()=>1);
  const [pan,setPan]=useState(()=>({x:0,y:0}));
  const [isDragging,setIsDragging]=useState(false);
- const [sheet,setSheet]=useState<"peek"|"open">("peek");
+ const [sheet,setSheet]=useState<"peek"|"open">("open");
  const [searchOpen,setSearchOpen]=useState(false);
  const [timeOpen,setTimeOpen]=useState(false);
  const [playing,setPlaying]=useState(false);
