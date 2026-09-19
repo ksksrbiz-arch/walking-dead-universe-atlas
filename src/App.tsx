@@ -12,7 +12,7 @@ import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
 import EntityGraphView from "./components/EntityGraphView";
 import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
-import {getCharacterEpisodeIds,getLocationEpisodeIds,getEntityNeighborhood,entityGraph} from "./lib/entityGraph";
+import {getCharacterEpisodeIds,getLocationEpisodeIds,getEntityNeighborhood,getEpisodeConnectionIds,entityGraph} from "./lib/entityGraph";
 import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
 
 type View="map"|"timeline"|"people"|"guide";
@@ -379,6 +379,7 @@ function LocationDetail({location,onEpisode}:{location:Location;onEpisode:(id:st
 function EpisodeDetail({episode,onLocation,onEpisode}:{episode:any;onLocation:(l:Location)=>void;onEpisode:(id:string)=>void}){
  const raw=atlasData.episodes.find((e:any)=>e.id===episode.id) as any;
  const meta=SERIES_BY_ID[episode.seriesId];
+ const derivedConnectionIds=getEpisodeConnectionIds(episode.id);
  const media=((atlasData as any).media?.episodes?.[episode.id] ?? (episodeMedia as any).episodes?.[episode.id] ?? (atlasData as any).media?.series?.[episode.seriesId]);
  const locations=atlasData.locations.filter(l=>raw?.locationIds?.includes(l.id));
  const ordered=buildChronology().filter(x=>x.kind==="episode");
@@ -387,7 +388,7 @@ function EpisodeDetail({episode,onLocation,onEpisode}:{episode:any;onLocation:(l
  return <div className="contentScroll">
   <div className="episodeHero" style={{"--accent":meta.color} as CSSProperties}>{media?.image&&<img src={atlasImageUrl(media.image,1200)} onError={e=>onAtlasImageError(e,media.image)} srcSet={atlasImageSrcSet(media.image)} sizes="(max-width: 699px) 94vw, 470px" loading="eager" decoding="async" fetchPriority="high" alt="" className="episodeArt"/>}<div className="episodeHeroCopy"><span>{meta.name} · {episode.seasonId?.toUpperCase()}E{String(episode.episodeNumber).padStart(2,"0")}</span><h3>{episode.title}</h3><div className="episodeMeta"><b>{episode.start===episode.end?episode.start:`${episode.start}–${episode.end}`}</b><em>{episode.certainty}</em><em>{episode.precision}</em></div></div></div>
   {locations.length>0&&<><div className="sectionTitle">LOCATIONS <span>{locations.length}</span></div><div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}><Icon name="pin"/>{l.name}</button>)}</div></>}
-  {raw?.connectionIds?.length>0&&<><div className="sectionTitle">UNIVERSE CONNECTIONS <span>{raw.connectionIds.length}</span></div><div className="connectionLinks">{raw.connectionIds.map((id:string)=>{const c=atlasData.connections.find((x:any)=>x.id===id);return c?<article key={id}><small>{c.type}</small><b>{c.label}</b><span>{c.fromId} ↔ {c.toId} · {c.certainty}</span></article>:null})}</div></>}
+  {derivedConnectionIds.length>0&&<><div className="sectionTitle">UNIVERSE CONNECTIONS <span>{derivedConnectionIds.length}</span></div><div className="connectionLinks">{derivedConnectionIds.map((id:string)=>{const c=atlasData.connections.find((x:any)=>x.id===id);return c?<article key={id}><small>{c.type.replaceAll("-"," ").toUpperCase()}</small><b>{c.label}</b><span>{c.fromId} ↔ {c.toId} · {c.certainty}</span></article>:null})}</div></>}
   <div className="sectionTitle">CHRONOLOGY NAVIGATION</div>
   <div className="episodeNav">{prev&&<button onClick={()=>onEpisode(prev.id)}><small>PREVIOUS</small><b>{prev.title}</b><span>{prev.start}</span></button>}<div className="chronologyMarker"><span>IN UNIVERSE</span><strong>{episode.start}</strong></div>{next&&<button onClick={()=>onEpisode(next.id)}><small>NEXT</small><b>{next.title}</b><span>{next.start}</span></button>}</div>
   <div className="sourceNote"><Icon name="layers"/><span>Air date and in-universe chronology are separate fields. Ranges and uncertain placements stay labeled rather than flattened.</span></div>
