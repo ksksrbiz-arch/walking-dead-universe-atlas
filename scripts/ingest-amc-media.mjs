@@ -142,7 +142,7 @@ async function discoverSitemapTree(rootUrl, seen = new Set()) {
   return [...episodeUrls];
 }
 
-function identify(url, html) {
+function identify(url, html, manifest) {
   const match = url.match(
     /https?:\/\/www\.amc\.com\/shows\/([^/]+)\/episodes\/[^?#]*/i
   );
@@ -256,7 +256,7 @@ async function main() {
 
       try {
         const html = await fetchText(url);
-        const id = identify(url, html);
+        const id = identify(url, html, manifest);
         if (!id) continue;
 
         const key = findManifestEpisode(manifest, id);
