@@ -49,3 +49,4 @@ main{height:100dvh;min-height:100svh}.map{position:relative;width:100%;height:10
 .watchNext b{display:block;margin-top:4px;font-size:11px}
 .watchNext small{display:block;margin-top:3px;color:#7e898b}
 @media(max-width:699px){.episodeRow{grid-template-columns:46px 1fr 18px;padding:11px 9px}.episodeFocus{padding:14px}.episodeFocus h3{font-size:18px}}
+.locationLinks button{border:0;background:#252c2e;color:#c5cccd;border-radius:999px;padding:5px 8px;font:inherit;font-size:8px;cursor:pointer}.locationLinks button:hover,.locationLinks button:focus-visible{background:#343d3f;color:#fff}
