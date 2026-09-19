@@ -663,3 +663,30 @@ button:active{transform:translateY(1px)}
   .map.view-map .seriesRail button:nth-child(5){min-width:112px}
   .map.view-map .seriesRail button:last-child{min-width:78px}
 }
+
+
+/* Final interaction/accessibility hardening */
+.mapSurface svg{cursor:grab}
+.mapSurface svg.dragging{cursor:grabbing}
+.marker{outline:none}
+.marker:focus-visible .dot{stroke:#fff;stroke-width:2}
+.marker:focus-visible .pulse{stroke-width:3;opacity:1}
+.seriesRail{scroll-snap-type:x proximity}
+.seriesRail button{scroll-snap-align:start}
+.seriesRail::after{content:"";position:absolute;right:0;top:0;bottom:0;width:34px;pointer-events:none;background:linear-gradient(90deg,transparent,#071011)}
+.bottomNav button:focus-visible,.seriesRail button:focus-visible,.mapTopRight button:focus-visible,.panelGrab:focus-visible,.closePanel:focus-visible,.atlasTimelineDock button:focus-visible{outline:2px solid #e9efed;outline-offset:2px}
+@media (min-width:700px) and (max-height:600px){
+  .atlasTimelineDock{height:176px}
+  .atlasTimelineBody{padding-top:12px}
+  .atlasTimelineLanes{display:none}
+  .atlasTimelineScale{top:2px}
+  .atlasTimelineFooter{margin-top:22px}
+  .atlasTimelineFooter input{height:44px;min-height:44px}
+}
+@media (max-width:699px){
+  .seriesRail{padding-right:36px}
+  .seriesRail::after{right:0}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
