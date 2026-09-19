@@ -190,3 +190,8 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
  .entityCard,.episodeRow{min-height:52px}
  .locationLinks button{min-height:38px}
 }
+
+.rowMedia{display:block;width:54px;height:38px}
+.rowMedia .rowThumb{display:block;width:100%;height:100%}
+.mediaRow.hasMedia{grid-template-columns:54px 39px 1fr 14px}
+@media(min-width:700px){.rowMedia{width:62px;height:43px}.mediaRow.hasMedia{grid-template-columns:62px 42px 1fr 14px}}
