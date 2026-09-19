@@ -19,6 +19,12 @@ export function validateAtlasData(){
   if(new Set(atlasData.locations.map(x=>x.id)).size!==atlasData.locations.length) errors.push("Duplicate location ID detected");
   if(new Set(atlasData.events.map(x=>x.id)).size!==atlasData.events.length) errors.push("Duplicate event ID detected");
   if(new Set((atlasData as any).episodes.map((x:any)=>x.id)).size!==(atlasData as any).episodes.length) errors.push("Duplicate episode ID detected");
+  for(const connection of atlasData.connections){
+    const fromExists=[seriesIds,seasonIds,ids((atlasData as any).episodes),locationIds,characterIds,communityIds,factionIds,connectionIds].some(set=>connection.fromId&&set.has(connection.fromId));
+    const toExists=[seriesIds,seasonIds,ids((atlasData as any).episodes),locationIds,characterIds,communityIds,factionIds,connectionIds].some(set=>connection.toId&&set.has(connection.toId));
+    if(connection.fromId&&!fromExists)errors.push(`Connection ${connection.id} references missing from entity ${connection.fromId}`);
+    if(connection.toId&&!toExists)errors.push(`Connection ${connection.id} references missing to entity ${connection.toId}`);
+  }
   for(const episode of (atlasData as any).episodes){
     if(!seriesIds.has(episode.seriesId)) errors.push(`Episode ${episode.id} references missing series ${episode.seriesId}`);
     if(!seasonIds.has(episode.seasonId)) errors.push(`Episode ${episode.id} references missing season ${episode.seasonId}`);
