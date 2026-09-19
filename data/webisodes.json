@@ -1,0 +1,16 @@
+{
+  "version":1,
+  "source":"Walking Dead Wiki — The Walking Dead Television Universe",
+  "status":"separate-ingestion-layer",
+  "totalEpisodes":63,
+  "series":[
+    {"id":"web-torn-apart","title":"Torn Apart","episodeCount":6,"releaseStart":"2011-10-03","releaseEnd":"2011-10-03","seriesId":"twd"},
+    {"id":"web-cold-storage","title":"Cold Storage","episodeCount":4,"releaseStart":"2012-10-01","releaseEnd":"2012-10-01","seriesId":"twd"},
+    {"id":"web-the-oath","title":"The Oath","episodeCount":3,"releaseStart":"2013-10-01","releaseEnd":"2013-10-01","seriesId":"twd"},
+    {"id":"web-flight-462","title":"Flight 462","episodeCount":16,"releaseStart":"2015-10-04","releaseEnd":"2016-03-26","seriesId":"ftwd"},
+    {"id":"web-passage","title":"Passage","episodeCount":16,"releaseStart":"2016-10-17","releaseEnd":"2017-03-27","seriesId":"ftwd"},
+    {"id":"web-red-machete","title":"Red Machete","episodeCount":6,"releaseStart":"2017-10-22","releaseEnd":"2018-04-09","seriesId":"twd"},
+    {"id":"web-althea-tapes","title":"The Althea Tapes","episodeCount":6,"releaseStart":"2019-07-27","releaseEnd":"2019-08-08","seriesId":"ftwd"},
+    {"id":"web-dead-in-the-water","title":"Dead in the Water","episodeCount":6,"releaseStart":"2022-04-10","releaseEnd":"2022-04-10","seriesId":"ftwd"}
+  ]
+}
