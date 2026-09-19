@@ -1,4 +1,5 @@
 import {atlasData} from "../data";
+import {getIndexedEpisodeIds} from "./entityIndex";
 
 export type EntityKind="series"|"season"|"episode"|"location"|"character"|"community"|"faction"|"connection";
 export type EntityRef={kind:EntityKind;id:string};
@@ -56,10 +57,15 @@ export function buildEntityGraph(){
 }
 
 export function getCharacterEpisodeIds(characterId:string){
-  return ((atlasData.characterEpisodes as any).episodesByCharacter?.[characterId]||[]) as string[];
+  const indexed=getIndexedEpisodeIds("byCharacter",characterId);
+  const source=((atlasData.characterEpisodes as any).episodesByCharacter?.[characterId]||[]) as string[];
+  return [...new Set([...indexed,...source])];
 }
 
 export function getLocationEpisodeIds(locationId:string){
+  // Location history may intentionally include episodes where a location is
+  // referenced by the broader atlas chronology but is not an episode-level
+  // geography tag. Prefer the curated location history index for that use case.
   return ((atlasData.locationEpisodes as any).episodesByLocation?.[locationId]||[]) as string[];
 }
 

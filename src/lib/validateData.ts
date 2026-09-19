@@ -1,4 +1,5 @@
 import {atlasData} from "../data";
+import {buildReverseEpisodeIndex} from "./entityIndex";
 
 const ids=(items:{id:string}[])=>new Set(items.map(x=>x.id));
 
@@ -28,6 +29,7 @@ export function validateAtlasData(){
     for(const id of episode.connectionIds??[]) if(!connectionIds.has(id)) errors.push(`Episode ${episode.id} references missing connection ${id}`);
   }
   const charIndex=(atlasData as any).characterEpisodes?.episodesByCharacter||{};
+  const canonical=buildReverseEpisodeIndex();
   const locIndex=(atlasData as any).locationEpisodes?.episodesByLocation||{};
   for(const [characterId,episodeIds] of Object.entries(charIndex)){
     if(!characterIds.has(characterId))errors.push(`Character index references missing character ${characterId}`);
@@ -38,7 +40,14 @@ export function validateAtlasData(){
     for(const episodeId of (episodeIds as string[]))if(!(atlasData as any).episodes.some((e:any)=>e.id===episodeId))errors.push(`Location index ${locationId} references missing episode ${episodeId}`);
   }
   for(const episode of (atlasData as any).episodes){
-    for(const characterId of episode.characterIds||[])if(!(charIndex[characterId]||[]).includes(episode.id))errors.push(`Episode ${episode.id} missing reverse character index for ${characterId}`);
+    for(const characterId of episode.characterIds||[])if(!(canonical.byCharacter[characterId]||[]).includes(episode.id))errors.push(`Canonical character index missing ${episode.id} for ${characterId}`);
+    for(const locationId of episode.locationIds||[])if(!(canonical.byLocation[locationId]||[]).includes(episode.id))errors.push(`Canonical location index missing ${episode.id} for ${locationId}`);
+  }
+  for(const [characterId,episodeIds] of Object.entries(canonical.byCharacter)){
+    for(const episodeId of episodeIds)if(!(atlasData as any).episodes.find((e:any)=>e.id===episodeId)?.characterIds?.includes(characterId))errors.push(`Canonical character index has stale edge ${characterId} -> ${episodeId}`);
+  }
+  for(const [locationId,episodeIds] of Object.entries(canonical.byLocation)){
+    for(const episodeId of episodeIds)if(!(atlasData as any).episodes.find((e:any)=>e.id===episodeId)?.locationIds?.includes(locationId))errors.push(`Canonical location index has stale edge ${locationId} -> ${episodeId}`);
   }
   void seasonIds; void locationIds;
   return [...new Set(errors)];
