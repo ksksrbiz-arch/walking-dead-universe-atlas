@@ -14,6 +14,28 @@ export type EntityEdge={
 
 const key=(kind:EntityKind,id:string)=>`${kind}:${id}`;
 
+const entityIdSets:Record<EntityKind,Set<string>>={
+  series:new Set(atlasData.series.map(x=>x.id)),
+  season:new Set(atlasData.seasons.map(x=>x.id)),
+  episode:new Set(atlasData.episodes.map(x=>x.id)),
+  location:new Set(atlasData.locations.map(x=>x.id)),
+  character:new Set(atlasData.characters.map(x=>x.id)),
+  community:new Set(atlasData.communities.map(x=>x.id)),
+  faction:new Set(atlasData.factions.map(x=>x.id)),
+  connection:new Set(atlasData.connections.map(x=>x.id))
+};
+
+const entityKindOrder:EntityKind[]=[
+  "character","location","community","faction","series","season","episode","connection"
+];
+
+function resolveEntityKind(id:string):EntityKind|null{
+  for(const kind of entityKindOrder){
+    if(entityIdSets[kind].has(id))return kind;
+  }
+  return null;
+}
+
 export function buildEntityGraph(){
   const nodes=new Map<string,EntityRef>();
   const edges:EntityEdge[]=[];
@@ -41,8 +63,10 @@ export function buildEntityGraph(){
   for(const f of atlasData.factions)addNode("faction",f.id);
   for(const x of atlasData.connections){
     addNode("connection",x.id);
-    if(x.fromId)addEdge({kind:"connection",id:x.id},{kind:"character",id:x.fromId},"FROM");
-    if(x.toId)addEdge({kind:"connection",id:x.id},{kind:"character",id:x.toId},"TO");
+    const fromKind=x.fromId?resolveEntityKind(x.fromId):null;
+    const toKind=x.toId?resolveEntityKind(x.toId):null;
+    if(fromKind)addEdge({kind:"connection",id:x.id},{kind:fromKind,id:x.fromId},"FROM",x.certainty==="confirmed"?"confirmed":"source-derived");
+    if(toKind)addEdge({kind:"connection",id:x.id},{kind:toKind,id:x.toId},"TO",x.certainty==="confirmed"?"confirmed":"source-derived");
   }
 
   const adjacency=new Map<string,EntityEdge[]>();
