@@ -1729,15 +1729,11 @@
       "ftwd-s04-e11",
       "ftwd-s04-e12",
       "ftwd-s05-e01",
-      "ftwd-s05-e02",
-      "ftwd-s05-e03",
-      "ftwd-s05-e04",
       "ftwd-s05-e05",
       "ftwd-s05-e06",
       "ftwd-s05-e07",
       "ftwd-s05-e08",
       "ftwd-s05-e09",
-      "ftwd-s05-e10",
       "ftwd-s05-e11",
       "ftwd-s05-e14",
       "ftwd-s05-e15",
@@ -1796,5 +1792,5 @@
       "wb-s02-e10"
     ]
   },
-  "updatedAt": "2026-09-19T21:38:36.643Z"
+  "updatedAt": "2026-09-19T21:39:00.770Z"
 }
