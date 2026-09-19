@@ -8,6 +8,7 @@ import {atlasData,Location,SeriesKey} from "./data";
 import {validateAtlasData} from "./lib/validateData";
 import {buildChronology} from "./lib/chronology";
 import episodeMedia from "../data/episodeMedia.json";
+import AtlasTimelineDock from "./components/AtlasTimelineDock";
 
 type View="map"|"timeline"|"people"|"guide";
 type SearchKind="location"|"character"|"community"|"faction"|"episode";
@@ -147,6 +148,7 @@ export default function App(){
    });
  };
  const selectEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;if(raw?.timelineStart)setYear(Number(raw.timelineStart));setSelectedEpisode(id);setSelectedLocation(null);setView("timeline");setSheet("open")};
+ const selectAtlasEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;if(raw?.timelineStart)setYear(Number(raw.timelineStart));setSelectedEpisode(id);setSelectedLocation(null);setView("map");setSheet("open")};
 
  const pointerDown=(e:React.PointerEvent<SVGSVGElement>)=>{
    e.preventDefault();
@@ -256,6 +258,8 @@ export default function App(){
       <button className={series==="ALL"?"active":""} onClick={()=>setSeries("ALL")}>ALL</button>
       {SERIES_KEYS.map(k=><button key={k} className={series===k?"active":""} style={series===k?{"--series":META[k].color} as CSSProperties:{}} onClick={()=>setSeries(k)}>{META[k].short}</button>)}
     </div>
+
+    <AtlasTimelineDock year={year} onYearChange={y=>{setPlaying(false);setYear(y)}} series={series} onEpisode={selectAtlasEpisode} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)}/>
 
     <div className={`timeMachine ${sheet==="open"?"sheetOpen":""}`}>
       <div className="timeMachineHead"><div><small>UNIVERSE TIME</small><b>{year}</b></div><button onClick={()=>setPlaying(v=>!v)} aria-label={playing?"Pause chronology":"Play chronology"}><Icon name={playing?"pause":"play"}/></button></div>
