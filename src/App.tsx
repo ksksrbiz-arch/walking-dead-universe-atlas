@@ -352,7 +352,7 @@ export default function App(){
       {selectedLoc?<LocationDetail location={selectedLoc} onEpisode={selectEpisode}/>:selectedEp?<EpisodeDetail episode={selectedEp} onLocation={selectLocation} onEpisode={selectEpisode}/>:selectedCharacter?<CharacterDetail characterId={selectedCharacter} onEpisode={selectEpisode} onLocation={selectLocation} onCharacter={selectCharacter}/>:view==="map"?<MapContent locations={locations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent episodes={episodes} onEpisode={selectEpisode}/>:view==="people"?<PeopleContent onCharacter={selectCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)selectLocation(l)}} onEpisode={selectEpisode}/>:<GuideContent errors={dataErrors} onView={goView}/>}
     </section>
 
-    <nav className="bottomNav" aria-label="Atlas sections" role="tablist">
+    <nav className="bottomNav" aria-label="Atlas sections">
       {(["map","timeline","people","guide"] as View[]).map(v=><button key={v} aria-current={view===v?"page":undefined} className={view===v?"active":""} onClick={()=>goView(v)}><Icon name={v==="map"?"map":v==="timeline"?"timeline":v==="people"?"people":"guide"}/><small>{v==="map"?"MAP":v==="timeline"?"TIME":v==="people"?"PEOPLE":"GUIDE"}</small></button>)}
     </nav>
    </section>
