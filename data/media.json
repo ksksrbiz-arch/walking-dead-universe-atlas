@@ -1,32 +1,41 @@
 {
-  "version": 1,
-  "policy": "Prefer official AMC/AMC Networks media when a stable public asset URL is verified. Keep sourcePage for provenance. Missing assets fall back to atlas art/placeholders until ingested.",
+  "version": 2,
+  "policy": "Prefer official AMC/AMC Networks media when a stable public asset URL is verified. Keep sourcePage for provenance. Missing episode assets use series-level AMC key art as an explicitly labeled fallback until an episode-specific asset is ingested.",
   "series": {
     "twd": {
       "name": "The Walking Dead",
-      "keyArt": "https://images.amcnetworks.com/amc.com/wp-content/uploads/2018/09/the-walking-dead-season-9-key-art-rick-lincoln-michonne-gurira-full-size.jpg",
-      "sourcePage": "https://www.amc.com/blogs/amc-releases-new-poster-cast-portraits-and-details-from-the-walking-dead-season-9--1007107"
+      "keyArt": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead"
     },
     "ftwd": {
-      "name": "Fear the Walking Dead"
+      "name": "Fear the Walking Dead",
+      "keyArt": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead"
     },
     "tales": {
-      "name": "Tales of the Walking Dead"
+      "name": "Tales of the Walking Dead",
+      "keyArt": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH043399190000_tales-of-the-walking-dead__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/tales-of-the-walking-dead"
     },
     "wb": {
-      "name": "The Walking Dead: World Beyond"
+      "name": "The Walking Dead: World Beyond",
+      "keyArt": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond"
     },
     "owl": {
-      "keyArt": "https://images.cds.amcn.com/amcn/tve/TOWL_KeyArtEmbed_AMCTalk.jpg",
-      "sourcePage": "https://www.amc.com/blogs/watch-the-second-trailer-for-the-walking-dead-the-ones-who-live--1066731"
+      "name": "The Walking Dead: The Ones Who Live",
+      "keyArt": "https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-the-ones-who-live"
     },
     "daryl": {
-      "name": "The Walking Dead: Daryl Dixon"
+      "name": "The Walking Dead: Daryl Dixon",
+      "keyArt": "https://images.cds.amcn.com/amcn/AMC_DD_S3_SDCC_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-daryl-dixon"
     },
     "dead": {
       "name": "The Walking Dead: Dead City",
-      "keyArt": "https://images.cds.amcn.com/amcn/tve/amc/DeadCity_301.jpg",
-      "sourcePage": "https://www.amc.com/shows/the-walking-dead-dead-city/episodes/season-3-trillium--1075484"
+      "keyArt": "https://images.cds.amcn.com/amcn/tve/DeadCity_308_ultrawide.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-dead-city"
     }
   },
   "episodes": {
