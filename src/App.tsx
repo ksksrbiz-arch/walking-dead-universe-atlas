@@ -86,7 +86,8 @@ export default function App(){
  const mapSvgRef=useRef<SVGSVGElement|null>(null);
  const raf=useRef<number|null>(null);
  const visual=useRef({x:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_X:0,y:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_Y:0,zoom:1});
- const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);\n useEffect(()=>{initAtlasPerformance()},[]);
+ const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
+ useEffect(()=>{initAtlasPerformance()},[]);
 
  useEffect(()=>setDataErrors(validateAtlasData()),[]);
  useEffect(()=>{initAtlasPerformance()},[]);
