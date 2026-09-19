@@ -1,9 +1,147 @@
 [
-  {"id":"twd-s01","seriesId":"twd","season":1},{"id":"twd-s02","seriesId":"twd","season":2},{"id":"twd-s03","seriesId":"twd","season":3},{"id":"twd-s04","seriesId":"twd","season":4},{"id":"twd-s05","seriesId":"twd","season":5},{"id":"twd-s06","seriesId":"twd","season":6},{"id":"twd-s07","seriesId":"twd","season":7},{"id":"twd-s08","seriesId":"twd","season":8},{"id":"twd-s09","seriesId":"twd","season":9},{"id":"twd-s10","seriesId":"twd","season":10},{"id":"twd-s11","seriesId":"twd","season":11},
-  {"id":"ftwd-s01","seriesId":"ftwd","season":1},{"id":"ftwd-s02","seriesId":"ftwd","season":2},{"id":"ftwd-s03","seriesId":"ftwd","season":3},{"id":"ftwd-s04","seriesId":"ftwd","season":4},{"id":"ftwd-s05","seriesId":"ftwd","season":5},{"id":"ftwd-s06","seriesId":"ftwd","season":6},{"id":"ftwd-s07","seriesId":"ftwd","season":7},{"id":"ftwd-s08","seriesId":"ftwd","season":8},
-  {"id":"tales-s01","seriesId":"tales","season":1},
-  {"id":"wb-s01","seriesId":"wb","season":1},{"id":"wb-s02","seriesId":"wb","season":2},
-  {"id":"owl-s01","seriesId":"owl","season":1},
-  {"id":"daryl-s01","seriesId":"daryl","season":1},{"id":"daryl-s02","seriesId":"daryl","season":2},{"id":"daryl-s03","seriesId":"daryl","season":3},
-  {"id":"dead-s01","seriesId":"dead","season":1},{"id":"dead-s02","seriesId":"dead","season":2}
+  {
+    "id": "twd-s01",
+    "seriesId": "twd",
+    "season": 1
+  },
+  {
+    "id": "twd-s02",
+    "seriesId": "twd",
+    "season": 2
+  },
+  {
+    "id": "twd-s03",
+    "seriesId": "twd",
+    "season": 3
+  },
+  {
+    "id": "twd-s04",
+    "seriesId": "twd",
+    "season": 4
+  },
+  {
+    "id": "twd-s05",
+    "seriesId": "twd",
+    "season": 5
+  },
+  {
+    "id": "twd-s06",
+    "seriesId": "twd",
+    "season": 6
+  },
+  {
+    "id": "twd-s07",
+    "seriesId": "twd",
+    "season": 7
+  },
+  {
+    "id": "twd-s08",
+    "seriesId": "twd",
+    "season": 8
+  },
+  {
+    "id": "twd-s09",
+    "seriesId": "twd",
+    "season": 9
+  },
+  {
+    "id": "twd-s10",
+    "seriesId": "twd",
+    "season": 10
+  },
+  {
+    "id": "twd-s11",
+    "seriesId": "twd",
+    "season": 11
+  },
+  {
+    "id": "ftwd-s01",
+    "seriesId": "ftwd",
+    "season": 1
+  },
+  {
+    "id": "ftwd-s02",
+    "seriesId": "ftwd",
+    "season": 2
+  },
+  {
+    "id": "ftwd-s03",
+    "seriesId": "ftwd",
+    "season": 3
+  },
+  {
+    "id": "ftwd-s04",
+    "seriesId": "ftwd",
+    "season": 4
+  },
+  {
+    "id": "ftwd-s05",
+    "seriesId": "ftwd",
+    "season": 5
+  },
+  {
+    "id": "ftwd-s06",
+    "seriesId": "ftwd",
+    "season": 6
+  },
+  {
+    "id": "ftwd-s07",
+    "seriesId": "ftwd",
+    "season": 7
+  },
+  {
+    "id": "ftwd-s08",
+    "seriesId": "ftwd",
+    "season": 8
+  },
+  {
+    "id": "tales-s01",
+    "seriesId": "tales",
+    "season": 1
+  },
+  {
+    "id": "wb-s01",
+    "seriesId": "wb",
+    "season": 1
+  },
+  {
+    "id": "wb-s02",
+    "seriesId": "wb",
+    "season": 2
+  },
+  {
+    "id": "owl-s01",
+    "seriesId": "owl",
+    "season": 1
+  },
+  {
+    "id": "daryl-s01",
+    "seriesId": "daryl",
+    "season": 1
+  },
+  {
+    "id": "daryl-s02",
+    "seriesId": "daryl",
+    "season": 2
+  },
+  {
+    "id": "daryl-s03",
+    "seriesId": "daryl",
+    "season": 3
+  },
+  {
+    "id": "dead-s01",
+    "seriesId": "dead",
+    "season": 1
+  },
+  {
+    "id": "dead-s02",
+    "seriesId": "dead",
+    "season": 2
+  },
+  {
+    "id": "dead-s03",
+    "seriesId": "dead",
+    "season": 3
+  }
 ]
