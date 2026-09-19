@@ -2,103 +2,330 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TWDU Atlas</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b0c">
+<title>TWDU Atlas — The Walking Dead Universe</title>
 <style>
-:root{--bg:#0b0e0f;--panel:#111617;--panel2:#171c1d;--line:#30383b;--text:#edf1f2;--muted:#9ca7aa}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px system-ui,sans-serif}
-header{padding:18px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#0b0e0fee;backdrop-filter:blur(10px);z-index:5}
-h1{margin:0;font-size:22px}.sub{color:var(--muted);margin-top:4px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.toolbar button,.toolbar input{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
-.toolbar button.active{border-color:#89979b;background:#293133}
-main{display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);min-height:calc(100vh - 110px)}
-#mapWrap{position:relative;min-height:650px;background:#d9d7cf;overflow:hidden}
-#mapSvg{width:100%;height:100%;min-height:650px;display:block;touch-action:none;transform-origin:50% 50%}
-.land{fill:#c3c0b6;stroke:#aaa79e;stroke-width:2}.label{font-size:12px;fill:#918d84;letter-spacing:.12em;font-weight:700;text-anchor:middle}
-.route{fill:none;stroke-width:3;stroke-dasharray:8 7;opacity:.55}.marker{cursor:pointer}.marker text{font-size:11px;font-weight:700;fill:#202526;paint-order:stroke;stroke:#d9d7cf;stroke-width:4px}.marker circle{stroke:#fff;stroke-width:2}.marker.selected circle{stroke:#111;stroke-width:3}
-.maptools{position:absolute;right:12px;bottom:12px;display:flex;gap:5px}.maptools button{background:#101415e8;color:white;border:1px solid #414a4d;border-radius:7px;padding:8px 12px}
-#side{border-left:1px solid var(--line);background:var(--panel);overflow:auto}.section{padding:16px;border-bottom:1px solid var(--line)}.section h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#aeb7b9;margin:0 0 12px}
-.card{padding:11px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;margin:7px 0;cursor:pointer}.card:hover{border-color:#687477}.eyebrow{font-size:10px;color:#9ea8aa;text-transform:uppercase}.card h3{font-size:13px;margin:3px 0}.card p{margin:3px 0;color:#b3bdc0;font-size:12px}.pill{display:inline-block;font-size:10px;padding:2px 6px;border-radius:999px;background:#293133;margin:2px}
-#details{color:#c0c9cb;line-height:1.45}.detailsTitle{color:white;font-size:20px;margin:0 0 4px}.muted{color:var(--muted)}
-@media(max-width:850px){main{grid-template-columns:1fr}#side{border-left:0}.section{padding:14px}#mapWrap,#mapSvg{min-height:520px}}
+:root{
+  --bg:#080a0b;--surface:#101415;--surface2:#171c1d;--surface3:#202729;
+  --line:#2b3335;--text:#f1f4f4;--muted:#8f999c;--dim:#657073;
+  --accent:#d9dedf;--danger:#c86a61;--gold:#d7a84b;--blue:#75a9c7;
+  --purple:#a08ac7;--green:#5eb39a;--shadow:0 18px 50px #0008;
+  --safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,system-ui,sans-serif}
+button,input{font:inherit}
+button{color:inherit}
+.app{height:100dvh;display:grid;grid-template-rows:auto 1fr;position:relative;overflow:hidden}
+.topbar{z-index:30;background:linear-gradient(180deg,#080a0bf5,#080a0bdc);backdrop-filter:blur(22px);border-bottom:1px solid #ffffff0d;padding:calc(10px + var(--safe-top)) 14px 10px}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brandmark{width:36px;height:36px;border:1px solid #667073;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#252d2f,#101415);box-shadow:inset 0 1px #ffffff16}
+.brandmark svg{width:22px;height:22px}
+.brand h1{font-size:16px;line-height:1.05;margin:0;letter-spacing:-.02em}
+.brand p{margin:3px 0 0;font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.iconbtn{width:40px;height:40px;border:1px solid var(--line);border-radius:13px;background:#14191a;display:grid;place-items:center;cursor:pointer}
+.iconbtn:active,.chip:active,.navitem:active,.mapbtn:active{transform:scale(.96)}
+.search{margin-top:10px;position:relative}
+.search input{width:100%;height:42px;padding:0 42px 0 40px;border:1px solid var(--line);border-radius:14px;background:#131819;color:var(--text);outline:0}
+.search input:focus{border-color:#677275;box-shadow:0 0 0 3px #ffffff08}
+.search svg{position:absolute;left:14px;top:12px;color:#7f8a8d}
+.search kbd{position:absolute;right:10px;top:10px;color:#697477;font-size:10px;border:1px solid #303839;border-radius:6px;padding:3px 5px}
+.content{min-height:0;position:relative}
+.map{position:absolute;inset:0;background:#d8d6ce;overflow:hidden;touch-action:none}
+.mapbg{position:absolute;inset:0;background:
+ radial-gradient(circle at 48% 38%,#ffffff22 0 1px,transparent 2px),
+ linear-gradient(#ffffff12 1px,transparent 1px),
+ linear-gradient(90deg,#ffffff12 1px,transparent 1px);
+ background-size:auto,80px 80px,80px 80px;opacity:.28;pointer-events:none}
+.mapcanvas{position:absolute;inset:0;transform-origin:center;will-change:transform}
+.mapcanvas svg{width:100%;height:100%;display:block}
+.ocean{fill:#d8d6ce}.land{fill:#c2c0b7;stroke:#aaa79e;stroke-width:1.4}
+.land2{fill:#b9b7ae;stroke:#a09d94;stroke-width:1}
+.gridline{stroke:#a9a79f;stroke-width:1;opacity:.32}.maplabel{fill:#77756f;font-size:10px;font-weight:800;letter-spacing:.22em;text-anchor:middle}
+.route{fill:none;stroke-width:2.5;stroke-dasharray:6 8;opacity:.72}
+.routeGlow{fill:none;stroke-width:7;opacity:.08}
+.marker{cursor:pointer}.marker circle{stroke:#f7f7f5;stroke-width:2}.marker .halo{fill:none;stroke:#fff;stroke-width:1;opacity:.18}.marker text{font-size:9.5px;font-weight:800;fill:#202526;paint-order:stroke;stroke:#d8d6ce;stroke-width:4px;stroke-linejoin:round}.marker.selected circle{stroke:#101313;stroke-width:2.8}.marker.selected .halo{stroke:#111;opacity:.45}
+.maptools{position:absolute;right:12px;top:12px;display:flex;flex-direction:column;gap:7px;z-index:8}
+.mapbtn{width:42px;height:42px;border:1px solid #777b79aa;border-radius:13px;background:#f0efebdd;color:#171a1a;box-shadow:0 8px 24px #0002;display:grid;place-items:center;cursor:pointer}
+.mapbtn.small{height:36px;width:42px;font-size:12px}
+.mapstatus{position:absolute;left:12px;top:12px;z-index:8;background:#101415dc;color:#fff;border:1px solid #ffffff1c;border-radius:12px;padding:8px 10px;box-shadow:var(--shadow);backdrop-filter:blur(10px);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.mapstatus b{color:#fff}.mapstatus span{color:#8e999b;margin-left:5px}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:20;max-height:min(67dvh,600px);background:linear-gradient(180deg,#0d1112f8,#0b0e0ff8);border-top:1px solid #ffffff12;border-radius:24px 24px 0 0;box-shadow:0 -20px 60px #0007;backdrop-filter:blur(20px);transform:translateY(calc(100% - 76px));transition:transform .28s ease;display:flex;flex-direction:column}
+.sheet.open{transform:translateY(0)}
+.grabber{width:38px;height:4px;border-radius:99px;background:#596164;margin:9px auto 7px}
+.sheethead{display:flex;align-items:center;justify-content:space-between;padding:0 14px 10px;gap:8px}
+.sheettitle{min-width:0}.sheettitle .eyebrow{font-size:9px;color:#7e898b;letter-spacing:.14em;text-transform:uppercase}.sheettitle h2{font-size:17px;margin:3px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sheethead .count{font-size:10px;color:#9ba4a6;background:#1c2223;border:1px solid #303839;border-radius:99px;padding:5px 8px}
+.sheetbody{overflow:auto;padding:0 12px calc(12px + var(--safe-bottom));-webkit-overflow-scrolling:touch}
+.chips{display:flex;gap:7px;overflow:auto;padding:0 2px 10px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid #303839;background:#151a1b;color:#aeb7b9;border-radius:99px;padding:8px 11px;font-size:11px;cursor:pointer}.chip.active{color:#fff;background:#293032;border-color:#687376}
+.detail{border:1px solid #2a3234;background:linear-gradient(145deg,#171c1d,#111516);border-radius:18px;padding:14px;margin-bottom:10px}
+.detailtop{display:flex;justify-content:space-between;gap:10px}.detail h3{font-size:21px;margin:0 0 5px;letter-spacing:-.03em}.detail p{margin:8px 0;color:#aeb7b9;font-size:12px;line-height:1.55}
+.pills{display:flex;gap:5px;flex-wrap:wrap}.pill{font-size:9px;padding:4px 7px;border-radius:99px;background:#252c2e;color:#bac2c4;border:1px solid #333c3e}
+.actionrow{display:flex;gap:7px;margin-top:12px}.action{flex:1;height:38px;border:1px solid #343d3f;border-radius:11px;background:#1a2021;color:#dbe0e1;font-size:11px;cursor:pointer}.action.primary{background:#e3e5e4;color:#101313;border-color:#e3e5e4;font-weight:700}
+.cards{display:grid;gap:8px}.card{border:1px solid #252d2f;background:#131819;border-radius:15px;padding:12px;cursor:pointer}.card:active{background:#1a2021}.cardrow{display:flex;justify-content:space-between;gap:8px}.eyebrow{font-size:9px;color:#798486;letter-spacing:.12em;text-transform:uppercase}.card h3{font-size:13px;margin:4px 0}.card p{font-size:11px;color:#929da0;margin:4px 0 0;line-height:1.45}.dot{width:8px;height:8px;border-radius:50%;margin-top:3px;flex:0 0 auto}
+.timelinebar{position:absolute;left:12px;right:64px;bottom:90px;z-index:9;background:#0d1112df;border:1px solid #ffffff16;border-radius:16px;padding:10px 11px;backdrop-filter:blur(16px);box-shadow:var(--shadow)}
+.timehead{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.timehead span{font-size:9px;color:#8d989a;letter-spacing:.13em;text-transform:uppercase}.timehead b{font-size:13px}
+.timelinebar input{width:100%;accent-color:#d9dedf}
+.yearticks{display:flex;justify-content:space-between;color:#717b7d;font-size:8px;margin-top:2px}
+.bottomnav{position:absolute;left:0;right:0;bottom:0;z-index:40;padding:8px 8px calc(8px + var(--safe-bottom));background:linear-gradient(180deg,#080a0b00,#080a0bf7 34%);pointer-events:none}
+.navinner{max-width:560px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;background:#101415ee;border:1px solid #2b3335;border-radius:20px;padding:5px;box-shadow:0 12px 40px #0009;pointer-events:auto;backdrop-filter:blur(18px)}
+.navitem{height:47px;border:0;background:transparent;border-radius:15px;color:#798487;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:8px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}.navitem.active{background:#242b2d;color:#fff}.navitem svg{width:17px;height:17px}
+.toast{position:absolute;top:12px;left:50%;transform:translate(-50%,-80px);z-index:50;background:#101415f0;border:1px solid #ffffff18;padding:9px 13px;border-radius:99px;font-size:10px;transition:.25s;box-shadow:var(--shadow)}.toast.show{transform:translate(-50%,0)}
+@media(min-width:700px){
+  .topbar{padding-left:22px;padding-right:22px}.search{max-width:520px}.topbar{display:grid;grid-template-columns:auto 1fr;column-gap:24px}.toprow{grid-column:1}.search{grid-column:2;grid-row:1;align-self:center;margin:0}
+  .sheet{left:auto;width:min(430px,48vw);max-height:calc(100% - 24px);bottom:12px;right:12px;border-radius:22px;transform:translateX(calc(100% + 20px));border:1px solid #ffffff14}.sheet.open{transform:translateX(0)}
+  .timelinebar{left:22px;right:auto;width:min(420px,48vw);bottom:22px}.bottomnav{left:12px;right:12px;bottom:12px;padding:0;background:none}.navinner{margin:0;width:310px}
+}
+@media(min-width:1100px){
+  .app{grid-template-rows:74px 1fr}.topbar{display:flex;align-items:center;padding:0 24px;gap:28px}.toprow{flex:0 0 auto}.search{width:440px}.maptools{right:20px;top:20px}.mapstatus{left:20px;top:20px}.timelinebar{left:20px;bottom:20px}.bottomnav{left:auto;width:330px;right:20px;bottom:20px}.navinner{width:330px}.sheet{right:20px;bottom:20px}
+}
 </style>
 </head>
 <body>
-<header>
-<h1>The Walking Dead Universe Atlas</h1>
-<div class="sub">Interactive chronology, geography and cross-series connections.</div>
-<div class="toolbar">
-<button class="active" data-series="ALL">All series</button>
-<button data-series="TWD">TWD</button><button data-series="FTWD">Fear</button><button data-series="WB">World Beyond</button><button data-series="OWL">The Ones Who Live</button><button data-series="DARYL">Daryl Dixon</button><button data-series="DEAD">Dead City</button>
-<input id="search" placeholder="Search locations…">
-<label style="display:flex;align-items:center;gap:6px;color:#b9c2c4">Year <input id="year" type="range" min="2010" max="2027" value="2010" style="width:130px"><b id="yearOut">2010</b></label>
-</div>
+<div class="app">
+<header class="topbar">
+  <div class="toprow">
+    <div class="brand">
+      <div class="brandmark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 18V6l7-3 7 3v12l-7 3-7-3Z" stroke="currentColor" stroke-width="1.4"/><path d="M8 15V9l4-2 4 2v6l-4 2-4-2Z" stroke="currentColor" stroke-width="1.2"/><path d="M12 7v10M8 9l8 6M16 9l-8 6" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <div><h1>TWDU Atlas</h1><p>Chronology · Geography · Connections</p></div>
+    </div>
+    <button class="iconbtn" id="layersBtn" aria-label="Open map layers">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="m12 3 9 5-9 5-9-5 9-5Z" stroke="currentColor" stroke-width="1.5"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </div>
+  <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input id="search" placeholder="Search locations, characters, communities…" autocomplete="off"><kbd>⌕</kbd></div>
 </header>
-<main>
-<section id="mapWrap">
-<svg id="mapSvg" viewBox="0 0 1000 560" aria-label="TWDU map">
-<rect width="1000" height="560" fill="#d9d7cf"/>
-<path class="land" d="M90 100 L145 65 L215 78 L265 125 L250 170 L278 205 L245 238 L205 220 L177 245 L130 215 L105 175 L72 145 Z"/>
-<path class="land" d="M260 250 L300 285 L325 335 L312 400 L280 455 L250 420 L242 365 L220 325 Z"/>
-<path class="land" d="M455 105 L510 70 L585 82 L635 115 L675 110 L720 145 L700 190 L650 205 L610 188 L570 215 L520 195 L480 210 L445 175 Z"/>
-<path class="land" d="M565 225 L610 245 L625 300 L605 350 L575 410 L535 455 L505 425 L520 370 L500 325 L525 275 Z"/>
-<path class="land" d="M700 135 L750 125 L790 150 L820 190 L795 225 L750 215 L720 185 Z"/>
-<text class="label" x="170" y="270">NORTH AMERICA</text><text class="label" x="550" y="55">EUROPE</text><text class="label" x="800" y="350">ASIA</text>
-<g id="routes"></g><g id="markers"></g>
-</svg>
-<div class="maptools"><button id="zin">+</button><button id="zout">−</button><button id="reset">Reset</button></div>
+
+<main class="content">
+<section class="map" id="map">
+  <div class="mapbg"></div>
+  <div class="mapcanvas" id="mapcanvas">
+    <svg id="mapSvg" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid slice" aria-label="Interactive Walking Dead Universe map">
+      <rect class="ocean" width="1200" height="720"/>
+      <g opacity=".42">
+        <path class="gridline" d="M0 180H1200M0 360H1200M0 540H1200M200 0V720M400 0V720M600 0V720M800 0V720M1000 0V720"/>
+      </g>
+      <g id="lands">
+        <path class="land" d="M80 155 145 105 235 120 302 182 283 236 318 280 274 324 218 296 173 332 105 294 72 239 42 214Z"/>
+        <path class="land2" d="M292 346 344 390 371 461 356 544 315 618 277 570 268 492 235 432Z"/>
+        <path class="land" d="M548 138 626 90 724 106 792 150 850 145 910 194 888 253 825 270 772 246 716 282 645 255 582 278 531 232Z"/>
+        <path class="land2" d="M703 293 764 319 783 385 755 451 714 530 659 591 618 551 639 477 611 419 647 355Z"/>
+        <path class="land" d="M901 176 972 159 1030 192 1074 247 1037 295 976 283 934 245Z"/>
+      </g>
+      <text class="maplabel" x="180" y="365">NORTH AMERICA</text>
+      <text class="maplabel" x="690" y="72">EUROPE</text>
+      <text class="maplabel" x="1000" y="390">ASIA</text>
+      <g id="routes"></g><g id="markers"></g>
+    </svg>
+  </div>
+  <div class="mapstatus"><b id="mapMode">WORLD</b><span id="mapCount">18 nodes</span></div>
+  <div class="maptools">
+    <button class="mapbtn" id="locateBtn" aria-label="Reset map"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="1.5"/></svg></button>
+    <button class="mapbtn" id="zoomIn" aria-label="Zoom in">+</button>
+    <button class="mapbtn" id="zoomOut" aria-label="Zoom out">−</button>
+  </div>
+
+  <div class="timelinebar">
+    <div class="timehead"><span>Universe time</span><b id="yearOut">2010</b></div>
+    <input id="year" type="range" min="2010" max="2027" value="2010">
+    <div class="yearticks"><span>2010</span><span>2014</span><span>2018</span><span>2022</span><span>2027</span></div>
+  </div>
+
+  <div class="sheet" id="sheet">
+    <div class="grabber"></div>
+    <div class="sheethead">
+      <div class="sheettitle"><div class="eyebrow" id="sheetEyebrow">Atlas</div><h2 id="sheetTitle">Explore the universe</h2></div>
+      <span class="count" id="sheetCount">18 locations</span>
+    </div>
+    <div class="sheetbody">
+      <div class="chips" id="seriesChips"></div>
+      <div id="detail"></div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </div>
+
+  <div class="bottomnav">
+    <nav class="navinner">
+      <button class="navitem active" data-view="map"><svg viewBox="0 0 24 24" fill="none"><path d="m4 6 6-3 5 3 5-2v14l-5 3-5-3-6 2V6Z" stroke="currentColor" stroke-width="1.5"/><path d="M10 3v14M15 6v14" stroke="currentColor" stroke-width="1.5"/></svg>Map</button>
+      <button class="navitem" data-view="timeline"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4v16M6 8h12M6 16h12" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="8" r="2" fill="currentColor"/><circle cx="6" cy="16" r="2" fill="currentColor"/></svg>Timeline</button>
+      <button class="navitem" data-view="people"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 20c.5-3.5 2.2-5 5.5-5s5 1.5 5.5 5M16 5.5a3 3 0 0 1 0 5.5M16 14.5c2.5.2 4 1.8 4.5 4.5" stroke="currentColor" stroke-width="1.5"/></svg>People</button>
+      <button class="navitem" data-view="guide"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2V4Z" stroke="currentColor" stroke-width="1.5"/><path d="M8 8h7M8 12h7M8 16h5" stroke="currentColor" stroke-width="1.5"/></svg>Guide</button>
+    </nav>
+  </div>
+  <div class="toast" id="toast"></div>
 </section>
-<aside id="side">
-<div class="section"><h2>Selected location</h2><div id="details"><span class="muted">Tap a marker to inspect its story connection.</span></div></div>
-<div class="section"><h2>Chronology</h2><div id="timeline"></div></div>
-<div class="section"><h2>Project status</h2><div class="card"><b>Prototype engine online</b><p>Next: episode-level data, character graph, continuity validation and source metadata.</p></div></div>
-</aside>
 </main>
+</div>
+
 <script>
-const S={TWD:{n:"The Walking Dead",c:"#e6e6e6"},FTWD:{n:"Fear the Walking Dead",c:"#d7a84b"},WB:{n:"World Beyond",c:"#74a7c9"},OWL:{n:"The Ones Who Live",c:"#d76b68"},DARYL:{n:"Daryl Dixon",c:"#9b82c4"},DEAD:{n:"Dead City",c:"#5fb29b"}};
-const P=[
-["Atlanta",33.749,-84.388,"TWD",2010,"Rick wakes and the flagship story begins."],
-["King County",34.22,-84.55,"TWD",2010,"Rick, Morgan and Duane establish the early Georgia setting."],
-["Los Angeles",34.052,-118.244,"FTWD",2010,"Fear begins during the initial outbreak."],
-["San Diego",32.716,-117.161,"FTWD",2010,"The early Fear storyline moves through Southern California."],
-["Baja California",31.0,-115.0,"FTWD",2011,"The Fear group reaches Mexico."],
-["Alexandria",38.804,-77.047,"TWD",2014,"The flagship community becomes a long-term base."],
-["Hilltop",38.0,-77.3,"TWD",2016,"A major allied community during the Savior era."],
-["Kingdom",38.2,-77.0,"TWD",2016,"Ezekiel's community joins the anti-Savior alliance."],
-["Sanctuary",38.7,-77.2,"TWD",2015,"Negan's Saviors operate from the Sanctuary."],
-["Omaha",41.256,-95.934,"WB",2020,"The Civic Republic's Omaha community is central to World Beyond."],
-["Civic Republic",39.95,-75.16,"OWL",2020,"CRM/Civic Republic territory becomes a major universe node."],
-["Philadelphia",39.952,-75.165,"OWL",2024,"The CRM's Philadelphia operation anchors Rick's continuation."],
-["France",43.3,5.37,"DARYL",2023,"Daryl reaches France."],
-["Paris",48.857,2.352,"DARYL",2023,"The European branch expands toward Paris."],
-["Normandy",49.18,-0.37,"DARYL",2024,"Daryl and Carol's European route continues."],
-["Spain",40.416,-3.704,"DARYL",2025,"The later Daryl Dixon storyline moves into Spain."],
-["Manhattan",40.783,-73.971,"DEAD",2024,"Maggie and Negan enter Manhattan."],
-["Commonwealth",40.8,-81.9,"TWD",2025,"The final major flagship community arc centers here."]
+const SERIES={
+ ALL:{name:"All series",color:"#d9dedf"},
+ TWD:{name:"The Walking Dead",short:"TWD",color:"#e5e8e8"},
+ FTWD:{name:"Fear the Walking Dead",short:"Fear",color:"#d7a84b"},
+ TALES:{name:"Tales of the Walking Dead",short:"Tales",color:"#d88468"},
+ WB:{name:"World Beyond",short:"World Beyond",color:"#75a9c7"},
+ OWL:{name:"The Ones Who Live",short:"TOWL",color:"#d16d68"},
+ DARYL:{name:"Daryl Dixon",short:"Daryl Dixon",color:"#a08ac7"},
+ DEAD:{name:"Dead City",short:"Dead City",color:"#5eb39a"}
+};
+const LOCATIONS=[
+{id:"atlanta",name:"Atlanta",lat:33.749,lng:-84.388,series:"TWD",year:2010,type:"City",desc:"The flagship story opens in and around Atlanta as Rick searches for Lori, Carl and survivors.",tags:["TWD S1","Early outbreak"]},
+{id:"king-county",name:"King County",lat:34.22,lng:-84.55,series:"TWD",year:2010,type:"Town",desc:"Rick's home county and the setting for the earliest encounters with Morgan and Duane.",tags:["TWD S1","Morgan"]},
+{id:"la",name:"Los Angeles",lat:34.052,lng:-118.244,series:"FTWD",year:2010,type:"City",desc:"Fear begins in Los Angeles as the outbreak unfolds from a family perspective.",tags:["Fear S1","Outbreak"]},
+{id:"san-diego",name:"San Diego",lat:32.716,lng:-117.161,series:"FTWD",year:2010,type:"City",desc:"Southern California becomes an early Fear geography node during the collapse.",tags:["Fear","California"]},
+{id:"baja",name:"Baja California",lat:31,lng:-115,series:"FTWD",year:2011,type:"Region",desc:"The Fear group crosses into Mexico, creating one of the universe's first major geographic expansions.",tags:["Fear S2","Mexico"]},
+{id:"alexandria",name:"Alexandria",lat:38.804,lng:-77.047,series:"TWD",year:2014,type:"Community",desc:"Alexandria becomes one of the central long-term communities of the flagship series.",tags:["TWD","Community"]},
+{id:"hilltop",name:"Hilltop",lat:38,lng:-77.3,series:"TWD",year:2016,type:"Community",desc:"A major allied community during the Savior conflict.",tags:["TWD","Saviors"]},
+{id:"kingdom",name:"Kingdom",lat:38.2,lng:-77,series:"TWD",year:2016,type:"Community",desc:"Ezekiel's community joins the larger alliance against the Saviors.",tags:["TWD","Ezekiel"]},
+{id:"sanctuary",name:"Sanctuary",lat:38.7,lng:-77.2,series:"TWD",year:2015,type:"Stronghold",desc:"The Saviors' headquarters under Negan.",tags:["TWD","Negan"]},
+{id:"omaha",name:"Omaha",lat:41.256,lng:-95.934,series:"WB",year:2020,type:"Community",desc:"A Civic Republic settlement and a major World Beyond setting.",tags:["World Beyond","CRM"]},
+{id:"civic-republic",name:"Civic Republic",lat:39.95,lng:-75.16,series:"OWL",year:2020,type:"State",desc:"The hidden power structure connecting the CRM storyline across the universe.",tags:["CRM","Civic Republic"]},
+{id:"philadelphia",name:"Philadelphia",lat:39.952,lng:-75.165,series:"OWL",year:2024,type:"City",desc:"The CRM's Philadelphia operation anchors the Rick and Michonne continuation.",tags:["TOWL","CRM"]},
+{id:"france",name:"France",lat:43.3,lng:5.37,series:"DARYL",year:2023,type:"Country",desc:"Daryl's European branch begins after his arrival in France.",tags:["Daryl Dixon","France"]},
+{id:"paris",name:"Paris",lat:48.857,lng:2.352,series:"DARYL",year:2023,type:"City",desc:"Paris becomes a major destination in Daryl's European journey.",tags:["Daryl Dixon","France"]},
+{id:"normandy",name:"Normandy",lat:49.18,lng:-.37,series:"DARYL",year:2024,type:"Region",desc:"The European story expands through Normandy and its surrounding communities.",tags:["Daryl Dixon","France"]},
+{id:"spain",name:"Spain",lat:40.416,lng:-3.704,series:"DARYL",year:2025,type:"Country",desc:"The Daryl Dixon story later extends into Spain.",tags:["Daryl Dixon","Spain"]},
+{id:"manhattan",name:"Manhattan",lat:40.783,lng:-73.971,series:"DEAD",year:2024,type:"City",desc:"Maggie and Negan enter a devastated Manhattan in Dead City.",tags:["Dead City","New York"]},
+{id:"commonwealth",name:"Commonwealth",lat:40.8,lng:-81.9,series:"TWD",year:2025,type:"Community",desc:"The final major community arc of the flagship series.",tags:["TWD","Commonwealth"]}
 ];
-const E=[
-["2010","Fear S1","Outbreak","Los Angeles","FTWD"],["2010","TWD S1","Rick wakes","Atlanta","TWD"],["2011","TWD S2","The farm","Georgia","TWD"],["2012","TWD S3","Prison / Woodbury","Georgia","TWD"],["2013","TWD S4–5","Terminus","Georgia","TWD"],["2014","TWD S5–6","Alexandria era","Virginia","TWD"],["2015–16","TWD S6–7","Saviors emerge","Virginia","TWD"],["2016–17","TWD S8","All Out War","Virginia","TWD"],["2017–18","Fear S4","Morgan crossover","Texas","FTWD"],["2018","TWD S9 E1–5","Rick's disappearance","Virginia","TWD"],["2020","World Beyond S1–2","CRM / Civic Republic","Omaha","WB"],["2024+","TWD S9–11","Post-jump / Commonwealth","Virginia / Ohio","TWD"],["2024+","The Ones Who Live","Rick + Michonne","CRM / Philadelphia","OWL"],["2023+","Daryl Dixon","France → Spain","Europe","DARYL"],["2024+","Dead City","Manhattan","New York","DEAD"]
+const EVENTS=[
+{year:2010,title:"Fear S1 — Los Angeles",desc:"The outbreak becomes visible through the Clark family story.",series:"FTWD"},
+{year:2010,title:"TWD S1 — Atlanta",desc:"Rick wakes from his coma and begins searching for his family.",series:"TWD"},
+{year:2011,title:"TWD S2 — The farm",desc:"The survivor group settles at Hershel's farm.",series:"TWD"},
+{year:2012,title:"TWD S3 — Prison / Woodbury",desc:"Two competing communities become the center of the story.",series:"TWD"},
+{year:2013,title:"TWD S4–5 — Terminus",desc:"The survivors move through the post-prison era toward Terminus.",series:"TWD"},
+{year:2014,title:"TWD S5–6 — Alexandria",desc:"The group establishes itself inside Alexandria.",series:"TWD"},
+{year:2016,title:"TWD S6–7 — Saviors",desc:"Negan and the Saviors reshape the power structure.",series:"TWD"},
+{year:2017,title:"TWD S8 — All Out War",desc:"The communities fight the Saviors.",series:"TWD"},
+{year:2017,title:"Fear S4 — Morgan crossover",desc:"Morgan's story crosses into Fear after the flagship's Savior era.",series:"FTWD"},
+{year:2018,title:"TWD S9 E1–5 — Rick's disappearance",desc:"Rick disappears after the bridge conflict, opening the CRM branch.",series:"TWD"},
+{year:2020,title:"World Beyond — CRM",desc:"The Civic Republic and CRM mythology expands substantially.",series:"WB"},
+{year:2024,title:"The Ones Who Live — Philadelphia",desc:"Rick and Michonne's branch brings the CRM conflict to the foreground.",series:"OWL"},
+{year:2024,title:"Dead City — Manhattan",desc:"Maggie and Negan enter Manhattan.",series:"DEAD"},
+{year:2023,title:"Daryl Dixon — France",desc:"Daryl wakes on the European side of the universe.",series:"DARYL"},
+{year:2025,title:"Daryl Dixon — Spain",desc:"The European storyline extends into Spain.",series:"DARYL"},
+{year:2010,title:"Tales — Anthology",desc:"Tales episodes occupy different points in the outbreak timeline; each episode will be placed individually in the canonical data layer.",series:"TALES"}
 ];
-let series="ALL",maxYear=2010,zoom=1,px=0,py=0,drag=false,lx=0,ly=0;
-const svg=document.getElementById("mapSvg"), markers=document.getElementById("markers"), routes=document.getElementById("routes");
-const proj=(lat,lng)=>[((lng+180)/360)*1000,((90-lat)/180)*560];
-function visible(p){return (series==="ALL"||p[3]===series)&&p[4]<=maxYear&&p[0].toLowerCase().includes(document.getElementById("search").value.toLowerCase())}
-function draw(){
- markers.innerHTML="";routes.innerHTML="";
- P.filter(visible).forEach((p,i)=>{let [x,y]=proj(p[1],p[2]),g=document.createElementNS("http://www.w3.org/2000/svg","g");g.classList.add("marker");g.setAttribute("transform",`translate(${x} ${y})`);g.innerHTML=`<circle r="7" fill="${S[p[3]].c}"></circle><text x="11" y="4">${p[0]}</text>`;g.onclick=()=>select(p,g);markers.appendChild(g)});
- const routesBy={FTWD:[[P[2],P[3],P[4]],[P[3],P[4],P[5]],[P[5],P[6],P[7]]],DARYL:[[P[12],P[13],P[14],P[15]]],DEAD:[[P[16]]],OWL:[[P[5],P[11],P[12]]],TWD:[[P[0],P[6],P[7],P[8],P[17]]]};
- Object.entries(routesBy).forEach(([k,rs])=>{if(series!=="ALL"&&series!==k)return;rs.forEach(route=>{if(route.length<2)return;let pts=route.map(p=>proj(p[1],p[2]).join(",")).join(" ");let z=document.createElementNS("http://www.w3.org/2000/svg","polyline");z.setAttribute("points",pts);z.setAttribute("class","route");z.setAttribute("stroke",S[k].c);routes.appendChild(z)})});
- document.getElementById("yearOut").textContent=maxYear;renderTimeline();
+const routes={
+FTWD:["la","san-diego","baja"],
+TWD:["atlanta","king-county","sanctuary","hilltop","kingdom","alexandria","commonwealth"],
+WB:["omaha"],
+OWL:["alexandria","civic-republic","philadelphia"],
+DARYL:["france","paris","normandy","spain"],
+DEAD:["manhattan"]
+};
+let activeSeries="ALL",maxYear=2010,selected=null,zoom=1,dx=0,dy=0,drag=false,lastX=0,lastY=0;
+
+const svg=document.getElementById("mapSvg"),markerLayer=document.getElementById("markers"),routeLayer=document.getElementById("routes"),canvas=document.getElementById("mapcanvas"),sheet=document.getElementById("sheet"),detail=document.getElementById("detail");
+const project=(lat,lng)=>[((lng+180)/360)*1200,((90-lat)/180)*720];
+const visibleLoc=l=> (activeSeries==="ALL"||l.series===activeSeries)&&l.year<=maxYear;
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+function renderChips(){
+ document.getElementById("seriesChips").innerHTML=Object.entries(SERIES).map(([k,v])=>'<button class="chip '+(activeSeries===k?"active":"")+'" data-series="'+k+'">'+esc(v.name)+'</button>').join("");
+ document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{activeSeries=b.dataset.series;renderAll();});
 }
-function select(p,g){document.querySelectorAll(".marker").forEach(x=>x.classList.remove("selected"));g.classList.add("selected");document.getElementById("details").innerHTML=`<h3 class="detailsTitle">${p[0]}</h3><span class="pill">${S[p[3]].n}</span><span class="pill">${p[4]}+</span><p>${p[5]}</p><p class="muted">Coordinates are schematic story anchors; exact travel routes are not implied.</p>`}
-function renderTimeline(){document.getElementById("timeline").innerHTML=E.filter(e=>parseInt(e[0])<=maxYear&&(series==="ALL"||e[4]===series)).map(e=>`<div class="card"><div class="eyebrow">${e[0]} · ${e[1]}</div><h3>${e[2]}</h3><p>${e[3]}</p><span class="pill">${S[e[4]].n}</span></div>`).join("")}
-document.querySelectorAll("[data-series]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-series]").forEach(x=>x.classList.remove("active"));b.classList.add("active");series=b.dataset.series;draw()});
-document.getElementById("search").oninput=draw;document.getElementById("year").oninput=e=>{maxYear=+e.target.value;draw()};
-document.getElementById("zin").onclick=()=>{zoom=Math.min(3,zoom+.25);apply()};document.getElementById("zout").onclick=()=>{zoom=Math.max(.75,zoom-.25);apply()};document.getElementById("reset").onclick=()=>{zoom=1;px=py=0;apply()};
-function apply(){svg.style.transform=`translate(${px}px,${py}px) scale(${zoom})`}
-document.getElementById("mapWrap").addEventListener("pointerdown",e=>{if(e.target.closest(".marker")||e.target.closest("button"))return;drag=true;lx=e.clientX;ly=e.clientY});
-window.addEventListener("pointermove",e=>{if(!drag)return;px+=e.clientX-lx;py+=e.clientY-ly;lx=e.clientX;ly=e.clientY;apply()});window.addEventListener("pointerup",()=>drag=false);
-draw();
+function renderMap(){
+ markerLayer.innerHTML="";routeLayer.innerHTML="";
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ const visible=LOCATIONS.filter(l=>visibleLoc(l)&&(!q||(l.name+" "+l.type+" "+l.tags.join(" ")).toLowerCase().includes(q)));
+ visible.forEach(l=>{
+  const [x,y]=project(l.lat,l.lng),g=document.createElementNS("http://www.w3.org/2000/svg","g");
+  g.classList.add("marker");if(selected?.id===l.id)g.classList.add("selected");
+  g.setAttribute("transform","translate("+x+" "+y+")");
+  const color=SERIES[l.series].color;
+  g.innerHTML='<circle class="halo" r="13"></circle><circle r="6.5" fill="'+color+'"></circle><text x="10" y="3.5">'+esc(l.name)+'</text>';
+  g.addEventListener("click",e=>{e.stopPropagation();selectLocation(l)});
+  markerLayer.appendChild(g);
+ });
+ Object.entries(routes).forEach(([key,ids])=>{
+  if(activeSeries!=="ALL"&&activeSeries!==key)return;
+  const pts=ids.map(id=>LOCATIONS.find(l=>l.id===id)).filter(Boolean).filter(l=>l.year<=maxYear).map(l=>project(l.lat,l.lng).join(",")).join(" ");
+  if(!pts)return;
+  const glow=document.createElementNS("http://www.w3.org/2000/svg","polyline");glow.setAttribute("points",pts);glow.setAttribute("class","routeGlow");glow.setAttribute("stroke",SERIES[key].color);routeLayer.appendChild(glow);
+  const line=document.createElementNS("http://www.w3.org/2000/svg","polyline");line.setAttribute("points",pts);line.setAttribute("class","route");line.setAttribute("stroke",SERIES[key].color);routeLayer.appendChild(line);
+ });
+ document.getElementById("mapCount").textContent=visible.length+" nodes";
+ document.getElementById("sheetCount").textContent=visible.length+" locations";
+ document.getElementById("mapMode").textContent=activeSeries==="ALL"?"WORLD":SERIES[activeSeries].short;
+}
+function selectLocation(l){
+ selected=l;renderMap();
+ document.getElementById("sheetEyebrow").textContent=SERIES[l.series].name;
+ document.getElementById("sheetTitle").textContent=l.name;
+ detail.innerHTML='<article class="detail"><div class="detailtop"><div><h3>'+esc(l.name)+'</h3><div class="pills"><span class="pill">'+esc(l.type)+'</span><span class="pill">'+esc(SERIES[l.series].short||SERIES[l.series].name)+'</span><span class="pill">'+l.year+'</span></div></div><div class="dot" style="background:'+SERIES[l.series].color+'"></div></div><p>'+esc(l.desc)+'</p><div class="pills">'+l.tags.map(t=>'<span class="pill">'+esc(t)+'</span>').join("")+'</div><div class="actionrow"><button class="action primary" id="focusBtn">Focus on map</button><button class="action" id="storyBtn">Story context</button></div></article>';
+ document.getElementById("focusBtn").onclick=()=>focusLocation(l);
+ document.getElementById("storyBtn").onclick=()=>toast("Episode-level story context is being added to the data engine.");
+ renderCards();
+ sheet.classList.add("open");
+}
+function renderCards(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ const locs=LOCATIONS.filter(l=>visibleLoc(l)&&(!q||(l.name+" "+l.type+" "+l.tags.join(" ")).toLowerCase().includes(q)));
+ document.getElementById("cards").innerHTML='<div class="eyebrow" style="margin:4px 3px 6px">Locations in view</div>'+locs.map(l=>'<article class="card" data-id="'+l.id+'"><div class="cardrow"><div><div class="eyebrow">'+esc(SERIES[l.series].short||SERIES[l.series].name)+' · '+l.year+'</div><h3>'+esc(l.name)+'</h3><p>'+esc(l.desc)+'</p></div><div class="dot" style="background:'+SERIES[l.series].color+'"></div></div></article>').join("");
+ document.querySelectorAll(".card[data-id]").forEach(c=>c.onclick=()=>selectLocation(LOCATIONS.find(l=>l.id===c.dataset.id)));
+}
+function renderTimeline(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ const events=EVENTS.filter(e=>e.year<=maxYear&&(activeSeries==="ALL"||e.series===activeSeries)&&(!q||e.title.toLowerCase().includes(q)||e.desc.toLowerCase().includes(q)));
+ document.getElementById("sheetEyebrow").textContent="Chronology";
+ document.getElementById("sheetTitle").textContent="Universe timeline";
+ document.getElementById("sheetCount").textContent=events.length+" events";
+ detail.innerHTML='<article class="detail"><div class="eyebrow">Current time window</div><h3 style="margin:5px 0;font-size:21px">'+maxYear+'</h3><p>Move through the universe by year. The production data layer will place anthology episodes and crossover events at episode-level precision.</p></article>';
+ document.getElementById("cards").innerHTML='<div class="cards">'+events.sort((a,b)=>a.year-b.year).map(e=>'<article class="card"><div class="eyebrow">'+e.year+' · '+esc(SERIES[e.series].short||SERIES[e.series].name)+'</div><h3>'+esc(e.title)+'</h3><p>'+esc(e.desc)+'</p></article>').join("")+'</div>';
+ sheet.classList.add("open");
+}
+function renderPeople(){
+ document.getElementById("sheetEyebrow").textContent="Universe graph";
+ document.getElementById("sheetTitle").textContent="People & connections";
+ document.getElementById("sheetCount").textContent="Coming next";
+ detail.innerHTML='<article class="detail"><div class="eyebrow">Character engine</div><h3>Follow people across the map</h3><p>Characters will become first-class entities: appearances, episode chronology, communities, factions, locations and cross-series connections will all be navigable from here.</p><div class="pills"><span class="pill">Characters</span><span class="pill">Communities</span><span class="pill">Factions</span><span class="pill">Relationships</span></div></article>';
+ document.getElementById("cards").innerHTML=["Rick Grimes","Michonne","Daryl Dixon","Negan","Morgan Jones","Jadis / Anne"].map((n,i)=>'<article class="card"><div class="eyebrow">Character node '+(i+1)+'</div><h3>'+n+'</h3><p>Character registry and cross-series appearances will be linked here.</p></article>').join("");
+ sheet.classList.add("open");
+}
+function renderGuide(){
+ document.getElementById("sheetEyebrow").textContent="Watch guide";
+ document.getElementById("sheetTitle").textContent="How to explore TWDU";
+ document.getElementById("sheetCount").textContent="Atlas guide";
+ detail.innerHTML='<article class="detail"><div class="eyebrow">Build target</div><h3>One universe. Multiple ways in.</h3><p>Use Map for geography, Timeline for chronology, People for cross-series relationships, and Guide for the eventual canonical watch order.</p><div class="actionrow"><button class="action primary" id="closeSheet">Back to map</button><button class="action" id="guideToast">Data status</button></div></article>';
+ document.getElementById("closeSheet").onclick=()=>sheet.classList.remove("open");
+ document.getElementById("guideToast").onclick=()=>toast("Phase 1: canonical series, season, episode and entity registry.");
+ document.getElementById("cards").innerHTML=[
+ ["Chronological","Episode-by-episode order, including Tales anthology placement."],
+ ["Geographic","Locations, routes and story regions across North America and Europe."],
+ ["Connections","Characters, communities, factions and crossover relationships."],
+ ["Sources","Every canon placement can carry certainty and source metadata."]
+ ].map(x=>'<article class="card"><div class="eyebrow">'+x[0]+'</div><h3>'+x[1]+'</h3></article>').join("");
+ sheet.classList.add("open");
+}
+function focusLocation(l){
+ const [x,y]=project(l.lat,l.lng);
+ const w=svg.clientWidth,h=svg.clientHeight;
+ const scale=Math.min(2.2,Math.max(1.35,zoom));
+ zoom=scale;dx=(w/2)-(x/1200*w)*scale;dy=(h/2)-(y/720*h)*scale;applyTransform();toast("Focused on "+l.name);
+}
+function applyTransform(){canvas.style.transform="translate3d("+dx+"px,"+dy+"px,0) scale("+zoom+")";}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2200);}
+function renderAll(){renderChips();renderMap();renderCards();}
+document.querySelectorAll(".navitem").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll(".navitem").forEach(x=>x.classList.remove("active"));b.classList.add("active");
+ if(b.dataset.view==="timeline")renderTimeline();else if(b.dataset.view==="people")renderPeople();else if(b.dataset.view==="guide")renderGuide();else{selected=null;document.getElementById("sheetEyebrow").textContent="Atlas";document.getElementById("sheetTitle").textContent="Explore the universe";sheet.classList.add("open");renderAll();}
+});
+document.getElementById("search").addEventListener("input",()=>{renderMap();if(sheet.classList.contains("open"))renderCards();});
+document.getElementById("year").addEventListener("input",e=>{maxYear=+e.target.value;document.getElementById("yearOut").textContent=maxYear;renderMap();renderCards();});
+document.getElementById("zoomIn").onclick=()=>{zoom=Math.min(3,zoom+.2);applyTransform();};
+document.getElementById("zoomOut").onclick=()=>{zoom=Math.max(.8,zoom-.2);applyTransform();};
+document.getElementById("locateBtn").onclick=()=>{zoom=1;dx=dy=0;applyTransform();toast("Map reset");};
+document.getElementById("layersBtn").onclick=()=>{sheet.classList.add("open");renderChips();toast("Choose a series layer below");};
+map.addEventListener("pointerdown",e=>{if(e.target.closest(".marker")||e.target.closest(".mapbtn")||e.target.closest(".sheet")||e.target.closest(".bottomnav"))return;drag=true;lastX=e.clientX;lastY=e.clientY;map.setPointerCapture?.(e.pointerId);});
+map.addEventListener("pointermove",e=>{if(!drag)return;dx+=e.clientX-lastX;dy+=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;applyTransform();});
+map.addEventListener("pointerup",()=>drag=false);map.addEventListener("pointercancel",()=>drag=false);
+let touchStartY=0;sheet.addEventListener("touchstart",e=>{touchStartY=e.touches[0].clientY},{passive:true});sheet.addEventListener("touchend",e=>{const y=e.changedTouches[0].clientY;if(y-touchStartY>70)sheet.classList.remove("open");if(touchStartY-y>70)sheet.classList.add("open")},{passive:true});
+renderAll();document.getElementById("yearOut").textContent=maxYear;
 </script>
 </body>
 </html>
