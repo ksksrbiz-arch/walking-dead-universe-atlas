@@ -1,0 +1,5 @@
+[
+  {"id":"rick-jadis-crm","type":"character-faction","fromId":"rick-grimes","toId":"crm","label":"CRM branch","certainty":"confirmed"},
+  {"id":"morgan-twd-ftwd","type":"cross-series","fromId":"morgan-jones","toId":"ftwd","label":"Cross-series character transition","certainty":"confirmed"},
+  {"id":"daryl-europe","type":"character-location","fromId":"daryl-dixon","toId":"france","label":"European storyline","certainty":"confirmed"}
+]
