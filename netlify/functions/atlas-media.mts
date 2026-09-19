@@ -5,10 +5,12 @@ import media from "../../data/media.json";
 
 export default async () => {
   const store=getStore("atlas-runtime");
-  let manifest=await store.get("media-manifest-v1",{type:"json"}) as any;
-  if(!manifest){
-    manifest={version:1,generatedAt:new Date().toISOString(),episodeMedia,media};
-    await store.setJSON("media-manifest-v1",manifest);
+  const key="media-manifest-v2";
+  let manifest=await store.get(key,{type:"json"}) as any;
+  const sourceUpdatedAt=(episodeMedia as any).updatedAt||"";
+  if(!manifest || manifest.sourceUpdatedAt!==sourceUpdatedAt){
+    manifest={version:2,generatedAt:new Date().toISOString(),sourceUpdatedAt,episodeMedia,media};
+    await store.setJSON(key,manifest);
   }
   return new Response(JSON.stringify(manifest),{
     headers:{
