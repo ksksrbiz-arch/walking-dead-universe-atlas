@@ -8,297 +8,363 @@
       "seasonId": "daryl-s01",
       "episodeNumber": 1,
       "title": "L'âme Perdue",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050002_walking-dead-daryl-dixon_101__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s01-e02": {
       "seriesId": "daryl",
       "seasonId": "daryl-s01",
       "episodeNumber": 2,
       "title": "Alouette",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050003_walking-dead-daryl-dixon_102__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s01-e03": {
       "seriesId": "daryl",
       "seasonId": "daryl-s01",
       "episodeNumber": 3,
       "title": "Paris Sera Toujours Paris",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050004_walking-dead-daryl-dixon_103__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s01-e04": {
       "seriesId": "daryl",
       "seasonId": "daryl-s01",
       "episodeNumber": 4,
       "title": "La Dame de Fer",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050005_walking-dead-daryl-dixon_104__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s01-e05": {
       "seriesId": "daryl",
       "seasonId": "daryl-s01",
       "episodeNumber": 5,
       "title": "Deux Amours",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050006_walking-dead-dixon_105__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s01-e06": {
       "seriesId": "daryl",
       "seasonId": "daryl-s01",
       "episodeNumber": 6,
       "title": "Coming Home",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050007_walking-dead-daryl-dixon_106__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s02-e01": {
       "seriesId": "daryl",
       "seasonId": "daryl-s02",
       "episodeNumber": 1,
       "title": "La Gentillesse Des Étrangers",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050024_walking-dead-daryl-dixon_201__img_wide_16x9_02rqij565nek.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s02-e02": {
       "seriesId": "daryl",
       "seasonId": "daryl-s02",
       "episodeNumber": 2,
       "title": "Moulin Rouge",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050025_walking-dead-daryl-dixon_202__img_wide_16x9_nchuc9fv2.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s02-e03": {
       "seriesId": "daryl",
       "seasonId": "daryl-s02",
       "episodeNumber": 3,
       "title": "L'Invisible",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/processed/episode_tms_EP048017050026_walking-dead-daryl-dixon_203__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s02-e04": {
       "seriesId": "daryl",
       "seasonId": "daryl-s02",
       "episodeNumber": 4,
       "title": "Le Paradis Pour Toi",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/processed/episode_tms_EP048017050027_walking-dead-daryl-dixon_204__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s02-e05": {
       "seriesId": "daryl",
       "seasonId": "daryl-s02",
       "episodeNumber": 5,
       "title": "Vouloir, C'est Pouvoir",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/processed/episode_tms_EP048017050028_walking-dead-daryl-dixon_205__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s02-e06": {
       "seriesId": "daryl",
       "seasonId": "daryl-s02",
       "episodeNumber": 6,
       "title": "Au Revoir Les Enfants",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050029_walking-dead-daryl-dixon_206__img_wide_16x9_k7va62byt8.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s03-e01": {
       "seriesId": "daryl",
       "seasonId": "daryl-s03",
       "episodeNumber": 1,
       "title": "Costa Da Morte",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050046_walking-dead-daryl-dixon_301__img_wide_16x9_6drxqil3r1f.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s03-e02": {
       "seriesId": "daryl",
       "seasonId": "daryl-s03",
       "episodeNumber": 2,
       "title": "La Ofrenda",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050047_walking-dead-dixon_302__img_wide_16x9_o7tmi1i7wse.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s03-e03": {
       "seriesId": "daryl",
       "seasonId": "daryl-s03",
       "episodeNumber": 3,
       "title": "El Sacrificio",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050048_walking-dead-daryl-dixon_303__img_wide_16x9_652rl8v16ya.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s03-e04": {
       "seriesId": "daryl",
       "seasonId": "daryl-s03",
       "episodeNumber": 4,
       "title": "La Justicia Fronteriza",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050049_walking-dead-daryl-dixon_304__img_wide_16x9_v88w9ss1sjg.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s03-e05": {
       "seriesId": "daryl",
       "seasonId": "daryl-s03",
       "episodeNumber": 5,
       "title": "Limbo",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/episode_tms_EP048017050050_walking-dead-daryl-dixon_305__img_wide_16x9_1.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s03-e06": {
       "seriesId": "daryl",
       "seasonId": "daryl-s03",
       "episodeNumber": 6,
       "title": "Contrabando",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050051_walking-dead-daryl-dixon_306__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "daryl-s03-e07": {
       "seriesId": "daryl",
       "seasonId": "daryl-s03",
       "episodeNumber": 7,
       "title": "Solaz Del Mar",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050052_walking-dead-daryl-dixon_307__img_wide_16x9_1siiryjpi18j.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s01-e01": {
       "seriesId": "dead",
       "seasonId": "dead-s01",
       "episodeNumber": 1,
       "title": "Old Acquaintances",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_101_Platform_1920x1080.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.760Z"
     },
     "dead-s01-e02": {
       "seriesId": "dead",
       "seasonId": "dead-s01",
       "episodeNumber": 2,
       "title": "Who's There?",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_102_Platform_1920x1080.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s01-e03": {
       "seriesId": "dead",
       "seasonId": "dead-s01",
       "episodeNumber": 3,
       "title": "People Are a Resource",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_103_Platform_1920x1080.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s01-e04": {
       "seriesId": "dead",
       "seasonId": "dead-s01",
       "episodeNumber": 4,
       "title": "Everybody Wins a Prize",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_104_Platform_1920x1080.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s01-e05": {
       "seriesId": "dead",
       "seasonId": "dead-s01",
       "episodeNumber": 5,
       "title": "Stories We Tell Ourselves",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_105_Platform_1920x1080.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s01-e06": {
       "seriesId": "dead",
       "seasonId": "dead-s01",
       "episodeNumber": 6,
       "title": "Doma Smo",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/TWDDC_106_Platform_1920x1080.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s02-e01": {
       "seriesId": "dead",
       "seasonId": "dead-s02",
       "episodeNumber": 1,
       "title": "Power Equals Power",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_201_1920x1080.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s02-e02": {
       "seriesId": "dead",
       "seasonId": "dead-s02",
       "episodeNumber": 2,
       "title": "Another Shitty Lesson",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_202.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s02-e03": {
       "seriesId": "dead",
       "seasonId": "dead-s02",
       "episodeNumber": 3,
       "title": "Why Did the Mainlanders Cross the River?",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_203.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s02-e04": {
       "seriesId": "dead",
       "seasonId": "dead-s02",
       "episodeNumber": 4,
       "title": "Feisty Friendly",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_204.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s02-e05": {
       "seriesId": "dead",
       "seasonId": "dead-s02",
       "episodeNumber": 5,
       "title": "The Bird Always Knows",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWD_DeadCity_205.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s02-e06": {
       "seriesId": "dead",
       "seasonId": "dead-s02",
       "episodeNumber": 6,
       "title": "Bridge Partners Are Hard to Come By These Days",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_206.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s02-e07": {
       "seriesId": "dead",
       "seasonId": "dead-s02",
       "episodeNumber": 7,
       "title": "Novi Dan, Novi Početak",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/amcplus/episode_tms_EP047027920026_walking-dead-dead-city_207__img_wide_16x9_fw7clumbfz.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s02-e08": {
       "seriesId": "dead",
       "seasonId": "dead-s02",
       "episodeNumber": 8,
       "title": "If History Were a Conflagration",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_208.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s03-e01": {
       "seriesId": "dead",
@@ -307,72 +373,87 @@
       "title": "Trillium",
       "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc",
-      "image": "https://images.cds.amcn.com/amcn/tve/amc/DeadCity_301.jpg",
-      "sourcePage": "https://www.amc.com/shows/the-walking-dead-dead-city/episodes/season-3-trillium--1075484"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_301.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-dead-city/episodes/season-3-trillium--1075484",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s03-e02": {
       "seriesId": "dead",
       "seasonId": "dead-s03",
       "episodeNumber": 2,
       "title": "Haven",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/amcplus/DeadCity_302.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s03-e03": {
       "seriesId": "dead",
       "seasonId": "dead-s03",
       "episodeNumber": 3,
       "title": "Emigrants",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_303.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s03-e04": {
       "seriesId": "dead",
       "seasonId": "dead-s03",
       "episodeNumber": 4,
       "title": "Found / Lost",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_304.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s03-e05": {
       "seriesId": "dead",
       "seasonId": "dead-s03",
       "episodeNumber": 5,
       "title": "Imperialis",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_305.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s03-e06": {
       "seriesId": "dead",
       "seasonId": "dead-s03",
       "episodeNumber": 6,
       "title": "Genesis",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_306.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s03-e07": {
       "seriesId": "dead",
       "seasonId": "dead-s03",
       "episodeNumber": 7,
       "title": "Hourglass",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/amcplus/processed/episode_tms_EP047027920038_walking-dead-dead-city_307__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "dead-s03-e08": {
       "seriesId": "dead",
       "seasonId": "dead-s03",
       "episodeNumber": 8,
       "title": "Tenebrae",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_308.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "ftwd-s01-e01": {
       "seriesId": "ftwd",
@@ -1450,54 +1531,66 @@
       "seasonId": "tales-s01",
       "episodeNumber": 1,
       "title": "Evie / Joe",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190001_tales-of-the-walking-dead_101__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "tales-s01-e02": {
       "seriesId": "tales",
       "seasonId": "tales-s01",
       "episodeNumber": 2,
       "title": "Blair / Gina",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190002_tales-of-the-walking-dead_102__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "tales-s01-e03": {
       "seriesId": "tales",
       "seasonId": "tales-s01",
       "episodeNumber": 3,
       "title": "Dee",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190003_tales-of-the-walking-dead_103__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "tales-s01-e04": {
       "seriesId": "tales",
       "seasonId": "tales-s01",
       "episodeNumber": 4,
       "title": "Amy / Dr. Everett",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190004_tales-of-the-walking-dead_104__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "tales-s01-e05": {
       "seriesId": "tales",
       "seasonId": "tales-s01",
       "episodeNumber": 5,
       "title": "Davon",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190005_tales-of-the-walking-dead_105__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "tales-s01-e06": {
       "seriesId": "tales",
       "seasonId": "tales-s01",
       "episodeNumber": 6,
       "title": "La Doña",
-      "status": "pending",
+      "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc"
+      "source": "amc-card",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190006_tales-of-the-walking-dead_106__img_wide_16x9.jpg",
+      "verifiedAt": "2026-09-19T22:06:12.763Z"
     },
     "twd-s01-e01": {
       "seriesId": "twd",
@@ -3272,5 +3365,7 @@
       "kind": "official-episode-image",
       "source": "amc"
     }
-  }
+  },
+  "verified": 47,
+  "updatedAt": "2026-09-19T22:06:12.764Z"
 }
