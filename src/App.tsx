@@ -3,7 +3,7 @@ import {geoEqualEarth,geoPath} from "d3-geo";
 import {feature} from "topojson-client";
 import type {CSSProperties} from "react";
 // @ts-ignore world-atlas ships JSON topology
-import world from "world-atlas/countries-50m.json";
+import world from "@cublya/world-atlas/countries-50m.json";
 import {atlasData,Location,SeriesKey} from "./data";
 import {validateAtlasData} from "./lib/validateData";
 import {buildChronology} from "./lib/chronology";
