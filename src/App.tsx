@@ -63,8 +63,8 @@ export default function App(){
  const [selectedCharacter,setSelectedCharacter]=useState<string|null>(null);
  const [view,setView]=useState<View>("map");
  const [dataErrors,setDataErrors]=useState<string[]>([]);
- const [zoom,setZoom]=useState(()=>window.matchMedia("(max-width:699px)").matches?1.22:1);
- const [pan,setPan]=useState(()=>window.matchMedia("(max-width:699px)").matches?{x:105,y:4}:{x:0,y:0});
+ const [zoom,setZoom]=useState(()=>1);
+ const [pan,setPan]=useState(()=>({x:0,y:0}));
  const [isDragging,setIsDragging]=useState(false);
  const [sheet,setSheet]=useState<"peek"|"open">("peek");
  const [searchOpen,setSearchOpen]=useState(false);
@@ -73,13 +73,13 @@ export default function App(){
  const drag=useRef({x:0,y:0,px:0,py:0,moved:false});
  const pointers=useRef(new Map<number,{x:number;y:number}>());
  const pinch=useRef<{distance:number;zoom:number}|null>(null);
- const mapSurfaceRef=useRef<HTMLDivElement|null>(null);
+ const mapSvgRef=useRef<SVGSVGElement|null>(null);
  const raf=useRef<number|null>(null);
- const visual=useRef({x:window.matchMedia("(max-width:699px)").matches?105:0,y:window.matchMedia("(max-width:699px)").matches?4:0,zoom:window.matchMedia("(max-width:699px)").matches?1.22:1});
+ const visual=useRef({x:0,y:0,zoom:1});
 
  useEffect(()=>setDataErrors(validateAtlasData()),[]);
  const applyMapTransform=(x:number,y:number,z:number,animate=false)=>{
-   const el=mapSurfaceRef.current;
+   const el=mapSvgRef.current;
    if(!el)return;
    el.style.transition=animate?"transform 140ms cubic-bezier(.2,.8,.2,1)":"none";
    el.style.transform="translate3d("+x+"px,"+y+"px,0) scale("+z+")";
@@ -127,12 +127,12 @@ export default function App(){
  },[query]);
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
- const resetMap=()=>{const mobile=window.matchMedia("(max-width:699px)").matches;setZoom(mobile?1.22:1);setPan(mobile?{x:105,y:4}:{x:0,y:0})};
+ const resetMap=()=>{setZoom(1);setPan({x:0,y:0})};
  const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const eps=atlasData.episodes.filter((e:any)=>e.characterIds?.includes(id)).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))] as string[];const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("map");setSheet("open");focusEpisodeGeography({locationIds:locations})};
  const selectLocation=(l:Location)=>{
    setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
    window.requestAnimationFrame(()=>{
-     const surface=mapSurfaceRef.current;
+     const surface=mapSvgRef.current;
      if(!surface)return;
      const marker=[...surface.querySelectorAll<SVGGElement>(".marker")].find(el=>el.getAttribute("data-location-id")===l.id);
      if(!marker)return;
@@ -141,7 +141,7 @@ export default function App(){
      const targetY=surfaceRect.top+surfaceRect.height*.38;
      const dx=targetX-(markerRect.left+markerRect.width/2);
      const dy=targetY-(markerRect.top+markerRect.height/2);
-     const limit=360*(visual.current.zoom-1)+45;
+     const limit=Math.max(0,Math.max(window.innerWidth,window.innerHeight)*0.5*(visual.current.zoom-1));
      const nextX=clamp(visual.current.x+dx,-limit,limit);
      const nextY=clamp(visual.current.y+dy,-limit,limit);
      visual.current={...visual.current,x:nextX,y:nextY};
@@ -155,17 +155,19 @@ export default function App(){
    const ids=(raw?.locationIds??[]) as string[];
    if(!ids.length)return;
    window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
-     const places=atlasData.locations.filter(l=>ids.includes(l.id));
-     if(!places.length)return;
-     const center=places.reduce((a,l)=>{const p=project(l.lat,l.lng);return {x:a.x+p.x/places.length,y:a.y+p.y/places.length}},{x:0,y:0});
-     const surface=mapSurfaceRef.current;
+     const surface=mapSvgRef.current;
      if(!surface)return;
      const rect=surface.getBoundingClientRect();
-     const markerX=rect.left+(center.x/1000)*rect.width;
-     const markerY=rect.top+(center.y/600)*rect.height;
+     const centers=ids.map(id=>surface.querySelector<SVGGElement>(".marker[data-location-id=\""+id+"\"]")).filter(Boolean).map(el=>{
+       const r=(el as SVGGElement).getBoundingClientRect();
+       return {x:r.left+r.width/2,y:r.top+r.height/2};
+     });
+     if(!centers.length)return;
+     const markerX=centers.reduce((sum,p)=>sum+p.x,0)/centers.length;
+     const markerY=centers.reduce((sum,p)=>sum+p.y,0)/centers.length;
      const targetX=rect.left+rect.width*.5;
      const targetY=rect.top+rect.height*.38;
-     const limit=360*(visual.current.zoom-1)+45;
+     const limit=Math.max(0,Math.max(window.innerWidth,window.innerHeight)*0.5*(visual.current.zoom-1));
      const nextX=clamp(visual.current.x+(targetX-markerX),-limit,limit);
      const nextY=clamp(visual.current.y+(targetY-markerY),-limit,limit);
      visual.current={...visual.current,x:nextX,y:nextY};
@@ -202,7 +204,7 @@ export default function App(){
    }else{
      const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
      if(Math.abs(dx)+Math.abs(dy)>4)drag.current.moved=true;
-     const limit=360*(nextZoom-1)+45;
+     const limit=Math.max(0,Math.max(window.innerWidth,window.innerHeight)*0.5*(nextZoom-1));
      nextX=clamp(drag.current.px+dx,-limit,limit);
      nextY=clamp(drag.current.py+dy,-limit,limit);
    }
@@ -244,7 +246,7 @@ export default function App(){
   <main className="atlasMain">
    <section className="map" aria-label="Interactive Walking Dead Universe map">
     <div className="mapAtmosphere"/>
-    <div className="mapSurface" ref={mapSurfaceRef}>
+    <div className="mapSurface" ref={mapSvgRef}>
      <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
       <defs>
        <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#9fb2b4"/><stop offset=".48" stopColor="#82999d"/><stop offset="1" stopColor="#60777b"/></linearGradient>

@@ -570,7 +570,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
 
   /* The map should remain visible behind every transient surface. */
   .mapSurface{position:absolute;inset:0}
-  .mapSurface svg{min-width:100%;min-height:100%}
+  .mapSurface svg{min-width:100%;min-height:100%;transform-origin:50% 50%}
 }
 
 @media(max-width:390px){
@@ -589,14 +589,16 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
 
 /* --- Mobile map performance: keep gesture frames off React's render path --- */
 .mapSurface{
-  transform-origin:50% 50%;
-  will-change:transform;
+  transform:none!important;
+  will-change:auto;
   contain:layout paint;
   backface-visibility:hidden;
   -webkit-backface-visibility:hidden;
-  transform:translate3d(0,0,0);
 }
 .mapSurface svg{
+  transform-origin:50% 50%;
+  transform:translate3d(0,0,0) scale(1);
+
   touch-action:none;
   user-select:none;
   -webkit-user-select:none;
@@ -609,6 +611,9 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
   .mapSurface{
     contain:strict;
     isolation:isolate;
+  }
+  .mapSurface>svg{
+    transform-origin:50% 50%;
   }
   .mapSurface svg{
     shape-rendering:geometricPrecision;
