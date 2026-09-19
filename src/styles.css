@@ -837,7 +837,7 @@ button:active{transform:translateY(1px)}
 
 @media(max-width:390px){
   .map.view-map .mapTopRight{top:188px}
-  .map.view-map .seriesRail{top:136px}
+  .map.view-map .seriesRail{top:480px}
   .map.view-map .seriesRail button{padding-inline:8px}
   .map.view-map .mapTopLeft{top:78px}
   .map.view-map .mobileTimeBar{bottom:calc(var(--mobile-nav) + 7px)}
@@ -899,7 +899,7 @@ button:active{transform:translateY(1px)}
 @media(max-width:699px){
   .map.view-map .mapWorld{will-change:transform}
   .map.view-map .seriesRail{
-    top:260px;
+    top:490px;
     padding-right:8px;
   }
   .map.view-map .seriesRailHint{display:none}
@@ -928,4 +928,17 @@ button:active{transform:translateY(1px)}
   .guideSecondary{grid-template-columns:1fr}
   .guidePaths{margin-top:8px}
   .guidePaths button{min-height:66px}
+}
+
+
+/* Mobile control stack: keep the series rail below the zoom controls. */
+@media(max-width:699px){
+  .map.view-map .seriesRail{
+    top:490px;
+    z-index:72;
+  }
+  .map.view-map .mapTopRight{z-index:75}
+}
+@media(max-width:390px){
+  .map.view-map .seriesRail{top:470px}
 }
