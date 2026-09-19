@@ -349,7 +349,7 @@ export default function App(){
 function LocationDetail({location,onEpisode}:{location:Location;onEpisode:(id:string)=>void}){
  const meta=SERIES_BY_ID[location.seriesId];
  const placeMedia=(atlasData as any).media?.places?.[location.id];
- const episodes=atlasData.episodes.filter((e:any)=>e.locationIds?.includes(location.id));
+ const locationEpisodeIds=getLocationEpisodeIds(location.id); const episodes=locationEpisodeIds.map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean) as any[];
  const events=atlasData.events.filter((e:any)=>e.locationIds?.includes(location.id));
  return <div className="contentScroll">
   <div className="entityHero" style={{"--accent":meta.color} as CSSProperties}>{placeMedia?.image&&<img src={atlasImageUrl(placeMedia.image,1200)} onError={e=>onAtlasImageError(e,placeMedia.image)} srcSet={atlasImageSrcSet(placeMedia.image)} sizes="(max-width: 699px) 92vw, 470px" loading="eager" decoding="async" alt="" className="entityArt"/>}<div className="entityHeroCopy"><span>{meta.short} · {location.year}</span><h3>{location.name}</h3><p>{location.type} · {location.certainty}</p></div></div>
@@ -398,7 +398,7 @@ function TimelineContent({episodes,onEpisode}:{episodes:any[];onEpisode:(id:stri
 function CharacterDetail({characterId,onEpisode,onLocation}:{characterId:string;onEpisode:(id:string)=>void;onLocation:(l:Location)=>void}){
  const character=atlasData.characters.find((x:any)=>x.id===characterId) as any;
  if(!character)return null;
- const eps=atlasData.episodes.filter((e:any)=>e.characterIds?.includes(characterId)).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));
+ const eps=getCharacterEpisodeIds(characterId).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));
  const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))].map(id=>atlasData.locations.find(l=>l.id===id)).filter(Boolean) as Location[];
  const links=atlasData.connections.filter((x:any)=>x.fromId===characterId||x.toId===characterId);
  return <div className="contentScroll">
