@@ -129,10 +129,7 @@ async function main(){
     for(const url of discoverUrls(catalog))urlsSet.add(url);
   }catch(err){console.warn("AMC catalog discovery failed:",err?.message||err)}
   for(const sitemap of SITEMAPS){
-    try{
-      const xml=await fetchText(sitemap);
-      for(const url of discoverSitemapUrls(xml))urlsSet.add(url);
-    }catch{}
+    for(const url of await discoverSitemapTree(sitemap))urlsSet.add(url);
   }
   const urls=[...urlsSet];
   console.log(`Discovered ${urls.length} AMC TWDU episode pages from catalog/sitemaps.`);
