@@ -32,7 +32,7 @@ export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,se
    <div className="atlasTimelineActions"><button className="atlasConnectionsButton" onClick={onConnections} aria-label="Open universe connections">{atlasData.connections.length} LINKS</button><button className={playing?"playing":""} onClick={onTogglePlaying} aria-label={playing?"Pause chronology":"Play chronology"}>{playing?"Ⅱ":"▶"}</button><output>{selected?.title||"Drag the chronology"}</output></div>
   </div>
   <div className="atlasTimelineBody">
-   <div className="atlasTimelineScale" aria-hidden="true">{[2010,2012,2014,2016,2018,2020,2022,2024,2026,2027].map(y=><button key={y} style={{left:pos(y)+"%"}} onClick={()=>onYearChange(y)}>{y}</button>)}</div>
+   <div className="atlasTimelineScale">{[2010,2012,2014,2016,2018,2020,2022,2024,2026,2027].map(y=><button key={y} style={{left:pos(y)+"%"}} onClick={()=>onYearChange(y)}>{y}</button>)}</div>
    <div className="atlasTimelineLanes">
     {ORDER.map(key=>{const meta=META[key];const items=visible.filter(x=>x.seriesId===meta.id);const active=activeSeries.has(meta.id);return <div className={"atlasTimelineLane "+(active?"active":"")} key={key}>
       <button className="atlasTimelineLaneLabel" onClick={()=>onYearChange(items.find(x=>x.start>=year)?.start??year)} style={{"--lane":meta.color} as CSSProperties}>{meta.short}</button>
