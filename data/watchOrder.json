@@ -2,7 +2,7 @@
   {
     "id": "watch-note",
     "type": "note",
-    "label": "Episode-level chronology requires scene-level timeline anchors for flashbacks, split seasons and overlapping storylines.",
+    "label": "Series-level chronological scaffold. Episode-level chronology will supersede this where flashbacks, split seasons, and overlapping stories require finer anchors.",
     "certainty": "confirmed"
   },
   {
@@ -10,8 +10,8 @@
     "seriesId": "ftwd",
     "startSeason": 1,
     "endSeason": 3,
-    "label": "FTWD S1–3",
-    "basis": "series-level chronological scaffold",
+    "label": "FTWD S1–S3",
+    "basis": "series-level chronology",
     "certainty": "approximate"
   },
   {
@@ -19,8 +19,8 @@
     "seriesId": "twd",
     "startSeason": 1,
     "endSeason": 8,
-    "label": "TWD S1–8",
-    "basis": "series-level chronological scaffold",
+    "label": "TWD S1–S8",
+    "basis": "series-level chronology",
     "certainty": "approximate"
   },
   {
@@ -29,7 +29,7 @@
     "startSeason": 4,
     "endSeason": 4,
     "label": "FTWD S4",
-    "basis": "series-level chronological scaffold",
+    "basis": "Morgan crossover era",
     "certainty": "approximate"
   },
   {
@@ -37,8 +37,8 @@
     "seriesId": "tales",
     "startSeason": 1,
     "endSeason": 1,
-    "label": "TALES S1",
-    "basis": "series-level chronological scaffold",
+    "label": "Tales S1",
+    "basis": "individual anthology timelines vary",
     "certainty": "approximate"
   },
   {
@@ -47,7 +47,7 @@
     "startSeason": 9,
     "endSeason": 9,
     "label": "TWD S9",
-    "basis": "series-level chronological scaffold",
+    "basis": "season contains a major time jump",
     "certainty": "approximate"
   },
   {
@@ -56,7 +56,7 @@
     "startSeason": 5,
     "endSeason": 5,
     "label": "FTWD S5",
-    "basis": "series-level chronological scaffold",
+    "basis": "series-level chronology",
     "certainty": "approximate"
   },
   {
@@ -65,7 +65,7 @@
     "startSeason": 10,
     "endSeason": 10,
     "label": "TWD S10",
-    "basis": "series-level chronological scaffold",
+    "basis": "series-level chronology",
     "certainty": "approximate"
   },
   {
@@ -73,8 +73,8 @@
     "seriesId": "wb",
     "startSeason": 1,
     "endSeason": 2,
-    "label": "WB S1–2",
-    "basis": "series-level chronological scaffold",
+    "label": "World Beyond S1–S2",
+    "basis": "ten-years-after outbreak era",
     "certainty": "approximate"
   },
   {
@@ -82,8 +82,8 @@
     "seriesId": "ftwd",
     "startSeason": 6,
     "endSeason": 7,
-    "label": "FTWD S6–7",
-    "basis": "series-level chronological scaffold",
+    "label": "FTWD S6–S7",
+    "basis": "series-level chronology",
     "certainty": "approximate"
   },
   {
@@ -92,7 +92,7 @@
     "startSeason": 11,
     "endSeason": 11,
     "label": "TWD S11",
-    "basis": "series-level chronological scaffold",
+    "basis": "series-level chronology",
     "certainty": "approximate"
   },
   {
@@ -101,34 +101,70 @@
     "startSeason": 8,
     "endSeason": 8,
     "label": "FTWD S8",
-    "basis": "series-level chronological scaffold",
+    "basis": "late Fear timeline",
     "certainty": "approximate"
   },
   {
     "id": "watch-12",
     "seriesId": "daryl",
     "startSeason": 1,
-    "endSeason": 3,
-    "label": "DARYL S1–3",
-    "basis": "series-level chronological scaffold",
+    "endSeason": 1,
+    "label": "Daryl Dixon S1",
+    "basis": "post-main-series Europe",
     "certainty": "approximate"
   },
   {
     "id": "watch-13",
-    "seriesId": "owl",
+    "seriesId": "dead",
     "startSeason": 1,
     "endSeason": 1,
-    "label": "OWL S1",
-    "basis": "series-level chronological scaffold",
+    "label": "Dead City S1",
+    "basis": "post-main-series Manhattan",
     "certainty": "approximate"
   },
   {
     "id": "watch-14",
-    "seriesId": "dead",
+    "seriesId": "daryl",
+    "startSeason": 2,
+    "endSeason": 2,
+    "label": "Daryl Dixon S2",
+    "basis": "post-S1 Europe",
+    "certainty": "approximate"
+  },
+  {
+    "id": "watch-15",
+    "seriesId": "owl",
     "startSeason": 1,
+    "endSeason": 1,
+    "label": "The Ones Who Live",
+    "basis": "post-Rick-disappearance storyline with extensive flashbacks",
+    "certainty": "approximate"
+  },
+  {
+    "id": "watch-16",
+    "seriesId": "dead",
+    "startSeason": 2,
+    "endSeason": 2,
+    "label": "Dead City S2",
+    "basis": "post-S1 Manhattan",
+    "certainty": "approximate"
+  },
+  {
+    "id": "watch-17",
+    "seriesId": "daryl",
+    "startSeason": 3,
     "endSeason": 3,
-    "label": "DEAD S1–3",
-    "basis": "series-level chronological scaffold",
+    "label": "Daryl Dixon S3",
+    "basis": "Spain storyline",
+    "certainty": "approximate"
+  },
+  {
+    "id": "watch-18",
+    "seriesId": "dead",
+    "startSeason": 3,
+    "endSeason": 3,
+    "label": "Dead City S3",
+    "basis": "current post-main-series storyline",
     "certainty": "approximate"
   }
 ]
