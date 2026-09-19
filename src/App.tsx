@@ -33,6 +33,7 @@ const worldLand:any=feature(world as any,(world as any).objects.land) as any;
 const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
 const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
 const MOBILE_HOME_X=-80;
+const MOBILE_HOME_Y=45;
 const onAtlasImageError=(e:React.SyntheticEvent<HTMLImageElement>,source:string)=>{const img=e.currentTarget;if(!source||img.dataset.fallback==="1")return;img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;};
 const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
 const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
@@ -68,7 +69,7 @@ export default function App(){
  const [view,setView]=useState<View>("map");
  const [dataErrors,setDataErrors]=useState<string[]>([]);
  const [zoom,setZoom]=useState(()=>1);
- const [pan,setPan]=useState(()=>({x:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_X:0,y:0}));
+ const [pan,setPan]=useState(()=>({x:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_X:0,y:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_Y:0}));
  const [isDragging,setIsDragging]=useState(false);
  const [sheet,setSheet]=useState<"peek"|"open">("open");
  const [searchOpen,setSearchOpen]=useState(false);
@@ -79,7 +80,7 @@ export default function App(){
  const pinch=useRef<{distance:number;zoom:number;x:number;y:number;midX:number;midY:number}|null>(null);
  const mapSvgRef=useRef<SVGSVGElement|null>(null);
  const raf=useRef<number|null>(null);
- const visual=useRef({x:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_X:0,y:0,zoom:1});
+ const visual=useRef({x:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_X:0,y:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_Y:0,zoom:1});
  const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
 
  useEffect(()=>setDataErrors(validateAtlasData()),[]);
@@ -134,7 +135,7 @@ export default function App(){
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
  const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,vbW=1000,vbH=600,scale=Math.max(w/vbW,h/vbH)*visual.current.zoom;return {x:Math.max(0,(vbW*scale-w)/2),y:Math.max(0,(vbH*scale-h)/2)}};
- const resetMap=()=>{const homeX=isMobileMap?MOBILE_HOME_X:0;visual.current={x:homeX,y:0,zoom:1};setZoom(1);setPan({x:homeX,y:0});};
+ const resetMap=()=>{const homeX=isMobileMap?MOBILE_HOME_X:0;const homeY=isMobileMap?MOBILE_HOME_Y:0;visual.current={x:homeX,y:homeY,zoom:1};setZoom(1);setPan({x:homeX,y:homeY});};
  const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const eps=atlasData.episodes.filter((e:any)=>e.characterIds?.includes(id)).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))] as string[];const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("people");setSheet("open")};
  const selectLocation=(l:Location)=>{
    setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
