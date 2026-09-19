@@ -11,7 +11,7 @@ import episodeMedia from "../data/episodeMedia.json";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
 import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
-import {getCharacterEpisodeIds,getLocationEpisodeIds} from "./lib/entityGraph";
+import {getCharacterEpisodeIds,getLocationEpisodeIds,getEntityNeighborhood} from "./lib/entityGraph";
 import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
 
 type View="map"|"timeline"|"people"|"guide";
@@ -401,6 +401,8 @@ function CharacterDetail({characterId,onEpisode,onLocation}:{characterId:string;
  const eps=getCharacterEpisodeIds(characterId).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));
  const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))].map(id=>atlasData.locations.find(l=>l.id===id)).filter(Boolean) as Location[];
  const links=atlasData.connections.filter((x:any)=>x.fromId===characterId||x.toId===characterId);
+ const neighborhood=getEntityNeighborhood("character",characterId).slice(0,16);
+ const graphLabel=(ref:{kind:string;id:string})=>{const pools:any={episode:atlasData.episodes,location:atlasData.locations,character:atlasData.characters,community:atlasData.communities,faction:atlasData.factions,connection:atlasData.connections,series:atlasData.series,season:atlasData.seasons};return pools[ref.kind]?.find((x:any)=>x.id===ref.id)?.name||pools[ref.kind]?.find((x:any)=>x.id===ref.id)?.title||ref.id};
  return <div className="contentScroll">
   <div className="entityHero"><div className="entityHeroCopy"><span>CHARACTER · {(character.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")}</span><h3>{character.name}</h3><p>{character.certainty||"tracked"} · {eps.length} linked episodes</p></div></div>
   <div className="detailGrid"><div><small>EPISODES</small><b>{eps.length}</b></div><div><small>LOCATIONS</small><b>{locations.length}</b></div><div><small>SERIES</small><b>{(character.seriesIds||[]).length}</b></div><div><small>LINKS</small><b>{links.length}</b></div></div>
@@ -409,6 +411,7 @@ function CharacterDetail({characterId,onEpisode,onLocation}:{characterId:string;
   <div className="sectionTitle">GEOGRAPHY <span>{locations.length}</span></div>
   <div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}><Icon name="pin"/>{l.name}</button>)}</div>
   {links.length>0&&<><div className="sectionTitle">CONNECTIONS <span>{links.length}</span></div><div className="connectionLinks">{links.map((x:any)=><article key={x.id}><small>{x.type}</small><b>{x.label}</b><span>{x.fromId} ↔ {x.toId} · {x.certainty}</span></article>)}</div></>}
+  {neighborhood.length>0&&<><div className="sectionTitle">ENTITY GRAPH <span>{neighborhood.length}</span></div><div className="connectionLinks graphLinks">{neighborhood.map((x:any,i:number)=><article key={x.ref.kind+x.ref.id+i}><small>{x.type} · {x.ref.kind.toUpperCase()}</small><b>{graphLabel(x.ref)}</b><span>{x.confidence}</span></article>)}</div></>}
  </div>;
 }
 
