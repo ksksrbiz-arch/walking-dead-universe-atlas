@@ -78,6 +78,7 @@ export default function App(){
  }),[series,year,query]);
 
  const chronology=useMemo(()=>buildChronology().filter(e=>e.start<=year&&(series==="ALL"||e.seriesId===SERIES_BY_ID[series]?.id)),[year,series]);
+ const chronology=useMemo(()=>buildChronology().filter(e=>e.start<=year&&(series==="ALL"||e.seriesId===SERIES_BY_ID[series]?.id)),[year,series]);
  const timeline=useMemo(()=>atlasData.events.filter(e=>{
    const meta=SERIES_BY_ID[e.seriesId];
    const q=query.trim().toLowerCase();
@@ -216,7 +217,16 @@ export default function App(){
 
 function LocationDetail({location}:{location:Location}){
  const meta=SERIES_BY_ID[location.seriesId];
- return <div className="detailBody"><div className="entityHero" style={{"--accent":meta.color} as CSSProperties}><span className="eyebrow">{meta.short} · {location.year}</span><h3>{location.name}</h3><p>{location.type} · {location.certainty}</p></div><div className="detailGrid"><div><small>TYPE</small><b>{location.type}</b></div><div><small>ERA</small><b>{location.year}+</b></div><div><small>SERIES</small><b>{meta.short}</b></div></div><div className="sectionTitle">Atlas status</div><p className="muted">This location is connected to the canonical data layer. Episode-level source references will progressively increase its chronology precision.</p></div>
+ const episodes=atlasData.episodes.filter((e:any)=>e.locationIds?.includes(location.id));
+ const events=atlasData.events.filter((e:any)=>e.locationIds?.includes(location.id));
+ return <div className="detailBody">
+  <div className="entityHero" style={{"--accent":meta.color} as CSSProperties}><span className="eyebrow">{meta.short} · {location.year}</span><h3>{location.name}</h3><p>{location.type} · {location.certainty}</p></div>
+  <div className="detailGrid"><div><small>TYPE</small><b>{location.type}</b></div><div><small>ERA</small><b>{location.year}+</b></div><div><small>SERIES</small><b>{meta.short}</b></div><div><small>EPISODES</small><b>{episodes.length}</b></div></div>
+  <div className="sectionTitle">Timeline presence <span>{episodes.length} episodes</span></div>
+  {episodes.length?<div className="timelineList">{episodes.map((e:any)=><article key={e.id}><div className="eventYear">{e.timelineStart||"?"}</div><div><small>{meta.short} · S{e.seasonId.slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><span>{e.certainty} · {e.timelinePrecision}</span></div></article>)}</div>:<p className="muted">No episode-level appearance has been linked to this location yet.</p>}
+  {events.length>0&&<><div className="sectionTitle">Major events <span>{events.length}</span></div><div className="timelineList">{events.map((e:any)=><article key={e.id}><div className="eventYear">{e.year}</div><div><small>EVENT</small><b>{e.title}</b><span>{e.certainty}</span></div></article>)}</div></>}
+  <div className="sectionTitle">Atlas status</div><p className="muted">Geographic position is stored independently from chronology certainty. Approximate coordinates remain explicitly marked.</p>
+ </div>
 }
 function MapContent({locations,onSelect}:{locations:Location[];onSelect:(l:Location)=>void}){return <div className="contentScroll"><div className="sectionTitle">Locations <span>{locations.length}</span></div><div className="cards">{locations.map(l=><button className="entityCard" key={l.id} onClick={()=>onSelect(l)}><div><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><span>{l.type} · {l.certainty}</span></div><Icon name="chevron"/></button>)}</div></div>}
 function TimelineContent({events,chronology}:{events:typeof atlasData.events;chronology:any[]}){return <div className="contentScroll"><div className="sectionTitle">Universe chronology <span>{chronology.length} nodes</span></div>{atlasData.episodes.length===0&&<article className="statusCard"><small>EPISODE REGISTRY</small><b>Episode-level chronology is ready for ingestion</b><span>The engine already merges episode records and timeline events. The current dataset still needs the full canonical episode registry; no episode facts are being invented in the UI.</span></article>}<div className="timelineList">{chronology.map((e:any)=><article key={e.kind+e.id}><div className="eventYear">{e.start||"—"}</div><div><small>{SERIES_BY_ID[e.seriesId]?.short} · {e.kind.toUpperCase()}</small><b>{e.title}</b><span>{e.certainty} · {e.precision}</span></div></article>)}</div></div>}
@@ -436,7 +446,7 @@ export default function App(){
     <section className={`contentPanel ${mobilePanel}`}>
       <button className="panelGrab" onClick={()=>setMobilePanel(p=>p==="open"?"peek":"open")} aria-label="Toggle panel"><span/></button>
       <div className="panelHeader"><div><small>{selected?SERIES_BY_ID[selected.seriesId]?.name:view.toUpperCase()}</small><h2>{selected?.name||view==="map"?"Explore the universe":view==="timeline"?"Universe timeline":view==="people"?"People & connections":"Atlas guide"}</h2></div>{selected&&<button className="closePanel" onClick={()=>{setSelectedId(null);setMobilePanel("peek")}}><Icon name="close"/></button>}</div>
-      {selected?<LocationDetail location={selected}/>:view==="map"?<MapContent locations={filteredLocations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent events={timeline}/>:view==="people"?<PeopleContent/>:<GuideContent errors={dataErrors}/>}
+      {selected?<LocationDetail location={selected}/>:view==="map"?<MapContent locations={filteredLocations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent events={timeline} chronology={chronology}/>:view==="people"?<PeopleContent/>:<GuideContent errors={dataErrors}/>}
     </section>
 
     <nav className="bottomNav">{(["map","timeline","people","guide"] as View[]).map(v=><button key={v} className={view===v?"active":""} onClick={()=>goView(v)}><Icon name={v==="map"?"map":v==="timeline"?"timeline":v==="people"?"people":"guide"}/><small>{v}</small></button>)}</nav>
