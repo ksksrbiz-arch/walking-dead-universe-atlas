@@ -1,0 +1,9 @@
+[
+  {"id":"twd","key":"TWD","title":"The Walking Dead","shortTitle":"TWD","type":"series"},
+  {"id":"ftwd","key":"FTWD","title":"Fear the Walking Dead","shortTitle":"Fear","type":"series"},
+  {"id":"tales","key":"TALES","title":"Tales of the Walking Dead","shortTitle":"Tales","type":"anthology"},
+  {"id":"wb","key":"WB","title":"The Walking Dead: World Beyond","shortTitle":"World Beyond","type":"series"},
+  {"id":"owl","key":"OWL","title":"The Walking Dead: The Ones Who Live","shortTitle":"TOWL","type":"limited-series"},
+  {"id":"daryl","key":"DARYL","title":"The Walking Dead: Daryl Dixon","shortTitle":"Daryl Dixon","type":"series"},
+  {"id":"dead","key":"DEAD","title":"The Walking Dead: Dead City","shortTitle":"Dead City","type":"series"}
+]
