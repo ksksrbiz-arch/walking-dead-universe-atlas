@@ -32,7 +32,7 @@ const worldCountries:any=feature(world as any,(world as any).objects.countries) 
 const worldLand:any=feature(world as any,(world as any).objects.land) as any;
 const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
 const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
-const MOBILE_HOME_X=-170;
+const MOBILE_HOME_X=-80;
 const onAtlasImageError=(e:React.SyntheticEvent<HTMLImageElement>,source:string)=>{const img=e.currentTarget;if(!source||img.dataset.fallback==="1")return;img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;};
 const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
 const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
