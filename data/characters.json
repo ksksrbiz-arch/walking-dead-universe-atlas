@@ -1,33 +1,276 @@
 [
-  {"id":"rick-grimes","name":"Rick Grimes","certainty":"confirmed","seriesIds":["twd","ftwd","owl","dead"]},
-  {"id":"michonne","name":"Michonne Grimes","certainty":"confirmed","seriesIds":["twd","owl"]},
-  {"id":"daryl-dixon","name":"Daryl Dixon","certainty":"confirmed","seriesIds":["twd","daryl","dead","owl"]},
-  {"id":"negan-smith","name":"Negan Smith","certainty":"confirmed","seriesIds":["twd","dead"]},
-  {"id":"morgan-jones","name":"Morgan Jones","certainty":"confirmed","seriesIds":["twd","ftwd"]},
-  {"id":"jadis-stokes","name":"Jadis / Anne","certainty":"confirmed","seriesIds":["twd","wb","owl"]},
-  {"id":"carol-peletier","name":"Carol Peletier","certainty":"confirmed","seriesIds":["twd","daryl","owl"]},
-  {"id":"carl-grimes","name":"Carl Grimes","certainty":"confirmed","seriesIds":["twd","ftwd"]},
-  {"id":"judith-grimes","name":"Judith Grimes","certainty":"confirmed","seriesIds":["twd","daryl","owl"]},
-  {"id":"maggie-rhee","name":"Maggie Rhee","certainty":"confirmed","seriesIds":["twd","dead","owl"]},
-  {"id":"hershel-rhee","name":"Hershel Rhee","certainty":"confirmed","seriesIds":["twd","dead"]},
-  {"id":"glenn-rhee","name":"Glenn Rhee","certainty":"confirmed","seriesIds":["twd","dead"]},
-  {"id":"rosita-espinosa","name":"Rosita Espinosa","certainty":"confirmed","seriesIds":["twd","dead"]},
-  {"id":"gabriel-stokes","name":"Gabriel Stokes","certainty":"confirmed","seriesIds":["twd","owl"]},
-  {"id":"paul-rovia","name":"Paul 'Jesus' Rovia","certainty":"confirmed","seriesIds":["twd","ftwd"]},
-  {"id":"ezekiel-sutton","name":"Ezekiel Sutton","certainty":"confirmed","seriesIds":["twd","ftwd"]},
-  {"id":"dwight","name":"Dwight","certainty":"confirmed","seriesIds":["twd","ftwd"]},
-  {"id":"sherry","name":"Sherry","certainty":"confirmed","seriesIds":["twd","ftwd"]},
-  {"id":"alpha","name":"Alpha / Dee","certainty":"confirmed","seriesIds":["twd","tales"]},
-  {"id":"lydia","name":"Lydia","certainty":"confirmed","seriesIds":["twd","tales"]},
-  {"id":"edwin-jenner","name":"Dr. Edwin Jenner","certainty":"confirmed","seriesIds":["twd","wb"]},
-  {"id":"sophia-peletier","name":"Sophia Peletier","certainty":"confirmed","seriesIds":["twd","daryl"]},
-  {"id":"simon","name":"Simon","certainty":"confirmed","seriesIds":["twd","dead"]},
-  {"id":"merle-dixon","name":"Merle Dixon","certainty":"confirmed","seriesIds":["twd","daryl"]},
-  {"id":"shane-walsh","name":"Shane Walsh","certainty":"confirmed","seriesIds":["twd"]},
-  {"id":"althea-szprygocki","name":"Althea Szewczyk-Przygocki","certainty":"confirmed","seriesIds":["ftwd"]},
-  {"id":"hope-bennett","name":"Hope Bennett","certainty":"confirmed","seriesIds":["wb"]},
-  {"id":"iris-bennett","name":"Iris Bennett","certainty":"confirmed","seriesIds":["wb"]},
-  {"id":"jennifer-mallick","name":"Jennifer Mallick","certainty":"confirmed","seriesIds":["wb","owl"]},
-  {"id":"samuel-abbott","name":"Samuel Abbott","certainty":"confirmed","seriesIds":["wb","owl"]},
-  {"id":"gabriel-stokes","name":"Gabriel Stokes","certainty":"confirmed","seriesIds":["twd","owl"]}
+  {
+    "id": "rick-grimes",
+    "name": "Rick Grimes",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "ftwd",
+      "owl",
+      "dead"
+    ]
+  },
+  {
+    "id": "michonne",
+    "name": "Michonne Grimes",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "owl"
+    ]
+  },
+  {
+    "id": "daryl-dixon",
+    "name": "Daryl Dixon",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "daryl",
+      "dead",
+      "owl"
+    ]
+  },
+  {
+    "id": "negan-smith",
+    "name": "Negan Smith",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "dead"
+    ]
+  },
+  {
+    "id": "morgan-jones",
+    "name": "Morgan Jones",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "ftwd"
+    ]
+  },
+  {
+    "id": "jadis-stokes",
+    "name": "Jadis / Anne",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "wb",
+      "owl"
+    ]
+  },
+  {
+    "id": "carol-peletier",
+    "name": "Carol Peletier",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "daryl",
+      "owl"
+    ]
+  },
+  {
+    "id": "carl-grimes",
+    "name": "Carl Grimes",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "ftwd"
+    ]
+  },
+  {
+    "id": "judith-grimes",
+    "name": "Judith Grimes",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "daryl",
+      "owl"
+    ]
+  },
+  {
+    "id": "maggie-rhee",
+    "name": "Maggie Rhee",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "dead",
+      "owl"
+    ]
+  },
+  {
+    "id": "hershel-rhee",
+    "name": "Hershel Rhee",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "dead"
+    ]
+  },
+  {
+    "id": "glenn-rhee",
+    "name": "Glenn Rhee",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "dead"
+    ]
+  },
+  {
+    "id": "rosita-espinosa",
+    "name": "Rosita Espinosa",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "dead"
+    ]
+  },
+  {
+    "id": "gabriel-stokes",
+    "name": "Gabriel Stokes",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "owl"
+    ]
+  },
+  {
+    "id": "paul-rovia",
+    "name": "Paul 'Jesus' Rovia",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "ftwd"
+    ]
+  },
+  {
+    "id": "ezekiel-sutton",
+    "name": "Ezekiel Sutton",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "ftwd"
+    ]
+  },
+  {
+    "id": "dwight",
+    "name": "Dwight",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "ftwd"
+    ]
+  },
+  {
+    "id": "sherry",
+    "name": "Sherry",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "ftwd"
+    ]
+  },
+  {
+    "id": "alpha",
+    "name": "Alpha / Dee",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "tales"
+    ]
+  },
+  {
+    "id": "lydia",
+    "name": "Lydia",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "tales"
+    ]
+  },
+  {
+    "id": "edwin-jenner",
+    "name": "Dr. Edwin Jenner",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "wb"
+    ]
+  },
+  {
+    "id": "sophia-peletier",
+    "name": "Sophia Peletier",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "daryl"
+    ]
+  },
+  {
+    "id": "simon",
+    "name": "Simon",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "dead"
+    ]
+  },
+  {
+    "id": "merle-dixon",
+    "name": "Merle Dixon",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "daryl"
+    ]
+  },
+  {
+    "id": "shane-walsh",
+    "name": "Shane Walsh",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ]
+  },
+  {
+    "id": "althea-szprygocki",
+    "name": "Althea Szewczyk-Przygocki",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ]
+  },
+  {
+    "id": "hope-bennett",
+    "name": "Hope Bennett",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ]
+  },
+  {
+    "id": "iris-bennett",
+    "name": "Iris Bennett",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ]
+  },
+  {
+    "id": "jennifer-mallick",
+    "name": "Jennifer Mallick",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb",
+      "owl"
+    ]
+  },
+  {
+    "id": "samuel-abbott",
+    "name": "Samuel Abbott",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb",
+      "owl"
+    ]
+  }
 ]
