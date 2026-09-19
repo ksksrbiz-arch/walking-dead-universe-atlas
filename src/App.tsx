@@ -9,6 +9,7 @@ import {validateAtlasData} from "./lib/validateData";
 import {buildChronology} from "./lib/chronology";
 import episodeMedia from "../data/episodeMedia.json";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
+import MobileTimeBar from "./components/MobileTimeBar";
 import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
 
 type View="map"|"timeline"|"people"|"guide";
@@ -133,7 +134,7 @@ export default function App(){
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
  const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,vbW=1000,vbH=600,scale=Math.max(w/vbW,h/vbH)*visual.current.zoom;return {x:Math.max(0,(vbW*scale-w)/2),y:Math.max(0,(vbH*scale-h)/2)}};
  const resetMap=()=>{visual.current={x:0,y:0,zoom:1};setZoom(1);setPan({x:0,y:0});};
- const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const eps=atlasData.episodes.filter((e:any)=>e.characterIds?.includes(id)).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))] as string[];const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("map");setSheet("open");focusEpisodeGeography({locationIds:locations})};
+ const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const eps=atlasData.episodes.filter((e:any)=>e.characterIds?.includes(id)).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))] as string[];const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("people");setSheet("open")};
  const selectLocation=(l:Location)=>{
    setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
    window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
@@ -264,7 +265,7 @@ export default function App(){
   </header>
 
   <main className="atlasMain">
-   <section className="map" aria-label="Interactive Walking Dead Universe map">
+   <section className={"map view-"+view} aria-label="Interactive Walking Dead Universe map">
     <div className="mapAtmosphere"/>
     <div className="mapSurface" ref={mapSvgRef}>
      <svg viewBox="0 0 1000 600" preserveAspectRatio={isMobileMap?"xMinYMid slice":"xMidYMid slice"} className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
@@ -302,14 +303,12 @@ export default function App(){
     <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>
     <div className={`mapLegend ${sheet==="open"?"sheetOpen":""}`} aria-label="Map legend"><small>SERIES LAYER</small>{SERIES_KEYS.map(k=><span key={k}><i style={{background:META[k].color}}/>{META[k].short}</span>)}</div>
 
-    <div className="seriesRail" aria-label="Series filter">
+    {view==="map"&&<div className="seriesRail" aria-label="Series filter">
       <button className={series==="ALL"?"active":""} onClick={()=>setSeries("ALL")}>ALL</button>
       {SERIES_KEYS.map(k=><button key={k} className={series===k?"active":""} style={series===k?{"--series":META[k].color} as CSSProperties:{}} onClick={()=>setSeries(k)}>{META[k].short}</button>)}
-    </div>
+    </div>}
 
-    <AtlasTimelineDock year={year} onYearChange={y=>{setPlaying(false);setYear(y)}} series={series} onEpisode={selectAtlasEpisode} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>
-
-    <div className={`timeMachine ${sheet==="open"?"sheetOpen":""}`}>
+    {!isMobileMap&&<AtlasTimelineDock year={year} onYearChange={y=>{setPlaying(false);setYear(y)}} series={series} onEpisode={selectAtlasEpisode} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>}\n\n    {isMobileMap&&view==="map"&&!selectedLocation&&!selectedCharacter&&<MobileTimeBar year={year} playing={playing} onYearChange={y=>{setPlaying(false);setYear(y)}} onTogglePlaying={()=>setPlaying(v=>!v)}/>}\n\n    <div className={`timeMachine ${sheet==="open"?"sheetOpen":""}`}>
       <div className="timeMachineHead"><div><small>UNIVERSE TIME</small><b>{year}</b></div><button onClick={()=>setPlaying(v=>!v)} aria-label={playing?"Pause chronology":"Play chronology"}><Icon name={playing?"pause":"play"}/></button></div>
       <input aria-label="Universe year" type="range" min="2010" max="2027" value={year} onChange={e=>{setPlaying(false);setYear(Number(e.target.value))}}/>
       <div className="timeScale"><span>2010 · OUTBREAK</span><span>2014</span><span>2018</span><span>2022</span><span>2027</span></div>
@@ -317,7 +316,7 @@ export default function App(){
 
     {searchOpen&&<div className="searchOverlay"><div className="searchOverlayHead"><b>SEARCH THE ATLAS</b><button onClick={()=>setSearchOpen(false)} aria-label="Close search"><Icon name="close"/></button></div><div className="searchOverlayInput"><Icon name="search"/><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Place, person, episode, faction…"/>{query&&<button onClick={()=>setQuery("")}><Icon name="close"/></button>}</div>{query&&<div className="searchOverlayResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else{setView("people");setSheet("open")}setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}</div>}
 
-    <section className={`contentPanel ${sheet}`}>
+    <section className={`contentPanel ${sheet} ${selectedLoc||selectedEp||selectedCharacter?"hasDetail":""}`}>
       <button className="panelGrab" onClick={()=>setSheet(v=>v==="open"?"peek":"open")} aria-label="Toggle information panel"><span/></button>
       <div className={`panelHeader ${selectedLoc||selectedEp||selectedCharacter?"detailHeader":""}`}>
        <div><small>{selectedLoc?SERIES_BY_ID[selectedLoc.seriesId]?.name:selectedEp?SERIES_BY_ID[selectedEp.seriesId]?.name:view==="map"?"ATLAS":"TWDU ATLAS"}</small><h2>{selectedLoc?.name||selectedEp?.title||((selectedCharacter&&atlasData.characters.find((x:any)=>x.id===selectedCharacter)?.name)||null)||(view==="map"?`${year} · ${mapYearCount} mapped`:view==="timeline"?"Chronology":"Field guide")}</h2></div>
