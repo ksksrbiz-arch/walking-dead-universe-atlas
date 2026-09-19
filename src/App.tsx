@@ -10,6 +10,7 @@ import {buildChronology} from "./lib/chronology";
 import episodeMedia from "../data/episodeMedia.json";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
+import EntityGraphView from "./components/EntityGraphView";
 import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
 import {getCharacterEpisodeIds,getLocationEpisodeIds,getEntityNeighborhood} from "./lib/entityGraph";
 import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
@@ -335,7 +336,7 @@ export default function App(){
        <div><small>{selectedLoc?SERIES_BY_ID[selectedLoc.seriesId]?.name:selectedEp?SERIES_BY_ID[selectedEp.seriesId]?.name:view==="map"?"ATLAS":"TWDU ATLAS"}</small><h2>{selectedLoc?.name||selectedEp?.title||((selectedCharacter&&atlasData.characters.find((x:any)=>x.id===selectedCharacter)?.name)||null)||(view==="map"?`${year} · ${mapYearCount} mapped`:view==="timeline"?"Chronology":"Field guide")}</h2></div>
        {(selectedLoc||selectedEp||selectedCharacter)&&<button className="closePanel" onClick={()=>{setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null)}}><Icon name="close"/></button>}
       </div>
-      {selectedLoc?<LocationDetail location={selectedLoc} onEpisode={selectEpisode}/>:selectedEp?<EpisodeDetail episode={selectedEp} onLocation={selectLocation} onEpisode={selectEpisode}/>:selectedCharacter?<CharacterDetail characterId={selectedCharacter} onEpisode={selectEpisode} onLocation={selectLocation}/>:view==="map"?<MapContent locations={locations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent episodes={episodes} onEpisode={selectEpisode}/>:view==="people"?<PeopleContent onCharacter={selectCharacter}/>:<GuideContent errors={dataErrors}/>}
+      {selectedLoc?<LocationDetail location={selectedLoc} onEpisode={selectEpisode}/>:selectedEp?<EpisodeDetail episode={selectedEp} onLocation={selectLocation} onEpisode={selectEpisode}/>:selectedCharacter?<CharacterDetail characterId={selectedCharacter} onEpisode={selectEpisode} onLocation={selectLocation}/>:view==="map"?<MapContent locations={locations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent episodes={episodes} onEpisode={selectEpisode}/>:view==="people"?<PeopleContent onCharacter={selectCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)selectLocation(l)}}/>:<GuideContent errors={dataErrors}/>}
     </section>
 
     <nav className="bottomNav" aria-label="Atlas sections" role="tablist">
@@ -415,8 +416,8 @@ function CharacterDetail({characterId,onEpisode,onLocation}:{characterId:string;
  </div>;
 }
 
-function PeopleContent({onCharacter}:{onCharacter:(id:string)=>void}){return <div className="contentScroll">
- <div className="peopleHero"><div><small>PEOPLE INDEX</small><b>{atlasData.characters.length} tracked characters</b></div><span>{atlasData.connections.length} known connections</span></div>
+function PeopleContent({onCharacter,onLocation}:{onCharacter:(id:string)=>void;onLocation:(id:string)=>void}){return <div className="contentScroll">
+ <div className="peopleHero"><div><small>PEOPLE INDEX</small><b>{atlasData.characters.length} tracked characters</b></div><span>{atlasData.connections.length} known connections</span></div><EntityGraphView onCharacter={onCharacter} onLocation={onLocation}/>
  <div className="sectionTitle">CHARACTERS <span>{atlasData.characters.length}</span></div>
  <div className="peopleGrid">{atlasData.characters.map(c=>{const cm=(atlasData as any).media?.characters?.[c.id];return <button className="entityCard characterCard" key={c.id} onClick={()=>onCharacter(c.id)}>{cm?.image&&<img src={atlasImageUrl(cm.image,640)} onError={e=>onAtlasImageError(e,cm.image)} srcSet={atlasImageSrcSet(cm.image,[320,480,640])} sizes="45vw" loading="lazy" decoding="async" alt="" className="characterArt"/>}<span><small>CHARACTER</small><b>{c.name}</b><em>{(c.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")||c.certainty}</em></span><Icon name="chevron"/></button>})}</div>
  <div className="sectionTitle">FACTIONS <span>{atlasData.factions.length}</span></div><div className="miniTags">{atlasData.factions.map(f=><span key={f.id}>{f.name}</span>)}</div>
