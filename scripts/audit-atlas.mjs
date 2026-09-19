@@ -4,6 +4,12 @@ import path from "node:path";
 const root=process.cwd();
 const read=(name)=>JSON.parse(fs.readFileSync(path.join(root,"data",name),"utf8"));
 const episodes=read("episodes.json");
+const series=read("series.json");
+const seasons=read("seasons.json");
+const locations=read("locations.json");
+const characters=read("characters.json");
+const communities=read("communities.json");
+const factions=read("factions.json");
 const characterEpisodes=read("characterEpisodes.json");
 const locationEpisodes=read("locationEpisodes.json");
 const media=read("episodeMedia.json");
@@ -49,10 +55,10 @@ const fallback=mediaEntries.filter(x=>x?.status==="fallback").length;
 if(available!==episodes.length)fail.push(`Media coverage is ${available}/${episodes.length}`);
 if(verified+fallback!==available)warn.push(`Media status accounting is ${verified} verified + ${fallback} fallback vs ${available} available`);
 
-const entityIds=new Set([...episodes.map(x=>x.id),...connections.map(x=>x.id)]);
+const entityIds=new Set([...series,...seasons,...episodes,...locations,...characters,...communities,...factions,...connections].map(x=>x.id));
 for(const c of connections){
-  if(c.fromId&&!entityIds.has(c.fromId))warn.push(`Connection endpoint may require non-episode entity registry: ${c.id} -> ${c.fromId}`);
-  if(c.toId&&!entityIds.has(c.toId))warn.push(`Connection endpoint may require non-episode entity registry: ${c.id} -> ${c.toId}`);
+  if(c.fromId&&!entityIds.has(c.fromId))fail.push(`Missing connection endpoint: ${c.id} -> ${c.fromId}`);
+  if(c.toId&&!entityIds.has(c.toId))fail.push(`Missing connection endpoint: ${c.id} -> ${c.toId}`);
 }
 
 console.log(JSON.stringify({
