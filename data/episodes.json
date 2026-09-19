@@ -10,7 +10,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris",
+      "mont-saint-michel"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -30,7 +34,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris",
+      "mont-saint-michel"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -50,7 +58,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris",
+      "mont-saint-michel"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -70,7 +82,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris",
+      "mont-saint-michel"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -90,7 +106,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris",
+      "mont-saint-michel"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -110,7 +130,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris",
+      "mont-saint-michel"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -130,7 +154,10 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -150,7 +177,10 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -170,7 +200,10 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -190,7 +223,10 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -210,7 +246,10 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -230,7 +269,10 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "france",
+      "paris"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -250,7 +292,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "spain",
+      "barcelona",
+      "madrid"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -270,7 +316,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "spain",
+      "barcelona",
+      "madrid"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -290,7 +340,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "spain",
+      "barcelona",
+      "madrid"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -310,7 +364,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "spain",
+      "barcelona",
+      "madrid"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -330,7 +388,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "spain",
+      "barcelona",
+      "madrid"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -350,7 +412,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "spain",
+      "barcelona",
+      "madrid"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -370,7 +436,11 @@
     "timelineEnd": 2025,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "spain",
+      "barcelona",
+      "madrid"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -390,7 +460,10 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -410,7 +483,10 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -430,7 +506,10 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -450,7 +529,10 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -470,7 +552,10 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -490,7 +575,10 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -510,7 +598,11 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -530,7 +622,11 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -550,7 +646,11 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -570,7 +670,11 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -590,7 +694,11 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -610,7 +718,11 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -630,7 +742,11 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -650,7 +766,11 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -670,7 +790,12 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks",
+      "new-babylon"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -690,7 +815,12 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks",
+      "new-babylon"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -710,7 +840,12 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks",
+      "new-babylon"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -730,7 +865,12 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks",
+      "new-babylon"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -750,7 +890,12 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks",
+      "new-babylon"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -770,7 +915,12 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks",
+      "new-babylon"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -790,7 +940,12 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks",
+      "new-babylon"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -810,7 +965,12 @@
     "timelineEnd": 2028,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "manhattan",
+      "manhattan-island",
+      "bricks",
+      "new-babylon"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -830,7 +990,10 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "los-angeles",
+      "san-diego"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -850,7 +1013,10 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "los-angeles",
+      "san-diego"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -870,7 +1036,10 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "los-angeles",
+      "san-diego"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -890,7 +1059,10 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "los-angeles",
+      "san-diego"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -910,7 +1082,10 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "los-angeles",
+      "san-diego"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -930,7 +1105,10 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "los-angeles",
+      "san-diego"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -950,7 +1128,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -970,7 +1153,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -990,7 +1178,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1010,7 +1203,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1030,7 +1228,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1050,7 +1253,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1070,7 +1278,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1090,7 +1303,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1110,7 +1328,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1130,7 +1353,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1150,7 +1378,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1170,7 +1403,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1190,7 +1428,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1210,7 +1453,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1230,7 +1478,12 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "tijuana",
+      "rosarito",
+      "valle-guadalupe"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1250,7 +1503,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1270,7 +1527,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1290,7 +1551,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1310,7 +1575,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1330,7 +1599,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1350,7 +1623,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1370,7 +1647,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1390,7 +1671,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1410,7 +1695,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1430,7 +1719,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1450,7 +1743,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1470,7 +1767,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1490,7 +1791,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1510,7 +1815,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1530,7 +1839,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1550,7 +1863,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "baja-california",
+      "brooke-ranch",
+      "dam"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1570,7 +1887,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1590,7 +1910,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1610,7 +1933,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1630,7 +1956,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1650,7 +1979,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1670,7 +2002,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1690,7 +2025,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1710,7 +2048,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1730,7 +2071,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1750,7 +2094,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1770,7 +2117,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1790,7 +2140,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1810,7 +2163,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1830,7 +2186,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1850,7 +2209,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1870,7 +2232,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas",
+      "austin"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1890,7 +2255,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1910,7 +2277,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1930,7 +2299,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1950,7 +2321,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1970,7 +2343,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1990,7 +2365,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2010,7 +2387,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2030,7 +2409,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2050,7 +2431,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2070,7 +2453,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2090,7 +2475,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2110,7 +2497,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2130,7 +2519,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2150,7 +2541,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2170,7 +2563,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2190,7 +2585,9 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2210,7 +2607,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2230,7 +2629,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2250,7 +2651,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2270,7 +2673,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2290,7 +2695,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2310,7 +2717,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2330,7 +2739,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2350,7 +2761,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2370,7 +2783,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2390,7 +2805,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2410,7 +2827,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2430,7 +2849,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2450,7 +2871,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2470,7 +2893,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2490,7 +2915,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2510,7 +2937,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2530,7 +2959,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2550,7 +2981,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2570,7 +3003,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2590,7 +3025,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2610,7 +3047,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2630,7 +3069,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2650,7 +3091,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2670,7 +3113,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2690,7 +3135,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2710,7 +3157,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2730,7 +3179,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2750,7 +3201,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2770,7 +3223,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2790,7 +3245,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2810,7 +3267,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2830,7 +3289,9 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "texas"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2850,7 +3311,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2870,7 +3336,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2890,7 +3361,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2910,7 +3386,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2930,7 +3411,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2950,7 +3436,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2970,7 +3461,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -2990,7 +3486,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3010,7 +3511,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3030,7 +3536,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3050,7 +3561,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3070,7 +3586,12 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "padre",
+      "king-county-ga",
+      "savannah",
+      "padre-shipyard"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3090,7 +3611,10 @@
     "timelineEnd": 2023,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "philadelphia",
+      "civic-republic"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3110,7 +3634,10 @@
     "timelineEnd": 2023,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "philadelphia",
+      "civic-republic"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3130,7 +3657,10 @@
     "timelineEnd": 2023,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "philadelphia",
+      "civic-republic"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3150,7 +3680,10 @@
     "timelineEnd": 2023,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "philadelphia",
+      "civic-republic"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3170,7 +3703,10 @@
     "timelineEnd": 2023,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "philadelphia",
+      "civic-republic"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3190,7 +3726,10 @@
     "timelineEnd": 2023,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "philadelphia",
+      "civic-republic"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3330,7 +3869,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "king-county",
+      "hospitals-atlanta",
+      "atlanta"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3350,7 +3893,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "atlanta",
+      "king-county",
+      "cdc-atlanta"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3370,7 +3917,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "atlanta",
+      "king-county",
+      "cdc-atlanta"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3390,7 +3941,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "atlanta",
+      "king-county",
+      "cdc-atlanta"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3410,7 +3965,11 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "atlanta",
+      "king-county",
+      "cdc-atlanta"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3430,7 +3989,9 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "cdc-atlanta"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3450,7 +4011,9 @@
     "timelineEnd": 2011,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3470,7 +4033,9 @@
     "timelineEnd": 2011,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3490,7 +4055,9 @@
     "timelineEnd": 2011,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3510,7 +4077,9 @@
     "timelineEnd": 2011,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3530,7 +4099,9 @@
     "timelineEnd": 2011,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3550,7 +4121,9 @@
     "timelineEnd": 2011,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3570,7 +4143,9 @@
     "timelineEnd": 2011,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3590,7 +4165,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3610,7 +4187,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3630,7 +4209,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3650,7 +4231,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3670,7 +4253,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3690,7 +4275,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "hershel-farm"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3710,7 +4297,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3730,7 +4320,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3750,7 +4343,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3770,7 +4366,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3790,7 +4389,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3810,7 +4412,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3830,7 +4435,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3850,7 +4458,10 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3870,7 +4481,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3890,7 +4504,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3910,7 +4527,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3930,7 +4550,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3950,7 +4573,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3970,7 +4596,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -3990,7 +4619,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4010,7 +4642,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4030,7 +4665,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4050,7 +4688,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4070,7 +4711,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4090,7 +4734,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4110,7 +4757,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4130,7 +4780,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4150,7 +4803,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4170,7 +4826,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4190,7 +4849,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4210,7 +4872,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4230,7 +4895,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4250,7 +4918,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4270,7 +4941,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4290,7 +4964,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4310,7 +4987,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4330,7 +5010,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "prison",
+      "terminus"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4350,7 +5033,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4370,7 +5056,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4390,7 +5079,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4410,7 +5102,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4430,7 +5125,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4450,7 +5148,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4470,7 +5171,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4490,7 +5194,10 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4510,7 +5217,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4530,7 +5240,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4550,7 +5263,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4570,7 +5286,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4590,7 +5309,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4610,7 +5332,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4630,7 +5355,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4650,7 +5378,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "terminus",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4670,7 +5401,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4690,7 +5424,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4710,7 +5447,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4730,7 +5470,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4750,7 +5493,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4770,7 +5516,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4790,7 +5539,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4810,7 +5562,10 @@
     "timelineEnd": 2015,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4830,7 +5585,10 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4850,7 +5608,10 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4870,7 +5631,10 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4890,7 +5654,10 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4910,7 +5677,10 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4930,7 +5700,10 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4950,7 +5723,10 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4970,7 +5746,10 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "sanctuary"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4990,7 +5769,11 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5010,7 +5793,11 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5030,7 +5817,11 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5050,7 +5841,11 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5070,7 +5865,11 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5090,7 +5889,11 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5110,7 +5913,11 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5130,7 +5937,11 @@
     "timelineEnd": 2016,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5150,7 +5961,11 @@
     "timelineEnd": 2017,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5170,7 +5985,11 @@
     "timelineEnd": 2017,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5190,7 +6009,11 @@
     "timelineEnd": 2017,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5210,7 +6033,11 @@
     "timelineEnd": 2017,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5230,7 +6057,11 @@
     "timelineEnd": 2017,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5250,7 +6081,11 @@
     "timelineEnd": 2017,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5270,7 +6105,11 @@
     "timelineEnd": 2017,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5290,7 +6129,11 @@
     "timelineEnd": 2017,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5310,7 +6153,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5330,7 +6178,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5350,7 +6203,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5370,7 +6228,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5390,7 +6253,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5410,7 +6278,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5430,7 +6303,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5450,7 +6328,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5470,7 +6353,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5490,7 +6378,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5510,7 +6403,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5530,7 +6428,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5550,7 +6453,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5570,7 +6478,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5590,7 +6503,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5610,7 +6528,12 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "sanctuary",
+      "kingdom",
+      "hilltop",
+      "alexandria"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5630,7 +6553,12 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5650,7 +6578,12 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5670,7 +6603,12 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5690,7 +6628,12 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5710,7 +6653,12 @@
     "timelineEnd": 2014,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5730,7 +6678,12 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5750,7 +6703,12 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5770,7 +6728,12 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5790,7 +6753,12 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5810,7 +6778,12 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5830,7 +6803,12 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5850,7 +6828,12 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5870,7 +6853,12 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5890,7 +6878,12 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5910,7 +6903,12 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5930,7 +6928,12 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5950,7 +6953,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5970,7 +6977,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5990,7 +7001,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6010,7 +7025,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6030,7 +7049,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6050,7 +7073,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6070,7 +7097,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6090,7 +7121,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6110,7 +7145,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6130,7 +7169,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6150,7 +7193,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6170,7 +7217,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6190,7 +7241,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6210,7 +7265,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6230,7 +7289,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6250,7 +7313,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6270,7 +7337,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6290,7 +7361,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6310,7 +7385,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6330,7 +7409,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6350,7 +7433,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6370,7 +7457,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "whisperer-woods"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6390,7 +7481,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6410,7 +7505,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6430,7 +7529,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6450,7 +7553,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6470,7 +7577,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6490,7 +7601,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6510,7 +7625,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6530,7 +7649,11 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6550,7 +7673,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6570,7 +7697,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6590,7 +7721,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6610,7 +7745,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6630,7 +7769,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6650,7 +7793,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6670,7 +7817,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6690,7 +7841,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6710,7 +7865,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6730,7 +7889,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6750,7 +7913,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6770,7 +7937,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6790,7 +7961,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6810,7 +7985,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6830,7 +8009,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6850,7 +8033,11 @@
     "timelineEnd": 2022,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "alexandria",
+      "commonwealth",
+      "hilltop"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6870,7 +8057,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6890,7 +8079,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6910,7 +8101,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6930,7 +8123,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6950,7 +8145,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6970,7 +8167,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -6990,7 +8189,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7010,7 +8211,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7030,7 +8233,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7050,7 +8255,9 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7070,7 +8277,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7090,7 +8300,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7110,7 +8323,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7130,7 +8346,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7150,7 +8369,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7170,7 +8392,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7190,7 +8415,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7210,7 +8438,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7230,7 +8461,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -7250,7 +8484,10 @@
     "timelineEnd": 2021,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "omaha",
+      "portland"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
