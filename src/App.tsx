@@ -1,9 +1,9 @@
 import {useEffect,useMemo,useRef,useState} from "react";
-import {geoNaturalEarth1,geoPath} from "d3-geo";
+import {geoEqualEarth,geoPath} from "d3-geo";
 import {feature} from "topojson-client";
 import type {CSSProperties} from "react";
 // @ts-ignore world-atlas ships JSON topology
-import world from "world-atlas/countries-110m.json";
+import world from "world-atlas/countries-50m.json";
 import {atlasData,Location,SeriesKey} from "./data";
 import {validateAtlasData} from "./lib/validateData";
 import {buildChronology} from "./lib/chronology";
@@ -22,11 +22,11 @@ const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
 };
 const SERIES_BY_ID=Object.fromEntries(Object.values(META).map(x=>[x.id,x])) as Record<string,typeof META.TWD>;
 const SERIES_KEYS=Object.keys(META) as SeriesKey[];
-const projection=geoNaturalEarth1().fitSize([1000,600],{type:"Sphere"});
+const projection=geoEqualEarth().fitExtent([[24,22],[976,578]],{type:"Sphere"});
 const pathGenerator=geoPath(projection);
-const worldCountries:any=feature(world as any,(world as any).objects.countries) as any;
+const worldCountries:any=feature(world as any,(world as any).objects.countries) as any;\nconst worldLand:any=feature(world as any,(world as any).objects.land) as any;
 const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
-const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
+const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));\nconst countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];\nconst countryTone=(i:number)=>countryPalette[i%countryPalette.length];
 
 function Icon({name}:{name:"map"|"timeline"|"people"|"guide"|"plus"|"minus"|"locate"|"search"|"close"|"chevron"|"layers"|"play"|"pause"|"arrow"|"pin"}) {
  const paths={
@@ -170,9 +170,18 @@ export default function App(){
     <div className="mapAtmosphere"/>
     <div className="mapSurface">
      <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" style={mapStyle} className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
-      <rect width="1000" height="600" fill="#d8d6ce"/>
+      <defs>
+       <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#9fb2b4"/><stop offset=".48" stopColor="#82999d"/><stop offset="1" stopColor="#60777b"/></linearGradient>
+       <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#d8d3c5"/><stop offset=".55" stopColor="#b9b7aa"/><stop offset="1" stopColor="#96988e"/></linearGradient>
+       <radialGradient id="oceanGlow" cx=".5" cy=".38" r=".72"><stop offset="0" stopColor="#c7d4d4" stopOpacity=".55"/><stop offset="1" stopColor="#51696e" stopOpacity=".08"/></radialGradient>
+       <filter id="landShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#26383a" floodOpacity=".28"/></filter>
+       <filter id="paperNoise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="2" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="gray"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer><feBlend in="SourceGraphic" in2="gray" mode="multiply"/></filter>
+      </defs>
+      <rect width="1000" height="600" fill="url(#ocean)"/>
+      <rect width="1000" height="600" fill="url(#oceanGlow)"/>
       <g className="graticule"><path d={pathGenerator({type:"Sphere"}) as string}/></g>
-      <g className="countries">{worldCountries.features.map((c:any)=><path key={c.id||c.properties?.name} d={pathGenerator(c) as string}/>)}</g>
+      <path className="landShadow" d={pathGenerator(worldLand) as string} fill="#26383a" opacity=".38" filter="url(#landShadow)"/>
+      <g className="countries" filter="url(#paperNoise)">{worldCountries.features.map((c:any,i:number)=><path key={c.id||c.properties?.name} d={pathGenerator(c) as string} fill={countryTone(i)}><title>{c.properties?.name||"Country"}</title></path>)}</g>
       <g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>
       <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} className={selectedLocation===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
        <circle className="pulse" r="2.5" style={{stroke:meta.color}}/><circle className="dot" r="1.5" fill={meta.color}/><text x="4" y=".5">{l.name}</text>
