@@ -2,7 +2,7 @@ import {useMemo,useState} from "react";
 import {atlasData} from "../data";
 import {buildEntityGraph} from "../lib/entityGraph";
 
-type Props={onCharacter:(id:string)=>void;onLocation:(id:string)=>void};
+type Props={onCharacter:(id:string)=>void;onLocation:(id:string)=>void;onEpisode?:(id:string)=>void};
 type Filter="ALL"|"character"|"location"|"community"|"faction"|"series"|"episode"|"connection";
 
 const labels:Record<string,string>={
@@ -16,7 +16,7 @@ function labelFor(kind:string,id:string){
  return item?.name||item?.title||item?.label||id;
 }
 
-export default function EntityGraphView({onCharacter,onLocation}:Props){
+export default function EntityGraphView({onCharacter,onLocation,onEpisode}:Props){
  const graph=useMemo(()=>buildEntityGraph(),[]);
  const [root,setRoot]=useState<string>("character:michonne");
  const [filter,setFilter]=useState<Filter>("ALL");
@@ -34,6 +34,7 @@ export default function EntityGraphView({onCharacter,onLocation}:Props){
    setFilter("ALL");
    if(kind==="character")onCharacter(id);
    if(kind==="location")onLocation(id);
+   if(kind==="episode")onEpisode?.(id);
  };
  return <section className="entityGraph" aria-label="Universe relationship graph">
    <div className="entityGraphHead">
