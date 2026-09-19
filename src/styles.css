@@ -312,3 +312,328 @@ button:active{transform:translateY(1px)}
   .contentPanel{top:42%;bottom:calc(var(--timeline) + var(--nav) + 8px)}
   .atlasTimelineDock{height:var(--timeline)}
 }
+
+
+/* Mobile shell v2: each primary mode owns the viewport; the map only gets contextual UI. */
+.mobileTimeBar{display:none}
+
+@media(max-width:699px){
+  :root{
+    --mobile-header:66px;
+    --mobile-nav:62px;
+    --mobile-sheet-gap:10px;
+  }
+
+  .map.view-map .mapSurface{
+    inset:0 0 calc(var(--mobile-nav) + 70px) 0;
+  }
+
+  .map.view-map .contentPanel:not(.hasDetail){
+    display:none;
+  }
+
+  .map.view-map .contentPanel.hasDetail{
+    top:42%;
+    left:8px;
+    right:8px;
+    bottom:calc(var(--mobile-nav) + 10px);
+    height:auto;
+    border-radius:22px;
+  }
+
+  .map.view-map .contentPanel.hasDetail .contentScroll{
+    padding-bottom:30px;
+  }
+
+  .map.view-map .mapTopLeft{
+    top:82px;
+  }
+
+  .map.view-map .mapTopRight{
+    top:82px;
+  }
+
+  .map.view-map .seriesRail{
+    top:130px;
+  }
+
+  .map.view-map .mapLegend,
+  .map.view-map .mapCompass{
+    display:none;
+  }
+
+  .mobileTimeBar{
+    display:grid;
+    position:absolute;
+    z-index:75;
+    left:10px;
+    right:10px;
+    bottom:calc(var(--mobile-nav) + 8px);
+    min-height:58px;
+    grid-template-columns:minmax(0,1fr) 48px;
+    grid-template-rows:auto auto;
+    gap:0 8px;
+    padding:8px 8px 7px 13px;
+    border:1px solid #263537;
+    border-radius:17px;
+    background:#081112f2;
+    color:#e7ecea;
+    box-shadow:0 16px 50px #000a;
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+  }
+
+  .mobileTimeSummary{
+    min-width:0;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:0;
+    padding:0;
+    background:transparent;
+    color:inherit;
+    text-align:left;
+  }
+
+  .mobileTimeSummary>span:first-child{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    min-width:0;
+  }
+
+  .mobileTimeSummary small{
+    color:#718082;
+    font:700 7px "Space Mono",monospace;
+    letter-spacing:.12em;
+    white-space:nowrap;
+  }
+
+  .mobileTimeSummary b{
+    font:700 20px "Space Mono",monospace;
+    white-space:nowrap;
+  }
+
+  .mobileTimeSummaryMeta{
+    color:#6d7b7d;
+    font:700 6px "Space Mono",monospace;
+    letter-spacing:.08em;
+    white-space:nowrap;
+  }
+
+  .mobileTimePlay{
+    grid-column:2;
+    grid-row:1;
+    min-width:44px;
+    min-height:44px;
+    border:1px solid #ffffff18;
+    border-radius:12px;
+    background:#111b1d;
+    color:#e6ecea;
+    font:700 15px "Space Mono",monospace;
+  }
+
+  .mobileTimePlay.playing{
+    background:#e8edeb;
+    color:#0c1516;
+  }
+
+  .mobileTimeTrackWrap{
+    grid-column:1/-1;
+    position:relative;
+    height:17px;
+    margin-top:1px;
+  }
+
+  .mobileTimeTrack{
+    position:absolute;
+    left:0;
+    right:0;
+    top:7px;
+    height:3px;
+    border-radius:99px;
+    background:#263537;
+    pointer-events:none;
+  }
+
+  .mobileTimeProgress{
+    position:absolute;
+    inset:0 auto 0 0;
+    border-radius:99px;
+    background:#cbd4d1;
+  }
+
+  .mobileTimeThumb{
+    position:absolute;
+    top:50%;
+    width:10px;
+    height:10px;
+    transform:translate(-50%,-50%);
+    border:2px solid #0b1415;
+    border-radius:50%;
+    background:#e9efed;
+    box-shadow:0 0 0 1px #dce4e1;
+  }
+
+  .mobileTimeTrackWrap input{
+    position:absolute;
+    inset:-9px 0 -9px 0;
+    width:100%;
+    height:36px;
+    margin:0;
+    opacity:0;
+    touch-action:pan-x;
+    cursor:pointer;
+  }
+
+  .mobileTimeTicks{
+    grid-column:1/-1;
+    position:relative;
+    height:25px;
+    margin-top:2px;
+  }
+
+  .mobileTimeTicks button{
+    position:absolute;
+    left:var(--tick);
+    transform:translateX(-50%);
+    min-width:44px;
+    min-height:25px;
+    border:0;
+    background:transparent;
+    color:#6f7d7f;
+    font:700 7px "Space Mono",monospace;
+  }
+
+  .mobileTimeBar.expanded{
+    min-height:91px;
+  }
+
+  .map.view-timeline .mapSurface,
+  .map.view-people .mapSurface,
+  .map.view-guide .mapSurface,
+  .map.view-timeline .mapAtmosphere,
+  .map.view-people .mapAtmosphere,
+  .map.view-guide .mapAtmosphere,
+  .map.view-timeline .mapTopLeft,
+  .map.view-people .mapTopLeft,
+  .map.view-guide .mapTopLeft,
+  .map.view-timeline .mapTopRight,
+  .map.view-people .mapTopRight,
+  .map.view-guide .mapTopRight,
+  .map.view-timeline .seriesRail,
+  .map.view-people .seriesRail,
+  .map.view-guide .seriesRail,
+  .map.view-timeline .mapLegend,
+  .map.view-people .mapLegend,
+  .map.view-guide .mapLegend,
+  .map.view-timeline .mapCompass,
+  .map.view-people .mapCompass,
+  .map.view-guide .mapCompass,
+  .map.view-timeline .mobileTimeBar,
+  .map.view-people .mobileTimeBar,
+  .map.view-guide .mobileTimeBar{
+    display:none;
+  }
+
+  .map.view-timeline .contentPanel,
+  .map.view-people .contentPanel,
+  .map.view-guide .contentPanel{
+    display:flex;
+    inset:66px 0 calc(var(--mobile-nav) + 8px) 0;
+    width:auto;
+    height:auto;
+    max-height:none;
+    border:0;
+    border-radius:0;
+    background:#071011;
+    box-shadow:none;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+
+  .map.view-timeline .panelHeader,
+  .map.view-people .panelHeader,
+  .map.view-guide .panelHeader{
+    min-height:68px;
+    padding:12px 16px;
+    background:#071011f2;
+  }
+
+  .map.view-timeline .contentScroll,
+  .map.view-people .contentScroll,
+  .map.view-guide .contentScroll{
+    padding:12px 14px calc(var(--mobile-nav) + 22px);
+  }
+
+  .map.view-timeline .panelGrab,
+  .map.view-people .panelGrab,
+  .map.view-guide .panelGrab{
+    display:none;
+  }
+
+  .map.view-timeline .timelineIntro{
+    padding-top:3px;
+  }
+
+  .map.view-timeline .timelineList{
+    gap:8px;
+  }
+
+  .map.view-timeline .episodeRow{
+    min-height:78px;
+  }
+
+  .map.view-people .peopleGrid{
+    grid-template-columns:1fr;
+  }
+
+  .map.view-people .characterCard{
+    min-height:82px;
+  }
+
+  .map.view-guide .guideHero{
+    min-height:190px;
+  }
+
+  .bottomNav{
+    left:10px;
+    right:10px;
+    bottom:6px;
+    height:56px;
+    padding:4px;
+    border-radius:18px;
+    z-index:120;
+    padding-bottom:max(4px, env(safe-area-inset-bottom));
+  }
+
+  .bottomNav button{
+    min-height:48px;
+    height:48px;
+  }
+
+  .bottomNav small{
+    font-size:6.5px;
+  }
+
+  .topbar{
+    z-index:140;
+    padding-top:max(9px, env(safe-area-inset-top));
+  }
+
+  .searchOverlay{
+    z-index:300;
+    padding-top:max(10px, env(safe-area-inset-top));
+  }
+
+  .contentPanel.hasDetail .panelHeader{
+    position:relative;
+    z-index:2;
+  }
+}
+
+@media(max-width:390px){
+  .mobileTimeSummaryMeta{display:none}
+  .mobileTimeSummary b{font-size:19px}
+}
