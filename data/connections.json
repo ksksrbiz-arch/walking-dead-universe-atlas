@@ -13,7 +13,6 @@
   {"id":"michonne-owl","type":"cross-series","fromId":"michonne","toId":"owl","label":"Michonne is a central protagonist","certainty":"confirmed"},
   {"id":"maggie-dead-city","type":"cross-series","fromId":"maggie-rhee","toId":"dead","label":"Maggie leads Dead City","certainty":"confirmed"},
   {"id":"negan-dead-city","type":"cross-series","fromId":"negan-smith","toId":"dead","label":"Negan leads Dead City","certainty":"confirmed"},
-  {"id":"daryl-dead-city","type":"cross-series","fromId":"daryl-dixon","toId":"dead","label":"Daryl appears in Dead City continuity","certainty":"confirmed"},
   {"id":"alpha-tales","type":"cross-series","fromId":"alpha","toId":"tales","label":"Alpha's backstory appears in Tales","certainty":"confirmed"},
   {"id":"lydia-tales","type":"cross-series","fromId":"lydia","toId":"tales","label":"Lydia appears in the Alpha/Dee story","certainty":"confirmed"},
   {"id":"jenner-world-beyond","type":"cross-series","fromId":"edwin-jenner","toId":"wb","label":"Jenner appears through archived video","certainty":"confirmed"},
