@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TWDU Atlas</title>
+<style>
+:root{--bg:#0b0e0f;--panel:#111617;--panel2:#171c1d;--line:#30383b;--text:#edf1f2;--muted:#9ca7aa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px system-ui,sans-serif}
+header{padding:18px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#0b0e0fee;backdrop-filter:blur(10px);z-index:5}
+h1{margin:0;font-size:22px}.sub{color:var(--muted);margin-top:4px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.toolbar button,.toolbar input{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+.toolbar button.active{border-color:#89979b;background:#293133}
+main{display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);min-height:calc(100vh - 110px)}
+#mapWrap{position:relative;min-height:650px;background:#d9d7cf;overflow:hidden}
+#mapSvg{width:100%;height:100%;min-height:650px;display:block;touch-action:none;transform-origin:50% 50%}
+.land{fill:#c3c0b6;stroke:#aaa79e;stroke-width:2}.label{font-size:12px;fill:#918d84;letter-spacing:.12em;font-weight:700;text-anchor:middle}
+.route{fill:none;stroke-width:3;stroke-dasharray:8 7;opacity:.55}.marker{cursor:pointer}.marker text{font-size:11px;font-weight:700;fill:#202526;paint-order:stroke;stroke:#d9d7cf;stroke-width:4px}.marker circle{stroke:#fff;stroke-width:2}.marker.selected circle{stroke:#111;stroke-width:3}
+.maptools{position:absolute;right:12px;bottom:12px;display:flex;gap:5px}.maptools button{background:#101415e8;color:white;border:1px solid #414a4d;border-radius:7px;padding:8px 12px}
+#side{border-left:1px solid var(--line);background:var(--panel);overflow:auto}.section{padding:16px;border-bottom:1px solid var(--line)}.section h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#aeb7b9;margin:0 0 12px}
+.card{padding:11px;background:var(--panel2);border:1px solid var(--line);border-radius:9px;margin:7px 0;cursor:pointer}.card:hover{border-color:#687477}.eyebrow{font-size:10px;color:#9ea8aa;text-transform:uppercase}.card h3{font-size:13px;margin:3px 0}.card p{margin:3px 0;color:#b3bdc0;font-size:12px}.pill{display:inline-block;font-size:10px;padding:2px 6px;border-radius:999px;background:#293133;margin:2px}
+#details{color:#c0c9cb;line-height:1.45}.detailsTitle{color:white;font-size:20px;margin:0 0 4px}.muted{color:var(--muted)}
+@media(max-width:850px){main{grid-template-columns:1fr}#side{border-left:0}.section{padding:14px}#mapWrap,#mapSvg{min-height:520px}}
+</style>
+</head>
+<body>
+<header>
+<h1>The Walking Dead Universe Atlas</h1>
+<div class="sub">Interactive chronology, geography and cross-series connections.</div>
+<div class="toolbar">
+<button class="active" data-series="ALL">All series</button>
+<button data-series="TWD">TWD</button><button data-series="FTWD">Fear</button><button data-series="WB">World Beyond</button><button data-series="OWL">The Ones Who Live</button><button data-series="DARYL">Daryl Dixon</button><button data-series="DEAD">Dead City</button>
+<input id="search" placeholder="Search locations…">
+<label style="display:flex;align-items:center;gap:6px;color:#b9c2c4">Year <input id="year" type="range" min="2010" max="2027" value="2010" style="width:130px"><b id="yearOut">2010</b></label>
+</div>
+</header>
+<main>
+<section id="mapWrap">
+<svg id="mapSvg" viewBox="0 0 1000 560" aria-label="TWDU map">
+<rect width="1000" height="560" fill="#d9d7cf"/>
+<path class="land" d="M90 100 L145 65 L215 78 L265 125 L250 170 L278 205 L245 238 L205 220 L177 245 L130 215 L105 175 L72 145 Z"/>
+<path class="land" d="M260 250 L300 285 L325 335 L312 400 L280 455 L250 420 L242 365 L220 325 Z"/>
+<path class="land" d="M455 105 L510 70 L585 82 L635 115 L675 110 L720 145 L700 190 L650 205 L610 188 L570 215 L520 195 L480 210 L445 175 Z"/>
+<path class="land" d="M565 225 L610 245 L625 300 L605 350 L575 410 L535 455 L505 425 L520 370 L500 325 L525 275 Z"/>
+<path class="land" d="M700 135 L750 125 L790 150 L820 190 L795 225 L750 215 L720 185 Z"/>
+<text class="label" x="170" y="270">NORTH AMERICA</text><text class="label" x="550" y="55">EUROPE</text><text class="label" x="800" y="350">ASIA</text>
+<g id="routes"></g><g id="markers"></g>
+</svg>
+<div class="maptools"><button id="zin">+</button><button id="zout">−</button><button id="reset">Reset</button></div>
+</section>
+<aside id="side">
+<div class="section"><h2>Selected location</h2><div id="details"><span class="muted">Tap a marker to inspect its story connection.</span></div></div>
+<div class="section"><h2>Chronology</h2><div id="timeline"></div></div>
+<div class="section"><h2>Project status</h2><div class="card"><b>Prototype engine online</b><p>Next: episode-level data, character graph, continuity validation and source metadata.</p></div></div>
+</aside>
+</main>
+<script>
+const S={TWD:{n:"The Walking Dead",c:"#e6e6e6"},FTWD:{n:"Fear the Walking Dead",c:"#d7a84b"},WB:{n:"World Beyond",c:"#74a7c9"},OWL:{n:"The Ones Who Live",c:"#d76b68"},DARYL:{n:"Daryl Dixon",c:"#9b82c4"},DEAD:{n:"Dead City",c:"#5fb29b"}};
+const P=[
+["Atlanta",33.749,-84.388,"TWD",2010,"Rick wakes and the flagship story begins."],
+["King County",34.22,-84.55,"TWD",2010,"Rick, Morgan and Duane establish the early Georgia setting."],
+["Los Angeles",34.052,-118.244,"FTWD",2010,"Fear begins during the initial outbreak."],
+["San Diego",32.716,-117.161,"FTWD",2010,"The early Fear storyline moves through Southern California."],
+["Baja California",31.0,-115.0,"FTWD",2011,"The Fear group reaches Mexico."],
+["Alexandria",38.804,-77.047,"TWD",2014,"The flagship community becomes a long-term base."],
+["Hilltop",38.0,-77.3,"TWD",2016,"A major allied community during the Savior era."],
+["Kingdom",38.2,-77.0,"TWD",2016,"Ezekiel's community joins the anti-Savior alliance."],
+["Sanctuary",38.7,-77.2,"TWD",2015,"Negan's Saviors operate from the Sanctuary."],
+["Omaha",41.256,-95.934,"WB",2020,"The Civic Republic's Omaha community is central to World Beyond."],
+["Civic Republic",39.95,-75.16,"OWL",2020,"CRM/Civic Republic territory becomes a major universe node."],
+["Philadelphia",39.952,-75.165,"OWL",2024,"The CRM's Philadelphia operation anchors Rick's continuation."],
+["France",43.3,5.37,"DARYL",2023,"Daryl reaches France."],
+["Paris",48.857,2.352,"DARYL",2023,"The European branch expands toward Paris."],
+["Normandy",49.18,-0.37,"DARYL",2024,"Daryl and Carol's European route continues."],
+["Spain",40.416,-3.704,"DARYL",2025,"The later Daryl Dixon storyline moves into Spain."],
+["Manhattan",40.783,-73.971,"DEAD",2024,"Maggie and Negan enter Manhattan."],
+["Commonwealth",40.8,-81.9,"TWD",2025,"The final major flagship community arc centers here."]
+];
+const E=[
+["2010","Fear S1","Outbreak","Los Angeles","FTWD"],["2010","TWD S1","Rick wakes","Atlanta","TWD"],["2011","TWD S2","The farm","Georgia","TWD"],["2012","TWD S3","Prison / Woodbury","Georgia","TWD"],["2013","TWD S4–5","Terminus","Georgia","TWD"],["2014","TWD S5–6","Alexandria era","Virginia","TWD"],["2015–16","TWD S6–7","Saviors emerge","Virginia","TWD"],["2016–17","TWD S8","All Out War","Virginia","TWD"],["2017–18","Fear S4","Morgan crossover","Texas","FTWD"],["2018","TWD S9 E1–5","Rick's disappearance","Virginia","TWD"],["2020","World Beyond S1–2","CRM / Civic Republic","Omaha","WB"],["2024+","TWD S9–11","Post-jump / Commonwealth","Virginia / Ohio","TWD"],["2024+","The Ones Who Live","Rick + Michonne","CRM / Philadelphia","OWL"],["2023+","Daryl Dixon","France → Spain","Europe","DARYL"],["2024+","Dead City","Manhattan","New York","DEAD"]
+];
+let series="ALL",maxYear=2010,zoom=1,px=0,py=0,drag=false,lx=0,ly=0;
+const svg=document.getElementById("mapSvg"), markers=document.getElementById("markers"), routes=document.getElementById("routes");
+const proj=(lat,lng)=>[((lng+180)/360)*1000,((90-lat)/180)*560];
+function visible(p){return (series==="ALL"||p[3]===series)&&p[4]<=maxYear&&p[0].toLowerCase().includes(document.getElementById("search").value.toLowerCase())}
+function draw(){
+ markers.innerHTML="";routes.innerHTML="";
+ P.filter(visible).forEach((p,i)=>{let [x,y]=proj(p[1],p[2]),g=document.createElementNS("http://www.w3.org/2000/svg","g");g.classList.add("marker");g.setAttribute("transform",`translate(${x} ${y})`);g.innerHTML=`<circle r="7" fill="${S[p[3]].c}"></circle><text x="11" y="4">${p[0]}</text>`;g.onclick=()=>select(p,g);markers.appendChild(g)});
+ const routesBy={FTWD:[[P[2],P[3],P[4]],[P[3],P[4],P[5]],[P[5],P[6],P[7]]],DARYL:[[P[12],P[13],P[14],P[15]]],DEAD:[[P[16]]],OWL:[[P[5],P[11],P[12]]],TWD:[[P[0],P[6],P[7],P[8],P[17]]]};
+ Object.entries(routesBy).forEach(([k,rs])=>{if(series!=="ALL"&&series!==k)return;rs.forEach(route=>{if(route.length<2)return;let pts=route.map(p=>proj(p[1],p[2]).join(",")).join(" ");let z=document.createElementNS("http://www.w3.org/2000/svg","polyline");z.setAttribute("points",pts);z.setAttribute("class","route");z.setAttribute("stroke",S[k].c);routes.appendChild(z)})});
+ document.getElementById("yearOut").textContent=maxYear;renderTimeline();
+}
+function select(p,g){document.querySelectorAll(".marker").forEach(x=>x.classList.remove("selected"));g.classList.add("selected");document.getElementById("details").innerHTML=`<h3 class="detailsTitle">${p[0]}</h3><span class="pill">${S[p[3]].n}</span><span class="pill">${p[4]}+</span><p>${p[5]}</p><p class="muted">Coordinates are schematic story anchors; exact travel routes are not implied.</p>`}
+function renderTimeline(){document.getElementById("timeline").innerHTML=E.filter(e=>parseInt(e[0])<=maxYear&&(series==="ALL"||e[4]===series)).map(e=>`<div class="card"><div class="eyebrow">${e[0]} · ${e[1]}</div><h3>${e[2]}</h3><p>${e[3]}</p><span class="pill">${S[e[4]].n}</span></div>`).join("")}
+document.querySelectorAll("[data-series]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-series]").forEach(x=>x.classList.remove("active"));b.classList.add("active");series=b.dataset.series;draw()});
+document.getElementById("search").oninput=draw;document.getElementById("year").oninput=e=>{maxYear=+e.target.value;draw()};
+document.getElementById("zin").onclick=()=>{zoom=Math.min(3,zoom+.25);apply()};document.getElementById("zout").onclick=()=>{zoom=Math.max(.75,zoom-.25);apply()};document.getElementById("reset").onclick=()=>{zoom=1;px=py=0;apply()};
+function apply(){svg.style.transform=`translate(${px}px,${py}px) scale(${zoom})`}
+document.getElementById("mapWrap").addEventListener("pointerdown",e=>{if(e.target.closest(".marker")||e.target.closest("button"))return;drag=true;lx=e.clientX;ly=e.clientY});
+window.addEventListener("pointermove",e=>{if(!drag)return;px+=e.clientX-lx;py+=e.clientY-ly;lx=e.clientX;ly=e.clientY;apply()});window.addEventListener("pointerup",()=>drag=false);
+draw();
+</script>
+</body>
+</html>
