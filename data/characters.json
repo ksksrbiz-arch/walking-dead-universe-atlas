@@ -6,9 +6,9 @@
     "seriesIds": [
       "twd",
       "ftwd",
-      "owl",
-      "dead"
-    ]
+      "owl"
+    ],
+    "episodeCount": 118
   },
   {
     "id": "michonne",
@@ -17,7 +17,8 @@
     "seriesIds": [
       "twd",
       "owl"
-    ]
+    ],
+    "episodeCount": 103
   },
   {
     "id": "daryl-dixon",
@@ -25,10 +26,9 @@
     "certainty": "confirmed",
     "seriesIds": [
       "twd",
-      "daryl",
-      "dead",
-      "owl"
-    ]
+      "daryl"
+    ],
+    "episodeCount": 167
   },
   {
     "id": "negan-smith",
@@ -37,7 +37,8 @@
     "seriesIds": [
       "twd",
       "dead"
-    ]
+    ],
+    "episodeCount": 86
   },
   {
     "id": "morgan-jones",
@@ -46,7 +47,8 @@
     "seriesIds": [
       "twd",
       "ftwd"
-    ]
+    ],
+    "episodeCount": 98
   },
   {
     "id": "jadis-stokes",
@@ -56,7 +58,8 @@
       "twd",
       "wb",
       "owl"
-    ]
+    ],
+    "episodeCount": 26
   },
   {
     "id": "carol-peletier",
@@ -64,18 +67,18 @@
     "certainty": "confirmed",
     "seriesIds": [
       "twd",
-      "daryl",
-      "owl"
-    ]
+      "daryl"
+    ],
+    "episodeCount": 141
   },
   {
     "id": "carl-grimes",
     "name": "Carl Grimes",
     "certainty": "confirmed",
     "seriesIds": [
-      "twd",
-      "ftwd"
-    ]
+      "twd"
+    ],
+    "episodeCount": 83
   },
   {
     "id": "judith-grimes",
@@ -83,9 +86,9 @@
     "certainty": "confirmed",
     "seriesIds": [
       "twd",
-      "daryl",
       "owl"
-    ]
+    ],
+    "episodeCount": 89
   },
   {
     "id": "maggie-rhee",
@@ -93,9 +96,9 @@
     "certainty": "confirmed",
     "seriesIds": [
       "twd",
-      "dead",
-      "owl"
-    ]
+      "dead"
+    ],
+    "episodeCount": 128
   },
   {
     "id": "hershel-rhee",
@@ -104,25 +107,26 @@
     "seriesIds": [
       "twd",
       "dead"
-    ]
+    ],
+    "episodeCount": 45
   },
   {
     "id": "glenn-rhee",
     "name": "Glenn Rhee",
     "certainty": "confirmed",
     "seriesIds": [
-      "twd",
-      "dead"
-    ]
+      "twd"
+    ],
+    "episodeCount": 74
   },
   {
     "id": "rosita-espinosa",
     "name": "Rosita Espinosa",
     "certainty": "confirmed",
     "seriesIds": [
-      "twd",
-      "dead"
-    ]
+      "twd"
+    ],
+    "episodeCount": 94
   },
   {
     "id": "gabriel-stokes",
@@ -131,25 +135,26 @@
     "seriesIds": [
       "twd",
       "owl"
-    ]
+    ],
+    "episodeCount": 74
   },
   {
     "id": "paul-rovia",
     "name": "Paul 'Jesus' Rovia",
     "certainty": "confirmed",
     "seriesIds": [
-      "twd",
-      "ftwd"
-    ]
+      "twd"
+    ],
+    "episodeCount": 25
   },
   {
     "id": "ezekiel-sutton",
     "name": "Ezekiel Sutton",
     "certainty": "confirmed",
     "seriesIds": [
-      "twd",
-      "ftwd"
-    ]
+      "twd"
+    ],
+    "episodeCount": 49
   },
   {
     "id": "dwight",
@@ -158,7 +163,8 @@
     "seriesIds": [
       "twd",
       "ftwd"
-    ]
+    ],
+    "episodeCount": 60
   },
   {
     "id": "sherry",
@@ -167,7 +173,8 @@
     "seriesIds": [
       "twd",
       "ftwd"
-    ]
+    ],
+    "episodeCount": 29
   },
   {
     "id": "alpha",
@@ -176,7 +183,8 @@
     "seriesIds": [
       "twd",
       "tales"
-    ]
+    ],
+    "episodeCount": 21
   },
   {
     "id": "lydia",
@@ -185,7 +193,8 @@
     "seriesIds": [
       "twd",
       "tales"
-    ]
+    ],
+    "episodeCount": 34
   },
   {
     "id": "edwin-jenner",
@@ -194,7 +203,8 @@
     "seriesIds": [
       "twd",
       "wb"
-    ]
+    ],
+    "episodeCount": 3
   },
   {
     "id": "sophia-peletier",
@@ -203,16 +213,17 @@
     "seriesIds": [
       "twd",
       "daryl"
-    ]
+    ],
+    "episodeCount": 20
   },
   {
     "id": "simon",
     "name": "Simon",
     "certainty": "confirmed",
     "seriesIds": [
-      "twd",
-      "dead"
-    ]
+      "twd"
+    ],
+    "episodeCount": 15
   },
   {
     "id": "merle-dixon",
@@ -221,7 +232,8 @@
     "seriesIds": [
       "twd",
       "daryl"
-    ]
+    ],
+    "episodeCount": 18
   },
   {
     "id": "shane-walsh",
@@ -229,7 +241,8 @@
     "certainty": "confirmed",
     "seriesIds": [
       "twd"
-    ]
+    ],
+    "episodeCount": 22
   },
   {
     "id": "althea-szprygocki",
@@ -237,7 +250,8 @@
     "certainty": "confirmed",
     "seriesIds": [
       "ftwd"
-    ]
+    ],
+    "episodeCount": 0
   },
   {
     "id": "hope-bennett",
@@ -245,7 +259,8 @@
     "certainty": "confirmed",
     "seriesIds": [
       "wb"
-    ]
+    ],
+    "episodeCount": 0
   },
   {
     "id": "iris-bennett",
@@ -253,7 +268,8 @@
     "certainty": "confirmed",
     "seriesIds": [
       "wb"
-    ]
+    ],
+    "episodeCount": 0
   },
   {
     "id": "jennifer-mallick",
@@ -262,7 +278,8 @@
     "seriesIds": [
       "wb",
       "owl"
-    ]
+    ],
+    "episodeCount": 20
   },
   {
     "id": "samuel-abbott",
@@ -271,6 +288,7 @@
     "seriesIds": [
       "wb",
       "owl"
-    ]
+    ],
+    "episodeCount": 7
   }
 ]
