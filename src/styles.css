@@ -350,7 +350,13 @@ button:active{transform:translateY(1px)}
   }
 
   .map.view-map .mapTopRight{
-    top:82px;
+    top:178px;
+    right:10px;
+  }
+
+  .map.view-map .mapTopRight button{
+    width:42px;
+    height:42px;
   }
 
   .map.view-map .seriesRail{
@@ -636,4 +642,24 @@ button:active{transform:translateY(1px)}
 @media(max-width:390px){
   .mobileTimeSummaryMeta{display:none}
   .mobileTimeSummary b{font-size:19px}
+}
+
+@media(max-width:699px){
+  .map.view-map .seriesRail{
+    right:8px;
+    max-width:none;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scrollbar-width:none;
+    padding-right:2px;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-x;
+  }
+  .map.view-map .seriesRail::-webkit-scrollbar{display:none}
+  .map.view-map .seriesRail button{
+    flex:0 0 auto;
+    min-width:58px;
+  }
+  .map.view-map .seriesRail button:nth-child(5){min-width:112px}
+  .map.view-map .seriesRail button:last-child{min-width:78px}
 }
