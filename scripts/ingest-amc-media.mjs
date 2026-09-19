@@ -40,6 +40,24 @@ const SLUG_TO_SERIES = Object.fromEntries(
   Object.entries(SERIES_SLUGS).map(([id, slug]) => [slug, id])
 );
 
+
+
+const SERIES_PAGES = Object.fromEntries(
+  Object.entries(SERIES_SLUGS).map(([id, slug]) => [id, BASE + "/shows/" + slug])
+);
+
+async function discoverSeriesPageUrls() {
+  const out = new Set();
+  for (const slug of Object.values(SERIES_SLUGS)) {
+    const page = BASE + "/shows/" + slug;
+    try {
+      const html = await fetchText(page);
+      for (const url of discoverUrls(html)) out.add(url);
+    } catch {}
+  }
+  return [...out];
+}
+
 const SLUG_ALIASES = {
   "the-walking-dead-rick-and-michonne": "owl"
 };
@@ -227,6 +245,8 @@ function findManifestEpisode(manifest, id) {
 async function main() {
   const manifest = JSON.parse(await readFile(MANIFEST, "utf8"));
   const urlsSet = new Set();
+
+  for (const url of await discoverSeriesPageUrls()) urlsSet.add(url);
 
   try {
     const catalog = await fetchText(CATALOG);
