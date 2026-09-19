@@ -302,7 +302,7 @@ export default function App(){
        <filter id="landShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#26383a" floodOpacity=".28"/></filter>
        <filter id="paperNoise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="2" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="gray"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer><feBlend in="SourceGraphic" in2="gray" mode="multiply"/></filter>
       </defs>
-      <g className="mapWorld" transform={isMobileMap?"translate(65 -106) scale(1.45)":undefined}>
+      <g className="mapWorld" transform={isMobileMap?"translate(95 50) scale(1.45)":undefined}>
       <rect width="1000" height="600" fill="url(#ocean)"/>
       <rect width="1000" height="600" fill="url(#oceanGlow)"/>
       <g className="graticule"><path d={pathGenerator({type:"Sphere"}) as string}/></g>
