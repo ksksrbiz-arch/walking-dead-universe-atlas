@@ -1,0 +1,16 @@
+[
+  {"id":"twd-s01-atlanta","year":2010,"title":"TWD S1 — Atlanta","seriesId":"twd","certainty":"confirmed"},
+  {"id":"ftwd-s01-la","year":2010,"title":"Fear S1 — Los Angeles","seriesId":"ftwd","certainty":"confirmed"},
+  {"id":"twd-s02-farm","year":2011,"title":"TWD S2 — The farm","seriesId":"twd","certainty":"approximate"},
+  {"id":"twd-s03-prison","year":2012,"title":"TWD S3 — Prison / Woodbury","seriesId":"twd","certainty":"approximate"},
+  {"id":"twd-s05-alexandria","year":2014,"title":"TWD S5–6 — Alexandria","seriesId":"twd","certainty":"approximate"},
+  {"id":"twd-s06-saviors","year":2016,"title":"TWD S6–7 — Saviors","seriesId":"twd","certainty":"approximate"},
+  {"id":"twd-s08-war","year":2017,"title":"TWD S8 — All Out War","seriesId":"twd","certainty":"approximate"},
+  {"id":"ftwd-s04-morgan","year":2017,"title":"Fear S4 — Morgan crossover era","seriesId":"ftwd","certainty":"approximate"},
+  {"id":"twd-s09-rick","year":2018,"title":"TWD S9 — Rick's disappearance","seriesId":"twd","certainty":"confirmed"},
+  {"id":"wb-crm","year":2020,"title":"World Beyond — CRM / Civic Republic","seriesId":"wb","certainty":"confirmed"},
+  {"id":"daryl-france","year":2023,"title":"Daryl Dixon — France","seriesId":"daryl","certainty":"confirmed"},
+  {"id":"owl-philadelphia","year":2024,"title":"The Ones Who Live — Philadelphia","seriesId":"owl","certainty":"confirmed"},
+  {"id":"dead-manhattan","year":2024,"title":"Dead City — Manhattan","seriesId":"dead","certainty":"confirmed"},
+  {"id":"daryl-spain","year":2025,"title":"Daryl Dixon — Spain","seriesId":"daryl","certainty":"confirmed"}
+]
