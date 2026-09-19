@@ -147,8 +147,31 @@ export default function App(){
      setPan({x:nextX,y:nextY});
    });
  };
- const selectEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;if(raw?.timelineStart)setYear(Number(raw.timelineStart));setSelectedEpisode(id);setSelectedLocation(null);setView("timeline");setSheet("open")};
- const selectAtlasEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;if(raw?.timelineStart)setYear(Number(raw.timelineStart));setSelectedEpisode(id);setSelectedLocation(null);setView("map");setSheet("open")};
+ const setYearForEpisode=(raw:any)=>{const storyYear=raw?.timelineStart ?? raw?.timelineEnd ?? raw?.airDate?.slice(0,4);if(storyYear)setYear(Number(storyYear))};
+ const selectEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;setYearForEpisode(raw);setSelectedEpisode(id);setSelectedLocation(null);setView("timeline");setSheet("open")};
+ const focusEpisodeGeography=(raw:any)=>{
+   const ids=(raw?.locationIds??[]) as string[];
+   if(!ids.length)return;
+   window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
+     const places=atlasData.locations.filter(l=>ids.includes(l.id));
+     if(!places.length)return;
+     const center=places.reduce((a,l)=>{const p=project(l.lat,l.lng);return {x:a.x+p.x/places.length,y:a.y+p.y/places.length}},{x:0,y:0});
+     const surface=mapSurfaceRef.current;
+     if(!surface)return;
+     const rect=surface.getBoundingClientRect();
+     const markerX=rect.left+(center.x/1000)*rect.width;
+     const markerY=rect.top+(center.y/600)*rect.height;
+     const targetX=rect.left+rect.width*.5;
+     const targetY=rect.top+rect.height*.38;
+     const limit=360*(visual.current.zoom-1)+45;
+     const nextX=clamp(visual.current.x+(targetX-markerX),-limit,limit);
+     const nextY=clamp(visual.current.y+(targetY-markerY),-limit,limit);
+     visual.current={...visual.current,x:nextX,y:nextY};
+     applyMapTransform(nextX,nextY,visual.current.zoom,true);
+     setPan({x:nextX,y:nextY});
+   }));
+ };
+ const selectAtlasEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;setYearForEpisode(raw);setSelectedEpisode(id);setSelectedLocation(null);setView("map");setSheet("open");focusEpisodeGeography(raw)};
 
  const pointerDown=(e:React.PointerEvent<SVGSVGElement>)=>{
    e.preventDefault();
