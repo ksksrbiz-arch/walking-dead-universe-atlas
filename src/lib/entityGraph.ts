@@ -62,3 +62,15 @@ export function getCharacterEpisodeIds(characterId:string){
 export function getLocationEpisodeIds(locationId:string){
   return ((atlasData.locationEpisodes as any).episodesByLocation?.[locationId]||[]) as string[];
 }
+
+
+export const entityGraph=buildEntityGraph();
+
+export function getEntityNeighborhood(kind:EntityKind,id:string){
+  const nodeKey=key(kind,id);
+  const edges=entityGraph.adjacency.get(nodeKey)||[];
+  return edges.map(edge=>{
+    const ref=edge.from.kind===kind&&edge.from.id===id?edge.to:edge.from;
+    return {ref,type:edge.type,confidence:edge.confidence};
+  });
+}
