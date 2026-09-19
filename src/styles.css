@@ -13,14 +13,14 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
 .atlasMain,.map{height:100%;min-height:100%}
 .map{position:relative;overflow:hidden;background:var(--paper);touch-action:none;user-select:none}
 .mapAtmosphere{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at 50% 30%,#fff3 0,#fff0 34%),linear-gradient(180deg,#0000 55%,#0005 100%)}
-.mapSurface{position:absolute;inset:0;overflow:hidden;background:var(--paper)}
+.mapSurface{position:absolute;inset:0;overflow:hidden;background:#70878b;box-shadow:inset 0 0 90px #1b2a2d66}.mapSurface:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 42%,#17262822 76%,#111a1c55 100%),linear-gradient(180deg,#ffffff12,#00000012);mix-blend-mode:multiply}
 .mapSurface>svg{position:absolute;inset:0;width:100%;height:100%;display:block;will-change:transform;touch-action:none;cursor:grab}
 .mapSurface>svg.dragging{cursor:grabbing}
 .graticule path{fill:none;stroke:#96938c;stroke-width:.7;stroke-dasharray:3 5;opacity:.25}
-.countries path{fill:#bcbab2;stroke:#a09e97;stroke-width:.7}
-.mapLabels text{font-size:10px;letter-spacing:2px;font-weight:800;fill:#6d6b66;text-anchor:middle}
+.countries path{stroke:#777b75;stroke-width:.65;vector-effect:non-scaling-stroke;paint-order:stroke fill}.countries path:nth-child(3n){filter:brightness(.97)}.countries path:nth-child(4n){filter:brightness(1.025)}.landShadow{vector-effect:non-scaling-stroke}.graticule path{stroke:#e3eceb;opacity:.22}
+.mapLabels text{font-size:9px;letter-spacing:2px;font-weight:900;fill:#3e5558;text-anchor:middle;opacity:.72}.mapLabels text:first-child{font-size:11px}.mapSurface svg:after{content:""}
 .marker{cursor:pointer}
-.marker text{font-size:8px;fill:#292c2b;stroke:#d8d6ce;stroke-width:2.5px;paint-order:stroke;text-anchor:start;pointer-events:none}
+.marker text{font-size:8px;fill:#182426;stroke:#d2d5ce;stroke-width:2.7px;paint-order:stroke;text-anchor:start;pointer-events:none;font-weight:700}.marker .dot{filter:drop-shadow(0 1px 2px #0007)}
 .marker .dot{stroke:#f7f5ef;stroke-width:1.2}
 .marker .pulse{fill:none;opacity:.42;animation:markerPulse 2.5s ease-out infinite}
 .marker.selected .dot{stroke:#151818;stroke-width:3}
