@@ -27,14 +27,14 @@ const SERIES_SLUGS={
   ftwd:"fear-the-walking-dead",
   wb:"the-walking-dead-world-beyond",
   tales:"tales-of-the-walking-dead",
-  t o w l:"the-walking-dead-the-ones-who-live",
+  owl:"the-walking-dead-the-ones-who-live",
   daryl:"the-walking-dead-daryl-dixon",
   dead:"the-walking-dead-dead-city"
 };
 
 const slugAliases={
-  "the-walking-dead-the-ones-who-live":"t o w l",
-  "the-walking-dead-rick-and-michonne":"t o w l",
+  "the-walking-dead-the-ones-who-live":"owl",
+  "the-walking-dead-rick-and-michonne":"owl",
 };
 
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
