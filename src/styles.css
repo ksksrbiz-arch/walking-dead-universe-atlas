@@ -220,3 +220,95 @@ button:focus-visible,input:focus-visible{outline:2px solid #dce5e2;outline-offse
   .contentPanel{bottom:calc(var(--nav) + var(--timeline) + 12px);height:calc(100dvh - var(--nav) - var(--timeline) - 94px)}
   .atlasTimelineDock{height:var(--timeline)}
 }
+
+
+/* Interaction + rendering foundation: all UI glyphs are bounded; map/data surfaces have independent hit zones. */
+.contentPanel svg,.searchOverlay svg,.bottomNav svg,.mapChrome svg,.topbar svg,.atlasTimelineDock svg{
+  width:18px;height:18px;min-width:18px;min-height:18px;display:block;flex:0 0 auto;
+}
+.timelineList>button,.timelineList>article,.characterJourney>button{
+  grid-template-columns:52px minmax(0,1fr) 18px;
+}
+.timelineList>button>svg,.timelineList>article>svg,.characterJourney>button>svg{
+  width:18px!important;height:18px!important;min-width:18px!important;min-height:18px!important;
+}
+.episodeList .episodeRow{
+  position:relative;
+  min-height:76px;
+  grid-template-columns:62px minmax(0,1fr) 18px;
+  overflow:hidden;
+}
+.episodeList .episodeRow>strong{font:700 13px "Space Mono",monospace;color:#aeb8b7}
+.episodeList .episodeRow>span:not(.rowMedia){min-width:0}
+.episodeList .episodeRow>span:not(.rowMedia) b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.episodeList .rowMedia{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.episodeList .rowThumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.16;mask-image:linear-gradient(90deg,#000,transparent 78%);-webkit-mask-image:linear-gradient(90deg,#000,transparent 78%)}
+.episodeList .episodeRow>strong,.episodeList .episodeRow>span:not(.rowMedia),.episodeList .episodeRow>svg{position:relative;z-index:1}
+.markerHit{pointer-events:all}
+.marker{touch-action:none}
+button,.atlasTimelineItem,.atlasTimelineLaneLabel{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:active{transform:translateY(1px)}
+.atlasTimelineItem{min-width:14px!important;height:18px!important;top:-8px;border-radius:10px;opacity:.62}
+.atlasTimelineItem.event{width:18px!important;height:18px!important;top:-8px}
+.atlasTimelineLaneLabel{min-height:32px}
+.atlasTimelineFooter input{min-height:32px;touch-action:pan-x}
+.mapTopRight button,.mobileSearchButton,.closePanel,.panelGrab,.bottomNav button{min-width:44px;min-height:44px}
+.seriesRail button{min-height:40px}
+.locationLinks button,.miniTags span{min-height:44px}
+.entityCard,.episodeNav button,.watchOrder article{min-height:64px}
+
+@media(max-width:699px){
+  :root{--timeline:188px;--nav:62px}
+  .mapSurface{inset:0 0 calc(var(--timeline) + var(--nav) + 12px) 0}
+  .mapSurface svg{width:100%;height:100%;touch-action:none}
+  .mapTopLeft{top:78px;left:12px}
+  .mapTopRight{top:78px;right:12px}
+  .seriesRail{top:126px}
+  .contentPanel{
+    left:12px;right:12px;top:44%;bottom:calc(var(--timeline) + var(--nav) + 10px);
+    width:auto;height:auto;max-height:none;border-radius:22px;
+  }
+  .contentPanel.peek{
+    top:auto;height:66px;bottom:calc(var(--timeline) + var(--nav) + 10px);
+  }
+  .panelHeader{min-height:72px;padding:17px 16px 11px}
+  .panelHeader h2{font-size:21px}
+  .contentScroll{padding:12px 14px 26px}
+  .entityHero,.episodeHero{min-height:150px}
+  .entityHero h3,.episodeHero h3{font-size:24px}
+  .detailGrid{grid-template-columns:1fr 1fr}
+  .timelineIntro p{font-size:11px}
+  .timelineReadout{grid-template-columns:auto 1fr;padding:12px}
+  .timelineReadout>b{font-size:24px}
+  .episodeList .episodeRow{min-height:72px;grid-template-columns:58px minmax(0,1fr) 18px;padding:9px 10px}
+  .episodeList .episodeRow>strong{font-size:12px}
+  .episodeList .episodeRow>span:not(.rowMedia) b{font-size:12px}
+  .episodeList .episodeRow>span:not(.rowMedia) small{font-size:7px}
+  .episodeList .episodeRow>span:not(.rowMedia) em{font-size:7px}
+  .atlasTimelineDock{
+    left:12px;right:12px;bottom:calc(var(--nav) + 6px);height:var(--timeline);
+    border-radius:20px;
+  }
+  .atlasTimelineHead{height:50px;padding:7px 11px}
+  .atlasTimelineTitle b{font-size:18px}
+  .atlasTimelineActions button{min-width:44px;min-height:44px;height:44px}
+  .atlasTimelineBody{padding:20px 10px 6px}
+  .atlasTimelineScale{left:51px;right:10px;top:4px}
+  .atlasTimelineLane{grid-template-columns:45px minmax(0,1fr);height:17px}
+  .atlasTimelineTrack{height:9px}
+  .atlasTimelineCursor{top:-5px}
+  .atlasTimelineFooter{margin-top:5px}
+  .atlasTimelineFooter input{height:28px}
+  .bottomNav{
+    left:12px;right:12px;bottom:6px;height:56px;
+    border-radius:18px;padding:4px;
+  }
+  .bottomNav button{height:48px;min-height:48px}
+  .bottomNav svg{width:20px;height:20px;min-width:20px;min-height:20px}
+  .bottomNav small{font-size:7px}
+  .mapChrome{box-shadow:0 8px 24px #0004}
+}
+@media(max-width:390px){
+  .contentPanel{top:42%;bottom:calc(var(--timeline) + var(--nav) + 8px)}
+  .atlasTimelineDock{height:var(--timeline)}
+}
