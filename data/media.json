@@ -7,11 +7,21 @@
       "keyArt": "https://images.amcnetworks.com/amc.com/wp-content/uploads/2018/09/the-walking-dead-season-9-key-art-rick-lincoln-michonne-gurira-full-size.jpg",
       "sourcePage": "https://www.amc.com/blogs/amc-releases-new-poster-cast-portraits-and-details-from-the-walking-dead-season-9--1007107"
     },
-    "ftwd": {"name": "Fear the Walking Dead"},
-    "tales": {"name": "Tales of the Walking Dead"},
-    "wb": {"name": "The Walking Dead: World Beyond"},
-    "owl": {"name": "The Walking Dead: The Ones Who Live"},
-    "daryl": {"name": "The Walking Dead: Daryl Dixon"},
+    "ftwd": {
+      "name": "Fear the Walking Dead"
+    },
+    "tales": {
+      "name": "Tales of the Walking Dead"
+    },
+    "wb": {
+      "name": "The Walking Dead: World Beyond"
+    },
+    "owl": {
+      "name": "The Walking Dead: The Ones Who Live"
+    },
+    "daryl": {
+      "name": "The Walking Dead: Daryl Dixon"
+    },
     "dead": {
       "name": "The Walking Dead: Dead City",
       "keyArt": "https://images.cds.amcn.com/amcn/tve/amc/DeadCity_301.jpg",
@@ -26,21 +36,65 @@
     }
   },
   "places": {
-    "atlanta": {"kind": "place", "status": "needs-ingestion"},
-    "king-county": {"kind": "place", "status": "needs-ingestion"},
-    "alexandria": {"kind": "place", "status": "needs-ingestion"},
-    "hilltop": {"kind": "place", "status": "needs-ingestion"},
-    "sanctuary": {"kind": "place", "status": "needs-ingestion"},
-    "manhattan": {"kind": "place", "status": "needs-ingestion"},
-    "paris": {"kind": "place", "status": "needs-ingestion"},
-    "omaha": {"kind": "place", "status": "needs-ingestion"}
+    "atlanta": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "king-county": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "alexandria": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "hilltop": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "sanctuary": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "manhattan": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "paris": {
+      "kind": "place",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDU_GoesToTheBigCity_AMCTalk_1920x1080.jpg",
+      "sourcePage": "https://www.amc.com/blogs/the-walking-dead-universe-turns-to-the-big-city--1064220"
+    },
+    "omaha": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    }
   },
   "characters": {
-    "rick": {"kind": "character", "status": "needs-official-portrait"},
-    "daryl": {"kind": "character", "status": "needs-official-portrait"},
-    "carol": {"kind": "character", "status": "needs-official-portrait"},
-    "michonne": {"kind": "character", "status": "needs-official-portrait"},
-    "maggie": {"kind": "character", "status": "needs-official-portrait"},
-    "negan": {"kind": "character", "status": "needs-official-portrait"}
+    "rick": {
+      "kind": "character",
+      "status": "needs-official-portrait"
+    },
+    "daryl": {
+      "kind": "character",
+      "status": "needs-official-portrait"
+    },
+    "carol": {
+      "kind": "character",
+      "status": "needs-official-portrait"
+    },
+    "michonne": {
+      "kind": "character",
+      "status": "needs-official-portrait"
+    },
+    "maggie": {
+      "kind": "character",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDDC_MaggieNYPD.jpg",
+      "sourcePage": "https://www.amc.com/blogs/the-walking-dead-universe-turns-to-the-big-city--1064220"
+    },
+    "negan": {
+      "kind": "character",
+      "status": "needs-official-portrait"
+    }
   }
 }
