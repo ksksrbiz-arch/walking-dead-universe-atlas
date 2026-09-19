@@ -971,3 +971,11 @@ button:active{transform:translateY(1px)}
 
 
 .timelineFilters button:disabled{opacity:.32;cursor:default}
+
+
+.historicalLinks{display:grid;gap:7px;margin-bottom:12px}
+.historicalLinks button{display:grid;grid-template-columns:minmax(0,1fr) 16px;gap:8px;align-items:center;width:100%;padding:10px 11px;border:1px solid #293638;border-radius:11px;background:#0e1819;color:#b4bfbd;text-align:left}
+.historicalLinks small{display:block;color:#687779;font:700 6.5px "Space Mono",monospace;letter-spacing:.08em}
+.historicalLinks b{display:block;margin:4px 0 2px;color:#cdd5d3;font-size:9px}
+.historicalLinks em{display:block;color:#6f7e80;font-size:7px;font-style:normal}
+.historicalLinks svg{width:13px;height:13px;color:#69787a}
