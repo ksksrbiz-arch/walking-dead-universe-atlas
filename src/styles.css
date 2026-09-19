@@ -883,3 +883,12 @@ button:active{transform:translateY(1px)}
 .connectionDirectory article{transition:border-color .16s ease,background .16s ease}
 .connectionDirectory article:hover{border-color:#465456;background:#142022}
 .connectionDirectory article strong{font-size:15px}
+
+
+/* Character journey surface */
+.characterEntityHero{min-height:205px}
+.characterEntityHero .entityArt{opacity:.5}
+.journeyRail{display:flex;gap:7px;overflow-x:auto;padding:2px 1px 5px;scroll-snap-type:x proximity}
+.journeySegment{position:relative;flex:1 0 112px;min-height:72px;padding:10px;border:1px solid #293638;border-top:2px solid var(--accent);border-radius:12px;background:#101a1c;scroll-snap-align:start}
+.journeySegment>span{display:block;color:#9aa6a7;font:700 7px "Space Mono",monospace;letter-spacing:.08em}.journeySegment>b{display:block;margin-top:7px;font:700 18px "Space Mono",monospace}.journeySegment>small{display:block;margin-top:3px;color:#718082;font-size:8px}.journeySegment>i{position:absolute;right:-8px;top:27px;z-index:2;color:#9aa6a7;font-style:normal}
+.characterJourney>div{display:grid;gap:5px}.characterJourney>div>button{display:grid;grid-template-columns:38px 1fr 14px;gap:9px;align-items:center;width:100%;padding:10px 11px;border:1px solid #293638;border-radius:11px;background:#101a1c;color:#e2e8e6;text-align:left}.characterJourney>div>button>strong{font:700 11px "Space Mono",monospace;color:#aeb8b8}.characterJourney>div>button small{display:block;color:#718082;font:700 7px "Space Mono",monospace}.characterJourney>div>button b{display:block;margin:4px 0 2px;font-size:10px}.characterJourney>div>button span{display:block;color:#718082;font-size:8px}.journeyTransition{padding:5px 8px;border-left:1px solid #465456;margin-left:18px}.journeyTransition span{display:block;color:#6f7d7f;font:700 6px "Space Mono",monospace;letter-spacing:.1em}.journeyTransition b{display:block;margin-top:3px;color:#9aa6a7;font-size:8px}.connectionTarget{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;margin-top:7px;padding:7px 8px;border:1px solid #293638;border-radius:9px;background:#0d1718;color:#dfe6e4;font-size:9px;text-align:left}.connectionTarget svg{width:12px;flex:0 0 auto}
