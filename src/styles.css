@@ -842,3 +842,35 @@ button:active{transform:translateY(1px)}
   .map.view-map .mapTopLeft{top:78px}
   .map.view-map .mobileTimeBar{bottom:calc(var(--mobile-nav) + 7px)}
 }
+
+
+/* Relationship graph v2 */
+.entityGraph{border-color:#ffffff20;background:linear-gradient(180deg,#0c1718f2,#091213e8)}
+.entityGraphHead{align-items:center}
+.entityGraphSub{display:block;margin-top:5px;color:#627274;font:700 7px "Space Mono",monospace;letter-spacing:.04em}
+.entityGraphCount{white-space:nowrap}
+.entityGraphFilters{display:flex;gap:5px;overflow-x:auto;padding:9px 10px;border-bottom:1px solid #ffffff10;scrollbar-width:none;touch-action:pan-x}
+.entityGraphFilters::-webkit-scrollbar{display:none}
+.entityGraphFilters button{flex:0 0 auto;min-height:34px;padding:0 9px;border:1px solid #ffffff15;border-radius:999px;background:#101c1d;color:#7e8d8f;font:700 7px "Space Mono",monospace;letter-spacing:.05em}
+.entityGraphFilters button b{margin-left:4px;color:#aeb9b7}
+.entityGraphFilters button.active{background:#e8edeb;color:#0b1415;border-color:#e8edeb}
+.entityGraphFilters button.active b{color:#0b1415}
+.entityGraphNodes{grid-template-columns:repeat(2,minmax(0,1fr))}
+.entityGraphNode{min-height:82px!important;background:linear-gradient(145deg,#111d1ecc,#0d1819e8)!important}
+.entityGraphNodeTop{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.entityGraphNodeTop i{font-size:6.5px!important}
+.entityGraphNodeTop em{font:700 6px "Space Mono",monospace;color:#687a7c;font-style:normal;text-transform:uppercase}
+.entityGraphNode b{font-size:12px!important}
+.entityGraphNode small{line-height:1.25}
+.entityGraphNode.kind-location{border-color:#72a9c533}
+.entityGraphNode.kind-community{border-color:#5bb29b33}
+.entityGraphNode.kind-faction{border-color:#d4a64b33}
+.entityGraphNode.kind-series{border-color:#d6816833}
+.entityGraphNode.kind-connection{border-color:#e7e7e133}
+.entityGraphMore{grid-column:1/-1;padding:8px;text-align:center;color:#647375;font:700 7px "Space Mono",monospace}
+@media(max-width:699px){
+ .entityGraphHead b{font-size:17px}
+ .entityGraphFilters{margin:0}
+ .entityGraphNodes{grid-template-columns:1fr}
+ .entityGraphNode{min-height:78px!important}
+}
