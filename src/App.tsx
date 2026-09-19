@@ -210,7 +210,7 @@ export default function App(){
        <div><small>{selectedLoc?SERIES_BY_ID[selectedLoc.seriesId]?.name:selectedEp?SERIES_BY_ID[selectedEp.seriesId]?.name:view==="map"?"ATLAS":"TWDU ATLAS"}</small><h2>{selectedLoc?.name||selectedEp?.title||(view==="map"?"Explore the universe":view==="timeline"?"Chronology":"Field guide")}</h2></div>
        {(selectedLoc||selectedEp)&&<button className="closePanel" onClick={()=>{setSelectedLocation(null);setSelectedEpisode(null)}}><Icon name="close"/></button>}
       </div>
-      {selectedLoc?<LocationDetail location={selectedLoc} onEpisode={selectEpisode}/>:selectedEp?<EpisodeDetail episode={selectedEp} onLocation={selectLocation}/>:view==="map"?<MapContent locations={locations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent episodes={episodes} onEpisode={selectEpisode}/>:view==="people"?<PeopleContent/>:<GuideContent errors={dataErrors}/>}
+      {selectedLoc?<LocationDetail location={selectedLoc} onEpisode={selectEpisode}/>:selectedEp?<EpisodeDetail episode={selectedEp} onLocation={selectLocation} onEpisode={selectEpisode}/>:view==="map"?<MapContent locations={locations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent episodes={episodes} onEpisode={selectEpisode}/>:view==="people"?<PeopleContent/>:<GuideContent errors={dataErrors}/>}
     </section>
 
     <nav className="bottomNav" aria-label="Atlas sections">
@@ -235,7 +235,7 @@ function LocationDetail({location,onEpisode}:{location:Location;onEpisode:(id:st
  </div>;
 }
 
-function EpisodeDetail({episode,onLocation}:{episode:any;onLocation:(l:Location)=>void}){
+function EpisodeDetail({episode,onLocation,onEpisode}:{episode:any;onLocation:(l:Location)=>void;onEpisode:(id:string)=>void}){
  const raw=atlasData.episodes.find((e:any)=>e.id===episode.id) as any;
  const meta=SERIES_BY_ID[episode.seriesId];
  const locations=atlasData.locations.filter(l=>raw?.locationIds?.includes(l.id));
@@ -246,7 +246,7 @@ function EpisodeDetail({episode,onLocation}:{episode:any;onLocation:(l:Location)
   <div className="episodeHero" style={{"--accent":meta.color} as CSSProperties}><span>{meta.name} · {episode.seasonId?.toUpperCase()}E{String(episode.episodeNumber).padStart(2,"0")}</span><h3>{episode.title}</h3><div className="episodeMeta"><b>{episode.start===episode.end?episode.start:`${episode.start}–${episode.end}`}</b><em>{episode.certainty}</em><em>{episode.precision}</em></div></div>
   {locations.length>0&&<><div className="sectionTitle">LOCATIONS <span>{locations.length}</span></div><div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}><Icon name="pin"/>{l.name}</button>)}</div></>}
   <div className="sectionTitle">CHRONOLOGY NAVIGATION</div>
-  <div className="episodeNav">{prev&&<button onClick={()=>onLocation?undefined:undefined} disabled><small>PREVIOUS</small><b>{prev.title}</b><span>{prev.start}</span></button>}<div className="chronologyMarker"><span>IN UNIVERSE</span><strong>{episode.start}</strong></div>{next&&<button onClick={()=>window.dispatchEvent(new CustomEvent("atlas:select-episode",{detail:next.id}))}><small>NEXT</small><b>{next.title}</b><span>{next.start}</span></button>}</div>
+  <div className="episodeNav">{prev&&<button onClick={()=>onEpisode(prev.id)}><small>PREVIOUS</small><b>{prev.title}</b><span>{prev.start}</span></button>}<div className="chronologyMarker"><span>IN UNIVERSE</span><strong>{episode.start}</strong></div>{next&&<button onClick={()=>onEpisode(next.id)}><small>NEXT</small><b>{next.title}</b><span>{next.start}</span></button>}</div>
   <div className="sourceNote"><Icon name="layers"/><span>Air date and in-universe chronology are separate fields. Ranges and uncertain placements stay labeled rather than flattened.</span></div>
  </div>;
 }
