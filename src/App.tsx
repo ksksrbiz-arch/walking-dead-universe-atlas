@@ -61,8 +61,8 @@ export default function App(){
  const [selectedEpisode,setSelectedEpisode]=useState<string|null>(null);
  const [view,setView]=useState<View>("map");
  const [dataErrors,setDataErrors]=useState<string[]>([]);
- const [zoom,setZoom]=useState(1);
- const [pan,setPan]=useState({x:0,y:0});
+ const [zoom,setZoom]=useState(()=>window.matchMedia("(max-width:699px)").matches?1.22:1);
+ const [pan,setPan]=useState(()=>window.matchMedia("(max-width:699px)").matches?{x:105,y:4}:{x:0,y:0});
  const [isDragging,setIsDragging]=useState(false);
  const [sheet,setSheet]=useState<"peek"|"open">("peek");
  const [searchOpen,setSearchOpen]=useState(false);
@@ -114,7 +114,7 @@ export default function App(){
  },[query]);
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
- const resetMap=()=>{setZoom(1);setPan({x:0,y:0})};
+ const resetMap=()=>{const mobile=window.matchMedia("(max-width:699px)").matches;setZoom(mobile?1.22:1);setPan(mobile?{x:105,y:4}:{x:0,y:0})};
  const selectLocation=(l:Location)=>{setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open")};
  const selectEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;if(raw?.timelineStart)setYear(Number(raw.timelineStart));setSelectedEpisode(id);setSelectedLocation(null);setView("timeline");setSheet("open")};
 
@@ -141,7 +141,7 @@ export default function App(){
    if(!isDragging)return;
    const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
    if(Math.abs(dx)+Math.abs(dy)>4)drag.current.moved=true;
-   const limit=220*(zoom-1)+35;
+   const limit=360*(zoom-1)+45;
    setPan({x:clamp(drag.current.px+dx,-limit,limit),y:clamp(drag.current.py+dy,-limit,limit)});
  };
  const pointerUp=(e:React.PointerEvent<SVGSVGElement>)=>{
@@ -189,7 +189,7 @@ export default function App(){
       <g className="countries" filter="url(#paperNoise)">{worldCountries.features.map((c:any,i:number)=><path key={c.id||c.properties?.name} d={pathGenerator(c) as string} fill={countryTone(i)}><title>{c.properties?.name||"Country"}</title></path>)}</g>
       <g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>
       <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} className={selectedLocation===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
-       <circle className="pulse" r="2.5" style={{stroke:meta.color}}/><circle className="dot" r="1.5" fill={meta.color}/><text x="4" y=".5">{l.name}</text>
+       <circle className="pulse" r="2.5" style={{stroke:meta.color}}/><circle className="dot" r="1.5" fill={meta.color}/>{(zoom>1.34||selectedLocation===l.id)&&<text x="4" y=".5">{l.name}</text>}
       </g>})}</g>
      </svg>
     </div>
@@ -207,14 +207,14 @@ export default function App(){
       <div className="zoomBadge">{Math.round(zoom*100)}%</div>
     </div>
 
-    <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>\n    <div className="mapLegend" aria-label="Map legend"><small>SERIES LAYER</small>{SERIES_KEYS.map(k=><span key={k}><i style={{background:META[k].color}}/>{META[k].short}</span>)}</div>
+    <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>\n    <div className={`mapLegend ${sheet==="open"?"sheetOpen":""}`} aria-label="Map legend"><small>SERIES LAYER</small>{SERIES_KEYS.map(k=><span key={k}><i style={{background:META[k].color}}/>{META[k].short}</span>)}</div>
 
     <div className="seriesRail" aria-label="Series filter">
       <button className={series==="ALL"?"active":""} onClick={()=>setSeries("ALL")}>ALL</button>
       {SERIES_KEYS.map(k=><button key={k} className={series===k?"active":""} style={series===k?{"--series":META[k].color} as CSSProperties:{}} onClick={()=>setSeries(k)}>{META[k].short}</button>)}
     </div>
 
-    <div className="timeMachine">
+    <div className={`timeMachine ${sheet==="open"?"sheetOpen":""}`}>
       <div className="timeMachineHead"><div><small>UNIVERSE TIME</small><b>{year}</b></div><button onClick={()=>setPlaying(v=>!v)} aria-label={playing?"Pause chronology":"Play chronology"}><Icon name={playing?"pause":"play"}/></button></div>
       <input aria-label="Universe year" type="range" min="2010" max="2027" value={year} onChange={e=>{setPlaying(false);setYear(Number(e.target.value))}}/>
       <div className="timeScale"><span>2010 · OUTBREAK</span><span>2014</span><span>2018</span><span>2022</span><span>2027</span></div>
