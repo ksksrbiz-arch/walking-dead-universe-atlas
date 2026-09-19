@@ -10,9 +10,11 @@ import watchOrder from "../data/watchOrder.json";
 import episodes from "../data/episodes.json";
 import seasonMeta from "../data/seasonMeta.json";
 import media from "../data/media.json";
+import webisodes from "../data/webisodes.json";
+import universeEvents from "../data/universeEvents.json";
 
-export const atlasData={series,seasons,seasonMeta,locations,events,characters,communities,factions,connections,watchOrder,episodes,media};
-export type SeriesKey="TWD"|"FTWD"|"TALES"|"WB"|"OWL"|"DARYL"|"DEAD";
+export const atlasData={series,seasons,seasonMeta,locations,events,universeEvents,characters,communities,factions,connections,watchOrder,episodes,webisodes,media};
+export type SeriesKey="TWD"|"FTWD"|"TALES"|"WB"|"OWL"|"DARYL"|"DEAD"|"MORE_TALES";
 export type Location=typeof locations[number];
 export type Event=typeof events[number];
 export type WatchOrderItem=typeof watchOrder[number];
