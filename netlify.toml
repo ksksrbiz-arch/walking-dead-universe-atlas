@@ -8,7 +8,7 @@
 [images]
   remote_images = [
     'https://images\.amcnetworks\.com/.*',
-    'https://images\.cds\.amcn\.com/.*'
+    'https://images\.cds\.amcn\.com/.*',
     'https://dimages\\.cds\\.amcn\\.com/.*'
   ]
 
