@@ -47,5 +47,68 @@
     "type": "secondary",
     "url": "https://en.wikipedia.org/wiki/List_of_The_Walking_Dead_episodes",
     "note": "Episode structure reference; detailed chronology remains separately sourced."
+  },
+  {
+    "id": "source-epguides-twd",
+    "title": "epguides — The Walking Dead episode guide",
+    "type": "episode-index",
+    "url": "https://epguides.com/WalkingDead/",
+    "note": "Episode titles, season/episode numbers and original U.S. air dates."
+  },
+  {
+    "id": "source-epguides-ftwd",
+    "title": "epguides — Fear the Walking Dead episode guide",
+    "type": "episode-index",
+    "url": "https://epguides.com/FeartheWalkingDead/",
+    "note": "Episode titles, season/episode numbers and original U.S. air dates."
+  },
+  {
+    "id": "source-epguides-tales",
+    "title": "epguides — Tales of the Walking Dead episode guide",
+    "type": "episode-index",
+    "url": "https://epguides.com/TalesoftheWalkingDead/",
+    "note": "Episode titles and original U.S. air dates."
+  },
+  {
+    "id": "source-epguides-wb",
+    "title": "epguides — World Beyond episode guide",
+    "type": "episode-index",
+    "url": "https://epguides.com/WalkingDeadWorldBeyond/",
+    "note": "Episode titles and original U.S. air dates."
+  },
+  {
+    "id": "source-epguides-owl",
+    "title": "epguides — The Ones Who Live episode guide",
+    "type": "episode-index",
+    "url": "https://epguides.com/WalkingDeadTheOnesWhoLive/",
+    "note": "Episode titles and original U.S. air dates."
+  },
+  {
+    "id": "source-epguides-daryl",
+    "title": "epguides — Daryl Dixon episode guide",
+    "type": "episode-index",
+    "url": "https://epguides.com/WalkingDeadDarylDixon/",
+    "note": "Episode titles and original U.S. air dates through season 3."
+  },
+  {
+    "id": "source-epguides-dead",
+    "title": "epguides — Dead City episode guide",
+    "type": "episode-index",
+    "url": "https://epguides.com/WalkingDeadDeadCity/",
+    "note": "Episode titles and original U.S. air dates through season 3."
+  },
+  {
+    "id": "source-timeline-wiki",
+    "title": "Walking Dead Wiki — Television Universe Timeline",
+    "type": "chronology",
+    "url": "https://walkingdead.fandom.com/wiki/Television_Universe_Timeline",
+    "note": "Detailed in-universe chronology, day counts, time jumps and cross-series placement. Used as a secondary chronology reference; disputed/unknown placements remain marked accordingly."
+  },
+  {
+    "id": "source-chronological-order-wiki",
+    "title": "Walking Dead Wiki — Chronological Episode Order",
+    "type": "chronology",
+    "url": "https://walkingdead.fandom.com/wiki/Chronological_Episode_Order",
+    "note": "Cross-series episode ordering and overlap reference."
   }
 ]
