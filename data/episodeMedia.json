@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "policy": "Episode media is ingested as a separate manifest. Prefer verified official AMC/AMC Networks episode imagery; every asset retains sourcePage provenance. Unknown assets remain explicitly pending.",
   "coverage": 363,
   "episodes": {
@@ -460,1071 +460,1428 @@
       "seasonId": "ftwd-s01",
       "episodeNumber": 1,
       "title": "Pilot",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s01-e02": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s01",
       "episodeNumber": 2,
       "title": "So Close, Yet So Far",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s01-e03": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s01",
       "episodeNumber": 3,
       "title": "The Dog",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s01-e04": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s01",
       "episodeNumber": 4,
       "title": "Not Fade Away",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s01-e05": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s01",
       "episodeNumber": 5,
       "title": "Cobalt",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s01-e06": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s01",
       "episodeNumber": 6,
       "title": "The Good Man",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e01": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 1,
       "title": "Monster",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e02": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 2,
       "title": "We All Fall Down",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e03": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 3,
       "title": "Ouroboros",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e04": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 4,
       "title": "Blood in the Streets",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e05": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 5,
       "title": "Captive",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e06": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 6,
       "title": "Sicut Cervus",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e07": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 7,
       "title": "Shiva",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e08": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 8,
       "title": "Grotesque",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e09": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 9,
       "title": "Los Muertos",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e10": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 10,
       "title": "Do Not Disturb",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e11": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 11,
       "title": "Pablo & Jessica",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e12": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 12,
       "title": "Pillar of Salt",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e13": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 13,
       "title": "Date of Death",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e14": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 14,
       "title": "Wrath",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s02-e15": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s02",
       "episodeNumber": 15,
       "title": "North",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e01": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 1,
       "title": "Eye of the Beholder",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e02": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 2,
       "title": "The New Frontier",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e03": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 3,
       "title": "TEOTWAWKI",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e04": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 4,
       "title": "100",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e05": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 5,
       "title": "Burning in Water, Drowning in Flame",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e06": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 6,
       "title": "Red Dirt",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e07": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 7,
       "title": "The Unveiling",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e08": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 8,
       "title": "Children of Wrath",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e09": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 9,
       "title": "Minotaur",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e10": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 10,
       "title": "The Diviner",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e11": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 11,
       "title": "La Serpiente",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e12": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 12,
       "title": "Brother's Keeper",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e13": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 13,
       "title": "This Land is Your Land",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e14": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 14,
       "title": "El Matadero",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e15": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 15,
       "title": "Things Bad Begun",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s03-e16": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s03",
       "episodeNumber": 16,
       "title": "Sleigh Ride",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e01": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 1,
       "title": "What's Your Story?",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e02": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 2,
       "title": "Another Day in the Diamond",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e03": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 3,
       "title": "Good Out Here",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e04": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 4,
       "title": "Buried",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e05": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 5,
       "title": "Laura",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e06": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 6,
       "title": "Just in Case",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e07": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 7,
       "title": "The Wrong Side of Where You Are Now",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e08": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 8,
       "title": "No One's Gone",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e09": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 9,
       "title": "People Like Us",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e10": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 10,
       "title": "Close Your Eyes",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e11": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 11,
       "title": "The Code",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e12": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 12,
       "title": "Weak",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e13": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 13,
       "title": "Blackjack",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e14": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 14,
       "title": "MM 54",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e15": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 15,
       "title": "I Lose People...",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s04-e16": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s04",
       "episodeNumber": 16,
       "title": "... I Lose Myself",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e01": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 1,
       "title": "Here to Help",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e02": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 2,
       "title": "The Hurt That Will Happen",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e03": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 3,
       "title": "Humbug's Gulch",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e04": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 4,
       "title": "Skidmark",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e05": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 5,
       "title": "The End of Everything",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e06": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 6,
       "title": "The Little Prince",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e07": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 7,
       "title": "Still Standing",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e08": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 8,
       "title": "Is Anybody Out There?",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e09": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 9,
       "title": "Channel 4",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e10": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 10,
       "title": "210 Words Per Minute",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e11": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 11,
       "title": "You're Still Here",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e12": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 12,
       "title": "Ner Tamid",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e13": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 13,
       "title": "Leave What You Don't",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e14": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 14,
       "title": "Today and Tomorrow",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e15": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 15,
       "title": "Channel 5",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s05-e16": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s05",
       "episodeNumber": 16,
       "title": "End of the Line",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e01": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 1,
       "title": "The End is the Beginning",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e02": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 2,
       "title": "Welcome to the Club",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e03": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 3,
       "title": "Alaska",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e04": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 4,
       "title": "The Key",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e05": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 5,
       "title": "Honey",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e06": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 6,
       "title": "Bury Her Next to Jasper's Leg",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e07": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 7,
       "title": "Damage from the Inside",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e08": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 8,
       "title": "The Door",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e09": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 9,
       "title": "Things Left to Do",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e10": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 10,
       "title": "Handle with Care",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e11": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 11,
       "title": "The Holding",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e12": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 12,
       "title": "In Dreams",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e13": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 13,
       "title": "J.D.",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e14": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 14,
       "title": "Mother",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e15": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 15,
       "title": "USS Pennsylvania",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s06-e16": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s06",
       "episodeNumber": 16,
       "title": "The Beginning",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e01": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 1,
       "title": "The Beacon",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e02": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 2,
       "title": "Six Hours",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e03": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 3,
       "title": "Cindy Hawkins",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e04": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 4,
       "title": "Breathe With Me",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e05": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 5,
       "title": "Till Death",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e06": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 6,
       "title": "Reclamation",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e07": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 7,
       "title": "The Portrait",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e08": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 8,
       "title": "PADRE",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e09": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 9,
       "title": "Follow Me",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e10": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 10,
       "title": "Mourning Cloak",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e11": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 11,
       "title": "Ofelia",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e12": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 12,
       "title": "Sonny Boy",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e13": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 13,
       "title": "The Raft",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e14": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 14,
       "title": "Divine Providence",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e15": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 15,
       "title": "Amina",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s07-e16": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s07",
       "episodeNumber": 16,
       "title": "Gone",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e01": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 1,
       "title": "Remember What They Took From You",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e02": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 2,
       "title": "Blue Jay",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e03": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 3,
       "title": "Odessa",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e04": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 4,
       "title": "King County",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e05": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 5,
       "title": "More Time Than You Know",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e06": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 6,
       "title": "All I See Is Red",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e07": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 7,
       "title": "Anton",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e08": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 8,
       "title": "Iron Tiger",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e09": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 9,
       "title": "Sanctuary",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e10": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 10,
       "title": "Keeping Her Alive",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e11": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 11,
       "title": "Fighting Like You",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "ftwd-s08-e12": {
       "seriesId": "ftwd",
       "seasonId": "ftwd-s08",
       "episodeNumber": 12,
       "title": "The Road Ahead",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead",
+      "fallbackForEpisode": true
     },
     "owl-s01-e01": {
       "seriesId": "owl",
       "seasonId": "owl-s01",
       "episodeNumber": 1,
       "title": "Years",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-the-ones-who-live",
+      "fallbackForEpisode": true
     },
     "owl-s01-e02": {
       "seriesId": "owl",
       "seasonId": "owl-s01",
       "episodeNumber": 2,
       "title": "Gone",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-the-ones-who-live",
+      "fallbackForEpisode": true
     },
     "owl-s01-e03": {
       "seriesId": "owl",
       "seasonId": "owl-s01",
       "episodeNumber": 3,
       "title": "Bye",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-the-ones-who-live",
+      "fallbackForEpisode": true
     },
     "owl-s01-e04": {
       "seriesId": "owl",
       "seasonId": "owl-s01",
       "episodeNumber": 4,
       "title": "What We",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-the-ones-who-live",
+      "fallbackForEpisode": true
     },
     "owl-s01-e05": {
       "seriesId": "owl",
       "seasonId": "owl-s01",
       "episodeNumber": 5,
       "title": "Become",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-the-ones-who-live",
+      "fallbackForEpisode": true
     },
     "owl-s01-e06": {
       "seriesId": "owl",
       "seasonId": "owl-s01",
       "episodeNumber": 6,
       "title": "The Last Time",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-the-ones-who-live",
+      "fallbackForEpisode": true
     },
     "tales-s01-e01": {
       "seriesId": "tales",
@@ -1597,1775 +1954,2368 @@
       "seasonId": "twd-s01",
       "episodeNumber": 1,
       "title": "Days Gone Bye",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s01-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s01",
       "episodeNumber": 2,
       "title": "Guts",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s01-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s01",
       "episodeNumber": 3,
       "title": "Tell It to the Frogs",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s01-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s01",
       "episodeNumber": 4,
       "title": "Vatos",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s01-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s01",
       "episodeNumber": 5,
       "title": "Wildfire",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s01-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s01",
       "episodeNumber": 6,
       "title": "TS-19",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 1,
       "title": "What Lies Ahead",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 2,
       "title": "Bloodletting",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 3,
       "title": "Save the Last One",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 4,
       "title": "Cherokee Rose",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 5,
       "title": "Chupacabra",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 6,
       "title": "Secrets",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 7,
       "title": "Pretty Much Dead Already",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 8,
       "title": "Nebraska",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 9,
       "title": "Triggerfinger",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 10,
       "title": "18 Miles Out",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 11,
       "title": "Judge, Jury, Executioner",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 12,
       "title": "Better Angels",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s02-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s02",
       "episodeNumber": 13,
       "title": "Beside the Dying Fire",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 1,
       "title": "Seed",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 2,
       "title": "Sick",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 3,
       "title": "Walk with Me",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 4,
       "title": "Killer Within",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 5,
       "title": "Say the Word",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 6,
       "title": "Hounded",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 7,
       "title": "When the Dead Come Knocking",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 8,
       "title": "Made to Suffer",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 9,
       "title": "The Suicide King",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 10,
       "title": "Home",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 11,
       "title": "I Ain't a Judas",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 12,
       "title": "Clear",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 13,
       "title": "Arrow on the Doorpost",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e14": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 14,
       "title": "Prey",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e15": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 15,
       "title": "This Sorrowful Life",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s03-e16": {
       "seriesId": "twd",
       "seasonId": "twd-s03",
       "episodeNumber": 16,
       "title": "Welcome to the Tombs",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 1,
       "title": "30 Days Without an Accident",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 2,
       "title": "Infected",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 3,
       "title": "Isolation",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 4,
       "title": "Indifference",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 5,
       "title": "Internment",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 6,
       "title": "Live Bait",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 7,
       "title": "Dead Weight",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 8,
       "title": "Too Far Gone",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 9,
       "title": "After",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 10,
       "title": "Inmates",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 11,
       "title": "Claimed",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 12,
       "title": "Still",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 13,
       "title": "Alone",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e14": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 14,
       "title": "The Grove",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e15": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 15,
       "title": "Us",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s04-e16": {
       "seriesId": "twd",
       "seasonId": "twd-s04",
       "episodeNumber": 16,
       "title": "A",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 1,
       "title": "No Sanctuary",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 2,
       "title": "Strangers",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 3,
       "title": "Four Walls and a Roof",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 4,
       "title": "Slabtown",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 5,
       "title": "Self Help",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 6,
       "title": "Consumed",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 7,
       "title": "Crossed",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 8,
       "title": "Coda",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 9,
       "title": "What Happened and What's Going On",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 10,
       "title": "Them",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 11,
       "title": "The Distance",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 12,
       "title": "Remember",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 13,
       "title": "Forget",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e14": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 14,
       "title": "Spend",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e15": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 15,
       "title": "Try",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s05-e16": {
       "seriesId": "twd",
       "seasonId": "twd-s05",
       "episodeNumber": 16,
       "title": "Conquer",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 1,
       "title": "First Time Again",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 2,
       "title": "JSS",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 3,
       "title": "Thank You",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 4,
       "title": "Here's Not Here",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 5,
       "title": "Now",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 6,
       "title": "Always Accountable",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 7,
       "title": "Heads Up",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 8,
       "title": "Start to Finish",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 9,
       "title": "No Way Out",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 10,
       "title": "The Next World",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 11,
       "title": "Knots Untie",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 12,
       "title": "Not Tomorrow Yet",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 13,
       "title": "The Same Boat",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e14": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 14,
       "title": "Twice as Far",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e15": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 15,
       "title": "East",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s06-e16": {
       "seriesId": "twd",
       "seasonId": "twd-s06",
       "episodeNumber": 16,
       "title": "Last Day on Earth",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 1,
       "title": "The Day Will Come When You Won't Be",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 2,
       "title": "The Well",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 3,
       "title": "The Cell",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 4,
       "title": "Service",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 5,
       "title": "Go Getters",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 6,
       "title": "Swear",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 7,
       "title": "Sing Me a Song",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 8,
       "title": "Hearts Still Beating",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 9,
       "title": "Rock in the Road",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 10,
       "title": "New Best Friends",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 11,
       "title": "Hostiles and Calamities",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 12,
       "title": "Say Yes",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 13,
       "title": "Bury Me Here",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e14": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 14,
       "title": "The Other Side",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e15": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 15,
       "title": "Something They Need",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s07-e16": {
       "seriesId": "twd",
       "seasonId": "twd-s07",
       "episodeNumber": 16,
       "title": "The First Day of the Rest of Your Life",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 1,
       "title": "Mercy",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 2,
       "title": "The Damned",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 3,
       "title": "Monsters",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 4,
       "title": "Some Guy",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 5,
       "title": "The Big Scary U",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 6,
       "title": "The King, the Widow, and Rick",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 7,
       "title": "Time for After",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 8,
       "title": "How It's Gotta Be",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 9,
       "title": "Honor",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 10,
       "title": "The Lost and the Plunderers",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 11,
       "title": "Dead or Alive Or",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 12,
       "title": "The Key",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 13,
       "title": "Do Not Send Us Astray",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e14": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 14,
       "title": "Still Gotta Mean Something",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e15": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 15,
       "title": "Worth",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s08-e16": {
       "seriesId": "twd",
       "seasonId": "twd-s08",
       "episodeNumber": 16,
       "title": "Wrath",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 1,
       "title": "A New Beginning",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 2,
       "title": "The Bridge",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 3,
       "title": "Warning Signs",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 4,
       "title": "The Obliged",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 5,
       "title": "What Comes After",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 6,
       "title": "Who Are You Now?",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 7,
       "title": "Stradivarius",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 8,
       "title": "Evolution",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 9,
       "title": "Adaptation",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 10,
       "title": "Omega",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 11,
       "title": "Bounty",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 12,
       "title": "Guardians",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 13,
       "title": "Chokepoint",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e14": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 14,
       "title": "Scars",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e15": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 15,
       "title": "The Calm Before",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s09-e16": {
       "seriesId": "twd",
       "seasonId": "twd-s09",
       "episodeNumber": 16,
       "title": "The Storm",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 1,
       "title": "Lines We Cross",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 2,
       "title": "We Are the End of the World",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 3,
       "title": "Ghosts",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 4,
       "title": "Silence the Whisperers",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 5,
       "title": "What It Always Is",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 6,
       "title": "Bonds",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 7,
       "title": "Open Your Eyes",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 8,
       "title": "The World Before",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 9,
       "title": "Squeeze",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 10,
       "title": "Stalker",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 11,
       "title": "Morning Star",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 12,
       "title": "Walk with Us",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 13,
       "title": "What We Become",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e14": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 14,
       "title": "Look at the Flowers",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e15": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 15,
       "title": "The Tower",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e16": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 16,
       "title": "A Certain Doom",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e17": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 17,
       "title": "Home Sweet Home",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e18": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 18,
       "title": "Find Me",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e19": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 19,
       "title": "One More",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e20": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 20,
       "title": "Splinter",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e21": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 21,
       "title": "Diverged",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s10-e22": {
       "seriesId": "twd",
       "seasonId": "twd-s10",
       "episodeNumber": 22,
       "title": "Here's Negan",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e01": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 1,
       "title": "Acheron: Part 1",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e02": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 2,
       "title": "Acheron: Part 2",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e03": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 3,
       "title": "Hunted",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e04": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 4,
       "title": "Rendition",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e05": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 5,
       "title": "Out of the Ashes",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e06": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 6,
       "title": "On the Inside",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e07": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 7,
       "title": "Promises Broken",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e08": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 8,
       "title": "For Blood",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e09": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 9,
       "title": "No Other Way",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e10": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 10,
       "title": "New Haunts",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e11": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 11,
       "title": "Rogue Element",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e12": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 12,
       "title": "The Lucky Ones",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e13": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 13,
       "title": "Warlords",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e14": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 14,
       "title": "The Rotten Core",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e15": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 15,
       "title": "Trust",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e16": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 16,
       "title": "Acts of God",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e17": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 17,
       "title": "Lockdown",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e18": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 18,
       "title": "A New Deal",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e19": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 19,
       "title": "Variant",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e20": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 20,
       "title": "What's Been Lost",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e21": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 21,
       "title": "Outpost 22",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e22": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 22,
       "title": "Faith",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e23": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 23,
       "title": "Family",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "twd-s11-e24": {
       "seriesId": "twd",
       "seasonId": "twd-s11",
       "episodeNumber": 24,
       "title": "Rest in Peace",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead",
+      "fallbackForEpisode": true
     },
     "wb-s01-e01": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 1,
       "title": "Brave",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s01-e02": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 2,
       "title": "The Blaze of Gory",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s01-e03": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 3,
       "title": "The Tyger and the Lamb",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s01-e04": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 4,
       "title": "The Wrong End of a Telescope",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s01-e05": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 5,
       "title": "Madman Across the Water",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s01-e06": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 6,
       "title": "Shadow Puppets",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s01-e07": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 7,
       "title": "Truth or Dare",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s01-e08": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 8,
       "title": "The Sky is a Graveyard",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s01-e09": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 9,
       "title": "The Deepest Cut",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s01-e10": {
       "seriesId": "wb",
       "seasonId": "wb-s01",
       "episodeNumber": 10,
       "title": "In This Life",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e01": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 1,
       "title": "Konsekans",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e02": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 2,
       "title": "Foothold",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e03": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 3,
       "title": "Exit Wounds",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e04": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 4,
       "title": "Family Is A Four Letter Word",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e05": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 5,
       "title": "Quatervois",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e06": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 6,
       "title": "Who Are You?",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e07": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 7,
       "title": "Blood and Lies",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e08": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 8,
       "title": "Returning Point",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e09": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 9,
       "title": "Death and the Dead",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     },
     "wb-s02-e10": {
       "seriesId": "wb",
       "seasonId": "wb-s02",
       "episodeNumber": 10,
       "title": "The Last Light",
-      "status": "pending",
-      "kind": "official-episode-image",
-      "source": "amc"
+      "status": "fallback",
+      "kind": "series-key-art-fallback",
+      "source": "amc-series-art",
+      "image": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond",
+      "fallbackForEpisode": true
     }
   },
   "verified": 47,
-  "updatedAt": "2026-09-19T22:06:12.764Z"
+  "updatedAt": "2026-09-19T23:36:42.270Z",
+  "available": 363,
+  "fallback": 316
 }
