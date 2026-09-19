@@ -7,6 +7,7 @@ import world from "@cublya/world-atlas/countries-50m.json";
 import {atlasData,Location,SeriesKey} from "./data";
 import {validateAtlasData} from "./lib/validateData";
 import {buildChronology} from "./lib/chronology";
+import episodeMedia from "../data/episodeMedia.json";
 
 type View="map"|"timeline"|"people"|"guide";
 type SearchKind="location"|"character"|"community"|"faction"|"episode";
@@ -98,6 +99,7 @@ export default function App(){
  const episodes=useMemo(()=>chronology.filter(e=>e.kind==="episode"),[chronology]);
  const selectedLoc=atlasData.locations.find(l=>l.id===selectedLocation)??null;
  const selectedEp=episodes.find(e=>e.id===selectedEpisode)??null;
+ const mediaCoverage=Object.values((episodeMedia as any).episodes||{}).filter((m:any)=>m.status==="verified").length;
 
  const searchResults=useMemo(()=>{
    const q=query.trim().toLowerCase();
@@ -253,6 +255,7 @@ function LocationDetail({location,onEpisode}:{location:Location;onEpisode:(id:st
 function EpisodeDetail({episode,onLocation,onEpisode}:{episode:any;onLocation:(l:Location)=>void;onEpisode:(id:string)=>void}){
  const raw=atlasData.episodes.find((e:any)=>e.id===episode.id) as any;
  const meta=SERIES_BY_ID[episode.seriesId];
+ const media=((atlasData as any).media?.episodes?.[episode.id] ?? (episodeMedia as any).episodes?.[episode.id] ?? (atlasData as any).media?.series?.[episode.seriesId]);
  const locations=atlasData.locations.filter(l=>raw?.locationIds?.includes(l.id));
  const ordered=buildChronology().filter(x=>x.kind==="episode");
  const index=ordered.findIndex(x=>x.id===episode.id);
@@ -266,11 +269,29 @@ function EpisodeDetail({episode,onLocation,onEpisode}:{episode:any;onLocation:(l
  </div>;
 }
 
-function MapContent({locations,onSelect}:{locations:Location[];onSelect:(l:Location)=>void}){return <div className="contentScroll"><div className="sectionTitle">MAPPED LOCATIONS <span>{locations.length}</span></div><div className="cards">{locations.map(l=><button className="entityCard" key={l.id} onClick={()=>onSelect(l)}><span><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><em>{l.type} · {l.certainty}</em></span><Icon name="chevron"/></button>)}</div></div>}
+function MapContent({locations,onSelect}:{locations:Location[];onSelect:(l:Location)=>void}){
+ return <div className="contentScroll">
+  <div className="panelSummary"><div><small>ACTIVE MAP LAYER</small><b>{locations.length} mapped locations</b></div><span>2010–{Math.max(...locations.map(x=>x.year),2010)}</span></div>
+  <div className="sectionTitle">MAPPED LOCATIONS <span>{locations.length}</span></div>
+  <div className="cards">{locations.map(l=>{const pm=(atlasData as any).media?.places?.[l.id];return <button className="entityCard locationCard" key={l.id} onClick={()=>onSelect(l)}>{pm?.image&&<img src={pm.image} alt="" className="cardArt"/>}<span><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><em>{l.type} · {l.certainty}</em></span><Icon name="chevron"/></button>})}</div>
+ </div>
+}
 
-function TimelineContent({episodes,onEpisode}:{episodes:any[];onEpisode:(id:string)=>void}){return <div className="contentScroll"><div className="timelineIntro"><span>EPISODE EXPLORER</span><p>Move through the universe by in-world chronology. Select any episode to jump into its locations and adjacent timeline entries.</p></div><div className="timelineList episodeList">{episodes.map((e:any)=><button className="episodeRow" key={e.id} onClick={()=>onEpisode(e.id)}><strong>{e.start||"?"}</strong><span><small>{SERIES_BY_ID[e.seriesId]?.short} · S{String(e.seasonId).slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><em>{e.certainty} · {e.precision}</em></span><Icon name="chevron"/></button>)}</div></div>}
+function TimelineContent({episodes,onEpisode}:{episodes:any[];onEpisode:(id:string)=>void}){
+ return <div className="contentScroll">
+  <div className="timelineIntro"><span>EPISODE EXPLORER</span><p>In-universe chronology is the primary navigation layer. Air dates remain separate from story time.</p></div>
+  <div className="timelineReadout"><b>{episodes.length}</b><span>episodes visible in this year/layer</span><i>{Object.values((episodeMedia as any).episodes||{}).filter((m:any)=>m.status==="verified").length} / {Object.keys((episodeMedia as any).episodes||{}).length} media verified</i></div>
+  <div className="timelineList episodeList">{episodes.map((e:any)=>{const em=(episodeMedia as any).episodes?.[e.id];return <button className="episodeRow mediaRow" key={e.id} onClick={()=>onEpisode(e.id)}>{em?.image&&<img src={em.image} alt="" className="rowThumb"/>}<strong>{e.start||"?"}</strong><span><small>{SERIES_BY_ID[e.seriesId]?.short} · S{String(e.seasonId).slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><em>{e.certainty} · {e.precision}</em></span><Icon name="chevron"/></button>})}</div>
+ </div>
+}
 
-function PeopleContent(){return <div className="contentScroll"><div className="sectionTitle">CHARACTERS <span>{atlasData.characters.length}</span></div><div className="cards">{atlasData.characters.map(c=>{const cm=(atlasData as any).media?.characters?.[c.id];return <article className="entityCard static characterCard" key={c.id}>{cm?.image&&<img src={cm.image} alt="" className="characterArt"/>}<span><small>CHARACTER</small><b>{c.name}</b><em>{c.certainty}</em></span></article>})}</div><div className="sectionTitle">FACTIONS <span>{atlasData.factions.length}</span></div><div className="miniTags">{atlasData.factions.map(f=><span key={f.id}>{f.name}</span>)}</div><div className="sectionTitle">CROSS-SERIES CONNECTIONS <span>{atlasData.connections.length}</span></div><div className="timelineList">{atlasData.connections.map((c:any)=><article key={c.id}><strong>↔</strong><div><small>{c.type}</small><b>{c.label}</b><span>{c.fromId} → {c.toId} · {c.certainty}</span></div></article>)}</div></div>}
+function PeopleContent(){return <div className="contentScroll">
+ <div className="peopleHero"><div><small>PEOPLE INDEX</small><b>{atlasData.characters.length} tracked characters</b></div><span>{atlasData.connections.length} known connections</span></div>
+ <div className="sectionTitle">CHARACTERS <span>{atlasData.characters.length}</span></div>
+ <div className="peopleGrid">{atlasData.characters.map(c=>{const cm=(atlasData as any).media?.characters?.[c.id];return <article className="entityCard static characterCard" key={c.id}>{cm?.image&&<img src={cm.image} alt="" className="characterArt"/>}<span><small>CHARACTER</small><b>{c.name}</b><em>{(c.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")||c.certainty}</em></span></article>})}</div>
+ <div className="sectionTitle">FACTIONS <span>{atlasData.factions.length}</span></div><div className="miniTags">{atlasData.factions.map(f=><span key={f.id}>{f.name}</span>)}</div>
+ <div className="sectionTitle">CROSS-SERIES CONNECTIONS <span>{atlasData.connections.length}</span></div><div className="timelineList">{atlasData.connections.map((c:any)=><article key={c.id}><strong>↔</strong><div><small>{c.type}</small><b>{c.label}</b><span>{c.fromId} → {c.toId} · {c.certainty}</span></div></article>)}</div>
+ </div>}
 
-function GuideContent({errors}:{errors:string[]}){const episodeCount=atlasData.seasonMeta.reduce((n:any,x:any)=>n+x.episodeCount,0);const art=(atlasData as any).media?.series?.twd?.keyArt;return <div className="contentScroll"><div className="guideHero">{art&&<img src={art} alt="" className="guideArt"/>}<div className="guideHeroCopy"><span>ATLAS ENGINE</span><h3>A living field guide to the entire TV universe.</h3><p>Geography, chronology, people and connections are rendered from the same normalized data layer.</p></div></div><div className="guideStats"><div><b>{atlasData.series.length}</b><span>SERIES</span></div><div><b>{atlasData.seasons.length}</b><span>SEASONS</span></div><div><b>{atlasData.locations.length}</b><span>LOCATIONS</span></div><div><b>{episodeCount}</b><span>EPISODES</span></div></div><div className="sectionTitle">WATCH ORDER <span>{atlasData.watchOrder.filter((x:any)=>x.type!=="note").length} segments</span></div><div className="watchOrder">{atlasData.watchOrder.filter((x:any)=>x.type!=="note").map((x:any,i)=><article key={x.id}><strong>{String(i+1).padStart(2,"0")}</strong><div><small>{SERIES_BY_ID[x.seriesId]?.name}</small><b>{x.startSeason===x.endSeason?"Season "+x.startSeason:"Seasons "+x.startSeason+"–"+x.endSeason}</b><span>{x.certainty} · series-level scaffold</span></div></article>)}</div><article className="statusCard"><small>DATA VALIDATION</small><b>{errors.length?"REVIEW REFERENCES":"REGISTRY HEALTHY"}</b><span>{errors.length?errors.join(" · "):"Core IDs and references pass the atlas validator."}</span></article></div>}
+function GuideContent({errors}:{errors:string[]}){const episodeCount=atlasData.seasonMeta.reduce((n:any,x:any)=>n+x.episodeCount,0);const art=(atlasData as any).media?.series?.twd?.keyArt;return <div className="contentScroll"><div className="guideHero">{art&&<img src={art} alt="" className="guideArt"/>}<div className="guideHeroCopy"><span>ATLAS ENGINE</span><h3>A living field guide to the entire TV universe.</h3><p>Geography, chronology, people and connections are rendered from the same normalized data layer.</p></div></div><div className="guideStats"><div><b>{atlasData.series.length}</b><span>SERIES</span></div><div><b>{atlasData.seasons.length}</b><span>SEASONS</span></div><div><b>{atlasData.locations.length}</b><span>LOCATIONS</span></div><div><b>{episodeCount}</b><span>EPISODES</span></div></div><div className="mediaCoverage"><div><small>MEDIA INGESTION</small><b>{mediaCoverage} / {episodeCount}</b></div><span>official episode assets verified</span><i style={{width:`${Math.round(mediaCoverage/episodeCount*100)}%`}}/></div><div className="sectionTitle">WATCH ORDER <span>{atlasData.watchOrder.filter((x:any)=>x.type!=="note").length} segments</span></div><div className="watchOrder">{atlasData.watchOrder.filter((x:any)=>x.type!=="note").map((x:any,i)=><article key={x.id}><strong>{String(i+1).padStart(2,"0")}</strong><div><small>{SERIES_BY_ID[x.seriesId]?.name}</small><b>{x.startSeason===x.endSeason?"Season "+x.startSeason:"Seasons "+x.startSeason+"–"+x.endSeason}</b><span>{x.certainty} · series-level scaffold</span></div></article>)}</div><article className="statusCard"><small>DATA VALIDATION</small><b>{errors.length?"REVIEW REFERENCES":"REGISTRY HEALTHY"}</b><span>{errors.length?errors.join(" · "):"Core IDs and references pass the atlas validator."}</span></article></div>}
 
