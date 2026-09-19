@@ -281,7 +281,7 @@ function TimelineContent({episodes,onEpisode}:{episodes:any[];onEpisode:(id:stri
  return <div className="contentScroll">
   <div className="timelineIntro"><span>EPISODE EXPLORER</span><p>In-universe chronology is the primary navigation layer. Air dates remain separate from story time.</p></div>
   <div className="timelineReadout"><b>{episodes.length}</b><span>episodes visible in this year/layer</span><i>{Object.values((episodeMedia as any).episodes||{}).filter((m:any)=>m.status==="verified").length} / {Object.keys((episodeMedia as any).episodes||{}).length} media verified</i></div>
-  <div className="timelineList episodeList">{episodes.map((e:any)=>{const em=(episodeMedia as any).episodes?.[e.id];return <button className="episodeRow mediaRow" key={e.id} onClick={()=>onEpisode(e.id)}>{em?.image&&<img src={em.image} alt="" className="rowThumb"/>}<strong>{e.start||"?"}</strong><span><small>{SERIES_BY_ID[e.seriesId]?.short} · S{String(e.seasonId).slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><em>{e.certainty} · {e.precision}</em></span><Icon name="chevron"/></button>})}</div>
+  <div className="timelineList episodeList">{episodes.map((e:any)=>{const em=(episodeMedia as any).episodes?.[e.id];return <button className={em?.image?"episodeRow mediaRow hasMedia":"episodeRow mediaRow"} key={e.id} onClick={()=>onEpisode(e.id)}>{em?.image&&<span className="rowMedia"><img src={em.image} alt="" className="rowThumb"/></span>}<strong>{e.start||"?"}</strong><span><small>{SERIES_BY_ID[e.seriesId]?.short} · S{String(e.seasonId).slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><em>{e.certainty} · {e.precision}</em></span><Icon name="chevron"/></button>})}</div>
  </div>
 }
 
