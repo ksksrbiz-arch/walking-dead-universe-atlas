@@ -3,6 +3,13 @@
   {"id":"hilltop","name":"Hilltop","type":"community","certainty":"confirmed"},
   {"id":"kingdom","name":"Kingdom","type":"community","certainty":"confirmed"},
   {"id":"sanctuary","name":"Sanctuary","type":"stronghold","certainty":"confirmed"},
-  {"id":"omaha","name":"Omaha","type":"community","certainty":"confirmed"},
-  {"id":"commonwealth","name":"Commonwealth","type":"community","certainty":"confirmed"}
+  {"id":"omaha","name":"Omaha","type":"city","certainty":"confirmed"},
+  {"id":"commonwealth","name":"Commonwealth","type":"community","certainty":"confirmed"},
+  {"id":"campus-colony","name":"Campus Colony","type":"community","certainty":"confirmed"},
+  {"id":"portland-alliance","name":"Portland","type":"community","certainty":"confirmed"},
+  {"id":"civic-republic-community","name":"Civic Republic","type":"city","certainty":"confirmed"},
+  {"id":"bricks","name":"The Bricks","type":"community","certainty":"approximate"},
+  {"id":"new-babylon","name":"New Babylon","type":"federation","certainty":"confirmed"},
+  {"id":"burazi","name":"Burazi","type":"faction-community","certainty":"confirmed"},
+  {"id":"padre","name":"PADRE","type":"safe-zone","certainty":"confirmed"}
 ]
