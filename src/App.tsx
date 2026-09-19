@@ -92,7 +92,7 @@ export default function App(){
    atlasData.locations.forEach(x=>{if([x.name,x.type].join(" ").toLowerCase().includes(q))result.push({kind:"location",id:x.id,title:x.name,meta:`${SERIES_BY_ID[x.seriesId]?.short} · ${x.year}`})});
    atlasData.characters.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"character",id:x.id,title:x.name,meta:"Character"})});
    atlasData.communities.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"community",id:x.id,title:x.name,meta:"Community"})});
-   atlasData.factions.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"faction",id:x.id,title:x.name,meta:"Faction"})});
+   atlasData.factions.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"faction",id:x.id,title:x.name,meta:"Faction"})});\n   atlasData.episodes.forEach((x:any)=>{if([x.title,x.seriesId,x.seasonId].join(" ").toLowerCase().includes(q))result.push({kind:"event",id:x.id,title:x.title,meta:`${SERIES_BY_ID[x.seriesId]?.short||x.seriesId} · S${x.seasonId.slice(-2)}E${String(x.episodeNumber).padStart(2,"0")}`})});
    return result.slice(0,10);
  },[query]);
 
@@ -160,7 +160,7 @@ export default function App(){
    <div className="searchWrap">
     <Icon name="search"/><input value={query} onFocus={()=>setSearchOpen(true)} onChange={e=>{setQuery(e.target.value);setSearchOpen(true)}} placeholder="Search locations, characters, communities…" aria-label="Search atlas"/>
     {query&&<button className="iconBtn clearSearch" onClick={()=>{setQuery("");setSearchOpen(false)}}><Icon name="close"/></button>}
-    {searchOpen&&query&&<div className="searchResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else{setView("people");setMobilePanel("open")}setSearchOpen(false)}}><span>{r.title}</span><small>{r.meta}</small><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas nodes.</div>}</div>}
+    {searchOpen&&query&&<div className="searchResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="event"){setView("timeline");setMobilePanel("open");setQuery("");}else{setView("people");setMobilePanel("open")}setSearchOpen(false)}}><span>{r.title}</span><small>{r.meta}</small><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas nodes.</div>}</div>}
    </div>
    <button className="mobileFilter" onClick={()=>setShowFilters(v=>!v)} aria-label="Filters">FILTER</button>
   </header>
