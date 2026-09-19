@@ -621,3 +621,57 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
 @media(max-width:430px){
   .mapSurface svg{shape-rendering:auto}
 }
+
+
+/* --- Mobile recording fixes: preserve geography while reducing detail dominance --- */
+@media(max-width:699px){
+  .contentPanel.open{
+    height:min(52dvh,560px);
+    max-height:calc(100dvh - 142px);
+  }
+  .contentPanel.open .contentScroll{
+    overflow-x:hidden;
+    overscroll-behavior-x:none;
+  }
+  .panelHeader.detailHeader{
+    min-height:22px;
+    height:22px;
+    justify-content:flex-end;
+    padding:0;
+  }
+  .panelHeader.detailHeader>div{display:none}
+  .panelHeader.detailHeader .closePanel{width:30px;height:30px;margin-top:-3px}
+  .entityHero{
+    min-height:104px;
+    height:104px;
+    padding:12px;
+    border-radius:15px;
+  }
+  .entityHero h3{font-size:22px;margin:5px 0 3px}
+  .entityHero p{font-size:8px}
+  .detailGrid{gap:5px;margin-top:6px}
+  .detailGrid>div{min-height:46px;padding:7px 9px;border-radius:10px}
+  .detailGrid b{font-size:8.5px}
+  .sectionTitle{margin:10px 0 6px;font-size:8px}
+  .episodeCard{
+    min-height:56px!important;
+    height:56px;
+    padding:8px 9px;
+    border-radius:11px;
+    overflow:hidden;
+  }
+  .episodeCard b{font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .episodeCard em{font-size:6.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .episodeCard small{font-size:6px}
+  .episodeCard .episodeYear{font-size:10px}
+  .contentPanel .cards{gap:5px}
+  .sourceNote{font-size:7px}
+}
+@media(max-width:430px){
+  .contentPanel.open{
+    height:min(50dvh,520px);
+    max-height:calc(100dvh - 142px);
+  }
+  .entityHero{height:98px;min-height:98px}
+  .detailGrid>div{min-height:43px}
+}
