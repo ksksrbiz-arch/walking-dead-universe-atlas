@@ -120,3 +120,16 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
 }
 @media(pointer:coarse){.mapTopRight button{width:46px;height:46px}.bottomNav button{min-height:48px}.seriesRail button{min-height:38px}.entityCard{min-height:54px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* --- Finished-view polish / media-aware cards --- */
+.panelSummary,.peopleHero,.timelineReadout{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:3px 0 10px;padding:11px 12px;border:1px solid #2b3436;border-radius:14px;background:linear-gradient(135deg,#181e20,#101516);box-shadow:inset 0 1px #ffffff08}
+.panelSummary small,.peopleHero small{display:block;color:#707b7d;font-size:6px;letter-spacing:.14em}.panelSummary b,.peopleHero b{display:block;margin-top:3px;font-size:11px}.panelSummary>span,.peopleHero>span{color:#9ba4a6;font-size:7px;white-space:nowrap}
+.timelineReadout{justify-content:flex-start}.timelineReadout b{font-size:18px}.timelineReadout span{color:#8b9698;font-size:8px}.timelineReadout i{margin-left:auto;color:#7e898b;font-size:7px;font-style:normal}
+.locationCard{position:relative;overflow:hidden}.locationCard .cardArt{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.2;mask-image:linear-gradient(90deg,#000,transparent 82%);-webkit-mask-image:linear-gradient(90deg,#000,transparent 82%)}.locationCard>span,.locationCard>svg{position:relative;z-index:1}
+.mediaRow{grid-template-columns:43px 1fr 14px}.mediaRow .rowThumb{width:43px;height:43px;grid-row:1;border-radius:9px;object-fit:cover;opacity:.9}.mediaRow:has(.rowThumb){grid-template-columns:43px 1fr 14px}.mediaRow:has(.rowThumb)>strong{display:none}.mediaRow:has(.rowThumb)>span{grid-column:2}
+.peopleGrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.peopleGrid .characterCard{min-height:108px}.peopleGrid .characterCard>span{max-width:90%}
+.mediaCoverage{position:relative;overflow:hidden;margin:8px 0 12px;padding:10px 11px;border:1px solid #2c3537;border-radius:13px;background:#111718}.mediaCoverage small{display:block;color:#707b7d;font-size:6px;letter-spacing:.14em}.mediaCoverage b{display:block;margin-top:3px;font-size:15px}.mediaCoverage span{display:block;margin-top:2px;color:#818c8e;font-size:7px}.mediaCoverage i{display:block;height:2px;margin-top:8px;border-radius:99px;background:#c9d0cf;max-width:100%;box-shadow:0 0 10px #c9d0cf33}
+.contentPanel.open .contentScroll{scrollbar-width:thin;scrollbar-color:#394345 transparent}
+.contentPanel.open .contentScroll::-webkit-scrollbar{width:5px}.contentPanel.open .contentScroll::-webkit-scrollbar-thumb{background:#394345;border-radius:99px}
+@media(min-width:700px){.peopleGrid{grid-template-columns:1fr 1fr}.panelSummary,.peopleHero,.timelineReadout{padding:12px 13px}}
+@media(max-width:430px){.peopleGrid{grid-template-columns:1fr 1fr}.peopleGrid .characterCard{min-height:102px}.mediaRow{grid-template-columns:40px 1fr 12px}.mediaRow .rowThumb{width:40px;height:40px}}
