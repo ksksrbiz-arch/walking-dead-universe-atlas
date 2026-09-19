@@ -585,3 +585,39 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
   .mobileSearchButton{display:none}
   .timePill{display:none}
 }
+
+
+/* --- Mobile map performance: keep gesture frames off React's render path --- */
+.mapSurface{
+  transform-origin:50% 50%;
+  will-change:transform;
+  contain:layout paint;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform:translate3d(0,0,0);
+}
+.mapSurface svg{
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  will-change:transform;
+}
+.countries{filter:none!important}
+.landShadow{filter:none!important}
+@media(max-width:699px){
+  .mapSurface{
+    contain:strict;
+    isolation:isolate;
+  }
+  .mapSurface svg{
+    shape-rendering:geometricPrecision;
+  }
+  .graticule{opacity:.22}
+  .landShadow{opacity:.18!important}
+  .countries path{vector-effect:non-scaling-stroke}
+  .pulse{animation:none!important}
+}
+@media(max-width:430px){
+  .mapSurface svg{shape-rendering:auto}
+}
