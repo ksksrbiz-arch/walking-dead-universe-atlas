@@ -1,0 +1,8 @@
+[
+  {"id":"rick-grimes","name":"Rick Grimes","certainty":"confirmed"},
+  {"id":"michonne","name":"Michonne","certainty":"confirmed"},
+  {"id":"daryl-dixon","name":"Daryl Dixon","certainty":"confirmed"},
+  {"id":"negan-smith","name":"Negan Smith","certainty":"confirmed"},
+  {"id":"morgan-jones","name":"Morgan Jones","certainty":"confirmed"},
+  {"id":"jadis-stokes","name":"Jadis / Anne","certainty":"confirmed"}
+]
