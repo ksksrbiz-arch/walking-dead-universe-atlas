@@ -90,8 +90,19 @@ export default function App(){
  useEffect(()=>{initAtlasPerformance()},[]);
 
  useEffect(()=>setDataErrors(validateAtlasData()),[]);
- useEffect(()=>{initAtlasPerformance()},[]);
  useEffect(()=>{const onResize=()=>setIsMobileMap(window.innerWidth<700);window.addEventListener("resize",onResize);return()=>window.removeEventListener("resize",onResize)},[]);
+ useEffect(()=>{
+   if(view!=="map")return;
+   const frame=window.requestAnimationFrame(()=>{
+     const limits=getMapPanLimits();
+     const nextX=clamp(visual.current.x,-limits.x,limits.x);
+     const nextY=clamp(visual.current.y,-limits.y,limits.y);
+     visual.current={...visual.current,x:nextX,y:nextY};
+     setPan(prev=>prev.x===nextX&&prev.y===nextY?prev:{x:nextX,y:nextY});
+     applyMapTransform(nextX,nextY,visual.current.zoom,true);
+   });
+   return()=>window.cancelAnimationFrame(frame);
+ },[view,isMobileMap]);
  const applyMapTransform=(x:number,y:number,z:number,animate=false)=>{
    const el=mapSvgRef.current;
    if(!el)return;
