@@ -418,5 +418,95 @@
     "lat": 40.5,
     "lng": -74.5,
     "certainty": "approximate"
+  },
+  {
+    "id": "texas",
+    "name": "Texas",
+    "seriesId": "ftwd",
+    "year": 2012,
+    "type": "state",
+    "lat": 31,
+    "lng": -99.9,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "austin",
+    "name": "Austin",
+    "seriesId": "ftwd",
+    "year": 2012,
+    "type": "city",
+    "lat": 30.267,
+    "lng": -97.743,
+    "certainty": "approximate"
+  },
+  {
+    "id": "savannah",
+    "name": "Savannah",
+    "seriesId": "ftwd",
+    "year": 2022,
+    "type": "city",
+    "lat": 32.0809,
+    "lng": -81.0912,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "padre",
+    "name": "PADRE",
+    "seriesId": "ftwd",
+    "year": 2022,
+    "type": "safe-zone",
+    "lat": 31.85,
+    "lng": -81.17,
+    "certainty": "approximate"
+  },
+  {
+    "id": "padre-shipyard",
+    "name": "PADRE Shipyard",
+    "seriesId": "ftwd",
+    "year": 2022,
+    "type": "industrial",
+    "lat": 32,
+    "lng": -81,
+    "certainty": "approximate"
+  },
+  {
+    "id": "king-county-ga",
+    "name": "King County, Georgia",
+    "seriesId": "ftwd",
+    "year": 2022,
+    "type": "county",
+    "lat": 33.42,
+    "lng": -84.72,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "tijuana",
+    "name": "Tijuana",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "city",
+    "lat": 32.5149,
+    "lng": -117.0382,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "rosarito",
+    "name": "Rosarito",
+    "seriesId": "ftwd",
+    "year": 2011,
+    "type": "city",
+    "lat": 32.333,
+    "lng": -117.033,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "valle-guadalupe",
+    "name": "Valle de Guadalupe",
+    "seriesId": "ftwd",
+    "year": 2011,
+    "type": "region",
+    "lat": 32.1,
+    "lng": -116.57,
+    "certainty": "confirmed"
   }
 ]
