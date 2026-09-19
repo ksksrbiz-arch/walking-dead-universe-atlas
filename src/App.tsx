@@ -207,7 +207,7 @@ export default function App(){
       <div className="zoomBadge">{Math.round(zoom*100)}%</div>
     </div>
 
-    <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>
+    <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>\n    <div className="mapLegend" aria-label="Map legend"><small>SERIES LAYER</small>{SERIES_KEYS.map(k=><span key={k}><i style={{background:META[k].color}}/>{META[k].short}</span>)}</div>
 
     <div className="seriesRail" aria-label="Series filter">
       <button className={series==="ALL"?"active":""} onClick={()=>setSeries("ALL")}>ALL</button>
