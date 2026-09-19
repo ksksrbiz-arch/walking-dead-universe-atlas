@@ -237,6 +237,7 @@ export default function App(){
 
 function LocationDetail({location,onEpisode}:{location:Location;onEpisode:(id:string)=>void}){
  const meta=SERIES_BY_ID[location.seriesId];
+ const placeMedia=(atlasData as any).media?.places?.[location.id];
  const episodes=atlasData.episodes.filter((e:any)=>e.locationIds?.includes(location.id));
  const events=atlasData.events.filter((e:any)=>e.locationIds?.includes(location.id));
  return <div className="contentScroll">
