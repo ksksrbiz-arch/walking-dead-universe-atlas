@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "ingest:media": "node scripts/ingest-amc-media.mjs",
     "audit:atlas": "node scripts/audit-atlas.mjs",
-    "build:with-media": "npm run audit:atlas && npm run ingest:media && vite build"
+    "build:with-media": "npm run ingest:media && npm run audit:atlas && vite build"
   },
   "dependencies": {
     "react": "^19.1.1",
