@@ -111,7 +111,7 @@ export default function App(){
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
  const resetMap=()=>{setZoom(1);setPan({x:0,y:0})};
  const selectLocation=(l:Location)=>{setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open")};
- const selectEpisode=(id:string)=>{setSelectedEpisode(id);setSelectedLocation(null);setView("timeline");setSheet("open")};
+ const selectEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;if(raw?.timelineStart)setYear(Number(raw.timelineStart));setSelectedEpisode(id);setSelectedLocation(null);setView("timeline");setSheet("open")};
 
  const pointerDown=(e:React.PointerEvent<SVGSVGElement>)=>{
    e.currentTarget.setPointerCapture?.(e.pointerId);
