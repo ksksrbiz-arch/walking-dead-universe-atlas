@@ -294,7 +294,7 @@ export default function App(){
    <section className={"map view-"+view} aria-label="Interactive Walking Dead Universe map">
     <div className="mapAtmosphere"/>
     <div className="mapSurface" ref={mapSvgRef}>
-     <svg viewBox={isMobileMap?"0 -70 1000 600":"0 0 1000 600"} preserveAspectRatio={isMobileMap?"xMinYMid slice":"xMidYMid slice"} className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
+     <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
       <defs>
        <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#9fb2b4"/><stop offset=".48" stopColor="#82999d"/><stop offset="1" stopColor="#60777b"/></linearGradient>
        <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#d8d3c5"/><stop offset=".55" stopColor="#b9b7aa"/><stop offset="1" stopColor="#96988e"/></linearGradient>
@@ -302,6 +302,7 @@ export default function App(){
        <filter id="landShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#26383a" floodOpacity=".28"/></filter>
        <filter id="paperNoise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="2" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="gray"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer><feBlend in="SourceGraphic" in2="gray" mode="multiply"/></filter>
       </defs>
+      <g className="mapWorld" transform={isMobileMap?"translate(235 -208) scale(1.45)":undefined}>
       <rect width="1000" height="600" fill="url(#ocean)"/>
       <rect width="1000" height="600" fill="url(#oceanGlow)"/>
       <g className="graticule"><path d={pathGenerator({type:"Sphere"}) as string}/></g>
@@ -309,14 +310,15 @@ export default function App(){
       <g className="countries">{worldCountries.features.map((c:any,i:number)=><path key={c.id||c.properties?.name} d={pathGenerator(c) as string} fill={countryTone(i)}><title>{c.properties?.name||"Country"}</title></path>)}</g>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} data-location-id={l.id} className={selectedLocation===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
-       <circle className="markerHit" r={isMobileMap?14:9} fill="transparent"/><circle className="pulse" r="2.5" style={{stroke:meta.color}}/><circle className="dot" r="1.5" fill={meta.color}/>{(zoom>1.34||selectedLocation===l.id)&&<text x="4" y=".5">{l.name}</text>}
+       <circle className="markerHit" r={isMobileMap?14:9} fill="transparent"/><circle className="pulse" r="2.5" style={{stroke:meta.color}}/><circle className="dot" r="1.5" fill={meta.color}/>{(zoom>1.34||selectedLocation===l.id||(isMobileMap&&l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name)))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
       </g>})}</g>
+     </g>
      </svg>
     </div>
 
     <div className="mapChrome mapTopLeft">
-      <div className="locationKicker"><span className="liveDot"/>{visibleSeries}</div>
-      <strong>{mapYearCount} <small>LOCATIONS</small></strong>
+      <div className="locationKicker"><span className="liveDot"/>{visibleSeries}<span className="mapModeTag">MAP</span></div>
+      <strong>{mapYearCount} <small>LOCATIONS · {year}</small></strong>
     </div>
 
     <div className="mapChrome mapTopRight">
@@ -329,7 +331,7 @@ export default function App(){
     <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>
     <div className={`mapLegend ${sheet==="open"?"sheetOpen":""}`} aria-label="Map legend"><small>SERIES LAYER</small>{SERIES_KEYS.map(k=><span key={k}><i style={{background:META[k].color}}/>{META[k].short}</span>)}</div>
 
-    {view==="map"&&<div className="seriesRail" aria-label="Series filter">
+    {view==="map"&&<div className="seriesRail" aria-label="Series filter"><span className="seriesRailHint" aria-hidden="true">SWIPE</span>
       <button className={series==="ALL"?"active":""} aria-pressed={series==="ALL"} onClick={()=>setSeries("ALL")}>ALL</button>
       {SERIES_KEYS.map(k=><button key={k} aria-pressed={series===k} className={series===k?"active":""} style={series===k?{"--series":META[k].color} as CSSProperties:{}} onClick={()=>setSeries(k)}>{META[k].short}</button>)}
     </div>}
