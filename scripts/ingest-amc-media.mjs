@@ -4,177 +4,299 @@
  *
  * Strategy:
  * 1. Discover episode URLs from AMC's canonical /episodes catalog.
- * 2. Keep only the seven core TWDU series.
- * 3. Fetch each episode page and extract its canonical/OG image.
- * 4. Match by series + season + episode number.
- * 5. Preserve explicit provenance; never invent an image URL.
+ * 2. Recursively crawl AMC sitemap indexes when available.
+ * 3. Keep only the seven core TWDU series.
+ * 4. Fetch each episode page and extract its canonical/OG image.
+ * 5. Match by series + season + episode number.
+ * 6. Preserve explicit provenance; never invent an image URL.
  *
- * Run:
- *   npm run ingest:media
- *
- * This intentionally runs as a maintenance script rather than during the Vite
- * production build, so a temporary AMC outage cannot break the application build.
+ * This script is intentionally resilient: an AMC outage or an individual
+ * missing page should not prevent the Vite build from completing.
  */
 
-import {readFile,writeFile} from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 
-const BASE="https://www.amc.com";
-const CATALOG=`${BASE}/episodes`;
-const SITEMAPS=[
+const BASE = "https://www.amc.com";
+const CATALOG = `${BASE}/episodes`;
+const SITEMAPS = [
   `${BASE}/sitemap.xml`,
   `${BASE}/sitemap_index.xml`,
   `${BASE}/sitemap-index.xml`,
   `${BASE}/sitemap/sitemap.xml`
 ];
-const MANIFEST="data/episodeMedia.json";
+const MANIFEST = "data/episodeMedia.json";
 
-const SERIES_SLUGS={
-  twd:"the-walking-dead",
-  ftwd:"fear-the-walking-dead",
-  wb:"the-walking-dead-world-beyond",
-  tales:"tales-of-the-walking-dead",
-  owl:"the-walking-dead-the-ones-who-live",
-  daryl:"the-walking-dead-daryl-dixon",
-  dead:"the-walking-dead-dead-city"
+const SERIES_SLUGS = {
+  twd: "the-walking-dead",
+  ftwd: "fear-the-walking-dead",
+  wb: "the-walking-dead-world-beyond",
+  tales: "tales-of-the-walking-dead",
+  owl: "the-walking-dead-the-ones-who-live",
+  daryl: "the-walking-dead-daryl-dixon",
+  dead: "the-walking-dead-dead-city"
 };
 
-const slugAliases={
-  "the-walking-dead-the-ones-who-live":"owl",
-  "the-walking-dead-rick-and-michonne":"owl",
+const SLUG_TO_SERIES = Object.fromEntries(
+  Object.entries(SERIES_SLUGS).map(([id, slug]) => [slug, id])
+);
+
+const SLUG_ALIASES = {
+  "the-walking-dead-rick-and-michonne": "owl"
 };
 
-const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function stripHtml(s=""){
-  return s.replace(/<script[\\s\\S]*?<\\/script>/gi,"")
-    .replace(/<style[\\s\\S]*?<\\/style>/gi,"")
-    .replace(/<[^>]+>/g," ")
-    .replace(/&amp;/g,"&").replace(/&#39;/g,"'")
-    .replace(/&quot;/g,'"').replace(/&nbsp;/g," ")
-    .replace(/\\s+/g," ").trim();
+function stripHtml(value = "") {
+  return value
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-function isCoreEpisodeUrl(url){
-  try{
-    const u=new URL(url);
-    if(u.hostname!=="www.amc.com")return false;
-    if(!u.pathname.includes("/shows/")||!u.pathname.includes("/episodes/"))return false;
-    const slug=u.pathname.split("/shows/")[1]?.split("/")[0]||"";
-    return !!(SERIES_SLUGS[slug]||slugAliases[slug]);
-  }catch{return false}
+function isCoreEpisodeUrl(value) {
+  try {
+    const url = new URL(value);
+    if (url.hostname !== "www.amc.com") return false;
+    if (!url.pathname.includes("/shows/") || !url.pathname.includes("/episodes/")) {
+      return false;
+    }
+
+    const parts = url.pathname.split("/shows/")[1]?.split("/") ?? [];
+    const slug = parts[0] ?? "";
+    return Boolean(SLUG_TO_SERIES[slug] || SLUG_ALIASES[slug]);
+  } catch {
+    return false;
+  }
 }
 
-function discoverUrls(html){
-  const out=new Set();
-  const patterns=[
-    /href=["'](\\/shows\\/[^"'#?]*\\/episodes\\/[^"'#?]*)["']/gi,
-    /https?:\\/\\/www\\.amc\\.com\\/shows\\/[^"'\\s<]+\\/episodes\\/[^"'\\s<]*/gi,
-    /\\/shows\\/[^"'\\s<]+\\/episodes\\/[^"'\\s<]*/gi
+function discoverUrls(html) {
+  const out = new Set();
+  const patterns = [
+    /href=["'](\/shows\/[^"'#?]*\/episodes\/[^"'#?]*)["']/gi,
+    /https?:\/\/www\.amc\.com\/shows\/[^"'\s<]+\/episodes\/[^"'\s<]*/gi,
+    /\/shows\/[^"'\s<]+\/episodes\/[^"'\s<]*/gi
   ];
-  for(const re of patterns){
-    for(const m of html.matchAll(re)){
-      const href=m[1]||m[0];
-      const url=new URL(href,BASE).href;
-      if(isCoreEpisodeUrl(url))out.add(url);
+
+  for (const pattern of patterns) {
+    for (const match of html.matchAll(pattern)) {
+      const href = match[1] || match[0];
+      try {
+        const url = new URL(href, BASE).href;
+        if (isCoreEpisodeUrl(url)) out.add(url);
+      } catch {
+        // Ignore malformed links.
+      }
     }
   }
+
   return [...out];
 }
 
-function discoverSitemapUrls(xml){
-  const out=new Set();
-  for(const m of xml.matchAll(/<loc>\\s*(.*?)\\s*<\\/loc>/gis)){
-    const url=m[1].trim();
-    if(isCoreEpisodeUrl(url))out.add(url);
+function discoverSitemapEntries(xml) {
+  const urls = new Set();
+
+  for (const match of xml.matchAll(/<loc>\s*(.*?)\s*<\/loc>/gis)) {
+    const url = match[1].trim();
+    urls.add(url);
   }
-  return [...out];
+
+  return [...urls];
 }
 
-function identify(url,html){
-  const match=url.match(/https?:\\/\\/www\\.amc\\.com\\/shows\\/([^/]+)\\/episodes\\/[^?#]*/);
-  if(!match) return null;
-  const slug=match[1];
-  const seriesId=SERIES_SLUGS[slug]||slugAliases[slug];
-  if(!seriesId) return null;
-  const se=stripHtml(html).match(/\\bS(\\d{1,2}),?\\s*E(\\d{1,2})\\b/i);
-  if(!se) return null;
-  return {seriesId,season:Number(se[1]),episode:Number(se[2])};
+async function discoverSitemapTree(rootUrl, seen = new Set()) {
+  if (seen.has(rootUrl)) return [];
+  seen.add(rootUrl);
+
+  let xml;
+  try {
+    xml = await fetchText(rootUrl);
+  } catch (error) {
+    console.warn("Sitemap discovery failed:", rootUrl, error?.message || error);
+    return [];
+  }
+
+  const entries = discoverSitemapEntries(xml);
+  const episodeUrls = new Set();
+  const childSitemaps = [];
+
+  for (const entry of entries) {
+    if (isCoreEpisodeUrl(entry)) {
+      episodeUrls.add(entry);
+    } else if (/\.xml(?:\?|$)/i.test(entry)) {
+      childSitemaps.push(entry);
+    }
+  }
+
+  for (const child of childSitemaps) {
+    for (const url of await discoverSitemapTree(child, seen)) {
+      episodeUrls.add(url);
+    }
+  }
+
+  return [...episodeUrls];
 }
 
-function extractImage(html){
-  const patterns=[
-    /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
-    /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
-    /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i,
-    /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image["']/i
+function identify(url, html) {
+  const match = url.match(
+    /https?:\/\/www\.amc\.com\/shows\/([^/]+)\/episodes\/[^?#]*/i
+  );
+  if (!match) return null;
+
+  const slug = match[1];
+  const seriesId = SLUG_TO_SERIES[slug] || SLUG_ALIASES[slug];
+  if (!seriesId) return null;
+
+  const text = stripHtml(html);
+  const seasonEpisode =
+    text.match(/\bS(\d{1,2})\s*,?\s*E(\d{1,2})\b/i) ||
+    text.match(/\bSeason\s*(\d{1,2})\D{0,20}\bEpisode\s*(\d{1,2})\b/i);
+
+  if (!seasonEpisode) return null;
+
+  return {
+    seriesId,
+    season: Number(seasonEpisode[1]),
+    episode: Number(seasonEpisode[2])
+  };
+}
+
+function extractMetaContent(html, propertyOrName) {
+  const escaped = propertyOrName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const patterns = [
+    new RegExp(`<meta[^>]+property=["']${escaped}["'][^>]+content=["']([^"']+)["']`, "i"),
+    new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+property=["']${escaped}["']`, "i"),
+    new RegExp(`<meta[^>]+name=["']${escaped}["'][^>]+content=["']([^"']+)["']`, "i"),
+    new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+name=["']${escaped}["']`, "i")
   ];
-  for(const re of patterns){
-    const m=html.match(re);
-    if(m?.[1]) return new URL(m[1],BASE).href;
+
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (match?.[1]) return match[1];
   }
+
   return null;
 }
 
-async function fetchText(url){
-  const res=await fetch(url,{headers:{"user-agent":"TWDU-Atlas-media-ingestor/1.0"}});
-  if(!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-  return await res.text();
+function extractImage(html) {
+  const image =
+    extractMetaContent(html, "og:image") ||
+    extractMetaContent(html, "twitter:image");
+
+  if (!image) return null;
+
+  try {
+    return new URL(image, BASE).href;
+  } catch {
+    return null;
+  }
 }
 
-async function main(){
-  const manifest=JSON.parse(await readFile(MANIFEST,"utf8"));
-  const urlsSet=new Set();
-  try{
-    const catalog=await fetchText(CATALOG);
-    for(const url of discoverUrls(catalog))urlsSet.add(url);
-  }catch(err){console.warn("AMC catalog discovery failed:",err?.message||err)}
-  for(const sitemap of SITEMAPS){
-    for(const url of await discoverSitemapTree(sitemap))urlsSet.add(url);
+async function fetchText(url) {
+  const response = await fetch(url, {
+    headers: {
+      "user-agent": "TWDU-Atlas-media-ingestor/1.0",
+      accept: "text/html,application/xml,text/xml;q=0.9,*/*;q=0.8"
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
   }
-  const urls=[...urlsSet];
+
+  return response.text();
+}
+
+function findManifestEpisode(manifest, id) {
+  return Object.entries(manifest.episodes).find(([, episode]) =>
+    episode.seriesId === id.seriesId &&
+    episode.seasonId === `${id.seriesId}-s${String(id.season).padStart(2, "0")}` &&
+    episode.episodeNumber === id.episode
+  )?.[0];
+}
+
+async function main() {
+  const manifest = JSON.parse(await readFile(MANIFEST, "utf8"));
+  const urlsSet = new Set();
+
+  try {
+    const catalog = await fetchText(CATALOG);
+    for (const url of discoverUrls(catalog)) urlsSet.add(url);
+  } catch (error) {
+    console.warn("AMC catalog discovery failed:", error?.message || error);
+  }
+
+  for (const sitemap of SITEMAPS) {
+    for (const url of await discoverSitemapTree(sitemap)) {
+      urlsSet.add(url);
+    }
+  }
+
+  const urls = [...urlsSet];
   console.log(`Discovered ${urls.length} AMC TWDU episode pages from catalog/sitemaps.`);
 
-  let verified=0,failed=0,matched=0;
-  const queue=[...urls];
-  const workers=Array.from({length:4},async()=>{
-    while(queue.length){
-      const url=queue.shift();
-      try{
-        const html=await fetchText(url);
-        const id=identify(url,html);
-        if(!id) continue;
-        const key=Object.entries(manifest.episodes).find(([,e])=>
-          e.seriesId===id.seriesId &&
-          e.seasonId===`${id.seriesId}-s${String(id.season).padStart(2,"0")}` &&
-          e.episodeNumber===id.episode
-        )?.[0];
-        if(!key) continue;
+  let verified = 0;
+  let failed = 0;
+  let matched = 0;
+  const queue = [...urls];
+
+  const workers = Array.from({ length: 4 }, async () => {
+    while (queue.length) {
+      const url = queue.shift();
+      if (!url) break;
+
+      try {
+        const html = await fetchText(url);
+        const id = identify(url, html);
+        if (!id) continue;
+
+        const key = findManifestEpisode(manifest, id);
+        if (!key) continue;
+
         matched++;
-        const image=extractImage(html);
-        if(image){
-          manifest.episodes[key]={
+
+        const image = extractImage(html);
+        if (image) {
+          manifest.episodes[key] = {
             ...manifest.episodes[key],
-            status:"verified",
+            status: "verified",
             image,
-            sourcePage:url,
-            source:"amc",
-            verifiedAt:new Date().toISOString()
+            sourcePage: url,
+            source: "amc",
+            verifiedAt: new Date().toISOString()
           };
           verified++;
         }
+
         await sleep(75);
-      }catch(err){
+      } catch (error) {
         failed++;
-        console.warn("media fetch failed:",url,err?.message||err);
+        console.warn("Media fetch failed:", url, error?.message || error);
       }
     }
   });
+
   await Promise.all(workers);
-  manifest.updatedAt=new Date().toISOString();
-  manifest.coverage=Object.keys(manifest.episodes).length;
-  manifest.verified=Object.values(manifest.episodes).filter(e=>e.status==="verified").length;
-  await writeFile(MANIFEST,JSON.stringify(manifest,null,2)+"\\n");
-  console.log(`Matched ${matched}; verified ${verified}; failed ${failed}; total verified now ${manifest.verified}/${manifest.coverage}.`);
+
+  manifest.updatedAt = new Date().toISOString();
+  manifest.coverage = Object.keys(manifest.episodes).length;
+  manifest.verified = Object.values(manifest.episodes).filter(
+    (episode) => episode.status === "verified"
+  ).length;
+
+  await writeFile(MANIFEST, JSON.stringify(manifest, null, 2) + "\n");
+
+  console.log(
+    `Matched ${matched}; verified this run ${verified}; failed ${failed}; total verified now ${manifest.verified}/${manifest.coverage}.`
+  );
 }
 
-main().catch(err=>{console.error(err);process.exit(1)});
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
