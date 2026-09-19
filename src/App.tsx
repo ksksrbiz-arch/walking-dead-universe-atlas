@@ -77,8 +77,10 @@ export default function App(){
  const mapSvgRef=useRef<SVGSVGElement|null>(null);
  const raf=useRef<number|null>(null);
  const visual=useRef({x:0,y:0,zoom:1});
+ const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
 
  useEffect(()=>setDataErrors(validateAtlasData()),[]);
+ useEffect(()=>{const onResize=()=>setIsMobileMap(window.innerWidth<700);window.addEventListener("resize",onResize);return()=>window.removeEventListener("resize",onResize)},[]);
  const applyMapTransform=(x:number,y:number,z:number,animate=false)=>{
    const el=mapSvgRef.current;
    if(!el)return;
@@ -128,7 +130,8 @@ export default function App(){
  },[query]);
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
- const resetMap=()=>{setZoom(1);setPan({x:0,y:0})};
+ const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,vbW=isMobileMap?650:1000,vbH=600,scale=Math.max(w/vbW,h/vbH)*visual.current.zoom;return {x:Math.max(0,(vbW*scale-w)/2),y:Math.max(0,(vbH*scale-h)/2)}};
+ const resetMap=()=>{visual.current={x:0,y:0,zoom:1};setZoom(1);setPan({x:0,y:0});};
  const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const eps=atlasData.episodes.filter((e:any)=>e.characterIds?.includes(id)).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))] as string[];const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("map");setSheet("open");focusEpisodeGeography({locationIds:locations})};
  const selectLocation=(l:Location)=>{
    setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
@@ -142,7 +145,8 @@ export default function App(){
      const targetY=surfaceRect.top+surfaceRect.height*.38;
      const dx=targetX-(markerRect.left+markerRect.width/2);
      const dy=targetY-(markerRect.top+markerRect.height/2);
-     const limit=Math.max(0,Math.max(window.innerWidth,window.innerHeight)*0.5*(visual.current.zoom-1));
+     const limits=getMapPanLimits();
+     const limit=Math.max(limits.x,limits.y);
      const nextX=clamp(visual.current.x+dx,-limit,limit);
      const nextY=clamp(visual.current.y+dy,-limit,limit);
      visual.current={...visual.current,x:nextX,y:nextY};
@@ -205,9 +209,10 @@ export default function App(){
    }else{
      const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
      if(Math.abs(dx)+Math.abs(dy)>4)drag.current.moved=true;
-     const limit=Math.max(0,Math.max(window.innerWidth,window.innerHeight)*0.5*(nextZoom-1));
-     nextX=clamp(drag.current.px+dx,-limit,limit);
-     nextY=clamp(drag.current.py+dy,-limit,limit);
+     visual.current.zoom=nextZoom;
+     const limits=getMapPanLimits();
+     nextX=clamp(drag.current.px+dx,-limits.x,limits.x);
+     nextY=clamp(drag.current.py+dy,-limits.y,limits.y);
    }
    visual.current={x:nextX,y:nextY,zoom:nextZoom};
    if(raf.current!==null)cancelAnimationFrame(raf.current);
@@ -248,7 +253,7 @@ export default function App(){
    <section className="map" aria-label="Interactive Walking Dead Universe map">
     <div className="mapAtmosphere"/>
     <div className="mapSurface" ref={mapSvgRef}>
-     <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
+     <svg viewBox={isMobileMap?"0 0 650 600":"0 0 1000 600"} preserveAspectRatio="xMidYMid slice" className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
       <defs>
        <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#9fb2b4"/><stop offset=".48" stopColor="#82999d"/><stop offset="1" stopColor="#60777b"/></linearGradient>
        <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#d8d3c5"/><stop offset=".55" stopColor="#b9b7aa"/><stop offset="1" stopColor="#96988e"/></linearGradient>
@@ -390,4 +395,3 @@ function PeopleContent({onCharacter}:{onCharacter:(id:string)=>void}){return <di
  </div>}
 
 function GuideContent({errors}:{errors:string[]}){const episodeCount=atlasData.seasonMeta.reduce((n:any,x:any)=>n+x.episodeCount,0);const art=(atlasData as any).media?.series?.twd?.keyArt;return <div className="contentScroll"><div className="guideHero">{art&&<img src={atlasImageUrl(art,1200)} srcSet={atlasImageSrcSet(art)} sizes="(max-width: 699px) 94vw, 470px" loading="eager" decoding="async" fetchPriority="high" alt="" className="guideArt"/>}<div className="guideHeroCopy"><span>ATLAS ENGINE</span><h3>A living field guide to the entire TV universe.</h3><p>Geography, chronology, people and connections are rendered from the same normalized data layer.</p></div></div><div className="guideStats"><div><b>{atlasData.series.length}</b><span>SERIES</span></div><div><b>{atlasData.seasons.length}</b><span>SEASONS</span></div><div><b>{atlasData.locations.length}</b><span>LOCATIONS</span></div><div><b>{episodeCount}</b><span>EPISODES</span></div></div><div className="mediaCoverage"><div><small>MEDIA INGESTION</small><b>{Object.values((episodeMedia as any).episodes||{}).filter((m:any)=>m.status==="verified").length} / {episodeCount}</b></div><span>official episode assets verified</span><i style={{width:`${Math.round(Object.values((episodeMedia as any).episodes||{}).filter((m:any)=>m.status==="verified").length/episodeCount*100)}%`}}/></div><div className="sectionTitle">WATCH ORDER <span>{atlasData.watchOrder.filter((x:any)=>x.type!=="note").length} segments</span></div><div className="watchOrder">{atlasData.watchOrder.filter((x:any)=>x.type!=="note").map((x:any,i)=><article key={x.id}><strong>{String(i+1).padStart(2,"0")}</strong><div><small>{SERIES_BY_ID[x.seriesId]?.name}</small><b>{x.startSeason===x.endSeason?"Season "+x.startSeason:"Seasons "+x.startSeason+"–"+x.endSeason}</b><span>{x.certainty} · series-level scaffold</span></div></article>)}</div><article className="statusCard"><small>DATA VALIDATION</small><b>{errors.length?"REVIEW REFERENCES":"REGISTRY HEALTHY"}</b><span>{errors.length?errors.join(" · "):"Core IDs and references pass the atlas validator."}</span></article></div>}
-
