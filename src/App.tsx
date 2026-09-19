@@ -436,10 +436,10 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter}:{charact
   {neighborhood.length>0&&<><div className="sectionTitle">ENTITY GRAPH <span>{neighborhood.length}</span></div><div className="connectionLinks graphLinks">{neighborhood.map((x:any,i:number)=><article key={x.ref.kind+x.ref.id+i}><small>{x.type} · {x.ref.kind.toUpperCase()}</small><b>{graphLabel(x.ref)}</b><span>{x.confidence}</span></article>)}</div></>}
  </div>;
 }
-function PeopleContent({onCharacter,onLocation}:{onCharacter:(id:string)=>void;onLocation:(id:string)=>void}){return <div className="contentScroll">
+function PeopleContent({onCharacter,onLocation,onEpisode}:{onCharacter:(id:string)=>void;onLocation:(id:string)=>void;onEpisode:(id:string)=>void}){return <div className="contentScroll">
  <div className="peopleHero"><div><small>PEOPLE INDEX</small><b>{atlasData.characters.length} tracked characters</b></div><span>{atlasData.connections.length} known connections</span></div>
  <div className="peopleIntro"><small>START WITH A PERSON</small><p>Select a character to follow their episode journey, geography, and documented links across the universe.</p></div>
- <EntityGraphView onCharacter={onCharacter} onLocation={onLocation}/>
+ <EntityGraphView onCharacter={onCharacter} onLocation={onLocation} onEpisode={onEpisode}/>
  <div className="sectionTitle">CHARACTERS <span>{atlasData.characters.length}</span></div>
  <div className="peopleGrid">{atlasData.characters.map(c=>{const cm=(atlasData as any).media?.characters?.[c.id];return <button className="entityCard characterCard" key={c.id} onClick={()=>onCharacter(c.id)}>{cm?.image&&<img src={atlasImageUrl(cm.image,640)} onError={e=>onAtlasImageError(e,cm.image)} srcSet={atlasImageSrcSet(cm.image,[320,480,640])} sizes="45vw" loading="lazy" decoding="async" alt="" className="characterArt"/>}<span><small>CHARACTER</small><b>{c.name}</b><em>{(c.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")||c.certainty}</em></span><Icon name="chevron"/></button>})}</div>
  <div className="sectionTitle">FACTIONS <span>{atlasData.factions.length}</span></div><div className="miniTags">{atlasData.factions.map(f=><span key={f.id}>{f.name}</span>)}</div>
