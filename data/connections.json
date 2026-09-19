@@ -5,7 +5,6 @@
   {"id":"carol-daryl","type":"character-character","fromId":"carol-peletier","toId":"daryl-dixon","label":"Long-running survivor partnership","certainty":"confirmed"},
   {"id":"maggie-negan","type":"character-character","fromId":"maggie-rhee","toId":"negan-smith","label":"Dead City central relationship","certainty":"confirmed"},
   {"id":"rick-michonne","type":"character-character","fromId":"rick-grimes","toId":"michonne","label":"Rick and Michonne","certainty":"confirmed"},
-  {"id":"rick-fear-crossover","type":"cross-series","fromId":"rick-grimes","toId":"ftwd","label":"Rick appears in Fear continuity","certainty":"confirmed"},
   {"id":"dwight-fear","type":"cross-series","fromId":"dwight","toId":"ftwd","label":"Dwight crosses into Fear","certainty":"confirmed"},
   {"id":"sherry-fear","type":"cross-series","fromId":"sherry","toId":"ftwd","label":"Sherry crosses into Fear","certainty":"confirmed"},
   {"id":"jadis-world-beyond","type":"cross-series","fromId":"jadis-stokes","toId":"wb","label":"Anne/Jadis appears in World Beyond","certainty":"confirmed"},
