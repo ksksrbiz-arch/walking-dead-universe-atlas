@@ -165,7 +165,6 @@ export default function App(){
        <path d="M76 16 83 14 88 18 92 24 88 29 82 27 78 22Z"/>
       </g>
       <g className="mapLabels"><text x="16" y="38">NORTH AMERICA</text><text x="61" y="7">EUROPE</text><text x="88" y="39">ASIA</text></g>
-      <g className="routes">{filteredLocations.slice(1).map((l,i)=>{const a=project(filteredLocations[0].lat,filteredLocations[0].lng),b=project(l.lat,l.lng);return <line key={l.id} x1={a.x} y1={a.y} x2={b.x} y2={b.y} style={{animationDelay:`${i*40}ms`}}/>})}</g>
       <g className="markers">{filteredLocations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} className={selectedId===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
        <circle className="pulse" r="2.6" style={{stroke:meta.color}}/><circle r="1.25" fill={meta.color}/><text x="2.1" y=".4">{l.name}</text>
       </g>})}</g>
