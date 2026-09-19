@@ -128,7 +128,7 @@ export default function App(){
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
  const resetMap=()=>{const mobile=window.matchMedia("(max-width:699px)").matches;setZoom(mobile?1.22:1);setPan(mobile?{x:105,y:4}:{x:0,y:0})};
  const selectLocation=(l:Location)=>{
-   setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
+   setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
    window.requestAnimationFrame(()=>{
      const surface=mapSurfaceRef.current;
      if(!surface)return;
