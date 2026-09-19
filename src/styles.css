@@ -195,3 +195,93 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
 .rowMedia .rowThumb{display:block;width:100%;height:100%}
 .mediaRow.hasMedia{grid-template-columns:54px 39px 1fr 14px}
 @media(min-width:700px){.rowMedia{width:62px;height:43px}.mediaRow.hasMedia{grid-template-columns:62px 42px 1fr 14px}}
+
+/* --- Mobile UX redesign: map-first, sheet-based atlas --- */
+@media(max-width:699px){
+  .topbar{
+    z-index:80;
+    grid-template-columns:1fr;
+    gap:8px;
+    padding:9px 12px 11px;
+    padding-top:max(9px,env(safe-area-inset-top));
+    background:linear-gradient(180deg,#07090af8 0,#07090ae8 82%,#07090a00);
+  }
+  .brand{height:42px;min-height:42px}
+  .logoMark{width:38px;height:38px;flex-basis:38px;border-radius:11px}
+  .brand b{font-size:14px;letter-spacing:.1em}
+  .brand small{font-size:5.7px;letter-spacing:.13em}
+  .searchWrap{width:100%;grid-column:1}
+  .searchWrap input{height:43px;border-radius:13px;font-size:12px;padding-left:40px;background:#0d1213ee}
+  .searchResults{top:48px;border-radius:14px}
+  .mapTopLeft{top:166px;left:12px;padding:9px 11px;border-radius:13px}
+  .mapTopLeft>strong{font-size:11px}
+  .mapTopRight{top:166px;right:12px;gap:6px}
+  .mapTopRight button{width:42px;height:42px}
+  .seriesRail{
+    top:222px;
+    left:12px;right:12px;
+    z-index:22;
+    gap:6px;
+  }
+  .seriesRail button{min-height:32px;padding:0 10px;background:#f0eee9df}
+  .mapCompass{top:336px;right:12px;width:45px;height:55px}
+  .mapLegend{transition:opacity .2s,transform .2s}
+  .mapLegend.sheetOpen{opacity:0;transform:translateY(12px);pointer-events:none}
+  .timeMachine{
+    left:12px;right:12px;
+    bottom:calc(var(--nav) + 86px + env(safe-area-inset-bottom));
+    padding:10px 12px 8px;
+    border-radius:16px;
+    transition:opacity .2s,transform .2s;
+  }
+  .timeMachine.sheetOpen{opacity:0;transform:translateY(150%);pointer-events:none}
+  .timeMachineHead b{font-size:18px}
+  .timeMachine input{height:20px}
+  .contentPanel{
+    left:10px;right:10px;
+    bottom:calc(var(--nav) + 7px + env(safe-area-inset-bottom));
+    height:72px;
+    max-height:calc(100dvh - 184px);
+    border-radius:24px;
+    padding:5px 11px 12px;
+    background:#090d0ef8;
+    box-shadow:0 25px 80px #000d;
+  }
+  .contentPanel.open{
+    height:min(58dvh,620px);
+    max-height:calc(100dvh - 150px);
+  }
+  .panelGrab{height:14px;padding:4px}
+  .panelGrab span{width:44px;height:4px}
+  .panelHeader{min-height:39px}
+  .panelHeader h2{font-size:18px}
+  .contentScroll{padding-bottom:22px}
+  .sectionTitle{margin-top:12px}
+  .entityCard{min-height:68px;padding:9px 10px;border-radius:14px}
+  .entityCard b{font-size:10.5px}
+  .entityCard em{font-size:7.5px}
+  .locationCard{min-height:68px}
+  .episodeRow{min-height:58px;padding:8px 9px}
+  .peopleGrid{grid-template-columns:1fr}
+  .bottomNav{
+    left:10px;right:10px;
+    bottom:max(6px,env(safe-area-inset-bottom));
+    height:70px;
+    border-radius:23px;
+    padding:5px;
+  }
+  .bottomNav button{border-radius:18px;gap:3px}
+  .bottomNav svg{width:19px;height:19px}
+  .bottomNav small{font-size:5.5px}
+}
+@media(max-width:390px){
+  .brand small{display:none}
+  .mapTopLeft{top:160px}
+  .mapTopRight{top:160px}
+  .seriesRail{top:214px}
+  .mapCompass{top:325px}
+  .contentPanel.open{height:60dvh}
+}
+@media(min-width:700px){
+  .contentPanel.peek{transform:translateX(0)}
+}
