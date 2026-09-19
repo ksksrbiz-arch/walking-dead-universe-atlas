@@ -752,3 +752,12 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
  .atlasTimelineFooter{grid-template-columns:1fr auto}
 }
 @media(prefers-reduced-motion:reduce){.atlasTimelineItem{transition:none}}
+
+
+/* Contextual connection surface */
+.connectionLinks{display:grid;gap:6px}
+.connectionLinks article{display:grid;gap:3px;padding:9px 10px;border:1px solid #2b3537;border-radius:12px;background:#111718}
+.connectionLinks small{font-size:5.5px;letter-spacing:.12em;color:#7d898a;text-transform:uppercase}
+.connectionLinks b{font-size:9px;color:#d8dddc;line-height:1.25}
+.connectionLinks span{font-size:6px;color:#717c7e}
+@media(max-width:699px){.connectionLinks article{padding:8px 9px}.connectionLinks b{font-size:8.5px}}
