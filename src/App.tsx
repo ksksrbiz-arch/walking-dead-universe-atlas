@@ -24,9 +24,12 @@ const SERIES_BY_ID=Object.fromEntries(Object.values(META).map(x=>[x.id,x])) as R
 const SERIES_KEYS=Object.keys(META) as SeriesKey[];
 const projection=geoEqualEarth().fitExtent([[24,22],[976,578]],{type:"Sphere"});
 const pathGenerator=geoPath(projection);
-const worldCountries:any=feature(world as any,(world as any).objects.countries) as any;\nconst worldLand:any=feature(world as any,(world as any).objects.land) as any;
+const worldCountries:any=feature(world as any,(world as any).objects.countries) as any;
+const worldLand:any=feature(world as any,(world as any).objects.land) as any;
 const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
-const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));\nconst countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];\nconst countryTone=(i:number)=>countryPalette[i%countryPalette.length];
+const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
+const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
+const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
 
 function Icon({name}:{name:"map"|"timeline"|"people"|"guide"|"plus"|"minus"|"locate"|"search"|"close"|"chevron"|"layers"|"play"|"pause"|"arrow"|"pin"}) {
  const paths={
