@@ -226,7 +226,7 @@ function PeopleContent(){return <div className="contentScroll"><div className="s
 function GuideContent({errors}:{errors:string[]}){
  return <div className="contentScroll">
   <div className="guideHero"><span>ATLAS ENGINE</span><h3>Explore the universe as a connected system.</h3><p>Geographic projection, chronology, entities and watch order share one normalized data layer.</p></div>
-  <div className="guideStats"><div><b>{atlasData.series.length}</b><span>Series</span></div><div><b>{atlasData.seasons.length}</b><span>Seasons</span></div><div><b>{atlasData.locations.length}</b><span>Locations</span></div><div><b>{atlasData.events.length}</b><span>Timeline nodes</span></div></div>
+  <div className="guideStats"><div><b>{atlasData.series.length}</b><span>Series</span></div><div><b>{atlasData.seasons.length}</b><span>Seasons</span></div><div><b>{atlasData.locations.length}</b><span>Locations</span></div><div><b>{atlasData.seasonMeta.reduce((n:any,x:any)=>n+x.episodeCount,0)}</b><span>Episodes indexed</span></div></div>
   <div className="sectionTitle">Chronological watch order <span>{atlasData.watchOrder.length-1} segments</span></div>
   <div className="watchOrder">{atlasData.watchOrder.filter((x:any)=>x.type!=="note").map((x:any,i)=><article key={x.id}><em>{String(i+1).padStart(2,"0")}</em><div><small>{SERIES_BY_ID[x.seriesId]?.name}</small><b>{x.startSeason===x.endSeason?"Season "+x.startSeason:"Seasons "+x.startSeason+"–"+x.endSeason}</b><span>{x.certainty} · series-level scaffold</span></div></article>)}</div>
   <article className="statusCard"><small>DATA VALIDATION</small><b>{errors.length?"Review references":"Registry healthy"}</b><span>{errors.length?errors.join(" · "):"Initial IDs and series references pass validation."}</span></article>
