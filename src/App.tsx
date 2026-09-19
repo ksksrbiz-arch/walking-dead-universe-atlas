@@ -277,7 +277,8 @@ export default function App(){
       <div className="zoomBadge">{Math.round(zoom*100)}%</div>
     </div>
 
-    <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>\n    <div className={`mapLegend ${sheet==="open"?"sheetOpen":""}`} aria-label="Map legend"><small>SERIES LAYER</small>{SERIES_KEYS.map(k=><span key={k}><i style={{background:META[k].color}}/>{META[k].short}</span>)}</div>
+    <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>
+    <div className={`mapLegend ${sheet==="open"?"sheetOpen":""}`} aria-label="Map legend"><small>SERIES LAYER</small>{SERIES_KEYS.map(k=><span key={k}><i style={{background:META[k].color}}/>{META[k].short}</span>)}</div>
 
     <div className="seriesRail" aria-label="Series filter">
       <button className={series==="ALL"?"active":""} onClick={()=>setSeries("ALL")}>ALL</button>
@@ -336,7 +337,8 @@ function EpisodeDetail({episode,onLocation,onEpisode}:{episode:any;onLocation:(l
  const prev=ordered[index-1],next=ordered[index+1];
  return <div className="contentScroll">
   <div className="episodeHero" style={{"--accent":meta.color} as CSSProperties}>{media?.image&&<img src={media.image} alt="" className="episodeArt"/>}<div className="episodeHeroCopy"><span>{meta.name} · {episode.seasonId?.toUpperCase()}E{String(episode.episodeNumber).padStart(2,"0")}</span><h3>{episode.title}</h3><div className="episodeMeta"><b>{episode.start===episode.end?episode.start:`${episode.start}–${episode.end}`}</b><em>{episode.certainty}</em><em>{episode.precision}</em></div></div></div>
-  {locations.length>0&&<><div className="sectionTitle">LOCATIONS <span>{locations.length}</span></div><div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}><Icon name="pin"/>{l.name}</button>)}</div></>}\n  {raw?.connectionIds?.length>0&&<><div className="sectionTitle">UNIVERSE CONNECTIONS <span>{raw.connectionIds.length}</span></div><div className="connectionLinks">{raw.connectionIds.map((id:string)=>{const c=atlasData.connections.find((x:any)=>x.id===id);return c?<article key={id}><small>{c.type}</small><b>{c.label}</b><span>{c.fromId} ↔ {c.toId} · {c.certainty}</span></article>:null})}</div></>}
+  {locations.length>0&&<><div className="sectionTitle">LOCATIONS <span>{locations.length}</span></div><div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}><Icon name="pin"/>{l.name}</button>)}</div></>}
+  {raw?.connectionIds?.length>0&&<><div className="sectionTitle">UNIVERSE CONNECTIONS <span>{raw.connectionIds.length}</span></div><div className="connectionLinks">{raw.connectionIds.map((id:string)=>{const c=atlasData.connections.find((x:any)=>x.id===id);return c?<article key={id}><small>{c.type}</small><b>{c.label}</b><span>{c.fromId} ↔ {c.toId} · {c.certainty}</span></article>:null})}</div></>}
   <div className="sectionTitle">CHRONOLOGY NAVIGATION</div>
   <div className="episodeNav">{prev&&<button onClick={()=>onEpisode(prev.id)}><small>PREVIOUS</small><b>{prev.title}</b><span>{prev.start}</span></button>}<div className="chronologyMarker"><span>IN UNIVERSE</span><strong>{episode.start}</strong></div>{next&&<button onClick={()=>onEpisode(next.id)}><small>NEXT</small><b>{next.title}</b><span>{next.start}</span></button>}</div>
   <div className="sourceNote"><Icon name="layers"/><span>Air date and in-universe chronology are separate fields. Ranges and uncertain placements stay labeled rather than flattened.</span></div>
