@@ -1,3 +1,51 @@
 [
-  {"id":"source-placeholder","type":"reference","title":"Source registry placeholder","note":"Episode-level source citations will be added as the canonical episode dataset is assembled."}
+  {
+    "id": "natural-earth-110m",
+    "title": "Natural Earth 1:110m Admin 0 Countries",
+    "type": "geography",
+    "url": "https://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/",
+    "note": "Base geographic boundary dataset used through world-atlas/TopoJSON."
+  },
+  {
+    "id": "world-atlas",
+    "title": "World Atlas TopoJSON",
+    "type": "geography",
+    "url": "https://github.com/topojson/world-atlas",
+    "note": "Offline 1:110m TopoJSON distribution derived from Natural Earth."
+  },
+  {
+    "id": "amc-shows",
+    "title": "AMC Walking Dead Universe show pages",
+    "type": "official",
+    "url": "https://www.amc.com/shows",
+    "note": "Official series and episode landing pages."
+  },
+  {
+    "id": "amc-daryl-spain",
+    "title": "AMC+ Daryl Dixon — Spain",
+    "type": "official",
+    "url": "https://www.amcplus.com/shows/the-walking-dead-daryl-dixon/episodes--1073085",
+    "note": "Official Daryl Dixon episode listing; season 3 is set in Spain."
+  },
+  {
+    "id": "amc-dead-city",
+    "title": "AMC Dead City episode listing",
+    "type": "official",
+    "url": "https://www.amc.com/shows/the-walking-dead-dead-city/episodes--1062858",
+    "note": "Official Dead City episode listing."
+  },
+  {
+    "id": "tvdb-fear",
+    "title": "TheTVDB Fear the Walking Dead all seasons",
+    "type": "secondary",
+    "url": "https://thetvdb.com/series/fear-the-walking-dead/allseasons/official",
+    "note": "Used for season episode counts/release metadata where needed."
+  },
+  {
+    "id": "twd-episode-list",
+    "title": "The Walking Dead episode list",
+    "type": "secondary",
+    "url": "https://en.wikipedia.org/wiki/List_of_The_Walking_Dead_episodes",
+    "note": "Episode structure reference; detailed chronology remains separately sourced."
+  }
 ]
