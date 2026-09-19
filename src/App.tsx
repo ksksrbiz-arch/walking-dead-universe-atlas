@@ -121,7 +121,13 @@ export default function App(){
    pointers.current.delete(e.pointerId);
    pinch.current=null;
    try{(e.currentTarget as Element).releasePointerCapture?.(e.pointerId)}catch{}
-   setIsDragging(pointers.current.size===1);
+   const remaining=[...pointers.current.values()][0];
+   if(remaining){
+     drag.current={x:remaining.x,y:remaining.y,px:pan.x,py:pan.y,moved:true};
+     setIsDragging(true);
+   }else{
+     setIsDragging(false);
+   }
  };
  const wheel=(e:React.WheelEvent<SVGSVGElement>)=>{
    e.preventDefault();
