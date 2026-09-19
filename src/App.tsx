@@ -240,7 +240,7 @@ function LocationDetail({location,onEpisode}:{location:Location;onEpisode:(id:st
  const episodes=atlasData.episodes.filter((e:any)=>e.locationIds?.includes(location.id));
  const events=atlasData.events.filter((e:any)=>e.locationIds?.includes(location.id));
  return <div className="contentScroll">
-  <div className="entityHero" style={{"--accent":meta.color} as CSSProperties}><span>{meta.short} · {location.year}</span><h3>{location.name}</h3><p>{location.type} · {location.certainty}</p></div>
+  <div className="entityHero" style={{"--accent":meta.color} as CSSProperties}>{placeMedia?.image&&<img src={placeMedia.image} alt="" className="entityArt"/>}<div className="entityHeroCopy"><span>{meta.short} · {location.year}</span><h3>{location.name}</h3><p>{location.type} · {location.certainty}</p></div></div>
   <div className="detailGrid"><div><small>TYPE</small><b>{location.type}</b></div><div><small>ERA</small><b>{location.year}+</b></div><div><small>EPISODES</small><b>{episodes.length}</b></div><div><small>STATUS</small><b>{location.certainty}</b></div></div>
   <div className="sectionTitle">EPISODE PRESENCE <span>{episodes.length}</span></div>
   {episodes.length?<div className="cards">{episodes.map((e:any)=><button className="entityCard episodeCard" key={e.id} onClick={()=>onEpisode(e.id)}><span className="episodeYear">{e.timelineStart||"?"}</span><span><small>{meta.short} · S{String(e.seasonId).slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><em>{e.certainty} · {e.timelinePrecision}</em></span><Icon name="chevron"/></button>)}</div>:<p className="muted">No episode-level location link has been recorded yet.</p>}
