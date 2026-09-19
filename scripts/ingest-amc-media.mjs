@@ -198,12 +198,16 @@ function extractImage(html) {
 }
 
 async function fetchText(url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
   const response = await fetch(url, {
     headers: {
       "user-agent": "TWDU-Atlas-media-ingestor/1.0",
       accept: "text/html,application/xml,text/xml;q=0.9,*/*;q=0.8"
-    }
+    },
+    signal: controller.signal
   });
+  clearTimeout(timeout);
 
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}`);
@@ -259,6 +263,7 @@ async function main() {
         if (!key) continue;
 
         matched++;
+        if (manifest.episodes[key]?.status === "verified" && manifest.episodes[key]?.image) continue;
 
         const image = extractImage(html);
         if (image) {
