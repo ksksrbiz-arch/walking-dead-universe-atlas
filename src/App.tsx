@@ -66,6 +66,7 @@ export default function App(){
  const [isDragging,setIsDragging]=useState(false);
  const [sheet,setSheet]=useState<"peek"|"open">("peek");
  const [searchOpen,setSearchOpen]=useState(false);
+ const [timeOpen,setTimeOpen]=useState(false);
  const [playing,setPlaying]=useState(false);
  const drag=useRef({x:0,y:0,px:0,py:0,moved:false});
  const pointers=useRef(new Map<number,{x:number;y:number}>());
@@ -154,13 +155,14 @@ export default function App(){
 
  const goView=(v:View)=>{setView(v);setSelectedLocation(null);setSelectedEpisode(null);setSheet("open")};
  const mapYearCount=locations.length;
- const visibleSeries=series==="ALL"?"THE WORLD":"${META[series].short}";
+ const visibleSeries=series==="ALL"?"THE WORLD":META[series].short;
 
  return <div className="app">
   <header className="topbar">
    <button className="brand" onClick={()=>{setView("map");setSelectedLocation(null);setSelectedEpisode(null)}} aria-label="Return to atlas map">
     <span className="logoMark">◈</span><span><b>TWDU ATLAS</b><small>THE WALKING DEAD UNIVERSE · FIELD GUIDE</small></span>
    </button>
+   <button className="mobileSearchButton" onClick={()=>setSearchOpen(true)} aria-label="Open atlas search"><Icon name="search"/></button>
    <div className="searchWrap">
     <Icon name="search"/>
     <input value={query} onFocus={()=>setSearchOpen(true)} onChange={e=>{setQuery(e.target.value);setSearchOpen(true)}} placeholder="Search a place, person, episode…" aria-label="Search atlas"/>
@@ -174,7 +176,7 @@ export default function App(){
    <section className="map" aria-label="Interactive Walking Dead Universe map">
     <div className="mapAtmosphere"/>
     <div className="mapSurface">
-     <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet" style={mapStyle} className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
+     <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" style={mapStyle} className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
       <defs>
        <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#9fb2b4"/><stop offset=".48" stopColor="#82999d"/><stop offset="1" stopColor="#60777b"/></linearGradient>
        <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#d8d3c5"/><stop offset=".55" stopColor="#b9b7aa"/><stop offset="1" stopColor="#96988e"/></linearGradient>
@@ -187,7 +189,7 @@ export default function App(){
       <g className="graticule"><path d={pathGenerator({type:"Sphere"}) as string}/></g>
       <path className="landShadow" d={pathGenerator(worldLand) as string} fill="#26383a" opacity=".38" filter="url(#landShadow)"/>
       <g className="countries" filter="url(#paperNoise)">{worldCountries.features.map((c:any,i:number)=><path key={c.id||c.properties?.name} d={pathGenerator(c) as string} fill={countryTone(i)}><title>{c.properties?.name||"Country"}</title></path>)}</g>
-      <g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>
+      {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} className={selectedLocation===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
        <circle className="pulse" r="2.5" style={{stroke:meta.color}}/><circle className="dot" r="1.5" fill={meta.color}/>{(zoom>1.34||selectedLocation===l.id)&&<text x="4" y=".5">{l.name}</text>}
       </g>})}</g>
@@ -196,8 +198,7 @@ export default function App(){
 
     <div className="mapChrome mapTopLeft">
       <div className="locationKicker"><span className="liveDot"/>{visibleSeries}</div>
-      <strong>{mapYearCount} LOCATIONS</strong>
-      <small>DRAG · PINCH · SCROLL TO EXPLORE</small>
+      <strong>{mapYearCount} <small>LOCATIONS</small></strong>
     </div>
 
     <div className="mapChrome mapTopRight">
@@ -219,6 +220,8 @@ export default function App(){
       <input aria-label="Universe year" type="range" min="2010" max="2027" value={year} onChange={e=>{setPlaying(false);setYear(Number(e.target.value))}}/>
       <div className="timeScale"><span>2010 · OUTBREAK</span><span>2014</span><span>2018</span><span>2022</span><span>2027</span></div>
     </div>
+
+    {searchOpen&&<div className="searchOverlay"><div className="searchOverlayHead"><b>SEARCH THE ATLAS</b><button onClick={()=>setSearchOpen(false)} aria-label="Close search"><Icon name="close"/></button></div><div className="searchOverlayInput"><Icon name="search"/><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Place, person, episode, faction…"/>{query&&<button onClick={()=>setQuery("")}><Icon name="close"/></button>}</div>{query&&<div className="searchOverlayResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else{setView("people");setSheet("open")}setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}</div>}
 
     <section className={`contentPanel ${sheet}`}>
       <button className="panelGrab" onClick={()=>setSheet(v=>v==="open"?"peek":"open")} aria-label="Toggle information panel"><span/></button>
