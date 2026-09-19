@@ -143,5 +143,13 @@
     "id": "dead-s03",
     "seriesId": "dead",
     "season": 3
+  },
+  {
+    "id": "daryl-s04",
+    "seriesId": "daryl",
+    "season": 4,
+    "status": "announced",
+    "certainty": "announced",
+    "episodeCount": 8
   }
 ]
