@@ -20,6 +20,12 @@ import {readFile,writeFile} from "node:fs/promises";
 
 const BASE="https://www.amc.com";
 const CATALOG=`${BASE}/episodes`;
+const SITEMAPS=[
+  `${BASE}/sitemap.xml`,
+  `${BASE}/sitemap_index.xml`,
+  `${BASE}/sitemap-index.xml`,
+  `${BASE}/sitemap/sitemap.xml`
+];
 const MANIFEST="data/episodeMedia.json";
 
 const SERIES_SLUGS={
@@ -48,15 +54,38 @@ function stripHtml(s=""){
     .replace(/\\s+/g," ").trim();
 }
 
+function isCoreEpisodeUrl(url){
+  try{
+    const u=new URL(url);
+    if(u.hostname!=="www.amc.com")return false;
+    if(!u.pathname.includes("/shows/")||!u.pathname.includes("/episodes/"))return false;
+    const slug=u.pathname.split("/shows/")[1]?.split("/")[0]||"";
+    return !!(SERIES_SLUGS[slug]||slugAliases[slug]);
+  }catch{return false}
+}
+
 function discoverUrls(html){
   const out=new Set();
-  const re=/href=["'](\\/shows\\/[^"'#?]*\\/episodes\\/[^"'#?]*)["']/gi;
-  for(const m of html.matchAll(re)){
-    const href=m[1];
-    if(Object.values(SERIES_SLUGS).some(slug=>href.includes("/"+slug+"/episodes/")) ||
-       Object.keys(slugAliases).some(slug=>href.includes("/"+slug+"/episodes/"))){
-      out.add(new URL(href,BASE).href);
+  const patterns=[
+    /href=["'](\\/shows\\/[^"'#?]*\\/episodes\\/[^"'#?]*)["']/gi,
+    /https?:\\/\\/www\\.amc\\.com\\/shows\\/[^"'\\s<]+\\/episodes\\/[^"'\\s<]*/gi,
+    /\\/shows\\/[^"'\\s<]+\\/episodes\\/[^"'\\s<]*/gi
+  ];
+  for(const re of patterns){
+    for(const m of html.matchAll(re)){
+      const href=m[1]||m[0];
+      const url=new URL(href,BASE).href;
+      if(isCoreEpisodeUrl(url))out.add(url);
     }
+  }
+  return [...out];
+}
+
+function discoverSitemapUrls(xml){
+  const out=new Set();
+  for(const m of xml.matchAll(/<loc>\\s*(.*?)\\s*<\\/loc>/gis)){
+    const url=m[1].trim();
+    if(isCoreEpisodeUrl(url))out.add(url);
   }
   return [...out];
 }
@@ -94,9 +123,19 @@ async function fetchText(url){
 
 async function main(){
   const manifest=JSON.parse(await readFile(MANIFEST,"utf8"));
-  const catalog=await fetchText(CATALOG);
-  const urls=discoverUrls(catalog);
-  console.log(`Discovered ${urls.length} AMC TWDU episode pages.`);
+  const urlsSet=new Set();
+  try{
+    const catalog=await fetchText(CATALOG);
+    for(const url of discoverUrls(catalog))urlsSet.add(url);
+  }catch(err){console.warn("AMC catalog discovery failed:",err?.message||err)}
+  for(const sitemap of SITEMAPS){
+    try{
+      const xml=await fetchText(sitemap);
+      for(const url of discoverSitemapUrls(xml))urlsSet.add(url);
+    }catch{}
+  }
+  const urls=[...urlsSet];
+  console.log(`Discovered ${urls.length} AMC TWDU episode pages from catalog/sitemaps.`);
 
   let verified=0,failed=0,matched=0;
   const queue=[...urls];
