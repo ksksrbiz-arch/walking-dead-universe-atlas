@@ -1,5 +1,12 @@
 [
   {"id":"saviors","name":"Saviors","certainty":"confirmed"},
   {"id":"crm","name":"Civic Republic Military","certainty":"confirmed"},
-  {"id":"civic-republic","name":"Civic Republic","certainty":"confirmed"}
+  {"id":"civic-republic","name":"Civic Republic","certainty":"confirmed"},
+  {"id":"whisperers","name":"Whisperers","certainty":"confirmed"},
+  {"id":"commonwealth-faction","name":"Commonwealth","certainty":"confirmed"},
+  {"id":"burazi","name":"Burazi","certainty":"confirmed"},
+  {"id":"new-babylon-federation","name":"New Babylon Federation","certainty":"confirmed"},
+  {"id":"alliance-of-three","name":"Alliance of the Three","certainty":"confirmed"},
+  {"id":"padre-faction","name":"PADRE","certainty":"confirmed"},
+  {"id":"proctors","name":"Proctors","certainty":"confirmed"}
 ]
