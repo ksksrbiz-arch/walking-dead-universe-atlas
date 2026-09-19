@@ -1,0 +1,234 @@
+[
+  {
+    "seasonId": "twd-s01",
+    "episodeCount": 6,
+    "airStart": "2010-10-31",
+    "airEnd": "2010-12-05",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s02",
+    "episodeCount": 13,
+    "airStart": "2011-10-16",
+    "airEnd": "2012-03-18",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s03",
+    "episodeCount": 16,
+    "airStart": "2012-10-14",
+    "airEnd": "2013-03-31",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s04",
+    "episodeCount": 16,
+    "airStart": "2013-10-13",
+    "airEnd": "2014-03-30",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s05",
+    "episodeCount": 16,
+    "airStart": "2014-10-12",
+    "airEnd": "2015-03-29",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s06",
+    "episodeCount": 16,
+    "airStart": "2015-10-11",
+    "airEnd": "2016-04-03",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s07",
+    "episodeCount": 16,
+    "airStart": "2016-10-23",
+    "airEnd": "2017-04-02",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s08",
+    "episodeCount": 16,
+    "airStart": "2017-10-22",
+    "airEnd": "2018-04-15",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s09",
+    "episodeCount": 16,
+    "airStart": "2018-10-07",
+    "airEnd": "2019-03-31",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s10",
+    "episodeCount": 22,
+    "airStart": "2019-10-06",
+    "airEnd": "2021-04-04",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "twd-s11",
+    "episodeCount": 24,
+    "airStart": "2021-08-22",
+    "airEnd": "2022-11-20",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "ftwd-s01",
+    "episodeCount": 6,
+    "airStart": "2015-08-23",
+    "airEnd": "2015-10-04",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "ftwd-s02",
+    "episodeCount": 15,
+    "airStart": "2016-04-10",
+    "airEnd": "2016-10-02",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "ftwd-s03",
+    "episodeCount": 16,
+    "airStart": "2017-06-04",
+    "airEnd": "2017-10-15",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "ftwd-s04",
+    "episodeCount": 16,
+    "airStart": "2018-04-15",
+    "airEnd": "2018-09-30",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "ftwd-s05",
+    "episodeCount": 16,
+    "airStart": "2019-06-02",
+    "airEnd": "2019-09-29",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "ftwd-s06",
+    "episodeCount": 16,
+    "airStart": "2020-10-11",
+    "airEnd": "2021-06-13",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "ftwd-s07",
+    "episodeCount": 16,
+    "airStart": "2021-10-17",
+    "airEnd": "2022-06-05",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "ftwd-s08",
+    "episodeCount": 12,
+    "airStart": "2023-05-14",
+    "airEnd": "2023-11-19",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "tales-s01",
+    "episodeCount": 6,
+    "airStart": "2022-08-14",
+    "airEnd": "2022-09-18",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "wb-s01",
+    "episodeCount": 10,
+    "airStart": "2020-10-04",
+    "airEnd": "2020-11-29",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "wb-s02",
+    "episodeCount": 10,
+    "airStart": "2021-10-03",
+    "airEnd": "2021-12-05",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "owl-s01",
+    "episodeCount": 6,
+    "airStart": "2024-02-25",
+    "airEnd": "2024-03-31",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "daryl-s01",
+    "episodeCount": 6,
+    "airStart": "2023-09-10",
+    "airEnd": "2023-10-15",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "daryl-s02",
+    "episodeCount": 6,
+    "airStart": "2024-09-29",
+    "airEnd": "2024-11-03",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "daryl-s03",
+    "episodeCount": 7,
+    "airStart": "2025-09-07",
+    "airEnd": "2025-10-20",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "dead-s01",
+    "episodeCount": 6,
+    "airStart": "2023-06-18",
+    "airEnd": "2023-07-23",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "dead-s02",
+    "episodeCount": 8,
+    "airStart": "2025-05-04",
+    "airEnd": "2025-06-22",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  },
+  {
+    "seasonId": "dead-s03",
+    "episodeCount": 8,
+    "airStart": "2026-07-26",
+    "airEnd": "2026-09-17",
+    "episodeRegistry": "index-only",
+    "chronologyStatus": "awaiting detailed episode timeline anchors"
+  }
+]
