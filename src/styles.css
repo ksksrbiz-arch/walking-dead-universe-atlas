@@ -904,3 +904,28 @@ button:active{transform:translateY(1px)}
   }
   .map.view-map .seriesRailHint{display:none}
 }
+
+
+/* Guide discovery surface */
+.guidePaths{display:grid;gap:8px;margin:10px 0 16px}
+.guidePaths button{display:grid;grid-template-columns:40px minmax(0,1fr) 16px;gap:10px;align-items:center;width:100%;padding:11px;border:1px solid #293638;border-radius:13px;background:#101a1c;color:#e0e7e5;text-align:left}
+.guidePaths button:hover{border-color:#465456;background:#142022}
+.guidePathIcon{display:grid;place-items:center;width:38px;height:38px;border:1px solid #ffffff14;border-radius:10px;background:#182426;color:#b8c3c1}
+.guidePathIcon svg{width:18px;height:18px}
+.guidePaths small{display:block;color:#718082;font:700 7px "Space Mono",monospace;letter-spacing:.1em}
+.guidePaths b{display:block;margin:4px 0 2px;font-size:11px}
+.guidePaths div>span{display:block;color:#7f8d8e;font-size:8px;line-height:1.35}
+.guidePaths>button>svg{width:14px;height:14px;color:#667577}
+.guideSecondary{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0 16px}
+.guideSecondary>div{padding:12px;border:1px solid #293638;border-radius:12px;background:#101a1c}
+.guideSecondary small,.guideStatus small{display:block;color:#6f7d7f;font:700 7px "Space Mono",monospace;letter-spacing:.1em}
+.guideSecondary b{display:block;margin:6px 0 3px;font:700 13px "Space Mono",monospace}
+.guideSecondary span,.guideStatus span{display:block;color:#748284;font-size:8px;line-height:1.4}
+.guideStatus{display:grid;gap:8px;margin:8px 0 8px;padding:12px;border:1px solid #293638;border-radius:13px;background:#0d1718}
+.guideStatus>div+div{padding-top:9px;border-top:1px solid #ffffff0b}
+.guideStatus b{display:block;margin:5px 0 3px;font-size:10px}
+@media(max-width:699px){
+  .guideSecondary{grid-template-columns:1fr}
+  .guidePaths{margin-top:8px}
+  .guidePaths button{min-height:66px}
+}
