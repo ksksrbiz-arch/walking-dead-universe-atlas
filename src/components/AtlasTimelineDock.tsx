@@ -16,9 +16,9 @@ const ORDER:SeriesKey[]=["TWD","FTWD","TALES","WB","OWL","DARYL","DEAD"];
 const MIN_YEAR=2010;
 const MAX_YEAR=2027;
 
-type Props={year:number;onYearChange:(year:number)=>void;series:SeriesKey|"ALL";onEpisode:(id:string)=>void;selectedEpisode?:string|null;playing:boolean;onTogglePlaying:()=>void};
+type Props={year:number;onYearChange:(year:number)=>void;series:SeriesKey|"ALL";onEpisode:(id:string)=>void;selectedEpisode?:string|null;playing:boolean;onTogglePlaying:()=>void;onConnections:()=>void};
 
-export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,selectedEpisode,playing,onTogglePlaying}:Props){
+export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,selectedEpisode,playing,onTogglePlaying,onConnections}:Props){
  const all=useMemo(()=>buildChronology(),[]);
  const visible=useMemo(()=>all.filter(item=>series==="ALL"||item.seriesId===META[series].id),[all,series]);
  const counts=useMemo(()=>ORDER.reduce((acc,key)=>{acc[key]=visible.filter(x=>x.seriesId===META[key].id).length;return acc} as Record<SeriesKey,number>,{}),[visible]);
@@ -29,7 +29,7 @@ export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,se
  return <section className="atlasTimelineDock" aria-label="Universe chronology">
   <div className="atlasTimelineHead">
    <div className="atlasTimelineTitle"><span className="timelineLiveDot"/><div><small>UNIVERSE CHRONOLOGY</small><b>{year}</b></div><span className="timelineCount">{yearEvents.length} active</span></div>
-   <div className="atlasTimelineActions"><button className={playing?"playing":""} onClick={onTogglePlaying} aria-label={playing?"Pause chronology":"Play chronology"}>{playing?"Ⅱ":"▶"}</button><output>{selected?.title||"Drag the chronology"}</output></div>
+   <div className="atlasTimelineActions"><button className="atlasConnectionsButton" onClick={onConnections} aria-label="Open universe connections">{all.filter(x=>x.connectionIds?.length).length||24} LINKS</button><button className={playing?"playing":""} onClick={onTogglePlaying} aria-label={playing?"Pause chronology":"Play chronology"}>{playing?"Ⅱ":"▶"}</button><output>{selected?.title||"Drag the chronology"}</output></div>
   </div>
   <div className="atlasTimelineBody">
    <div className="atlasTimelineScale" aria-hidden="true">{[2010,2012,2014,2016,2018,2020,2022,2024,2026,2027].map(y=><button key={y} style={{left:pos(y)+"%"}} onClick={()=>onYearChange(y)}>{y}</button>)}</div>
