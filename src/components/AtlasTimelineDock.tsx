@@ -21,7 +21,7 @@ type Props={year:number;onYearChange:(year:number)=>void;series:SeriesKey|"ALL";
 export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,selectedEpisode,playing,onTogglePlaying,onConnections}:Props){
  const all=useMemo(()=>buildChronology(),[]);
  const visible=useMemo(()=>all.filter(item=>series==="ALL"||item.seriesId===META[series].id),[all,series]);
- const counts=useMemo(()=>ORDER.reduce((acc,key)=>{acc[key]=visible.filter(x=>x.seriesId===META[key].id).length;return acc} as Record<SeriesKey,number>,{}),[visible]);
+ const counts=useMemo(()=>ORDER.reduce((acc,key)=>{acc[key]=visible.filter(x=>x.seriesId===META[key].id).length;return acc},{} as Record<SeriesKey,number>),[visible]);
  const pos=(value:number)=>((Math.max(MIN_YEAR,Math.min(MAX_YEAR,value))-MIN_YEAR)/(MAX_YEAR-MIN_YEAR))*100;
  const yearEvents=useMemo(()=>visible.filter(x=>x.start<=year&&x.end>=year),[visible,year]);
  const activeSeries=new Set(yearEvents.map(x=>x.seriesId));
