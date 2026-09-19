@@ -126,7 +126,26 @@ export default function App(){
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
  const resetMap=()=>{const mobile=window.matchMedia("(max-width:699px)").matches;setZoom(mobile?1.22:1);setPan(mobile?{x:105,y:4}:{x:0,y:0})};
- const selectLocation=(l:Location)=>{setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open")};
+ const selectLocation=(l:Location)=>{
+   setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
+   window.requestAnimationFrame(()=>{
+     const surface=mapSurfaceRef.current;
+     if(!surface)return;
+     const marker=[...surface.querySelectorAll<SVGGElement>(".marker")].find(el=>el.getAttribute("data-location-id")===l.id);
+     if(!marker)return;
+     const surfaceRect=surface.getBoundingClientRect(), markerRect=marker.getBoundingClientRect();
+     const targetX=surfaceRect.left+surfaceRect.width/2;
+     const targetY=surfaceRect.top+surfaceRect.height*.38;
+     const dx=targetX-(markerRect.left+markerRect.width/2);
+     const dy=targetY-(markerRect.top+markerRect.height/2);
+     const limit=360*(visual.current.zoom-1)+45;
+     const nextX=clamp(visual.current.x+dx,-limit,limit);
+     const nextY=clamp(visual.current.y+dy,-limit,limit);
+     visual.current={...visual.current,x:nextX,y:nextY};
+     applyMapTransform(nextX,nextY,visual.current.zoom,true);
+     setPan({x:nextX,y:nextY});
+   });
+ };
  const selectEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;if(raw?.timelineStart)setYear(Number(raw.timelineStart));setSelectedEpisode(id);setSelectedLocation(null);setView("timeline");setSheet("open")};
 
  const pointerDown=(e:React.PointerEvent<SVGSVGElement>)=>{
@@ -213,7 +232,7 @@ export default function App(){
       <path className="landShadow" d={pathGenerator(worldLand) as string} fill="#26383a" opacity=".28"/>
       <g className="countries">{worldCountries.features.map((c:any,i:number)=><path key={c.id||c.properties?.name} d={pathGenerator(c) as string} fill={countryTone(i)}><title>{c.properties?.name||"Country"}</title></path>)}</g>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
-      <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} className={selectedLocation===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
+      <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} data-location-id={l.id} className={selectedLocation===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
        <circle className="pulse" r="2.5" style={{stroke:meta.color}}/><circle className="dot" r="1.5" fill={meta.color}/>{(zoom>1.34||selectedLocation===l.id)&&<text x="4" y=".5">{l.name}</text>}
       </g>})}</g>
      </svg>
@@ -248,7 +267,7 @@ export default function App(){
 
     <section className={`contentPanel ${sheet}`}>
       <button className="panelGrab" onClick={()=>setSheet(v=>v==="open"?"peek":"open")} aria-label="Toggle information panel"><span/></button>
-      <div className="panelHeader">
+      <div className={`panelHeader ${selectedLoc||selectedEp?"detailHeader":""}`}>
        <div><small>{selectedLoc?SERIES_BY_ID[selectedLoc.seriesId]?.name:selectedEp?SERIES_BY_ID[selectedEp.seriesId]?.name:view==="map"?"ATLAS":"TWDU ATLAS"}</small><h2>{selectedLoc?.name||selectedEp?.title||(view==="map"?`${year} · ${mapYearCount} mapped`:view==="timeline"?"Chronology":"Field guide")}</h2></div>
        {(selectedLoc||selectedEp)&&<button className="closePanel" onClick={()=>{setSelectedLocation(null);setSelectedEpisode(null)}}><Icon name="close"/></button>}
       </div>
