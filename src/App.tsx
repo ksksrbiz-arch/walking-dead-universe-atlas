@@ -229,8 +229,30 @@ function LocationDetail({location}:{location:Location}){
  </div>
 }
 function MapContent({locations,onSelect}:{locations:Location[];onSelect:(l:Location)=>void}){return <div className="contentScroll"><div className="sectionTitle">Locations <span>{locations.length}</span></div><div className="cards">{locations.map(l=><button className="entityCard" key={l.id} onClick={()=>onSelect(l)}><div><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><span>{l.type} · {l.certainty}</span></div><Icon name="chevron"/></button>)}</div></div>}
-function TimelineContent({events,chronology}:{events:typeof atlasData.events;chronology:any[]}){return <div className="contentScroll"><div className="sectionTitle">Universe chronology <span>{chronology.length} nodes</span></div>{atlasData.episodes.length===0&&<article className="statusCard"><small>EPISODE REGISTRY</small><b>Episode-level chronology is ready for ingestion</b><span>The engine already merges episode records and timeline events. The current dataset still needs the full canonical episode registry; no episode facts are being invented in the UI.</span></article>}<div className="timelineList">{chronology.map((e:any)=><article key={e.kind+e.id}><div className="eventYear">{e.start||"—"}</div><div><small>{SERIES_BY_ID[e.seriesId]?.short} · {e.kind.toUpperCase()}</small><b>{e.title}</b><span>{e.certainty} · {e.precision}</span></div></article>)}</div></div>}
-
+function TimelineContent({events,chronology}:{events:typeof atlasData.events;chronology:any[]}){
+ const [episodeId,setEpisodeId]=useState<string|null>(null);
+ const episodes=useMemo(()=>chronology.filter(x=>x.kind==="episode"),[chronology]);
+ const selected=episodes.find(x=>x.id===episodeId)??null;
+ const next=selected?episodes[episodes.findIndex(x=>x.id===selected.id)+1]:null;
+ const locationIds=selected?(atlasData.episodes.find((x:any)=>x.id===selected.id)?.locationIds??[]):[];
+ const locations=atlasData.locations.filter(x=>locationIds.includes(x.id));
+ return <div className="contentScroll">
+  <div className="timelineToolbar"><div><div className="sectionTitle">Episode explorer <span>{episodes.length} episodes</span></div><p className="muted">Chronology is driven by in-universe anchors, not broadcast dates. Ranges and uncertain placements stay labeled.</p></div></div>
+  {selected&&<article className="episodeFocus">
+   <button className="closePanel" onClick={()=>setEpisodeId(null)}><Icon name="close"/></button>
+   <small>{SERIES_BY_ID[selected.seriesId]?.name} · {selected.seasonId?.toUpperCase()}E{String(selected.episodeNumber).padStart(2,"0")}</small>
+   <h3>{selected.title}</h3>
+   <div className="episodeMeta"><span>{selected.start===selected.end?selected.start:selected.start+"–"+selected.end}</span><span>{selected.certainty}</span><span>{selected.precision}</span></div>
+   {locations.length>0&&<div className="miniTags">{locations.map(l=><span key={l.id}>{l.name}</span>)}</div>}
+   {next&&<button className="watchNext" onClick={()=>setEpisodeId(next.id)}><span>WATCH NEXT IN CHRONOLOGY</span><b>{SERIES_BY_ID[next.seriesId]?.short} · {next.title}</b><small>{next.start===next.end?next.start:next.start+"–"+next.end}</small></button>}
+  </article>}
+  <div className="timelineList episodeList">{episodes.map((e:any)=>{const meta=SERIES_BY_ID[e.seriesId];return <button className={episodeId===e.id?"episodeRow selected":"episodeRow"} key={e.id} onClick={()=>setEpisodeId(e.id)}>
+    <div className="eventYear">{e.start||"?"}</div><div><small>{meta?.short} · S{e.seasonId.slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><span>{e.certainty} · {e.precision}</span></div><Icon name="chevron"/>
+  </button>})}</div>
+  <div className="sectionTitle">Major timeline events <span>{events.length}</span></div>
+  <div className="timelineList">{events.map((e:any)=><article key={e.id}><div className="eventYear">{e.year}</div><div><small>{SERIES_BY_ID[e.seriesId]?.short} · EVENT</small><b>{e.title}</b><span>{e.certainty}</span></div></article>)}</div>
+ </div>
+}
 function PeopleContent(){return <div className="contentScroll"><div className="sectionTitle">Characters <span>{atlasData.characters.length}</span></div><div className="cards">{atlasData.characters.map(c=><article className="entityCard static" key={c.id}><div><small>CHARACTER</small><b>{c.name}</b><span>{c.certainty} · cross-series links available below.</span></div></article>)}</div><div className="sectionTitle">Factions <span>{atlasData.factions.length}</span></div><div className="miniTags">{atlasData.factions.map(f=><span key={f.id}>{f.name}</span>)}</div><div className="sectionTitle">Cross-series connections <span>{atlasData.connections.length}</span></div><div className="timelineList">{atlasData.connections.map((c:any)=><article key={c.id}><div className="eventYear">↔</div><div><small>{c.type}</small><b>{c.label}</b><span>{c.fromId} → {c.toId} · {c.certainty}</span></div></article>)}</div></div>}
 
 function GuideContent({errors}:{errors:string[]}){
