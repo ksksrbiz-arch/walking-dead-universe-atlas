@@ -1,4 +1,9 @@
 import {useEffect,useMemo,useRef,useState} from "react";
+import {geoNaturalEarth1,geoPath} from "d3-geo";
+import {feature} from "topojson-client";
+// world-atlas distributes a Natural Earth 1:110m country topology for offline map rendering.
+// @ts-ignore JSON topology package data
+import world from "world-atlas/countries-110m.json";
 import type {CSSProperties} from "react";
 import {atlasData,Location,SeriesKey} from "./data";
 import {validateAtlasData} from "./lib/validateData";
@@ -17,7 +22,10 @@ const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
 };
 const SERIES_BY_ID=Object.fromEntries(Object.values(META).map(x=>[x.id,x])) as Record<string,typeof META.TWD>;
 const SERIES_KEYS=Object.keys(META) as SeriesKey[];
-const project=(lat:number,lng:number)=>({x:(lng+180)/360*100,y:(90-lat)/180*60});
+const projection=geoNaturalEarth1().fitSize([1000,600],{type:"Sphere"});
+const pathGenerator=geoPath(projection);
+const worldCountries:any=feature(world as any,(world as any).objects.countries) as any;
+const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
 const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
 
 function Icon({name}:{name:"map"|"timeline"|"people"|"guide"|"plus"|"minus"|"locate"|"search"|"close"|"chevron"}) {
@@ -157,20 +165,14 @@ export default function App(){
   <main>
    <section className="map" aria-label="Interactive Walking Dead Universe map">
     <div className="mapSurface">
-     <svg ref={svgRef} viewBox="0 0 100 60" preserveAspectRatio="xMidYMid meet"
+     <svg ref={svgRef} viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet"
        onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp}
        onWheel={wheel} onDoubleClick={doubleClick}
        style={mapStyle} className={isDragging?"dragging":""}>
-      <rect width="100" height="60" fill="#d8d6ce"/>
-      <g className="gridlines">{[10,20,30,40,50,60,70,80,90].map(x=><line key={"x"+x} x1={x} y1="0" x2={x} y2="60"/>)}{[10,20,30,40,50].map(y=><line key={"y"+y} x1="0" y1={y} x2="100" y2={y}/>)}</g>
-      <g className="landmasses">
-       <path d="M5 14 13 9 21 11 27 17 24 23 27 28 22 33 16 30 12 35 7 30 4 23Z"/>
-       <path d="M26 31 31 35 33 43 30 51 25 46 24 38 21 34Z"/>
-       <path d="M43 12 51 8 60 10 66 15 73 14 78 19 76 25 69 27 64 24 59 28 52 25 48 27 44 22Z"/>
-       <path d="M57 29 63 31 66 37 63 44 59 51 55 47 57 40 54 35Z"/>
-       <path d="M76 16 83 14 88 18 92 24 88 29 82 27 78 22Z"/>
-      </g>
-      <g className="mapLabels"><text x="16" y="38">NORTH AMERICA</text><text x="61" y="7">EUROPE</text><text x="88" y="39">ASIA</text></g>
+      <rect width="1000" height="600" fill="#d8d6ce"/>
+      <g className="graticule"><path d={pathGenerator({type:"Sphere"}) as string}/></g>
+      <g className="countries">{worldCountries.features.map((country:any)=><path key={country.id||country.properties?.name} d={pathGenerator(country) as string} />)}</g>
+      <g className="mapLabels"><text x="180" y="350">NORTH AMERICA</text><text x="550" y="150">EUROPE</text><text x="770" y="355">ASIA</text></g>
       <g className="markers">{filteredLocations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} className={selectedId===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
        <circle className="pulse" r="2.6" style={{stroke:meta.color}}/><circle r="1.25" fill={meta.color}/><text x="2.1" y=".4">{l.name}</text>
       </g>})}</g>
