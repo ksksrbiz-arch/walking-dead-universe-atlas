@@ -1,97 +1,120 @@
 # The Walking Dead Universe Atlas
 
-An interactive, data-driven atlas for the television **Walking Dead Universe (TWDU)**.
+A mobile-first, data-driven atlas for the television **Walking Dead Universe (TWDU)**.
 
-## Project goal
+## Current architecture
 
-Build a canonical-feeling reference application that connects:
+The application is now being migrated from the original standalone prototype to:
 
-- chronological watch order
-- episode-level chronology
-- interactive geography
-- characters
-- locations
-- communities
-- factions
-- cross-series connections
-- major events
-- confirmed vs inferred timeline information
+- **React**
+- **TypeScript**
+- **Vite**
+- **Cloudflare Pages**
+- normalized JSON data registries
 
-The goal is to make the universe navigable as a connected graph rather than a simple list of shows.
+Cloudflare's React (Vite) preset uses `npm run build` and `dist` as the build directory.
 
-## Current state
+## Current application
 
-**Phase 0 — working prototype**
+The React shell now provides:
 
-The repository currently contains the standalone Atlas v4 prototype. It has:
-
-- self-contained SVG geographic map
-- touch/pointer map panning
-- zoom controls
-- clickable locations
+- mobile-first map workspace
+- responsive tablet layout
+- universe-year control
 - series filtering
-- geographic filtering
-- chronology filtering
-- chronology explorer
-- schematic story routes
-- mobile-friendly layout
+- location selection
+- timeline view
+- people/relationship view foundation
+- watch-guide foundation
+- normalized series, season, location, event, character, community and faction data
+- initial data-reference validation
 
-The prototype is intentionally dependency-light so it works when opened directly from GitHub/Files.
-
-## Planned architecture
-
-The prototype will be migrated into a componentized application with a normalized data layer:
+## Data architecture
 
 ```
 data/
-  series/
-  seasons/
-  episodes/
-  events/
-  locations/
-  characters/
-  communities/
-  factions/
-  connections/
+  series.json
+  seasons.json
+  episodes.json
+  events.json
+  locations.json
+  characters.json
+  communities.json
+  factions.json
+  connections.json
+  sources.json
 
-app/
-  map/
-  timeline/
-  episodes/
-  entities/
-  watch-order/
-  search/
+src/
+  App.tsx
+  main.tsx
+  data.ts
+  lib/
+    validateData.ts
+  styles.css
 ```
 
-Every episode/event should be able to link to its participating characters, locations, factions and adjacent chronology nodes.
+The UI should consume these registries rather than becoming the source of canon facts.
 
-## Continuity rules
+## Canon precision
 
-The data model will distinguish:
+Each timeline/geographic entity can carry certainty metadata:
 
-- **confirmed** — directly established by the series
-- **inferred** — strongly supported by chronology but not explicitly dated
-- **approximate** — geographic/time estimate
-- **announced** — future production information
-- **unknown** — deliberately left unresolved
+- `confirmed`
+- `inferred`
+- `approximate`
+- `announced`
+- `unknown`
 
-We will not manufacture exact dates or travel routes when canon does not establish them.
+The Atlas deliberately avoids inventing exact dates or fictional travel routes where the source material does not establish them.
 
-## Repository
+## Build
 
-GitHub: https://github.com/ksksrbiz-arch/walking-dead-universe-atlas
+For Cloudflare Pages:
 
-## Development roadmap
+- Production branch: `main`
+- Framework preset: **React (Vite)**
+- Build command: `npm run build`
+- Build directory: `dist`
+- Root directory: `/`
 
-1. Preserve the working prototype.
-2. Establish canonical entity schemas.
-3. Import the complete series/season/episode catalog.
-4. Build the episode-level master chronology.
-5. Replace prototype map data with normalized location/event data.
-6. Add character and faction relationship graph.
-7. Add cross-show navigation.
-8. Add continuity validation/tests.
-9. Add source/uncertainty metadata.
-10. Deploy a polished public atlas.
+## Roadmap
+
+### Phase 1 — Canonical data engine
+1. Complete television series registry
+2. Complete season registry
+3. Complete episode registry
+4. Episode-level timeline events
+5. Location registry and geographic precision
+6. Character registry
+7. Community/faction registry
+8. Cross-series connection graph
+9. Source/provenance metadata
+10. Automated continuity validation
+
+### Phase 2 — Atlas engine
+- map layers
+- routes and movement events
+- location pages
+- episode pages
+- timeline navigation
+- character pages
+- relationship graph
+
+### Phase 3 — Watch-order engine
+- chronological order
+- release order
+- series/season order
+- anthology episode placement
+- crossover-aware navigation
+- alternate viewing modes
+
+### Phase 4 — Production quality
+- accessibility
+- performance
+- offline-friendly caching
+- advanced search
+- source auditing
+- visual polish
+- mobile/tablet optimization
 
 This is a fan reference project and is not affiliated with AMC Networks or the creators of The Walking Dead.
