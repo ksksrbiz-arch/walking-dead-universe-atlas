@@ -223,7 +223,7 @@ export default function App(){
     <section className={`contentPanel ${sheet}`}>
       <button className="panelGrab" onClick={()=>setSheet(v=>v==="open"?"peek":"open")} aria-label="Toggle information panel"><span/></button>
       <div className="panelHeader">
-       <div><small>{selectedLoc?SERIES_BY_ID[selectedLoc.seriesId]?.name:selectedEp?SERIES_BY_ID[selectedEp.seriesId]?.name:view==="map"?"ATLAS":"TWDU ATLAS"}</small><h2>{selectedLoc?.name||selectedEp?.title||(view==="map"?"Explore the universe":view==="timeline"?"Chronology":"Field guide")}</h2></div>
+       <div><small>{selectedLoc?SERIES_BY_ID[selectedLoc.seriesId]?.name:selectedEp?SERIES_BY_ID[selectedEp.seriesId]?.name:view==="map"?"ATLAS":"TWDU ATLAS"}</small><h2>{selectedLoc?.name||selectedEp?.title||(view==="map"?`${year} · ${mapYearCount} mapped`:view==="timeline"?"Chronology":"Field guide")}</h2></div>
        {(selectedLoc||selectedEp)&&<button className="closePanel" onClick={()=>{setSelectedLocation(null);setSelectedEpisode(null)}}><Icon name="close"/></button>}
       </div>
       {selectedLoc?<LocationDetail location={selectedLoc} onEpisode={selectEpisode}/>:selectedEp?<EpisodeDetail episode={selectedEp} onLocation={selectLocation} onEpisode={selectEpisode}/>:view==="map"?<MapContent locations={locations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent episodes={episodes} onEpisode={selectEpisode}/>:view==="people"?<PeopleContent/>:<GuideContent errors={dataErrors}/>}
