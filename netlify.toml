@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm run build:with-media"
   publish = "dist"
 
 [build.environment]
