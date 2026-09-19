@@ -1,1 +1,7262 @@
-[]
+[
+  {
+    "id": "daryl-s01-e01",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s01",
+    "episodeNumber": 1,
+    "title": "L'âme Perdue",
+    "airDate": "2023-09-10",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s01-e02",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s01",
+    "episodeNumber": 2,
+    "title": "Alouette",
+    "airDate": "2023-09-17",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s01-e03",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s01",
+    "episodeNumber": 3,
+    "title": "Paris Sera Toujours Paris",
+    "airDate": "2023-09-24",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s01-e04",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s01",
+    "episodeNumber": 4,
+    "title": "La Dame de Fer",
+    "airDate": "2023-10-01",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s01-e05",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s01",
+    "episodeNumber": 5,
+    "title": "Deux Amours",
+    "airDate": "2023-10-08",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s01-e06",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s01",
+    "episodeNumber": 6,
+    "title": "Coming Home",
+    "airDate": "2023-10-15",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s02-e01",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s02",
+    "episodeNumber": 1,
+    "title": "La Gentillesse Des Étrangers",
+    "airDate": "2024-09-29",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s02-e02",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s02",
+    "episodeNumber": 2,
+    "title": "Moulin Rouge",
+    "airDate": "2024-10-06",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s02-e03",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s02",
+    "episodeNumber": 3,
+    "title": "L'Invisible",
+    "airDate": "2024-10-13",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s02-e04",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s02",
+    "episodeNumber": 4,
+    "title": "Le Paradis Pour Toi",
+    "airDate": "2024-10-20",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s02-e05",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s02",
+    "episodeNumber": 5,
+    "title": "Vouloir, C'est Pouvoir",
+    "airDate": "2024-10-27",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s02-e06",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s02",
+    "episodeNumber": 6,
+    "title": "Au Revoir Les Enfants",
+    "airDate": "2024-11-03",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s03-e01",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s03",
+    "episodeNumber": 1,
+    "title": "Costa Da Morte",
+    "airDate": "2025-09-07",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s03-e02",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s03",
+    "episodeNumber": 2,
+    "title": "La Ofrenda",
+    "airDate": "2025-09-14",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s03-e03",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s03",
+    "episodeNumber": 3,
+    "title": "El Sacrificio",
+    "airDate": "2025-09-21",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s03-e04",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s03",
+    "episodeNumber": 4,
+    "title": "La Justicia Fronteriza",
+    "airDate": "2025-09-28",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s03-e05",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s03",
+    "episodeNumber": 5,
+    "title": "Limbo",
+    "airDate": "2025-10-05",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s03-e06",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s03",
+    "episodeNumber": 6,
+    "title": "Contrabando",
+    "airDate": "2025-10-12",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "daryl-s03-e07",
+    "seriesId": "daryl",
+    "seasonId": "daryl-s03",
+    "episodeNumber": 7,
+    "title": "Solaz Del Mar",
+    "airDate": "2025-10-19",
+    "timelineStart": 2023,
+    "timelineEnd": 2025,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-daryl"
+    ]
+  },
+  {
+    "id": "dead-s01-e01",
+    "seriesId": "dead",
+    "seasonId": "dead-s01",
+    "episodeNumber": 1,
+    "title": "Old Acquaintances",
+    "airDate": "2023-06-15",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s01-e02",
+    "seriesId": "dead",
+    "seasonId": "dead-s01",
+    "episodeNumber": 2,
+    "title": "Who's There?",
+    "airDate": "2023-06-22",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s01-e03",
+    "seriesId": "dead",
+    "seasonId": "dead-s01",
+    "episodeNumber": 3,
+    "title": "People Are a Resource",
+    "airDate": "2023-06-29",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s01-e04",
+    "seriesId": "dead",
+    "seasonId": "dead-s01",
+    "episodeNumber": 4,
+    "title": "Everybody Wins a Prize",
+    "airDate": "2023-07-06",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s01-e05",
+    "seriesId": "dead",
+    "seasonId": "dead-s01",
+    "episodeNumber": 5,
+    "title": "Stories We Tell Ourselves",
+    "airDate": "2023-07-13",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s01-e06",
+    "seriesId": "dead",
+    "seasonId": "dead-s01",
+    "episodeNumber": 6,
+    "title": "Doma Smo",
+    "airDate": "2023-07-20",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s02-e01",
+    "seriesId": "dead",
+    "seasonId": "dead-s02",
+    "episodeNumber": 1,
+    "title": "Power Equals Power",
+    "airDate": "2025-05-04",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s02-e02",
+    "seriesId": "dead",
+    "seasonId": "dead-s02",
+    "episodeNumber": 2,
+    "title": "Another Shitty Lesson",
+    "airDate": "2025-05-11",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s02-e03",
+    "seriesId": "dead",
+    "seasonId": "dead-s02",
+    "episodeNumber": 3,
+    "title": "Why Did the Mainlanders Cross the River?",
+    "airDate": "2025-05-18",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s02-e04",
+    "seriesId": "dead",
+    "seasonId": "dead-s02",
+    "episodeNumber": 4,
+    "title": "Feisty Friendly",
+    "airDate": "2025-05-25",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s02-e05",
+    "seriesId": "dead",
+    "seasonId": "dead-s02",
+    "episodeNumber": 5,
+    "title": "The Bird Always Knows",
+    "airDate": "2025-06-01",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s02-e06",
+    "seriesId": "dead",
+    "seasonId": "dead-s02",
+    "episodeNumber": 6,
+    "title": "Bridge Partners Are Hard to Come By These Days",
+    "airDate": "2025-06-08",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s02-e07",
+    "seriesId": "dead",
+    "seasonId": "dead-s02",
+    "episodeNumber": 7,
+    "title": "Novi Dan, Novi Početak",
+    "airDate": "2025-06-15",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s02-e08",
+    "seriesId": "dead",
+    "seasonId": "dead-s02",
+    "episodeNumber": 8,
+    "title": "If History Were a Conflagration",
+    "airDate": "2025-06-22",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s03-e01",
+    "seriesId": "dead",
+    "seasonId": "dead-s03",
+    "episodeNumber": 1,
+    "title": "Trillium",
+    "airDate": "2026-07-26",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s03-e02",
+    "seriesId": "dead",
+    "seasonId": "dead-s03",
+    "episodeNumber": 2,
+    "title": "Haven",
+    "airDate": "2026-08-02",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s03-e03",
+    "seriesId": "dead",
+    "seasonId": "dead-s03",
+    "episodeNumber": 3,
+    "title": "Emigrants",
+    "airDate": "2026-08-09",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s03-e04",
+    "seriesId": "dead",
+    "seasonId": "dead-s03",
+    "episodeNumber": 4,
+    "title": "Found / Lost",
+    "airDate": "2026-08-16",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s03-e05",
+    "seriesId": "dead",
+    "seasonId": "dead-s03",
+    "episodeNumber": 5,
+    "title": "Imperialis",
+    "airDate": "2026-08-23",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s03-e06",
+    "seriesId": "dead",
+    "seasonId": "dead-s03",
+    "episodeNumber": 6,
+    "title": "Genesis",
+    "airDate": "2026-08-30",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s03-e07",
+    "seriesId": "dead",
+    "seasonId": "dead-s03",
+    "episodeNumber": 7,
+    "title": "Hourglass",
+    "airDate": "2026-09-06",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "dead-s03-e08",
+    "seriesId": "dead",
+    "seasonId": "dead-s03",
+    "episodeNumber": 8,
+    "title": "Tenebrae",
+    "airDate": "2026-09-13",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-dead"
+    ]
+  },
+  {
+    "id": "ftwd-s01-e01",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s01",
+    "episodeNumber": 1,
+    "title": "Pilot",
+    "airDate": "2015-08-23",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s01-e02",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s01",
+    "episodeNumber": 2,
+    "title": "So Close, Yet So Far",
+    "airDate": "2015-08-30",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s01-e03",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s01",
+    "episodeNumber": 3,
+    "title": "The Dog",
+    "airDate": "2015-09-13",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s01-e04",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s01",
+    "episodeNumber": 4,
+    "title": "Not Fade Away",
+    "airDate": "2015-09-20",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s01-e05",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s01",
+    "episodeNumber": 5,
+    "title": "Cobalt",
+    "airDate": "2015-09-27",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s01-e06",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s01",
+    "episodeNumber": 6,
+    "title": "The Good Man",
+    "airDate": "2015-10-04",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e01",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 1,
+    "title": "Monster",
+    "airDate": "2016-04-10",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e02",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 2,
+    "title": "We All Fall Down",
+    "airDate": "2016-04-17",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e03",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 3,
+    "title": "Ouroboros",
+    "airDate": "2016-04-24",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e04",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 4,
+    "title": "Blood in the Streets",
+    "airDate": "2016-05-01",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e05",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 5,
+    "title": "Captive",
+    "airDate": "2016-05-08",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e06",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 6,
+    "title": "Sicut Cervus",
+    "airDate": "2016-05-15",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e07",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 7,
+    "title": "Shiva",
+    "airDate": "2016-05-22",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e08",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 8,
+    "title": "Grotesque",
+    "airDate": "2016-08-21",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e09",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 9,
+    "title": "Los Muertos",
+    "airDate": "2016-08-28",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e10",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 10,
+    "title": "Do Not Disturb",
+    "airDate": "2016-09-04",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e11",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 11,
+    "title": "Pablo & Jessica",
+    "airDate": "2016-09-11",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e12",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 12,
+    "title": "Pillar of Salt",
+    "airDate": "2016-09-18",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e13",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 13,
+    "title": "Date of Death",
+    "airDate": "2016-09-25",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e14",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 14,
+    "title": "Wrath",
+    "airDate": "2016-10-02",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s02-e15",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s02",
+    "episodeNumber": 15,
+    "title": "North",
+    "airDate": "2016-10-02",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e01",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 1,
+    "title": "Eye of the Beholder",
+    "airDate": "2017-06-04",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e02",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 2,
+    "title": "The New Frontier",
+    "airDate": "2017-06-04",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e03",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 3,
+    "title": "TEOTWAWKI",
+    "airDate": "2017-06-11",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e04",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 4,
+    "title": "100",
+    "airDate": "2017-06-18",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e05",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 5,
+    "title": "Burning in Water, Drowning in Flame",
+    "airDate": "2017-06-25",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e06",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 6,
+    "title": "Red Dirt",
+    "airDate": "2017-07-02",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e07",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 7,
+    "title": "The Unveiling",
+    "airDate": "2017-07-09",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e08",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 8,
+    "title": "Children of Wrath",
+    "airDate": "2017-07-09",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e09",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 9,
+    "title": "Minotaur",
+    "airDate": "2017-09-10",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e10",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 10,
+    "title": "The Diviner",
+    "airDate": "2017-09-10",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e11",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 11,
+    "title": "La Serpiente",
+    "airDate": "2017-09-17",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e12",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 12,
+    "title": "Brother's Keeper",
+    "airDate": "2017-09-24",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e13",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 13,
+    "title": "This Land is Your Land",
+    "airDate": "2017-10-01",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e14",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 14,
+    "title": "El Matadero",
+    "airDate": "2017-10-08",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e15",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 15,
+    "title": "Things Bad Begun",
+    "airDate": "2017-10-15",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s03-e16",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s03",
+    "episodeNumber": 16,
+    "title": "Sleigh Ride",
+    "airDate": "2017-10-15",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e01",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 1,
+    "title": "What's Your Story?",
+    "airDate": "2018-04-15",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e02",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 2,
+    "title": "Another Day in the Diamond",
+    "airDate": "2018-04-22",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e03",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 3,
+    "title": "Good Out Here",
+    "airDate": "2018-04-29",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e04",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 4,
+    "title": "Buried",
+    "airDate": "2018-05-06",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e05",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 5,
+    "title": "Laura",
+    "airDate": "2018-05-13",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e06",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 6,
+    "title": "Just in Case",
+    "airDate": "2018-05-20",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e07",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 7,
+    "title": "The Wrong Side of Where You Are Now",
+    "airDate": "2018-06-03",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e08",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 8,
+    "title": "No One's Gone",
+    "airDate": "2018-06-10",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e09",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 9,
+    "title": "People Like Us",
+    "airDate": "2018-08-12",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e10",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 10,
+    "title": "Close Your Eyes",
+    "airDate": "2018-08-19",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e11",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 11,
+    "title": "The Code",
+    "airDate": "2018-08-26",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e12",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 12,
+    "title": "Weak",
+    "airDate": "2018-09-02",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e13",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 13,
+    "title": "Blackjack",
+    "airDate": "2018-09-09",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e14",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 14,
+    "title": "MM 54",
+    "airDate": "2018-09-16",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e15",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 15,
+    "title": "I Lose People...",
+    "airDate": "2018-09-23",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s04-e16",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s04",
+    "episodeNumber": 16,
+    "title": "... I Lose Myself",
+    "airDate": "2018-09-30",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e01",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 1,
+    "title": "Here to Help",
+    "airDate": "2019-06-02",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e02",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 2,
+    "title": "The Hurt That Will Happen",
+    "airDate": "2019-06-09",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e03",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 3,
+    "title": "Humbug's Gulch",
+    "airDate": "2019-06-16",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e04",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 4,
+    "title": "Skidmark",
+    "airDate": "2019-06-23",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e05",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 5,
+    "title": "The End of Everything",
+    "airDate": "2019-06-30",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e06",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 6,
+    "title": "The Little Prince",
+    "airDate": "2019-07-07",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e07",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 7,
+    "title": "Still Standing",
+    "airDate": "2019-07-14",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e08",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 8,
+    "title": "Is Anybody Out There?",
+    "airDate": "2019-07-21",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e09",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 9,
+    "title": "Channel 4",
+    "airDate": "2019-08-11",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e10",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 10,
+    "title": "210 Words Per Minute",
+    "airDate": "2019-08-18",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e11",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 11,
+    "title": "You're Still Here",
+    "airDate": "2019-08-25",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e12",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 12,
+    "title": "Ner Tamid",
+    "airDate": "2019-09-01",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e13",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 13,
+    "title": "Leave What You Don't",
+    "airDate": "2019-09-08",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e14",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 14,
+    "title": "Today and Tomorrow",
+    "airDate": "2019-09-15",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e15",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 15,
+    "title": "Channel 5",
+    "airDate": "2019-09-22",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s05-e16",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s05",
+    "episodeNumber": 16,
+    "title": "End of the Line",
+    "airDate": "2019-09-29",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e01",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 1,
+    "title": "The End is the Beginning",
+    "airDate": "2020-10-11",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e02",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 2,
+    "title": "Welcome to the Club",
+    "airDate": "2020-10-18",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e03",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 3,
+    "title": "Alaska",
+    "airDate": "2020-10-25",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e04",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 4,
+    "title": "The Key",
+    "airDate": "2020-11-01",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e05",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 5,
+    "title": "Honey",
+    "airDate": "2020-11-08",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e06",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 6,
+    "title": "Bury Her Next to Jasper's Leg",
+    "airDate": "2020-11-15",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e07",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 7,
+    "title": "Damage from the Inside",
+    "airDate": "2020-11-22",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e08",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 8,
+    "title": "The Door",
+    "airDate": "2021-04-11",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e09",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 9,
+    "title": "Things Left to Do",
+    "airDate": "2021-04-18",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e10",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 10,
+    "title": "Handle with Care",
+    "airDate": "2021-04-25",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e11",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 11,
+    "title": "The Holding",
+    "airDate": "2021-05-02",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e12",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 12,
+    "title": "In Dreams",
+    "airDate": "2021-05-09",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e13",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 13,
+    "title": "J.D.",
+    "airDate": "2021-05-16",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e14",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 14,
+    "title": "Mother",
+    "airDate": "2021-05-23",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e15",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 15,
+    "title": "USS Pennsylvania",
+    "airDate": "2021-06-06",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s06-e16",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s06",
+    "episodeNumber": 16,
+    "title": "The Beginning",
+    "airDate": "2021-06-13",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e01",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 1,
+    "title": "The Beacon",
+    "airDate": "2021-10-10",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e02",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 2,
+    "title": "Six Hours",
+    "airDate": "2021-10-17",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e03",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 3,
+    "title": "Cindy Hawkins",
+    "airDate": "2021-10-24",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e04",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 4,
+    "title": "Breathe With Me",
+    "airDate": "2021-10-31",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e05",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 5,
+    "title": "Till Death",
+    "airDate": "2021-11-07",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e06",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 6,
+    "title": "Reclamation",
+    "airDate": "2021-11-14",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e07",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 7,
+    "title": "The Portrait",
+    "airDate": "2021-11-21",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e08",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 8,
+    "title": "PADRE",
+    "airDate": "2021-11-28",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e09",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 9,
+    "title": "Follow Me",
+    "airDate": "2022-04-17",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e10",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 10,
+    "title": "Mourning Cloak",
+    "airDate": "2022-04-17",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e11",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 11,
+    "title": "Ofelia",
+    "airDate": "2022-04-24",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e12",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 12,
+    "title": "Sonny Boy",
+    "airDate": "2022-05-01",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e13",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 13,
+    "title": "The Raft",
+    "airDate": "2022-05-08",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e14",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 14,
+    "title": "Divine Providence",
+    "airDate": "2022-05-15",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e15",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 15,
+    "title": "Amina",
+    "airDate": "2022-05-22",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s07-e16",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s07",
+    "episodeNumber": 16,
+    "title": "Gone",
+    "airDate": "2022-05-29",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e01",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 1,
+    "title": "Remember What They Took From You",
+    "airDate": "2023-05-14",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e02",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 2,
+    "title": "Blue Jay",
+    "airDate": "2023-05-21",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e03",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 3,
+    "title": "Odessa",
+    "airDate": "2023-05-28",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e04",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 4,
+    "title": "King County",
+    "airDate": "2023-06-04",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e05",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 5,
+    "title": "More Time Than You Know",
+    "airDate": "2023-06-11",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e06",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 6,
+    "title": "All I See Is Red",
+    "airDate": "2023-06-18",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e07",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 7,
+    "title": "Anton",
+    "airDate": "2023-10-22",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e08",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 8,
+    "title": "Iron Tiger",
+    "airDate": "2023-10-29",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e09",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 9,
+    "title": "Sanctuary",
+    "airDate": "2023-11-05",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e10",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 10,
+    "title": "Keeping Her Alive",
+    "airDate": "2023-11-12",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e11",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 11,
+    "title": "Fighting Like You",
+    "airDate": "2023-11-19",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "ftwd-s08-e12",
+    "seriesId": "ftwd",
+    "seasonId": "ftwd-s08",
+    "episodeNumber": 12,
+    "title": "The Road Ahead",
+    "airDate": "2023-11-19",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-ftwd"
+    ]
+  },
+  {
+    "id": "owl-s01-e01",
+    "seriesId": "owl",
+    "seasonId": "owl-s01",
+    "episodeNumber": 1,
+    "title": "Years",
+    "airDate": "2024-02-25",
+    "timelineStart": 2019,
+    "timelineEnd": 2023,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-owl"
+    ]
+  },
+  {
+    "id": "owl-s01-e02",
+    "seriesId": "owl",
+    "seasonId": "owl-s01",
+    "episodeNumber": 2,
+    "title": "Gone",
+    "airDate": "2024-03-03",
+    "timelineStart": 2019,
+    "timelineEnd": 2023,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-owl"
+    ]
+  },
+  {
+    "id": "owl-s01-e03",
+    "seriesId": "owl",
+    "seasonId": "owl-s01",
+    "episodeNumber": 3,
+    "title": "Bye",
+    "airDate": "2024-03-10",
+    "timelineStart": 2019,
+    "timelineEnd": 2023,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-owl"
+    ]
+  },
+  {
+    "id": "owl-s01-e04",
+    "seriesId": "owl",
+    "seasonId": "owl-s01",
+    "episodeNumber": 4,
+    "title": "What We",
+    "airDate": "2024-03-17",
+    "timelineStart": 2019,
+    "timelineEnd": 2023,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-owl"
+    ]
+  },
+  {
+    "id": "owl-s01-e05",
+    "seriesId": "owl",
+    "seasonId": "owl-s01",
+    "episodeNumber": 5,
+    "title": "Become",
+    "airDate": "2024-03-24",
+    "timelineStart": 2019,
+    "timelineEnd": 2023,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-owl"
+    ]
+  },
+  {
+    "id": "owl-s01-e06",
+    "seriesId": "owl",
+    "seasonId": "owl-s01",
+    "episodeNumber": 6,
+    "title": "The Last Time",
+    "airDate": "2024-03-31",
+    "timelineStart": 2019,
+    "timelineEnd": 2023,
+    "timelinePrecision": "range",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-owl"
+    ]
+  },
+  {
+    "id": "tales-s01-e01",
+    "seriesId": "tales",
+    "seasonId": "tales-s01",
+    "episodeNumber": 1,
+    "title": "Evie / Joe",
+    "airDate": "2022-08-14",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-tales"
+    ]
+  },
+  {
+    "id": "tales-s01-e02",
+    "seriesId": "tales",
+    "seasonId": "tales-s01",
+    "episodeNumber": 2,
+    "title": "Blair / Gina",
+    "airDate": "2022-08-21",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-tales"
+    ]
+  },
+  {
+    "id": "tales-s01-e03",
+    "seriesId": "tales",
+    "seasonId": "tales-s01",
+    "episodeNumber": 3,
+    "title": "Dee",
+    "airDate": "2022-08-28",
+    "timelineStart": 2011,
+    "timelineEnd": 2011,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-tales"
+    ]
+  },
+  {
+    "id": "tales-s01-e04",
+    "seriesId": "tales",
+    "seasonId": "tales-s01",
+    "episodeNumber": 4,
+    "title": "Amy / Dr. Everett",
+    "airDate": "2022-09-04",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-tales"
+    ]
+  },
+  {
+    "id": "tales-s01-e05",
+    "seriesId": "tales",
+    "seasonId": "tales-s01",
+    "episodeNumber": 5,
+    "title": "Davon",
+    "airDate": "2022-09-11",
+    "timelineStart": 2025,
+    "timelineEnd": 2025,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-tales"
+    ]
+  },
+  {
+    "id": "tales-s01-e06",
+    "seriesId": "tales",
+    "seasonId": "tales-s01",
+    "episodeNumber": 6,
+    "title": "La Doña",
+    "airDate": "2022-09-18",
+    "timelineStart": null,
+    "timelineEnd": null,
+    "timelinePrecision": "year",
+    "certainty": "unknown",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-tales"
+    ]
+  },
+  {
+    "id": "twd-s01-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s01",
+    "episodeNumber": 1,
+    "title": "Days Gone Bye",
+    "airDate": "2010-10-31",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s01-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s01",
+    "episodeNumber": 2,
+    "title": "Guts",
+    "airDate": "2010-11-07",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s01-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s01",
+    "episodeNumber": 3,
+    "title": "Tell It to the Frogs",
+    "airDate": "2010-11-14",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s01-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s01",
+    "episodeNumber": 4,
+    "title": "Vatos",
+    "airDate": "2010-11-21",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s01-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s01",
+    "episodeNumber": 5,
+    "title": "Wildfire",
+    "airDate": "2010-11-28",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s01-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s01",
+    "episodeNumber": 6,
+    "title": "TS-19",
+    "airDate": "2010-12-05",
+    "timelineStart": 2010,
+    "timelineEnd": 2010,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 1,
+    "title": "What Lies Ahead",
+    "airDate": "2011-10-16",
+    "timelineStart": 2011,
+    "timelineEnd": 2011,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 2,
+    "title": "Bloodletting",
+    "airDate": "2011-10-23",
+    "timelineStart": 2011,
+    "timelineEnd": 2011,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 3,
+    "title": "Save the Last One",
+    "airDate": "2011-10-30",
+    "timelineStart": 2011,
+    "timelineEnd": 2011,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 4,
+    "title": "Cherokee Rose",
+    "airDate": "2011-11-06",
+    "timelineStart": 2011,
+    "timelineEnd": 2011,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 5,
+    "title": "Chupacabra",
+    "airDate": "2011-11-13",
+    "timelineStart": 2011,
+    "timelineEnd": 2011,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 6,
+    "title": "Secrets",
+    "airDate": "2011-11-20",
+    "timelineStart": 2011,
+    "timelineEnd": 2011,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 7,
+    "title": "Pretty Much Dead Already",
+    "airDate": "2011-11-27",
+    "timelineStart": 2011,
+    "timelineEnd": 2011,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 8,
+    "title": "Nebraska",
+    "airDate": "2012-02-12",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 9,
+    "title": "Triggerfinger",
+    "airDate": "2012-02-19",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 10,
+    "title": "18 Miles Out",
+    "airDate": "2012-02-26",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 11,
+    "title": "Judge, Jury, Executioner",
+    "airDate": "2012-03-04",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 12,
+    "title": "Better Angels",
+    "airDate": "2012-03-11",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s02-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s02",
+    "episodeNumber": 13,
+    "title": "Beside the Dying Fire",
+    "airDate": "2012-03-18",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 1,
+    "title": "Seed",
+    "airDate": "2012-10-14",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 2,
+    "title": "Sick",
+    "airDate": "2012-10-21",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 3,
+    "title": "Walk with Me",
+    "airDate": "2012-10-28",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 4,
+    "title": "Killer Within",
+    "airDate": "2012-11-04",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 5,
+    "title": "Say the Word",
+    "airDate": "2012-11-11",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 6,
+    "title": "Hounded",
+    "airDate": "2012-11-18",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 7,
+    "title": "When the Dead Come Knocking",
+    "airDate": "2012-11-25",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 8,
+    "title": "Made to Suffer",
+    "airDate": "2012-12-02",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 9,
+    "title": "The Suicide King",
+    "airDate": "2013-02-10",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 10,
+    "title": "Home",
+    "airDate": "2013-02-17",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 11,
+    "title": "I Ain't a Judas",
+    "airDate": "2013-02-24",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 12,
+    "title": "Clear",
+    "airDate": "2013-03-03",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 13,
+    "title": "Arrow on the Doorpost",
+    "airDate": "2013-03-10",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e14",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 14,
+    "title": "Prey",
+    "airDate": "2013-03-17",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e15",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 15,
+    "title": "This Sorrowful Life",
+    "airDate": "2013-03-24",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s03-e16",
+    "seriesId": "twd",
+    "seasonId": "twd-s03",
+    "episodeNumber": 16,
+    "title": "Welcome to the Tombs",
+    "airDate": "2013-03-31",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 1,
+    "title": "30 Days Without an Accident",
+    "airDate": "2013-10-13",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 2,
+    "title": "Infected",
+    "airDate": "2013-10-20",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 3,
+    "title": "Isolation",
+    "airDate": "2013-10-27",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 4,
+    "title": "Indifference",
+    "airDate": "2013-11-03",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 5,
+    "title": "Internment",
+    "airDate": "2013-11-10",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 6,
+    "title": "Live Bait",
+    "airDate": "2013-11-17",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 7,
+    "title": "Dead Weight",
+    "airDate": "2013-11-24",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 8,
+    "title": "Too Far Gone",
+    "airDate": "2013-12-01",
+    "timelineStart": 2013,
+    "timelineEnd": 2013,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 9,
+    "title": "After",
+    "airDate": "2014-02-09",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 10,
+    "title": "Inmates",
+    "airDate": "2014-02-16",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 11,
+    "title": "Claimed",
+    "airDate": "2014-02-23",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 12,
+    "title": "Still",
+    "airDate": "2014-03-02",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 13,
+    "title": "Alone",
+    "airDate": "2014-03-09",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e14",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 14,
+    "title": "The Grove",
+    "airDate": "2014-03-16",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e15",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 15,
+    "title": "Us",
+    "airDate": "2014-03-23",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s04-e16",
+    "seriesId": "twd",
+    "seasonId": "twd-s04",
+    "episodeNumber": 16,
+    "title": "A",
+    "airDate": "2014-03-30",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 1,
+    "title": "No Sanctuary",
+    "airDate": "2014-10-12",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 2,
+    "title": "Strangers",
+    "airDate": "2014-10-19",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 3,
+    "title": "Four Walls and a Roof",
+    "airDate": "2014-10-26",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 4,
+    "title": "Slabtown",
+    "airDate": "2014-11-02",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 5,
+    "title": "Self Help",
+    "airDate": "2014-11-09",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 6,
+    "title": "Consumed",
+    "airDate": "2014-11-16",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 7,
+    "title": "Crossed",
+    "airDate": "2014-11-23",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 8,
+    "title": "Coda",
+    "airDate": "2014-11-30",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 9,
+    "title": "What Happened and What's Going On",
+    "airDate": "2015-02-08",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 10,
+    "title": "Them",
+    "airDate": "2015-02-15",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 11,
+    "title": "The Distance",
+    "airDate": "2015-02-22",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 12,
+    "title": "Remember",
+    "airDate": "2015-03-01",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 13,
+    "title": "Forget",
+    "airDate": "2015-03-08",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e14",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 14,
+    "title": "Spend",
+    "airDate": "2015-03-15",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e15",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 15,
+    "title": "Try",
+    "airDate": "2015-03-22",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s05-e16",
+    "seriesId": "twd",
+    "seasonId": "twd-s05",
+    "episodeNumber": 16,
+    "title": "Conquer",
+    "airDate": "2015-03-29",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 1,
+    "title": "First Time Again",
+    "airDate": "2015-10-11",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 2,
+    "title": "JSS",
+    "airDate": "2015-10-18",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 3,
+    "title": "Thank You",
+    "airDate": "2015-10-25",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 4,
+    "title": "Here's Not Here",
+    "airDate": "2015-11-01",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 5,
+    "title": "Now",
+    "airDate": "2015-11-08",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 6,
+    "title": "Always Accountable",
+    "airDate": "2015-11-15",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 7,
+    "title": "Heads Up",
+    "airDate": "2015-11-22",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 8,
+    "title": "Start to Finish",
+    "airDate": "2015-11-29",
+    "timelineStart": 2015,
+    "timelineEnd": 2015,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 9,
+    "title": "No Way Out",
+    "airDate": "2016-02-14",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 10,
+    "title": "The Next World",
+    "airDate": "2016-02-21",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 11,
+    "title": "Knots Untie",
+    "airDate": "2016-02-28",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 12,
+    "title": "Not Tomorrow Yet",
+    "airDate": "2016-03-06",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 13,
+    "title": "The Same Boat",
+    "airDate": "2016-03-13",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e14",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 14,
+    "title": "Twice as Far",
+    "airDate": "2016-03-20",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e15",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 15,
+    "title": "East",
+    "airDate": "2016-03-27",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s06-e16",
+    "seriesId": "twd",
+    "seasonId": "twd-s06",
+    "episodeNumber": 16,
+    "title": "Last Day on Earth",
+    "airDate": "2016-04-03",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 1,
+    "title": "The Day Will Come When You Won't Be",
+    "airDate": "2016-10-23",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 2,
+    "title": "The Well",
+    "airDate": "2016-10-30",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 3,
+    "title": "The Cell",
+    "airDate": "2016-11-06",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 4,
+    "title": "Service",
+    "airDate": "2016-11-13",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 5,
+    "title": "Go Getters",
+    "airDate": "2016-11-20",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 6,
+    "title": "Swear",
+    "airDate": "2016-11-27",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 7,
+    "title": "Sing Me a Song",
+    "airDate": "2016-12-04",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 8,
+    "title": "Hearts Still Beating",
+    "airDate": "2016-12-11",
+    "timelineStart": 2016,
+    "timelineEnd": 2016,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 9,
+    "title": "Rock in the Road",
+    "airDate": "2017-02-12",
+    "timelineStart": 2017,
+    "timelineEnd": 2017,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 10,
+    "title": "New Best Friends",
+    "airDate": "2017-02-19",
+    "timelineStart": 2017,
+    "timelineEnd": 2017,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 11,
+    "title": "Hostiles and Calamities",
+    "airDate": "2017-02-26",
+    "timelineStart": 2017,
+    "timelineEnd": 2017,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 12,
+    "title": "Say Yes",
+    "airDate": "2017-03-05",
+    "timelineStart": 2017,
+    "timelineEnd": 2017,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 13,
+    "title": "Bury Me Here",
+    "airDate": "2017-03-12",
+    "timelineStart": 2017,
+    "timelineEnd": 2017,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e14",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 14,
+    "title": "The Other Side",
+    "airDate": "2017-03-19",
+    "timelineStart": 2017,
+    "timelineEnd": 2017,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e15",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 15,
+    "title": "Something They Need",
+    "airDate": "2017-03-26",
+    "timelineStart": 2017,
+    "timelineEnd": 2017,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s07-e16",
+    "seriesId": "twd",
+    "seasonId": "twd-s07",
+    "episodeNumber": 16,
+    "title": "The First Day of the Rest of Your Life",
+    "airDate": "2017-04-02",
+    "timelineStart": 2017,
+    "timelineEnd": 2017,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 1,
+    "title": "Mercy",
+    "airDate": "2017-10-22",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 2,
+    "title": "The Damned",
+    "airDate": "2017-10-29",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 3,
+    "title": "Monsters",
+    "airDate": "2017-11-05",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 4,
+    "title": "Some Guy",
+    "airDate": "2017-11-12",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 5,
+    "title": "The Big Scary U",
+    "airDate": "2017-11-19",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 6,
+    "title": "The King, the Widow, and Rick",
+    "airDate": "2017-11-26",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 7,
+    "title": "Time for After",
+    "airDate": "2017-12-03",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 8,
+    "title": "How It's Gotta Be",
+    "airDate": "2017-12-10",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 9,
+    "title": "Honor",
+    "airDate": "2018-02-25",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 10,
+    "title": "The Lost and the Plunderers",
+    "airDate": "2018-03-04",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 11,
+    "title": "Dead or Alive Or",
+    "airDate": "2018-03-11",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 12,
+    "title": "The Key",
+    "airDate": "2018-03-18",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 13,
+    "title": "Do Not Send Us Astray",
+    "airDate": "2018-03-25",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e14",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 14,
+    "title": "Still Gotta Mean Something",
+    "airDate": "2018-04-01",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e15",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 15,
+    "title": "Worth",
+    "airDate": "2018-04-08",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s08-e16",
+    "seriesId": "twd",
+    "seasonId": "twd-s08",
+    "episodeNumber": 16,
+    "title": "Wrath",
+    "airDate": "2018-04-15",
+    "timelineStart": 2012,
+    "timelineEnd": 2012,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 1,
+    "title": "A New Beginning",
+    "airDate": "2018-10-07",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 2,
+    "title": "The Bridge",
+    "airDate": "2018-10-14",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 3,
+    "title": "Warning Signs",
+    "airDate": "2018-10-21",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 4,
+    "title": "The Obliged",
+    "airDate": "2018-10-28",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 5,
+    "title": "What Comes After",
+    "airDate": "2018-11-04",
+    "timelineStart": 2014,
+    "timelineEnd": 2014,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 6,
+    "title": "Who Are You Now?",
+    "airDate": "2018-11-11",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 7,
+    "title": "Stradivarius",
+    "airDate": "2018-11-18",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 8,
+    "title": "Evolution",
+    "airDate": "2018-11-25",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 9,
+    "title": "Adaptation",
+    "airDate": "2019-02-10",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 10,
+    "title": "Omega",
+    "airDate": "2019-02-17",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 11,
+    "title": "Bounty",
+    "airDate": "2019-02-24",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 12,
+    "title": "Guardians",
+    "airDate": "2019-03-03",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 13,
+    "title": "Chokepoint",
+    "airDate": "2019-03-10",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e14",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 14,
+    "title": "Scars",
+    "airDate": "2019-03-17",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e15",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 15,
+    "title": "The Calm Before",
+    "airDate": "2019-03-24",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s09-e16",
+    "seriesId": "twd",
+    "seasonId": "twd-s09",
+    "episodeNumber": 16,
+    "title": "The Storm",
+    "airDate": "2019-03-31",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 1,
+    "title": "Lines We Cross",
+    "airDate": "2019-10-06",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 2,
+    "title": "We Are the End of the World",
+    "airDate": "2019-10-13",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 3,
+    "title": "Ghosts",
+    "airDate": "2019-10-20",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 4,
+    "title": "Silence the Whisperers",
+    "airDate": "2019-10-27",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 5,
+    "title": "What It Always Is",
+    "airDate": "2019-11-03",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 6,
+    "title": "Bonds",
+    "airDate": "2019-11-10",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 7,
+    "title": "Open Your Eyes",
+    "airDate": "2019-11-17",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 8,
+    "title": "The World Before",
+    "airDate": "2019-11-24",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 9,
+    "title": "Squeeze",
+    "airDate": "2020-02-23",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 10,
+    "title": "Stalker",
+    "airDate": "2020-03-01",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 11,
+    "title": "Morning Star",
+    "airDate": "2020-03-08",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 12,
+    "title": "Walk with Us",
+    "airDate": "2020-03-15",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 13,
+    "title": "What We Become",
+    "airDate": "2020-03-22",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e14",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 14,
+    "title": "Look at the Flowers",
+    "airDate": "2020-03-29",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e15",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 15,
+    "title": "The Tower",
+    "airDate": "2020-04-05",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e16",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 16,
+    "title": "A Certain Doom",
+    "airDate": "2020-10-04",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e17",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 17,
+    "title": "Home Sweet Home",
+    "airDate": "2021-02-28",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e18",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 18,
+    "title": "Find Me",
+    "airDate": "2021-03-07",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e19",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 19,
+    "title": "One More",
+    "airDate": "2021-03-14",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e20",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 20,
+    "title": "Splinter",
+    "airDate": "2021-03-21",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e21",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 21,
+    "title": "Diverged",
+    "airDate": "2021-03-28",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s10-e22",
+    "seriesId": "twd",
+    "seasonId": "twd-s10",
+    "episodeNumber": 22,
+    "title": "Here's Negan",
+    "airDate": "2021-04-04",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e01",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 1,
+    "title": "Acheron: Part 1",
+    "airDate": "2021-08-15",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e02",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 2,
+    "title": "Acheron: Part 2",
+    "airDate": "2021-08-22",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e03",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 3,
+    "title": "Hunted",
+    "airDate": "2021-08-29",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e04",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 4,
+    "title": "Rendition",
+    "airDate": "2021-09-05",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e05",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 5,
+    "title": "Out of the Ashes",
+    "airDate": "2021-09-12",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e06",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 6,
+    "title": "On the Inside",
+    "airDate": "2021-09-19",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e07",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 7,
+    "title": "Promises Broken",
+    "airDate": "2021-09-26",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e08",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 8,
+    "title": "For Blood",
+    "airDate": "2021-10-03",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e09",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 9,
+    "title": "No Other Way",
+    "airDate": "2022-02-13",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e10",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 10,
+    "title": "New Haunts",
+    "airDate": "2022-02-20",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e11",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 11,
+    "title": "Rogue Element",
+    "airDate": "2022-02-27",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e12",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 12,
+    "title": "The Lucky Ones",
+    "airDate": "2022-03-06",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e13",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 13,
+    "title": "Warlords",
+    "airDate": "2022-03-13",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e14",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 14,
+    "title": "The Rotten Core",
+    "airDate": "2022-03-20",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e15",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 15,
+    "title": "Trust",
+    "airDate": "2022-03-27",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e16",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 16,
+    "title": "Acts of God",
+    "airDate": "2022-04-03",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e17",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 17,
+    "title": "Lockdown",
+    "airDate": "2022-10-02",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e18",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 18,
+    "title": "A New Deal",
+    "airDate": "2022-10-02",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e19",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 19,
+    "title": "Variant",
+    "airDate": "2022-10-09",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e20",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 20,
+    "title": "What's Been Lost",
+    "airDate": "2022-10-16",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e21",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 21,
+    "title": "Outpost 22",
+    "airDate": "2022-10-23",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e22",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 22,
+    "title": "Faith",
+    "airDate": "2022-10-30",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e23",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 23,
+    "title": "Family",
+    "airDate": "2022-11-06",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "twd-s11-e24",
+    "seriesId": "twd",
+    "seasonId": "twd-s11",
+    "episodeNumber": 24,
+    "title": "Rest in Peace",
+    "airDate": "2022-11-20",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-twd"
+    ]
+  },
+  {
+    "id": "wb-s01-e01",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 1,
+    "title": "Brave",
+    "airDate": "2020-10-04",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s01-e02",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 2,
+    "title": "The Blaze of Gory",
+    "airDate": "2020-10-11",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s01-e03",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 3,
+    "title": "The Tyger and the Lamb",
+    "airDate": "2020-10-18",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s01-e04",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 4,
+    "title": "The Wrong End of a Telescope",
+    "airDate": "2020-10-25",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s01-e05",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 5,
+    "title": "Madman Across the Water",
+    "airDate": "2020-11-01",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s01-e06",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 6,
+    "title": "Shadow Puppets",
+    "airDate": "2020-11-08",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s01-e07",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 7,
+    "title": "Truth or Dare",
+    "airDate": "2020-11-15",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s01-e08",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 8,
+    "title": "The Sky is a Graveyard",
+    "airDate": "2020-11-22",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s01-e09",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 9,
+    "title": "The Deepest Cut",
+    "airDate": "2020-11-29",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s01-e10",
+    "seriesId": "wb",
+    "seasonId": "wb-s01",
+    "episodeNumber": 10,
+    "title": "In This Life",
+    "airDate": "2020-11-29",
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e01",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 1,
+    "title": "Konsekans",
+    "airDate": "2021-10-03",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e02",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 2,
+    "title": "Foothold",
+    "airDate": "2021-10-10",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e03",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 3,
+    "title": "Exit Wounds",
+    "airDate": "2021-10-17",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e04",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 4,
+    "title": "Family Is A Four Letter Word",
+    "airDate": "2021-10-24",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e05",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 5,
+    "title": "Quatervois",
+    "airDate": "2021-10-31",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e06",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 6,
+    "title": "Who Are You?",
+    "airDate": "2021-11-07",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e07",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 7,
+    "title": "Blood and Lies",
+    "airDate": "2021-11-14",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e08",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 8,
+    "title": "Returning Point",
+    "airDate": "2021-11-21",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e09",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 9,
+    "title": "Death and the Dead",
+    "airDate": "2021-11-28",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  },
+  {
+    "id": "wb-s02-e10",
+    "seriesId": "wb",
+    "seasonId": "wb-s02",
+    "episodeNumber": 10,
+    "title": "The Last Light",
+    "airDate": "2021-12-05",
+    "timelineStart": 2021,
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
+    "locationIds": [],
+    "characterIds": [],
+    "communityIds": [],
+    "factionIds": [],
+    "connectionIds": [],
+    "sources": [
+      "source-epguides-wb"
+    ]
+  }
+]
