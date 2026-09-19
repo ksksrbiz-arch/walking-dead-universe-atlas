@@ -110,5 +110,19 @@
     "type": "chronology",
     "url": "https://walkingdead.fandom.com/wiki/Chronological_Episode_Order",
     "note": "Cross-series episode ordering and overlap reference."
+  },
+  {
+    "id": "source-tv-universe-wiki",
+    "title": "Walking Dead Wiki — The Walking Dead Television Universe",
+    "type": "universe-index",
+    "url": "https://walkingdead.fandom.com/wiki/The_Walking_Dead_Television_Universe",
+    "note": "Universe-wide index for shows, webisodes, cross-medium character appearances and major continuity facts."
+  },
+  {
+    "id": "source-webisodes-wiki",
+    "title": "Walking Dead Wiki — The Walking Dead Webisodes",
+    "type": "universe-index",
+    "url": "https://walkingdead.fandom.com/wiki/The_Walking_Dead_%28Webisodes%29",
+    "note": "Webisode series, episode counts and release windows."
   }
 ]
