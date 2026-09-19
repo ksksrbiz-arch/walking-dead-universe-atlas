@@ -5,5 +5,6 @@
   {"id":"wb","key":"WB","title":"The Walking Dead: World Beyond","shortTitle":"World Beyond","type":"series"},
   {"id":"owl","key":"OWL","title":"The Walking Dead: The Ones Who Live","shortTitle":"TOWL","type":"limited-series"},
   {"id":"daryl","key":"DARYL","title":"The Walking Dead: Daryl Dixon","shortTitle":"Daryl Dixon","type":"series"},
-  {"id":"dead","key":"DEAD","title":"The Walking Dead: Dead City","shortTitle":"Dead City","type":"series"}
+  {"id":"dead","key":"DEAD","title":"The Walking Dead: Dead City","shortTitle":"Dead City","type":"series"},
+  {"id":"more-tales","key":"MORE_TALES","title":"More Tales from the TWDU","shortTitle":"More Tales","type":"short-form","status":"announced","certainty":"announced","episodeCount":6}
 ]
