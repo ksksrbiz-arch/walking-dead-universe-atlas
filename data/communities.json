@@ -1,0 +1,8 @@
+[
+  {"id":"alexandria","name":"Alexandria","type":"community","certainty":"confirmed"},
+  {"id":"hilltop","name":"Hilltop","type":"community","certainty":"confirmed"},
+  {"id":"kingdom","name":"Kingdom","type":"community","certainty":"confirmed"},
+  {"id":"sanctuary","name":"Sanctuary","type":"stronghold","certainty":"confirmed"},
+  {"id":"omaha","name":"Omaha","type":"community","certainty":"confirmed"},
+  {"id":"commonwealth","name":"Commonwealth","type":"community","certainty":"confirmed"}
+]
