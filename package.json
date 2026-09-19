@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run ingest:media && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "ingest:media": "node scripts/ingest-amc-media.mjs"
+    "ingest:media": "node scripts/ingest-amc-media.mjs",
+    "build:with-media": "npm run ingest:media && vite build"
   },
   "dependencies": {
     "react": "^19.1.1",
