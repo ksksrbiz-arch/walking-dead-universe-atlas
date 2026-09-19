@@ -8,8 +8,9 @@ import factions from "../data/factions.json";
 import connections from "../data/connections.json";
 import watchOrder from "../data/watchOrder.json";
 import episodes from "../data/episodes.json";
+import seasonMeta from "../data/seasonMeta.json";
 
-export const atlasData={series,seasons,locations,events,characters,communities,factions,connections,watchOrder,episodes};
+export const atlasData={series,seasons,seasonMeta,locations,events,characters,communities,factions,connections,watchOrder,episodes};
 export type SeriesKey="TWD"|"FTWD"|"TALES"|"WB"|"OWL"|"DARYL"|"DEAD";
 export type Location=typeof locations[number];
 export type Event=typeof events[number];
