@@ -968,3 +968,6 @@ button:active{transform:translateY(1px)}
   .timelineSnapshot{grid-template-columns:1fr 1fr}
   .timelineCards .episodeRow{min-height:70px}
 }
+
+
+.timelineFilters button:disabled{opacity:.32;cursor:default}
