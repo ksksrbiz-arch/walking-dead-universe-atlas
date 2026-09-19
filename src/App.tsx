@@ -282,7 +282,7 @@ export default function App(){
    <section className={"map view-"+view} aria-label="Interactive Walking Dead Universe map">
     <div className="mapAtmosphere"/>
     <div className="mapSurface" ref={mapSvgRef}>
-     <svg viewBox="0 0 1000 600" preserveAspectRatio={isMobileMap?"xMinYMid slice":"xMidYMid slice"} className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
+     <svg viewBox={isMobileMap?"0 -70 1000 600":"0 0 1000 600"} preserveAspectRatio={isMobileMap?"xMinYMid slice":"xMidYMid slice"} className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
       <defs>
        <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#9fb2b4"/><stop offset=".48" stopColor="#82999d"/><stop offset="1" stopColor="#60777b"/></linearGradient>
        <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#d8d3c5"/><stop offset=".55" stopColor="#b9b7aa"/><stop offset="1" stopColor="#96988e"/></linearGradient>
