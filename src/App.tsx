@@ -74,7 +74,7 @@ export default function App(){
  const [playing,setPlaying]=useState(false);
  const drag=useRef({x:0,y:0,px:0,py:0,moved:false});
  const pointers=useRef(new Map<number,{x:number;y:number}>());
- const pinch=useRef<{distance:number;zoom:number}|null>(null);
+ const pinch=useRef<{distance:number;zoom:number;x:number;y:number;midX:number;midY:number}|null>(null);
  const mapSvgRef=useRef<SVGSVGElement|null>(null);
  const raf=useRef<number|null>(null);
  const visual=useRef({x:0,y:0,zoom:1});
@@ -136,7 +136,7 @@ export default function App(){
  const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const eps=atlasData.episodes.filter((e:any)=>e.characterIds?.includes(id)).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))] as string[];const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("map");setSheet("open");focusEpisodeGeography({locationIds:locations})};
  const selectLocation=(l:Location)=>{
    setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
-   window.requestAnimationFrame(()=>{
+   window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
      const surface=mapSvgRef.current;
      if(!surface)return;
      const marker=[...surface.querySelectorAll<SVGGElement>(".marker")].find(el=>el.getAttribute("data-location-id")===l.id);
@@ -153,7 +153,7 @@ export default function App(){
      visual.current={...visual.current,x:nextX,y:nextY};
      applyMapTransform(nextX,nextY,visual.current.zoom,true);
      setPan({x:nextX,y:nextY});
-   });
+   }));
  };
  const setYearForEpisode=(raw:any)=>{const storyYear=raw?.timelineStart ?? raw?.timelineEnd ?? raw?.airDate?.slice(0,4);if(storyYear)setYear(Number(storyYear))};
  const selectEpisode=(id:string)=>{const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;setYearForEpisode(raw);setSelectedEpisode(id);setSelectedLocation(null);setView("timeline");setSheet("open")};
@@ -189,7 +189,7 @@ export default function App(){
    pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});
    if(pointers.current.size===2){
      const p=[...pointers.current.values()];
-     pinch.current={distance:Math.max(1,Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)),zoom:visual.current.zoom};
+     pinch.current={distance:Math.max(1,Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)),zoom:visual.current.zoom,x:visual.current.x,y:visual.current.y,midX:(p[0].x+p[1].x)/2,midY:(p[0].y+p[1].y)/2};
      drag.current.moved=true;
      setIsDragging(true);
      return;
@@ -206,6 +206,19 @@ export default function App(){
      const p=[...pointers.current.values()].slice(0,2);
      const d=Math.max(1,Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y));
      nextZoom=clamp(pinch.current.zoom*d/pinch.current.distance,1,5);
+     const rect=mapSvgRef.current?.getBoundingClientRect();
+     if(rect){
+       const centerX=rect.left+rect.width/2;
+       const centerY=rect.top+rect.height/2;
+       const midX=(p[0].x+p[1].x)/2;
+       const midY=(p[0].y+p[1].y)/2;
+       const ratio=nextZoom/pinch.current.zoom;
+       nextX=(midX-centerX)*(1-ratio)+ratio*pinch.current.x;
+       nextY=(midY-centerY)*(1-ratio)+ratio*pinch.current.y;
+       const limits=getMapPanLimits();
+       nextX=clamp(nextX,-limits.x,limits.x);
+       nextY=clamp(nextY,-limits.y,limits.y);
+     }
      drag.current.moved=true;
    }else{
      const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
@@ -269,7 +282,7 @@ export default function App(){
       <g className="countries">{worldCountries.features.map((c:any,i:number)=><path key={c.id||c.properties?.name} d={pathGenerator(c) as string} fill={countryTone(i)}><title>{c.properties?.name||"Country"}</title></path>)}</g>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} data-location-id={l.id} className={selectedLocation===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
-       <circle className="pulse" r="2.5" style={{stroke:meta.color}}/><circle className="dot" r="1.5" fill={meta.color}/>{(zoom>1.34||selectedLocation===l.id)&&<text x="4" y=".5">{l.name}</text>}
+       <circle className="markerHit" r={isMobileMap?14:9} fill="transparent"/><circle className="pulse" r="2.5" style={{stroke:meta.color}}/><circle className="dot" r="1.5" fill={meta.color}/>{(zoom>1.34||selectedLocation===l.id)&&<text x="4" y=".5">{l.name}</text>}
       </g>})}</g>
      </svg>
     </div>
