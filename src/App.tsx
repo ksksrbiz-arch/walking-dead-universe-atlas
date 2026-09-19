@@ -205,6 +205,8 @@ export default function App(){
       <div className="zoomBadge">{Math.round(zoom*100)}%</div>
     </div>
 
+    <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>
+
     <div className="seriesRail" aria-label="Series filter">
       <button className={series==="ALL"?"active":""} onClick={()=>setSeries("ALL")}>ALL</button>
       {SERIES_KEYS.map(k=><button key={k} className={series===k?"active":""} style={series===k?{"--series":META[k].color} as CSSProperties:{}} onClick={()=>setSeries(k)}>{META[k].short}</button>)}
