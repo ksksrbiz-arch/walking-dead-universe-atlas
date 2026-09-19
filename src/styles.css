@@ -693,3 +693,152 @@ button:active{transform:translateY(1px)}
 
 
 .entityGraph{margin:4px 0 18px;border:1px solid #d5dfdb18;border-radius:18px;background:#0c1718cc;overflow:hidden}.entityGraphHead{display:flex;justify-content:space-between;gap:12px;padding:14px 15px;border-bottom:1px solid #d5dfdb12}.entityGraphHead small{display:block;font:700 8px "Space Mono",monospace;letter-spacing:.12em;color:#788789}.entityGraphHead b{display:block;margin-top:4px;font-size:18px}.entityGraphHead span{align-self:center;font:700 8px "Space Mono",monospace;color:#788789}.entityGraphNodes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px}.entityGraphNodes button{min-height:70px;text-align:left;border:1px solid #d5dfdb16;border-radius:12px;background:#111d1ecc;color:#dfe6e3;padding:10px;display:flex;flex-direction:column;gap:3px}.entityGraphNodes button i{font:700 7px "Space Mono",monospace;text-transform:uppercase;color:#6f8385;font-style:normal}.entityGraphNodes button b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.entityGraphNodes button small{font:700 7px "Space Mono",monospace;color:#708183;text-transform:uppercase}.entityGraphNodes button:focus-visible{outline:2px solid #e9efed;outline-offset:2px}@media(max-width:699px){.entityGraphNodes{grid-template-columns:1fr}.entityGraph{border-radius:16px}}
+
+/* Mobile visual composition pass: hierarchy before density. */
+.mapWorld{transform-box:fill-box;transform-origin:center;will-change:transform}
+.markerLabel{font:700 8px "Space Mono",monospace;letter-spacing:.02em;fill:#f1f3ef;paint-order:stroke;stroke:#071011;stroke-width:3px;stroke-linejoin:round}
+.mapModeTag{display:inline-flex;align-items:center;margin-left:7px;padding:3px 5px;border:1px solid #ffffff18;border-radius:999px;color:#899596;font:700 6px "Space Mono",monospace;letter-spacing:.1em}
+.seriesRailHint{display:none}
+
+@media(max-width:699px){
+  .map.view-map .mapWorld{transform-origin:center}
+  .map.view-map .mapTopLeft{
+    min-width:156px;
+    padding:11px 13px;
+    border-color:#ffffff2b;
+    background:linear-gradient(180deg,#0a1516ed,#091213e8);
+    box-shadow:0 14px 38px #0008;
+  }
+  .map.view-map .mapTopLeft>strong{
+    display:flex;
+    align-items:baseline;
+    gap:7px;
+    font-size:20px;
+  }
+  .map.view-map .mapTopLeft>strong small{
+    font-size:6.5px;
+    letter-spacing:.1em;
+  }
+  .map.view-map .seriesRail{
+    top:140px;
+    left:10px;
+    right:10px;
+    gap:5px;
+    padding:3px 44px 3px 2px;
+    border-radius:14px;
+    background:linear-gradient(90deg,#071011d9,#0710119e);
+    box-shadow:0 8px 24px #0006;
+    mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 28px),transparent 100%);
+    -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 28px),transparent 100%);
+  }
+  .map.view-map .seriesRail button{
+    min-width:52px;
+    height:34px;
+    padding:0 10px;
+    border-color:#ffffff24;
+    background:#0a1516ed;
+    color:#a1acab;
+    font-size:7px;
+  }
+  .map.view-map .seriesRail button:nth-child(2){min-width:45px}
+  .map.view-map .seriesRail button:nth-child(3){min-width:54px}
+  .map.view-map .seriesRail button:nth-child(4){min-width:56px}
+  .map.view-map .seriesRail button:nth-child(5){min-width:80px}
+  .map.view-map .seriesRail button:nth-child(6){min-width:50px}
+  .map.view-map .seriesRail button:nth-child(7){min-width:52px}
+  .map.view-map .seriesRail button:nth-child(8){min-width:76px}
+  .map.view-map .seriesRailHint{
+    display:block;
+    position:absolute;
+    right:7px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:2;
+    padding:5px 4px;
+    border-radius:5px;
+    background:#0b1617e8;
+    color:#a9b3b1;
+    font:700 6px "Space Mono",monospace;
+    letter-spacing:.1em;
+    pointer-events:none;
+  }
+  .map.view-map .mapTopRight{
+    top:190px;
+    right:10px;
+  }
+  .map.view-map .mapTopRight button{
+    width:44px;
+    height:44px;
+    border-color:#ffffff24;
+    background:#0a1516ed;
+  }
+  .map.view-map .zoomBadge{
+    min-width:44px;
+    padding:5px 3px;
+    border-color:#ffffff1d;
+    background:#0a1516d9;
+    font-size:6px;
+  }
+  .map.view-map .mapSurface{
+    inset:0 0 calc(var(--mobile-nav) + 70px) 0;
+    background:#51696e;
+  }
+  .map.view-map .mapSurface:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(180deg,rgba(4,11,12,.05),rgba(4,11,12,.12));
+  }
+  .map.view-map .marker .pulse{r:3.5}
+  .map.view-map .marker .dot{r:2}
+  .map.view-map .marker.selected .pulse{r:7;opacity:1}
+  .map.view-map .marker.selected .dot{r:3}
+  .map.view-map .mobileTimeBar{
+    left:10px;
+    right:10px;
+    bottom:calc(var(--mobile-nav) + 8px);
+    min-height:64px;
+    border-radius:18px;
+    border-color:#314043;
+    background:linear-gradient(180deg,#081314f5,#071011f2);
+    box-shadow:0 18px 54px #000b;
+  }
+  .map.view-map .mobileTimeSummary b{font-size:21px}
+  .map.view-map .mobileTimeSummary small{font-size:7px;color:#899697}
+  .map.view-map .mobileTimePlay{
+    background:#dfe6e3;
+    color:#0b1415;
+    border-color:#dfe6e3;
+  }
+  .map.view-map .mobileTimeTrack{background:#344447}
+  .map.view-map .mobileTimeProgress{background:#d9e1de}
+  .map.view-map .mobileTimeThumb{width:12px;height:12px}
+  .map.view-map .bottomNav{
+    left:10px;
+    right:10px;
+    bottom:6px;
+    height:58px;
+    border-radius:19px;
+    background:#071011f2;
+    border-color:#ffffff22;
+    box-shadow:0 16px 44px #000b;
+  }
+  .map.view-map .bottomNav button{
+    min-height:50px;
+    height:50px;
+  }
+  .map.view-map .bottomNav button.active{
+    background:#e8edeb;
+    box-shadow:0 4px 14px #0003;
+  }
+  .map.view-map .bottomNav small{font-size:6.5px}
+}
+
+@media(max-width:390px){
+  .map.view-map .mapTopRight{top:188px}
+  .map.view-map .seriesRail{top:136px}
+  .map.view-map .seriesRail button{padding-inline:8px}
+  .map.view-map .mapTopLeft{top:78px}
+  .map.view-map .mobileTimeBar{bottom:calc(var(--mobile-nav) + 7px)}
+}
