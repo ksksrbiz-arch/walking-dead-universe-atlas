@@ -1,6 +1,6 @@
 import {useMemo} from "react";
 import type {CSSProperties} from "react";
-import {atlasData,SeriesKey} from "../data";
+import {SeriesKey} from "../data";
 import {buildChronology} from "../lib/chronology";
 
 const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
