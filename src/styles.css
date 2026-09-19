@@ -135,3 +135,58 @@ button:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2
 @media(max-width:430px){.peopleGrid{grid-template-columns:1fr 1fr}.peopleGrid .characterCard{min-height:102px}.mediaRow{grid-template-columns:40px 1fr 12px}.mediaRow .rowThumb{width:40px;height:40px}}
 
 .mapLegend{position:absolute;z-index:19;left:12px;bottom:calc(var(--nav) + 100px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;gap:5px 9px;max-width:220px;padding:8px 9px;border:1px solid #888d89aa;border-radius:12px;background:#f0eee9d9;color:#3a4141;box-shadow:0 7px 20px #0002;pointer-events:none}.mapLegend>small{width:100%;font-size:5px;letter-spacing:.14em;color:#727a7b}.mapLegend>span{display:flex;align-items:center;gap:4px;font-size:6px;font-weight:900}.mapLegend i{width:6px;height:6px;border-radius:50%;display:block;box-shadow:0 0 0 1px #30383944}@media(min-width:700px){.mapLegend{left:22px;bottom:98px}}@media(max-width:430px){.mapLegend{left:10px;max-width:190px}.mapLegend>span{font-size:5.5px}}
+
+/* --- Atlas finishing pass: visual hierarchy, media surfaces, touch polish --- */
+.panelSummary,.peopleHero,.timelineReadout{position:relative;overflow:hidden}
+.panelSummary:before,.peopleHero:before,.timelineReadout:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,#ffffff05,transparent 42%,#ffffff02)}
+.panelSummary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 13px;border:1px solid #2a3335;border-radius:15px;background:linear-gradient(145deg,#171d1f,#101516)}
+.panelSummary small,.peopleHero small,.timelineReadout span{display:block;color:#7d888a;font-size:6px;letter-spacing:.16em;font-weight:900}
+.panelSummary b,.peopleHero b{display:block;margin-top:4px;font-size:12px}
+.panelSummary>span,.peopleHero>span{padding:5px 7px;border:1px solid #30393b;border-radius:999px;color:#aeb7b8;background:#151a1b;font-size:7px;white-space:nowrap}
+.peopleHero{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;padding:15px;border:1px solid #2a3335;border-radius:17px;background:radial-gradient(circle at 100% 0,#8b979a12,transparent 45%),linear-gradient(145deg,#171d1f,#101516)}
+.timelineReadout{display:grid;grid-template-columns:auto 1fr;gap:2px 9px;margin-top:7px;padding:11px 12px;border:1px solid #2a3335;border-radius:14px;background:#101516}
+.timelineReadout>b{grid-row:span 2;font-size:23px;line-height:1}
+.timelineReadout i{font-style:normal;color:#6f7a7c;font-size:7px;letter-spacing:.05em}
+.mediaRow{min-height:56px}
+.mediaRow:has(.rowThumb){grid-template-columns:54px 39px 1fr 14px}
+.rowThumb{width:54px;height:38px;object-fit:cover;border-radius:9px;border:1px solid #3a4345;filter:saturate(.72) contrast(1.04);background:#202729}
+.mediaRow:has(.rowThumb)>strong{font-size:11px;color:#d2d7d7}
+.locationCard{min-height:72px}
+.cardArt{position:absolute;right:0;top:0;width:42%;height:100%;object-fit:cover;opacity:.34;filter:saturate(.6) contrast(1.08);mask-image:linear-gradient(90deg,transparent,#000 48%);-webkit-mask-image:linear-gradient(90deg,transparent,#000 48%)}
+.locationCard>span{position:relative;z-index:1;max-width:72%}
+.mediaCoverage{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin-top:8px;padding:11px 12px;border:1px solid #293234;border-radius:13px;background:#101516}
+.mediaCoverage small{display:block;color:#727d7f;font-size:6px;letter-spacing:.14em}
+.mediaCoverage b{display:block;margin-top:3px;font-size:15px}
+.mediaCoverage>span{align-self:end;color:#7c8789;font-size:7px;text-align:right}
+.mediaCoverage>i{grid-column:1/-1;display:block;height:3px;margin-top:6px;border-radius:99px;background:linear-gradient(90deg,#b8c1c2,#687477);box-shadow:0 0 12px #b8c1c218}
+.mapLegend{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.mapLegend>small{flex-basis:100%;font-size:5px;font-weight:900;letter-spacing:.15em;color:#6f7674}
+.mapLegend>span{display:inline-flex;align-items:center;gap:4px;font-size:6px;font-weight:800;letter-spacing:.04em}
+.mapLegend i{display:block;width:6px;height:6px;border-radius:50%;box-shadow:0 0 0 2px #fff6}
+.mapLabels text{paint-order:stroke;stroke:#d0d6d033;stroke-width:2px}
+.episodeHero,.entityHero,.guideHero{box-shadow:inset 0 1px #ffffff08,0 12px 35px #0003}
+.episodeHero:hover .episodeArt,.entityHero:hover .entityArt,.guideHero:hover .guideArt{transform:scale(1.015);transition:transform .45s ease}
+.episodeArt,.entityArt,.guideArt,.characterArt,.cardArt,.rowThumb{will-change:transform}
+.contentScroll::-webkit-scrollbar{width:5px}.contentScroll::-webkit-scrollbar-track{background:transparent}.contentScroll::-webkit-scrollbar-thumb{background:#30393b;border-radius:99px}
+@media(max-width:430px){
+ .mapLegend{left:10px;bottom:calc(var(--nav) + 91px + env(safe-area-inset-bottom));max-width:205px;padding:7px 8px}
+ .timeMachine{bottom:calc(var(--nav) + 84px + env(safe-area-inset-bottom))}
+ .contentPanel{bottom:calc(var(--nav) + 7px + env(safe-area-inset-bottom))}
+ .episodeHero{min-height:185px}
+}
+@media(min-width:700px){
+ .mapLegend{left:22px;bottom:100px}
+ .mediaRow:has(.rowThumb){grid-template-columns:62px 42px 1fr 14px}
+ .rowThumb{width:62px;height:43px}
+}
+@media(prefers-reduced-motion:reduce){
+ .episodeArt,.entityArt,.guideArt{transition:none!important}
+}
+@media(hover:hover){
+ .entityCard,.episodeRow,.episodeNav button,.locationLinks button{transition:background .18s ease,border-color .18s ease,transform .18s ease}
+ .entityCard:hover,.episodeRow:hover{transform:translateY(-1px)}
+}
+@media(pointer:coarse){
+ .entityCard,.episodeRow{min-height:52px}
+ .locationLinks button{min-height:38px}
+}
