@@ -50,11 +50,13 @@ export default function App(){
  const [mobilePanel,setMobilePanel]=useState<"hidden"|"peek"|"open">("peek");
  const [searchOpen,setSearchOpen]=useState(false);
  const drag=useRef({x:0,y:0,px:0,py:0,moved:false});
+ const pointers=useRef(new Map<number,{x:number;y:number}>());
  const pinch=useRef<{distance:number;zoom:number}|null>(null);
  const svgRef=useRef<SVGSVGElement|null>(null);
 
  useEffect(()=>setDataErrors(validateAtlasData()),[]);
  useEffect(()=>{ if(view!=="map") setMobilePanel("open"); else setMobilePanel("peek"); },[view]);
+ useEffect(()=>{const onKey=(e:KeyboardEvent)=>{if(e.key==="Escape"){setSearchOpen(false);setShowFilters(false);setSelectedId(null);setMobilePanel(view==="map"?"peek":"open")}if(e.key==="+"||e.key==="=")setMapZoom(z=>z+.5);if(e.key==="-"||e.key==="_")setMapZoom(z=>z-.5);if(e.key==="0")resetMap()};window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey)},[view]);
 
  const selected=atlasData.locations.find(l=>l.id===selectedId) ?? null;
  const filteredLocations=useMemo(()=>atlasData.locations.filter(l=>{
@@ -88,11 +90,27 @@ export default function App(){
  const selectLocation=(l:Location)=>{setSelectedId(l.id);setView("map");setMobilePanel("open")};
 
  const pointerDown=(e:React.PointerEvent<SVGSVGElement>)=>{
-   (e.currentTarget as Element).setPointerCapture?.(e.pointerId);
+   const svg=e.currentTarget as SVGSVGElement;
+   svg.setPointerCapture?.(e.pointerId);
+   pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(pointers.current.size===2){
+     const pts=[...pointers.current.values()];
+     pinch.current={distance:Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y),zoom};
+     setIsDragging(false);
+     return;
+   }
    drag.current={x:e.clientX,y:e.clientY,px:pan.x,py:pan.y,moved:false};
    setIsDragging(true);
  };
  const pointerMove=(e:React.PointerEvent<SVGSVGElement>)=>{
+   if(!pointers.current.has(e.pointerId))return;
+   pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(pointers.current.size>=2){
+     const pts=[...pointers.current.values()].slice(0,2);
+     const distance=Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y);
+     if(pinch.current) setMapZoom(pinch.current.zoom*(distance/pinch.current.distance));
+     return;
+   }
    if(!isDragging)return;
    const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
    if(Math.abs(dx)+Math.abs(dy)>3)drag.current.moved=true;
@@ -100,27 +118,20 @@ export default function App(){
    setPan({x:clamp(drag.current.px+dx,-limit,limit),y:clamp(drag.current.py+dy,-limit,limit)});
  };
  const pointerUp=(e:React.PointerEvent<SVGSVGElement>)=>{
+   pointers.current.delete(e.pointerId);
+   pinch.current=null;
    try{(e.currentTarget as Element).releasePointerCapture?.(e.pointerId)}catch{}
-   setIsDragging(false);
+   setIsDragging(pointers.current.size===1);
  };
  const wheel=(e:React.WheelEvent<SVGSVGElement>)=>{
    e.preventDefault();
-   setMapZoom(z=>clamp(z*(e.deltaY<0?1.12:.89),1,5));
+   setMapZoom(z=>z*(e.deltaY<0?1.12:.89));
  };
- const touchStart=(e:React.TouchEvent<SVGSVGElement>)=>{
-   if(e.touches.length===2){
-     const dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;
-     pinch.current={distance:Math.hypot(dx,dy),zoom};
-   }
+ const doubleClick=(e:React.MouseEvent<SVGSVGElement>)=>{
+   e.preventDefault();
+   setMapZoom(z=>z>=4?1:z+.75);
  };
- const touchMove=(e:React.TouchEvent<SVGSVGElement>)=>{
-   if(e.touches.length===2&&pinch.current){
-     e.preventDefault();
-     const dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;
-     setMapZoom(pinch.current.zoom*(Math.hypot(dx,dy)/pinch.current.distance));
-   }
- };
- const touchEnd=()=>{pinch.current=null};
+
 
  const goView=(v:View)=>{setView(v);setSelectedId(null);setShowFilters(false)};
  const zoomButton=(delta:number)=>setMapZoom(z=>z+delta);
@@ -142,7 +153,7 @@ export default function App(){
     <div className="mapSurface">
      <svg ref={svgRef} viewBox="0 0 100 60" preserveAspectRatio="xMidYMid meet"
        onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp}
-       onWheel={wheel} onTouchStart={touchStart} onTouchMove={touchMove} onTouchEnd={touchEnd}
+       onWheel={wheel} onDoubleClick={doubleClick}
        style={mapStyle} className={isDragging?"dragging":""}>
       <rect width="100" height="60" fill="#d8d6ce"/>
       <g className="gridlines">{[10,20,30,40,50,60,70,80,90].map(x=><line key={"x"+x} x1={x} y1="0" x2={x} y2="60"/>)}{[10,20,30,40,50].map(y=><line key={"y"+y} x1="0" y1={y} x2="100" y2={y}/>)}</g>
