@@ -1,6 +1,6 @@
 import {useMemo} from "react";
 import type {CSSProperties} from "react";
-import {SeriesKey} from "../data";
+import {atlasData,SeriesKey} from "../data";
 import {buildChronology} from "../lib/chronology";
 
 const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
@@ -29,7 +29,7 @@ export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,se
  return <section className="atlasTimelineDock" aria-label="Universe chronology">
   <div className="atlasTimelineHead">
    <div className="atlasTimelineTitle"><span className="timelineLiveDot"/><div><small>UNIVERSE CHRONOLOGY</small><b>{year}</b></div><span className="timelineCount">{yearEvents.length} active</span></div>
-   <div className="atlasTimelineActions"><button className="atlasConnectionsButton" onClick={onConnections} aria-label="Open universe connections">{all.filter(x=>x.connectionIds?.length).length||24} LINKS</button><button className={playing?"playing":""} onClick={onTogglePlaying} aria-label={playing?"Pause chronology":"Play chronology"}>{playing?"Ⅱ":"▶"}</button><output>{selected?.title||"Drag the chronology"}</output></div>
+   <div className="atlasTimelineActions"><button className="atlasConnectionsButton" onClick={onConnections} aria-label="Open universe connections">{atlasData.connections.length} LINKS</button><button className={playing?"playing":""} onClick={onTogglePlaying} aria-label={playing?"Pause chronology":"Play chronology"}>{playing?"Ⅱ":"▶"}</button><output>{selected?.title||"Drag the chronology"}</output></div>
   </div>
   <div className="atlasTimelineBody">
    <div className="atlasTimelineScale" aria-hidden="true">{[2010,2012,2014,2016,2018,2020,2022,2024,2026,2027].map(y=><button key={y} style={{left:pos(y)+"%"}} onClick={()=>onYearChange(y)}>{y}</button>)}</div>
