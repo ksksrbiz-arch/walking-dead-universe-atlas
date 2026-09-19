@@ -206,7 +206,7 @@ export default function App(){
     <section className={`contentPanel ${mobilePanel}`}>
       <button className="panelGrab" onClick={()=>setMobilePanel(p=>p==="open"?"peek":"open")} aria-label="Toggle panel"><span/></button>
       <div className="panelHeader"><div><small>{selected?SERIES_BY_ID[selected.seriesId]?.name:view.toUpperCase()}</small><h2>{selected?.name||view==="map"?"Explore the universe":view==="timeline"?"Universe timeline":view==="people"?"People & connections":"Atlas guide"}</h2></div>{selected&&<button className="closePanel" onClick={()=>{setSelectedId(null);setMobilePanel("peek")}}><Icon name="close"/></button>}</div>
-      {selected?<LocationDetail location={selected}/>:view==="map"?<MapContent locations={filteredLocations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent events={timeline} chronology={chronology}/>:view==="people"?<PeopleContent/>:<GuideContent errors={dataErrors}/>}
+      {selected?<LocationDetail location={selected}/>:view==="map"?<MapContent locations={filteredLocations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent events={timeline} chronology={chronology} onLocation={selectLocation}/>:view==="people"?<PeopleContent/>:<GuideContent errors={dataErrors}/>}
     </section>
 
     <nav className="bottomNav">{(["map","timeline","people","guide"] as View[]).map(v=><button key={v} className={view===v?"active":""} onClick={()=>goView(v)}><Icon name={v==="map"?"map":v==="timeline"?"timeline":v==="people"?"people":"guide"}/><small>{v}</small></button>)}</nav>
@@ -229,7 +229,7 @@ function LocationDetail({location}:{location:Location}){
  </div>
 }
 function MapContent({locations,onSelect}:{locations:Location[];onSelect:(l:Location)=>void}){return <div className="contentScroll"><div className="sectionTitle">Locations <span>{locations.length}</span></div><div className="cards">{locations.map(l=><button className="entityCard" key={l.id} onClick={()=>onSelect(l)}><div><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><span>{l.type} · {l.certainty}</span></div><Icon name="chevron"/></button>)}</div></div>}
-function TimelineContent({events,chronology}:{events:typeof atlasData.events;chronology:any[]}){
+function TimelineContent({events,chronology,onLocation}:{events:typeof atlasData.events;chronology:any[];onLocation:(l:Location)=>void}){
  const [episodeId,setEpisodeId]=useState<string|null>(null);
  const episodes=useMemo(()=>chronology.filter(x=>x.kind==="episode"),[chronology]);
  const selected=episodes.find(x=>x.id===episodeId)??null;
@@ -243,7 +243,7 @@ function TimelineContent({events,chronology}:{events:typeof atlasData.events;chr
    <small>{SERIES_BY_ID[selected.seriesId]?.name} · {selected.seasonId?.toUpperCase()}E{String(selected.episodeNumber).padStart(2,"0")}</small>
    <h3>{selected.title}</h3>
    <div className="episodeMeta"><span>{selected.start===selected.end?selected.start:selected.start+"–"+selected.end}</span><span>{selected.certainty}</span><span>{selected.precision}</span></div>
-   {locations.length>0&&<div className="miniTags">{locations.map(l=><span key={l.id}>{l.name}</span>)}</div>}
+   {locations.length>0&&<div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}>{l.name}</button>)}</div>}
    {next&&<button className="watchNext" onClick={()=>setEpisodeId(next.id)}><span>WATCH NEXT IN CHRONOLOGY</span><b>{SERIES_BY_ID[next.seriesId]?.short} · {next.title}</b><small>{next.start===next.end?next.start:next.start+"–"+next.end}</small></button>}
   </article>}
   <div className="timelineList episodeList">{episodes.map((e:any)=>{const meta=SERIES_BY_ID[e.seriesId];return <button className={episodeId===e.id?"episodeRow selected":"episodeRow"} key={e.id} onClick={()=>setEpisodeId(e.id)}>
