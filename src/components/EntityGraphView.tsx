@@ -53,7 +53,7 @@ function confidenceLabel(value:string){
 
 export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConnection,onCommunity,onFaction,defaultCollapsed=false,root:rootProp,heading}:Props){
  const [root,setRoot]=useState<string>(rootProp??"character:michonne");
- useEffect(()=>{if(rootProp)setRoot(rootProp)},[rootProp]);
+ useEffect(()=>{if(rootProp!==undefined)setRoot(rootProp)},[rootProp]);
  const [filter,setFilter]=useState<Filter>("ALL");
  const [collapsed,setCollapsed]=useState(defaultCollapsed);
  const rootNode=graph.nodes.get(root);
