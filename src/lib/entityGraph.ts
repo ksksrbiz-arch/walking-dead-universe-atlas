@@ -61,6 +61,10 @@ export function buildEntityGraph(){
   for(const c of atlasData.characters)addNode("character",c.id);
   for(const c of atlasData.communities)addNode("community",c.id);
   for(const f of atlasData.factions)addNode("faction",f.id);
+  const curated=(atlasData as any).connectionEpisodes?.connections||{};
+  for(const [connectionId,evidence] of Object.entries(curated) as any){
+    for(const episodeId of evidence.episodeIds||[]) addEdge({kind:"connection",id:connectionId},{kind:"episode",id:episodeId},"DOCUMENTED_IN",evidence.evidenceKind==="direct"?"confirmed":"source-derived");
+  }
   for(const x of atlasData.connections){
     addNode("connection",x.id);
     const fromKind=x.fromId?resolveEntityKind(x.fromId):null;
@@ -109,6 +113,8 @@ export function getEpisodeConnectionIds(episodeId:string):string[]{
   return false;
  };
  const direct=new Set<string>(episode.connectionIds??[]);
+ const curated=((atlasData as any).connectionEpisodes?.connections||{}) as Record<string,{episodeIds:string[]}>;
+ for(const [connectionId,evidence] of Object.entries(curated)) if(evidence.episodeIds?.includes(episodeId)) direct.add(connectionId);
  for(const connection of atlasData.connections as any[]){
   const fromKind=resolveEntityKind(connection.fromId);
   const toKind=resolveEntityKind(connection.toId);
