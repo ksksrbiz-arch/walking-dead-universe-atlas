@@ -102,11 +102,14 @@
     "flight-462-crash-site": [
       "ftwd-s02-e03"
     ],
-    "valle-guadalupe": [
+    "abigail-home-experience": [
+      "ftwd-s02-e04"
+    ],
+    "mexico-us-border": [
       "ftwd-s02-e04",
       "ftwd-s02-e06",
-      "ftwd-s02-e07",
-      "ftwd-s02-e08"
+      "ftwd-s02-e14",
+      "ftwd-s02-e15"
     ],
     "emerald-hotel": [
       "ftwd-s02-e04"
@@ -114,9 +117,46 @@
     "pirates-dock": [
       "ftwd-s02-e05"
     ],
+    "valle-guadalupe": [
+      "ftwd-s02-e06",
+      "ftwd-s02-e07"
+    ],
+    "mexican-church": [
+      "ftwd-s02-e06"
+    ],
+    "abigail-vineyard": [
+      "ftwd-s02-e06",
+      "ftwd-s02-e07"
+    ],
+    "salvadorian-jungle": [
+      "ftwd-s02-e06",
+      "ftwd-s02-e07"
+    ],
+    "javiers-home": [
+      "ftwd-s02-e07"
+    ],
     "tijuana": [
+      "ftwd-s02-e08"
+    ],
+    "ftwd-s02-drugstore": [
+      "ftwd-s02-e08"
+    ],
+    "ftwd-s02-barber-shop": [
+      "ftwd-s02-e08"
+    ],
+    "la-colonia": [
       "ftwd-s02-e08",
-      "ftwd-s02-e09"
+      "ftwd-s02-e09",
+      "ftwd-s02-e11",
+      "ftwd-s02-e12",
+      "ftwd-s02-e14",
+      "ftwd-s02-e15"
+    ],
+    "mothers-house": [
+      "ftwd-s02-e08"
+    ],
+    "rehabilitation-center": [
+      "ftwd-s02-e08"
     ],
     "rosarito": [
       "ftwd-s02-e09",
@@ -126,6 +166,34 @@
       "ftwd-s02-e13",
       "ftwd-s02-e14",
       "ftwd-s02-e15"
+    ],
+    "rosarito-beach-hotel": [
+      "ftwd-s02-e09",
+      "ftwd-s02-e10",
+      "ftwd-s02-e11",
+      "ftwd-s02-e12",
+      "ftwd-s02-e13",
+      "ftwd-s02-e14",
+      "ftwd-s02-e15"
+    ],
+    "el-pelicano": [
+      "ftwd-s02-e09",
+      "ftwd-s02-e12",
+      "ftwd-s02-e14",
+      "ftwd-s02-e15"
+    ],
+    "magana-restaurant-bar": [
+      "ftwd-s02-e10"
+    ],
+    "suarez-family-farm": [
+      "ftwd-s02-e10",
+      "ftwd-s02-e13"
+    ],
+    "poco-cielo": [
+      "ftwd-s02-e12"
+    ],
+    "salazar-family-home": [
+      "ftwd-s02-e12"
     ],
     "baja-california": [
       "ftwd-s03-e01",
