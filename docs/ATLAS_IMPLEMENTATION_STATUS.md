@@ -49,6 +49,12 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Regenerate and validate the reverse location index after geography changes.
 - [x] Preserve episodes with no currently registered specific location rather than inventing geography.
 
+### Fear geography refinement — seasons 2–3
+- [x] Expand Fear season 2 episode geography with source-backed site-level locations, including Catrina Island, Flight 462 crash site, Valle de Guadalupe, Abigail Vineyard, La Colonia, Rosarito Beach Hotel, El Pelícano, Suarez Family Farm, and documented flashback sites.
+- [x] Expand Fear season 3 episode geography with source-backed military, ranch, reservation, dam, trading-post, and site-level locations.
+- [x] Keep site-level locations with unknown exact coordinates explicitly unplaced instead of inventing map precision.
+- [x] Regenerate the reverse location index after both season passes and validate it against episode references.
+
 ### Chronology integrity pass
 - [x] Align location chronology years with the earliest linked episode timeline anchor.
 - [x] Validate the reverse location index against episode-level location references.
