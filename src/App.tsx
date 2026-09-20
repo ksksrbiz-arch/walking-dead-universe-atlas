@@ -197,10 +197,6 @@ export default function App(){
    const meta=SERIES_BY_ID[l.seriesId];
    return !!meta&&(series==="ALL"||l.seriesId===META[series].id)&&l.year<=year;
  }),[series,year]);
- const mapLocations=useMemo(()=>{
-   const source=journeyMapMode&&selectedCharacter?atlasData.locations.filter(l=>characterJourneyLocationIds.has(l.id)):locations;
-   return source.filter(l=>mapLayer==="ALL"||locationMapLayer(l.type)===mapLayer);
- },[journeyMapMode,selectedCharacter,characterJourneyLocationIds,locations,mapLayer]);
  const chronology=useMemo(()=>buildChronology().filter(e=>e.start<=year&&(series==="ALL"||e.seriesId===META[series].id)),[series,year]);
  const episodes=useMemo(()=>chronology.filter(e=>e.kind==="episode"),[chronology]);
  const selectedLoc=atlasData.locations.find(l=>l.id===selectedLocation)??null;
@@ -209,6 +205,10 @@ export default function App(){
  const selectedConnectionData=selectedConnection?atlasData.connections.find((x:any)=>x.id===selectedConnection) as any:null;
  const characterJourneyLocationIds=useMemo(()=>{if(!selectedCharacter)return new Set<string>();const ids=new Set<string>();getCharacterEpisodeIds(selectedCharacter).forEach(eid=>{const e=atlasData.episodes.find((x:any)=>x.id===eid) as any;(e?.locationIds??[]).forEach((id:string)=>ids.add(id))});return ids},[selectedCharacter]);
  const connectionContextLocationIds=useMemo(()=>{const ids=new Set<string>();if(!selectedConnectionData)return ids;[selectedConnectionData.fromId,selectedConnectionData.toId].filter(Boolean).forEach((id:string)=>{const l=atlasData.locations.find(x=>x.id===id);if(l)ids.add(l.id)});const evidence=((atlasData as any).connectionEpisodes?.connections?.[selectedConnectionData.id]?.episodeIds??[]) as string[];evidence.forEach((episodeId:string)=>{const e=atlasData.episodes.find((x:any)=>x.id===episodeId) as any;(e?.locationIds??[]).forEach((id:string)=>ids.add(id))});return ids},[selectedConnectionData]);
+ const mapLocations=useMemo(()=>{
+   const source=journeyMapMode&&selectedCharacter?atlasData.locations.filter(l=>characterJourneyLocationIds.has(l.id)):locations;
+   return source.filter(l=>mapLayer==="ALL"||locationMapLayer(l.type)===mapLayer);
+ },[journeyMapMode,selectedCharacter,characterJourneyLocationIds,locations,mapLayer]);
 
  const searchResults=useMemo(()=>{
    const q=query.trim().toLowerCase();
