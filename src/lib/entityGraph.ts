@@ -80,13 +80,13 @@ export function buildEntityGraph(){
     // episode records a character and a place/community/faction together, the graph
     // may traverse between them without inventing travel or a direct relationship.
     for(const characterId of e.characterIds||[]){
-      for(const locationId of e.locationIds||[])addEdge({kind:"character",id:characterId},{kind:"location",id:locationId},"EPISODE_GEOGRAPHY");
-      for(const communityId of e.communityIds||[])addEdge({kind:"character",id:characterId},{kind:"community",id:communityId},"EPISODE_CONTEXT");
-      for(const factionId of e.factionIds||[])addEdge({kind:"character",id:characterId},{kind:"faction",id:factionId},"EPISODE_CONTEXT");
+      for(const locationId of e.locationIds||[])addEdge({kind:"character",id:characterId},{kind:"location",id:locationId},"EPISODE_GEOGRAPHY","source-derived",e.id);
+      for(const communityId of e.communityIds||[])addEdge({kind:"character",id:characterId},{kind:"community",id:communityId},"EPISODE_CONTEXT","source-derived",e.id);
+      for(const factionId of e.factionIds||[])addEdge({kind:"character",id:characterId},{kind:"faction",id:factionId},"EPISODE_CONTEXT","source-derived",e.id);
     }
     for(const locationId of e.locationIds||[]){
-      for(const communityId of e.communityIds||[])addEdge({kind:"location",id:locationId},{kind:"community",id:communityId},"EPISODE_CONTEXT");
-      for(const factionId of e.factionIds||[])addEdge({kind:"location",id:locationId},{kind:"faction",id:factionId},"EPISODE_CONTEXT");
+      for(const communityId of e.communityIds||[])addEdge({kind:"location",id:locationId},{kind:"community",id:communityId},"EPISODE_CONTEXT","source-derived",e.id);
+      for(const factionId of e.factionIds||[])addEdge({kind:"location",id:locationId},{kind:"faction",id:factionId},"EPISODE_CONTEXT","source-derived",e.id);
     }
   }
   for(const l of atlasData.locations)addNode("location",l.id);
