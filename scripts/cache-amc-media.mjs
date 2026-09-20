@@ -94,7 +94,7 @@ async function main(){
     const known=local[source];
     if(known){
       try{
-        await access(path.join(".",known.replace(/^\//,"")));
+        await access(path.join("public",known.replace(/^\//,"")));
         reused++;
         continue;
       }catch{}
@@ -103,7 +103,7 @@ async function main(){
     try{
       const result=await fetchMedia(source);
       const relative=`/media-cache/${key}.${result.ext}`;
-      const outputPath=path.join(".",relative.replace(/^\//,""));
+      const outputPath=path.join("public",relative.replace(/^\//,""));
       await mkdir(path.dirname(outputPath),{recursive:true});
       await writeFile(outputPath,result.bytes);
       local[source]=relative;
