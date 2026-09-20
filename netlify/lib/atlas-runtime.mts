@@ -1,4 +1,4 @@
-import { getStore } from "@netlify/blobs";
+import { getAtlasStore } from "./blob-store.mts";
 import series from "../../data/series.json";
 import seasons from "../../data/seasons.json";
 import episodes from "../../data/episodes.json";
@@ -14,7 +14,7 @@ import media from "../../data/media.json";
 import episodeMedia from "../../data/episodeMedia.json";
 
 export const RUNTIME_VERSION = "3";
-export const runtimeStore = getStore("atlas-runtime");
+export const runtimeStore = getAtlasStore("atlas-runtime");
 
 type EntityRecord = { id: string; [key: string]: unknown };
 type IndexMap = Record<string, string[]>;
