@@ -87,7 +87,15 @@ const MapGeography=memo(function MapGeography(){
   <g className="countries">{worldCountryPaths.map((c:any)=><path key={c.key} d={c.d} fill={c.fill}><title>{c.name}</title></path>)}</g>
  </>;
 });
-const locationIconName=(type:string)=>{const names=new Set(["city","community","facility","hospital","farm","prison","route","region","residence","ranch","dam","territory","country","landmark","stronghold","boat"]);return names.has(type)?type:"facility"};
+const locationIconName=(type:string):"city"|"community"|"facility"|"hospital"|"farm"|"prison"|"boat"|"route"|"region"|"residence"|"ranch"|"dam"|"territory"|"country"|"landmark"|"stronghold"=>{
+ const direct=new Set(["city","community","facility","hospital","farm","prison","boat","route","region","residence","ranch","dam","territory","country","landmark","stronghold"]);
+ if(direct.has(type))return type as any;
+ const aliases:Record<string,typeof direct extends Set<infer U>?U:string>={
+  town:"community",neighborhood:"community",district:"community","safe-zone":"stronghold","outpost":"stronghold",reservation:"community","trading-center":"community",
+  "medical-facility":"hospital","military-facility":"facility",industrial:"facility",hotel:"facility",retail:"facility",store:"facility",restaurant:"facility",workshop:"facility","store-plaza":"facility",church:"landmark",stadium:"landmark",park:"landmark",cabin:"residence",bunker:"stronghold",ranch:"ranch",vineyard:"farm",jungle:"region","crash-site":"landmark",island:"region",state:"region",county:"region",country:"country",territory:"territory",bridge:"route",transit:"route","rail-yard":"route",dock:"route",river:"route","international-border":"route"
+ };
+ return (aliases[type]||"facility") as any;
+};
 
 function Icon({name,className}:{name:"map"|"timeline"|"people"|"guide"|"plus"|"minus"|"locate"|"search"|"close"|"chevron"|"layers"|"play"|"pause"|"arrow"|"pin";className?:string}) {
  const paths={
