@@ -109,7 +109,10 @@
       "ftwd-s02-e04",
       "ftwd-s02-e06",
       "ftwd-s02-e14",
-      "ftwd-s02-e15"
+      "ftwd-s02-e15",
+      "ftwd-s03-e01",
+      "ftwd-s03-e05",
+      "ftwd-s03-e08"
     ],
     "emerald-hotel": [
       "ftwd-s02-e04"
@@ -126,7 +129,8 @@
     ],
     "abigail-vineyard": [
       "ftwd-s02-e06",
-      "ftwd-s02-e07"
+      "ftwd-s02-e07",
+      "ftwd-s03-e04"
     ],
     "salvadorian-jungle": [
       "ftwd-s02-e06",
@@ -136,7 +140,11 @@
       "ftwd-s02-e07"
     ],
     "tijuana": [
-      "ftwd-s02-e08"
+      "ftwd-s02-e08",
+      "ftwd-s03-e04",
+      "ftwd-s03-e09",
+      "ftwd-s03-e11",
+      "ftwd-s03-e16"
     ],
     "ftwd-s02-drugstore": [
       "ftwd-s02-e08"
@@ -174,7 +182,9 @@
       "ftwd-s02-e12",
       "ftwd-s02-e13",
       "ftwd-s02-e14",
-      "ftwd-s02-e15"
+      "ftwd-s02-e15",
+      "ftwd-s03-e02",
+      "ftwd-s03-e05"
     ],
     "el-pelicano": [
       "ftwd-s02-e09",
@@ -195,59 +205,49 @@
     "salazar-family-home": [
       "ftwd-s02-e12"
     ],
-    "baja-california": [
-      "ftwd-s03-e01",
-      "ftwd-s03-e02",
-      "ftwd-s03-e03",
-      "ftwd-s03-e04",
-      "ftwd-s03-e05",
-      "ftwd-s03-e06",
-      "ftwd-s03-e07",
-      "ftwd-s03-e08",
-      "ftwd-s03-e09",
-      "ftwd-s03-e10",
-      "ftwd-s03-e11",
-      "ftwd-s03-e12",
-      "ftwd-s03-e13",
-      "ftwd-s03-e14",
-      "ftwd-s03-e15",
-      "ftwd-s03-e16"
+    "military-fuel-depot": [
+      "ftwd-s03-e01"
     ],
     "brooke-ranch": [
-      "ftwd-s03-e01",
       "ftwd-s03-e02",
-      "ftwd-s03-e03",
-      "ftwd-s03-e04",
       "ftwd-s03-e05",
       "ftwd-s03-e06",
       "ftwd-s03-e07",
       "ftwd-s03-e08",
       "ftwd-s03-e09",
       "ftwd-s03-e10",
-      "ftwd-s03-e11",
       "ftwd-s03-e12",
-      "ftwd-s03-e13",
-      "ftwd-s03-e14",
+      "ftwd-s03-e13"
+    ],
+    "dam": [
+      "ftwd-s03-e03",
+      "ftwd-s03-e04",
+      "ftwd-s03-e09",
+      "ftwd-s03-e11",
       "ftwd-s03-e15",
       "ftwd-s03-e16"
     ],
-    "dam": [
-      "ftwd-s03-e01",
-      "ftwd-s03-e02",
-      "ftwd-s03-e03",
-      "ftwd-s03-e04",
+    "phils-outpost": [
       "ftwd-s03-e05",
-      "ftwd-s03-e06",
+      "ftwd-s03-e12"
+    ],
+    "black-hat-reservation": [
       "ftwd-s03-e07",
-      "ftwd-s03-e08",
-      "ftwd-s03-e09",
+      "ftwd-s03-e08"
+    ],
+    "el-bazar": [
       "ftwd-s03-e10",
-      "ftwd-s03-e11",
-      "ftwd-s03-e12",
-      "ftwd-s03-e13",
       "ftwd-s03-e14",
-      "ftwd-s03-e15",
-      "ftwd-s03-e16"
+      "ftwd-s03-e15"
+    ],
+    "workshop-ftwd": [
+      "ftwd-s03-e10"
+    ],
+    "on-the-go-burger": [
+      "ftwd-s03-e14"
+    ],
+    "romminda-plaza": [
+      "ftwd-s03-e14"
     ],
     "texas": [
       "ftwd-s04-e01",
