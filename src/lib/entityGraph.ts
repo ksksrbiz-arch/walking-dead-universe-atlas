@@ -60,10 +60,7 @@ export function buildEntityGraph(){
   const nodes=new Map<string,EntityRef>();
   const edges:EntityEdge[]=[];
   const addNode=(kind:EntityKind,id:string)=>{if(id)nodes.set(key(kind,id),{kind,id})};
-  const addEdge=(from:EntityRef,to:EntityRef,type:string,confidence:EntityEdge["confidence"]="source-derived")=>{
-    addNode(from.kind,from.id); addNode(to.kind,to.id);
-    edges.push({id:`${key(from.kind,from.id)}>${type}>${key(to.kind,to.id)}`,from,to,type,confidence});
-  };
+  const addEdge=(from:EntityRef,to:EntityRef,type:string,confidence:EntityEdge["confidence"]="source-derived",evidenceId?:string)=>{\n    addNode(from.kind,from.id); addNode(to.kind,to.id);\n    edges.push({id:`${key(from.kind,from.id)}>${type}>${key(to.kind,to.id)}${evidenceId?">"+evidenceId:""}`,from,to,type,confidence});\n  };
 
   for(const s of atlasData.series)addNode("series",s.id);
   for(const s of atlasData.seasons)addNode("season",s.id);
