@@ -456,7 +456,7 @@ function EpisodeDetail({episode,onLocation,onEpisode,onCharacter,onConnection}:{
   <div className="sectionTitle">CHRONOLOGY NAVIGATION</div>
   <div className="episodeNav">{prev&&<button onClick={()=>onEpisode(prev.id)}><small>PREVIOUS</small><b>{prev.title}</b><span>{prev.start}</span></button>}<div className="chronologyMarker"><span>IN UNIVERSE</span><strong>{episode.start}</strong></div>{next&&<button onClick={()=>onEpisode(next.id)}><small>NEXT</small><b>{next.title}</b><span>{next.start}</span></button>}</div>
   <div className="sourceNote"><Icon name="layers"/><span>Air date and in-universe chronology are separate fields. Ranges and uncertain placements stay labeled rather than flattened.</span></div>
-  <EntityGraphView heading="CONNECTIONS FROM HERE" root={"episode:"+episode.id} onCharacter={onCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)onLocation(l)}} onEpisode={onEpisode}/>
+  <EntityGraphView heading="CONNECTIONS FROM HERE" root={"episode:"+episode.id} onCharacter={onCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)onLocation(l)}} onEpisode={onEpisode} onConnection={onConnection}/>
  </div>;
 }
 
@@ -512,7 +512,7 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
     const otherCharacter=atlasData.characters.find((c:any)=>c.id===other);
     return <article key={x.id}><small>{x.type.replaceAll("-"," ").toUpperCase()} · {x.certainty}</small><button className="connectionFocusButton" onClick={()=>onConnection(x.id)}><b>{x.label}</b><Icon name="chevron"/></button>{otherCharacter?<button className="connectionTarget" onClick={()=>onCharacter(otherCharacter.id)}>{otherCharacter.name}<Icon name="chevron"/></button>:<span>{endpointName(x.fromId)} → {endpointName(x.toId)}</span>}</article>;
   })}</div></>}
-  <EntityGraphView heading="CONNECTIONS FROM HERE" root={"character:"+characterId} onCharacter={onCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)onLocation(l)}} onEpisode={onEpisode}/>
+  <EntityGraphView heading="CONNECTIONS FROM HERE" root={"character:"+characterId} onCharacter={onCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)onLocation(l)}} onEpisode={onEpisode} onConnection={onConnection}/>
  </div>;
 }
 function PeopleContent({onCharacter,onLocation,onEpisode,onConnection}:{onCharacter:(id:string)=>void;onLocation:(id:string)=>void;onEpisode:(id:string)=>void;onConnection:(id:string)=>void}){
