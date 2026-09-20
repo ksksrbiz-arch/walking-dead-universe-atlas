@@ -1275,3 +1275,23 @@ button.universeEventRow:hover{background:#ffffff04}
     overflow-x:auto;
   }
 }
+
+
+/* Desktop map rail correction: reserve the left geography card and the
+   right-side map controls/detail panel instead of centering rails beneath them. */
+@media (min-width:1100px){
+  .map.view-map .seriesRail{
+    left:190px !important;
+    right:calc(min(410px,34vw) + 110px) !important;
+    transform:none !important;
+    max-width:none !important;
+    overflow-x:auto;
+  }
+  .map.view-map .mapLayerRail{
+    left:190px !important;
+    right:calc(min(410px,34vw) + 110px) !important;
+    transform:none !important;
+    max-width:none !important;
+    overflow-x:auto;
+  }
+}
