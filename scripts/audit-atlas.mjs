@@ -125,6 +125,41 @@ for(const [id,evidence] of Object.entries(curated)){
 }
 const unresolved=connections.filter(c=>!curated[c.id]).map(c=>c.id);if(unresolved.length)fail.push(`Connections without curated episode evidence: ${unresolved.join(", ")}`);
 
+// Relationship graph integrity: validate every graph node/edge concept against the
+// same typed registry used by the client. Episode-context bridges are deliberately
+// checked here so graph traversal cannot silently expose stale or fabricated refs.
+const graphKinds={series:series,seasons:seasons,episodes:episodes,locations:locations,characters:characters,communities:communities,factions:factions,connections:connections};
+const graphNodes=new Set(Object.entries(graphKinds).flatMap(([kind,list])=>list.map(x=>`${kind.slice(0,-1)}:${x.id}`)));
+const graphEdges=new Set();
+const addGraphEdge=(fromKind,fromId,type,toKind,toId,evidenceId)=>{
+  const from=`${fromKind}:${fromId}`,to=`${toKind}:${toId}`;
+  if(!graphNodes.has(from))fail.push(`Graph edge ${type}: missing from node ${from}`);
+  if(!graphNodes.has(to))fail.push(`Graph edge ${type}: missing to node ${to}`);
+  const edge=`${from}>${type}>${to}${evidenceId?`>${evidenceId}`:""}`;
+  if(graphEdges.has(edge))fail.push(`Duplicate graph edge ${edge}`); else graphEdges.add(edge);
+};
+for(const e of episodes){
+  for(const id of e.locationIds??[])addGraphEdge("episode",e.id,"OCCURS_AT","location",id);
+  for(const id of e.characterIds??[])addGraphEdge("episode",e.id,"FEATURES","character",id);
+  for(const id of e.communityIds??[])addGraphEdge("episode",e.id,"INVOLVES","community",id);
+  for(const id of e.factionIds??[])addGraphEdge("episode",e.id,"INVOLVES","faction",id);
+  for(const id of e.connectionIds??[])addGraphEdge("episode",e.id,"CONTEXT","connection",id);
+  for(const characterId of e.characterIds??[]){
+    for(const locationId of e.locationIds??[])addGraphEdge("character",characterId,"EPISODE_GEOGRAPHY","location",locationId,e.id);
+    for(const communityId of e.communityIds??[])addGraphEdge("character",characterId,"EPISODE_CONTEXT","community",communityId,e.id);
+    for(const factionId of e.factionIds??[])addGraphEdge("character",characterId,"EPISODE_CONTEXT","faction",factionId,e.id);
+  }
+  for(const locationId of e.locationIds??[]){
+    for(const communityId of e.communityIds??[])addGraphEdge("location",locationId,"EPISODE_CONTEXT","community",communityId,e.id);
+    for(const factionId of e.factionIds??[])addGraphEdge("location",locationId,"EPISODE_CONTEXT","faction",factionId,e.id);
+  }
+}
+for(const c of connections){
+  const expected=endpointKinds[c.type];
+  if(expected){addGraphEdge(expected[0].slice(0,-1),c.fromId,"FROM",expected[1].slice(0,-1),c.toId);}
+}
+info.push(`Graph integrity: ${graphNodes.size} typed nodes; ${graphEdges.size} validated edges`);
+
 const mediaMap=media.episodes??{};const mediaKeys=Object.keys(mediaMap);const available=mediaKeys.filter(id=>mediaMap[id]?.image).length;const verified=mediaKeys.filter(id=>mediaMap[id]?.status==="verified").length;const fallback=mediaKeys.filter(id=>mediaMap[id]?.status==="fallback").length;
 if(available!==episodes.length)fail.push(`Media coverage is ${available}/${episodes.length}`);
 for(const id of episodes.map(e=>e.id))if(!mediaMap[id])fail.push(`Missing media entry ${id}`);
