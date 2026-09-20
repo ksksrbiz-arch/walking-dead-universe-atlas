@@ -1,9 +1,4 @@
 {
-  "france": [
-    "daryl-s01-e01",
-    "daryl-s02-e01",
-    "daryl-s02-e06"
-  ],
   "marseille": [
     "daryl-s01-e01"
   ],
@@ -25,6 +20,10 @@
   "le-havre": [
     "daryl-s01-e06"
   ],
+  "france": [
+    "daryl-s02-e01",
+    "daryl-s02-e06"
+  ],
   "london": [
     "daryl-s03-e01"
   ],
@@ -42,20 +41,15 @@
   "seville": [
     "daryl-s03-e07"
   ],
-  "new-york-city": [
-    "dead-s01-e01",
-    "dead-s02-e01",
-    "wb-s01-e10",
-    "wb-s02-e01"
+  "manhattan-island": [
+    "dead-s01-e01"
   ],
   "manhattan": [
-    "dead-s01-e01",
     "dead-s01-e02",
     "dead-s01-e03",
     "dead-s01-e04",
     "dead-s01-e05",
     "dead-s01-e06",
-    "dead-s02-e01",
     "dead-s02-e02",
     "dead-s02-e03",
     "dead-s02-e04",
@@ -71,9 +65,6 @@
     "dead-s03-e06",
     "dead-s03-e07",
     "dead-s03-e08"
-  ],
-  "manhattan-island": [
-    "dead-s01-e01"
   ],
   "madison-square-garden": [
     "dead-s01-e05"
@@ -792,6 +783,9 @@
     "wb-s01-e07",
     "wb-s01-e08",
     "wb-s01-e09"
+  ],
+  "new-york-city": [
+    "wb-s01-e10"
   ],
   "perimeter": [
     "wb-s02-e01",
