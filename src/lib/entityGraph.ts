@@ -33,6 +33,7 @@ const connectionEndpointKinds:Record<string,[EntityKind,EntityKind]>={
   "character-character":["character","character"],
   "character-community":["character","community"],
   "community-faction":["community","faction"],
+  "community-community":["community","community"],
   "faction-community":["faction","community"],
   "community-series":["community","series"],
   "faction-series":["faction","series"],
