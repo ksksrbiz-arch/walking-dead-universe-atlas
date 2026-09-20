@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import {atlasData} from "../data";
 import {entityGraph as graph} from "../lib/entityGraph";
 import AtlasIcon,{type AtlasIconName} from "./AtlasIcon";
@@ -53,6 +53,7 @@ function confidenceLabel(value:string){
 
 export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaultCollapsed=false,root:rootProp,heading}:Props){
  const [root,setRoot]=useState<string>(rootProp??"character:michonne");
+ useEffect(()=>{if(rootProp)setRoot(rootProp)},[rootProp]);
  const [filter,setFilter]=useState<Filter>("ALL");
  const [collapsed,setCollapsed]=useState(defaultCollapsed);
  const rootNode=graph.nodes.get(root);
