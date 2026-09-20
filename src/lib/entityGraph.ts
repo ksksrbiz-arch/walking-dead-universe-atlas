@@ -10,6 +10,7 @@ export type EntityEdge={
   to:EntityRef;
   type:string;
   confidence:"confirmed"|"approximate"|"source-derived";
+  evidenceId?:string;
 };
 
 const key=(kind:EntityKind,id:string)=>`${kind}:${id}`;
@@ -52,7 +53,8 @@ function resolveConnectionEndpoint(connection:ConnectionRecord,side:"from"|"to")
   const id=side==="from"?connection.fromId:connection.toId;
   if(!id)return null;
   const expected=connectionEndpointKinds[connection.type]?.[side==="from"?0:1];
-  const kind=expected&&entityIdSets[expected].has(id)?expected:resolveEntityKind(id);
+  if(expected)return entityIdSets[expected].has(id)?{kind:expected,id}:null;
+  const kind=resolveEntityKind(id);
   return kind?{kind,id}:null;
 }
 
@@ -62,7 +64,7 @@ export function buildEntityGraph(){
   const addNode=(kind:EntityKind,id:string)=>{if(id)nodes.set(key(kind,id),{kind,id})};
   const addEdge=(from:EntityRef,to:EntityRef,type:string,confidence:EntityEdge["confidence"]="source-derived",evidenceId?:string)=>{
     addNode(from.kind,from.id); addNode(to.kind,to.id);
-    edges.push({id:`${key(from.kind,from.id)}>${type}>${key(to.kind,to.id)}${evidenceId?">"+evidenceId:""}`,from,to,type,confidence});
+    edges.push({id:`${key(from.kind,from.id)}>${type}>${key(to.kind,to.id)}${evidenceId?">"+evidenceId:""}`,from,to,type,confidence,evidenceId});
   };
 
   for(const s of atlasData.series)addNode("series",s.id);
