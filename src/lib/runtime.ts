@@ -15,3 +15,15 @@ export async function getRuntimeRelationships(kind:string,id:string):Promise<Run
     return await response.json();
   }catch{return null}
 }
+
+const relationshipCache = new Map<string, RuntimeRelationship>();
+
+export async function getRuntimeEpisodeIds(kind: string, id: string): Promise<string[] | null> {
+  const key = kind + ":" + id;
+  const cached = relationshipCache.get(key);
+  if (cached) return cached.episodeIds;
+  const relationship = await getRuntimeRelationships(kind, id);
+  if (!relationship) return null;
+  relationshipCache.set(key, relationship);
+  return relationship.episodeIds;
+}
