@@ -80,6 +80,13 @@ for(const c of characters){
   if(Number.isInteger(c.episodeCount)&&c.episodeCount!==actualEpisodes.length)fail.push(`Character ${c.id}: declared episodeCount ${c.episodeCount} vs episode registry ${actualEpisodes.length}`);
 }
 for(const l of locations){if(!sets.series.has(l.seriesId))fail.push(`Location ${l.id}: unknown series ${l.seriesId}`);if(!Number.isFinite(Number(l.lat))||!Number.isFinite(Number(l.lng)))fail.push(`Location ${l.id}: invalid coordinates`);if(Number(l.lat)<-90||Number(l.lat)>90||Number(l.lng)<-180||Number(l.lng)>180)fail.push(`Location ${l.id}: coordinates out of range`)}
+for(const l of locations){
+  const linkedEpisodes=episodes.filter(e=>(e.locationIds??[]).includes(l.id));
+  if(linkedEpisodes.length){
+    const earliest=Math.min(...linkedEpisodes.map(e=>Number(e.timelineStart??e.timelineEnd)).filter(Number.isFinite));
+    if(Number.isFinite(earliest)&&Number(l.year)>earliest)fail.push(`Location ${l.id}: year ${l.year} is later than earliest linked episode chronology ${earliest}`);
+  }
+}
 for(const [id,set] of reverseCharacter)for(const eid of set)if(!(characterEpisodes.episodesByCharacter?.[id]??[]).includes(eid))fail.push(`Missing reverse character edge ${id} -> ${eid}`);
 for(const [id,set] of reverseLocation)for(const eid of set)if(!(locationEpisodes.episodesByLocation?.[id]??[]).includes(eid))fail.push(`Missing reverse location edge ${id} -> ${eid}`);
 for(const [id,list] of Object.entries(characterEpisodes.episodesByCharacter??{})){if(!sets.characters.has(id))fail.push(`Character index references unknown character ${id}`);const d=duplicate(list.map(eid=>({id:eid})));if(d.length)fail.push(`Character index ${id}: duplicate episode IDs ${d.join(", ")}`);for(const eid of list)if(!episodeIds.has(eid))fail.push(`Character index ${id}: stale episode ${eid}`)}
