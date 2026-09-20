@@ -40,9 +40,12 @@
 - [x] Cross-show navigation
 
 ## Phase 5 — Quality
-- [ ] Continuity validation
-- [ ] Broken-reference tests
-- [ ] Source auditing
-- [ ] Performance optimization
-- [ ] Accessibility pass
-- [ ] Production deployment
+- [x] Continuity validation
+- [x] Broken-reference tests
+- [x] Source auditing
+- [x] Performance instrumentation and optimization pass
+- [x] Accessibility source audit
+- [x] Production deployment
+- [ ] Live-browser regression and physical mobile verification
+
+See `docs/QUALITY_AUDIT_2026-09-20.md` for the current ten-part quality audit and the remaining live-browser verification gate.
