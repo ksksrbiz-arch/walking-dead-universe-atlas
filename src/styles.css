@@ -1181,3 +1181,97 @@ button.universeEventRow:hover{background:#ffffff04}
 .entityTagButton{display:inline-flex;align-items:center;min-height:34px;padding:7px 10px;border:1px solid #293638;border-radius:999px;background:#111b1d;color:#aeb8b8;font-size:9px;cursor:pointer}.entityTagButton:hover{border-color:#ffffff28;background:#152022}.entityFocusClear{margin:10px 0 0;padding:7px 9px;border:1px solid #ffffff18;border-radius:9px;background:#0b1416;color:#7f8d8b;font:700 7px "Space Mono",monospace;letter-spacing:.06em}
 
 .mediaAuditGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0}.mediaAuditGrid>div{display:grid;gap:3px;padding:10px;border:1px solid #ffffff12;border-radius:11px;background:#0b1416}.mediaAuditGrid small{font:700 7px "Space Mono",monospace;color:#718081}.mediaAuditGrid b{font-size:14px;color:#d7dedc}.mediaAuditGrid span{font-size:8px;color:#879392}.mediaGapNote{display:grid;gap:5px;margin:0 0 14px;padding:10px;border:1px solid #ffffff12;border-radius:11px;background:#0b1416}.mediaGapNote b{font:700 7px "Space Mono",monospace;color:#aeb8b8}.mediaGapNote span{font-size:8px;line-height:1.45;color:#879392}
+
+
+/* Responsive layout correction: final viewport-owned control stack.
+   Keep mobile map controls in a deterministic vertical stack and give
+   tablet layouts a non-overlapping left map rail beside the detail panel. */
+@media (max-width:699px){
+  .map.view-map .mapTopLeft{
+    top:72px;
+    left:10px;
+    right:auto;
+  }
+  .map.view-map .seriesRail{
+    top:124px !important;
+    left:10px !important;
+    right:10px !important;
+    transform:none !important;
+    max-width:none !important;
+    height:40px;
+    z-index:72;
+  }
+  .map.view-map .mapLayerRail{
+    top:166px !important;
+    left:10px !important;
+    right:10px !important;
+    transform:none !important;
+    max-width:none !important;
+    height:34px;
+    z-index:73;
+    padding-right:36px;
+  }
+  .map.view-map .mapTopRight{
+    top:208px !important;
+    right:10px !important;
+    z-index:76;
+  }
+  .map.view-map .mapSurface{
+    inset:0 0 calc(var(--mobile-nav) + 70px) 0;
+  }
+  .map.view-map .seriesRailHint{
+    display:none !important;
+  }
+}
+@media (max-width:390px){
+  .map.view-map .mapTopLeft{top:70px}
+  .map.view-map .seriesRail{top:122px !important}
+  .map.view-map .mapLayerRail{top:164px !important}
+  .map.view-map .mapTopRight{top:206px !important}
+}
+
+@media (min-width:700px) and (max-width:1099px){
+  .topbar{
+    grid-template-columns:auto minmax(260px,1fr) auto;
+    gap:12px;
+    padding-left:14px;
+    padding-right:14px;
+  }
+  .topbar .brand b{font-size:18px}
+  .topbar .brand small{font-size:7px}
+  .searchWrap{min-width:0}
+  .contentPanel{
+    right:14px;
+    width:min(360px,36vw);
+    top:86px;
+    bottom:84px;
+  }
+  .atlasTimelineDock{
+    left:14px;
+    right:calc(min(360px,36vw) + 28px);
+    bottom:84px;
+    height:190px;
+  }
+  .mapTopLeft{
+    left:14px;
+    top:86px;
+  }
+  .mapTopRight{
+    right:calc(min(360px,36vw) + 28px);
+    top:86px;
+  }
+  .seriesRail{
+    left:14px;
+    right:calc(min(360px,36vw) + 28px);
+    transform:none;
+    max-width:none;
+    overflow-x:auto;
+  }
+  .mapLayerRail{
+    left:14px;
+    right:calc(min(360px,36vw) + 28px);
+    transform:none;
+    max-width:none;
+    overflow-x:auto;
+  }
+}
