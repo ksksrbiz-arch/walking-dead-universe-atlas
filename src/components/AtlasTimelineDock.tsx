@@ -21,6 +21,10 @@ type Props={year:number;onYearChange:(year:number)=>void;series:SeriesKey|"ALL";
 
 export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,selectedEpisode,playing,onTogglePlaying,onConnections}:Props){
  const all=useMemo(()=>buildChronology(),[]);
+ // Lanes are a fixed-height grid tuned for series that actually have chronology items;
+ // an always-empty lane (e.g. an announced series with no episodes yet) would overflow
+ // the dock's fixed height and clip the year scrubber below it.
+ const laneOrder=useMemo(()=>ORDER.filter(key=>all.some(x=>x.seriesId===META[key].id)),[all]);
  const visible=useMemo(()=>all.filter(item=>series==="ALL"||item.seriesId===META[series].id),[all,series]);
  const counts=useMemo(()=>ORDER.reduce((acc,key)=>{acc[key]=visible.filter(x=>x.seriesId===META[key].id).length;return acc},{} as Record<SeriesKey,number>),[visible]);
  const pos=(value:number)=>((Math.max(MIN_YEAR,Math.min(MAX_YEAR,value))-MIN_YEAR)/(MAX_YEAR-MIN_YEAR))*100;
@@ -35,13 +39,13 @@ export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,se
   <div className="atlasTimelineBody">
    <div className="atlasTimelineScale">{[2010,2012,2014,2016,2018,2020,2022,2024,2026,2027].map(y=><button key={y} style={{left:pos(y)+"%"}} onClick={()=>onYearChange(y)}>{y}</button>)}</div>
    <div className="atlasTimelineLanes">
-    {ORDER.map(key=>{const meta=META[key];const items=visible.filter(x=>x.seriesId===meta.id);const active=activeSeries.has(meta.id);return <div className={"atlasTimelineLane "+(active?"active":"")} key={key}>
+    {laneOrder.map(key=>{const meta=META[key];const items=visible.filter(x=>x.seriesId===meta.id);const active=activeSeries.has(meta.id);return <div className={"atlasTimelineLane "+(active?"active":"")} key={key}>
       <button className="atlasTimelineLaneLabel" onClick={()=>onYearChange(items.find(x=>x.start>=year)?.start??year)} style={{"--lane":meta.color} as CSSProperties}>{meta.short}</button>
       <div className="atlasTimelineTrack">{items.map(item=>{const left=pos(item.start);const width=Math.max(.42,pos(item.end)-left);const isSelected=item.id===selectedEpisode;return <button key={item.id} className={"atlasTimelineItem "+(item.kind==="event"?"event":"episode")+(isSelected?" selected":"")} style={{left:left+"%",width:Math.min(18,Math.max(width,item.kind==="event" ? .55 : .62))+"%","--item":meta.color} as CSSProperties} title={item.title} onClick={()=>item.kind==="episode"?onEpisode(item.id):onYearChange(item.start)} aria-label={item.title}><i/></button>})}</div>
      </div>})}
     <div className="atlasTimelineCursor" style={{left:pos(year)+"%"}} aria-hidden="true"><span/></div>
    </div>
-   <div className="atlasTimelineFooter"><span>{counts.TWD+counts.FTWD+counts.TALES+counts.WB+counts.OWL+counts.DARYL+counts.DEAD} chronology records</span><input type="range" min={MIN_YEAR} max={MAX_YEAR} step=".01" value={year} onChange={e=>onYearChange(Number(e.target.value))} aria-label="Scrub universe chronology"/><span>2027</span></div>
+   <div className="atlasTimelineFooter"><span>{Object.values(counts).reduce((a,b)=>a+b,0)} chronology records</span><input type="range" min={MIN_YEAR} max={MAX_YEAR} step=".01" value={year} onChange={e=>onYearChange(Number(e.target.value))} aria-label="Scrub universe chronology"/><span>2027</span></div>
   </div>
  </section>
 }
