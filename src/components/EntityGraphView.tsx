@@ -8,6 +8,8 @@ type Props={
  onLocation:(id:string)=>void;
  onEpisode?:(id:string)=>void;
  onConnection?:(id:string)=>void;
+ onCommunity?:(id:string)=>void;
+ onFaction?:(id:string)=>void;
  defaultCollapsed?:boolean;
  root?:string;
  heading?:string;
@@ -43,7 +45,8 @@ function iconForEdge(type:string):AtlasIconName{
  if(type.includes("character-character"))return "character-link";
  if(type.includes("character-location"))return "location-link";
  if(type==="lore")return "lore";
- if(type.includes("community"))return "community-link";
+ if(type.includes("community")||type.includes("EPISODE_CONTEXT"))return "community-link";
+ if(type.includes("EPISODE_GEOGRAPHY"))return "location-link";
  return "connection";
 }
 
