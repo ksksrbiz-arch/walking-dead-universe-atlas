@@ -64,6 +64,8 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Replace series-level watch-order scaffolding with episode-level chronology where evidence supports it.
 - [x] Integrate webisodes/specials as an optional secondary chronology layer.
 - [x] Keep approximate/unknown dates explicitly marked.
+- [x] Integrate the canonical universe-event registry into the chronology engine and expanded Timeline view.
+- [x] Distinguish universe events visually from episode chronology records.
 
 ### Source registry & methodology
 - [x] Expose the canonical source registry directly in the Guide.
