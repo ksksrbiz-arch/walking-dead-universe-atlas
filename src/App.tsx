@@ -42,7 +42,7 @@ const MOBILE_HOME_Y=0;
 const onAtlasImageError=(e:React.SyntheticEvent<HTMLImageElement>,source:string)=>{const img=e.currentTarget;if(!source||img.dataset.fallback==="1")return;observeImageError(source);img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;};
 const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
 const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
-const locationIconName=(type:string):"map"|"pin"=>["city","community","facility","hospital","farm","prison","route","region","residence","ranch","dam","territory","country","landmark","stronghold"].includes(type)?"pin":"pin";
+const locationIconName=(type:string)=>{const names=new Set(["city","community","facility","hospital","farm","prison","route","region","residence","ranch","dam","territory","country","landmark","stronghold"]);return names.has(type)?type:"facility"};
 
 function Icon({name,className}:{name:"map"|"timeline"|"people"|"guide"|"plus"|"minus"|"locate"|"search"|"close"|"chevron"|"layers"|"play"|"pause"|"arrow"|"pin";className?:string}) {
  const paths={
@@ -314,7 +314,7 @@ export default function App(){
       <g className="countries">{worldCountries.features.map((c:any,i:number)=><path key={c.id||c.properties?.name} d={pathGenerator(c) as string} fill={countryTone(i)}><title>{c.properties?.name||"Country"}</title></path>)}</g>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} data-location-id={l.id} className={selectedLocation===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
-       <circle className="markerHit" r={isMobileMap?16:11} fill="transparent"/><g className="markerGlyph" style={{color:meta.color}}><Icon name={locationIconName(l.type)} className="markerIcon"/><circle className="markerCore" r="1.2" fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||selectedLocation===l.id|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
+       <circle className="markerHit" r={isMobileMap?16:11} fill="transparent"/><g className="markerGlyph" style={{color:meta.color}}><AtlasIcon name={locationIconName(l.type) as any} className="markerIcon"/><circle className="markerCore" r="1.2" fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||selectedLocation===l.id|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
       </g>})}</g>
      </g>
      </svg>
