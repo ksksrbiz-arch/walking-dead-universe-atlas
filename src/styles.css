@@ -1161,3 +1161,5 @@ button:active{transform:translateY(1px)}
  .timelineSecondaryToggle{grid-template-columns:auto minmax(0,1fr) 14px}
  .timelineSecondaryToggle small{font-size:6.5px}
 }
+
+.universeEventList{display:grid;gap:0;margin:8px 0 16px}.universeEventRow{display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid #ffffff0d}.universeEventRow>strong{font:700 11px "Space Mono",monospace;color:#cbd2d0}.universeEventRow>div{display:grid;gap:3px}.universeEventRow small{font:700 7px "Space Mono",monospace;letter-spacing:.06em;color:#718081}.universeEventRow b{font-size:11px;color:#d7dedc}.universeEventRow span{font-size:9px;line-height:1.4;color:#879392}.atlasTimelineItem.universe-event{border:1px solid #fff2c9;background:#fff2c9;opacity:.85}.atlasTimelineItem.universe-event i{display:block;width:5px;height:5px;border-radius:50%;background:#fff2c9}
