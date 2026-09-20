@@ -89,6 +89,7 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - Expanded location marker icon aliases so the map uses distinct SVG glyphs for the registered location taxonomy instead of collapsing most types into the generic facility glyph.
 - Added map-linked universe-event handling for any event record that carries documented locationIds; events without geography remain non-clickable rather than receiving invented placements.
 - Fixed entity-graph root synchronization so community/faction focus selections actually replace the graph root instead of leaving the initial character root mounted.
+- Completed search-to-graph navigation for community and faction results so search opens the selected entity relationship context.
 
 ## Validation
 
