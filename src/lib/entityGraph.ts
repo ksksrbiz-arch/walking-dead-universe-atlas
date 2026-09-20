@@ -76,6 +76,18 @@ export function buildEntityGraph(){
     for(const id of e.communityIds||[])addEdge({kind:"episode",id:e.id},{kind:"community",id},"INVOLVES");
     for(const id of e.factionIds||[])addEdge({kind:"episode",id:e.id},{kind:"faction",id},"INVOLVES");
     for(const id of e.connectionIds||[])addEdge({kind:"episode",id:e.id},{kind:"connection",id},"CONTEXT");
+    // These bridge edges are explicitly grounded in the episode registry: when an
+    // episode records a character and a place/community/faction together, the graph
+    // may traverse between them without inventing travel or a direct relationship.
+    for(const characterId of e.characterIds||[]){
+      for(const locationId of e.locationIds||[])addEdge({kind:"character",id:characterId},{kind:"location",id:locationId},"EPISODE_GEOGRAPHY");
+      for(const communityId of e.communityIds||[])addEdge({kind:"character",id:characterId},{kind:"community",id:communityId},"EPISODE_CONTEXT");
+      for(const factionId of e.factionIds||[])addEdge({kind:"character",id:characterId},{kind:"faction",id:factionId},"EPISODE_CONTEXT");
+    }
+    for(const locationId of e.locationIds||[]){
+      for(const communityId of e.communityIds||[])addEdge({kind:"location",id:locationId},{kind:"community",id:communityId},"EPISODE_CONTEXT");
+      for(const factionId of e.factionIds||[])addEdge({kind:"location",id:locationId},{kind:"faction",id:factionId},"EPISODE_CONTEXT");
+    }
   }
   for(const l of atlasData.locations)addNode("location",l.id);
   for(const c of atlasData.characters)addNode("character",c.id);
