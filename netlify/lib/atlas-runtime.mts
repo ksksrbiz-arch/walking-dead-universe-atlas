@@ -143,7 +143,23 @@ export async function getRuntimeCollection(kind: string) {
 }
 
 export async function getRuntimeEntity(kind: string, id: string) {
+  const direct = await runtimeStore.get(
+    `runtime/entity-v${RUNTIME_VERSION}/${kind}/${encodeURIComponent(id)}`,
+    { type: "json" },
+  );
+  if (direct) return direct;
   const collection = await getRuntimeCollection(kind);
   if (!Array.isArray(collection)) return null;
   return (collection as EntityRecord[]).find(item => item.id === id) ?? null;
+}
+
+export async function getRuntimeIndex(indexName: string, id: string): Promise<string[]> {
+  const direct = await runtimeStore.get(
+    `runtime/index-v${RUNTIME_VERSION}/${indexName}/${encodeURIComponent(id)}`,
+    { type: "json" },
+  ) as string[] | null;
+  if (Array.isArray(direct)) return direct;
+  const manifest = await getRuntimeManifest();
+  const index = (manifest.indexes as Record<string, IndexMap>)[indexName];
+  return Array.isArray(index?.[id]) ? index[id] : [];
 }
