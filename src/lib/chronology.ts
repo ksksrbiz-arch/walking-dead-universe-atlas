@@ -48,3 +48,28 @@ export function filterChronology(year:number,seriesId?:string){
 export function getSeriesWatchOrder(){
  return atlasData.watchOrder.filter((x:any)=>x.type!=="note");
 }
+
+export type EpisodeWatchOrderItem=ChronologyItem & {
+ sequence:number;
+ chronologyStatus:"anchored"|"shared-year"|"unknown";
+ orderingBasis:"timeline-anchor"|"timeline-window";
+};
+
+export function buildEpisodeWatchOrder(){
+ const episodes=buildChronology().filter(x=>x.kind==="episode");
+ return episodes.map((item,index,all)=>{
+  const sameWindow=all.some(other=>other.id!==item.id&&other.start===item.start&&other.end===item.end);
+  const unknown=item.precision==="unknown"||!Number.isFinite(item.start)||item.start<=0;
+  return {
+   ...item,
+   sequence:index+1,
+   chronologyStatus:unknown?"unknown":sameWindow?"shared-year":"anchored",
+   orderingBasis:item.precision==="year"?"timeline-window":"timeline-anchor"
+  } as EpisodeWatchOrderItem;
+ });
+}
+
+export function getEpisodeWatchOrder(seriesId?:string){
+ const order=buildEpisodeWatchOrder();
+ return seriesId?order.filter(item=>item.seriesId===seriesId):order;
+}
