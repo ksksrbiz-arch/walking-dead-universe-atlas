@@ -718,5 +718,15 @@
     "lat": 0,
     "lng": 0,
     "certainty": "unknown"
+  },
+  {
+    "id": "tales-atlanta",
+    "name": "Atlanta, Georgia",
+    "seriesId": "tales",
+    "year": 2010,
+    "type": "city",
+    "lat": 33.749,
+    "lng": -84.388,
+    "certainty": "confirmed"
   }
 ]
