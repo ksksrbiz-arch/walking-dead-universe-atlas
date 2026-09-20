@@ -1219,12 +1219,7 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
-    ],
+    "locationIds": [],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1244,12 +1239,7 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
-    ],
+    "locationIds": [],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1269,12 +1259,7 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
-    ],
+    "locationIds": [],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1295,9 +1280,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
       "valle-guadalupe"
     ],
     "characterIds": [],
@@ -1319,12 +1301,7 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
-    ],
+    "locationIds": [],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1345,9 +1322,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
       "valle-guadalupe"
     ],
     "characterIds": [],
@@ -1370,9 +1344,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
       "valle-guadalupe"
     ],
     "characterIds": [],
@@ -1395,10 +1366,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "valle-guadalupe",
+      "tijuana"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1420,10 +1389,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
       "rosarito",
-      "valle-guadalupe"
+      "tijuana"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1445,10 +1412,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "rosarito"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1470,10 +1434,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "rosarito"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1495,10 +1456,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "rosarito"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1520,10 +1478,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "rosarito"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1545,10 +1500,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "rosarito"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1570,10 +1522,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "rosarito"
     ],
     "characterIds": [],
     "communityIds": [],
