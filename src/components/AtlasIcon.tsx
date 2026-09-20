@@ -1,7 +1,7 @@
 import type {ReactNode,SVGProps} from "react";
 
 export type AtlasIconName =
-  | "city" | "community" | "facility" | "hospital" | "farm" | "prison"
+  | "city" | "community" | "facility" | "hospital" | "farm" | "prison" | "boat"
   | "route" | "region" | "residence" | "ranch" | "dam" | "territory"
   | "country" | "landmark" | "stronghold" | "character" | "episode"
   | "faction" | "series" | "connection" | "community-link" | "cross-series"
@@ -10,7 +10,8 @@ export type AtlasIconName =
 const paths:Record<AtlasIconName,ReactNode>={
  city:<><path d="M4 20V9l4-2v13M8 20V5l4-2v17M12 20V8l4-2v14M16 20V11l4-2v11"/><path d="M6 12h.01M6 16h.01M10 9h.01M10 13h.01M14 12h.01M18 15h.01"/></>,
  community:<><path d="M5 20v-7l7-5 7 5v7H5Z"/><path d="M9 20v-4h6v4M3 12l9-8 9 8"/><path d="M12 8v4M10 10h4"/></>,
- facility:<><path d="M4 20V7h16v13M8 7V4h8v3M8 11h2M14 11h2M8 15h2M14 15h2"/></>,\n boat:<><path d="M4 14h16l-2 5H6l-2-5Z"/><path d="M8 14V7h6l3 7M8 18c-1.5 1-3 1-4.5 0M16 18c1.5 1 3 1 4.5 0"/></>,
+ facility:<><path d="M4 20V7h16v13M8 7V4h8v3M8 11h2M14 11h2M8 15h2M14 15h2"/></>,
+ boat:<><path d="M4 14h16l-2 5H6l-2-5Z"/><path d="M8 14V7h6l3 7M8 18c-1.5 1-3 1-4.5 0M16 18c1.5 1 3 1 4.5 0"/></>,
  hospital:<><path d="M5 20V6h14v14H5Z"/><path d="M10 9h4M12 7v4M9 14h6M9 17h6"/></>,
  farm:<><path d="M4 20h16M6 20v-7l6-4 6 4v7M3 13l9-7 9 7M9 20v-4h6v4"/></>,
  prison:<><path d="M5 20V5h14v15M8 5v15M12 5v15M16 5v15"/><path d="M5 9h14M5 15h14"/></>,
