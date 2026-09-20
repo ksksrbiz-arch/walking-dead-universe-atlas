@@ -25,15 +25,34 @@ const entityIdSets:Record<EntityKind,Set<string>>={
   connection:new Set(atlasData.connections.map(x=>x.id))
 };
 
-const entityKindOrder:EntityKind[]=[
-  "character","location","community","faction","series","season","episode","connection"
-];
+type ConnectionRecord={id:string;type:string;fromId?:string;toId?:string;certainty?:string};
+
+const connectionEndpointKinds:Record<string,[EntityKind,EntityKind]>={
+  "character-faction":["character","faction"],
+  "character-location":["character","location"],
+  "character-character":["character","character"],
+  "character-community":["character","community"],
+  "community-faction":["community","faction"],
+  "faction-community":["faction","community"],
+  "community-series":["community","series"],
+  "faction-series":["faction","series"],
+  "cross-series":["character","series"],
+  "lore":["character","series"]
+};
 
 function resolveEntityKind(id:string):EntityKind|null{
-  for(const kind of entityKindOrder){
+  for(const kind of ["character","location","community","faction","series","season","episode","connection"] as EntityKind[]){
     if(entityIdSets[kind].has(id))return kind;
   }
   return null;
+}
+
+function resolveConnectionEndpoint(connection:ConnectionRecord,side:"from"|"to"):EntityRef|null{
+  const id=side==="from"?connection.fromId:connection.toId;
+  if(!id)return null;
+  const expected=connectionEndpointKinds[connection.type]?.[side==="from"?0:1];
+  const kind=expected&&entityIdSets[expected].has(id)?expected:resolveEntityKind(id);
+  return kind?{kind,id}:null;
 }
 
 export function buildEntityGraph(){
@@ -51,26 +70,28 @@ export function buildEntityGraph(){
     addNode("episode",e.id);
     if(e.seriesId)addEdge({kind:"episode",id:e.id},{kind:"series",id:e.seriesId},"IN_SERIES");
     if(e.seasonId)addEdge({kind:"episode",id:e.id},{kind:"season",id:e.seasonId},"IN_SEASON");
-    for(const id of e.locationIds||[])addEdge({kind:"episode",id:e.id},{kind:"location",id}, "OCCURS_AT");
-    for(const id of e.characterIds||[])addEdge({kind:"episode",id:e.id},{kind:"character",id}, "FEATURES");
-    for(const id of e.communityIds||[])addEdge({kind:"episode",id:e.id},{kind:"community",id}, "INVOLVES");
-    for(const id of e.factionIds||[])addEdge({kind:"episode",id:e.id},{kind:"faction",id}, "INVOLVES");
-    for(const id of e.connectionIds||[])addEdge({kind:"episode",id:e.id},{kind:"connection",id}, "CONTEXT");
+    for(const id of e.locationIds||[])addEdge({kind:"episode",id:e.id},{kind:"location",id},"OCCURS_AT");
+    for(const id of e.characterIds||[])addEdge({kind:"episode",id:e.id},{kind:"character",id},"FEATURES");
+    for(const id of e.communityIds||[])addEdge({kind:"episode",id:e.id},{kind:"community",id},"INVOLVES");
+    for(const id of e.factionIds||[])addEdge({kind:"episode",id:e.id},{kind:"faction",id},"INVOLVES");
+    for(const id of e.connectionIds||[])addEdge({kind:"episode",id:e.id},{kind:"connection",id},"CONTEXT");
   }
   for(const l of atlasData.locations)addNode("location",l.id);
   for(const c of atlasData.characters)addNode("character",c.id);
   for(const c of atlasData.communities)addNode("community",c.id);
   for(const f of atlasData.factions)addNode("faction",f.id);
+
   const curated=(atlasData as any).connectionEpisodes?.connections||{};
   for(const [connectionId,evidence] of Object.entries(curated) as any){
-    for(const episodeId of evidence.episodeIds||[]) addEdge({kind:"connection",id:connectionId},{kind:"episode",id:episodeId},"DOCUMENTED_IN",evidence.evidenceKind==="direct"?"confirmed":"source-derived");
+    for(const episodeId of evidence.episodeIds||[])addEdge({kind:"connection",id:connectionId},{kind:"episode",id:episodeId},"DOCUMENTED_IN",evidence.evidenceKind==="direct"?"confirmed":"source-derived");
   }
-  for(const x of atlasData.connections){
+
+  for(const x of atlasData.connections as ConnectionRecord[]){
     addNode("connection",x.id);
-    const fromKind=x.fromId?resolveEntityKind(x.fromId):null;
-    const toKind=x.toId?resolveEntityKind(x.toId):null;
-    if(fromKind)addEdge({kind:"connection",id:x.id},{kind:fromKind,id:x.fromId},"FROM",x.certainty==="confirmed"?"confirmed":"source-derived");
-    if(toKind)addEdge({kind:"connection",id:x.id},{kind:toKind,id:x.toId},"TO",x.certainty==="confirmed"?"confirmed":"source-derived");
+    const from=resolveConnectionEndpoint(x,"from");
+    const to=resolveConnectionEndpoint(x,"to");
+    if(from)addEdge({kind:"connection",id:x.id},from,"FROM",x.certainty==="confirmed"?"confirmed":"source-derived");
+    if(to)addEdge({kind:"connection",id:x.id},to,"TO",x.certainty==="confirmed"?"confirmed":"source-derived");
   }
 
   const adjacency=new Map<string,EntityEdge[]>();
@@ -97,7 +118,6 @@ export function getLocationEpisodeIds(locationId:string){
   return ((atlasData.locationEpisodes as any).episodesByLocation?.[locationId]||[]) as string[];
 }
 
-
 export const entityGraph=buildEntityGraph();
 
 export function getEpisodeConnectionIds(episodeId:string):string[]{
@@ -114,11 +134,11 @@ export function getEpisodeConnectionIds(episodeId:string):string[]{
  };
  const direct=new Set<string>(episode.connectionIds??[]);
  const curated=((atlasData as any).connectionEpisodes?.connections||{}) as Record<string,{episodeIds:string[]}>;
- for(const [connectionId,evidence] of Object.entries(curated)) if(evidence.episodeIds?.includes(episodeId)) direct.add(connectionId);
- for(const connection of atlasData.connections as any[]){
-  const fromKind=resolveEntityKind(connection.fromId);
-  const toKind=resolveEntityKind(connection.toId);
-  if(fromKind&&toKind&&has(fromKind,connection.fromId)&&has(toKind,connection.toId))direct.add(connection.id);
+ for(const [connectionId,evidence] of Object.entries(curated))if(evidence.episodeIds?.includes(episodeId))direct.add(connectionId);
+ for(const connection of atlasData.connections as ConnectionRecord[]){
+  const from=resolveConnectionEndpoint(connection,"from");
+  const to=resolveConnectionEndpoint(connection,"to");
+  if(from&&to&&has(from.kind,from.id)&&has(to.kind,to.id))direct.add(connection.id);
  }
  return [...direct];
 }
