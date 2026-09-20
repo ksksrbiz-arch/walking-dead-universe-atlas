@@ -1,8 +1,8 @@
-import { getStore } from "@netlify/blobs";
+import { getAtlasStore } from "../lib/blob-store.mts";
 import type { Config } from "@netlify/functions";
 
 export default async () => {
-  const store = getStore("atlas-runtime");
+  const store = getAtlasStore("atlas-runtime");
   const manifest = await store.get("runtime/manifest-v3", { type: "json" }) as any;
   if (!manifest) return;
 
