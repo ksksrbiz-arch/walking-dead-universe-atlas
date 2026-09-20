@@ -38,3 +38,11 @@ const paths:Record<AtlasIconName,ReactNode>={
 export default function AtlasIcon({name,className,...props}:{name:AtlasIconName;className?:string}&SVGProps<SVGSVGElement>){
  return <svg className={className} viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...props}>{paths[name]}</svg>;
 }
+
+// For embedding an icon's glyph directly inside another <svg> (e.g. a map marker). A nested
+// <svg viewBox> establishes its own ambiguous, browser-inconsistent sizing context there, so
+// callers that need one glyph inside an existing SVG coordinate system should wrap this in a
+// <g transform="scale(...)"> themselves instead of using the <svg>-wrapped AtlasIcon above.
+export function AtlasIconGlyph({name}:{name:AtlasIconName}){
+ return <>{paths[name]}</>;
+}
