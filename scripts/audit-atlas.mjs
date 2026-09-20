@@ -86,16 +86,22 @@ for(const [id,list] of Object.entries(characterEpisodes.episodesByCharacter??{})
 for(const [id,list] of Object.entries(locationEpisodes.episodesByLocation??{})){if(!sets.locations.has(id))fail.push(`Location index references unknown location ${id}`);const d=duplicate(list.map(eid=>({id:eid})));if(d.length)fail.push(`Location index ${id}: duplicate episode IDs ${d.join(", ")}`);for(const eid of list)if(!episodeIds.has(eid))fail.push(`Location index ${id}: stale episode ${eid}`);for(const eid of list)if(!reverseLocation.get(id)?.has(eid))warn.push(`Location index ${id} includes curated historical association ${eid}`)}
 
 const endpointKinds={
-  "character-faction":["character","faction"],"character-location":["character","location"],"character-character":["character","character"],"character-community":["character","community"],"community-community":["community","community"],
-  "community-faction":["community","faction"],"faction-community":["faction","community"],"community-series":["community","series"],"faction-series":["faction","series"],"cross-series":["character","series"],"lore":["character","series"]
+  "character-faction":["characters","factions"],"character-location":["characters","locations"],"character-character":["characters","characters"],"character-community":["characters","communities"],"community-community":["communities","communities"],
+  "community-faction":["communities","factions"],"faction-community":["factions","communities"],"community-series":["communities","series"],"faction-series":["factions","series"],"cross-series":["characters","series"],"lore":["characters","series"]
 };
 for(const c of connections){
   if(c.fromId===c.toId)fail.push(`Connection ${c.id}: self-reference`);
   if(!c.label?.trim())fail.push(`Connection ${c.id}: missing label`);
   const expected=endpointKinds[c.type];
   if(expected){
-    if(!sets[expected[0]].has(c.fromId))fail.push(`Connection ${c.id}: fromId ${c.fromId} is not a ${expected[0]} for type ${c.type}`);
-    if(!sets[expected[1]].has(c.toId))fail.push(`Connection ${c.id}: toId ${c.toId} is not a ${expected[1]} for type ${c.type}`);
+    const fromSet=sets[expected[0]];
+    const toSet=sets[expected[1]];
+    if(!fromSet||!toSet){
+      fail.push(`Connection ${c.id}: unknown expected node type for connection type ${c.type}`);
+    }else{
+      if(!fromSet.has(c.fromId))fail.push(`Connection ${c.id}: fromId ${c.fromId} is not a ${expected[0]} for type ${c.type}`);
+      if(!toSet.has(c.toId))fail.push(`Connection ${c.id}: toId ${c.toId} is not a ${expected[1]} for type ${c.type}`);
+    }
   }else{
     if(!allEntityRefs.has(c.fromId))fail.push(`Connection ${c.id}: unknown fromId ${c.fromId}`);
     if(!allEntityRefs.has(c.toId))fail.push(`Connection ${c.id}: unknown toId ${c.toId}`);
