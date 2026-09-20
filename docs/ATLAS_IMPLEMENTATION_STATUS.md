@@ -76,6 +76,8 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Surface source type, provenance note, and methodology rules without hiding them in repository files.
 
 ### Block E — Media
+- [x] Add a build-time local AMC media cache so production rendering does not depend on runtime third-party image proxying.
+- [x] Add explicit series-art fallbacks for locations and characters without dedicated media assets.
 - [x] Add an in-app media coverage audit surface with per-series coverage and unresolved episode visibility.
 - Continue official AMC media ingestion with provenance.
 - Do not claim an episode asset is verified unless the ingestion pipeline actually verified it.
