@@ -33,6 +33,20 @@ const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
 };
 const SERIES_BY_ID=Object.fromEntries(Object.values(META).map(x=>[x.id,x])) as Record<string,typeof META.TWD>;
 const SERIES_KEYS=Object.keys(META) as SeriesKey[];
+
+type MapLayer="ALL"|"SETTLEMENTS"|"FACILITIES"|"LANDMARKS"|"INFRASTRUCTURE"|"REGIONS";
+const MAP_LAYER_LABELS:Record<MapLayer,string>={ALL:"ALL",SETTLEMENTS:"SETTLEMENTS",FACILITIES:"FACILITIES",LANDMARKS:"LANDMARKS",INFRASTRUCTURE:"INFRASTRUCTURE",REGIONS:"REGIONS"};
+const LOCATION_LAYER_TYPES:Record<Exclude<MapLayer,"ALL">,Set<string>>={
+ SETTLEMENTS:new Set(["city","town","community","stronghold","safe-zone","neighborhood","district","residence","farm","ranch","reservation","outpost","trading-center"]),
+ FACILITIES:new Set(["facility","hospital","prison","medical-facility","military-facility","industrial","hotel","retail","store","restaurant","workshop","store-plaza","church","stadium","bunker"]),
+ LANDMARKS:new Set(["landmark","park","boat","cabin","vineyard","jungle","crash-site"]),
+ INFRASTRUCTURE:new Set(["dam","route","bridge","transit","rail-yard","dock","river","international-border"]),
+ REGIONS:new Set(["region","country","state","territory","county","island"])
+};
+const locationMapLayer=(type:string):MapLayer=>{
+ for(const [layer,types] of Object.entries(LOCATION_LAYER_TYPES) as [Exclude<MapLayer,"ALL">,Set<string>][])if(types.has(type))return layer;
+ return "LANDMARKS";
+};
 const projection=geoEqualEarth().fitExtent([[24,22],[976,578]],{type:"Sphere"});
 const pathGenerator=geoPath(projection);
 const worldCountries:any=feature(world as any,(world as any).objects.countries) as any;
@@ -99,6 +113,7 @@ function Icon({name,className}:{name:"map"|"timeline"|"people"|"guide"|"plus"|"m
 
 export default function App(){
  const [series,setSeries]=useState<SeriesKey|"ALL">("ALL");
+ const [mapLayer,setMapLayer]=useState<MapLayer>("ALL");
  const [year,setYear]=useState(2010);
  const [query,setQuery]=useState("");
  const [selectedLocation,setSelectedLocation]=useState<string|null>(null);
@@ -174,6 +189,10 @@ export default function App(){
    const meta=SERIES_BY_ID[l.seriesId];
    return !!meta&&(series==="ALL"||l.seriesId===META[series].id)&&l.year<=year;
  }),[series,year]);
+ const mapLocations=useMemo(()=>{
+   const source=journeyMapMode&&selectedCharacter?atlasData.locations.filter(l=>characterJourneyLocationIds.has(l.id)):locations;
+   return source.filter(l=>mapLayer==="ALL"||locationMapLayer(l.type)===mapLayer);
+ },[journeyMapMode,selectedCharacter,characterJourneyLocationIds,locations,mapLayer]);
  const chronology=useMemo(()=>buildChronology().filter(e=>e.start<=year&&(series==="ALL"||e.seriesId===META[series].id)),[series,year]);
  const episodes=useMemo(()=>chronology.filter(e=>e.kind==="episode"),[chronology]);
  const selectedLoc=atlasData.locations.find(l=>l.id===selectedLocation)??null;
@@ -181,7 +200,6 @@ export default function App(){
  const episodeContextLocationIds=useMemo(()=>new Set<string>(selectedEpisode?((atlasData.episodes.find((e:any)=>e.id===selectedEpisode)?.locationIds??[]) as string[]):[]),[selectedEpisode]);
  const selectedConnectionData=selectedConnection?atlasData.connections.find((x:any)=>x.id===selectedConnection) as any:null;
  const characterJourneyLocationIds=useMemo(()=>{if(!selectedCharacter)return new Set<string>();const ids=new Set<string>();getCharacterEpisodeIds(selectedCharacter).forEach(eid=>{const e=atlasData.episodes.find((x:any)=>x.id===eid) as any;(e?.locationIds??[]).forEach((id:string)=>ids.add(id))});return ids},[selectedCharacter]);
- const mapLocations=useMemo(()=>journeyMapMode&&selectedCharacter?atlasData.locations.filter(l=>characterJourneyLocationIds.has(l.id)):locations,[journeyMapMode,selectedCharacter,characterJourneyLocationIds,locations]);
  const connectionContextLocationIds=useMemo(()=>{const ids=new Set<string>();if(!selectedConnectionData)return ids;[selectedConnectionData.fromId,selectedConnectionData.toId].filter(Boolean).forEach((id:string)=>{const l=atlasData.locations.find(x=>x.id===id);if(l)ids.add(l.id)});const evidence=((atlasData as any).connectionEpisodes?.connections?.[selectedConnectionData.id]?.episodeIds??[]) as string[];evidence.forEach((episodeId:string)=>{const e=atlasData.episodes.find((x:any)=>x.id===episodeId) as any;(e?.locationIds??[]).forEach((id:string)=>ids.add(id))});return ids},[selectedConnectionData]);
 
  const searchResults=useMemo(()=>{
@@ -366,7 +384,7 @@ export default function App(){
 
     <div className="mapChrome mapTopLeft">
       <div className="locationKicker"><span className="liveDot"/>{visibleSeries}<span className="mapModeTag">MAP</span></div>
-      <strong>{mapYearCount} <small>LOCATIONS · {year}</small></strong>
+      <strong>{mapYearCount} <small>{MAP_LAYER_LABELS[mapLayer]} · {year}</small></strong>
     </div>
 
     <div className="mapChrome mapTopRight">
@@ -382,6 +400,10 @@ export default function App(){
     {view==="map"&&!selectedLocation&&!selectedEpisode&&<div className="seriesRail" aria-label="Series filter"><span className="seriesRailHint" aria-hidden="true">SWIPE</span>
       <button className={series==="ALL"?"active":""} aria-pressed={series==="ALL"} onClick={()=>setSeries("ALL")}>ALL</button>
       {SERIES_KEYS.map(k=><button key={k} aria-pressed={series===k} className={series===k?"active":""} style={series===k?{"--series":META[k].color} as CSSProperties:{}} onClick={()=>setSeries(k)}>{META[k].short}</button>)}
+    </div>}
+    {view==="map"&&!selectedLocation&&!selectedEpisode&&!selectedCharacter&&<div className="mapLayerRail" aria-label="Map location layer filter">
+      <span className="mapLayerLabel"><Icon name="layers"/> LAYERS</span>
+      {(Object.keys(MAP_LAYER_LABELS) as MapLayer[]).map(layer=><button key={layer} className={mapLayer===layer?"active":""} aria-pressed={mapLayer===layer} onClick={()=>setMapLayer(layer)}>{MAP_LAYER_LABELS[layer]}</button>)}
     </div>}
 
     {!isMobileMap&&<AtlasTimelineDock year={year} onYearChange={y=>{setPlaying(false);setYear(y)}} series={series} onEpisode={selectAtlasEpisode} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>}
