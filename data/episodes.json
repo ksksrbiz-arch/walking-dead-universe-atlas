@@ -1580,9 +1580,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "military-fuel-depot",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1604,9 +1603,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "rosarito-beach-hotel"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1628,8 +1626,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
       "dam"
     ],
     "characterIds": [],
@@ -1652,9 +1648,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "dam",
+      "tijuana",
+      "abigail-vineyard"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1676,9 +1672,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "phils-outpost",
+      "rosarito-beach-hotel",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1700,9 +1697,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "brooke-ranch"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1724,9 +1719,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "black-hat-reservation"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1748,9 +1742,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "black-hat-reservation",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1772,9 +1766,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "dam",
+      "tijuana"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1796,9 +1790,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "el-bazar",
+      "workshop-ftwd"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1820,9 +1814,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "dam",
+      "tijuana"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1844,9 +1837,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "phils-outpost"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1868,9 +1860,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "brooke-ranch"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1892,9 +1882,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "el-bazar",
+      "on-the-go-burger",
+      "romminda-plaza"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1916,9 +1906,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "dam",
+      "el-bazar"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1940,9 +1929,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "dam",
+      "tijuana"
     ],
     "characterIds": [],
     "communityIds": [],
