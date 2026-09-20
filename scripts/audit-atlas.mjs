@@ -129,7 +129,8 @@ const unresolved=connections.filter(c=>!curated[c.id]).map(c=>c.id);if(unresolve
 // same typed registry used by the client. Episode-context bridges are deliberately
 // checked here so graph traversal cannot silently expose stale or fabricated refs.
 const graphKinds={series:series,seasons:seasons,episodes:episodes,locations:locations,characters:characters,communities:communities,factions:factions,connections:connections};
-const graphNodes=new Set(Object.entries(graphKinds).flatMap(([kind,list])=>list.map(x=>`${kind.slice(0,-1)}:${x.id}`)));
+const graphSingular={series:"series",seasons:"season",episodes:"episode",locations:"location",characters:"character",communities:"community",factions:"faction",connections:"connection"};
+const graphNodes=new Set(Object.entries(graphKinds).flatMap(([kind,list])=>list.map(x=>`${graphSingular[kind]}:${x.id}`)));
 const graphEdges=new Set();
 const addGraphEdge=(fromKind,fromId,type,toKind,toId,evidenceId)=>{
   const from=`${fromKind}:${fromId}`,to=`${toKind}:${toId}`;
@@ -156,7 +157,7 @@ for(const e of episodes){
 }
 for(const c of connections){
   const expected=endpointKinds[c.type];
-  if(expected){addGraphEdge(expected[0].slice(0,-1),c.fromId,"FROM",expected[1].slice(0,-1),c.toId);}
+  if(expected){addGraphEdge(graphSingular[expected[0]],c.fromId,"FROM",graphSingular[expected[1]],c.toId);}
 }
 info.push(`Graph integrity: ${graphNodes.size} typed nodes; ${graphEdges.size} validated edges`);
 
