@@ -182,7 +182,7 @@ export default function App(){
  },[query]);
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
- const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,vbW=1000,vbH=600,scale=Math.max(w/vbW,h/vbH)*visual.current.zoom;return {x:Math.max(0,(vbW*scale-w)/2),y:Math.max(0,(vbH*scale-h)/2)}};
+ const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,vbW=1000,vbH=600,scale=Math.max(w/vbW,h/vbH)*visual.current.zoom;const rawX=Math.max(0,(vbW*scale-w)/2),rawY=Math.max(0,(vbH*scale-h)/2);if(isMobileMap&&visual.current.zoom<=1.001)return {x:Math.min(rawX,180),y:Math.min(Math.max(rawY,80),100)};return {x:rawX,y:rawY}};
  const resetMap=()=>{const homeX=isMobileMap?MOBILE_HOME_X:0;const homeY=isMobileMap?MOBILE_HOME_Y:0;visual.current={x:homeX,y:homeY,zoom:1};setZoom(1);setPan({x:homeX,y:homeY});trackAtlasMetric("map-reset",1,{mobile:isMobileMap});};
  const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const ids=getCharacterEpisodeIds(id);const eps=ids.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("people");setSheet("open");trackAtlasMetric("character-select",eps.length,{character:id});void getRuntimeRelationships("character",id).then(remote=>{if(remote)trackAtlasMetric("runtime-character-relationships",remote.episodeIds.length,{character:id,remoteIndexed:true})});};
  const selectLocation=(l:Location)=>{ const focusStarted=performance.now();
@@ -273,18 +273,10 @@ export default function App(){
      drag.current.moved=true;
    }else{
      const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
-     // At the base zoom the world already fills the intended mobile frame.
-     // Do not allow a one-finger drag to move the SVG into its transparent
-     // letterbox area; panning becomes available once the user zooms in.
-     if(visual.current.zoom<=1.001){
-       nextX=0;
-       nextY=0;
-     }else{
-       if(Math.abs(dx)+Math.abs(dy)>4)drag.current.moved=true;
-       const limits=getMapPanLimits();
-       nextX=clamp(drag.current.px+dx,-limits.x,limits.x);
-       nextY=clamp(drag.current.py+dy,-limits.y,limits.y);
-     }
+     if(Math.abs(dx)+Math.abs(dy)>4)drag.current.moved=true;
+     const limits=getMapPanLimits();
+     nextX=clamp(drag.current.px+dx,-limits.x,limits.x);
+     nextY=clamp(drag.current.py+dy,-limits.y,limits.y);
    }
    visual.current={x:nextX,y:nextY,zoom:nextZoom};
    if(raf.current!==null)cancelAnimationFrame(raf.current);
