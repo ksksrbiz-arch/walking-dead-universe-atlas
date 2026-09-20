@@ -14,6 +14,7 @@ const characterEpisodes=read("characterEpisodes.json");
 const locationEpisodes=read("locationEpisodes.json");
 const media=read("episodeMedia.json");
 const connections=read("connections.json");
+const connectionEpisodes=read("connectionEpisodes.json");
 
 const fail=[];
 const warn=[];
@@ -48,6 +49,16 @@ for(const [id,list] of Object.entries(locationEpisodes.episodesByLocation??{})){
 for(const [id,set] of byCharacter)for(const eid of set)if(!(characterEpisodes.episodesByCharacter?.[id]??[]).includes(eid))fail.push(`Missing reverse character edge: ${id} -> ${eid}`);
 for(const [id,set] of byLocation)for(const eid of set)if(!(locationEpisodes.episodesByLocation?.[id]??[]).includes(eid))fail.push(`Missing reverse location edge: ${id} -> ${eid}`);
 
+const curatedConnections=connectionEpisodes.connections??{};
+const connectionIdSet=new Set(connections.map(x=>x.id));
+for(const [id,evidence] of Object.entries(curatedConnections)){
+  if(!connectionIdSet.has(id))fail.push(`Connection evidence references missing connection: ${id}`);
+  const ids=new Set(evidence.episodeIds??[]);
+  if(ids.size!==(evidence.episodeIds??[]).length)fail.push(`Duplicate episode evidence IDs: ${id}`);
+  for(const eid of evidence.episodeIds??[])if(!episodeIds.has(eid))fail.push(`Connection evidence ${id} references missing episode ${eid}`);
+}
+const unresolved=connections.filter(c=>!(curatedConnections as any)[c.id]);
+if(unresolved.length)warn.push(`Connections without curated episode evidence: ${unresolved.map(x=>x.id).join(", ")}`);
 const mediaEntries=Object.values(media.episodes??{});
 const available=mediaEntries.filter(x=>x?.image).length;
 const verified=mediaEntries.filter(x=>x?.status==="verified").length;
@@ -68,6 +79,7 @@ console.log(JSON.stringify({
   characterPairs:[...byCharacter.values()].reduce((n,s)=>n+s.size,0),
   locationPairs:[...byLocation.values()].reduce((n,s)=>n+s.size,0),
   media:{available,verified,fallback},
+  connectionEvidence:{covered:Object.keys(curatedConnections).length,total:connections.length,unresolved:unresolved.map(x=>x.id)},
   failures:fail,
   warnings:warn
 },null,2));
