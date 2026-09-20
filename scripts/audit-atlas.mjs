@@ -57,7 +57,7 @@ for(const [id,evidence] of Object.entries(curatedConnections)){
   if(ids.size!==(evidence.episodeIds??[]).length)fail.push(`Duplicate episode evidence IDs: ${id}`);
   for(const eid of evidence.episodeIds??[])if(!episodeIds.has(eid))fail.push(`Connection evidence ${id} references missing episode ${eid}`);
 }
-const unresolved=connections.filter(c=>!(curatedConnections as any)[c.id]);
+const unresolved=connections.filter(c=>!curatedConnections[c.id]);
 if(unresolved.length)warn.push(`Connections without curated episode evidence: ${unresolved.map(x=>x.id).join(", ")}`);
 const mediaEntries=Object.values(media.episodes??{});
 const available=mediaEntries.filter(x=>x?.image).length;
