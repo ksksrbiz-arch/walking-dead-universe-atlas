@@ -99,10 +99,10 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConn
     </div>
    </div>
 
-   {!collapsed&&related.length>0&&<div className="entityGraphFilters" aria-label="Relationship filters">
-    <button className={filter==="ALL"?"active":""} onClick={()=>setFilter("ALL")}>ALL <b>{related.length}</b></button>
+   {!collapsed&&related.length>0&&<div className="entityGraphFilters" aria-label="Relationship filters" role="group">
+    <button className={filter==="ALL"?"active":""} onClick={()=>setFilter("ALL")} aria-pressed={filter==="ALL"}>ALL <b>{related.length}</b></button>
     {Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)).map(([kind,count])=>
-      <button key={kind} className={filter===kind?"active":""} onClick={()=>setFilter(kind as Filter)}>
+      <button key={kind} className={filter===kind?"active":""} onClick={()=>setFilter(kind as Filter)} aria-pressed={filter===kind}>
         {labels[kind]||kind.toUpperCase()} <b>{count}</b>
       </button>
     )}
