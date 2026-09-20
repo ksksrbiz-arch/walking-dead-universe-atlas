@@ -4117,7 +4117,9 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "tales-atlanta"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
