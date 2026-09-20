@@ -1,7 +1,7 @@
-import { getStore } from "@netlify/blobs";
+import { getAtlasStore } from "../lib/blob-store.mts";
 import type { Config } from "@netlify/functions";
 
-const store = getStore("atlas-state");
+const store = getAtlasStore("atlas-state");
 
 function validSession(value: string | null) {
   return !!value && /^[A-Za-z0-9_-]{16,128}$/.test(value);
