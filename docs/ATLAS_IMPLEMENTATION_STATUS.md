@@ -28,7 +28,7 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Episode selection identifies all linked locations.
 - [x] Map highlights the episode's linked geography while preserving chronology context.
 - [x] Location selection jumps the chronology to the location's configured earliest/relevant history.
-- [ ] Add a compact location-history indicator to the timeline.
+- [x] Add a compact location-history indicator to location detail chronology context.
 
 ### Block B — Connections
 - [x] Populate and consume curated episode connection evidence where source-backed.
