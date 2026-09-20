@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "source": "curated episode-level relationship evidence",
+  "updatedAt": "2026-09-19",
+  "connections": {
+    "rick-jadis-crm": {"episodeIds":["twd-s09-e05"],"basis":"Rick's disappearance/CRM extraction storyline","evidenceKind":"direct"},
+    "morgan-twd-ftwd": {"episodeIds":["ftwd-s04-e01"],"basis":"Morgan's Fear debut and continuation","evidenceKind":"direct"},
+    "daryl-europe": {"episodeIds":["daryl-s01-e01"],"basis":"Daryl's France storyline begins","evidenceKind":"direct"},
+    "carol-daryl": {"episodeIds":["twd-s01-e03"],"basis":"Carol and Daryl are both episode-level character entities","evidenceKind":"co-presence"},
+    "maggie-negan": {"episodeIds":["dead-s01-e01"],"basis":"Maggie and Negan are both central episode-level characters in Dead City","evidenceKind":"co-presence"},
+    "rick-michonne": {"episodeIds":["twd-s03-e01"],"basis":"Rick and Michonne are both episode-level character entities","evidenceKind":"co-presence"},
+    "dwight-fear": {"episodeIds":["ftwd-s05-e03"],"basis":"Dwight's Fear debut","evidenceKind":"direct"},
+    "sherry-fear": {"episodeIds":["ftwd-s06-e03"],"basis":"Sherry's Fear storyline","evidenceKind":"direct"},
+    "jadis-world-beyond": {"episodeIds":["wb-s02-e05"],"basis":"Jadis/Anne appears in World Beyond","evidenceKind":"direct"},
+    "jadis-owl": {"episodeIds":["owl-s01-e02"],"basis":"Jadis/Anne returns in The Ones Who Live","evidenceKind":"direct"},
+    "michonne-owl": {"episodeIds":["owl-s01-e01"],"basis":"Michonne's Ones Who Live storyline begins","evidenceKind":"direct"},
+    "maggie-dead-city": {"episodeIds":["dead-s01-e01"],"basis":"Maggie's Dead City storyline begins","evidenceKind":"direct"},
+    "negan-dead-city": {"episodeIds":["dead-s01-e01"],"basis":"Negan's Dead City storyline begins","evidenceKind":"direct"},
+    "alpha-tales": {"episodeIds":["tales-s01-e03"],"basis":"Tales Episode 3 is the Dee/Alpha origin story","evidenceKind":"direct"},
+    "lydia-tales": {"episodeIds":["tales-s01-e03"],"basis":"Lydia appears in the Dee/Alpha story","evidenceKind":"direct"},
+    "jenner-world-beyond": {"episodeIds":["wb-s02-e10"],"basis":"Jenner appears through archived video","evidenceKind":"direct"},
+    "jenner-variant-lore": {"episodeIds":["twd-s01-e06"],"basis":"Jenner's CDC research anchors the early outbreak lore","evidenceKind":"direct"},
+    "campus-omaha": {"episodeIds":["wb-s01-e01"],"basis":"Campus Colony and Omaha are both represented in the World Beyond opening geography/history","evidenceKind":"curated-context"},
+    "crm-portland": {"episodeIds":["wb-s02-e01"],"basis":"Portland enters the episode-level World Beyond geography/history index","evidenceKind":"curated-context"},
+    "commonwealth-twd": {"episodeIds":["twd-s11-e01"],"basis":"Commonwealth becomes part of the late TWD episode geography","evidenceKind":"curated-context"}
+  }
+}
