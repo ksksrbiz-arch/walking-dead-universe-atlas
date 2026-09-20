@@ -1,4 +1,4 @@
-import {useEffect,useMemo,useRef,useState} from "react";
+import {memo,useEffect,useMemo,useRef,useState} from "react";
 import {geoEqualEarth,geoPath} from "d3-geo";
 import {feature} from "topojson-client";
 import type {CSSProperties} from "react";
@@ -44,6 +44,30 @@ const MOBILE_HOME_Y=0;
 const onAtlasImageError=(e:React.SyntheticEvent<HTMLImageElement>,source:string)=>{const img=e.currentTarget;if(!source||img.dataset.fallback==="1")return;observeImageError(source);img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;};
 const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
 const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
+// The projection, topology and per-country fill never change after load, so the geo
+// projection math (the expensive part — hundreds of polygon rings through d3-geo) is
+// done once here instead of on every React render. Re-deriving these ~250 path strings
+// per render was the single largest source of jank (250-450ms blocking tasks on every
+// zoom tick, autoplay tick, and navigation).
+const sphereD=pathGenerator({type:"Sphere"}) as string;
+const worldLandD=pathGenerator(worldLand) as string;
+const worldCountryPaths=worldCountries.features.map((c:any,i:number)=>({
+ key:(c.id||c.properties?.name||"country")+"-"+i,
+ d:pathGenerator(c) as string,
+ fill:countryTone(i),
+ name:c.properties?.name||"Country"
+}));
+// Takes no props and its output never changes, so React skips re-rendering (and
+// re-diffing all ~250 country paths) on every unrelated state change elsewhere in App.
+const MapBackground=memo(function MapBackground(){
+ return <>
+  <rect width="1000" height="600" fill="url(#ocean)"/>
+  <rect width="1000" height="600" fill="url(#oceanGlow)"/>
+  <g className="graticule"><path d={sphereD}/></g>
+  <path className="landShadow" d={worldLandD} fill="#26383a" opacity=".28"/>
+  <g className="countries">{worldCountryPaths.map((c:any)=><path key={c.key} d={c.d} fill={c.fill}><title>{c.name}</title></path>)}</g>
+ </>;
+});
 const locationIconName=(type:string)=>{const names=new Set(["city","community","facility","hospital","farm","prison","route","region","residence","ranch","dam","territory","country","landmark","stronghold"]);return names.has(type)?type:"facility"};
 
 function Icon({name,className}:{name:"map"|"timeline"|"people"|"guide"|"plus"|"minus"|"locate"|"search"|"close"|"chevron"|"layers"|"play"|"pause"|"arrow"|"pin";className?:string}) {
@@ -309,11 +333,7 @@ export default function App(){
        <filter id="paperNoise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="2" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="gray"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer><feBlend in="SourceGraphic" in2="gray" mode="multiply"/></filter>
       </defs>
       <g className="mapWorld">
-      <rect width="1000" height="600" fill="url(#ocean)"/>
-      <rect width="1000" height="600" fill="url(#oceanGlow)"/>
-      <g className="graticule"><path d={pathGenerator({type:"Sphere"}) as string}/></g>
-      <path className="landShadow" d={pathGenerator(worldLand) as string} fill="#26383a" opacity=".28"/>
-      <g className="countries">{worldCountries.features.map((c:any,i:number)=><path key={(c.id||c.properties?.name||"country")+"-"+i} d={pathGenerator(c) as string} fill={countryTone(i)}><title>{c.properties?.name||"Country"}</title></path>)}</g>
+      <MapBackground/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];const isSelected=selectedLocation===l.id;const iconSize=isSelected?20:18;const iconHalf=iconSize/2;return <g key={l.id} data-location-id={l.id} className={isSelected?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
        <circle className="markerHit" r={isMobileMap?16:11} fill="transparent"/><g className="markerGlyph" transform={`translate(${-iconHalf} ${-iconHalf})`} style={{color:meta.color}}><g className="markerIcon" transform={`scale(${iconSize/24})`} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type) as any}/></g><circle className="markerCore" cx={iconHalf} cy={iconHalf} r="1.2" fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||isSelected|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
