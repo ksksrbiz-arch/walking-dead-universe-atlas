@@ -2,7 +2,12 @@ import {useMemo,useState} from "react";
 import {atlasData} from "../data";
 import {buildEntityGraph} from "../lib/entityGraph";
 
-type Props={onCharacter:(id:string)=>void;onLocation:(id:string)=>void;onEpisode?:(id:string)=>void};
+type Props={
+ onCharacter:(id:string)=>void;
+ onLocation:(id:string)=>void;
+ onEpisode?:(id:string)=>void;
+ defaultCollapsed?:boolean;
+};
 type Filter="ALL"|"character"|"location"|"community"|"faction"|"series"|"episode"|"connection";
 
 const labels:Record<string,string>={
@@ -11,15 +16,24 @@ const labels:Record<string,string>={
 };
 
 function labelFor(kind:string,id:string){
- const pools:any={episode:atlasData.episodes,location:atlasData.locations,character:atlasData.characters,community:atlasData.communities,faction:atlasData.factions,series:atlasData.series,connection:atlasData.connections};
+ const pools:any={
+  episode:atlasData.episodes,location:atlasData.locations,character:atlasData.characters,
+  community:atlasData.communities,faction:atlasData.factions,series:atlasData.series,connection:atlasData.connections
+ };
  const item=pools[kind]?.find((x:any)=>x.id===id);
+ if(kind==="episode")return item?.title||id;
  return item?.name||item?.title||item?.label||id;
 }
 
-export default function EntityGraphView({onCharacter,onLocation,onEpisode}:Props){
+function confidenceLabel(value:string){
+ return value==="confirmed"?"CONFIRMED":value==="source-derived"?"SOURCE-DERIVED":"APPROXIMATE";
+}
+
+export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaultCollapsed=false}:Props){
  const graph=useMemo(()=>buildEntityGraph(),[]);
  const [root,setRoot]=useState<string>("character:michonne");
  const [filter,setFilter]=useState<Filter>("ALL");
+ const [collapsed,setCollapsed]=useState(defaultCollapsed);
  const rootNode=graph.nodes.get(root);
  const edges=rootNode?graph.adjacency.get(root)||[]:[];
  const related=edges.map(edge=>{
@@ -27,35 +41,60 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode}:Props
    return {edge,other};
  }).filter(x=>x.other.id!==rootNode?.id);
  const visible=filter==="ALL"?related:related.filter(x=>x.other.kind===filter);
- const counts=related.reduce<Record<string,number>>((acc,x)=>{acc[x.other.kind]=(acc[x.other.kind]||0)+1;return acc},{} as Record<string,number>);
+ const counts=related.reduce<Record<string,number>>((acc,x)=>{
+   acc[x.other.kind]=(acc[x.other.kind]||0)+1;
+   return acc;
+ },{});
  const title=rootNode?labelFor(rootNode.kind,rootNode.id):"Universe";
+
  const select=(kind:string,id:string)=>{
    setRoot(kind+":"+id);
    setFilter("ALL");
+   setCollapsed(false);
    if(kind==="character")onCharacter(id);
    if(kind==="location")onLocation(id);
    if(kind==="episode")onEpisode?.(id);
  };
- return <section className="entityGraph" aria-label="Universe relationship graph">
+
+ return <section className={"entityGraph"+(collapsed?" isCollapsed":"")} aria-label="Universe relationship graph">
    <div className="entityGraphHead">
-    <div><small>RELATIONSHIP GRAPH</small><b>{title||"Universe"}</b><span className="entityGraphSub">{rootNode?.kind||"entity"} · {related.length} indexed relationships</span></div>
-    <span className="entityGraphCount">{graph.nodes.size} NODES</span>
-   </div>
-   {related.length>0&&<div className="entityGraphFilters" aria-label="Relationship filters">
-    <button className={filter==="ALL"?"active":""} onClick={()=>setFilter("ALL")}>ALL <b>{related.length}</b></button>
-    {Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)).map(([kind,count])=><button key={kind} className={filter===kind?"active":""} onClick={()=>setFilter(kind as Filter)}>{labels[kind]||kind.toUpperCase()} <b>{count}</b></button>)}
-   </div>}
-   <div className="entityGraphNodes">
-    {visible.slice(0,24).map(({edge,other})=>{
-      const text=labelFor(other.kind,other.id);
-      return <button key={edge.id} className={"entityGraphNode kind-"+other.kind} onClick={()=>select(other.kind,other.id)}>
-       <span className="entityGraphNodeTop"><i>{labels[other.kind]||other.kind.toUpperCase()}</i><em>{edge.confidence}</em></span>
-       <b>{text}</b>
-       <small>{edge.type.replaceAll("_"," ")}{edge.kind==="connection"?" · DOCUMENTED LINK":""}</small>
+    <div>
+      <small>RELATIONSHIP GRAPH</small>
+      <b>{title||"Universe"}</b>
+      <span className="entityGraphSub">{rootNode?.kind||"entity"} · {related.length} indexed relationships</span>
+    </div>
+    <div className="entityGraphHeadAction">
+      <span className="entityGraphCount">{related.length} RELATIONSHIPS</span>
+      <button className="entityGraphToggle" onClick={()=>setCollapsed(v=>!v)} aria-expanded={!collapsed} aria-label={collapsed?"Expand relationship graph":"Collapse relationship graph"}>
+        {collapsed?"SHOW":"HIDE"}
       </button>
+    </div>
+   </div>
+
+   {!collapsed&&related.length>0&&<div className="entityGraphFilters" aria-label="Relationship filters">
+    <button className={filter==="ALL"?"active":""} onClick={()=>setFilter("ALL")}>ALL <b>{related.length}</b></button>
+    {Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)).map(([kind,count])=>
+      <button key={kind} className={filter===kind?"active":""} onClick={()=>setFilter(kind as Filter)}>
+        {labels[kind]||kind.toUpperCase()} <b>{count}</b>
+      </button>
+    )}
+   </div>}
+
+   {!collapsed&&<div className="entityGraphNodes">
+    {visible.slice(0,18).map(({edge,other})=>{
+      const text=labelFor(other.kind,other.id);
+      const isEpisode=other.kind==="episode";
+      const episode=isEpisode?atlasData.episodes.find((e:any)=>e.id===other.id):null;
+      return <button key={edge.id} className={"entityGraphNode kind-"+other.kind} onClick={()=>select(other.kind,other.id)}>
+       <span className="entityGraphNodeTop"><i>{labels[other.kind]||other.kind.toUpperCase()}</i><em>{confidenceLabel(edge.confidence)}</em></span>
+       <b>{text}</b>
+       {isEpisode&&episode
+         ? <small>{episode.seriesId?.toUpperCase()} · S{String(episode.seasonId).slice(-2)}E{String(episode.episodeNumber).padStart(2,"0")} · {episode.timelineStart??"?"}</small>
+         : <small>{edge.type.replaceAll("_"," ")}{edge.to.kind==="connection"||edge.from.kind==="connection"?" · DOCUMENTED LINK":""}</small>}
+      </button>;
     })}
     {!visible.length&&<p className="muted">No indexed relationships in this category.</p>}
-    {visible.length>24&&<div className="entityGraphMore">Showing 24 of {visible.length} related entities</div>}
-   </div>
+    {visible.length>18&&<div className="entityGraphMore">Showing 18 of {visible.length} related entities</div>}
+   </div>}
  </section>;
 }
