@@ -8,6 +8,8 @@ type Props={
  onLocation:(id:string)=>void;
  onEpisode?:(id:string)=>void;
  defaultCollapsed?:boolean;
+ root?:string;
+ heading?:string;
 };
 type Filter="ALL"|"character"|"location"|"community"|"faction"|"series"|"episode"|"connection";
 
@@ -48,9 +50,9 @@ function confidenceLabel(value:string){
  return value==="confirmed"?"CONFIRMED":value==="source-derived"?"SOURCE-DERIVED":"APPROXIMATE";
 }
 
-export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaultCollapsed=false}:Props){
+export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaultCollapsed=false,root:rootProp,heading}:Props){
  const graph=useMemo(()=>buildEntityGraph(),[]);
- const [root,setRoot]=useState<string>("character:michonne");
+ const [root,setRoot]=useState<string>(rootProp??"character:michonne");
  const [filter,setFilter]=useState<Filter>("ALL");
  const [collapsed,setCollapsed]=useState(defaultCollapsed);
  const rootNode=graph.nodes.get(root);
@@ -78,7 +80,7 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaul
  return <section className={"entityGraph"+(collapsed?" isCollapsed":"")} aria-label="Universe relationship graph">
    <div className="entityGraphHead">
     <div>
-      <small>RELATIONSHIP GRAPH</small>
+      <small>{heading||"RELATIONSHIP GRAPH"}</small>
       <b>{title||"Universe"}</b>
       <span className="entityGraphSub">{rootNode?.kind||"entity"} · {related.length} indexed relationships</span>
     </div>
