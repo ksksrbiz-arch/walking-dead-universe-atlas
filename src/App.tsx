@@ -283,7 +283,7 @@ export default function App(){
 
  return <div className="app">
   <header className="topbar">
-   <button className="brand" onClick={()=>{setView("map");setSelectedLocation(null);setSelectedEpisode(null)}} aria-label="Return to atlas map">
+   <button className="brand" onClick={()=>{setView("map");setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null)}} aria-label="Return to atlas map">
     <span className="logoMark">◈</span><span><b>TWDU ATLAS</b><small>THE WALKING DEAD UNIVERSE · FIELD GUIDE</small></span>
    </button>
    <button className="mobileSearchButton" onClick={()=>setSearchOpen(true)} aria-label="Open atlas search"><Icon name="search"/></button>

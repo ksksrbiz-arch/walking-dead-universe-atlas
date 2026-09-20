@@ -19,7 +19,7 @@ export default class ErrorBoundary extends Component<Props,State>{
     <div className="errorFallback">
      <small>SOMETHING WENT WRONG</small>
      <b>This view hit an unexpected error.</b>
-     <p>{this.state.error.message}</p>
+     <p>Try going back — the rest of the atlas is unaffected. Details are in the browser console.</p>
      <button onClick={()=>{this.setState({error:null});this.props.onReset?.()}}>Go back</button>
     </div>
    </div>;
