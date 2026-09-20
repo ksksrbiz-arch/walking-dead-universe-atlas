@@ -1056,3 +1056,18 @@ button:active{transform:translateY(1px)}
   .episodeCard b{font-size:11px!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
   .episodeCard em{font-size:7px!important}
 }
+
+
+/* Atlas SVG icon system */
+.markerGlyph{pointer-events:none;transform:translate(-9px,-9px)}
+.markerIcon{width:18px;height:18px;display:block;filter:drop-shadow(0 2px 3px #071011aa)}
+.markerCore{opacity:.9}
+.marker.selected .markerIcon{width:22px;height:22px;transform:translate(-2px,-2px)}
+.marker.selected .markerCore{opacity:1}
+.marker:hover .markerIcon{filter:drop-shadow(0 0 5px currentColor)}
+.entityGraphFilters button{display:inline-flex;align-items:center;gap:5px}
+.entityGraphFilters button svg{width:12px;height:12px;flex:0 0 auto}
+.entityGraphNodeTop i,.entityGraphNodeTop em{display:inline-flex!important;align-items:center;gap:4px}
+.entityGraphNodeTop i svg,.entityGraphNodeTop em svg{width:11px;height:11px;flex:0 0 auto}
+.entityGraphNode>b{display:flex;align-items:center;gap:7px}
+.entityGraphNode>b svg{width:17px;height:17px;flex:0 0 auto;color:#91a09f}
