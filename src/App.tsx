@@ -115,6 +115,7 @@ export default function App(){
  const pointers=useRef(new Map<number,{x:number;y:number}>());
  const pinch=useRef<{distance:number;zoom:number;x:number;y:number;midX:number;midY:number}|null>(null);
  const mapSvgRef=useRef<SVGSVGElement|null>(null);
+ const mapWorldRef=useRef<SVGGElement|null>(null);
  const raf=useRef<number|null>(null);
  const visual=useRef({x:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_X:0,y:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_Y:0,zoom:1});
  const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
@@ -134,11 +135,15 @@ export default function App(){
    });
    return()=>window.cancelAnimationFrame(frame);
  },[view,isMobileMap]);
- const applyMapTransform=(x:number,y:number,z:number,animate=false)=>{
-   const el=mapSvgRef.current;
-   if(!el)return;
-   el.style.transition=animate?"transform 140ms cubic-bezier(.2,.8,.2,1)":"none";
-   el.style.transform="translate3d("+x+"px,"+y+"px,0) scale("+z+")";
+ const applyMapTransform=(x:number,y:number,z:number,_animate=false)=>{
+   const svg=mapSvgRef.current;
+   const worldGroup=mapWorldRef.current;
+   if(!svg||!worldGroup)return;
+   const baseScale=Math.max(svg.clientWidth/1000,svg.clientHeight/600);
+   if(!Number.isFinite(baseScale)||baseScale<=0)return;
+   // Pan the geographic group inside the fixed SVG viewport. Moving the root
+   // SVG itself exposes its CSS background instead of the off-screen world.
+   worldGroup.setAttribute("transform","translate("+(x/baseScale)+" "+(y/baseScale)+") scale("+z+")");
  };
  useEffect(()=>{visual.current={x:pan.x,y:pan.y,zoom};applyMapTransform(pan.x,pan.y,zoom,true);},[pan.x,pan.y,zoom]);
  useEffect(()=>{if(view!=="map")setSheet("open");},[view]);
@@ -333,7 +338,7 @@ export default function App(){
        <filter id="landShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#26383a" floodOpacity=".28"/></filter>
        <filter id="paperNoise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="2" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="gray"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer><feBlend in="SourceGraphic" in2="gray" mode="multiply"/></filter>
       </defs>
-      <g className="mapWorld">
+      <g ref={mapWorldRef} className="mapWorld">
       <MapBackground/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       <g className="markers">{locations.filter(hasMapCoordinates).map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];const isSelected=selectedLocation===l.id;const iconSize=isSelected?20:18;const iconHalf=iconSize/2;return <g key={l.id} data-location-id={l.id} className={isSelected?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
