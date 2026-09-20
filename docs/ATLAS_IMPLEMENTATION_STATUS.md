@@ -25,21 +25,22 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 ## Next implementation blocks
 
 ### Block A — Timeline ↔ Geography
-- Episode selection should identify all linked locations.
-- Map should center/highlight relevant episode locations without hiding chronology.
-- Location selection should jump the chronology to its earliest/relevant history.
-- Add a compact location-history indicator to the timeline.
+- [x] Episode selection identifies all linked locations.
+- [x] Map highlights the episode's linked geography while preserving chronology context.
+- [x] Location selection jumps the chronology to the location's configured earliest/relevant history.
+- [ ] Add a compact location-history indicator to the timeline.
 
 ### Block B — Connections
-- Populate episode connection IDs where source-backed.
-- Add contextual connection highlighting when an episode/person/location is selected.
-- Add a connection focus mode that keeps both endpoints visible.
-- Preserve certainty and provenance.
+- [x] Populate and consume curated episode connection evidence where source-backed.
+- [ ] Add visual contextual connection highlighting when an episode/person/location is selected.
+- [ ] Add a connection focus mode that keeps both endpoints visible.
+- [x] Preserve certainty and provenance.
 
 ### Block C — Character journeys
-- Build a character journey timeline from episode appearances.
-- Synchronize character selection with map locations and series crossings.
-- Expose cross-series transitions as explicit chronology events.
+- [x] Build a character journey timeline from episode appearances.
+- [x] Synchronize character detail with its episode geography and location navigation.
+- [x] Expose cross-series transitions as explicit chronology events.
+- [ ] Add direct map-context highlighting for the complete character journey.
 
 ### Block D — Chronology depth
 - Replace series-level watch-order scaffolding with episode-level chronology where evidence supports it.
