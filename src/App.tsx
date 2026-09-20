@@ -11,6 +11,7 @@ import episodeMedia from "../data/episodeMedia.json";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
 import EntityGraphView from "./components/EntityGraphView";
+import {useAtlasFocusController} from "./lib/entityFocus";
 import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
 import {getCharacterEpisodeIds,getLocationEpisodeIds,getEpisodeConnectionIds} from "./lib/entityGraph";
 import AtlasIcon,{AtlasIconGlyph} from "./components/AtlasIcon";
@@ -129,7 +130,7 @@ export default function App(){
  const [selectedCharacter,setSelectedCharacter]=useState<string|null>(null);
  const [selectedConnection,setSelectedConnection]=useState<string|null>(null);
  const [peopleFocusEntity,setPeopleFocusEntity]=useState<string|null>(null);
- const clearPeopleFocus=()=>setPeopleFocusEntity(null);
+ const clearPeopleFocus=clearFocus;
  const [journeyMapMode,setJourneyMapMode]=useState(false);
  const [view,setView]=useState<View>("map");
  const [dataErrors,setDataErrors]=useState<string[]>([]);
