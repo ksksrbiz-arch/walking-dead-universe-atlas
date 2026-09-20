@@ -55,8 +55,8 @@
     "seriesId": "twd",
     "year": 2014,
     "type": "community",
-    "lat": 38.8,
-    "lng": -77.05,
+    "lat": 38.8048,
+    "lng": -77.0469,
     "certainty": "confirmed"
   },
   {
@@ -65,8 +65,8 @@
     "seriesId": "twd",
     "year": 2016,
     "type": "community",
-    "lat": 38,
-    "lng": -77.3,
+    "lat": 38.473,
+    "lng": -78,
     "certainty": "approximate"
   },
   {
@@ -75,8 +75,8 @@
     "seriesId": "twd",
     "year": 2016,
     "type": "community",
-    "lat": 38.2,
-    "lng": -77,
+    "lat": 38.88,
+    "lng": -77.07,
     "certainty": "approximate"
   },
   {
@@ -85,8 +85,8 @@
     "seriesId": "twd",
     "year": 2015,
     "type": "stronghold",
-    "lat": 38.7,
-    "lng": -77.2,
+    "lat": 38.85,
+    "lng": -77.3,
     "certainty": "approximate"
   },
   {
@@ -363,7 +363,7 @@
     "id": "marseille",
     "name": "Marseille",
     "seriesId": "daryl",
-    "year": 2025,
+    "year": 2023,
     "type": "city",
     "lat": 43.2965,
     "lng": 5.3698,
@@ -403,20 +403,20 @@
     "id": "bricks",
     "name": "The Bricks",
     "seriesId": "dead",
-    "year": 2024,
+    "year": 2025,
     "type": "community",
-    "lat": 40.72,
-    "lng": -74,
+    "lat": 38.5,
+    "lng": -78.3,
     "certainty": "approximate"
   },
   {
     "id": "new-babylon",
     "name": "New Babylon",
     "seriesId": "dead",
-    "year": 2024,
+    "year": 2027,
     "type": "community",
-    "lat": 40.5,
-    "lng": -74.5,
+    "lat": 38.8,
+    "lng": -77.5,
     "certainty": "approximate"
   },
   {
@@ -508,5 +508,215 @@
     "lat": 32.1,
     "lng": -116.57,
     "certainty": "confirmed"
+  },
+  {
+    "id": "nebraska",
+    "name": "Nebraska",
+    "seriesId": "wb",
+    "year": 2020,
+    "type": "state",
+    "lat": 41.4925,
+    "lng": -99.9018,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "lincoln-nebraska",
+    "name": "Lincoln, Nebraska",
+    "seriesId": "wb",
+    "year": 2020,
+    "type": "city",
+    "lat": 40.8136,
+    "lng": -96.7026,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "iowa",
+    "name": "Iowa",
+    "seriesId": "wb",
+    "year": 2020,
+    "type": "state",
+    "lat": 42,
+    "lng": -93.5,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "albany-new-york",
+    "name": "Albany, New York",
+    "seriesId": "wb",
+    "year": 2021,
+    "type": "city",
+    "lat": 42.6526,
+    "lng": -73.7562,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "watkins-glen",
+    "name": "Watkins Glen State Park",
+    "seriesId": "wb",
+    "year": 2021,
+    "type": "park",
+    "lat": 42.381,
+    "lng": -76.886,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "civic-republic-research-facility",
+    "name": "Civic Republic Research Facility",
+    "seriesId": "wb",
+    "year": 2020,
+    "type": "facility",
+    "lat": 39.95,
+    "lng": -75.16,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "perimeter",
+    "name": "The Perimeter",
+    "seriesId": "wb",
+    "year": 2021,
+    "type": "community",
+    "lat": 42.65,
+    "lng": -73.76,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "la-biomedicine",
+    "name": "La Biomédicine / DDMI",
+    "seriesId": "wb",
+    "year": 2010,
+    "type": "facility",
+    "lat": 48.86,
+    "lng": 2.35,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "new-york-city",
+    "name": "New York City",
+    "seriesId": "dead",
+    "year": 2027,
+    "type": "city",
+    "lat": 40.7128,
+    "lng": -74.006,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "central-park",
+    "name": "Central Park",
+    "seriesId": "dead",
+    "year": 2028,
+    "type": "park",
+    "lat": 40.7829,
+    "lng": -73.9654,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "brooklyn-bridge",
+    "name": "Brooklyn Bridge",
+    "seriesId": "dead",
+    "year": 2027,
+    "type": "bridge",
+    "lat": 40.7061,
+    "lng": -73.9969,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "statue-of-liberty",
+    "name": "Statue of Liberty",
+    "seriesId": "dead",
+    "year": 2027,
+    "type": "landmark",
+    "lat": 40.6892,
+    "lng": -74.0445,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "madison-square-garden",
+    "name": "Madison Square Garden",
+    "seriesId": "dead",
+    "year": 2027,
+    "type": "stadium",
+    "lat": 40.7505,
+    "lng": -73.9934,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "le-havre",
+    "name": "Le Havre",
+    "seriesId": "daryl",
+    "year": 2023,
+    "type": "city",
+    "lat": 49.4944,
+    "lng": 0.1079,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "agen",
+    "name": "Agen",
+    "seriesId": "daryl",
+    "year": 2023,
+    "type": "city",
+    "lat": 44.203,
+    "lng": 0.616,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "london",
+    "name": "London",
+    "seriesId": "daryl",
+    "year": 2023,
+    "type": "city",
+    "lat": 51.5074,
+    "lng": -0.1278,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "galicia",
+    "name": "Galicia",
+    "seriesId": "daryl",
+    "year": 2023,
+    "type": "region",
+    "lat": 42.8782,
+    "lng": -8.5448,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "seville",
+    "name": "Seville",
+    "seriesId": "daryl",
+    "year": 2023,
+    "type": "city",
+    "lat": 37.3891,
+    "lng": -5.9845,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "madawaska-maine",
+    "name": "Madawaska, Maine",
+    "seriesId": "tales",
+    "year": 2025,
+    "type": "town",
+    "lat": 47.2844,
+    "lng": -68.3261,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "ranger-station-tales",
+    "name": "Ranger Station",
+    "seriesId": "tales",
+    "year": 2020,
+    "type": "facility",
+    "lat": 39,
+    "lng": -105.5,
+    "certainty": "approximate"
+  },
+  {
+    "id": "la-dona-house",
+    "name": "La Doña Alma's House",
+    "seriesId": "tales",
+    "year": 0,
+    "type": "residence",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
   }
 ]
