@@ -43,9 +43,9 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Add direct map-context highlighting for the complete character journey.
 
 ### Block D — Chronology depth
-- Replace series-level watch-order scaffolding with episode-level chronology where evidence supports it.
-- Integrate webisodes/specials as an optional secondary chronology layer.
-- Keep approximate/unknown dates explicitly marked.
+- [x] Replace series-level watch-order scaffolding with episode-level chronology where evidence supports it.
+- [x] Integrate webisodes/specials as an optional secondary chronology layer.
+- [x] Keep approximate/unknown dates explicitly marked.
 
 ### Block E — Media
 - Continue official AMC media ingestion with provenance.
@@ -56,7 +56,7 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 
 The repository has a data validator and a deployment-time AMC media ingestion step.
 
-The assistant has not claimed a local production build or physical-device verification when network access is unavailable. Cloudflare Pages remains the deployment target.
+The assistant has not claimed a local production build or physical-device verification when network access is unavailable. Netlify is the production deployment target.
 
 ## Definition of done
 
