@@ -37,7 +37,7 @@ const projection=geoEqualEarth().fitExtent([[24,22],[976,578]],{type:"Sphere"});
 const pathGenerator=geoPath(projection);
 const worldCountries:any=feature(world as any,(world as any).objects.countries) as any;
 const worldLand:any=feature(world as any,(world as any).objects.land) as any;
-const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
+const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};\nconst hasMapCoordinates=(location:Location)=>Number.isFinite(Number(location.lat))&&Number.isFinite(Number(location.lng))&&!(Number(location.lat)===0&&Number(location.lng)===0&&location.certainty==="unknown");
 const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
 const MOBILE_HOME_X=0;
 const MOBILE_HOME_Y=0;
@@ -68,7 +68,7 @@ const MapBackground=memo(function MapBackground(){
   <g className="countries">{worldCountryPaths.map((c:any)=><path key={c.key} d={c.d} fill={c.fill}><title>{c.name}</title></path>)}</g>
  </>;
 });
-const locationIconName=(type:string)=>{const names=new Set(["city","community","facility","hospital","farm","prison","route","region","residence","ranch","dam","territory","country","landmark","stronghold"]);return names.has(type)?type:"facility"};
+const locationIconName=(type:string)=>{const names=new Set(["city","community","facility","hospital","farm","prison","route","region","residence","ranch","dam","territory","country","landmark","stronghold","boat"]);return names.has(type)?type:"facility"};
 
 function Icon({name,className}:{name:"map"|"timeline"|"people"|"guide"|"plus"|"minus"|"locate"|"search"|"close"|"chevron"|"layers"|"play"|"pause"|"arrow"|"pin";className?:string}) {
  const paths={
@@ -186,7 +186,7 @@ export default function App(){
  const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const ids=getCharacterEpisodeIds(id);const eps=ids.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("people");setSheet("open");trackAtlasMetric("character-select",eps.length,{character:id});void getRuntimeRelationships("character",id).then(remote=>{if(remote)trackAtlasMetric("runtime-character-relationships",remote.episodeIds.length,{character:id,remoteIndexed:true})});};
  const selectLocation=(l:Location)=>{ const focusStarted=performance.now();
    void getRuntimeRelationships("location",l.id).then(remote=>{if(remote)trackAtlasMetric("runtime-location-relationships",remote.episodeIds.length,{location:l.id,remoteIndexed:true})});
-   setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
+   if(Number(l.year)>0)setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setView("map");setSheet("open");
    window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
      const surface=mapSvgRef.current;
      if(!surface)return;
@@ -302,7 +302,7 @@ export default function App(){
  };
  const wheel=(e:React.WheelEvent<SVGSVGElement>)=>{e.preventDefault();const next=clamp(visual.current.zoom*(e.deltaY<0?1.12:.89),1,5);visual.current.zoom=next;applyMapTransform(visual.current.x,visual.current.y,next,false);setZoom(next)};
  const goView=(v:View)=>{setView(v);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSheet("open")};
- const mapYearCount=locations.length;
+ const mapYearCount=locations.filter(hasMapCoordinates).length;
  const visibleSeries=series==="ALL"?"THE WORLD":META[series].short;
 
  return <div className="app">
@@ -335,7 +335,7 @@ export default function App(){
       <g className="mapWorld">
       <MapBackground/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
-      <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];const isSelected=selectedLocation===l.id;const iconSize=isSelected?20:18;const iconHalf=iconSize/2;return <g key={l.id} data-location-id={l.id} className={isSelected?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
+      <g className="markers">{locations.filter(hasMapCoordinates).map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];const isSelected=selectedLocation===l.id;const iconSize=isSelected?20:18;const iconHalf=iconSize/2;return <g key={l.id} data-location-id={l.id} className={isSelected?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
        <circle className="markerHit" r={isMobileMap?16:11} fill="transparent"/><g className="markerGlyph" transform={`translate(${-iconHalf} ${-iconHalf})`} style={{color:meta.color}}><g className="markerIcon" transform={`scale(${iconSize/24})`} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type) as any}/></g><circle className="markerCore" cx={iconHalf} cy={iconHalf} r="1.2" fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||isSelected|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
       </g>})}</g>
      </g>
