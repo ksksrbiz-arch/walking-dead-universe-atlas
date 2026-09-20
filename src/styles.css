@@ -1059,10 +1059,10 @@ button:active{transform:translateY(1px)}
 
 
 /* Atlas SVG icon system */
-.markerGlyph{pointer-events:none;transform:translate(-9px,-9px)}
+.markerGlyph{pointer-events:none}
 .markerIcon{width:18px;height:18px;display:block;filter:drop-shadow(0 2px 3px #071011aa)}
 .markerCore{opacity:.9}
-.marker.selected .markerIcon{width:22px;height:22px;transform:translate(-2px,-2px)}
+.marker.selected .markerIcon{width:20px;height:20px}
 .marker.selected .markerCore{opacity:1}
 .marker:hover .markerIcon{filter:drop-shadow(0 0 5px currentColor)}
 .entityGraphFilters button{display:inline-flex;align-items:center;gap:5px}

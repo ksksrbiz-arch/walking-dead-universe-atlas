@@ -306,7 +306,7 @@ export default function App(){
        <filter id="landShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#26383a" floodOpacity=".28"/></filter>
        <filter id="paperNoise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="2" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="gray"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer><feBlend in="SourceGraphic" in2="gray" mode="multiply"/></filter>
       </defs>
-      <g className="mapWorld" transform={isMobileMap?"translate(95 50) scale(1.45)":undefined}>
+      <g className="mapWorld">
       <rect width="1000" height="600" fill="url(#ocean)"/>
       <rect width="1000" height="600" fill="url(#oceanGlow)"/>
       <g className="graticule"><path d={pathGenerator({type:"Sphere"}) as string}/></g>
@@ -314,7 +314,7 @@ export default function App(){
       <g className="countries">{worldCountries.features.map((c:any,i:number)=><path key={c.id||c.properties?.name} d={pathGenerator(c) as string} fill={countryTone(i)}><title>{c.properties?.name||"Country"}</title></path>)}</g>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       <g className="markers">{locations.map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];return <g key={l.id} data-location-id={l.id} className={selectedLocation===l.id?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
-       <circle className="markerHit" r={isMobileMap?16:11} fill="transparent"/><g className="markerGlyph" style={{color:meta.color}}><AtlasIcon name={locationIconName(l.type) as any} className="markerIcon"/><circle className="markerCore" r="1.2" fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||selectedLocation===l.id|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
+       <circle className="markerHit" r={isMobileMap?16:11} fill="transparent"/><g className="markerGlyph" transform="translate(-9 -9)" style={{color:meta.color}}><AtlasIcon name={locationIconName(l.type) as any} className="markerIcon"/><circle className="markerCore" cx="9" cy="9" r="1.2" fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||selectedLocation===l.id|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
       </g>})}</g>
      </g>
      </svg>
