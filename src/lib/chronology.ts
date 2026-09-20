@@ -2,7 +2,7 @@ import {atlasData} from "../data";
 
 export type ChronologyItem={
  id:string;
- kind:"episode"|"event";
+ kind:"episode"|"event"|"universe-event";
  seriesId:string;
  seasonId?:string;
  episodeNumber?:number;
@@ -37,7 +37,11 @@ export function buildChronology(){
   id:e.id,kind:"event",seriesId:e.seriesId,title:e.title,start:e.year,end:e.year,
   precision:e.precision ?? "year",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[]
  }));
- chronologyCache=[...episodeItems,...eventItems].sort((a,b)=>a.start-b.start||a.end-b.end||a.title.localeCompare(b.title));
+ const universeEventItems:ChronologyItem[]=(atlasData as any).universeEvents.map((e:any)=>({
+  id:e.id,kind:"universe-event",seriesId:e.seriesId,title:e.title,start:Number(e.year),end:Number(e.year),
+  precision:e.date?"day":"year",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[]
+ }));
+ chronologyCache=[...episodeItems,...eventItems,...universeEventItems].sort((a,b)=>a.start-b.start||a.end-b.end||a.title.localeCompare(b.title));
  return chronologyCache;
 }
 
