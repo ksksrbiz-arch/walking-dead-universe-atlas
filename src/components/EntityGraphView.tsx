@@ -51,7 +51,7 @@ function confidenceLabel(value:string){
  return value==="confirmed"?"CONFIRMED":value==="source-derived"?"SOURCE-DERIVED":"APPROXIMATE";
 }
 
-export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaultCollapsed=false,root:rootProp,heading}:Props){
+export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConnection,onCommunity,onFaction,defaultCollapsed=false,root:rootProp,heading}:Props){
  const [root,setRoot]=useState<string>(rootProp??"character:michonne");
  useEffect(()=>{if(rootProp)setRoot(rootProp)},[rootProp]);
  const [filter,setFilter]=useState<Filter>("ALL");
@@ -77,6 +77,8 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaul
    if(kind==="location")onLocation(id);
    if(kind==="episode")onEpisode?.(id);
    if(kind==="connection")onConnection?.(id);
+   if(kind==="community")onCommunity?.(id);
+   if(kind==="faction")onFaction?.(id);
  };
 
  return <section className={"entityGraph"+(collapsed?" isCollapsed":"")} aria-label="Universe relationship graph">
