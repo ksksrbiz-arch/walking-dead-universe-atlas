@@ -1,6 +1,7 @@
 import {useMemo,useState} from "react";
 import {atlasData} from "../data";
 import {buildEntityGraph} from "../lib/entityGraph";
+import AtlasIcon,{type AtlasIconName} from "./AtlasIcon";
 
 type Props={
  onCharacter:(id:string)=>void;
@@ -23,6 +24,24 @@ function labelFor(kind:string,id:string){
  const item=pools[kind]?.find((x:any)=>x.id===id);
  if(kind==="episode")return item?.title||id;
  return item?.name||item?.title||item?.label||id;
+}
+
+function iconForKind(kind:string):AtlasIconName{
+ if(kind==="character")return "character";
+ if(kind==="location")return "location-link";
+ if(kind==="community")return "community";
+ if(kind==="faction")return "faction";
+ if(kind==="series")return "series";
+ if(kind==="episode")return "episode";
+ return "connection";
+}
+function iconForEdge(type:string):AtlasIconName{
+ if(type==="cross-series")return "cross-series";
+ if(type.includes("character-character"))return "character-link";
+ if(type.includes("character-location"))return "location-link";
+ if(type==="lore")return "lore";
+ if(type.includes("community"))return "community-link";
+ return "connection";
 }
 
 function confidenceLabel(value:string){
@@ -86,8 +105,8 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaul
       const isEpisode=other.kind==="episode";
       const episode=isEpisode?atlasData.episodes.find((e:any)=>e.id===other.id):null;
       return <button key={edge.id} className={"entityGraphNode kind-"+other.kind} onClick={()=>select(other.kind,other.id)}>
-       <span className="entityGraphNodeTop"><i>{labels[other.kind]||other.kind.toUpperCase()}</i><em>{confidenceLabel(edge.confidence)}</em></span>
-       <b>{text}</b>
+       <span className="entityGraphNodeTop"><i><AtlasIcon name={iconForKind(other.kind)} />{labels[other.kind]||other.kind.toUpperCase()}</i><em><AtlasIcon name={iconForEdge(edge.type)} />{confidenceLabel(edge.confidence)}</em></span>
+       <b><AtlasIcon name={iconForEdge(edge.type)} />{text}</b>
        {isEpisode&&episode
          ? <small>{episode.seriesId?.toUpperCase()} · S{String(episode.seasonId).slice(-2)}E{String(episode.episodeNumber).padStart(2,"0")} · {episode.timelineStart??"?"}</small>
          : <small>{edge.type.replaceAll("_"," ")}{edge.to.kind==="connection"||edge.from.kind==="connection"?" · DOCUMENTED LINK":""}</small>}
