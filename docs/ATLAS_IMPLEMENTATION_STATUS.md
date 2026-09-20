@@ -40,7 +40,7 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Build a character journey timeline from episode appearances.
 - [x] Synchronize character detail with its episode geography and location navigation.
 - [x] Expose cross-series transitions as explicit chronology events.
-- [ ] Add direct map-context highlighting for the complete character journey.
+- [x] Add direct map-context highlighting for the complete character journey.
 
 ### Block D — Chronology depth
 - Replace series-level watch-order scaffolding with episode-level chronology where evidence supports it.
