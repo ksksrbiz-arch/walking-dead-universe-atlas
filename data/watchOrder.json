@@ -2,7 +2,7 @@
   {
     "id": "watch-note",
     "type": "note",
-    "label": "Series-level chronological scaffold. Episode-level chronology will supersede this where flashbacks, split seasons, and overlapping stories require finer anchors.",
+    "label": "Series-level chronological scaffold. Episode-level chronology supersedes this where flashbacks, split seasons, and overlapping stories require finer anchors.",
     "certainty": "confirmed"
   },
   {
@@ -12,7 +12,7 @@
     "endSeason": 3,
     "label": "FTWD S1–S3",
     "basis": "series-level chronology",
-    "certainty": "approximate"
+    "certainty": "confirmed"
   },
   {
     "id": "watch-02",
@@ -20,8 +20,8 @@
     "startSeason": 1,
     "endSeason": 8,
     "label": "TWD S1–S8",
-    "basis": "series-level chronology",
-    "certainty": "approximate"
+    "basis": "episode chronology; TWD S9 begins after the 18-month jump",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-03",
@@ -29,8 +29,8 @@
     "startSeason": 4,
     "endSeason": 4,
     "label": "FTWD S4",
-    "basis": "Morgan crossover era",
-    "certainty": "approximate"
+    "basis": "2012 Morgan crossover era",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-04",
@@ -38,8 +38,8 @@
     "startSeason": 1,
     "endSeason": 1,
     "label": "Tales S1",
-    "basis": "individual anthology timelines vary",
-    "certainty": "approximate"
+    "basis": "anthology; place each episode individually",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-05",
@@ -47,8 +47,8 @@
     "startSeason": 9,
     "endSeason": 9,
     "label": "TWD S9",
-    "basis": "season contains a major time jump",
-    "certainty": "approximate"
+    "basis": "E1–5 in 2014; E6–15 in 2020; E16 in 2021",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-06",
@@ -56,8 +56,8 @@
     "startSeason": 5,
     "endSeason": 5,
     "label": "FTWD S5",
-    "basis": "series-level chronology",
-    "certainty": "approximate"
+    "basis": "2013",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-07",
@@ -65,8 +65,8 @@
     "startSeason": 10,
     "endSeason": 10,
     "label": "TWD S10",
-    "basis": "series-level chronology",
-    "certainty": "approximate"
+    "basis": "Aug–Sep 2021",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-08",
@@ -74,8 +74,8 @@
     "startSeason": 1,
     "endSeason": 2,
     "label": "World Beyond S1–S2",
-    "basis": "ten-years-after outbreak era",
-    "certainty": "approximate"
+    "basis": "S1 2020; S2 2021",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-09",
@@ -83,8 +83,8 @@
     "startSeason": 6,
     "endSeason": 7,
     "label": "FTWD S6–S7",
-    "basis": "series-level chronology",
-    "certainty": "approximate"
+    "basis": "2014",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-10",
@@ -92,8 +92,8 @@
     "startSeason": 11,
     "endSeason": 11,
     "label": "TWD S11",
-    "basis": "series-level chronology",
-    "certainty": "approximate"
+    "basis": "main story Sep 2021–Apr 2022; finale epilogue summer 2023",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-11",
@@ -101,26 +101,26 @@
     "startSeason": 8,
     "endSeason": 8,
     "label": "FTWD S8",
-    "basis": "late Fear timeline",
-    "certainty": "approximate"
+    "basis": "2022 after seven-year jump",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-12",
+    "seriesId": "owl",
+    "startSeason": 1,
+    "endSeason": 1,
+    "label": "The Ones Who Live",
+    "basis": "flashbacks 2014–2022; present autumn 2022; return to Alexandria summer 2023",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "watch-13",
     "seriesId": "daryl",
     "startSeason": 1,
     "endSeason": 1,
     "label": "Daryl Dixon S1",
-    "basis": "post-main-series Europe",
-    "certainty": "approximate"
-  },
-  {
-    "id": "watch-13",
-    "seriesId": "dead",
-    "startSeason": 1,
-    "endSeason": 1,
-    "label": "Dead City S1",
-    "basis": "post-main-series Manhattan",
-    "certainty": "approximate"
+    "basis": "2023",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-14",
@@ -128,38 +128,20 @@
     "startSeason": 2,
     "endSeason": 2,
     "label": "Daryl Dixon S2",
-    "basis": "post-S1 Europe",
-    "certainty": "approximate"
+    "basis": "2023; shortly after S1",
+    "certainty": "confirmed"
   },
   {
     "id": "watch-15",
-    "seriesId": "owl",
-    "startSeason": 1,
-    "endSeason": 1,
-    "label": "The Ones Who Live",
-    "basis": "post-Rick-disappearance storyline with extensive flashbacks",
-    "certainty": "approximate"
-  },
-  {
-    "id": "watch-16",
-    "seriesId": "dead",
-    "startSeason": 2,
-    "endSeason": 2,
-    "label": "Dead City S2",
-    "basis": "post-S1 Manhattan",
-    "certainty": "approximate"
-  },
-  {
-    "id": "watch-19",
     "seriesId": "daryl",
     "startSeason": 3,
     "endSeason": 3,
     "label": "Daryl Dixon S3",
-    "basis": "same 2023 in-universe arc; follows S2 shortly after",
+    "basis": "2023; UK and Spain arc",
     "certainty": "confirmed"
   },
   {
-    "id": "watch-20",
+    "id": "watch-16",
     "seriesId": "dead",
     "startSeason": 1,
     "endSeason": 1,
@@ -168,7 +150,7 @@
     "certainty": "confirmed"
   },
   {
-    "id": "watch-21",
+    "id": "watch-17",
     "seriesId": "dead",
     "startSeason": 2,
     "endSeason": 2,
@@ -177,7 +159,7 @@
     "certainty": "confirmed"
   },
   {
-    "id": "watch-22",
+    "id": "watch-18",
     "seriesId": "dead",
     "startSeason": 3,
     "endSeason": 3,
