@@ -538,7 +538,9 @@
       "hershel-rhee"
     ],
     "communityIds": [],
-    "factionIds": [],
+    "factionIds": [
+      "new-babylon-federation"
+    ],
     "connectionIds": [],
     "sources": [
       "source-epguides-dead"
@@ -618,7 +620,9 @@
       "hershel-rhee"
     ],
     "communityIds": [],
-    "factionIds": [],
+    "factionIds": [
+      "burazi"
+    ],
     "connectionIds": [],
     "sources": [
       "source-epguides-dead"
@@ -10356,8 +10360,12 @@
       "hope-bennett",
       "iris-bennett"
     ],
-    "communityIds": [],
-    "factionIds": [],
+    "communityIds": [
+      "omaha"
+    ],
+    "factionIds": [
+      "crm"
+    ],
     "connectionIds": [],
     "sources": [
       "source-epguides-wb"
