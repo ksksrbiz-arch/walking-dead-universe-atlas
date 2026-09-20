@@ -1,5 +1,5 @@
 import type { Config } from "@netlify/functions";
-import { getRuntimeCollection, getRuntimeEntity, getRuntimeManifest, RUNTIME_VERSION } from "../lib/atlas-runtime.mts";
+import { getRuntimeCollection, getRuntimeEntity, getRuntimeIndex, getRuntimeManifest, RUNTIME_VERSION } from "../lib/atlas-runtime.mts";
 
 const cacheHeaders = {
   "content-type": "application/json; charset=utf-8",
@@ -47,9 +47,6 @@ export default async (req: Request) => {
     }
 
     if (resource === "relationships" && kind && id) {
-      const manifest = await getRuntimeManifest();
-      const episodeIds = new Set<string>();
-      const indexes = manifest.indexes as Record<string, Record<string, string[]>>;
       const indexNames: Record<string, string[]> = {
         character: ["episodesByCharacter"],
         location: ["episodesByLocation"],
@@ -59,9 +56,11 @@ export default async (req: Request) => {
         series: ["episodesBySeries"],
         season: ["episodesBySeason"],
       };
+      const episodeIds = new Set<string>();
       for (const indexName of indexNames[kind] ?? []) {
-        for (const episodeId of indexes[indexName]?.[id] ?? []) episodeIds.add(episodeId);
+        for (const episodeId of await getRuntimeIndex(indexName, id)) episodeIds.add(episodeId);
       }
+      const manifest = await getRuntimeManifest();
       const curated = manifest.curated as any;
       if (kind === "character") for (const episodeId of curated.characterEpisodes?.episodesByCharacter?.[id] ?? []) episodeIds.add(episodeId);
       if (kind === "location") for (const episodeId of curated.locationEpisodes?.episodesByLocation?.[id] ?? []) episodeIds.add(episodeId);
