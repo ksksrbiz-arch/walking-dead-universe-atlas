@@ -4097,7 +4097,12 @@
     "timelineEnd": 2011,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "ohio-roadtrip",
+      "evies-cabin",
+      "stevens-cabin",
+      "sandra-bunker"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4139,7 +4144,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "brookes-steamboat",
+      "atlantic-bayou"
+    ],
     "characterIds": [
       "alpha",
       "lydia"
@@ -4163,7 +4171,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "ranger-station-tales"
+      "dead-sector",
+      "wiregrass-ranger-station",
+      "chattahoochee-river"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -5791,7 +5801,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus"
+      "st-sarahs-church"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5823,7 +5833,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "st-sarahs-church"
+    ],
     "characterIds": [
       "rick-grimes",
       "michonne",
@@ -5878,7 +5890,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "grady-memorial"
+      "rural-virginia"
     ],
     "characterIds": [
       "maggie-rhee",
@@ -5904,6 +5916,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "rural-virginia",
       "grady-memorial"
     ],
     "characterIds": [
@@ -5996,7 +6009,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "rural-virginia"
+    ],
     "characterIds": [
       "rick-grimes",
       "michonne",
@@ -6027,7 +6042,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "rural-virginia"
+    ],
     "characterIds": [
       "rick-grimes",
       "michonne",
@@ -6058,7 +6075,9 @@
     "timelineEnd": 2012,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "rural-virginia"
+    ],
     "characterIds": [
       "rick-grimes",
       "michonne",
@@ -8777,8 +8796,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "bloodsworth-island"
     ],
     "characterIds": [
       "rick-grimes",
@@ -8812,8 +8830,8 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "rural-virginia",
+      "mid-atlantic-city"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -8842,8 +8860,8 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "rural-virginia",
+      "mid-atlantic-city"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -8873,8 +8891,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "rural-virginia-hospital"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -8907,8 +8924,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -8938,8 +8954,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -8964,8 +8979,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "gabriel-stokes"
@@ -8989,8 +9003,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "west-virginia-train-yard"
     ],
     "characterIds": [
       "ezekiel-sutton"
@@ -9014,8 +9027,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9040,8 +9052,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9071,9 +9082,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "washington-dc-subway"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9106,9 +9115,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "washington-dc-subway"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9136,9 +9143,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "reapers-war"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9169,9 +9174,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "reapers-war"
     ],
     "characterIds": [
       "daryl-dixon"
@@ -9195,9 +9198,8 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "reapers-war",
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "negan-smith",
@@ -9229,9 +9231,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "reapers-war"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9260,9 +9260,8 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "reapers-war",
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9290,9 +9289,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "reapers-war"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9324,9 +9321,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9358,9 +9353,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9389,9 +9382,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "carol-peletier",
@@ -9416,9 +9407,8 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "commonwealth"
+      "commonwealth-ohio",
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9448,9 +9438,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "riverbend"
     ],
     "characterIds": [
       "negan-smith",
@@ -9478,9 +9466,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "riverbend"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9511,9 +9497,8 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "commonwealth-ohio",
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9544,9 +9529,8 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "commonwealth-ohio",
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9576,9 +9560,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9617,9 +9599,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9656,9 +9636,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9692,9 +9670,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9722,9 +9698,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "ohio-virginia-wilds"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9760,9 +9734,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9797,9 +9769,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9832,9 +9802,7 @@
     "timelinePrecision": "range",
     "certainty": "confirmed",
     "locationIds": [
-      "commonwealth",
-      "alexandria",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
