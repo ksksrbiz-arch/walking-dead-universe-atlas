@@ -42,6 +42,13 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Expose cross-series transitions as explicit chronology events.
 - [x] Add direct map-context highlighting for the complete character journey.
 
+### Episode geography precision pass
+- [x] Remove blanket Fear season 2 geography links where episode-level evidence identifies a specific documented location.
+- [x] Remove redundant broad/city geography links when a more specific documented episode location is already represented.
+- [x] Align affected Dead City location chronology years with their earliest linked episode.
+- [x] Regenerate and validate the reverse location index after geography changes.
+- [x] Preserve episodes with no currently registered specific location rather than inventing geography.
+
 ### Chronology integrity pass
 - [x] Align location chronology years with the earliest linked episode timeline anchor.
 - [x] Validate the reverse location index against episode-level location references.
