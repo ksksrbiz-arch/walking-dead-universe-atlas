@@ -11,7 +11,6 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "france",
       "marseille"
     ],
     "characterIds": [
@@ -499,8 +498,6 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "new-york-city",
-      "manhattan",
       "manhattan-island"
     ],
     "characterIds": [
@@ -662,9 +659,7 @@
     "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
-      "new-york-city",
-      "manhattan",
-      "bricks"
+      "the-bricks"
     ],
     "characterIds": [
       "negan-smith",
@@ -10053,7 +10048,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "new-york-city",
       "perimeter"
     ],
     "characterIds": [
