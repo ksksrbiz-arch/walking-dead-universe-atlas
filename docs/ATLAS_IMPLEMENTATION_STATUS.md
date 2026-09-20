@@ -83,6 +83,13 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - Do not claim an episode asset is verified unless the ingestion pipeline actually verified it.
 - Use media as contextual storytelling, not as a replacement for chronology.
 
+## Recent completion pass
+
+- Added synchronized map location layers: all, settlements, facilities, landmarks, infrastructure, and regions.
+- Expanded location marker icon aliases so the map uses distinct SVG glyphs for the registered location taxonomy instead of collapsing most types into the generic facility glyph.
+- Added map-linked universe-event handling for any event record that carries documented locationIds; events without geography remain non-clickable rather than receiving invented placements.
+- Fixed entity-graph root synchronization so community/faction focus selections actually replace the graph root instead of leaving the initial character root mounted.
+
 ## Validation
 
 The repository has a data validator and a deployment-time AMC media ingestion step.
