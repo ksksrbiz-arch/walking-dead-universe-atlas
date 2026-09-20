@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "source": "data/episodes.json locationIds; corrected against Walking Dead Wiki TV Universe Timeline, Chronological Episode Order, and series location indexes",
-  "generatedAt": "2026-09-20T19:33:24.306Z",
+  "source": "data/episodes.json locationIds; episode-level chronology/location audit",
+  "generatedAt": "2026-09-20T19:36:08.754Z",
   "episodesByLocation": {
     "france": [
       "daryl-s01-e01",
@@ -384,10 +384,34 @@
       "owl-s01-e05",
       "owl-s01-e06"
     ],
+    "ohio-roadtrip": [
+      "tales-s01-e01"
+    ],
+    "evies-cabin": [
+      "tales-s01-e01"
+    ],
+    "stevens-cabin": [
+      "tales-s01-e01"
+    ],
+    "sandra-bunker": [
+      "tales-s01-e01"
+    ],
     "tales-atlanta": [
       "tales-s01-e02"
     ],
-    "ranger-station-tales": [
+    "brookes-steamboat": [
+      "tales-s01-e03"
+    ],
+    "atlantic-bayou": [
+      "tales-s01-e03"
+    ],
+    "dead-sector": [
+      "tales-s01-e04"
+    ],
+    "wiregrass-ranger-station": [
+      "tales-s01-e04"
+    ],
+    "chattahoochee-river": [
       "tales-s01-e04"
     ],
     "madawaska-maine": [
@@ -488,15 +512,34 @@
     ],
     "terminus": [
       "twd-s04-e16",
-      "twd-s05-e01",
-      "twd-s05-e02"
+      "twd-s05-e01"
+    ],
+    "st-sarahs-church": [
+      "twd-s05-e02",
+      "twd-s05-e03"
     ],
     "grady-memorial": [
       "twd-s05-e04",
-      "twd-s05-e05",
       "twd-s05-e06",
       "twd-s05-e07",
       "twd-s05-e08"
+    ],
+    "rural-virginia": [
+      "twd-s05-e05",
+      "twd-s05-e06",
+      "twd-s05-e09",
+      "twd-s05-e10",
+      "twd-s05-e11",
+      "twd-s10-e14",
+      "twd-s10-e15",
+      "twd-s10-e17",
+      "twd-s10-e18",
+      "twd-s10-e19",
+      "twd-s10-e21",
+      "twd-s10-e22",
+      "twd-s11-e12",
+      "twd-s11-e15",
+      "twd-s11-e16"
     ],
     "alexandria": [
       "twd-s05-e12",
@@ -564,41 +607,7 @@
       "twd-s10-e09",
       "twd-s10-e10",
       "twd-s10-e11",
-      "twd-s10-e12",
-      "twd-s10-e13",
-      "twd-s10-e14",
-      "twd-s10-e15",
-      "twd-s10-e16",
-      "twd-s10-e17",
-      "twd-s10-e18",
-      "twd-s10-e19",
-      "twd-s10-e20",
-      "twd-s10-e21",
-      "twd-s10-e22",
-      "twd-s11-e01",
-      "twd-s11-e02",
-      "twd-s11-e03",
-      "twd-s11-e04",
-      "twd-s11-e05",
-      "twd-s11-e06",
-      "twd-s11-e07",
-      "twd-s11-e08",
-      "twd-s11-e09",
-      "twd-s11-e10",
-      "twd-s11-e11",
-      "twd-s11-e12",
-      "twd-s11-e13",
-      "twd-s11-e14",
-      "twd-s11-e15",
-      "twd-s11-e16",
-      "twd-s11-e17",
-      "twd-s11-e18",
-      "twd-s11-e19",
-      "twd-s11-e20",
-      "twd-s11-e21",
-      "twd-s11-e22",
-      "twd-s11-e23",
-      "twd-s11-e24"
+      "twd-s10-e12"
     ],
     "sanctuary": [
       "twd-s06-e01",
@@ -734,31 +743,7 @@
       "twd-s09-e13",
       "twd-s09-e14",
       "twd-s09-e15",
-      "twd-s09-e16",
-      "twd-s11-e01",
-      "twd-s11-e02",
-      "twd-s11-e03",
-      "twd-s11-e04",
-      "twd-s11-e05",
-      "twd-s11-e06",
-      "twd-s11-e07",
-      "twd-s11-e08",
-      "twd-s11-e09",
-      "twd-s11-e10",
-      "twd-s11-e11",
-      "twd-s11-e12",
-      "twd-s11-e13",
-      "twd-s11-e14",
-      "twd-s11-e15",
-      "twd-s11-e16",
-      "twd-s11-e17",
-      "twd-s11-e18",
-      "twd-s11-e19",
-      "twd-s11-e20",
-      "twd-s11-e21",
-      "twd-s11-e22",
-      "twd-s11-e23",
-      "twd-s11-e24"
+      "twd-s09-e16"
     ],
     "oceanside": [
       "twd-s07-e06",
@@ -790,43 +775,56 @@
       "twd-s10-e09",
       "twd-s10-e10",
       "twd-s10-e11",
-      "twd-s10-e12",
-      "twd-s10-e13",
-      "twd-s10-e14",
-      "twd-s10-e15",
-      "twd-s10-e16",
-      "twd-s10-e17",
-      "twd-s10-e18",
-      "twd-s10-e19",
-      "twd-s10-e20",
-      "twd-s10-e21",
-      "twd-s10-e22"
+      "twd-s10-e12"
     ],
-    "commonwealth": [
+    "bloodsworth-island": [
+      "twd-s10-e13"
+    ],
+    "mid-atlantic-city": [
+      "twd-s10-e14",
+      "twd-s10-e15"
+    ],
+    "rural-virginia-hospital": [
+      "twd-s10-e16"
+    ],
+    "west-virginia-train-yard": [
+      "twd-s10-e20"
+    ],
+    "washington-dc-subway": [
       "twd-s11-e01",
-      "twd-s11-e02",
+      "twd-s11-e02"
+    ],
+    "reapers-war": [
       "twd-s11-e03",
       "twd-s11-e04",
       "twd-s11-e05",
       "twd-s11-e06",
       "twd-s11-e07",
-      "twd-s11-e08",
+      "twd-s11-e08"
+    ],
+    "commonwealth-ohio": [
+      "twd-s11-e05",
+      "twd-s11-e07",
       "twd-s11-e09",
       "twd-s11-e10",
       "twd-s11-e11",
       "twd-s11-e12",
-      "twd-s11-e13",
-      "twd-s11-e14",
       "twd-s11-e15",
       "twd-s11-e16",
       "twd-s11-e17",
       "twd-s11-e18",
       "twd-s11-e19",
       "twd-s11-e20",
-      "twd-s11-e21",
       "twd-s11-e22",
       "twd-s11-e23",
       "twd-s11-e24"
+    ],
+    "riverbend": [
+      "twd-s11-e13",
+      "twd-s11-e14"
+    ],
+    "ohio-virginia-wilds": [
+      "twd-s11-e21"
     ],
     "lincoln-nebraska": [
       "wb-s01-e01"
