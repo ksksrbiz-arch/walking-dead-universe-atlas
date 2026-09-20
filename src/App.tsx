@@ -64,6 +64,10 @@ const MapBackground=memo(function MapBackground(){
  return <>
   <rect width="1000" height="600" fill="url(#ocean)"/>
   <rect width="1000" height="600" fill="url(#oceanGlow)"/>
+ </>;
+});
+const MapGeography=memo(function MapGeography(){
+ return <>
   <g className="graticule"><path d={sphereD}/></g>
   <path className="landShadow" d={worldLandD} fill="#26383a" opacity=".28"/>
   <g className="countries">{worldCountryPaths.map((c:any)=><path key={c.key} d={c.d} fill={c.fill}><title>{c.name}</title></path>)}</g>
@@ -141,9 +145,8 @@ export default function App(){
    if(!svg||!worldGroup)return;
    const baseScale=Math.max(svg.clientWidth/1000,svg.clientHeight/600);
    if(!Number.isFinite(baseScale)||baseScale<=0)return;
-   // Pan the geographic group inside the fixed SVG viewport. Moving the root
-   // SVG itself exposes its CSS background instead of the off-screen world.
-   worldGroup.setAttribute("transform","translate("+(x/baseScale)+" "+(y/baseScale)+") scale("+z+")");
+   const cx=500,cy=300,px=x/baseScale,py=y/baseScale;
+   worldGroup.setAttribute("transform","translate("+(cx+px)+" "+(cy+py)+") scale("+z+") translate("+(-cx)+" "+(-cy)+")");
  };
  useEffect(()=>{visual.current={x:pan.x,y:pan.y,zoom};applyMapTransform(pan.x,pan.y,zoom,true);},[pan.x,pan.y,zoom]);
  useEffect(()=>{if(view!=="map")setSheet("open");},[view]);
@@ -187,7 +190,7 @@ export default function App(){
  },[query]);
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
- const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,vbW=1000,vbH=600,scale=Math.max(w/vbW,h/vbH)*visual.current.zoom;const rawX=Math.max(0,(vbW*scale-w)/2),rawY=Math.max(0,(vbH*scale-h)/2);return {x:rawX,y:rawY}};
+ const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,baseScale=Math.max(w/1000,h/600),z=visual.current.zoom;const worldW=952*baseScale*z,worldH=556*baseScale*z;return {x:Math.max(0,(worldW-w)/2),y:Math.max(0,(worldH-h)/2)}};
  const resetMap=()=>{const homeX=isMobileMap?MOBILE_HOME_X:0;const homeY=isMobileMap?MOBILE_HOME_Y:0;visual.current={x:homeX,y:homeY,zoom:1};setZoom(1);setPan({x:homeX,y:homeY});trackAtlasMetric("map-reset",1,{mobile:isMobileMap});};
  const selectCharacter=(id:string)=>{const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const ids=getCharacterEpisodeIds(id);const eps=ids.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setView("people");setSheet("open");trackAtlasMetric("character-select",eps.length,{character:id});void getRuntimeRelationships("character",id).then(remote=>{if(remote)trackAtlasMetric("runtime-character-relationships",remote.episodeIds.length,{character:id,remoteIndexed:true})});};
  const selectLocation=(l:Location)=>{ const focusStarted=performance.now();
@@ -340,6 +343,8 @@ export default function App(){
       </defs>
       <g ref={mapWorldRef} className="mapWorld">
       <MapBackground/>
+      <g ref={mapWorldRef} className="mapWorld">
+      <MapGeography/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       <g className="markers">{locations.filter(hasMapCoordinates).map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];const isSelected=selectedLocation===l.id;const iconSize=isSelected?20:18;const iconHalf=iconSize/2;return <g key={l.id} data-location-id={l.id} className={isSelected?"marker selected":"marker"} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
        <circle className="markerHit" r={isMobileMap?16:11} fill="transparent"/><g className="markerGlyph" transform={`translate(${-iconHalf} ${-iconHalf})`} style={{color:meta.color}}><g className="markerIcon" transform={`scale(${iconSize/24})`} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type) as any}/></g><circle className="markerCore" cx={iconHalf} cy={iconHalf} r="1.2" fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||isSelected|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
