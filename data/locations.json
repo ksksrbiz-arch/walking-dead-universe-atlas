@@ -928,5 +928,45 @@
     "lat": 31.1,
     "lng": -85,
     "certainty": "approximate"
+  },
+  {
+    "id": "catrina-island",
+    "name": "Catrina Island",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "island",
+    "lat": 33.38,
+    "lng": -118.42,
+    "certainty": "approximate"
+  },
+  {
+    "id": "flight-462-crash-site",
+    "name": "TruWest Airlines Flight 462 Crash Site",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "crash-site",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "pirates-dock",
+    "name": "The Pirates' Dock",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "dock",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "emerald-hotel",
+    "name": "The Emerald Hotel",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "hotel",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
   }
 ]
