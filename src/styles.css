@@ -1076,3 +1076,5 @@ button:active{transform:translateY(1px)}
 .errorFallback b{font-size:15px}
 .errorFallback p{margin:0;color:#a99;font-size:11px;line-height:1.5;font-family:"Space Mono",monospace}
 .errorFallback button{justify-self:start;min-height:38px;padding:0 16px;border:1px solid #ffffff20;border-radius:10px;background:#241616;color:#edf1ef}
+
+.marker.episodeContext .markerCore{r:2.4;stroke:#f4f1df;stroke-width:1.2}.marker.episodeContext .markerGlyph{filter:drop-shadow(0 0 3px currentColor)}
