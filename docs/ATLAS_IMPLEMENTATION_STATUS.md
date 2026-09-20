@@ -42,6 +42,11 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Expose cross-series transitions as explicit chronology events.
 - [x] Add direct map-context highlighting for the complete character journey.
 
+### Chronology integrity pass
+- [x] Align location chronology years with the earliest linked episode timeline anchor.
+- [x] Validate the reverse location index against episode-level location references.
+- [x] Preserve explicitly unknown/zero-coordinate locations as unplaced rather than inventing geography.
+
 ### Block D — Chronology depth
 - [x] Replace series-level watch-order scaffolding with episode-level chronology where evidence supports it.
 - [x] Integrate webisodes/specials as an optional secondary chronology layer.
