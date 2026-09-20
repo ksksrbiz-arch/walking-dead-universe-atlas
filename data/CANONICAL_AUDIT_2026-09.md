@@ -18,6 +18,8 @@ Updated against the supplied TimelineTWD location/map reference, Nerdist's July 
 
 ## Location corrections/additions
 
+- Added an explicit Tales-only Atlanta node so Blair/Gina can be linked without conflating series ownership.
+
 - Alexandria moved to its real-world Alexandria, Virginia anchor.
 - Hilltop moved to Culpeper, Virginia.
 - Kingdom moved to Arlington County, Virginia.
