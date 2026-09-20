@@ -67,6 +67,10 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Integrate the canonical universe-event registry into the chronology engine and expanded Timeline view.
 - [x] Distinguish universe events visually from episode chronology records.
 
+### Entity graph depth
+- [x] Make community and faction registry entries interactive graph roots.
+- [x] Allow relationship exploration to traverse from those entities into episodes, locations, characters, and documented connections.
+
 ### Source registry & methodology
 - [x] Expose the canonical source registry directly in the Guide.
 - [x] Surface source type, provenance note, and methodology rules without hiding them in repository files.
