@@ -13,7 +13,7 @@ import connectionEpisodes from "../../data/connectionEpisodes.json";
 import media from "../../data/media.json";
 import episodeMedia from "../../data/episodeMedia.json";
 
-export const RUNTIME_VERSION = "3";
+export const RUNTIME_VERSION = "4";
 export const runtimeStore = getAtlasStore("atlas-runtime");
 
 type EntityRecord = { id: string; [key: string]: unknown };
@@ -98,6 +98,33 @@ export async function getRuntimeManifest() {
   };
 
   await runtimeStore.setJSON(key, manifest);
+
+  // Persist the hot path as small, independently readable blobs. The manifest
+  // remains the build/runtime snapshot, while entity and relationship reads do
+  // not need to download the entire atlas graph.
+  const indexEntries = Object.entries(manifest.indexes) as [string, IndexMap][];
+  await Promise.all(indexEntries.flatMap(([indexName, index]) =>
+    Object.entries(index).map(([entityId, ids]) =>
+      runtimeStore.setJSON(`runtime/index-v${RUNTIME_VERSION}/${indexName}/${encodeURIComponent(entityId)}`, ids)
+    )
+  ));
+
+  const entityCollections: Record<string, EntityRecord[]> = {
+    series: asRecords(series),
+    seasons: asRecords(seasons),
+    episodes: episodeRecords,
+    locations: locationRecords,
+    characters: characterRecords,
+    communities: communityRecords,
+    factions: factionRecords,
+    connections: connectionRecords,
+  };
+  await Promise.all(Object.entries(entityCollections).flatMap(([kind, records]) =>
+    records.map(record =>
+      runtimeStore.setJSON(`runtime/entity-v${RUNTIME_VERSION}/${kind}/${encodeURIComponent(record.id)}`, record)
+    )
+  ));
+
   await runtimeStore.setJSON(`runtime/meta-v${RUNTIME_VERSION}`, {
     version: RUNTIME_VERSION,
     generatedAt: manifest.generatedAt,
