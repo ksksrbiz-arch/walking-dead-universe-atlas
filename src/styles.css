@@ -76,7 +76,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #dce5e2;outline-offse
 .liveDot{width:8px;height:8px;border-radius:50%;background:#58c392;box-shadow:0 0 0 5px #58c39220}
 .mapTopLeft>strong{display:block;margin-top:8px;font-size:22px;line-height:1}
 .mapTopLeft>strong small{font-size:8px;letter-spacing:.12em;color:#778587}
-.mapTopRight{right:22px;top:94px;display:flex;flex-direction:column;gap:7px;padding:7px;border-radius:15px}
+.mapTopRight{right:calc(min(410px,34vw) + 40px);top:94px;display:flex;flex-direction:column;gap:7px;padding:7px;border-radius:15px}
 .mapTopRight button{display:grid;place-items:center;width:42px;height:42px;border:1px solid #ffffff18;border-radius:11px;background:#111b1cdc;color:#e6ecea}
 .mapTopRight svg{width:19px;height:19px}
 .zoomBadge{padding:3px 0;text-align:center;color:#6f7d7f;font:700 7px "Space Mono",monospace}
@@ -937,7 +937,7 @@ button:active{transform:translateY(1px)}
     top:490px;
     z-index:72;
   }
-  .map.view-map .mapTopRight{z-index:75}
+  .map.view-map .mapTopRight{right:12px;z-index:76}
 }
 @media(max-width:390px){
   .map.view-map .seriesRail{top:470px}
