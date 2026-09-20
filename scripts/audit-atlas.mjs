@@ -134,6 +134,7 @@ const graphNodes=new Set(Object.entries(graphKinds).flatMap(([kind,list])=>list.
 const graphEdges=new Set();
 const addGraphEdge=(fromKind,fromId,type,toKind,toId,evidenceId)=>{
   const from=`${fromKind}:${fromId}`,to=`${toKind}:${toId}`;
+  if((type==="EPISODE_GEOGRAPHY"||type==="EPISODE_CONTEXT")&&!evidenceId)fail.push(`Graph bridge edge ${type} ${from} -> ${to} is missing episode evidence`);
   if(!graphNodes.has(from))fail.push(`Graph edge ${type}: missing from node ${from}`);
   if(!graphNodes.has(to))fail.push(`Graph edge ${type}: missing to node ${to}`);
   const edge=`${from}>${type}>${to}${evidenceId?`>${evidenceId}`:""}`;
