@@ -728,5 +728,205 @@
     "lat": 33.749,
     "lng": -84.388,
     "certainty": "confirmed"
+  },
+  {
+    "id": "st-sarahs-church",
+    "name": "St. Sarah's Church",
+    "seriesId": "twd",
+    "year": 2012,
+    "type": "church",
+    "lat": 38.03,
+    "lng": -78.48,
+    "certainty": "approximate"
+  },
+  {
+    "id": "rural-virginia",
+    "name": "Rural Virginia",
+    "seriesId": "twd",
+    "year": 2012,
+    "type": "region",
+    "lat": 38.03,
+    "lng": -78.48,
+    "certainty": "approximate"
+  },
+  {
+    "id": "washington-dc-subway",
+    "name": "Washington, D.C. Subway Tunnel",
+    "seriesId": "twd",
+    "year": 2021,
+    "type": "transit",
+    "lat": 38.9072,
+    "lng": -77.0369,
+    "certainty": "approximate"
+  },
+  {
+    "id": "reapers-war",
+    "name": "Reapers War Territory",
+    "seriesId": "twd",
+    "year": 2021,
+    "type": "region",
+    "lat": 38.03,
+    "lng": -78.48,
+    "certainty": "approximate"
+  },
+  {
+    "id": "commonwealth-ohio",
+    "name": "Commonwealth, Ohio",
+    "seriesId": "twd",
+    "year": 2021,
+    "type": "community",
+    "lat": 40.8,
+    "lng": -81.9,
+    "certainty": "approximate"
+  },
+  {
+    "id": "bloodsworth-island",
+    "name": "Bloodsworth Island",
+    "seriesId": "twd",
+    "year": 2021,
+    "type": "island",
+    "lat": 38.22,
+    "lng": -76.55,
+    "certainty": "approximate"
+  },
+  {
+    "id": "mid-atlantic-city",
+    "name": "Mid-Atlantic City",
+    "seriesId": "twd",
+    "year": 2021,
+    "type": "city",
+    "lat": 39.3,
+    "lng": -77.1,
+    "certainty": "unknown"
+  },
+  {
+    "id": "rural-virginia-hospital",
+    "name": "Rural Virginia Hospital",
+    "seriesId": "twd",
+    "year": 2021,
+    "type": "hospital",
+    "lat": 38.03,
+    "lng": -78.48,
+    "certainty": "approximate"
+  },
+  {
+    "id": "west-virginia-train-yard",
+    "name": "West Virginia Train Yard",
+    "seriesId": "twd",
+    "year": 2021,
+    "type": "rail-yard",
+    "lat": 39,
+    "lng": -80.45,
+    "certainty": "approximate"
+  },
+  {
+    "id": "riverbend",
+    "name": "Riverbend",
+    "seriesId": "twd",
+    "year": 2022,
+    "type": "community",
+    "lat": 38.5,
+    "lng": -78.5,
+    "certainty": "unknown"
+  },
+  {
+    "id": "ohio-virginia-wilds",
+    "name": "Ohio/Virginia Wilds",
+    "seriesId": "twd",
+    "year": 2022,
+    "type": "region",
+    "lat": 39.4,
+    "lng": -79,
+    "certainty": "approximate"
+  },
+  {
+    "id": "ohio-roadtrip",
+    "name": "Ohio Road Trip",
+    "seriesId": "tales",
+    "year": 2011,
+    "type": "region",
+    "lat": 40.4,
+    "lng": -82.5,
+    "certainty": "approximate"
+  },
+  {
+    "id": "evies-cabin",
+    "name": "Evie's Cabin",
+    "seriesId": "tales",
+    "year": 2011,
+    "type": "cabin",
+    "lat": 39.3995,
+    "lng": -84.5613,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "stevens-cabin",
+    "name": "Steven's Cabin",
+    "seriesId": "tales",
+    "year": 2011,
+    "type": "cabin",
+    "lat": 43.5978,
+    "lng": -84.7675,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "sandra-bunker",
+    "name": "Sandra's Bunker",
+    "seriesId": "tales",
+    "year": 2011,
+    "type": "bunker",
+    "lat": 42.3314,
+    "lng": -83.0458,
+    "certainty": "approximate"
+  },
+  {
+    "id": "brookes-steamboat",
+    "name": "Brooke's Steamboat",
+    "seriesId": "tales",
+    "year": 2013,
+    "type": "boat",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "atlantic-bayou",
+    "name": "Atlantic Bayou",
+    "seriesId": "tales",
+    "year": 2013,
+    "type": "region",
+    "lat": 30.2,
+    "lng": -90.5,
+    "certainty": "approximate"
+  },
+  {
+    "id": "dead-sector",
+    "name": "Dead Sector",
+    "seriesId": "tales",
+    "year": 2020,
+    "type": "territory",
+    "lat": 31.1,
+    "lng": -85,
+    "certainty": "approximate"
+  },
+  {
+    "id": "chattahoochee-river",
+    "name": "Chattahoochee River",
+    "seriesId": "tales",
+    "year": 2020,
+    "type": "river",
+    "lat": 31.1,
+    "lng": -85,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "wiregrass-ranger-station",
+    "name": "Wiregrass Ranger Station",
+    "seriesId": "tales",
+    "year": 2020,
+    "type": "facility",
+    "lat": 31.1,
+    "lng": -85,
+    "certainty": "approximate"
   }
 ]
