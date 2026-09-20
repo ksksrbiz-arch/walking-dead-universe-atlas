@@ -471,7 +471,7 @@ function MapContent({locations,onSelect}:{locations:Location[];onSelect:(l:Locat
  return <div className="contentScroll">
   <div className="panelSummary"><div><small>ACTIVE MAP LAYER</small><b>{mappedLocations.length} mapped locations</b></div><span>2010–{Math.max(...locations.map(x=>x.year),2010)}</span></div>
   <div className="sectionTitle">MAPPED LOCATIONS <span>{mappedLocations.length}</span></div>
-  <div className="cards">{mappedLocations.map(l=>{const pm=(atlasData as any).media?.places?.[l.id];return <button className="entityCard locationCard" key={l.id} onClick={()=>onSelect(l)}>{pm?.image&&<img src={atlasImageUrl(pm.image,720)} onError={e=>onAtlasImageError(e,pm.image)} srcSet={atlasImageSrcSet(pm.image,[360,540,720])} sizes="180px" loading="lazy" decoding="async" alt="" className="cardArt"/>}<span><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><em>{l.type} · {l.certainty}</em></span><Icon name="chevron"/></button>})}</div>
+  <div className="cards">{mappedLocations.map(l=>{const pm=(atlasData as any).media?.places?.[l.id];return <button className="entityCard locationCard" key={l.id} onClick={()=>onSelect(l)}>{(()=>{const image=pm?.image||(atlasData as any).media?.series?.[l.seriesId]?.keyArt;return image?<img src={atlasImageUrl(image,720)} onError={e=>onAtlasImageError(e,image)} srcSet={atlasImageSrcSet(image,[360,540,720])} sizes="180px" loading="lazy" decoding="async" alt="" className="cardArt"/>:null})()}}<span><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><em>{l.type} · {l.certainty}</em></span><Icon name="chevron"/></button>})}</div>
   {unplacedLocations.length>0&&<><div className="sectionTitle">UNPLACED LOCATIONS <span>{unplacedLocations.length}</span></div><div className="miniTags locationLinks">{unplacedLocations.map(l=><button key={l.id} onClick={()=>onSelect(l)}><Icon name="pin"/>{l.name}<small>{l.certainty}</small></button>)}</div></>}
  </div>
 }
@@ -489,6 +489,8 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
  const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))].map(id=>atlasData.locations.find(l=>l.id===id)).filter(Boolean) as Location[];
  const links=atlasData.connections.filter((x:any)=>x.fromId===characterId||x.toId===characterId);
  const media=(atlasData as any).media?.characters?.[characterId];
+ const characterImage=media?.image||(atlasData as any).media?.series?.[character.seriesIds?.[0]]?.keyArt;
+ const characterMediaFallback=!media?.image&&Boolean(characterImage);
  const endpointName=(id:string)=>{const pools:any=[atlasData.characters,atlasData.locations,atlasData.communities,atlasData.factions,atlasData.series,atlasData.connections];for(const pool of pools){const item=pool.find((x:any)=>x.id===id);if(item)return item.name||item.title||item.label||id}return id};
  const seriesSpans=useMemo(()=>{
    const spans:any[]=[];
@@ -502,8 +504,8 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
  },[characterId,eps.length]);
  return <div className="contentScroll">
   <div className="entityHero characterEntityHero" style={{"--accent":SERIES_BY_ID[character.seriesIds?.[0]]?.color||"#aab7b3"} as CSSProperties}>
-   {media?.image&&<img src={atlasImageUrl(media.image,1200)} onError={e=>onAtlasImageError(e,media.image)} srcSet={atlasImageSrcSet(media.image)} sizes="(max-width: 699px) 92vw, 470px" loading="eager" decoding="async" alt="" className="entityArt"/>}
-   <div className="entityHeroCopy"><span>CHARACTER · {(character.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")}</span><h3>{character.name}</h3><p>{character.certainty||"tracked"} · {eps.length} linked episodes</p></div>
+   {characterImage&&<img src={atlasImageUrl(characterImage,1200)} onError={e=>onAtlasImageError(e,characterImage)} srcSet={atlasImageSrcSet(characterImage)} sizes="(max-width: 699px) 92vw, 470px" loading="eager" decoding="async" alt="" className="entityArt"/>}
+   <div className="entityHeroCopy"><span>CHARACTER · {(character.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")}</span><h3>{character.name}</h3><p>{character.certainty||"tracked"} · {eps.length} linked episodes{characterMediaFallback?" · series art fallback":""}</p></div>
   </div>
   <div className="detailGrid"><div><small>EPISODES</small><b>{eps.length}</b></div><div><small>LOCATIONS</small><b>{locations.length}</b></div><div><small>SERIES</small><b>{(character.seriesIds||[]).length}</b></div><div><small>LINKS</small><b>{links.length}</b></div></div>
   <div className="sectionTitle">SERIES JOURNEY <span>{seriesSpans.length}</span></div>
