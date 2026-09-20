@@ -466,10 +466,12 @@ function EpisodeDetail({episode,onLocation,onEpisode,onCharacter,onConnection}:{
 }
 
 function MapContent({locations,onSelect}:{locations:Location[];onSelect:(l:Location)=>void}){
+ const mappedLocations=locations.filter(hasMapCoordinates);
+ const unplacedLocations=locations.filter(l=>!hasMapCoordinates(l));
  return <div className="contentScroll">
   <div className="panelSummary"><div><small>ACTIVE MAP LAYER</small><b>{mappedLocations.length} mapped locations</b></div><span>2010–{Math.max(...locations.map(x=>x.year),2010)}</span></div>
-  <div className="sectionTitle">MAPPED LOCATIONS <span>{locations.length}</span></div>
-  <div className="cards">{locations.map(l=>{const pm=(atlasData as any).media?.places?.[l.id];return <button className="entityCard locationCard" key={l.id} onClick={()=>onSelect(l)}>{pm?.image&&<img src={atlasImageUrl(pm.image,720)} onError={e=>onAtlasImageError(e,pm.image)} srcSet={atlasImageSrcSet(pm.image,[360,540,720])} sizes="180px" loading="lazy" decoding="async" alt="" className="cardArt"/>}<span><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><em>{l.type} · {l.certainty}</em></span><Icon name="chevron"/></button>})}</div>
+  <div className="sectionTitle">MAPPED LOCATIONS <span>{mappedLocations.length}</span></div>
+  <div className="cards">{mappedLocations.map(l=>{const pm=(atlasData as any).media?.places?.[l.id];return <button className="entityCard locationCard" key={l.id} onClick={()=>onSelect(l)}>{pm?.image&&<img src={atlasImageUrl(pm.image,720)} onError={e=>onAtlasImageError(e,pm.image)} srcSet={atlasImageSrcSet(pm.image,[360,540,720])} sizes="180px" loading="lazy" decoding="async" alt="" className="cardArt"/>}<span><small>{SERIES_BY_ID[l.seriesId]?.short} · {l.year}</small><b>{l.name}</b><em>{l.type} · {l.certainty}</em></span><Icon name="chevron"/></button>})}</div>
  </div>{unplacedLocations.length>0&&<><div className="sectionTitle">UNPLACED LOCATIONS <span>{unplacedLocations.length}</span></div><div className="miniTags locationLinks">{unplacedLocations.map(l=><button key={l.id} onClick={()=>onSelect(l)}><Icon name="pin"/>{l.name}<small>{l.certainty}</small></button>)}</div></>}
 }
 
