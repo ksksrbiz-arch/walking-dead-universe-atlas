@@ -1279,7 +1279,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "valle-guadalupe",
+      "abigail-home-experience",
+      "mexico-us-border",
       "emerald-hotel"
     ],
     "characterIds": [],
@@ -1324,7 +1325,11 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "valle-guadalupe"
+      "valle-guadalupe",
+      "mexican-church",
+      "abigail-vineyard",
+      "mexico-us-border",
+      "salvadorian-jungle"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1346,7 +1351,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "valle-guadalupe"
+      "valle-guadalupe",
+      "abigail-vineyard",
+      "javiers-home",
+      "salvadorian-jungle"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1368,8 +1376,12 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "valle-guadalupe",
-      "tijuana"
+      "tijuana",
+      "ftwd-s02-drugstore",
+      "ftwd-s02-barber-shop",
+      "la-colonia",
+      "mothers-house",
+      "rehabilitation-center"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1392,7 +1404,9 @@
     "certainty": "approximate",
     "locationIds": [
       "rosarito",
-      "tijuana"
+      "rosarito-beach-hotel",
+      "la-colonia",
+      "el-pelicano"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1414,7 +1428,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "rosarito"
+      "rosarito",
+      "rosarito-beach-hotel",
+      "magana-restaurant-bar",
+      "suarez-family-farm"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1436,7 +1453,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "rosarito"
+      "rosarito",
+      "rosarito-beach-hotel",
+      "la-colonia"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1458,7 +1477,12 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "rosarito"
+      "rosarito",
+      "rosarito-beach-hotel",
+      "la-colonia",
+      "el-pelicano",
+      "poco-cielo",
+      "salazar-family-home"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1480,7 +1504,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "rosarito"
+      "rosarito",
+      "rosarito-beach-hotel",
+      "suarez-family-farm"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1502,7 +1528,11 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "rosarito"
+      "rosarito",
+      "rosarito-beach-hotel",
+      "la-colonia",
+      "el-pelicano",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1524,7 +1554,11 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "rosarito"
+      "rosarito",
+      "rosarito-beach-hotel",
+      "la-colonia",
+      "el-pelicano",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
