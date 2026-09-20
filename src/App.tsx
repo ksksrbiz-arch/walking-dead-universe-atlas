@@ -510,6 +510,7 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
     const previous=eps[i-1]; const transitioned=!!previous&&previous.seriesId!==e.seriesId;
     return <div key={e.id}>{transitioned&&<div className="journeyTransition"><span>UNIVERSE TRANSITION</span><b>{SERIES_BY_ID[previous.seriesId]?.short} → {SERIES_BY_ID[e.seriesId]?.short}</b></div>}<button onClick={()=>onEpisode(e.id)}><strong>{e.timelineStart??"?"}</strong><div><small>{SERIES_BY_ID[e.seriesId]?.short} · S{String(e.seasonId).slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><span>{(e.locationIds||[]).length} locations · {e.certainty}</span></div><Icon name="chevron"/></button></div>;
   })}</div>:null}
+  {locations.length>0&&<div className="journeyMapAction"><div><small>MAP CONTEXT</small><b>See the complete recorded journey</b><span>Show every episode-linked location for this character on the map, without inferring unrecorded travel.</span></div><button onClick={onJourney}><Icon name="map"/><span>SHOW JOURNEY</span></button></div>}
   <div className="sectionTitle">GEOGRAPHY <span>{locations.length}</span></div>
   <div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}><Icon name="pin"/>{l.name}</button>)}</div>
   {links.length>0&&<><div className="sectionTitle">DOCUMENTED CONNECTIONS <span>{links.length}</span></div><div className="connectionLinks">{links.map((x:any)=>{
