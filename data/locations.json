@@ -1148,5 +1148,85 @@
     "lat": 0,
     "lng": 0,
     "certainty": "unknown"
+  },
+  {
+    "id": "military-fuel-depot",
+    "name": "Military Fuel Depot",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "military-facility",
+    "lat": 32.55,
+    "lng": -117.02,
+    "certainty": "approximate"
+  },
+  {
+    "id": "black-hat-reservation",
+    "name": "Black Hat Reservation",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "reservation",
+    "lat": 32.8,
+    "lng": -116.7,
+    "certainty": "approximate"
+  },
+  {
+    "id": "phils-outpost",
+    "name": "Phil's Outpost",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "outpost",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "el-bazar",
+    "name": "El Bazar",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "trading-center",
+    "lat": 32.53,
+    "lng": -117.02,
+    "certainty": "approximate"
+  },
+  {
+    "id": "workshop-ftwd",
+    "name": "Workshop",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "workshop",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "on-the-go-burger",
+    "name": "On-The-Go Burger",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "restaurant",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "romminda-plaza",
+    "name": "Romminda Plaza",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "store-plaza",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "revolucion-tijuana",
+    "name": "Revolución",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "district",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
   }
 ]
