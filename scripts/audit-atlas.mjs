@@ -160,6 +160,16 @@ for(const c of connections){
   const expected=endpointKinds[c.type];
   if(expected){addGraphEdge(graphSingular[expected[0]],c.fromId,"FROM",graphSingular[expected[1]],c.toId);}
 }
+// Episode-to-episode graph edges are permitted only when both episodes are
+// explicitly documented by the same curated connection evidence record.
+for(const [connectionId,evidence] of Object.entries(curated)){
+  const episodeList=[...new Set(evidence.episodeIds??[])];
+  for(let i=0;i<episodeList.length;i++)for(let j=i+1;j<episodeList.length;j++){
+    const from=episodeList[i],to=episodeList[j];
+    if(!episodeIds.has(from)||!episodeIds.has(to))continue;
+    addGraphEdge("episode",from,"EPISODE_CONNECTION","episode",to,connectionId);
+  }
+}
 info.push(`Graph integrity: ${graphNodes.size} typed nodes; ${graphEdges.size} validated edges`);
 
 const mediaMap=media.episodes??{};const mediaKeys=Object.keys(mediaMap);const available=mediaKeys.filter(id=>mediaMap[id]?.image).length;const verified=mediaKeys.filter(id=>mediaMap[id]?.status==="verified").length;const fallback=mediaKeys.filter(id=>mediaMap[id]?.status==="fallback").length;
