@@ -82,7 +82,7 @@
   {
     "seasonId": "twd-s11",
     "episodeCount": 24,
-    "airStart": "2021-08-22",
+    "airStart": "2021-08-15",
     "airEnd": "2022-11-20",
     "episodeRegistry": "index-only",
     "chronologyStatus": "awaiting detailed episode timeline anchors"
@@ -138,8 +138,8 @@
   {
     "seasonId": "ftwd-s07",
     "episodeCount": 16,
-    "airStart": "2021-10-17",
-    "airEnd": "2022-06-05",
+    "airStart": "2021-10-10",
+    "airEnd": "2022-05-29",
     "episodeRegistry": "index-only",
     "chronologyStatus": "awaiting detailed episode timeline anchors"
   },
@@ -203,15 +203,15 @@
     "seasonId": "daryl-s03",
     "episodeCount": 7,
     "airStart": "2025-09-07",
-    "airEnd": "2025-10-20",
+    "airEnd": "2025-10-19",
     "episodeRegistry": "index-only",
     "chronologyStatus": "awaiting detailed episode timeline anchors"
   },
   {
     "seasonId": "dead-s01",
     "episodeCount": 6,
-    "airStart": "2023-06-18",
-    "airEnd": "2023-07-23",
+    "airStart": "2023-06-15",
+    "airEnd": "2023-07-20",
     "episodeRegistry": "index-only",
     "chronologyStatus": "awaiting detailed episode timeline anchors"
   },
