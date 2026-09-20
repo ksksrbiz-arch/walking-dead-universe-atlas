@@ -70,6 +70,8 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 ### Entity graph depth
 - [x] Make community and faction registry entries interactive graph roots.
 - [x] Allow relationship exploration to traverse from those entities into episodes, locations, characters, and documented connections.
+- [x] Add evidence-backed episode-to-episode graph edges from curated connection evidence.
+- [x] Audit episode-to-episode graph bridges so shared characters/locations alone never fabricate a narrative connection.
 
 ### Source registry & methodology
 - [x] Expose the canonical source registry directly in the Guide.
