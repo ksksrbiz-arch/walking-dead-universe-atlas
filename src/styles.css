@@ -1078,3 +1078,5 @@ button:active{transform:translateY(1px)}
 .errorFallback button{justify-self:start;min-height:38px;padding:0 16px;border:1px solid #ffffff20;border-radius:10px;background:#241616;color:#edf1ef}
 
 .marker.episodeContext .markerCore{r:2.4;stroke:#f4f1df;stroke-width:1.2}.marker.episodeContext .markerGlyph{filter:drop-shadow(0 0 3px currentColor)}
+
+.locationHistoryStrip{display:grid;grid-template-columns:1fr 2fr .7fr;gap:8px;margin:12px 0;padding:10px;border:1px solid #ffffff18;border-radius:14px;background:#07101180}.locationHistoryStrip span{min-width:0}.locationHistoryStrip small{display:block;font:600 8px "Space Mono",monospace;letter-spacing:.12em;opacity:.58}.locationHistoryStrip b{display:block;margin-top:4px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.locationHistoryStrip span:first-child b{font-family:"Space Mono",monospace}@media(max-width:699px){.locationHistoryStrip{grid-template-columns:1fr 1.7fr .6fr}.locationHistoryStrip b{font-size:11px}}
