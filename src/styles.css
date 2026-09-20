@@ -1130,3 +1130,22 @@ button:active{transform:translateY(1px)}
  .journeyMapAction{grid-template-columns:1fr}
  .journeyMapAction>button{justify-content:center;width:100%}
 }
+
+
+.timelineSecondaryToggle{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;width:100%;margin:8px 0 10px;padding:10px 11px;border:1px solid #ffffff16;border-radius:11px;background:#0c1617;color:#d4dcda;text-align:left}
+.timelineSecondaryToggle>span{color:#718081;font:700 6px "Space Mono",monospace;letter-spacing:.08em}
+.timelineSecondaryToggle b{font-size:9px}
+.timelineSecondaryToggle small{grid-column:2/3;color:#718081;font-size:7px;line-height:1.35}
+.timelineSecondaryToggle svg{grid-column:3;grid-row:1/3;width:13px}
+.timelineSecondaryToggle.active{border-color:#72a9c544;background:#101c1e}
+.webisodeLayer{margin-top:14px;padding-top:3px}
+.webisodeRow{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid #ffffff0d}
+.webisodeRow>strong{font:700 11px "Space Mono",monospace;color:#bfc9c7}
+.webisodeRow small{display:block;color:#718081;font:700 6.5px "Space Mono",monospace;letter-spacing:.05em}
+.webisodeRow b{display:block;margin:3px 0;color:#d4dcda;font-size:10px}
+.webisodeRow span{display:block;color:#718081;font-size:7px}
+.webisodeLayer>.muted{margin:10px 0 0;font-size:8px;line-height:1.5}
+@media(max-width:699px){
+ .timelineSecondaryToggle{grid-template-columns:auto minmax(0,1fr) 14px}
+ .timelineSecondaryToggle small{font-size:6.5px}
+}
