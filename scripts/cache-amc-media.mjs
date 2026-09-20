@@ -103,7 +103,9 @@ async function main(){
     try{
       const result=await fetchMedia(source);
       const relative=`/media-cache/${key}.${result.ext}`;
-      await writeFile(path.join(".",relative.replace(/^\//,"")),result.bytes);
+      const outputPath=path.join(".",relative.replace(/^\//,""));
+      await mkdir(path.dirname(outputPath),{recursive:true});
+      await writeFile(outputPath,result.bytes);
       local[source]=relative;
       downloaded++;
       console.log(`Cached media: ${source} -> ${relative}`);
