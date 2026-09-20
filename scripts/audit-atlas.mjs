@@ -86,7 +86,7 @@ for(const [id,list] of Object.entries(characterEpisodes.episodesByCharacter??{})
 for(const [id,list] of Object.entries(locationEpisodes.episodesByLocation??{})){if(!sets.locations.has(id))fail.push(`Location index references unknown location ${id}`);const d=duplicate(list.map(eid=>({id:eid})));if(d.length)fail.push(`Location index ${id}: duplicate episode IDs ${d.join(", ")}`);for(const eid of list)if(!episodeIds.has(eid))fail.push(`Location index ${id}: stale episode ${eid}`);for(const eid of list)if(!reverseLocation.get(id)?.has(eid))warn.push(`Location index ${id} includes curated historical association ${eid}`)}
 
 const endpointKinds={
-  "character-faction":["character","faction"],"character-location":["character","location"],"character-character":["character","character"],"character-community":["character","community"],
+  "character-faction":["character","faction"],"character-location":["character","location"],"character-character":["character","character"],"character-community":["character","community"],"community-community":["community","community"],
   "community-faction":["community","faction"],"faction-community":["faction","community"],"community-series":["community","series"],"faction-series":["faction","series"],"cross-series":["character","series"],"lore":["character","series"]
 };
 for(const c of connections){
