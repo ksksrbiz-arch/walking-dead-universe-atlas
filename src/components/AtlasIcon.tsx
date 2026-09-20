@@ -1,4 +1,4 @@
-import type {SVGProps} from "react";
+import type {ReactNode,SVGProps} from "react";
 
 export type AtlasIconName =
   | "city" | "community" | "facility" | "hospital" | "farm" | "prison"
@@ -7,7 +7,7 @@ export type AtlasIconName =
   | "faction" | "series" | "connection" | "community-link" | "cross-series"
   | "lore" | "character-link" | "location-link";
 
-const paths:Record<AtlasIconName,React.ReactNode>={
+const paths:Record<AtlasIconName,ReactNode>={
  city:<><path d="M4 20V9l4-2v13M8 20V5l4-2v17M12 20V8l4-2v14M16 20V11l4-2v11"/><path d="M6 12h.01M6 16h.01M10 9h.01M10 13h.01M14 12h.01M18 15h.01"/></>,
  community:<><path d="M5 20v-7l7-5 7 5v7H5Z"/><path d="M9 20v-4h6v4M3 12l9-8 9 8"/><path d="M12 8v4M10 10h4"/></>,
  facility:<><path d="M4 20V7h16v13M8 7V4h8v3M8 11h2M14 11h2M8 15h2M14 15h2"/></>,
