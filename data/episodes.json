@@ -1234,7 +1234,9 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "catrina-island"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1254,7 +1256,9 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "flight-462-crash-site"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1275,7 +1279,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "valle-guadalupe"
+      "valle-guadalupe",
+      "emerald-hotel"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1296,7 +1301,9 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "pirates-dock"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
