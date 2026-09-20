@@ -7,6 +7,7 @@ type Props={
  onCharacter:(id:string)=>void;
  onLocation:(id:string)=>void;
  onEpisode?:(id:string)=>void;
+ onConnection?:(id:string)=>void;
  defaultCollapsed?:boolean;
  root?:string;
  heading?:string;
@@ -74,6 +75,7 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaul
    if(kind==="character")onCharacter(id);
    if(kind==="location")onLocation(id);
    if(kind==="episode")onEpisode?.(id);
+   if(kind==="connection")onConnection?.(id);
  };
 
  return <section className={"entityGraph"+(collapsed?" isCollapsed":"")} aria-label="Universe relationship graph">
