@@ -150,21 +150,39 @@
     "certainty": "approximate"
   },
   {
-    "id": "watch-17",
+    "id": "watch-19",
     "seriesId": "daryl",
     "startSeason": 3,
     "endSeason": 3,
     "label": "Daryl Dixon S3",
-    "basis": "Spain storyline",
-    "certainty": "approximate"
+    "basis": "same 2023 in-universe arc; follows S2 shortly after",
+    "certainty": "confirmed"
   },
   {
-    "id": "watch-18",
+    "id": "watch-20",
+    "seriesId": "dead",
+    "startSeason": 1,
+    "endSeason": 1,
+    "label": "Dead City S1",
+    "basis": "summer 2027",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "watch-21",
+    "seriesId": "dead",
+    "startSeason": 2,
+    "endSeason": 2,
+    "label": "Dead City S2",
+    "basis": "2028; one year after S1",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "watch-22",
     "seriesId": "dead",
     "startSeason": 3,
     "endSeason": 3,
     "label": "Dead City S3",
-    "basis": "current post-main-series storyline",
-    "certainty": "approximate"
+    "basis": "2028; shortly after S2",
+    "certainty": "confirmed"
   }
 ]
