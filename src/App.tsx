@@ -273,10 +273,18 @@ export default function App(){
      drag.current.moved=true;
    }else{
      const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
-     if(Math.abs(dx)+Math.abs(dy)>4)drag.current.moved=true;
-     const limits=getMapPanLimits();
-     nextX=clamp(drag.current.px+dx,-limits.x,limits.x);
-     nextY=clamp(drag.current.py+dy,-limits.y,limits.y);
+     // At the base zoom the world already fills the intended mobile frame.
+     // Do not allow a one-finger drag to move the SVG into its transparent
+     // letterbox area; panning becomes available once the user zooms in.
+     if(visual.current.zoom<=1.001){
+       nextX=0;
+       nextY=0;
+     }else{
+       if(Math.abs(dx)+Math.abs(dy)>4)drag.current.moved=true;
+       const limits=getMapPanLimits();
+       nextX=clamp(drag.current.px+dx,-limits.x,limits.x);
+       nextY=clamp(drag.current.py+dy,-limits.y,limits.y);
+     }
    }
    visual.current={x:nextX,y:nextY,zoom:nextZoom};
    if(raf.current!==null)cancelAnimationFrame(raf.current);
