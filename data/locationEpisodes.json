@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "data/episodes.json locationIds; corrected against Walking Dead Wiki TV Universe Timeline, Chronological Episode Order, and series location indexes",
-  "generatedAt": "2026-09-20T19:33:01.475Z",
+  "generatedAt": "2026-09-20T19:33:24.306Z",
   "episodesByLocation": {
     "france": [
       "daryl-s01-e01",
@@ -383,6 +383,9 @@
       "owl-s01-e04",
       "owl-s01-e05",
       "owl-s01-e06"
+    ],
+    "tales-atlanta": [
+      "tales-s01-e02"
     ],
     "ranger-station-tales": [
       "tales-s01-e04"
