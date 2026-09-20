@@ -10,9 +10,10 @@ const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
  WB:{id:"wb",name:"World Beyond",color:"#72a9c5",short:"WORLD BEYOND"},
  OWL:{id:"owl",name:"The Ones Who Live",color:"#d26e6b",short:"TOWL"},
  DARYL:{id:"daryl",name:"Daryl Dixon",color:"#9d88c8",short:"DARYL"},
- DEAD:{id:"dead",name:"Dead City",color:"#5bb29b",short:"DEAD CITY"}
+ DEAD:{id:"dead",name:"Dead City",color:"#5bb29b",short:"DEAD CITY"},
+ MORE_TALES:{id:"more-tales",name:"More Tales from the TWDU",color:"#c46b9a",short:"MORE TALES"}
 };
-const ORDER:SeriesKey[]=["TWD","FTWD","TALES","WB","OWL","DARYL","DEAD"];
+const ORDER:SeriesKey[]=["TWD","FTWD","TALES","WB","OWL","DARYL","DEAD","MORE_TALES"];
 const MIN_YEAR=2010;
 const MAX_YEAR=2027;
 

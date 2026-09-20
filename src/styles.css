@@ -1070,3 +1070,9 @@ button:active{transform:translateY(1px)}
 .entityGraphNodeTop i svg,.entityGraphNodeTop em svg{width:11px;height:11px;flex:0 0 auto}
 .entityGraphNode>b{display:flex;align-items:center;gap:7px}
 .entityGraphNode>b svg{width:17px;height:17px;flex:0 0 auto;color:#91a09f}
+
+.errorFallback{display:grid;gap:9px;padding:16px;border:1px solid #4a2b2b;border-radius:14px;background:#1a1010}
+.errorFallback small{font:700 8px "Space Mono",monospace;letter-spacing:.12em;color:#c98f8f}
+.errorFallback b{font-size:15px}
+.errorFallback p{margin:0;color:#a99;font-size:11px;line-height:1.5;font-family:"Space Mono",monospace}
+.errorFallback button{justify-self:start;min-height:38px;padding:0 16px;border:1px solid #ffffff20;border-radius:10px;background:#241616;color:#edf1ef}

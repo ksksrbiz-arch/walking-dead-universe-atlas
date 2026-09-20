@@ -16,6 +16,7 @@ import {getCharacterEpisodeIds,getLocationEpisodeIds,getEpisodeConnectionIds,get
 import AtlasIcon,{AtlasIconGlyph} from "./components/AtlasIcon";
 import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
 import {getRuntimeMeta,getRuntimeRelationships,getRuntimeEpisodeIds} from "./lib/runtime";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 type View="map"|"timeline"|"people"|"guide";
 type SearchKind="location"|"character"|"community"|"faction"|"episode";
@@ -27,7 +28,8 @@ const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
  WB:{id:"wb",name:"World Beyond",color:"#72a9c5",short:"WORLD BEYOND"},
  OWL:{id:"owl",name:"The Ones Who Live",color:"#d26e6b",short:"TOWL"},
  DARYL:{id:"daryl",name:"Daryl Dixon",color:"#9d88c8",short:"DARYL"},
- DEAD:{id:"dead",name:"Dead City",color:"#5bb29b",short:"DEAD CITY"}
+ DEAD:{id:"dead",name:"Dead City",color:"#5bb29b",short:"DEAD CITY"},
+ MORE_TALES:{id:"more-tales",name:"More Tales from the TWDU",color:"#c46b9a",short:"MORE TALES"}
 };
 const SERIES_BY_ID=Object.fromEntries(Object.values(META).map(x=>[x.id,x])) as Record<string,typeof META.TWD>;
 const SERIES_KEYS=Object.keys(META) as SeriesKey[];
@@ -358,7 +360,9 @@ export default function App(){
        <div><small>{selectedLoc?SERIES_BY_ID[selectedLoc.seriesId]?.name:selectedEp?SERIES_BY_ID[selectedEp.seriesId]?.name:view==="map"?"ATLAS":"TWDU ATLAS"}</small><h2>{selectedLoc?.name||selectedEp?.title||((selectedCharacter&&atlasData.characters.find((x:any)=>x.id===selectedCharacter)?.name)||null)||(view==="map"?`${year} · ${mapYearCount} mapped`:view==="timeline"?"Chronology":view==="people"?"People":"Field guide")}</h2></div>
        {(selectedLoc||selectedEp||selectedCharacter)&&<button className="closePanel" onClick={()=>{setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null)}} aria-label="Close details"><Icon name="close"/></button>}
       </div>
+      <ErrorBoundary key={selectedLocation||selectedEpisode||selectedCharacter||view} onReset={()=>{setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setView("map")}}>
       {selectedLoc?<LocationDetail location={selectedLoc} onEpisode={selectEpisode}/>:selectedEp?<EpisodeDetail episode={selectedEp} onLocation={selectLocation} onEpisode={selectEpisode}/>:selectedCharacter?<CharacterDetail characterId={selectedCharacter} onEpisode={selectEpisode} onLocation={selectLocation} onCharacter={selectCharacter}/>:view==="map"?<MapContent locations={locations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent episodes={episodes} onEpisode={selectEpisode}/>:view==="people"?<PeopleContent onCharacter={selectCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)selectLocation(l)}} onEpisode={selectEpisode}/>:<GuideContent errors={dataErrors} onView={goView}/>}
+      </ErrorBoundary>
     </section>
 
     <nav className="bottomNav" aria-label="Atlas sections">
