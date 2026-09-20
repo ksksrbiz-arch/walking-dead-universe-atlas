@@ -968,5 +968,185 @@
     "lat": 0,
     "lng": 0,
     "certainty": "unknown"
+  },
+  {
+    "id": "geary-family-home",
+    "name": "Geary Family Home",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "residence",
+    "lat": 33.38,
+    "lng": -118.42,
+    "certainty": "approximate"
+  },
+  {
+    "id": "mexico-us-border",
+    "name": "Mexico–United States Border",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "international-border",
+    "lat": 32.54,
+    "lng": -117.03,
+    "certainty": "approximate"
+  },
+  {
+    "id": "abigail-home-experience",
+    "name": "Abigail Home Experience",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "neighborhood",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "mexican-church",
+    "name": "Mexican Church",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "church",
+    "lat": 32.1,
+    "lng": -116.57,
+    "certainty": "approximate"
+  },
+  {
+    "id": "salvadorian-jungle",
+    "name": "Salvadorian Jungle",
+    "seriesId": "ftwd",
+    "year": 0,
+    "type": "jungle",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "abigail-vineyard",
+    "name": "Abigail Vineyard",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "vineyard",
+    "lat": 32.1,
+    "lng": -116.57,
+    "certainty": "approximate"
+  },
+  {
+    "id": "javiers-home",
+    "name": "Javier's Home",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "residence",
+    "lat": 32.12,
+    "lng": -116.55,
+    "certainty": "approximate"
+  },
+  {
+    "id": "rehabilitation-center",
+    "name": "Rehabilitation Center",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "medical-facility",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "mothers-house",
+    "name": "Mother's House",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "residence",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "ftwd-s02-drugstore",
+    "name": "Drugstore",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "retail",
+    "lat": 32.515,
+    "lng": -117.038,
+    "certainty": "approximate"
+  },
+  {
+    "id": "ftwd-s02-barber-shop",
+    "name": "Barber Shop",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "retail",
+    "lat": 32.515,
+    "lng": -117.038,
+    "certainty": "approximate"
+  },
+  {
+    "id": "la-colonia",
+    "name": "La Colonia",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "community",
+    "lat": 32.515,
+    "lng": -117.038,
+    "certainty": "approximate"
+  },
+  {
+    "id": "rosarito-beach-hotel",
+    "name": "Rosarito Beach Hotel",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "hotel",
+    "lat": 32.332,
+    "lng": -117.031,
+    "certainty": "confirmed"
+  },
+  {
+    "id": "el-pelicano",
+    "name": "El Pelícano",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "store",
+    "lat": 32.52,
+    "lng": -116.97,
+    "certainty": "approximate"
+  },
+  {
+    "id": "magana-restaurant-bar",
+    "name": "Magaña Restaurant Bar",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "restaurant",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "suarez-family-farm",
+    "name": "Suarez Family Farm",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "farm",
+    "lat": 32.35,
+    "lng": -116.75,
+    "certainty": "approximate"
+  },
+  {
+    "id": "poco-cielo",
+    "name": "Poco Cielo",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "restaurant",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
+  },
+  {
+    "id": "salazar-family-home",
+    "name": "Salazar Family Home",
+    "seriesId": "ftwd",
+    "year": 2010,
+    "type": "residence",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown"
   }
 ]
