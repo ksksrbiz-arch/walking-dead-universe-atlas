@@ -918,7 +918,19 @@ button:active{transform:translateY(1px)}
 .guidePaths>button>svg{width:14px;height:14px;color:#667577}
 .guideSecondary{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0 16px}
 .guideSecondary>div{padding:12px;border:1px solid #293638;border-radius:12px;background:#101a1c}
-.guideSecondary small,.guideStatus small{display:block;color:#6f7d7f;font:700 7px "Space Mono",monospace;letter-spacing:.1em}
+.guideSecondary small,
+.sourceDirectory{display:grid;gap:7px;margin-top:10px}
+.sourceDirectoryItem{display:grid;grid-template-columns:minmax(0,1fr) 16px;gap:10px;align-items:center;padding:11px 12px;border:1px solid #ffffff12;border-radius:13px;background:#0b1416;color:inherit;text-decoration:none}
+.sourceDirectoryItem:hover{border-color:#ffffff25;background:#101a1c}
+.sourceDirectoryItem>span{display:grid;gap:3px;min-width:0}
+.sourceDirectoryItem small{font:700 7px "Space Mono",monospace;letter-spacing:.08em;color:#718081}
+.sourceDirectoryItem b{font-size:11px;color:#d7dedc}
+.sourceDirectoryItem em{font-size:9px;line-height:1.4;color:#879392;font-style:normal}
+.sourceDirectoryItem svg{width:14px;color:#aeb8b8}
+.sourceMethodology{display:grid;gap:5px;margin:10px 0 18px;padding:12px;border:1px solid #ffffff12;border-radius:13px;background:#081113}
+.sourceMethodology b{font:700 7px "Space Mono",monospace;letter-spacing:.08em;color:#aeb8b8}
+.sourceMethodology span{font-size:9px;line-height:1.45;color:#7f8d8b}
+.guideStatus small{display:block;color:#6f7d7f;font:700 7px "Space Mono",monospace;letter-spacing:.1em}
 .guideSecondary b{display:block;margin:6px 0 3px;font:700 13px "Space Mono",monospace}
 .guideSecondary span,.guideStatus span{display:block;color:#748284;font-size:8px;line-height:1.4}
 .guideStatus{display:grid;gap:8px;margin:8px 0 8px;padding:12px;border:1px solid #293638;border-radius:13px;background:#0d1718}
