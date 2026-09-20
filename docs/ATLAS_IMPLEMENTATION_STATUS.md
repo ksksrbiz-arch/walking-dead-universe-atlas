@@ -32,8 +32,8 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 
 ### Block B — Connections
 - [x] Populate and consume curated episode connection evidence where source-backed.
-- [ ] Add visual contextual connection highlighting when an episode/person/location is selected.
-- [ ] Add a connection focus mode that keeps both endpoints visible.
+- [x] Add visual contextual connection highlighting when an episode/person/location is selected.
+- [x] Add a connection focus mode that keeps both endpoints visible.
 - [x] Preserve certainty and provenance.
 
 ### Block C — Character journeys
