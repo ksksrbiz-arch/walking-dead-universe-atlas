@@ -65,6 +65,10 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Integrate webisodes/specials as an optional secondary chronology layer.
 - [x] Keep approximate/unknown dates explicitly marked.
 
+### Source registry & methodology
+- [x] Expose the canonical source registry directly in the Guide.
+- [x] Surface source type, provenance note, and methodology rules without hiding them in repository files.
+
 ### Block E — Media
 - Continue official AMC media ingestion with provenance.
 - Do not claim an episode asset is verified unless the ingestion pipeline actually verified it.
