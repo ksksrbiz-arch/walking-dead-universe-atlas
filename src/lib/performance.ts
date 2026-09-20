@@ -48,27 +48,33 @@ export function initAtlasPerformance(){
   if(typeof window==="undefined"||observed)return;
   observed=true;
   trackAtlasMetric("page-load",performance.now(),{navigation:performance.getEntriesByType("navigation")[0]?.entryType||"navigation"});
-  try{
-    const po=new PerformanceObserver(list=>{
-      for(const e of list.getEntries()){
-        if(e.entryType==="paint")trackAtlasMetric(e.name,e.startTime);
-        else if(e.entryType==="largest-contentful-paint")trackAtlasMetric("lcp",e.startTime);
-        else if(e.entryType==="layout-shift"){
-          const ls=e as PerformanceEntry&{value?:number;hadRecentInput?:boolean};
-          if(!ls.hadRecentInput)trackAtlasMetric("cls",ls.value||0);
-        }else if(e.entryType==="event"){
-          const ev=e as PerformanceEntry&{duration?:number;name:string};
-          if(ev.duration&&ev.duration>40)trackAtlasMetric("event-latency",ev.duration,{event:ev.name});
-        }
-      }
-    });
-    po.observe({entryTypes:["paint","largest-contentful-paint","layout-shift","event"] as PerformanceObserverInit["entryTypes"]});
-  }catch{}
+  const observeBuffered=(type:string,handler:(entry:PerformanceEntry)=>void)=>{
+    try{
+      const po=new PerformanceObserver(list=>list.getEntries().forEach(handler));
+      po.observe({type,buffered:true} as PerformanceObserverInit);
+      return po;
+    }catch{return null}
+  };
+  observeBuffered("paint",e=>trackAtlasMetric(e.name,e.startTime));
+  observeBuffered("largest-contentful-paint",e=>trackAtlasMetric("lcp",e.startTime));
+  observeBuffered("layout-shift",e=>{
+    const ls=e as PerformanceEntry&{value?:number;hadRecentInput?:boolean};
+    if(!ls.hadRecentInput)trackAtlasMetric("cls",ls.value||0);
+  });
+  // Event Timing is not available in every browser; isolate it so lack of support
+  // cannot disable the paint/LCP/CLS observers above.
+  observeBuffered("event",e=>{
+    const ev=e as PerformanceEntry&{duration?:number;name:string};
+    if(ev.duration&&ev.duration>40)trackAtlasMetric("event-latency",ev.duration,{event:ev.name});
+  });
   const nav=performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming|undefined;
-  if(nav){
-    trackAtlasMetric("dom-content-loaded",nav.domContentLoadedEventEnd);
-    trackAtlasMetric("load-complete",nav.loadEventEnd);
-  }
+  if(nav)trackAtlasMetric("dom-content-loaded",nav.domContentLoadedEventEnd);
+  const recordLoad=()=>{
+    const current=performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming|undefined;
+    if(current)trackAtlasMetric("load-complete",current.loadEventEnd||performance.now());
+  };
+  if(document.readyState==="complete")recordLoad();
+  else window.addEventListener("load",recordLoad,{once:true});
   window.addEventListener("pagehide",()=>{void flushAtlasTelemetry()},{once:true});
   document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")void flushAtlasTelemetry()});
 }
