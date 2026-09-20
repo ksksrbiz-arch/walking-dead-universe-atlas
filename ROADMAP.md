@@ -33,11 +33,11 @@
 - [ ] Mobile interaction model
 
 ## Phase 4 — Universe graph
-- [ ] Character graph
-- [ ] Community graph
-- [ ] Faction graph
-- [ ] Episode-to-episode connections
-- [ ] Cross-show navigation
+- [x] Character graph
+- [x] Community graph
+- [x] Faction graph
+- [x] Episode-to-episode connections
+- [x] Cross-show navigation
 
 ## Phase 5 — Quality
 - [ ] Continuity validation
