@@ -125,11 +125,7 @@ export default function App(){
  const [mapLayer,setMapLayer]=useState<MapLayer>("ALL");
  const [year,setYear]=useState(2010);
  const [query,setQuery]=useState("");
- const [selectedLocation,setSelectedLocation]=useState<string|null>(null);
- const [selectedEpisode,setSelectedEpisode]=useState<string|null>(null);
- const [selectedCharacter,setSelectedCharacter]=useState<string|null>(null);
- const [selectedConnection,setSelectedConnection]=useState<string|null>(null);
- const [peopleFocusEntity,setPeopleFocusEntity]=useState<string|null>(null);
+ const {selectedLocation,selectedEpisode,selectedCharacter,selectedConnection,peopleFocusEntity,setSelectedLocation,setSelectedEpisode,setSelectedCharacter,setSelectedConnection,setPeopleFocusEntity,clearFocus}=useAtlasFocusController();
  const clearPeopleFocus=clearFocus;
  const [journeyMapMode,setJourneyMapMode]=useState(false);
  const [view,setView]=useState<View>("map");
