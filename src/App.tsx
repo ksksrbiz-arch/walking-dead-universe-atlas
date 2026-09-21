@@ -12,6 +12,7 @@ import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
 import EntityGraphView from "./components/EntityGraphView";
 import MiniTimeline from "./components/MiniTimeline";
+import ChronologyMatrix from "./components/ChronologyMatrix";
 import {useAtlasFocusController} from "./lib/entityFocus";
 import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
 import {getCharacterEpisodeIds,getLocationEpisodeIds,getEpisodeConnectionIds} from "./lib/entityGraph";
@@ -563,30 +564,46 @@ function MapContent({locations,onSelect}:{locations:Location[];onSelect:(l:Locat
  </div>
 }
 
-function TimelineContent({episodes,onEpisode,onUniverseEvent}:{episodes:any[];onEpisode:(id:string)=>void;onUniverseEvent:(event:any)=>void}){
+function TimelineContent({episodes,onEpisode,onUniverseEvent,onConnections,onYearChange,currentYear}:{episodes:any[];onEpisode:(id:string)=>void;onUniverseEvent:(event:any)=>void;onConnections:()=>void;onYearChange:(year:number)=>void;currentYear:number}){
  const [filter,setFilter]=useState<string>("ALL");
  const [showWebisodes,setShowWebisodes]=useState(false);
  const available=useMemo(()=>Object.keys(META) as SeriesKey[],[]);
  const visible=useMemo(()=>filter==="ALL"?episodes:episodes.filter(e=>e.seriesId===META[filter as SeriesKey].id),[episodes,filter]);
  const latest=episodes.reduce((n,e)=>Math.max(n,Number(e.start??0)),0);
  return <div className="contentScroll">
-  <div className="timelineIntro"><span>UNIVERSE TIME</span><h3>Follow the story through in-universe chronology.</h3><p>Episodes are ordered by story time. Air dates and certainty remain visible inside each episode.</p></div>
+  <div className="timelineIntro"><span>UNIVERSE TIME</span><h3>Follow the story through in-universe chronology.</h3><p>Use the chronology atlas to see every series on one continuous story-time axis. Click any episode block to open its evidence, geography and connections.</p></div>
+  <ChronologyMatrix year={currentYear} onYearChange={onYearChange} series={filter==="ALL"?"ALL":filter as SeriesKey} onEpisode={onEpisode} onConnections={onConnections}/>
   <div className="timelineSnapshot"><div><small>VISIBLE EPISODES</small><b>{visible.length}</b><span>{latest||"—"} latest story year</span></div><div><small>ACTIVE SERIES</small><b>{available.length}</b><span>series represented in this layer</span></div></div>
   <div className="timelineFilters" aria-label="Timeline series filters"><button className={filter==="ALL"?"active":""} onClick={()=>setFilter("ALL")}>ALL <span>{episodes.length}</span></button>{available.map(key=>{const count=episodes.filter(e=>e.seriesId===META[key].id).length;return <button key={key} disabled={!count} className={filter===key?"active":""} onClick={()=>count&&setFilter(key)}>{META[key].short} <span>{count}</span></button>})}</div>
   <div className="sectionTitle">EPISODES <span>{visible.length}</span></div>
   <button className={"timelineSecondaryToggle "+(showWebisodes?"active":"")} onClick={()=>setShowWebisodes(v=>!v)}><span>SECONDARY LAYER</span><b>{showWebisodes?"HIDE":"SHOW"} WEBSERIES</b><small>Release chronology · 63 installments · story placement not forced where exact in-universe dates are unavailable.</small><Icon name={showWebisodes?"chevronUp":"chevron"}/></button>
   <div className="sectionTitle">UNIVERSE EVENTS <span>{((atlasData as any).universeEvents||[]).length}</span></div>
-  <div className="universeEventList">
-   {((atlasData as any).universeEvents||[]).map((event:any)=>{
-    const locationIds=(event.locationIds??[]) as string[];
-    const content=<><strong>{event.year}</strong><div><small>{SERIES_BY_ID[event.seriesId]?.short||event.seriesId} · UNIVERSE EVENT</small><b>{event.title}</b><span>{event.description||event.certainty}</span>{locationIds.length>0?<em>{locationIds.length} mapped location{locationIds.length===1?"":"s"} · OPEN MAP</em>:null}</div>{locationIds.length>0?<Icon name="chevron"/>:null}</>;
-    if(locationIds.length>0)return <button className="universeEventRow" key={event.id} onClick={()=>onUniverseEvent(event)} aria-label={"Open map for "+event.title}>{content}</button>;
-    return <article className="universeEventRow" key={event.id}>{content}</article>;
-   })}
-  </div>
+  <div className="universeEventList">{((atlasData as any).universeEvents||[]).map((event:any)=>{const locationIds=(event.locationIds??[]) as string[];const content=<><strong>{event.year}</strong><div><small>{SERIES_BY_ID[event.seriesId]?.short||event.seriesId} · UNIVERSE EVENT</small><b>{event.title}</b><span>{event.description||event.certainty}</span>{locationIds.length>0?<em>{locationIds.length} mapped location{locationIds.length===1?"":"s"} · OPEN MAP</em>:null}</div>{locationIds.length>0?<Icon name="chevron"/>:null}</>;return locationIds.length>0?<button className="universeEventRow" key={event.id} onClick={()=>onUniverseEvent(event)} aria-label={"Open map for "+event.title}>{content}</button>:<article className="universeEventRow" key={event.id}>{content}</article>})}</div>
   <div className="timelineList episodeList timelineCards">{visible.map((e:any)=>{const em=(episodeMedia as any).episodes?.[e.id];const mediaAvailable=Boolean(em?.image);const mediaVerified=em?.status==="verified";return <button className={mediaAvailable?"episodeRow mediaRow hasMedia":"episodeRow mediaRow"} key={e.id} onClick={()=>onEpisode(e.id)}>{mediaAvailable&&<span className="rowMedia"><img src={atlasImageUrl(em.image,240)} onError={e=>onAtlasImageError(e,em.image)} srcSet={atlasImageSrcSet(em.image,[160,240,360])} sizes="80px" loading="lazy" decoding="async" alt="" className="rowThumb"/></span>}<strong>{e.start||"?"}</strong><span><small>{SERIES_BY_ID[e.seriesId]?.short} · S{String(e.seasonId).slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><em>{e.precision} · {e.certainty}</em></span><i className={mediaVerified?"mediaIndicator verified":mediaAvailable?"mediaIndicator fallback":"mediaIndicator"} aria-label={mediaVerified?"Verified official episode media":mediaAvailable?"AMC series key art fallback":"No episode media available"}/><Icon name="chevron"/></button>})}</div>
   {showWebisodes&&<div className="webisodeLayer"><div className="sectionTitle">WEBSERIES RELEASE CHRONOLOGY <span>{Number((atlasData as any).webisodes?.totalEpisodes||0)}</span></div>{((atlasData as any).webisodes?.series||[]).map((w:any)=><article className="webisodeRow" key={w.id}><strong>{w.releaseStart?.slice(0,4)||"?"}</strong><div><small>{SERIES_BY_ID[w.seriesId]?.short||w.seriesId} · {w.episodeCount} installments</small><b>{w.title}</b><span>{w.releaseStart===w.releaseEnd?w.releaseStart:w.releaseStart+" → "+w.releaseEnd}</span></div></article>)}<p className="muted">Webisodes remain a secondary release-order layer because the current registry does not provide sufficiently precise in-universe dates for every installment.</p></div>}
  </div>
+}
+
+function ChronologyMatrix({year,onYearChange,series,onEpisode,onConnections}:{year:number;onYearChange:(year:number)=>void;series:SeriesKey|"ALL";onEpisode:(id:string)=>void;onConnections:()=>void}){
+ const [scale,setScale]=useState(1);
+ const [compact,setCompact]=useState(false);
+ const all=useMemo(()=>buildChronology(),[]);
+ const visible=useMemo(()=>all.filter(x=>series==="ALL"||x.seriesId===META[series].id),[all,series]);
+ const lanes=useMemo(()=>Object.keys(META).filter(k=>all.some(x=>x.seriesId===META[k as SeriesKey].id)) as SeriesKey[],[all]);
+ const min=2010,max=2028;
+ const pos=(y:number)=>((Math.max(min,Math.min(max,y))-min)/(max-min))*100;
+ const active=useMemo(()=>new Set(visible.filter(x=>x.start<=year&&x.end>=year).map(x=>x.id)),[visible,year]);
+ return <section className={"chronologyMatrix"+(compact?" compact":"")} aria-label="Interactive universe chronology map">
+  <header className="chronologyMatrixHead">
+   <div className="chronologyMatrixTitle"><span className="chronologyPulse"/><div><small>CHRONOLOGY ATLAS</small><h3>Story time, mapped across the universe</h3><p>{visible.length} records · cursor {year}</p></div></div>
+   <div className="chronologyMatrixTools"><button onClick={()=>setCompact(v=>!v)}>{compact?"EXPAND":"COMPACT"}</button><button onClick={()=>setScale(s=>Math.max(1,s/1.2))} aria-label="Zoom chronology out">−</button><output>{Math.round(scale*100)}%</output><button onClick={()=>setScale(s=>Math.min(2.4,s*1.2))} aria-label="Zoom chronology in">+</button><button className="matrixLinks" onClick={onConnections}>LINK GRAPH</button></div>
+  </header>
+  <div className="chronologyMatrixBody"><div className="chronologyMatrixCanvas" style={{width:(scale*100)+"%"}}>
+   <div className="chronologyYears">{[2010,2012,2014,2016,2018,2020,2022,2024,2026,2028].map(y=><button key={y} style={{left:pos(y)+"%"}} onClick={()=>onYearChange(y)}>{y}</button>)}</div>
+   <div className="chronologyGrid">{lanes.map(key=><div className="chronologyLane" key={key}><button className="chronologyLaneLabel" style={{"--lane":META[key].color} as CSSProperties}>{META[key].short}</button><div className="chronologyTrack"><div className="chronologyGridline"/>{visible.filter(x=>x.seriesId===META[key].id).map(item=>{const left=pos(item.start),width=Math.max(.35,pos(item.end)-left),selected=active.has(item.id);return <button key={item.kind+":"+item.id} className={"chronologyBar "+(selected?"active":"")} style={{left:left+"%",width:Math.min(24,Math.max(width,item.kind==="event"?.7:1))+"%","--bar":META[key].color} as CSSProperties} title={item.title+" · "+item.start+(item.end!==item.start?"–"+item.end:"")} onClick={()=>item.kind==="episode"?onEpisode(item.id):onYearChange(item.start)}><span>{item.kind==="episode"?item.title:"EVENT"}</span></button>})}</div></div>)}<div className="chronologyCursor" style={{left:pos(year)+"%"}}><span>{year}</span></div></div>
+  </div></div>
+  <footer className="chronologyMatrixFoot"><div><b>{year}</b><span>UNIVERSE YEAR</span></div><input type="range" min={min} max={max} step=".01" value={year} onChange={e=>onYearChange(Number(e.target.value))} aria-label="Chronology year"/><div className="chronologyLegend"><i/><span>active</span><i className="future"/><span>inactive</span></div></footer>
+ </section>
 }
 function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnection,onJourney,onCommunity,onFaction}:{characterId:string;onEpisode:(id:string)=>void;onLocation:(l:Location)=>void;onCharacter:(id:string)=>void;onConnection:(id:string)=>void;onJourney:()=>void;onCommunity:(id:string)=>void;onFaction:(id:string)=>void}){
  const [runtimeEpisodeIds,setRuntimeEpisodeIds]=useState<string[]|null>(null);
