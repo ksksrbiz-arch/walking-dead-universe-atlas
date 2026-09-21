@@ -80,6 +80,13 @@ for(const c of characters){
   if(Number.isInteger(c.episodeCount)&&c.episodeCount!==actualEpisodes.length)fail.push(`Character ${c.id}: declared episodeCount ${c.episodeCount} vs episode registry ${actualEpisodes.length}`);
 }
 for(const l of locations){if(!sets.series.has(l.seriesId))fail.push(`Location ${l.id}: unknown series ${l.seriesId}`);if(!Number.isFinite(Number(l.lat))||!Number.isFinite(Number(l.lng)))fail.push(`Location ${l.id}: invalid coordinates`);if(Number(l.lat)<-90||Number(l.lat)>90||Number(l.lng)<-180||Number(l.lng)>180)fail.push(`Location ${l.id}: coordinates out of range`)}
+for(const l of locations){
+  const linkedEpisodes=episodes.filter(e=>(e.locationIds??[]).includes(l.id));
+  if(linkedEpisodes.length){
+    const earliest=Math.min(...linkedEpisodes.map(e=>Number(e.timelineStart??e.timelineEnd)).filter(Number.isFinite));
+    if(Number.isFinite(earliest)&&Number(l.year)>earliest)fail.push(`Location ${l.id}: year ${l.year} is later than earliest linked episode chronology ${earliest}`);
+  }
+}
 for(const [id,set] of reverseCharacter)for(const eid of set)if(!(characterEpisodes.episodesByCharacter?.[id]??[]).includes(eid))fail.push(`Missing reverse character edge ${id} -> ${eid}`);
 for(const [id,set] of reverseLocation)for(const eid of set)if(!(locationEpisodes.episodesByLocation?.[id]??[]).includes(eid))fail.push(`Missing reverse location edge ${id} -> ${eid}`);
 for(const [id,list] of Object.entries(characterEpisodes.episodesByCharacter??{})){if(!sets.characters.has(id))fail.push(`Character index references unknown character ${id}`);const d=duplicate(list.map(eid=>({id:eid})));if(d.length)fail.push(`Character index ${id}: duplicate episode IDs ${d.join(", ")}`);for(const eid of list)if(!episodeIds.has(eid))fail.push(`Character index ${id}: stale episode ${eid}`)}
@@ -117,6 +124,53 @@ for(const [id,evidence] of Object.entries(curated)){
   if(!evidence.basis?.trim())fail.push(`Connection evidence ${id}: missing basis`);
 }
 const unresolved=connections.filter(c=>!curated[c.id]).map(c=>c.id);if(unresolved.length)fail.push(`Connections without curated episode evidence: ${unresolved.join(", ")}`);
+
+// Relationship graph integrity: validate every graph node/edge concept against the
+// same typed registry used by the client. Episode-context bridges are deliberately
+// checked here so graph traversal cannot silently expose stale or fabricated refs.
+const graphKinds={series:series,seasons:seasons,episodes:episodes,locations:locations,characters:characters,communities:communities,factions:factions,connections:connections};
+const graphSingular={series:"series",seasons:"season",episodes:"episode",locations:"location",characters:"character",communities:"community",factions:"faction",connections:"connection"};
+const graphNodes=new Set(Object.entries(graphKinds).flatMap(([kind,list])=>list.map(x=>`${graphSingular[kind]}:${x.id}`)));
+const graphEdges=new Set();
+const addGraphEdge=(fromKind,fromId,type,toKind,toId,evidenceId)=>{
+  const from=`${fromKind}:${fromId}`,to=`${toKind}:${toId}`;
+  if((type==="EPISODE_GEOGRAPHY"||type==="EPISODE_CONTEXT")&&!evidenceId)fail.push(`Graph bridge edge ${type} ${from} -> ${to} is missing episode evidence`);
+  if(!graphNodes.has(from))fail.push(`Graph edge ${type}: missing from node ${from}`);
+  if(!graphNodes.has(to))fail.push(`Graph edge ${type}: missing to node ${to}`);
+  const edge=`${from}>${type}>${to}${evidenceId?`>${evidenceId}`:""}`;
+  if(graphEdges.has(edge))fail.push(`Duplicate graph edge ${edge}`); else graphEdges.add(edge);
+};
+for(const e of episodes){
+  for(const id of e.locationIds??[])addGraphEdge("episode",e.id,"OCCURS_AT","location",id);
+  for(const id of e.characterIds??[])addGraphEdge("episode",e.id,"FEATURES","character",id);
+  for(const id of e.communityIds??[])addGraphEdge("episode",e.id,"INVOLVES","community",id);
+  for(const id of e.factionIds??[])addGraphEdge("episode",e.id,"INVOLVES","faction",id);
+  for(const id of e.connectionIds??[])addGraphEdge("episode",e.id,"CONTEXT","connection",id);
+  for(const characterId of e.characterIds??[]){
+    for(const locationId of e.locationIds??[])addGraphEdge("character",characterId,"EPISODE_GEOGRAPHY","location",locationId,e.id);
+    for(const communityId of e.communityIds??[])addGraphEdge("character",characterId,"EPISODE_CONTEXT","community",communityId,e.id);
+    for(const factionId of e.factionIds??[])addGraphEdge("character",characterId,"EPISODE_CONTEXT","faction",factionId,e.id);
+  }
+  for(const locationId of e.locationIds??[]){
+    for(const communityId of e.communityIds??[])addGraphEdge("location",locationId,"EPISODE_CONTEXT","community",communityId,e.id);
+    for(const factionId of e.factionIds??[])addGraphEdge("location",locationId,"EPISODE_CONTEXT","faction",factionId,e.id);
+  }
+}
+for(const c of connections){
+  const expected=endpointKinds[c.type];
+  if(expected){addGraphEdge(graphSingular[expected[0]],c.fromId,"FROM",graphSingular[expected[1]],c.toId);}
+}
+// Episode-to-episode graph edges are permitted only when both episodes are
+// explicitly documented by the same curated connection evidence record.
+for(const [connectionId,evidence] of Object.entries(curated)){
+  const episodeList=[...new Set(evidence.episodeIds??[])];
+  for(let i=0;i<episodeList.length;i++)for(let j=i+1;j<episodeList.length;j++){
+    const from=episodeList[i],to=episodeList[j];
+    if(!episodeIds.has(from)||!episodeIds.has(to))continue;
+    addGraphEdge("episode",from,"EPISODE_CONNECTION","episode",to,connectionId);
+  }
+}
+info.push(`Graph integrity: ${graphNodes.size} typed nodes; ${graphEdges.size} validated edges`);
 
 const mediaMap=media.episodes??{};const mediaKeys=Object.keys(mediaMap);const available=mediaKeys.filter(id=>mediaMap[id]?.image).length;const verified=mediaKeys.filter(id=>mediaMap[id]?.status==="verified").length;const fallback=mediaKeys.filter(id=>mediaMap[id]?.status==="fallback").length;
 if(available!==episodes.length)fail.push(`Media coverage is ${available}/${episodes.length}`);
