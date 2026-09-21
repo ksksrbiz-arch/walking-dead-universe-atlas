@@ -15,28 +15,28 @@
   },
   {
     "id": "twd-s02-farm",
-    "year": 2011,
+    "year": 2010,
     "title": "TWD S2 — The farm",
     "seriesId": "twd",
     "certainty": "approximate"
   },
   {
     "id": "twd-s03-prison",
-    "year": 2012,
+    "year": 2011,
     "title": "TWD S3 — Prison / Woodbury",
     "seriesId": "twd",
     "certainty": "approximate"
   },
   {
     "id": "twd-s05-alexandria",
-    "year": 2014,
+    "year": 2012,
     "title": "TWD S5–6 — Alexandria",
     "seriesId": "twd",
     "certainty": "approximate"
   },
   {
     "id": "twd-s06-saviors",
-    "year": 2016,
+    "year": 2012,
     "title": "TWD S6–7 — Saviors",
     "seriesId": "twd",
     "certainty": "approximate"
@@ -78,7 +78,7 @@
   },
   {
     "id": "owl-philadelphia",
-    "year": 2023,
+    "year": 2022,
     "title": "The Ones Who Live — Philadelphia",
     "seriesId": "owl",
     "certainty": "confirmed"
@@ -96,5 +96,33 @@
     "title": "Daryl Dixon — Spain",
     "seriesId": "daryl",
     "certainty": "confirmed"
+  },
+  {
+    "id": "twd-s10-s11-commonwealth",
+    "year": 2021,
+    "title": "TWD S10–11 — Commonwealth war",
+    "seriesId": "twd",
+    "certainty": "approximate"
+  },
+  {
+    "id": "ftwd-s08-padre",
+    "year": 2022,
+    "title": "Fear S8 — PADRE finale",
+    "seriesId": "ftwd",
+    "certainty": "approximate"
+  },
+  {
+    "id": "dead-s02-new-babylon",
+    "year": 2028,
+    "title": "Dead City S2 — New Babylon",
+    "seriesId": "dead",
+    "certainty": "approximate"
+  },
+  {
+    "id": "tales-davon",
+    "year": 2025,
+    "title": "Tales — Davon",
+    "seriesId": "tales",
+    "certainty": "approximate"
   }
 ]
