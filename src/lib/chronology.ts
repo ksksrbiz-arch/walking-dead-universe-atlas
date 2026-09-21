@@ -53,6 +53,17 @@ export function getSeriesWatchOrder(){
  return atlasData.watchOrder.filter((x:any)=>x.type!=="note");
 }
 
+// The universe year axis (outbreak through the latest anchored story year) is used by
+// every chronological visualization in the app — the timeline dock, the mobile time
+// bar, and any mini-timeline embedded in an entity detail panel. Defining it once here
+// means a future chronology correction that pushes the latest year further only needs
+// updating in one place, instead of the three-plus hardcoded copies this replaced.
+export const UNIVERSE_MIN_YEAR=2010;
+export const UNIVERSE_MAX_YEAR=2028;
+export function yearToPercent(year:number,min=UNIVERSE_MIN_YEAR,max=UNIVERSE_MAX_YEAR){
+ return ((Math.max(min,Math.min(max,year))-min)/(max-min))*100;
+}
+
 // events.json is a curated set of named story-era markers (e.g. "TWD S3 — Prison /
 // Woodbury", "Dead City — Manhattan") anchored to the same in-universe year system as
 // everything else. The current year is otherwise shown as a bare number everywhere in
