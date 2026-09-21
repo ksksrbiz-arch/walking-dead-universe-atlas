@@ -148,6 +148,7 @@ export default function App(){
  const visual=useRef({x:0,y:0,zoom:1});
  const didAutoHome=useRef(false);
  const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
+ const contentScrollRef=useRef<HTMLDivElement|null>(null);
  useEffect(()=>{initAtlasPerformance();void getRuntimeMeta().then(meta=>{if(meta)trackAtlasMetric("runtime-ready",1,{version:String(meta.version??"unknown"),episodes:Number(meta.counts?.episodes??0),characters:Number(meta.counts?.characters??0),locations:Number(meta.counts?.locations??0)})})},[]);
 
  useEffect(()=>setDataErrors(validateAtlasData()),[]);
@@ -186,7 +187,512 @@ export default function App(){
    worldGroup.setAttribute("transform","translate("+(cx+px)+" "+(cy+py)+") scale("+z+") translate("+(-cx)+" "+(-cy)+")");
  };
  useEffect(()=>{visual.current={x:pan.x,y:pan.y,zoom};applyMapTransform(pan.x,pan.y,zoom,true);},[pan.x,pan.y,zoom]);
- useEffect(()=>{if(view!=="map")setSheet("open");},[view]);
+ useEffect(()=>{if(view!=="map")setSheet("open");requestAnimationFrame(()=>contentScrollRef.current?.scrollTo({top:0,left:0,behavior:"auto"}));},[view,selectedLocation,selectedEpisode,selectedCharacter,selectedConnection]);
+ useEffect(()=>{
+   if(!playing)return;
+   const id=window.setInterval(()=>setYear(y=>y>=2028?2010:y+1),900);
+   return()=>window.clearInterval(id);
+ },[playing]);
+ useEffect(()=>{
+   const onKey=(e:KeyboardEvent)=>{
+     if((e.target as HTMLElement)?.tagName==="INPUT")return;
+     if(e.key==="Escape"){setSearchOpen(false);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false)}
+     if(e.key==="+"||e.key==="=")setZoomValue(zoom+0.5);
+     if(e.key==="-"||e.key==="_")setZoomValue(zoom-0.5);
+     if(e.key==="0")resetMap();
+     if(e.key===" ") {e.preventDefault();setPlaying(v=>!v)}
+   };
+   window.addEventListener("keydown",onKey);
+   return()=>window.removeEventListener("keydown",onKey);
+ },[zoom]);
+
+ const locations=useMemo(()=>atlasData.locations.filter(l=>{
+   const meta=SERIES_BY_ID[l.seriesId];
+   return !!meta&&(series==="ALL"||l.seriesId===META[series].id)&&l.year<=year;
+ }),[series,year]);
+ const chronology=useMemo(()=>buildChronology().filter(e=>e.start<=year&&(series==="ALL"||e.seriesId===META[series].id)),[series,year]);
+ const currentEra=useMemo(()=>describeEra(year),[year]);
+ const episodes=useMemo(()=>chronology.filter(e=>e.kind==="episode"),[chronology]);
+ const selectedLoc=atlasData.locations.find(l=>l.id===selectedLocation)??null;
+ const selectedEp=episodes.find(e=>e.id===selectedEpisode)??null;
+ const episodeContextLocationIds=useMemo(()=>new Set<string>(selectedEpisode?((atlasData.episodes.find((e:any)=>e.id===selectedEpisode)?.locationIds??[]) as string[]):[]),[selectedEpisode]);
+ const selectedConnectionData=selectedConnection?atlasData.connections.find((x:any)=>x.id===selectedConnection) as any:null;
+ const characterJourneyLocationIds=useMemo(()=>{if(!selectedCharacter)return new Set<string>();const ids=new Set<string>();getCharacterEpisodeIds(selectedCharacter).forEach(eid=>{const e=atlasData.episodes.find((x:any)=>x.id===eid) as any;(e?.locationIds??[]).forEach((id:string)=>ids.add(id))});return ids},[selectedCharacter]);
+ const connectionContextLocationIds=useMemo(()=>{const ids=new Set<string>();if(!selectedConnectionData)return ids;[selectedConnectionData.fromId,selectedConnectionData.toId].filter(Boolean).forEach((id:string)=>{const l=atlasData.locations.find(x=>x.id===id);if(l)ids.add(l.id)});const evidence=((atlasData as any).connectionEpisodes?.connections?.[selectedConnectionData.id]?.episodeIds??[]) as string[];evidence.forEach((episodeId:string)=>{const e=atlasData.episodes.find((x:any)=>x.id===episodeId) as any;(e?.locationIds??[]).forEach((id:string)=>ids.add(id))});return ids},[selectedConnectionData]);
+ const mapLocations=useMemo(()=>{
+   const source=journeyMapMode&&selectedCharacter?atlasData.locations.filter(l=>characterJourneyLocationIds.has(l.id)):locations;
+   return source.filter(l=>mapLayer==="ALL"||locationMapLayer(l.type)===mapLayer);
+ },[journeyMapMode,selectedCharacter,characterJourneyLocationIds,locations,mapLayer]);
+
+ const searchResults=useMemo(()=>{
+   const q=query.trim().toLowerCase();
+   if(!q)return [] as {kind:SearchKind;id:string;title:string;meta:string}[];
+   const result:{kind:SearchKind;id:string;title:string;meta:string}[]=[];
+   atlasData.locations.forEach(x=>{if([x.name,x.type].join(" ").toLowerCase().includes(q))result.push({kind:"location",id:x.id,title:x.name,meta:`${SERIES_BY_ID[x.seriesId]?.short} · ${x.year}`})});
+   atlasData.characters.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"character",id:x.id,title:x.name,meta:"CHARACTER"})});
+   atlasData.communities.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"community",id:x.id,title:x.name,meta:"COMMUNITY"})});
+   atlasData.factions.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"faction",id:x.id,title:x.name,meta:"FACTION"})});
+   atlasData.episodes.forEach((x:any)=>{if([x.title,x.seriesId,x.seasonId].join(" ").toLowerCase().includes(q))result.push({kind:"episode",id:x.id,title:x.title,meta:`${SERIES_BY_ID[x.seriesId]?.short} · S${String(x.seasonId).slice(-2)}E${String(x.episodeNumber).padStart(2,"0")}`})});
+   return result.slice(0,12);
+ },[query]);
+
+ const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
+ const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,baseScale=Math.max(w/1000,h/600),z=visual.current.zoom;const worldW=952*baseScale*z,worldH=556*baseScale*z;return {x:Math.max(0,(worldW-w)/2),y:Math.max(0,(worldH-h)/2)}};
+ // "Home" is the initial (present-day) location cluster centered in the viewport, not
+ // the raw world/viewBox center — on a narrow phone slice the world center is empty
+ // ocean, well off from where the story's early locations (Georgia) actually sit.
+ const computeHomePan=()=>{
+   const el=mapSvgRef.current;
+   if(!el)return {x:0,y:0};
+   const surfaceRect=el.getBoundingClientRect();
+   const w=el.clientWidth,h=el.clientHeight;
+   if(!w||!h)return {x:0,y:0};
+   const scale=Math.max(w/1000,h/600);
+   const pts=atlasData.locations.filter(l=>l.year<=2010).map(l=>project(l.lat,l.lng));
+   if(!pts.length)return {x:0,y:0};
+   const cx=pts.reduce((s,p)=>s+p.x,0)/pts.length;
+   const cy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
+   // A permanently-open content sidebar (tablet/desktop widths) can cover the right
+   // portion of the map — center within whatever's actually unobstructed, or "home"
+   // can land the story's starting cluster right behind the panel.
+   const panelRect=document.querySelector(".contentPanel")?.getBoundingClientRect();
+   const visibleW=panelRect&&panelRect.width>100&&panelRect.left<surfaceRect.right
+     ?Math.max(160,panelRect.left-surfaceRect.left)
+     :w;
+   const limits=getMapPanLimits();
+   return {x:clamp(visibleW/2-w/2-(cx-500)*scale,-limits.x,limits.x),y:clamp((300-cy)*scale,-limits.y,limits.y)};
+ };
+ const resetMap=()=>{const home=computeHomePan();visual.current={x:home.x,y:home.y,zoom:1};setZoom(1);setPan({x:home.x,y:home.y});trackAtlasMetric("map-reset",1,{mobile:isMobileMap});};
+ const openPeopleEntity=(kind:"community"|"faction",id:string)=>{
+   setPeopleFocusEntity(kind+":"+id);setView("people");setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setSheet("open");
+ };
+ const selectCharacter=(id:string)=>{clearPeopleFocus();const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const ids=getCharacterEpisodeIds(id);const eps=ids.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setSelectedConnection(null);setJourneyMapMode(false);setView("people");setSheet("open");trackAtlasMetric("character-select",eps.length,{character:id});void getRuntimeRelationships("character",id).then(remote=>{if(remote)trackAtlasMetric("runtime-character-relationships",remote.episodeIds.length,{character:id,remoteIndexed:true})});};
+ const selectLocation=(l:Location)=>{ clearPeopleFocus(); const focusStarted=performance.now();
+   void getRuntimeRelationships("location",l.id).then(remote=>{if(remote)trackAtlasMetric("runtime-location-relationships",remote.episodeIds.length,{location:l.id,remoteIndexed:true})});
+   if(Number(l.year)>0)setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setView("map");setSheet("open");
+   window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
+     const surface=mapSvgRef.current;
+     if(!surface)return;
+     const marker=[...surface.querySelectorAll<SVGGElement>(".marker")].find(el=>el.getAttribute("data-location-id")===l.id);
+     if(!marker)return;
+     const surfaceRect=surface.getBoundingClientRect(), markerRect=marker.getBoundingClientRect();
+     const targetX=surfaceRect.left+surfaceRect.width/2;
+     const targetY=surfaceRect.top+surfaceRect.height*.38;
+     const dx=targetX-(markerRect.left+markerRect.width/2);
+     const dy=targetY-(markerRect.top+markerRect.height/2);
+     const limits=getMapPanLimits();
+     const limit=Math.max(limits.x,limits.y);
+     const nextX=clamp(visual.current.x+dx,-limit,limit);
+     const nextY=clamp(visual.current.y+dy,-limit,limit);
+     visual.current={...visual.current,x:nextX,y:nextY};
+     applyMapTransform(nextX,nextY,visual.current.zoom,true);
+     setPan({x:nextX,y:nextY});trackAtlasMetric("location-focus",performance.now()-focusStarted,{location:l.id,linkedEpisodes:getLocationEpisodeIds(l.id).length});
+   }));
+ };
+ const setYearForEpisode=(raw:any)=>{const storyYear=raw?.timelineStart ?? raw?.timelineEnd ?? raw?.airDate?.slice(0,4);if(storyYear)setYear(Number(storyYear))};
+ const selectEpisode=(id:string)=>{clearPeopleFocus();const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;setYearForEpisode(raw);setSelectedEpisode(id);setSelectedLocation(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setView("timeline");setSheet("open")};
+ const focusEpisodeGeography=(raw:any)=>{ const focusStarted=performance.now();
+   const ids=(raw?.locationIds??[]) as string[];
+   if(!ids.length)return;
+   window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
+     const surface=mapSvgRef.current;
+     if(!surface)return;
+     const rect=surface.getBoundingClientRect();
+     const centers=ids.map(id=>surface.querySelector<SVGGElement>(".marker[data-location-id=\""+id+"\"]")).filter(Boolean).map(el=>{
+       const r=(el as SVGGElement).getBoundingClientRect();
+       return {x:r.left+r.width/2,y:r.top+r.height/2};
+     });
+     if(!centers.length)return;
+     const markerX=centers.reduce((sum,p)=>sum+p.x,0)/centers.length;
+     const markerY=centers.reduce((sum,p)=>sum+p.y,0)/centers.length;
+     const targetX=rect.left+rect.width*.5;
+     const targetY=rect.top+rect.height*.38;
+     const limits=getMapPanLimits(); const nextXLimit=limits.x; const nextYLimit=limits.y;
+     const nextX=clamp(visual.current.x+(targetX-markerX),-nextXLimit,nextXLimit);
+     const nextY=clamp(visual.current.y+(targetY-markerY),-nextYLimit,nextYLimit);
+     visual.current={...visual.current,x:nextX,y:nextY};
+     applyMapTransform(nextX,nextY,visual.current.zoom,true);
+     setPan({x:nextX,y:nextY});trackAtlasMetric("episode-geography-focus",performance.now()-focusStarted,{episode:raw?.id||"",locations:ids.length});
+   }));
+ };
+ const selectAtlasEpisode=(id:string)=>{clearPeopleFocus();const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;setYearForEpisode(raw);setSelectedEpisode(id);setSelectedLocation(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setView("map");setSheet("open");focusEpisodeGeography(raw)};
+ const selectUniverseEvent=(event:any)=>{
+   clearPeopleFocus();
+   setYear(Number(event.year)||year);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setView("map");setSheet("open");
+   const locationIds=(event.locationIds??[]) as string[];
+   if(locationIds.length)focusEpisodeGeography({id:event.id,locationIds});
+ };
+ const focusCharacterJourney=()=>{if(!selectedCharacter)return;const ids=getCharacterEpisodeIds(selectedCharacter).flatMap(eid=>(atlasData.episodes.find((e:any)=>e.id===eid) as any)?.locationIds??[]);const unique=[...new Set<string>(ids)];const years=getCharacterEpisodeIds(selectedCharacter).map(eid=>atlasData.episodes.find((e:any)=>e.id===eid) as any).filter(Boolean).flatMap((e:any)=>[Number(e.timelineStart??e.timelineEnd??0)]).filter((n:number)=>Number.isFinite(n)&&n>0);if(years.length)setYear(Math.max(...years));setSeries("ALL");setJourneyMapMode(true);setSelectedConnection(null);setSelectedLocation(null);setSelectedEpisode(null);setView("map");setSheet("open");window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{const surface=mapSvgRef.current;if(!surface)return;const rect=surface.getBoundingClientRect();const centers=unique.map(id=>surface.querySelector<SVGGElement>(".marker[data-location-id=\""+id+"\"]")).filter(Boolean).map(el=>{const r=(el as SVGGElement).getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}});if(!centers.length)return;const markerX=centers.reduce((sum,p)=>sum+p.x,0)/centers.length;const markerY=centers.reduce((sum,p)=>sum+p.y,0)/centers.length;const targetX=rect.left+rect.width*.5;const targetY=rect.top+rect.height*.38;const limits=getMapPanLimits();const nextX=clamp(visual.current.x+(targetX-markerX),-limits.x,limits.x);const nextY=clamp(visual.current.y+(targetY-markerY),-limits.y,limits.y);visual.current={...visual.current,x:nextX,y:nextY};applyMapTransform(nextX,nextY,visual.current.zoom,true);setPan({x:nextX,y:nextY});trackAtlasMetric("character-journey-geography-focus",1,{character:selectedCharacter,locations:unique.length})}))};
+ const focusConnectionGeography=(ids:string[])=>{const usable=ids.filter(id=>{const l=atlasData.locations.find(x=>x.id===id);return !!l&&hasMapCoordinates(l)});if(!usable.length)return;window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{const surface=mapSvgRef.current;if(!surface)return;const rect=surface.getBoundingClientRect();const centers=usable.map(id=>surface.querySelector<SVGGElement>(".marker[data-location-id=\""+id+"\"]")).filter(Boolean).map(el=>{const r=(el as SVGGElement).getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}});if(!centers.length)return;const markerX=centers.reduce((sum,p)=>sum+p.x,0)/centers.length;const markerY=centers.reduce((sum,p)=>sum+p.y,0)/centers.length;const targetX=rect.left+rect.width*.5;const targetY=rect.top+rect.height*.38;const limits=getMapPanLimits();const nextX=clamp(visual.current.x+(targetX-markerX),-limits.x,limits.x);const nextY=clamp(visual.current.y+(targetY-markerY),-limits.y,limits.y);visual.current={...visual.current,x:nextX,y:nextY};applyMapTransform(nextX,nextY,visual.current.zoom,true);setPan({x:nextX,y:nextY});trackAtlasMetric("connection-geography-focus",1,{locations:usable.length})}))};
+ const selectConnection=(id:string)=>{clearPeopleFocus();const connection=atlasData.connections.find((x:any)=>x.id===id) as any;if(!connection)return;const evidence=((atlasData as any).connectionEpisodes?.connections?.[id]??{}) as any;const episodeIds=(evidence.episodeIds??[]) as string[];const years=episodeIds.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).map((e:any)=>Number(e.timelineStart??e.timelineEnd??0)).filter((n:number)=>Number.isFinite(n)&&n>0);if(years.length)setYear(Math.min(...years));setSeries("ALL");setSelectedConnection(id);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setJourneyMapMode(false);setView("map");setSheet("open");const contextIds=[connection.fromId,connection.toId,...episodeIds.flatMap(eid=>(atlasData.episodes.find((e:any)=>e.id===eid) as any)?.locationIds??[])].filter(Boolean) as string[];focusConnectionGeography([...new Set(contextIds)]);};
+
+ const pointerDown=(e:React.PointerEvent<SVGSVGElement>)=>{
+   e.preventDefault();
+   // setPointerCapture retargets this pointer's future events (including pointerup) to
+   // the SVG itself, so a marker's own onPointerUp never fires — hit-test the original
+   // target here, while it still reflects what was actually touched, and resolve the tap
+   // against that on release instead of relying on a handler on the marker.
+   if(pointers.current.size===0){
+     const hit=(e.target as Element).closest?.("[data-location-id]");
+     tapLocation.current=hit?hit.getAttribute("data-location-id"):null;
+   }else{
+     tapLocation.current=null;
+   }
+   e.currentTarget.setPointerCapture?.(e.pointerId);
+   pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(gestureStart.current===null)gestureStart.current=performance.now();
+   if(pointers.current.size===2){
+     const p=[...pointers.current.values()];
+     pinch.current={distance:Math.max(1,Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)),zoom:visual.current.zoom,x:visual.current.x,y:visual.current.y,midX:(p[0].x+p[1].x)/2,midY:(p[0].y+p[1].y)/2};
+     drag.current.moved=true;
+     setIsDragging(true);
+     return;
+   }
+   drag.current={x:e.clientX,y:e.clientY,px:visual.current.x,py:visual.current.y,moved:false};
+   setIsDragging(true);
+ };
+ const pointerMove=(e:React.PointerEvent<SVGSVGElement>)=>{
+   if(!pointers.current.has(e.pointerId))return;
+   e.preventDefault();
+   pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   let nextX=visual.current.x,nextY=visual.current.y,nextZoom=visual.current.zoom;
+   if(pointers.current.size>=2&&pinch.current){
+     const p=[...pointers.current.values()].slice(0,2);
+     const d=Math.max(1,Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y));
+     nextZoom=clamp(pinch.current.zoom*d/pinch.current.distance,1,5);
+     const rect=mapSvgRef.current?.getBoundingClientRect();
+     if(rect){
+       const centerX=rect.left+rect.width/2,centerY=rect.top+rect.height/2;
+       const midX=(p[0].x+p[1].x)/2,midY=(p[0].y+p[1].y)/2;
+       const ratio=nextZoom/pinch.current.zoom;
+       nextX=(midX-centerX)*(1-ratio)+ratio*pinch.current.x;
+       nextY=(midY-centerY)*(1-ratio)+ratio*pinch.current.y;
+       const limits=getMapPanLimits();
+       nextX=clamp(nextX,-limits.x,limits.x);nextY=clamp(nextY,-limits.y,limits.y);
+     }
+     gestureDistance.current+=d;
+     drag.current.moved=true;
+   }else{
+     const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
+     if(Math.abs(dx)+Math.abs(dy)>4)drag.current.moved=true;
+     const limits=getMapPanLimits();
+     nextX=clamp(drag.current.px+dx,-limits.x,limits.x);
+     nextY=clamp(drag.current.py+dy,-limits.y,limits.y);
+   }
+   visual.current={x:nextX,y:nextY,zoom:nextZoom};
+   if(raf.current!==null)cancelAnimationFrame(raf.current);
+   raf.current=requestAnimationFrame(()=>{raf.current=null;applyMapTransform(nextX,nextY,nextZoom,false)});
+ };
+ const pointerUp=(e:React.PointerEvent<SVGSVGElement>)=>{
+   pointers.current.delete(e.pointerId);
+   try{e.currentTarget.releasePointerCapture?.(e.pointerId)}catch{}
+   if(pointers.current.size===1){
+     const p=[...pointers.current.entries()][0];
+     pinch.current=null;
+     drag.current={x:p[1].x,y:p[1].y,px:visual.current.x,py:visual.current.y,moved:true};
+     return;
+   }
+   if(pointers.current.size===0){
+     const duration=gestureStart.current===null?0:performance.now()-gestureStart.current;
+     if(drag.current.moved)trackAtlasMetric("map-gesture",duration,{zoom:visual.current.zoom,distance:gestureDistance.current});
+     trackAtlasMetric("map-gesture-distance",gestureDistance.current,{zoom:visual.current.zoom});
+     gestureStart.current=null;gestureDistance.current=0;
+     pinch.current=null;
+     const final=visual.current;
+     setPan({x:final.x,y:final.y});setZoom(final.zoom);setIsDragging(false);
+     if(!drag.current.moved&&tapLocation.current){
+       const tapped=atlasData.locations.find(x=>x.id===tapLocation.current);
+       if(tapped)selectLocation(tapped);
+     }
+     tapLocation.current=null;
+   }
+ };
+ const wheel=(e:React.WheelEvent<SVGSVGElement>)=>{e.preventDefault();const next=clamp(visual.current.zoom*(e.deltaY<0?1.12:.89),1,5);visual.current.zoom=next;applyMapTransform(visual.current.x,visual.current.y,next,false);setZoom(next)};
+ const goView=(v:View)=>{clearPeopleFocus();setView(v);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setSheet("open")};
+ const mapYearCount=mapLocations.filter(hasMapCoordinates).length;
+ const visibleSeries=series==="ALL"?"THE WORLD":META[series].short;
+
+ return <div className="app">
+  <header className="topbar">
+   <button className="brand" onClick={()=>{setView("map");setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false)}} aria-label="Return to atlas map">
+    <span className="logoMark">◈</span><span><b>TWDU ATLAS</b><small>THE WALKING DEAD UNIVERSE · FIELD GUIDE</small></span>
+   </button>
+   <button className="mobileSearchButton" onClick={()=>setSearchOpen(true)} aria-label="Open atlas search"><Icon name="search"/></button>
+   <div className="searchWrap">
+    <Icon name="search"/>
+    <input value={query} onFocus={()=>setSearchOpen(true)} onChange={e=>{setQuery(e.target.value);setSearchOpen(true)}} placeholder="Search a place, person, episode…" aria-label="Search atlas"/>
+    {query&&<button className="clearSearch" onClick={()=>{setQuery("");setSearchOpen(false)}} aria-label="Clear atlas search"><Icon name="close"/></button>}
+    {searchOpen&&query&&<div className="searchResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}
+   </div>
+   <div className="headerMeta"><span>LIVE ATLAS</span><b>{year}</b><em>{currentEra.short}</em></div>
+  </header>
+
+  <main className="atlasMain">
+   <section className={"map view-"+view+(selectedLocation||selectedEpisode||selectedCharacter||selectedConnection?" detailOpen":"")} aria-label="Interactive Walking Dead Universe map">
+    <div className="mapAtmosphere"/>
+    <div className="mapSurface">
+     <svg ref={mapSvgRef} viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
+      <defs>
+       <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#9fb2b4"/><stop offset=".48" stopColor="#82999d"/><stop offset="1" stopColor="#60777b"/></linearGradient>
+       <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#d8d3c5"/><stop offset=".55" stopColor="#b9b7aa"/><stop offset="1" stopColor="#96988e"/></linearGradient>
+       <radialGradient id="oceanGlow" cx=".5" cy=".38" r=".72"><stop offset="0" stopColor="#c7d4d4" stopOpacity=".55"/><stop offset="1" stopColor="#51696e" stopOpacity=".08"/></radialGradient>
+       <filter id="landShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" floodColor="#26383a" floodOpacity=".28"/></filter>
+       <filter id="paperNoise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="2" stitchTiles="stitch" result="noise"/><feColorMatrix in="noise" type="saturate" values="0" result="gray"/><feComponentTransfer><feFuncA type="table" tableValues="0 .055"/></feComponentTransfer><feBlend in="SourceGraphic" in2="gray" mode="multiply"/></filter>
+      </defs>
+      <MapBackground/>
+      <g ref={mapWorldRef} className="mapWorld">
+      <MapGeography/>
+      {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
+      <g className="markers">{mapLocations.filter(hasMapCoordinates).map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];const isSelected=selectedLocation===l.id;const isEpisodeContext=episodeContextLocationIds.has(l.id);
+ const isConnectionContext=connectionContextLocationIds.has(l.id);
+ const isCharacterJourneyContext=journeyMapMode&&characterJourneyLocationIds.has(l.id);const iconSize=isSelected?20:18;const iconHalf=iconSize/2;return <g key={l.id} data-location-id={l.id} className={"marker"+(isSelected?" selected":"")+(isEpisodeContext?" episodeContext":"")+(isConnectionContext?" connectionContext":"")+(isCharacterJourneyContext?" characterJourneyContext":"")} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}}>
+       <circle className="markerHit" r={(isMobileMap?16:11)/zoom} fill="transparent"/><g className="markerGlyph" transform={`scale(${1/zoom}) translate(${-iconHalf} ${-iconHalf})`} style={{color:meta.color}}><g className="markerIcon" transform={`scale(${iconSize/24})`} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type) as any}/></g><circle className="markerCore" cx={iconHalf} cy={iconHalf} r={1.2} fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||isSelected|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
+      </g>})}</g>
+     </g>
+     </svg>
+    </div>
+
+    <div className="mapChrome mapTopLeft">
+      <div className="locationKicker"><span className="liveDot"/>{visibleSeries}<span className="mapModeTag">MAP</span></div>
+      <strong>{mapYearCount} <small>{MAP_LAYER_LABELS[mapLayer]} · {year}</small></strong>
+    </div>
+
+    <div className="mapChrome mapTopRight">
+      <button onClick={()=>setZoomValue(zoom+.5)} aria-label="Zoom in"><Icon name="plus"/></button>
+      <button onClick={()=>setZoomValue(zoom-.5)} aria-label="Zoom out"><Icon name="minus"/></button>
+      <button onClick={resetMap} aria-label="Reset map"><Icon name="locate"/></button>
+      <div className="zoomBadge">{Math.round(zoom*100)}%</div>
+    </div>
+
+    <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>
+    <div className={`mapLegend ${sheet==="open"?"sheetOpen":""}`} aria-label="Map legend"><small>SERIES LAYER</small>{SERIES_KEYS.map(k=><span key={k}><i style={{background:META[k].color}}/>{META[k].short}</span>)}</div>
+
+    {view==="map"&&!selectedLocation&&!selectedEpisode&&<div className="seriesRail" aria-label="Series filter"><span className="seriesRailHint" aria-hidden="true">SWIPE</span>
+      <button className={series==="ALL"?"active":""} aria-pressed={series==="ALL"} onClick={()=>setSeries("ALL")}>ALL</button>
+      {SERIES_KEYS.map(k=><button key={k} aria-pressed={series===k} className={series===k?"active":""} style={series===k?{"--series":META[k].color} as CSSProperties:{}} onClick={()=>setSeries(k)}>{META[k].short}</button>)}
+    </div>}
+    {view==="map"&&!selectedLocation&&!selectedEpisode&&!selectedCharacter&&<div className="mapLayerRail" aria-label="Map location layer filter">
+      <span className="mapLayerLabel"><Icon name="layers"/> LAYERS</span>
+      {(Object.keys(MAP_LAYER_LABELS) as MapLayer[]).map(layer=><button key={layer} className={mapLayer===layer?"active":""} aria-pressed={mapLayer===layer} onClick={()=>setMapLayer(layer)}>{MAP_LAYER_LABELS[layer]}</button>)}
+    </div>}
+
+    {!isMobileMap&&<AtlasTimelineDock year={year} onYearChange={y=>{setPlaying(false);setYear(y)}} series={series} onEpisode={selectAtlasEpisode} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>}
+
+    {isMobileMap&&view==="map"&&!selectedLocation&&!selectedEpisode&&!selectedCharacter&&<MobileTimeBar year={year} playing={playing} onYearChange={y=>{setPlaying(false);setYear(y)}} onTogglePlaying={()=>setPlaying(v=>!v)}/>}
+
+    {searchOpen&&<div className="searchOverlay"><div className="searchOverlayHead"><b>SEARCH THE ATLAS</b><button onClick={()=>setSearchOpen(false)} aria-label="Close search"><Icon name="close"/></button></div><div className="searchOverlayInput"><Icon name="search"/><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Place, person, episode, faction…"/>{query&&<button onClick={()=>setQuery("")}><Icon name="close"/></button>}</div>{query&&<div className="searchOverlayResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}</div>}
+
+    <section className={`contentPanel ${sheet} ${selectedLoc||selectedEp||selectedCharacter||selectedConnection?"hasDetail":""}`}>
+      <button className="panelGrab" onClick={()=>setSheet(v=>v==="open"?"peek":"open")} aria-expanded={sheet==="open"} aria-label={sheet==="open"?"Collapse information panel":"Expand information panel"}><span/></button>
+      <div className={`panelHeader ${selectedLoc||selectedEp||selectedCharacter||selectedConnection?"detailHeader":""}`}>
+       <div><small>{selectedLoc?SERIES_BY_ID[selectedLoc.seriesId]?.name:selectedEp?SERIES_BY_ID[selectedEp.seriesId]?.name:selectedConnection?"UNIVERSE LINK":view==="map"?"ATLAS":"TWDU ATLAS"}</small><h2>{selectedLoc?.name||selectedEp?.title||selectedConnectionData?.label||((selectedCharacter&&atlasData.characters.find((x:any)=>x.id===selectedCharacter)?.name)||null)||(view==="map"?`${year} · ${mapYearCount} mapped`:view==="timeline"?"Chronology":view==="people"?"People":"Field guide")}</h2></div>
+       {(selectedLoc||selectedEp||selectedCharacter)&&<button className="closePanel" onClick={()=>{setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false)}} aria-label="Close details"><Icon name="close"/></button>}
+      </div>
+      <ErrorBoundary key={selectedLocation||selectedEpisode||selectedCharacter||selectedConnection||view} onReset={()=>{setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setView("map")}}>
+      {selectedLoc?<LocationDetail location={selectedLoc} onEpisode={selectEpisode} onCharacter={selectCharacter} onLocation={selectLocation} onConnection={selectConnection} onCommunity={id=>openPeopleEntity("community",id)} onFaction={id=>openPeopleEntity("faction",id)}/>:selectedEp?<EpisodeDetail episode={selectedEp} onLocation={selectLocation} onEpisode={selectEpisode} onCharacter={selectCharacter} onConnection={selectConnection} onCommunity={id=>openPeopleEntity("community",id)} onFaction={id=>openPeopleEntity("faction",id)}/>:selectedCharacter?<CharacterDetail characterId={selectedCharacter} onEpisode={selectEpisode} onLocation={selectLocation} onCharacter={selectCharacter} onConnection={selectConnection} onJourney={focusCharacterJourney} onCommunity={id=>openPeopleEntity("community",id)} onFaction={id=>openPeopleEntity("faction",id)}/>:selectedConnection?<ConnectionDetail connectionId={selectedConnection} onCharacter={selectCharacter} onLocation={selectLocation} onEpisode={selectEpisode} onConnection={selectConnection} onCommunity={id=>openPeopleEntity("community",id)} onFaction={id=>openPeopleEntity("faction",id)}/>:view==="map"?<MapContent locations={mapLocations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent episodes={episodes} onEpisode={selectEpisode} onUniverseEvent={selectUniverseEvent} onConnections={()=>{setView("people");setSelectedConnection(null);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSheet("open")}} onYearChange={setYear} currentYear={year}/>:view==="people"?<PeopleContent onCharacter={selectCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)selectLocation(l)}} onEpisode={selectEpisode} onConnection={selectConnection} onCommunity={id=>openPeopleEntity("community",id)} onFaction={id=>openPeopleEntity("faction",id)} focusEntity={peopleFocusEntity} onFocusEntity={setPeopleFocusEntity}/>:<GuideContent errors={dataErrors} onView={goView}/>}
+      </ErrorBoundary>
+    </section>
+
+    <nav className="bottomNav" aria-label="Atlas sections">
+      {(["map","timeline","people","guide"] as View[]).map(v=><button key={v} aria-current={view===v?"page":undefined} className={view===v?"active":""} onClick={()=>goView(v)}><Icon name={v==="map"?"map":v==="timeline"?"timeline":v==="people"?"people":"guide"}/><small>{v==="map"?"MAP":v==="timeline"?"TIME":v==="people"?"PEOPLE":"GUIDE"}</small></button>)}
+    </nav>
+   </section>
+  </main>
+ </div>;
+}
+
+function LocationDetail({location,onEpisode,onCharacter,onLocation,onConnection,onCommunity,onFaction}:{location:Location;onEpisode:(id:string)=>void;onCharacter:(id:string)=>void;onLocation:(l:Location)=>void;onConnection:(id:string)=>void;onCommunity:(id:string)=>void;onFaction:(id:string)=>void}){
+ const [runtimeEpisodeIds,setRuntimeEpisodeIds]=useState<string[]|null>(null);
+ useEffect(()=>{let active=true;void getRuntimeEpisodeIds("location",location.id).then(ids=>{if(active)setRuntimeEpisodeIds(ids)});return()=>{active=false}},[location.id]);const meta=SERIES_BY_ID[location.seriesId];const placeMedia=(atlasData as any).media?.places?.[location.id];const placeImage=placeMedia?.image||(atlasData as any).media?.series?.[location.seriesId]?.keyArt;const placeMediaFallback=!placeMedia?.image&&Boolean(placeImage);const curatedIds=runtimeEpisodeIds??getLocationEpisodeIds(location.id);const strictEpisodes=atlasData.episodes.filter((e:any)=>(e.locationIds??[]).includes(location.id));const strictIds=new Set(strictEpisodes.map((e:any)=>e.id));const historicalEpisodes=curatedIds.filter(id=>!strictIds.has(id)).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean) as any[];const episodes=[...strictEpisodes];const events=atlasData.events.filter((e:any)=>e.locationIds?.includes(location.id));return import {memo,useEffect,useMemo,useRef,useState} from "react";
+import {geoEqualEarth,geoPath} from "d3-geo";
+import {feature} from "topojson-client";
+import type {CSSProperties} from "react";
+// @ts-ignore world-atlas ships JSON topology
+import world from "@cublya/world-atlas/countries-50m.json";
+import {atlasData,Location,SeriesKey} from "./data";
+import {validateAtlasData} from "./lib/validateData";
+import {buildChronology,getEpisodeWatchOrder,describeEra} from "./lib/chronology";
+import episodeMedia from "../data/episodeMedia.json";
+import AtlasTimelineDock from "./components/AtlasTimelineDock";
+import MobileTimeBar from "./components/MobileTimeBar";
+import EntityGraphView from "./components/EntityGraphView";
+import MiniTimeline from "./components/MiniTimeline";
+import {useAtlasFocusController} from "./lib/entityFocus";
+import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
+import {getCharacterEpisodeIds,getLocationEpisodeIds,getEpisodeConnectionIds} from "./lib/entityGraph";
+import AtlasIcon,{AtlasIconGlyph} from "./components/AtlasIcon";
+import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
+import {getRuntimeMeta,getRuntimeRelationships,getRuntimeEpisodeIds} from "./lib/runtime";
+import ErrorBoundary from "./components/ErrorBoundary";
+
+type View="map"|"timeline"|"people"|"guide";
+type SearchKind="location"|"character"|"community"|"faction"|"episode";
+
+const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
+ TWD:{id:"twd",name:"The Walking Dead",color:"#e7e7e1",short:"TWD"},
+ FTWD:{id:"ftwd",name:"Fear the Walking Dead",color:"#d4a64b",short:"FEAR"},
+ TALES:{id:"tales",name:"Tales of the Walking Dead",color:"#d68168",short:"TALES"},
+ WB:{id:"wb",name:"World Beyond",color:"#72a9c5",short:"WORLD BEYOND"},
+ OWL:{id:"owl",name:"The Ones Who Live",color:"#d26e6b",short:"TOWL"},
+ DARYL:{id:"daryl",name:"Daryl Dixon",color:"#9d88c8",short:"DARYL"},
+ DEAD:{id:"dead",name:"Dead City",color:"#5bb29b",short:"DEAD CITY"},
+ MORE_TALES:{id:"more-tales",name:"More Tales from the TWDU",color:"#c46b9a",short:"MORE TALES"}
+};
+const SERIES_BY_ID=Object.fromEntries(Object.values(META).map(x=>[x.id,x])) as Record<string,typeof META.TWD>;
+const SERIES_KEYS=Object.keys(META) as SeriesKey[];
+
+type MapLayer="ALL"|"SETTLEMENTS"|"FACILITIES"|"LANDMARKS"|"INFRASTRUCTURE"|"REGIONS";
+const MAP_LAYER_LABELS:Record<MapLayer,string>={ALL:"ALL",SETTLEMENTS:"SETTLEMENTS",FACILITIES:"FACILITIES",LANDMARKS:"LANDMARKS",INFRASTRUCTURE:"INFRASTRUCTURE",REGIONS:"REGIONS"};
+const LOCATION_LAYER_TYPES:Record<Exclude<MapLayer,"ALL">,Set<string>>={
+ SETTLEMENTS:new Set(["city","town","community","stronghold","safe-zone","neighborhood","district","residence","farm","ranch","reservation","outpost","trading-center"]),
+ FACILITIES:new Set(["facility","hospital","prison","medical-facility","military-facility","industrial","hotel","retail","store","restaurant","workshop","store-plaza","church","stadium","bunker"]),
+ LANDMARKS:new Set(["landmark","park","boat","cabin","vineyard","jungle","crash-site"]),
+ INFRASTRUCTURE:new Set(["dam","route","bridge","transit","rail-yard","dock","river","international-border"]),
+ REGIONS:new Set(["region","country","state","territory","county","island"])
+};
+const locationMapLayer=(type:string):MapLayer=>{
+ for(const [layer,types] of Object.entries(LOCATION_LAYER_TYPES) as [Exclude<MapLayer,"ALL">,Set<string>][])if(types.has(type))return layer;
+ return "LANDMARKS";
+};
+const projection=geoEqualEarth().fitExtent([[24,22],[976,578]],{type:"Sphere"});
+const pathGenerator=geoPath(projection);
+const worldCountries:any=feature(world as any,(world as any).objects.countries) as any;
+const worldLand:any=feature(world as any,(world as any).objects.land) as any;
+const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
+const hasMapCoordinates=(location:Location)=>Number.isFinite(Number(location.lat))&&Number.isFinite(Number(location.lng))&&!(Number(location.lat)===0&&Number(location.lng)===0&&location.certainty==="unknown");
+const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
+const onAtlasImageError=(e:React.SyntheticEvent<HTMLImageElement>,source:string)=>{const img=e.currentTarget;if(!source||img.dataset.fallback==="1")return;observeImageError(source);img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;};
+const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
+const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
+// The projection, topology and per-country fill never change after load, so the geo
+// projection math (the expensive part — hundreds of polygon rings through d3-geo) is
+// done once here instead of on every React render. Re-deriving these ~250 path strings
+// per render was the single largest source of jank (250-450ms blocking tasks on every
+// zoom tick, autoplay tick, and navigation).
+const sphereD=pathGenerator({type:"Sphere"}) as string;
+const worldLandD=pathGenerator(worldLand) as string;
+const worldCountryPaths=worldCountries.features.map((c:any,i:number)=>({
+ key:(c.id||c.properties?.name||"country")+"-"+i,
+ d:pathGenerator(c) as string,
+ fill:countryTone(i),
+ name:c.properties?.name||"Country"
+}));
+// Takes no props and its output never changes, so React skips re-rendering (and
+// re-diffing all ~250 country paths) on every unrelated state change elsewhere in App.
+const MapBackground=memo(function MapBackground(){
+ return <>
+  <rect width="1000" height="600" fill="url(#ocean)"/>
+  <rect width="1000" height="600" fill="url(#oceanGlow)"/>
+ </>;
+});
+const MapGeography=memo(function MapGeography(){
+ return <>
+  <g className="graticule"><path d={sphereD}/></g>
+  <path className="landShadow" d={worldLandD} fill="#26383a" opacity=".28"/>
+  <g className="countries">{worldCountryPaths.map((c:any)=><path key={c.key} d={c.d} fill={c.fill}><title>{c.name}</title></path>)}</g>
+ </>;
+});
+const locationIconName=(type:string):"city"|"community"|"facility"|"hospital"|"farm"|"prison"|"boat"|"route"|"region"|"residence"|"ranch"|"dam"|"territory"|"country"|"landmark"|"stronghold"=>{
+ const direct=new Set(["city","community","facility","hospital","farm","prison","boat","route","region","residence","ranch","dam","territory","country","landmark","stronghold"]);
+ if(direct.has(type))return type as any;
+ const aliases:Record<string,string>={
+  town:"community",neighborhood:"community",district:"community","safe-zone":"stronghold","outpost":"stronghold",reservation:"community","trading-center":"community",
+  "medical-facility":"hospital","military-facility":"facility",industrial:"facility",hotel:"facility",retail:"facility",store:"facility",restaurant:"facility",workshop:"facility","store-plaza":"facility",church:"landmark",stadium:"landmark",park:"landmark",cabin:"residence",bunker:"stronghold",ranch:"ranch",vineyard:"farm",jungle:"region","crash-site":"landmark",island:"region",state:"region",county:"region",country:"country",territory:"territory",bridge:"route",transit:"route","rail-yard":"route",dock:"route",river:"route","international-border":"route"
+ };
+ return (aliases[type]||"facility") as any;
+};
+
+function Icon({name,className}:{name:"map"|"timeline"|"people"|"guide"|"plus"|"minus"|"locate"|"search"|"close"|"chevron"|"layers"|"play"|"pause"|"arrow"|"pin";className?:string}) {
+ const paths={
+  map:<><path d="M4 6 9 4l6 2 5-2v14l-5 2-6-2-5 2Z"/><path d="M9 4v14M15 6v14"/></>,
+  timeline:<><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></>,
+  people:<><circle cx="12" cy="8" r="3"/><path d="M6.5 20c.6-3.3 2.4-5 5.5-5s4.9 1.7 5.5 5"/></>,
+  guide:<><path d="M6 4h12v16H6z"/><path d="M9 8h6M9 12h6M9 16h6"/></>,
+  plus:<><path d="M12 5v14M5 12h14"/></>,
+  minus:<path d="M5 12h14"/>,
+  locate:<><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></>,
+  search:<><circle cx="10.5" cy="10.5" r="6"/><path d="m16 16 5 5"/></>,
+  close:<><path d="m6 6 12 12M18 6 6 18"/></>,
+  chevron:<path d="m9 6 6 6-6 6"/>,
+  layers:<><path d="m12 4 8 4-8 4-8-4 8-4Z"/><path d="m4 12 8 4 8-4M4 16l8 4 8-4"/></>,
+  play:<path d="m9 6 10 6-10 6Z"/>,
+  pause:<><path d="M8 6v12M16 6v12"/></>,
+  arrow:<path d="M5 12h13M13 7l5 5-5 5"/>,
+  pin:<><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></>
+ };
+
+ return <svg className={className} viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
+}
+
+export default function App(){
+ const [series,setSeries]=useState<SeriesKey|"ALL">("ALL");
+ const [mapLayer,setMapLayer]=useState<MapLayer>("ALL");
+ const [year,setYear]=useState(2010);
+ const [query,setQuery]=useState("");
+ const {selectedLocation,selectedEpisode,selectedCharacter,selectedConnection,peopleFocusEntity,setSelectedLocation,setSelectedEpisode,setSelectedCharacter,setSelectedConnection,setPeopleFocusEntity,clearFocus}=useAtlasFocusController();
+ const clearPeopleFocus=clearFocus;
+ const [journeyMapMode,setJourneyMapMode]=useState(false);
+ const [view,setView]=useState<View>("map");
+ const [dataErrors,setDataErrors]=useState<string[]>([]);
+ const [zoom,setZoom]=useState(()=>1);
+ const [pan,setPan]=useState(()=>({x:0,y:0}));
+ const [isDragging,setIsDragging]=useState(false);
+ const [sheet,setSheet]=useState<"peek"|"open">("open");
+ const [searchOpen,setSearchOpen]=useState(false);
+ const [timeOpen,setTimeOpen]=useState(false);
+ const [playing,setPlaying]=useState(false);
+ const drag=useRef({x:0,y:0,px:0,py:0,moved:false});
+ const gestureStart=useRef<number|null>(null);
+ const gestureDistance=useRef(0);
+ const pointers=useRef(new Map<number,{x:number;y:number}>());
+ const pinch=useRef<{distance:number;zoom:number;x:number;y:number;midX:number;midY:number}|null>(null);
+ const tapLocation=useRef<string|null>(null);
+ const mapSvgRef=useRef<SVGSVGElement|null>(null);
+ const mapWorldRef=useRef<SVGGElement|null>(null);
+ const raf=useRef<number|null>(null);
+ const visual=useRef({x:0,y:0,zoom:1});
+ const didAutoHome=useRef(false);
+ const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
+ const contentScrollRef=useRef<HTMLDivElement|null>(null);
+ useEffect(()=>{initAtlasPerformance();void getRuntimeMeta().then(meta=>{if(meta)trackAtlasMetric("runtime-ready",1,{version:String(meta.version??"unknown"),episodes:Number(meta.counts?.episodes??0),characters:Number(meta.counts?.characters??0),locations:Number(meta.counts?.locations??0)})})},[]);
+
+ useEffect(()=>setDataErrors(validateAtlasData()),[]);
+ useEffect(()=>{const onResize=()=>setIsMobileMap(window.innerWidth<700);window.addEventListener("resize",onResize);return()=>window.removeEventListener("resize",onResize)},[]);
+ useEffect(()=>{
+   if(view!=="map")return;
+   const frame=window.requestAnimationFrame(()=>{
+     // On a narrow phone/tablet viewport the 1000x600 viewBox gets cropped hard by
+     // preserveAspectRatio="slice" — panning from the raw world center (0,0) leaves
+     // every marker off the visible slice. Home in on the initial location cluster
+     // once, the first time we have real layout to measure against.
+     if(!didAutoHome.current&&mapSvgRef.current?.clientWidth){
+       didAutoHome.current=true;
+       const home=computeHomePan();
+       visual.current={x:home.x,y:home.y,zoom:1};
+       setPan({x:home.x,y:home.y});
+       applyMapTransform(home.x,home.y,1,false);
+       return;
+     }
+     const limits=getMapPanLimits();
+     const nextX=clamp(visual.current.x,-limits.x,limits.x);
+     const nextY=clamp(visual.current.y,-limits.y,limits.y);
+     visual.current={...visual.current,x:nextX,y:nextY};
+     setPan(prev=>prev.x===nextX&&prev.y===nextY?prev:{x:nextX,y:nextY});
+     applyMapTransform(nextX,nextY,visual.current.zoom,true);
+   });
+   return()=>window.cancelAnimationFrame(frame);
+ },[view,isMobileMap]);
+ const applyMapTransform=(x:number,y:number,z:number,_animate=false)=>{
+   const svg=mapSvgRef.current;
+   const worldGroup=mapWorldRef.current;
+   if(!svg||!worldGroup)return;
+   const baseScale=Math.max(svg.clientWidth/1000,svg.clientHeight/600);
+   if(!Number.isFinite(baseScale)||baseScale<=0)return;
+   const cx=500,cy=300,px=x/baseScale,py=y/baseScale;
+   worldGroup.setAttribute("transform","translate("+(cx+px)+" "+(cy+py)+") scale("+z+") translate("+(-cx)+" "+(-cy)+")");
+ };
+ useEffect(()=>{visual.current={x:pan.x,y:pan.y,zoom};applyMapTransform(pan.x,pan.y,zoom,true);},[pan.x,pan.y,zoom]);
+ useEffect(()=>{if(view!=="map")setSheet("open");requestAnimationFrame(()=>contentScrollRef.current?.scrollTo({top:0,left:0,behavior:"auto"}));},[view,selectedLocation,selectedEpisode,selectedCharacter,selectedConnection]);
  useEffect(()=>{
    if(!playing)return;
    const id=window.setInterval(()=>setYear(y=>y>=2028?2010:y+1),900);
