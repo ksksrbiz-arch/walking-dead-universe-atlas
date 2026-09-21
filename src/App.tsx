@@ -503,27 +503,7 @@ export default function App(){
 
 function LocationDetail({location,onEpisode,onCharacter,onLocation,onConnection,onCommunity,onFaction}:{location:Location;onEpisode:(id:string)=>void;onCharacter:(id:string)=>void;onLocation:(l:Location)=>void;onConnection:(id:string)=>void;onCommunity:(id:string)=>void;onFaction:(id:string)=>void}){
  const [runtimeEpisodeIds,setRuntimeEpisodeIds]=useState<string[]|null>(null);
- useEffect(()=>{let active=true;void getRuntimeEpisodeIds("location",location.id).then(ids=>{if(active)setRuntimeEpisodeIds(ids)});return()=>{active=false}},[location.id]);const meta=SERIES_BY_ID[location.seriesId];const placeMedia=(atlasData as any).media?.places?.[location.id];const placeImage=placeMedia?.image||(atlasData as any).media?.series?.[location.seriesId]?.keyArt;const placeMediaFallback=!placeMedia?.image&&Boolean(placeImage);const curatedIds=runtimeEpisodeIds??getLocationEpisodeIds(location.id);const strictEpisodes=atlasData.episodes.filter((e:any)=>(e.locationIds??[]).includes(location.id));const strictIds=new Set(strictEpisodes.map((e:any)=>e.id));const historicalEpisodes=curatedIds.filter(id=>!strictIds.has(id)).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean) as any[];const episodes=[...strictEpisodes];const events=atlasData.events.filter((e:any)=>e.locationIds?.includes(location.id));return import {memo,useEffect,useMemo,useRef,useState} from "react";
-import {geoEqualEarth,geoPath} from "d3-geo";
-import {feature} from "topojson-client";
-import type {CSSProperties} from "react";
-// @ts-ignore world-atlas ships JSON topology
-import world from "@cublya/world-atlas/countries-50m.json";
-import {atlasData,Location,SeriesKey} from "./data";
-import {validateAtlasData} from "./lib/validateData";
-import {buildChronology,getEpisodeWatchOrder,describeEra} from "./lib/chronology";
-import episodeMedia from "../data/episodeMedia.json";
-import AtlasTimelineDock from "./components/AtlasTimelineDock";
-import MobileTimeBar from "./components/MobileTimeBar";
-import EntityGraphView from "./components/EntityGraphView";
-import MiniTimeline from "./components/MiniTimeline";
-import {useAtlasFocusController} from "./lib/entityFocus";
-import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
-import {getCharacterEpisodeIds,getLocationEpisodeIds,getEpisodeConnectionIds} from "./lib/entityGraph";
-import AtlasIcon,{AtlasIconGlyph} from "./components/AtlasIcon";
-import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
-import {getRuntimeMeta,getRuntimeRelationships,getRuntimeEpisodeIds} from "./lib/runtime";
-import ErrorBoundary from "./components/ErrorBoundary";
+ useEffect(()=>{let active=true;void getRuntimeEpisodeIds("location",location.id).then(ids=>{if(active)setRuntimeEpisodeIds(ids)});return()=>{active=false}},[location.id]);const meta=SERIES_BY_ID[location.seriesId];const placeMedia=(atlasData as any).media?.places?.[location.id];const placeImage=placeMedia?.image||(atlasData as any).media?.series?.[location.seriesId]?.keyArt;const placeMediaFallback=!placeMedia?.image&&Boolean(placeImage);const curatedIds=runtimeEpisodeIds??getLocationEpisodeIds(location.id);const strictEpisodes=atlasData.episodes.filter((e:any)=>(e.locationIds??[]).includes(location.id));const strictIds=new Set(strictEpisodes.map((e:any)=>e.id));const historicalEpisodes=curatedIds.filter(id=>!strictIds.has(id)).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean) as any[];const episodes=[...strictEpisodes];const events=atlasData.events.filter((e:any)=>e.locationIds?.includes(location.id));
 
 type View="map"|"timeline"|"people"|"guide";
 type SearchKind="location"|"character"|"community"|"faction"|"episode";
