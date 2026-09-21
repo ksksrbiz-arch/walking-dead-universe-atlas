@@ -749,13 +749,31 @@ function PeopleContent({onCharacter,onLocation,onEpisode,onConnection,onCommunit
  const focusEntity=focusEntityProp??null;
  const q=query.trim().toLowerCase();
  const characters=atlasData.characters.filter((c:any)=>!q||c.name.toLowerCase().includes(q));
+ // The character grid otherwise carries zero chronology cues — a visitor has to open a
+ // card to learn even roughly where in universe time someone belongs. Deriving each
+ // character's earliest anchored episode year once (buildChronology is memoized, so
+ // this is cheap) lets the grid itself carry a "Time" cue, consistent with the rest of
+ // the app's Time -> Story -> Geography loop.
+ const characterFirstYear=useMemo(()=>{
+  const map=new Map<string,number>();
+  for(const item of buildChronology()){
+   if(item.kind!=="episode")continue;
+   const y=Number(item.start);
+   if(!Number.isFinite(y)||y<=0)continue;
+   for(const id of item.characterIds??[]){
+    const prev=map.get(id);
+    if(prev===undefined||y<prev)map.set(id,y);
+   }
+  }
+  return map;
+ },[]);
  return <div className="contentScroll">
   <div className="peopleHero"><div><small>PEOPLE INDEX</small><b>{atlasData.characters.length} tracked characters</b></div><span>{atlasData.connections.length} documented connections</span></div>
   <div className="peopleIntro"><small>START WITH A PERSON</small><p>Select a character to follow their episode journey, geography, and documented links across the universe.</p></div>
   <div className="peopleSearch"><span>SEARCH PEOPLE</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Find a character…" aria-label="Search characters"/></div>
   <EntityGraphView heading="EXPLORE CONNECTIONS" onCharacter={onCharacter} onLocation={onLocation} onEpisode={onEpisode} onConnection={onConnection} onCommunity={onCommunity} onFaction={onFaction}/>
   <div className="sectionTitle">CHARACTERS <span>{characters.length} OF {atlasData.characters.length}</span></div>
-  <div className="peopleGrid">{characters.map((c:any)=>{const cm=(atlasData as any).media?.characters?.[c.id];return <button className="entityCard characterCard" key={c.id} onClick={()=>onCharacter(c.id)}>{(()=>{const image=cm?.image||(atlasData as any).media?.series?.[c.seriesIds?.[0]]?.keyArt;return image?<img src={atlasImageUrl(image,640)} onError={e=>onAtlasImageError(e,image)} srcSet={atlasImageSrcSet(image,[320,480,640])} sizes="45vw" loading="lazy" decoding="async" alt="" className="characterArt"/>:null})()}<span><small>CHARACTER</small><b>{c.name}</b><em>{(c.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")||c.certainty}</em></span><Icon name="chevron"/></button>})}</div>
+  <div className="peopleGrid">{characters.map((c:any)=>{const cm=(atlasData as any).media?.characters?.[c.id];const firstYear=characterFirstYear.get(c.id);return <button className="entityCard characterCard" key={c.id} onClick={()=>onCharacter(c.id)}>{(()=>{const image=cm?.image||(atlasData as any).media?.series?.[c.seriesIds?.[0]]?.keyArt;return image?<img src={atlasImageUrl(image,640)} onError={e=>onAtlasImageError(e,image)} srcSet={atlasImageSrcSet(image,[320,480,640])} sizes="45vw" loading="lazy" decoding="async" alt="" className="characterArt"/>:null})()}<span><small>CHARACTER{firstYear!=null&&<em className="characterFirstYear">{firstYear}</em>}</small><b>{c.name}</b><em>{(c.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")||c.certainty}</em></span><Icon name="chevron"/></button>})}</div>
   {!characters.length&&<p className="muted">No tracked character matches "{query}".</p>}
   <div className="sectionTitle">FACTIONS <span>{atlasData.factions.length}</span></div><div className="miniTags">{atlasData.factions.map((f:any)=><button className="entityTagButton" key={f.id} onClick={()=>onFaction(f.id)}>{f.name}</button>)}</div><div className="sectionTitle">COMMUNITIES <span>{atlasData.communities.length}</span></div><div className="miniTags">{atlasData.communities.map((c:any)=><button className="entityTagButton" key={c.id} onClick={()=>onCommunity(c.id)}>{c.name}</button>)}</div>{focusEntity&&<><button className="entityFocusClear" onClick={()=>onFocusEntity(null)}>CLEAR ENTITY FOCUS</button><EntityGraphView heading="ENTITY RELATIONSHIPS" root={focusEntity} onCharacter={onCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)onLocation(l)}} onEpisode={onEpisode} onConnection={onConnection} onCommunity={onCommunity} onFaction={onFaction}/></>}
   <div className="sectionTitle">DOCUMENTED CONNECTIONS <span>{atlasData.connections.length}</span></div><div className="timelineList connectionDirectory">{atlasData.connections.map((c:any)=>{const name=(id:string)=>{const pools:any=[atlasData.characters,atlasData.locations,atlasData.communities,atlasData.factions,atlasData.series,atlasData.connections];for(const pool of pools){const item=pool.find((x:any)=>x.id===id);if(item)return item.name||item.title||item.label||id}return id};return <article key={c.id}><strong>↔</strong><div><small>{c.type.replaceAll("-"," ").toUpperCase()}</small><button className="connectionFocusButton" onClick={()=>onConnection(c.id)}><b>{c.label}</b><Icon name="chevron"/></button><span>{name(c.fromId)} → {name(c.toId)} · {c.certainty}</span></div></article>})}</div>
