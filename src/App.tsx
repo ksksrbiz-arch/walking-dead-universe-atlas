@@ -55,8 +55,6 @@ const worldLand:any=feature(world as any,(world as any).objects.land) as any;
 const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
 const hasMapCoordinates=(location:Location)=>Number.isFinite(Number(location.lat))&&Number.isFinite(Number(location.lng))&&!(Number(location.lat)===0&&Number(location.lng)===0&&location.certainty==="unknown");
 const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
-const MOBILE_HOME_X=0;
-const MOBILE_HOME_Y=0;
 const onAtlasImageError=(e:React.SyntheticEvent<HTMLImageElement>,source:string)=>{const img=e.currentTarget;if(!source||img.dataset.fallback==="1")return;observeImageError(source);img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;};
 const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
 const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
@@ -131,7 +129,7 @@ export default function App(){
  const [view,setView]=useState<View>("map");
  const [dataErrors,setDataErrors]=useState<string[]>([]);
  const [zoom,setZoom]=useState(()=>1);
- const [pan,setPan]=useState(()=>({x:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_X:0,y:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_Y:0}));
+ const [pan,setPan]=useState(()=>({x:0,y:0}));
  const [isDragging,setIsDragging]=useState(false);
  const [sheet,setSheet]=useState<"peek"|"open">("open");
  const [searchOpen,setSearchOpen]=useState(false);
@@ -142,10 +140,12 @@ export default function App(){
  const gestureDistance=useRef(0);
  const pointers=useRef(new Map<number,{x:number;y:number}>());
  const pinch=useRef<{distance:number;zoom:number;x:number;y:number;midX:number;midY:number}|null>(null);
+ const tapLocation=useRef<string|null>(null);
  const mapSvgRef=useRef<SVGSVGElement|null>(null);
  const mapWorldRef=useRef<SVGGElement|null>(null);
  const raf=useRef<number|null>(null);
- const visual=useRef({x:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_X:0,y:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_Y:0,zoom:1});
+ const visual=useRef({x:0,y:0,zoom:1});
+ const didAutoHome=useRef(false);
  const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
  useEffect(()=>{initAtlasPerformance();void getRuntimeMeta().then(meta=>{if(meta)trackAtlasMetric("runtime-ready",1,{version:String(meta.version??"unknown"),episodes:Number(meta.counts?.episodes??0),characters:Number(meta.counts?.characters??0),locations:Number(meta.counts?.locations??0)})})},[]);
 
@@ -154,6 +154,18 @@ export default function App(){
  useEffect(()=>{
    if(view!=="map")return;
    const frame=window.requestAnimationFrame(()=>{
+     // On a narrow phone/tablet viewport the 1000x600 viewBox gets cropped hard by
+     // preserveAspectRatio="slice" — panning from the raw world center (0,0) leaves
+     // every marker off the visible slice. Home in on the initial location cluster
+     // once, the first time we have real layout to measure against.
+     if(!didAutoHome.current&&mapSvgRef.current?.clientWidth){
+       didAutoHome.current=true;
+       const home=computeHomePan();
+       visual.current={x:home.x,y:home.y,zoom:1};
+       setPan({x:home.x,y:home.y});
+       applyMapTransform(home.x,home.y,1,false);
+       return;
+     }
      const limits=getMapPanLimits();
      const nextX=clamp(visual.current.x,-limits.x,limits.x);
      const nextY=clamp(visual.current.y,-limits.y,limits.y);
@@ -223,7 +235,31 @@ export default function App(){
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
  const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,baseScale=Math.max(w/1000,h/600),z=visual.current.zoom;const worldW=952*baseScale*z,worldH=556*baseScale*z;return {x:Math.max(0,(worldW-w)/2),y:Math.max(0,(worldH-h)/2)}};
- const resetMap=()=>{const homeX=isMobileMap?MOBILE_HOME_X:0;const homeY=isMobileMap?MOBILE_HOME_Y:0;visual.current={x:homeX,y:homeY,zoom:1};setZoom(1);setPan({x:homeX,y:homeY});trackAtlasMetric("map-reset",1,{mobile:isMobileMap});};
+ // "Home" is the initial (present-day) location cluster centered in the viewport, not
+ // the raw world/viewBox center — on a narrow phone slice the world center is empty
+ // ocean, well off from where the story's early locations (Georgia) actually sit.
+ const computeHomePan=()=>{
+   const el=mapSvgRef.current;
+   if(!el)return {x:0,y:0};
+   const surfaceRect=el.getBoundingClientRect();
+   const w=el.clientWidth,h=el.clientHeight;
+   if(!w||!h)return {x:0,y:0};
+   const scale=Math.max(w/1000,h/600);
+   const pts=atlasData.locations.filter(l=>l.year<=2010).map(l=>project(l.lat,l.lng));
+   if(!pts.length)return {x:0,y:0};
+   const cx=pts.reduce((s,p)=>s+p.x,0)/pts.length;
+   const cy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
+   // A permanently-open content sidebar (tablet/desktop widths) can cover the right
+   // portion of the map — center within whatever's actually unobstructed, or "home"
+   // can land the story's starting cluster right behind the panel.
+   const panelRect=document.querySelector(".contentPanel")?.getBoundingClientRect();
+   const visibleW=panelRect&&panelRect.width>100&&panelRect.left<surfaceRect.right
+     ?Math.max(160,panelRect.left-surfaceRect.left)
+     :w;
+   const limits=getMapPanLimits();
+   return {x:clamp(visibleW/2-w/2-(cx-500)*scale,-limits.x,limits.x),y:clamp((300-cy)*scale,-limits.y,limits.y)};
+ };
+ const resetMap=()=>{const home=computeHomePan();visual.current={x:home.x,y:home.y,zoom:1};setZoom(1);setPan({x:home.x,y:home.y});trackAtlasMetric("map-reset",1,{mobile:isMobileMap});};
  const openPeopleEntity=(kind:"community"|"faction",id:string)=>{
    setPeopleFocusEntity(kind+":"+id);setView("people");setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setSheet("open");
  };
@@ -289,6 +325,16 @@ export default function App(){
 
  const pointerDown=(e:React.PointerEvent<SVGSVGElement>)=>{
    e.preventDefault();
+   // setPointerCapture retargets this pointer's future events (including pointerup) to
+   // the SVG itself, so a marker's own onPointerUp never fires — hit-test the original
+   // target here, while it still reflects what was actually touched, and resolve the tap
+   // against that on release instead of relying on a handler on the marker.
+   if(pointers.current.size===0){
+     const hit=(e.target as Element).closest?.("[data-location-id]");
+     tapLocation.current=hit?hit.getAttribute("data-location-id"):null;
+   }else{
+     tapLocation.current=null;
+   }
    e.currentTarget.setPointerCapture?.(e.pointerId);
    pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});
    if(gestureStart.current===null)gestureStart.current=performance.now();
@@ -351,6 +397,11 @@ export default function App(){
      pinch.current=null;
      const final=visual.current;
      setPan({x:final.x,y:final.y});setZoom(final.zoom);setIsDragging(false);
+     if(!drag.current.moved&&tapLocation.current){
+       const tapped=atlasData.locations.find(x=>x.id===tapLocation.current);
+       if(tapped)selectLocation(tapped);
+     }
+     tapLocation.current=null;
    }
  };
  const wheel=(e:React.WheelEvent<SVGSVGElement>)=>{e.preventDefault();const next=clamp(visual.current.zoom*(e.deltaY<0?1.12:.89),1,5);visual.current.zoom=next;applyMapTransform(visual.current.x,visual.current.y,next,false);setZoom(next)};
@@ -391,7 +442,7 @@ export default function App(){
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       <g className="markers">{mapLocations.filter(hasMapCoordinates).map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];const isSelected=selectedLocation===l.id;const isEpisodeContext=episodeContextLocationIds.has(l.id);
  const isConnectionContext=connectionContextLocationIds.has(l.id);
- const isCharacterJourneyContext=journeyMapMode&&characterJourneyLocationIds.has(l.id);const iconSize=isSelected?20:18;const iconHalf=iconSize/2;return <g key={l.id} data-location-id={l.id} className={"marker"+(isSelected?" selected":"")+(isEpisodeContext?" episodeContext":"")+(isConnectionContext?" connectionContext":"")+(isCharacterJourneyContext?" characterJourneyContext":"")} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}} onPointerUp={e=>{if(!drag.current.moved){e.stopPropagation();selectLocation(l)}}}>
+ const isCharacterJourneyContext=journeyMapMode&&characterJourneyLocationIds.has(l.id);const iconSize=isSelected?20:18;const iconHalf=iconSize/2;return <g key={l.id} data-location-id={l.id} className={"marker"+(isSelected?" selected":"")+(isEpisodeContext?" episodeContext":"")+(isConnectionContext?" connectionContext":"")+(isCharacterJourneyContext?" characterJourneyContext":"")} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}}>
        <circle className="markerHit" r={(isMobileMap?16:11)/zoom} fill="transparent"/><g className="markerGlyph" transform={`scale(${1/zoom}) translate(${-iconHalf} ${-iconHalf})`} style={{color:meta.color}}><g className="markerIcon" transform={`scale(${iconSize/24})`} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type) as any}/></g><circle className="markerCore" cx={iconHalf} cy={iconHalf} r={1.2} fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||isSelected|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
       </g>})}</g>
      </g>
