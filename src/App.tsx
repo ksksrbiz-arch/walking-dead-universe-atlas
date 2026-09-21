@@ -584,26 +584,72 @@ function TimelineContent({episodes,onEpisode,onUniverseEvent,onConnections,onYea
 }
 
 function ChronologyMatrix({year,onYearChange,series,onEpisode,onConnections}:{year:number;onYearChange:(year:number)=>void;series:SeriesKey|"ALL";onEpisode:(id:string)=>void;onConnections:()=>void}){
- const [scale,setScale]=useState(1);
- const [compact,setCompact]=useState(false);
+ const [mode,setMode]=useState<"overview"|"focus">("overview");
  const all=useMemo(()=>buildChronology(),[]);
- const visible=useMemo(()=>all.filter(x=>series==="ALL"||x.seriesId===META[series].id),[all,series]);
- const lanes=useMemo(()=>Object.keys(META).filter(k=>all.some(x=>x.seriesId===META[k as SeriesKey].id)) as SeriesKey[],[all]);
  const min=2010,max=2028;
+ const focusYear=Math.round(year);
  const pos=(y:number)=>((Math.max(min,Math.min(max,y))-min)/(max-min))*100;
- const active=useMemo(()=>new Set(visible.filter(x=>x.start<=year&&x.end>=year).map(x=>x.id)),[visible,year]);
- return <section className={"chronologyMatrix"+(compact?" compact":"")} aria-label="Interactive universe chronology map">
-  <header className="chronologyMatrixHead">
-   <div className="chronologyMatrixTitle"><span className="chronologyPulse"/><div><small>CHRONOLOGY ATLAS</small><h3>Story time, mapped across the universe</h3><p>{visible.length} records · cursor {year}</p></div></div>
-   <div className="chronologyMatrixTools"><button onClick={()=>setCompact(v=>!v)}>{compact?"EXPAND":"COMPACT"}</button><button onClick={()=>setScale(s=>Math.max(1,s/1.2))} aria-label="Zoom chronology out">−</button><output>{Math.round(scale*100)}%</output><button onClick={()=>setScale(s=>Math.min(2.4,s*1.2))} aria-label="Zoom chronology in">+</button><button className="matrixLinks" onClick={onConnections}>LINK GRAPH</button></div>
+ const lanes=useMemo(()=>Object.keys(META).filter(k=>all.some(x=>x.seriesId===META[k as SeriesKey].id)) as SeriesKey[],[all]);
+ const visible=useMemo(()=>all.filter(x=>series==="ALL"||x.seriesId===META[series].id),[all,series]);
+ const byLaneYear=useMemo(()=>{
+  const result=new Map<SeriesKey,Map<number,{count:number;episodes:string[];events:string[]}>>();
+  for(const key of lanes){
+   const map=new Map<number,{count:number;episodes:string[];events:string[]}>();
+   for(const item of visible.filter(x=>x.seriesId===META[key].id)){
+    const startYear=Math.round(item.start),endYear=Math.round(item.end);
+    for(let y=Math.max(min,startYear);y<=Math.min(max,endYear);y++){
+     const cell=map.get(y)||{count:0,episodes:[],events:[]};
+     cell.count++;
+     if(item.kind==="episode")cell.episodes.push(item.id);else cell.events.push(item.id);
+     map.set(y,cell);
+    }
+   }
+   result.set(key,map);
+  }
+  return result;
+ },[visible,lanes]);
+ const focusItems=useMemo(()=>visible.filter(x=>x.start<=focusYear&&x.end>=focusYear).sort((a,b)=>a.start-b.start||a.title.localeCompare(b.title)),[visible,focusYear]);
+ const focusEpisodes=focusItems.filter(x=>x.kind==="episode");
+ const focusEvents=focusItems.filter(x=>x.kind!=="episode");
+ const maxCount=useMemo(()=>Math.max(1,...[...byLaneYear.values()].flatMap(m=>[...m.values()].map(v=>v.count))),[byLaneYear]);
+ const jump=(y:number)=>onYearChange(Math.max(min,Math.min(max,y)));
+ return <section className={"chronologyAtlas"+(mode==="focus"?" focusMode":"")} aria-label="Universe chronology atlas">
+  <header className="chronologyAtlasHead">
+   <div className="chronologyAtlasTitle"><span className="chronologyAtlasLive"/><div><small>CHRONOLOGY ATLAS</small><h3>See the whole universe at once</h3><p>{visible.length} chronology records · selected year <b>{focusYear}</b></p></div></div>
+   <div className="chronologyAtlasTools"><button className="chronologyModeButton" onClick={()=>setMode(m=>m==="overview"?"focus":"overview")}>{mode==="overview"?"YEAR FOCUS":"OVERVIEW"}</button><button onClick={()=>jump(focusYear-1)} aria-label="Previous year">−</button><output>{focusYear}</output><button onClick={()=>jump(focusYear+1)} aria-label="Next year">+</button><button className="matrixLinks" onClick={onConnections}>LINKS</button></div>
   </header>
-  <div className="chronologyMatrixBody"><div className="chronologyMatrixCanvas" style={{width:(scale*100)+"%"}}>
-   <div className="chronologyYears">{[2010,2012,2014,2016,2018,2020,2022,2024,2026,2028].map(y=><button key={y} style={{left:pos(y)+"%"}} onClick={()=>onYearChange(y)}>{y}</button>)}</div>
-   <div className="chronologyGrid">{lanes.map(key=><div className="chronologyLane" key={key}><button className="chronologyLaneLabel" style={{"--lane":META[key].color} as CSSProperties}>{META[key].short}</button><div className="chronologyTrack"><div className="chronologyGridline"/>{visible.filter(x=>x.seriesId===META[key].id).map(item=>{const left=pos(item.start),width=Math.max(.35,pos(item.end)-left),selected=active.has(item.id);return <button key={item.kind+":"+item.id} className={"chronologyBar "+(selected?"active":"")} style={{left:left+"%",width:Math.min(24,Math.max(width,item.kind==="event"?.7:1))+"%","--bar":META[key].color} as CSSProperties} title={item.title+" · "+item.start+(item.end!==item.start?"–"+item.end:"")} onClick={()=>item.kind==="episode"?onEpisode(item.id):onYearChange(item.start)}><span>{item.kind==="episode"?item.title:"EVENT"}</span></button>})}</div></div>)}<div className="chronologyCursor" style={{left:pos(year)+"%"}}><span>{year}</span></div></div>
-  </div></div>
-  <footer className="chronologyMatrixFoot"><div><b>{year}</b><span>UNIVERSE YEAR</span></div><input type="range" min={min} max={max} step=".01" value={year} onChange={e=>onYearChange(Number(e.target.value))} aria-label="Chronology year"/><div className="chronologyLegend"><i/><span>active</span><i className="future"/><span>inactive</span></div></footer>
- </section>
+  <div className="chronologyAtlasRead"><span>READING THE ATLAS</span><b>Each block shows how much story activity exists in that series during a year.</b><small>Tap any year column to move the global timeline. Brighter blocks indicate more recorded chronology.</small></div>
+  <div className="chronologyAtlasChartWrap">
+   <div className="chronologyAtlasChart">
+    <div className="chronologyAtlasAxis"><div className="chronologyAtlasAxisLabel">SERIES</div>{[2010,2012,2014,2016,2018,2020,2022,2024,2026,2028].map(y=><button key={y} className={focusYear===y?"current":""} style={{left:pos(y)+"%"}} onClick={()=>jump(y)}>{y}</button>)}</div>
+    <div className="chronologyAtlasGrid">
+     {lanes.map(key=>{
+      const lane=byLaneYear.get(key)!;
+      return <div className="chronologyAtlasLane" key={key}>
+       <div className="chronologyAtlasLaneName"><i style={{background:META[key].color}}/><span>{META[key].short}</span></div>
+       <div className="chronologyAtlasCells">
+        {Array.from({length:max-min+1},(_,i)=>min+i).map(y=>{
+         const cell=lane.get(y);
+         const selected=y===focusYear;
+         const intensity=cell?Math.max(.18,Math.min(1,.3+.7*(cell.count/maxCount))):0;
+         const label=cell?META[key].name+" · "+y+" · "+cell.count+" record"+(cell.count===1?"":"s"):"No recorded chronology in "+y;
+         return <button key={y} className={"chronologyYearCell"+(selected?" selected":"")+(cell?" hasData":"")} style={{"--intensity":String(intensity),"--bar":META[key].color} as CSSProperties} title={label} aria-label={label} onClick={()=>jump(y)}>{cell&&<><span className="chronologyCellBar"/>{cell.count>1&&<b>{cell.count}</b>}</>}</button>;
+        })}
+       </div>
+      </div>;
+     })}
+     <div className="chronologyAtlasCursor" style={{left:pos(focusYear)+"%"}}><span>{focusYear}</span></div>
+    </div>
+   </div>
+  </div>
+  <div className="chronologyAtlasControls"><div><b>{focusYear}</b><span>UNIVERSE YEAR</span></div><input type="range" min={min} max={max} step="1" value={focusYear} onChange={e=>jump(Number(e.target.value))} aria-label="Select universe year"/><button onClick={()=>{const next=focusYear>=max?min:focusYear+1;jump(next)}}>{focusYear>=max?"START":"NEXT YEAR"} <span>→</span></button></div>
+  <div className="chronologyAtlasFocus">
+   <div className="chronologyAtlasFocusHead"><div><small>YEAR FOCUS</small><b>{focusYear}</b></div><span>{focusEpisodes.length} episodes · {focusEvents.length} events</span></div>
+   {(focusEpisodes.length||focusEvents.length)?<div className="chronologyFocusList">{focusItems.slice(0,8).map(item=><button key={item.kind+":"+item.id} onClick={()=>item.kind==="episode"?onEpisode(item.id):jump(item.start)}><strong>{META[(Object.keys(META) as SeriesKey[]).find(k=>META[k].id===item.seriesId) as SeriesKey]?.short||item.seriesId}</strong><span><small>{item.kind==="episode"?"EPISODE":"EVENT"}</small><b>{item.title}</b></span><i>{Math.round(item.start)}{item.end!==item.start?"–"+Math.round(item.end):""}</i></button>)}{focusItems.length>8&&<small className="chronologyFocusMore">+{focusItems.length-8} more records in the episode list below.</small>}</div>:<p className="muted">No chronology records overlap this year.</p>}
+  </div>
+ </section>;
 }
+
 function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnection,onJourney,onCommunity,onFaction}:{characterId:string;onEpisode:(id:string)=>void;onLocation:(l:Location)=>void;onCharacter:(id:string)=>void;onConnection:(id:string)=>void;onJourney:()=>void;onCommunity:(id:string)=>void;onFaction:(id:string)=>void}){
  const [runtimeEpisodeIds,setRuntimeEpisodeIds]=useState<string[]|null>(null);
  useEffect(()=>{let active=true;void getRuntimeEpisodeIds("character",characterId).then(ids=>{if(active)setRuntimeEpisodeIds(ids)});return()=>{active=false}},[characterId]);
