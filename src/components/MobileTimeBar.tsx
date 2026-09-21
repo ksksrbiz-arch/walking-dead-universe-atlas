@@ -1,6 +1,6 @@
 import {useMemo,useState} from "react";
 import type {CSSProperties} from "react";
-import {describeEra} from "../lib/chronology";
+import {describeEra,UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR,yearToPercent} from "../lib/chronology";
 
 type Props={
   year:number;
@@ -9,14 +9,14 @@ type Props={
   onTogglePlaying:()=>void;
 };
 
-const MIN_YEAR=2010;
-const MAX_YEAR=2028;
+const MIN_YEAR=UNIVERSE_MIN_YEAR;
+const MAX_YEAR=UNIVERSE_MAX_YEAR;
 const SPAN=MAX_YEAR-MIN_YEAR;
 const TICKS=[2010,2014,2018,2022,2028];
 
 export default function MobileTimeBar({year,playing,onYearChange,onTogglePlaying}:Props){
   const [expanded,setExpanded]=useState(false);
-  const percent=((year-MIN_YEAR)/SPAN)*100;
+  const percent=yearToPercent(year);
   const era=useMemo(()=>describeEra(year),[year]);
   return <section className={"mobileTimeBar "+(expanded?"expanded":"")} aria-label="Universe time control">
     <button className="mobileTimeSummary" onClick={()=>setExpanded(v=>!v)} aria-expanded={expanded}>

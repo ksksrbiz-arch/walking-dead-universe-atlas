@@ -1,7 +1,7 @@
 import {memo,useMemo,useRef} from "react";
 import type {CSSProperties} from "react";
 import {atlasData,SeriesKey} from "../data";
-import {buildChronology,describeEra} from "../lib/chronology";
+import {buildChronology,describeEra,UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR,yearToPercent} from "../lib/chronology";
 
 const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
  TWD:{id:"twd",name:"The Walking Dead",color:"#e7e7e1",short:"TWD"},
@@ -14,9 +14,9 @@ const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
  MORE_TALES:{id:"more-tales",name:"More Tales from the TWDU",color:"#c46b9a",short:"MORE TALES"}
 };
 const ORDER:SeriesKey[]=["TWD","FTWD","TALES","WB","OWL","DARYL","DEAD","MORE_TALES"];
-const MIN_YEAR=2010;
-const MAX_YEAR=2028;
-const pos=(value:number)=>((Math.max(MIN_YEAR,Math.min(MAX_YEAR,value))-MIN_YEAR)/(MAX_YEAR-MIN_YEAR))*100;
+const MIN_YEAR=UNIVERSE_MIN_YEAR;
+const MAX_YEAR=UNIVERSE_MAX_YEAR;
+const pos=yearToPercent;
 
 type ChronologyLike={id:string;kind:string;start:number;end:number;title:string};
 

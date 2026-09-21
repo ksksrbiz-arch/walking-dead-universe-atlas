@@ -915,6 +915,22 @@ button:active{transform:translateY(1px)}
 .journeySegment>span{display:block;color:#9aa6a7;font:700 7px "Space Mono",monospace;letter-spacing:.08em}.journeySegment>b{display:block;margin-top:7px;font:700 18px "Space Mono",monospace}.journeySegment>small{display:block;margin-top:3px;color:#718082;font-size:8px}.journeySegment>i{position:absolute;right:-8px;top:27px;z-index:2;color:#9aa6a7;font-style:normal}
 .characterJourney>div{display:grid;gap:5px}.characterJourney>div>button{display:grid;grid-template-columns:38px 1fr 14px;gap:9px;align-items:center;width:100%;padding:10px 11px;border:1px solid #293638;border-radius:11px;background:#101a1c;color:#e2e8e6;text-align:left}.characterJourney>div>button>strong{font:700 11px "Space Mono",monospace;color:#aeb8b8}.characterJourney>div>button small{display:block;color:#718082;font:700 7px "Space Mono",monospace}.characterJourney>div>button b{display:block;margin:4px 0 2px;font-size:10px}.characterJourney>div>button span{display:block;color:#718082;font-size:8px}.journeyTransition{padding:5px 8px;border-left:1px solid #465456;margin-left:18px}.journeyTransition span{display:block;color:#6f7d7f;font:700 6px "Space Mono",monospace;letter-spacing:.1em}.journeyTransition b{display:block;margin-top:3px;color:#9aa6a7;font-size:8px}.connectionTarget{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;margin-top:7px;padding:7px 8px;border:1px solid #293638;border-radius:9px;background:#0d1718;color:#dfe6e4;font-size:9px;text-align:left}.connectionTarget svg{width:12px;flex:0 0 auto}
 
+/* Shared mini-timeline: plots an entity's chronology anchors proportionally on the
+   universe year axis, reused across location/connection/episode detail panels. */
+.miniTimeline{margin:12px 0;padding:11px 12px 9px;border:1px solid #ffffff18;border-radius:14px;background:#07101180}
+.miniTimelineEmpty{margin:12px 0}
+.miniTimelineAxis{display:flex;justify-content:space-between;color:#6d7b7d;font:700 7px "Space Mono",monospace;letter-spacing:.1em;margin-bottom:6px}
+.miniTimelineTrack{position:relative;height:16px;border-top:1px solid #ffffff14}
+.miniTimelineMark{position:absolute;top:-1px;bottom:0;width:1px;background:#f2f4f0aa;z-index:2}
+.miniTimelineMark::before{content:"";position:absolute;top:-3px;left:-3px;width:7px;height:7px;border-radius:50%;background:#f0f3ef}
+.miniTimelineItem{position:absolute;top:4px;height:8px;min-width:8px;padding:0;border:0;border-radius:99px;background:var(--dot);opacity:.55;cursor:default}
+button.miniTimelineItem{cursor:pointer}
+.miniTimelineItem>i{display:block;width:100%;height:100%;border-radius:inherit}
+.miniTimelineItem.active,button.miniTimelineItem:hover{opacity:1;box-shadow:0 0 0 1px #fff7,0 0 8px var(--dot)}
+.miniTimelineItem.clustered{top:2px;height:12px;min-width:16px;display:grid;place-items:center}
+.miniTimelineItem.clustered>i{display:none}
+.miniTimelineItem>b{position:relative;font:700 7px "Space Mono",monospace;color:#0c1516;line-height:1}
+
 
 /* Mobile map framing: the world transform is authored on the SVG group.
    Do not let a CSS transform override the SVG presentation transform. */
