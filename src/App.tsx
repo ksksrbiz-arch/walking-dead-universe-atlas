@@ -6,7 +6,7 @@ import type {CSSProperties} from "react";
 import world from "@cublya/world-atlas/countries-50m.json";
 import {atlasData,Location,SeriesKey} from "./data";
 import {validateAtlasData} from "./lib/validateData";
-import {buildChronology,getEpisodeWatchOrder} from "./lib/chronology";
+import {buildChronology,getEpisodeWatchOrder,describeEra} from "./lib/chronology";
 import episodeMedia from "../data/episodeMedia.json";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
@@ -188,7 +188,7 @@ export default function App(){
  useEffect(()=>{if(view!=="map")setSheet("open");},[view]);
  useEffect(()=>{
    if(!playing)return;
-   const id=window.setInterval(()=>setYear(y=>y>=2027?2010:y+1),900);
+   const id=window.setInterval(()=>setYear(y=>y>=2028?2010:y+1),900);
    return()=>window.clearInterval(id);
  },[playing]);
  useEffect(()=>{
@@ -209,6 +209,7 @@ export default function App(){
    return !!meta&&(series==="ALL"||l.seriesId===META[series].id)&&l.year<=year;
  }),[series,year]);
  const chronology=useMemo(()=>buildChronology().filter(e=>e.start<=year&&(series==="ALL"||e.seriesId===META[series].id)),[series,year]);
+ const currentEra=useMemo(()=>describeEra(year),[year]);
  const episodes=useMemo(()=>chronology.filter(e=>e.kind==="episode"),[chronology]);
  const selectedLoc=atlasData.locations.find(l=>l.id===selectedLocation)??null;
  const selectedEp=episodes.find(e=>e.id===selectedEpisode)??null;
@@ -421,7 +422,7 @@ export default function App(){
     {query&&<button className="clearSearch" onClick={()=>{setQuery("");setSearchOpen(false)}} aria-label="Clear atlas search"><Icon name="close"/></button>}
     {searchOpen&&query&&<div className="searchResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}
    </div>
-   <div className="headerMeta"><span>LIVE ATLAS</span><b>{year}</b></div>
+   <div className="headerMeta"><span>LIVE ATLAS</span><b>{year}</b><em>{currentEra.short}</em></div>
   </header>
 
   <main className="atlasMain">
@@ -476,12 +477,6 @@ export default function App(){
     {!isMobileMap&&<AtlasTimelineDock year={year} onYearChange={y=>{setPlaying(false);setYear(y)}} series={series} onEpisode={selectAtlasEpisode} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>}
 
     {isMobileMap&&view==="map"&&!selectedLocation&&!selectedEpisode&&!selectedCharacter&&<MobileTimeBar year={year} playing={playing} onYearChange={y=>{setPlaying(false);setYear(y)}} onTogglePlaying={()=>setPlaying(v=>!v)}/>}
-
-    <div className={`timeMachine ${sheet==="open"?"sheetOpen":""}`}>
-      <div className="timeMachineHead"><div><small>UNIVERSE TIME</small><b>{year}</b></div><button onClick={()=>setPlaying(v=>!v)} aria-label={playing?"Pause chronology":"Play chronology"}><Icon name={playing?"pause":"play"}/></button></div>
-      <input aria-label="Universe year" type="range" min="2010" max="2027" value={year} onChange={e=>{setPlaying(false);setYear(Number(e.target.value))}}/>
-      <div className="timeScale"><span>2010 · OUTBREAK</span><span>2014</span><span>2018</span><span>2022</span><span>2027</span></div>
-    </div>
 
     {searchOpen&&<div className="searchOverlay"><div className="searchOverlayHead"><b>SEARCH THE ATLAS</b><button onClick={()=>setSearchOpen(false)} aria-label="Close search"><Icon name="close"/></button></div><div className="searchOverlayInput"><Icon name="search"/><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Place, person, episode, faction…"/>{query&&<button onClick={()=>setQuery("")}><Icon name="close"/></button>}</div>{query&&<div className="searchOverlayResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}</div>}
 
