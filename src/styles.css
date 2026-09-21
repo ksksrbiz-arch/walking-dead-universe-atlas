@@ -27,7 +27,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #dce5e2;outline-offse
 .map{position:absolute;inset:0;overflow:hidden;background:#71888c;isolation:isolate}
 .mapAtmosphere{position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 48% 42%,#d7e0df30,transparent 38%),linear-gradient(180deg,#9aafb1 0%,#71888c 100%);pointer-events:none}
 .mapSurface{position:absolute;inset:0;z-index:1;contain:layout paint;overflow:hidden}
-.mapSurface svg{position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;transform:translate3d(0,0,0) scale(1);touch-action:none;user-select:none;-webkit-user-select:none;will-change:transform}
+.mapSurface svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform-origin:50% 50%;transform:translate3d(0,0,0) scale(1);touch-action:none;user-select:none;-webkit-user-select:none;will-change:transform}
 .mapSurface svg.dragging{cursor:grabbing}
 .countries path{stroke:#727b77aa;stroke-width:.65;vector-effect:non-scaling-stroke}
 .landShadow{filter:none}
@@ -211,8 +211,29 @@ button:focus-visible,input:focus-visible{outline:2px solid #dce5e2;outline-offse
   .searchOverlayResults>button{padding:12px 8px;background:#101a1c;border:1px solid #1f2c2e;margin-bottom:5px}
   .timeMachine{display:none}
 }
+@media(min-width:700px){
+  /* Left-anchored, stacked below mapTopLeft: a right:22px anchor here sits directly
+     under the content sidebar (also right:22px, higher z-index than mapChrome), making
+     zoom/reset dead on every desktop and tablet width — the sidebar is open by default
+     with no way to know it's blocking anything underneath. Scoped to min-width:700px so
+     the phone-only .mapTopRight positioning (which sets right but not left) is untouched. */
+  .mapTopRight{left:22px;right:auto;top:180px}
+}
 @media(min-width:700px) and (max-width:1100px){
-  .contentPanel{width:380px}.atlasTimelineDock{right:420px}.topbar{grid-template-columns:auto minmax(240px,1fr) auto}
+  /* At this width the fixed 380px sidebar can cover over half the screen with no way
+     to dismiss it (panelGrab, the collapse handle mobile relies on, is display:none
+     outside the phone breakpoint) — locking users out of most of the map. Give tablet
+     widths the same collapsible affordance, shrinking width instead of height since
+     this is a right-anchored sidebar rather than a bottom sheet. */
+  .contentPanel{width:380px;transition:width 160ms ease}
+  .contentPanel.peek{width:40px}
+  .atlasTimelineDock{right:420px}.topbar{grid-template-columns:auto minmax(240px,1fr) auto}
+  .panelGrab{
+    display:grid;place-items:center;position:absolute;z-index:4;
+    top:0;left:0;bottom:0;width:26px;border:0;border-right:1px solid #ffffff10;background:transparent;
+  }
+  .panelGrab span{width:4px;height:26px;border-radius:99px;background:#647174}
+  .contentPanel.peek .panelHeader,.contentPanel.peek .contentScroll{opacity:0;pointer-events:none}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.pulse{animation:none!important}}
 @media(max-width:390px){
