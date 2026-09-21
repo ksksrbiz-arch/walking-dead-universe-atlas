@@ -274,7 +274,11 @@ button:active{transform:translateY(1px)}
 .atlasTimelineItem.event{width:18px!important;height:18px!important;top:-8px}
 .atlasTimelineLaneLabel{min-height:32px}
 .atlasTimelineFooter input{min-height:32px;touch-action:pan-x}
-.mapTopRight button,.mobileSearchButton,.closePanel,.panelGrab,.bottomNav button{min-width:44px;min-height:44px}
+.mapTopRight button,.mobileSearchButton,.closePanel,.bottomNav button{min-width:44px;min-height:44px}
+/* .panelGrab is a full-width horizontal drag/tap strip, not a discrete button — its width
+   (300px+) already gives it a touch-target area far larger than 44x44. Forcing min-height:44px
+   here (as for the buttons above) doubled its actual height past its intended 22-26px, pushing
+   it down far enough to overlap and swallow taps meant for the adjacent .closePanel button. */
 .seriesRail button{min-height:40px}
 .locationLinks button,.miniTags span{min-height:44px}
 .entityCard,.episodeNav button,.watchOrder article{min-height:64px}
@@ -1204,27 +1208,38 @@ button.universeEventRow:hover{background:#ffffff04}
     left:10px;
     right:auto;
   }
+  /* mapTopLeft renders ~66-67px tall (kicker + count line) across this whole phone
+     range, not just the narrowest widths — top:124 put seriesRail's top well inside
+     that box. Tightened row heights here too, since two full chip rows plus
+     mapTopLeft used to reach nearly halfway down a phone screen, sitting right over
+     where the map's initial location cluster naturally renders. */
   .map.view-map .seriesRail{
-    top:124px !important;
+    top:142px !important;
     left:10px !important;
     right:10px !important;
     transform:none !important;
     max-width:none !important;
-    height:40px;
+    height:32px;
     z-index:72;
   }
+  .map.view-map .seriesRail button{
+    height:28px;
+  }
   .map.view-map .mapLayerRail{
-    top:166px !important;
+    top:178px !important;
     left:10px !important;
     right:10px !important;
     transform:none !important;
     max-width:none !important;
-    height:34px;
+    height:28px;
     z-index:73;
     padding-right:36px;
   }
+  .map.view-map .mapLayerRail button{
+    height:24px;
+  }
   .map.view-map .mapTopRight{
-    top:208px !important;
+    top:212px !important;
     right:10px !important;
     z-index:76;
   }
@@ -1235,13 +1250,6 @@ button.universeEventRow:hover{background:#ffffff04}
     display:none !important;
   }
 }
-@media (max-width:390px){
-  .map.view-map .mapTopLeft{top:70px}
-  .map.view-map .seriesRail{top:122px !important}
-  .map.view-map .mapLayerRail{top:164px !important}
-  .map.view-map .mapTopRight{top:206px !important}
-}
-
 @media (min-width:700px) and (max-width:1099px){
   .topbar{
     grid-template-columns:auto minmax(260px,1fr) auto;

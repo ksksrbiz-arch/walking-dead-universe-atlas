@@ -161,9 +161,10 @@ export default function App(){
      if(!didAutoHome.current&&mapSvgRef.current?.clientWidth){
        didAutoHome.current=true;
        const home=computeHomePan();
-       visual.current={x:home.x,y:home.y,zoom:1};
+       visual.current={x:home.x,y:home.y,zoom:home.zoom};
        setPan({x:home.x,y:home.y});
-       applyMapTransform(home.x,home.y,1,false);
+       setZoom(home.zoom);
+       applyMapTransform(home.x,home.y,home.zoom,false);
        return;
      }
      const limits=getMapPanLimits();
@@ -240,13 +241,13 @@ export default function App(){
  // ocean, well off from where the story's early locations (Georgia) actually sit.
  const computeHomePan=()=>{
    const el=mapSvgRef.current;
-   if(!el)return {x:0,y:0};
+   if(!el)return {x:0,y:0,zoom:1};
    const surfaceRect=el.getBoundingClientRect();
    const w=el.clientWidth,h=el.clientHeight;
-   if(!w||!h)return {x:0,y:0};
+   if(!w||!h)return {x:0,y:0,zoom:1};
    const scale=Math.max(w/1000,h/600);
    const pts=atlasData.locations.filter(l=>l.year<=2010).map(l=>project(l.lat,l.lng));
-   if(!pts.length)return {x:0,y:0};
+   if(!pts.length)return {x:0,y:0,zoom:1};
    const cx=pts.reduce((s,p)=>s+p.x,0)/pts.length;
    const cy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
    // A permanently-open content sidebar (tablet/desktop widths) can cover the right
@@ -256,10 +257,52 @@ export default function App(){
    const visibleW=panelRect&&panelRect.width>100&&panelRect.left<surfaceRect.right
      ?Math.max(160,panelRect.left-surfaceRect.left)
      :w;
-   const limits=getMapPanLimits();
-   return {x:clamp(visibleW/2-w/2-(cx-500)*scale,-limits.x,limits.x),y:clamp((300-cy)*scale,-limits.y,limits.y)};
+   // The stacked top chrome (location card, series filter, map-layer filter, zoom
+   // controls) floats over the map itself — on a phone it can reach nearly halfway
+   // down the screen. Centering blind to that puts the cluster right behind it
+   // (and its markers behind it too, un-tappable). Only count chrome that actually
+   // overlaps the horizontal middle, since some of this is left/right-anchored.
+   const centerX=surfaceRect.left+surfaceRect.width/2;
+   let topExclusion=surfaceRect.top;
+   [".mapTopLeft",".mapTopRight",".seriesRail",".mapLayerRail"].forEach(sel=>{
+     const chromeEl=document.querySelector(sel);
+     if(!chromeEl)return;
+     const r=chromeEl.getBoundingClientRect();
+     if(r.width===0&&r.height===0)return;
+     if(r.left<centerX&&r.right>centerX)topExclusion=Math.max(topExclusion,r.bottom);
+   });
+   const topExclusionRel=clamp(topExclusion-surfaceRect.top+12,0,h);
+   // At zoom 1 the map is scaled to exactly "cover" the container on whichever axis
+   // drives that scale — on a portrait phone that's height, which means the vertical
+   // pan limit is mathematically zero at zoom 1 (there is no slack to shift into).
+   // No pan offset, however small, can move the cluster clear of the chrome above at
+   // the default zoom, so panning alone can never fix this — solve for the smallest
+   // zoom that actually opens up enough vertical slack to clear the chrome, rather
+   // than guessing a flat constant (a short phone needs more help than a tall one).
+   // Desired pan y(z) = topExclusionRel/2 - (cy-300)*scale*z is linear in z; the
+   // available limit, limitY(z) = (556*scale*z-h)/2, is also linear in z — solve for
+   // where they meet. Tablet/desktop keep the original zoom-1 home (plenty of room).
+   let homeZoom=1;
+   if(isMobileMap){
+     // Solve for just enough zoom to clear the chrome with a margin — not to perfectly
+     // center the remaining space, which demands far more zoom than the goal needs and
+     // pushes the two story regions (Georgia, California/Mexico) too far apart to both
+     // stay in frame. The pan itself (below) still aims for center-of-remaining-space;
+     // it'll simply clamp to whatever this smaller zoom actually makes available.
+     const clearMargin=60;
+     const B=-(cy-300)*scale,denom=278*scale-B;
+     const zNeeded=denom>0?(topExclusionRel+clearMargin)/denom:1;
+     homeZoom=clamp(zNeeded*1.1,1.15,1.85);
+   }
+   const worldW=952*scale*homeZoom,worldH=556*scale*homeZoom;
+   const limits={x:Math.max(0,(worldW-w)/2),y:Math.max(0,(worldH-h)/2)};
+   return {
+     x:clamp(visibleW/2-w/2-(cx-500)*scale*homeZoom,-limits.x,limits.x),
+     y:clamp(topExclusionRel/2-(cy-300)*scale*homeZoom,-limits.y,limits.y),
+     zoom:homeZoom
+   };
  };
- const resetMap=()=>{const home=computeHomePan();visual.current={x:home.x,y:home.y,zoom:1};setZoom(1);setPan({x:home.x,y:home.y});trackAtlasMetric("map-reset",1,{mobile:isMobileMap});};
+ const resetMap=()=>{const home=computeHomePan();visual.current={x:home.x,y:home.y,zoom:home.zoom};setZoom(home.zoom);setPan({x:home.x,y:home.y});trackAtlasMetric("map-reset",1,{mobile:isMobileMap});};
  const openPeopleEntity=(kind:"community"|"faction",id:string)=>{
    setPeopleFocusEntity(kind+":"+id);setView("people");setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setSheet("open");
  };
