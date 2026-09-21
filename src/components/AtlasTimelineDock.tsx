@@ -42,7 +42,7 @@ const TimelineLane=memo(function TimelineLane({meta,items,active,selectedEpisode
  const buttons=useMemo(()=>items.map(item=>{
    const left=pos(item.start);const width=Math.max(.42,pos(item.end)-left);
    const isSelected=item.id===selectedEpisode;
-   return <button key={item.id} className={"atlasTimelineItem "+(item.kind==="event"?"event":"episode")+(isSelected?" selected":"")} style={{left:left+"%",width:Math.min(18,Math.max(width,item.kind==="event"?.55:.62))+"%","--item":meta.color} as CSSProperties} title={item.title} onClick={()=>item.kind==="episode"?callbacks.current.onEpisode(item.id):callbacks.current.onYearChange(item.start)} aria-label={item.title}><i/></button>;
+   return <button key={item.id} className={"atlasTimelineItem "+(item.kind==="event"?"event":item.kind==="universe-event"?"universe-event":"episode")+(isSelected?" selected":"")} style={{left:left+"%",width:Math.min(18,Math.max(width,item.kind==="event"?.55:.62))+"%","--item":meta.color} as CSSProperties} title={item.title} onClick={()=>item.kind==="episode"?callbacks.current.onEpisode(item.id):callbacks.current.onYearChange(item.start)} aria-label={item.title}><i/></button>;
  }),[items,selectedEpisode,meta.color]);
  return <div className={"atlasTimelineLane "+(active?"active":"")}>
    <button className="atlasTimelineLaneLabel" onClick={()=>onYearChange(items.find(x=>x.start>=year)?.start??year)} style={{"--lane":meta.color} as CSSProperties}>{meta.short}</button>

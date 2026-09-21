@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import {atlasData} from "../data";
 import {entityGraph as graph} from "../lib/entityGraph";
 import AtlasIcon,{type AtlasIconName} from "./AtlasIcon";
@@ -7,6 +7,9 @@ type Props={
  onCharacter:(id:string)=>void;
  onLocation:(id:string)=>void;
  onEpisode?:(id:string)=>void;
+ onConnection?:(id:string)=>void;
+ onCommunity?:(id:string)=>void;
+ onFaction?:(id:string)=>void;
  defaultCollapsed?:boolean;
  root?:string;
  heading?:string;
@@ -42,7 +45,8 @@ function iconForEdge(type:string):AtlasIconName{
  if(type.includes("character-character"))return "character-link";
  if(type.includes("character-location"))return "location-link";
  if(type==="lore")return "lore";
- if(type.includes("community"))return "community-link";
+ if(type.includes("community")||type.includes("EPISODE_CONTEXT"))return "community-link";
+ if(type.includes("EPISODE_GEOGRAPHY"))return "location-link";
  return "connection";
 }
 
@@ -50,8 +54,9 @@ function confidenceLabel(value:string){
  return value==="confirmed"?"CONFIRMED":value==="source-derived"?"SOURCE-DERIVED":"APPROXIMATE";
 }
 
-export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaultCollapsed=false,root:rootProp,heading}:Props){
+export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConnection,onCommunity,onFaction,defaultCollapsed=false,root:rootProp,heading}:Props){
  const [root,setRoot]=useState<string>(rootProp??"character:michonne");
+ useEffect(()=>{if(rootProp!==undefined)setRoot(rootProp)},[rootProp]);
  const [filter,setFilter]=useState<Filter>("ALL");
  const [collapsed,setCollapsed]=useState(defaultCollapsed);
  const rootNode=graph.nodes.get(root);
@@ -74,6 +79,9 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaul
    if(kind==="character")onCharacter(id);
    if(kind==="location")onLocation(id);
    if(kind==="episode")onEpisode?.(id);
+   if(kind==="connection")onConnection?.(id);
+   if(kind==="community")onCommunity?.(id);
+   if(kind==="faction")onFaction?.(id);
  };
 
  return <section className={"entityGraph"+(collapsed?" isCollapsed":"")} aria-label="Universe relationship graph">
@@ -91,10 +99,10 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,defaul
     </div>
    </div>
 
-   {!collapsed&&related.length>0&&<div className="entityGraphFilters" aria-label="Relationship filters">
-    <button className={filter==="ALL"?"active":""} onClick={()=>setFilter("ALL")}>ALL <b>{related.length}</b></button>
+   {!collapsed&&related.length>0&&<div className="entityGraphFilters" aria-label="Relationship filters" role="group">
+    <button className={filter==="ALL"?"active":""} onClick={()=>setFilter("ALL")} aria-pressed={filter==="ALL"}>ALL <b>{related.length}</b></button>
     {Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)).map(([kind,count])=>
-      <button key={kind} className={filter===kind?"active":""} onClick={()=>setFilter(kind as Filter)}>
+      <button key={kind} className={filter===kind?"active":""} onClick={()=>setFilter(kind as Filter)} aria-pressed={filter===kind}>
         {labels[kind]||kind.toUpperCase()} <b>{count}</b>
       </button>
     )}

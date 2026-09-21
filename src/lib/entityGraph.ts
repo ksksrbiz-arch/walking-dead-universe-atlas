@@ -10,6 +10,7 @@ export type EntityEdge={
   to:EntityRef;
   type:string;
   confidence:"confirmed"|"approximate"|"source-derived";
+  evidenceId?:string;
 };
 
 const key=(kind:EntityKind,id:string)=>`${kind}:${id}`;
@@ -52,7 +53,8 @@ function resolveConnectionEndpoint(connection:ConnectionRecord,side:"from"|"to")
   const id=side==="from"?connection.fromId:connection.toId;
   if(!id)return null;
   const expected=connectionEndpointKinds[connection.type]?.[side==="from"?0:1];
-  const kind=expected&&entityIdSets[expected].has(id)?expected:resolveEntityKind(id);
+  if(expected)return entityIdSets[expected].has(id)?{kind:expected,id}:null;
+  const kind=resolveEntityKind(id);
   return kind?{kind,id}:null;
 }
 
@@ -60,9 +62,9 @@ export function buildEntityGraph(){
   const nodes=new Map<string,EntityRef>();
   const edges:EntityEdge[]=[];
   const addNode=(kind:EntityKind,id:string)=>{if(id)nodes.set(key(kind,id),{kind,id})};
-  const addEdge=(from:EntityRef,to:EntityRef,type:string,confidence:EntityEdge["confidence"]="source-derived")=>{
+  const addEdge=(from:EntityRef,to:EntityRef,type:string,confidence:EntityEdge["confidence"]="source-derived",evidenceId?:string)=>{
     addNode(from.kind,from.id); addNode(to.kind,to.id);
-    edges.push({id:`${key(from.kind,from.id)}>${type}>${key(to.kind,to.id)}`,from,to,type,confidence});
+    edges.push({id:`${key(from.kind,from.id)}>${type}>${key(to.kind,to.id)}${evidenceId?">"+evidenceId:""}`,from,to,type,confidence,evidenceId});
   };
 
   for(const s of atlasData.series)addNode("series",s.id);
@@ -76,6 +78,18 @@ export function buildEntityGraph(){
     for(const id of e.communityIds||[])addEdge({kind:"episode",id:e.id},{kind:"community",id},"INVOLVES");
     for(const id of e.factionIds||[])addEdge({kind:"episode",id:e.id},{kind:"faction",id},"INVOLVES");
     for(const id of e.connectionIds||[])addEdge({kind:"episode",id:e.id},{kind:"connection",id},"CONTEXT");
+    // These bridge edges are explicitly grounded in the episode registry: when an
+    // episode records a character and a place/community/faction together, the graph
+    // may traverse between them without inventing travel or a direct relationship.
+    for(const characterId of e.characterIds||[]){
+      for(const locationId of e.locationIds||[])addEdge({kind:"character",id:characterId},{kind:"location",id:locationId},"EPISODE_GEOGRAPHY","source-derived",e.id);
+      for(const communityId of e.communityIds||[])addEdge({kind:"character",id:characterId},{kind:"community",id:communityId},"EPISODE_CONTEXT","source-derived",e.id);
+      for(const factionId of e.factionIds||[])addEdge({kind:"character",id:characterId},{kind:"faction",id:factionId},"EPISODE_CONTEXT","source-derived",e.id);
+    }
+    for(const locationId of e.locationIds||[]){
+      for(const communityId of e.communityIds||[])addEdge({kind:"location",id:locationId},{kind:"community",id:communityId},"EPISODE_CONTEXT","source-derived",e.id);
+      for(const factionId of e.factionIds||[])addEdge({kind:"location",id:locationId},{kind:"faction",id:factionId},"EPISODE_CONTEXT","source-derived",e.id);
+    }
   }
   for(const l of atlasData.locations)addNode("location",l.id);
   for(const c of atlasData.characters)addNode("character",c.id);
@@ -85,6 +99,15 @@ export function buildEntityGraph(){
   const curated=(atlasData as any).connectionEpisodes?.connections||{};
   for(const [connectionId,evidence] of Object.entries(curated) as any){
     for(const episodeId of evidence.episodeIds||[])addEdge({kind:"connection",id:connectionId},{kind:"episode",id:episodeId},"DOCUMENTED_IN",evidence.evidenceKind==="direct"?"confirmed":"source-derived");
+  }
+  // Episode-to-episode edges are only created from curated connection evidence.
+  // Shared characters/places alone do not imply a narrative connection.
+  for(const [connectionId,evidence] of Object.entries(curated) as any){
+    const episodeIds=[...new Set((evidence.episodeIds||[]).filter((id:string)=>entityIdSets.episode.has(id)))];
+    const confidence:EntityEdge["confidence"]=evidence.evidenceKind==="direct"?"confirmed":"source-derived";
+    for(let i=0;i<episodeIds.length;i++)for(let j=i+1;j<episodeIds.length;j++){
+      addEdge({kind:"episode",id:episodeIds[i]},{kind:"episode",id:episodeIds[j]},"EPISODE_CONNECTION",confidence,connectionId);
+    }
   }
 
   for(const x of atlasData.connections as ConnectionRecord[]){

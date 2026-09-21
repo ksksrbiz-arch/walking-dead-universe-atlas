@@ -7,13 +7,11 @@
     "title": "L'âme Perdue",
     "airDate": "2023-09-10",
     "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
-      "paris",
-      "mont-saint-michel"
+      "marseille"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -35,13 +33,11 @@
     "title": "Alouette",
     "airDate": "2023-09-17",
     "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
-      "paris",
-      "mont-saint-michel"
+      "agen"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -62,13 +58,11 @@
     "title": "Paris Sera Toujours Paris",
     "airDate": "2023-09-24",
     "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
-      "paris",
-      "mont-saint-michel"
+      "paris"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -89,13 +83,11 @@
     "title": "La Dame de Fer",
     "airDate": "2023-10-01",
     "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
-      "paris",
-      "mont-saint-michel"
+      "paris"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -116,13 +108,11 @@
     "title": "Deux Amours",
     "airDate": "2023-10-08",
     "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
-      "paris",
-      "mont-saint-michel"
+      "paris"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -143,13 +133,12 @@
     "title": "Coming Home",
     "airDate": "2023-10-15",
     "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
-      "paris",
-      "mont-saint-michel"
+      "mont-saint-michel",
+      "le-havre"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -169,13 +158,12 @@
     "episodeNumber": 1,
     "title": "La Gentillesse Des Étrangers",
     "airDate": "2024-09-29",
-    "timelineStart": 2024,
-    "timelineEnd": 2025,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
-      "paris"
+      "france"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -196,12 +184,11 @@
     "episodeNumber": 2,
     "title": "Moulin Rouge",
     "airDate": "2024-10-06",
-    "timelineStart": 2024,
-    "timelineEnd": 2025,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
       "paris"
     ],
     "characterIds": [
@@ -223,12 +210,11 @@
     "episodeNumber": 3,
     "title": "L'Invisible",
     "airDate": "2024-10-13",
-    "timelineStart": 2024,
-    "timelineEnd": 2025,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
       "paris"
     ],
     "characterIds": [
@@ -250,12 +236,11 @@
     "episodeNumber": 4,
     "title": "Le Paradis Pour Toi",
     "airDate": "2024-10-20",
-    "timelineStart": 2024,
-    "timelineEnd": 2025,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
       "paris"
     ],
     "characterIds": [
@@ -277,12 +262,11 @@
     "episodeNumber": 5,
     "title": "Vouloir, C'est Pouvoir",
     "airDate": "2024-10-27",
-    "timelineStart": 2024,
-    "timelineEnd": 2025,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
       "paris"
     ],
     "characterIds": [
@@ -304,13 +288,12 @@
     "episodeNumber": 6,
     "title": "Au Revoir Les Enfants",
     "airDate": "2024-11-03",
-    "timelineStart": 2024,
-    "timelineEnd": 2025,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "france",
-      "paris"
+      "france"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -331,14 +314,12 @@
     "episodeNumber": 1,
     "title": "Costa Da Morte",
     "airDate": "2025-09-07",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "spain",
-      "barcelona",
-      "madrid"
+      "london"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -359,14 +340,12 @@
     "episodeNumber": 2,
     "title": "La Ofrenda",
     "airDate": "2025-09-14",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "spain",
-      "barcelona",
-      "madrid"
+      "galicia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -386,14 +365,12 @@
     "episodeNumber": 3,
     "title": "El Sacrificio",
     "airDate": "2025-09-21",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "spain",
-      "barcelona",
-      "madrid"
+      "galicia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -413,14 +390,12 @@
     "episodeNumber": 4,
     "title": "La Justicia Fronteriza",
     "airDate": "2025-09-28",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "spain",
-      "barcelona",
-      "madrid"
+      "spain"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -440,14 +415,12 @@
     "episodeNumber": 5,
     "title": "Limbo",
     "airDate": "2025-10-05",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "spain",
-      "barcelona",
-      "madrid"
+      "spain"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -468,14 +441,12 @@
     "episodeNumber": 6,
     "title": "Contrabando",
     "airDate": "2025-10-12",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "spain",
-      "barcelona",
-      "madrid"
+      "barcelona"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -496,14 +467,12 @@
     "episodeNumber": 7,
     "title": "Solaz Del Mar",
     "airDate": "2025-10-19",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2023,
+    "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "spain",
-      "barcelona",
-      "madrid"
+      "seville"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -524,12 +493,11 @@
     "episodeNumber": 1,
     "title": "Old Acquaintances",
     "airDate": "2023-06-15",
-    "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2027,
+    "timelineEnd": 2027,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
       "manhattan-island"
     ],
     "characterIds": [
@@ -553,13 +521,12 @@
     "episodeNumber": 2,
     "title": "Who's There?",
     "airDate": "2023-06-22",
-    "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2027,
+    "timelineEnd": 2027,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -580,13 +547,12 @@
     "episodeNumber": 3,
     "title": "People Are a Resource",
     "airDate": "2023-06-29",
-    "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2027,
+    "timelineEnd": 2027,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -606,13 +572,12 @@
     "episodeNumber": 4,
     "title": "Everybody Wins a Prize",
     "airDate": "2023-07-06",
-    "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2027,
+    "timelineEnd": 2027,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -635,13 +600,13 @@
     "episodeNumber": 5,
     "title": "Stories We Tell Ourselves",
     "airDate": "2023-07-13",
-    "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2027,
+    "timelineEnd": 2027,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "manhattan",
-      "manhattan-island"
+      "madison-square-garden"
     ],
     "characterIds": [
       "negan-smith",
@@ -662,13 +627,13 @@
     "episodeNumber": 6,
     "title": "Doma Smo",
     "airDate": "2023-07-20",
-    "timelineStart": 2023,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2027,
+    "timelineEnd": 2027,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "manhattan",
-      "manhattan-island"
+      "new-babylon"
     ],
     "characterIds": [
       "negan-smith",
@@ -689,13 +654,11 @@
     "episodeNumber": 1,
     "title": "Power Equals Power",
     "airDate": "2025-05-04",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2027,
+    "timelineEnd": 2027,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
       "bricks"
     ],
     "characterIds": [
@@ -717,14 +680,12 @@
     "episodeNumber": 2,
     "title": "Another Shitty Lesson",
     "airDate": "2025-05-11",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
-    "timelinePrecision": "year",
-    "certainty": "approximate",
+    "timelineStart": 2027,
+    "timelineEnd": 2028,
+    "timelinePrecision": "range",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -745,14 +706,12 @@
     "episodeNumber": 3,
     "title": "Why Did the Mainlanders Cross the River?",
     "airDate": "2025-05-18",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -773,14 +732,12 @@
     "episodeNumber": 4,
     "title": "Feisty Friendly",
     "airDate": "2025-05-25",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -801,14 +758,13 @@
     "episodeNumber": 5,
     "title": "The Bird Always Knows",
     "airDate": "2025-06-01",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "manhattan",
-      "manhattan-island",
-      "bricks"
+      "central-park"
     ],
     "characterIds": [
       "negan-smith",
@@ -829,14 +785,12 @@
     "episodeNumber": 6,
     "title": "Bridge Partners Are Hard to Come By These Days",
     "airDate": "2025-06-08",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -857,14 +811,12 @@
     "episodeNumber": 7,
     "title": "Novi Dan, Novi Početak",
     "airDate": "2025-06-15",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -885,14 +837,12 @@
     "episodeNumber": 8,
     "title": "If History Were a Conflagration",
     "airDate": "2025-06-22",
-    "timelineStart": 2025,
-    "timelineEnd": 2025,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -913,14 +863,12 @@
     "episodeNumber": 1,
     "title": "Trillium",
     "airDate": "2026-07-26",
-    "timelineStart": 2026,
-    "timelineEnd": 2026,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "manhattan",
-      "manhattan-island",
-      "bricks",
       "new-babylon"
     ],
     "characterIds": [
@@ -942,15 +890,12 @@
     "episodeNumber": 2,
     "title": "Haven",
     "airDate": "2026-08-02",
-    "timelineStart": 2026,
-    "timelineEnd": 2026,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks",
-      "new-babylon"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -971,15 +916,12 @@
     "episodeNumber": 3,
     "title": "Emigrants",
     "airDate": "2026-08-09",
-    "timelineStart": 2026,
-    "timelineEnd": 2026,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks",
-      "new-babylon"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -1000,15 +942,12 @@
     "episodeNumber": 4,
     "title": "Found / Lost",
     "airDate": "2026-08-16",
-    "timelineStart": 2026,
-    "timelineEnd": 2026,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks",
-      "new-babylon"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -1029,15 +968,12 @@
     "episodeNumber": 5,
     "title": "Imperialis",
     "airDate": "2026-08-23",
-    "timelineStart": 2026,
-    "timelineEnd": 2026,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks",
-      "new-babylon"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -1058,15 +994,12 @@
     "episodeNumber": 6,
     "title": "Genesis",
     "airDate": "2026-08-30",
-    "timelineStart": 2026,
-    "timelineEnd": 2026,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks",
-      "new-babylon"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -1087,15 +1020,12 @@
     "episodeNumber": 7,
     "title": "Hourglass",
     "airDate": "2026-09-06",
-    "timelineStart": 2026,
-    "timelineEnd": 2026,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks",
-      "new-babylon"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -1116,15 +1046,12 @@
     "episodeNumber": 8,
     "title": "Tenebrae",
     "airDate": "2026-09-13",
-    "timelineStart": 2026,
-    "timelineEnd": 2026,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "manhattan",
-      "manhattan-island",
-      "bricks",
-      "new-babylon"
+      "manhattan"
     ],
     "characterIds": [
       "negan-smith",
@@ -1287,12 +1214,7 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
-    ],
+    "locationIds": [],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -1313,10 +1235,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "catrina-island"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1338,10 +1257,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "flight-462-crash-site"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1363,10 +1279,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "abigail-home-experience",
+      "mexico-us-border",
+      "emerald-hotel"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1388,10 +1303,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "pirates-dock"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1413,10 +1325,11 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "valle-guadalupe",
+      "mexican-church",
+      "abigail-vineyard",
+      "mexico-us-border",
+      "salvadorian-jungle"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1438,10 +1351,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "valle-guadalupe",
+      "abigail-vineyard",
+      "javiers-home",
+      "salvadorian-jungle"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1463,10 +1376,12 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "tijuana",
-      "rosarito",
-      "valle-guadalupe"
+      "ftwd-s02-drugstore",
+      "ftwd-s02-barber-shop",
+      "la-colonia",
+      "mothers-house",
+      "rehabilitation-center"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1488,10 +1403,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
       "rosarito",
-      "valle-guadalupe"
+      "rosarito-beach-hotel",
+      "la-colonia",
+      "el-pelicano"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1513,10 +1428,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
       "rosarito",
-      "valle-guadalupe"
+      "rosarito-beach-hotel",
+      "magana-restaurant-bar",
+      "suarez-family-farm"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1538,10 +1453,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
       "rosarito",
-      "valle-guadalupe"
+      "rosarito-beach-hotel",
+      "la-colonia"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1563,10 +1477,12 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
       "rosarito",
-      "valle-guadalupe"
+      "rosarito-beach-hotel",
+      "la-colonia",
+      "el-pelicano",
+      "poco-cielo",
+      "salazar-family-home"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1588,10 +1504,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
       "rosarito",
-      "valle-guadalupe"
+      "rosarito-beach-hotel",
+      "suarez-family-farm"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1613,10 +1528,11 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
       "rosarito",
-      "valle-guadalupe"
+      "rosarito-beach-hotel",
+      "la-colonia",
+      "el-pelicano",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1638,10 +1554,11 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "tijuana",
       "rosarito",
-      "valle-guadalupe"
+      "rosarito-beach-hotel",
+      "la-colonia",
+      "el-pelicano",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1663,9 +1580,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "military-fuel-depot",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1687,9 +1603,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "rosarito-beach-hotel"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1711,8 +1626,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
       "dam"
     ],
     "characterIds": [],
@@ -1735,9 +1648,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "dam",
+      "tijuana",
+      "abigail-vineyard"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1759,9 +1672,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "phils-outpost",
+      "rosarito-beach-hotel",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1783,9 +1697,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "brooke-ranch"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1807,9 +1719,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "black-hat-reservation"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1831,9 +1742,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "black-hat-reservation",
+      "mexico-us-border"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1855,9 +1766,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "dam",
+      "tijuana"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1879,9 +1790,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "el-bazar",
+      "workshop-ftwd"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1903,9 +1814,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "dam",
+      "tijuana"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1927,9 +1837,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
       "brooke-ranch",
-      "dam"
+      "phils-outpost"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1951,9 +1860,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "brooke-ranch"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1975,9 +1882,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "el-bazar",
+      "on-the-go-burger",
+      "romminda-plaza"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -1999,9 +1906,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "dam",
+      "el-bazar"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -2023,9 +1929,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "baja-california",
-      "brooke-ranch",
-      "dam"
+      "dam",
+      "tijuana"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -3997,10 +3902,10 @@
     "episodeNumber": 1,
     "title": "Years",
     "airDate": "2024-02-25",
-    "timelineStart": 2019,
-    "timelineEnd": 2024,
+    "timelineStart": 2014,
+    "timelineEnd": 2022,
     "timelinePrecision": "range",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -4023,10 +3928,10 @@
     "episodeNumber": 2,
     "title": "Gone",
     "airDate": "2024-03-03",
-    "timelineStart": 2019,
-    "timelineEnd": 2024,
+    "timelineStart": 2021,
+    "timelineEnd": 2022,
     "timelinePrecision": "range",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -4050,10 +3955,10 @@
     "episodeNumber": 3,
     "title": "Bye",
     "airDate": "2024-03-10",
-    "timelineStart": 2019,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -4077,10 +3982,10 @@
     "episodeNumber": 4,
     "title": "What We",
     "airDate": "2024-03-17",
-    "timelineStart": 2019,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -4103,10 +4008,10 @@
     "episodeNumber": 5,
     "title": "Become",
     "airDate": "2024-03-24",
-    "timelineStart": 2019,
-    "timelineEnd": 2024,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -4132,10 +4037,10 @@
     "episodeNumber": 6,
     "title": "The Last Time",
     "airDate": "2024-03-31",
-    "timelineStart": 2019,
-    "timelineEnd": 2024,
+    "timelineStart": 2022,
+    "timelineEnd": 2023,
     "timelinePrecision": "range",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -4165,7 +4070,12 @@
     "timelineEnd": 2011,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "ohio-roadtrip",
+      "evies-cabin",
+      "stevens-cabin",
+      "sandra-bunker"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4185,7 +4095,9 @@
     "timelineEnd": 2010,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "tales-atlanta"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4205,7 +4117,10 @@
     "timelineEnd": 2013,
     "timelinePrecision": "range",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "brookes-steamboat",
+      "atlantic-bayou"
+    ],
     "characterIds": [
       "alpha",
       "lydia"
@@ -4228,7 +4143,11 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "dead-sector",
+      "wiregrass-ranger-station",
+      "chattahoochee-river"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4248,7 +4167,9 @@
     "timelineEnd": 2025,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [],
+    "locationIds": [
+      "madawaska-maine"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -4268,7 +4189,9 @@
     "timelineEnd": null,
     "timelinePrecision": "unknown",
     "certainty": "unknown",
-    "locationIds": [],
+    "locationIds": [
+      "la-dona-house"
+    ],
     "characterIds": [],
     "communityIds": [],
     "factionIds": [],
@@ -5370,8 +5293,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5402,8 +5324,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5434,8 +5355,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5466,8 +5386,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5494,8 +5413,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5524,8 +5442,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [],
     "communityIds": [],
@@ -5547,8 +5464,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5574,8 +5490,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5605,8 +5520,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5632,8 +5546,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -5662,8 +5575,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5692,8 +5604,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "daryl-dixon"
@@ -5717,8 +5628,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -5744,8 +5654,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "carol-peletier",
@@ -5770,8 +5679,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
-      "terminus"
+      "prison"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5801,7 +5709,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "prison",
       "terminus"
     ],
     "characterIds": [
@@ -5834,8 +5741,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "terminus"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5868,8 +5774,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "st-sarahs-church"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5902,8 +5807,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "st-sarahs-church"
     ],
     "characterIds": [
       "rick-grimes",
@@ -5935,8 +5839,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "grady-memorial"
     ],
     "characterIds": [
       "carol-peletier"
@@ -5960,8 +5863,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "rural-virginia"
     ],
     "characterIds": [
       "maggie-rhee",
@@ -5987,8 +5889,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "rural-virginia",
+      "grady-memorial"
     ],
     "characterIds": [
       "rick-grimes",
@@ -6014,8 +5916,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "grady-memorial"
     ],
     "characterIds": [
       "rick-grimes",
@@ -6048,8 +5949,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "grady-memorial"
     ],
     "characterIds": [
       "rick-grimes",
@@ -6083,8 +5983,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "rural-virginia"
     ],
     "characterIds": [
       "rick-grimes",
@@ -6117,8 +6016,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "rural-virginia"
     ],
     "characterIds": [
       "rick-grimes",
@@ -6151,8 +6049,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
-      "alexandria"
+      "rural-virginia"
     ],
     "characterIds": [
       "rick-grimes",
@@ -6185,7 +6082,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
       "alexandria"
     ],
     "characterIds": [
@@ -6219,7 +6115,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
       "alexandria"
     ],
     "characterIds": [
@@ -6252,7 +6147,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
       "alexandria"
     ],
     "characterIds": [
@@ -6283,7 +6177,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
       "alexandria"
     ],
     "characterIds": [
@@ -6315,7 +6208,6 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "terminus",
       "alexandria"
     ],
     "characterIds": [
@@ -7031,9 +6923,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
-      "kingdom",
-      "hilltop"
+      "oceanside"
     ],
     "characterIds": [
       "rosita-espinosa"
@@ -7057,9 +6947,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
       "kingdom",
-      "hilltop"
+      "hilltop",
+      "sanctuary"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7093,9 +6983,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
       "kingdom",
-      "hilltop"
+      "hilltop",
+      "sanctuary"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7130,9 +7020,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
       "kingdom",
-      "hilltop"
+      "hilltop",
+      "sanctuary"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7168,9 +7058,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
       "kingdom",
-      "hilltop"
+      "hilltop",
+      "sanctuary"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7202,9 +7092,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
       "kingdom",
-      "hilltop"
+      "hilltop",
+      "sanctuary"
     ],
     "characterIds": [
       "negan-smith",
@@ -7230,9 +7120,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
       "kingdom",
-      "hilltop"
+      "hilltop",
+      "sanctuary"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7261,9 +7151,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
       "kingdom",
-      "hilltop"
+      "hilltop",
+      "sanctuary"
     ],
     "characterIds": [
       "morgan-jones",
@@ -7289,9 +7179,9 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
       "kingdom",
-      "hilltop"
+      "hilltop",
+      "sanctuary"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -7322,9 +7212,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "sanctuary",
-      "kingdom",
-      "hilltop"
+      "oceanside"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7357,6 +7245,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
       "hilltop"
@@ -7398,10 +7287,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7439,10 +7328,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7471,10 +7360,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7504,10 +7393,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7534,10 +7423,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7566,10 +7455,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7602,10 +7491,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7637,10 +7526,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7679,10 +7568,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7716,10 +7605,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7747,10 +7636,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -7782,10 +7671,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7818,10 +7707,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7855,10 +7744,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7892,10 +7781,10 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
-      "hilltop",
-      "alexandria"
+      "hilltop"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7930,10 +7819,11 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "alexandria",
       "sanctuary",
       "kingdom",
       "hilltop",
-      "alexandria"
+      "oceanside"
     ],
     "characterIds": [
       "rick-grimes",
@@ -7968,7 +7858,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8006,7 +7896,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8044,7 +7934,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8079,7 +7969,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8116,7 +8006,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8154,14 +8044,13 @@
     "title": "Who Are You Now?",
     "airDate": "2018-11-11",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
-      "whisperer-woods"
+      "kingdom"
     ],
     "characterIds": [
       "michonne",
@@ -8188,14 +8077,13 @@
     "title": "Stradivarius",
     "airDate": "2018-11-18",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
-      "whisperer-woods"
+      "kingdom"
     ],
     "characterIds": [
       "michonne",
@@ -8219,14 +8107,13 @@
     "title": "Evolution",
     "airDate": "2018-11-25",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
-      "whisperer-woods"
+      "kingdom"
     ],
     "characterIds": [
       "michonne",
@@ -8252,13 +8139,12 @@
     "title": "Adaptation",
     "airDate": "2019-02-10",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8286,13 +8172,12 @@
     "title": "Omega",
     "airDate": "2019-02-17",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8316,13 +8201,12 @@
     "title": "Bounty",
     "airDate": "2019-02-24",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8348,13 +8232,12 @@
     "title": "Guardians",
     "airDate": "2019-03-03",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8382,13 +8265,12 @@
     "title": "Chokepoint",
     "airDate": "2019-03-10",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8412,13 +8294,12 @@
     "title": "Scars",
     "airDate": "2019-03-17",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8445,13 +8326,12 @@
     "title": "The Calm Before",
     "airDate": "2019-03-24",
     "timelineStart": 2020,
-    "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2020,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8479,14 +8359,13 @@
     "episodeNumber": 16,
     "title": "The Storm",
     "airDate": "2019-03-31",
-    "timelineStart": 2020,
+    "timelineStart": 2021,
     "timelineEnd": 2021,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
       "hilltop",
-      "kingdom",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8516,12 +8395,11 @@
     "title": "Lines We Cross",
     "airDate": "2019-10-06",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8551,12 +8429,11 @@
     "title": "We Are the End of the World",
     "airDate": "2019-10-13",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8580,12 +8457,11 @@
     "title": "Ghosts",
     "airDate": "2019-10-20",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8615,12 +8491,11 @@
     "title": "Silence the Whisperers",
     "airDate": "2019-10-27",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8649,12 +8524,11 @@
     "title": "What It Always Is",
     "airDate": "2019-11-03",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8678,12 +8552,11 @@
     "title": "Bonds",
     "airDate": "2019-11-10",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8708,12 +8581,11 @@
     "title": "Open Your Eyes",
     "airDate": "2019-11-17",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8739,12 +8611,11 @@
     "title": "The World Before",
     "airDate": "2019-11-24",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8772,12 +8643,11 @@
     "title": "Squeeze",
     "airDate": "2020-02-23",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8801,12 +8671,11 @@
     "title": "Stalker",
     "airDate": "2020-03-01",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8832,12 +8701,11 @@
     "title": "Morning Star",
     "airDate": "2020-03-08",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8865,12 +8733,11 @@
     "title": "Walk with Us",
     "airDate": "2020-03-15",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
       "alexandria",
-      "hilltop",
       "whisperer-woods"
     ],
     "characterIds": [
@@ -8898,13 +8765,11 @@
     "title": "What We Become",
     "airDate": "2020-03-22",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "bloodsworth-island"
     ],
     "characterIds": [
       "rick-grimes",
@@ -8934,13 +8799,12 @@
     "title": "Look at the Flowers",
     "airDate": "2020-03-29",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "rural-virginia",
+      "mid-atlantic-city"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -8965,13 +8829,12 @@
     "title": "The Tower",
     "airDate": "2020-04-05",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "rural-virginia",
+      "mid-atlantic-city"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -8997,13 +8860,11 @@
     "title": "A Certain Doom",
     "airDate": "2020-10-04",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "rural-virginia-hospital"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9032,13 +8893,11 @@
     "title": "Home Sweet Home",
     "airDate": "2021-02-28",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9064,13 +8923,11 @@
     "title": "Find Me",
     "airDate": "2021-03-07",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9091,13 +8948,11 @@
     "title": "One More",
     "airDate": "2021-03-14",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "gabriel-stokes"
@@ -9117,13 +8972,11 @@
     "title": "Splinter",
     "airDate": "2021-03-21",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "west-virginia-train-yard"
     ],
     "characterIds": [
       "ezekiel-sutton"
@@ -9143,13 +8996,11 @@
     "title": "Diverged",
     "airDate": "2021-03-28",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9170,13 +9021,11 @@
     "title": "Here's Negan",
     "airDate": "2021-04-04",
     "timelineStart": 2021,
-    "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "hilltop",
-      "whisperer-woods"
+      "rural-virginia"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9202,13 +9051,11 @@
     "title": "Acheron: Part 1",
     "airDate": "2021-08-15",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "washington-dc-subway"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9237,13 +9084,11 @@
     "title": "Acheron: Part 2",
     "airDate": "2021-08-22",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "washington-dc-subway"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9267,13 +9112,11 @@
     "title": "Hunted",
     "airDate": "2021-08-29",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "reapers-war"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9300,13 +9143,11 @@
     "title": "Rendition",
     "airDate": "2021-09-05",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "reapers-war"
     ],
     "characterIds": [
       "daryl-dixon"
@@ -9326,13 +9167,12 @@
     "title": "Out of the Ashes",
     "airDate": "2021-09-12",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "reapers-war",
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "negan-smith",
@@ -9360,13 +9200,11 @@
     "title": "On the Inside",
     "airDate": "2021-09-19",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "reapers-war"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9391,13 +9229,12 @@
     "title": "Promises Broken",
     "airDate": "2021-09-26",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "reapers-war",
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9421,13 +9258,11 @@
     "title": "For Blood",
     "airDate": "2021-10-03",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "reapers-war"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9455,13 +9290,11 @@
     "title": "No Other Way",
     "airDate": "2022-02-13",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9489,13 +9322,11 @@
     "title": "New Haunts",
     "airDate": "2022-02-20",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9520,13 +9351,11 @@
     "title": "Rogue Element",
     "airDate": "2022-02-27",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "carol-peletier",
@@ -9547,13 +9376,12 @@
     "title": "The Lucky Ones",
     "airDate": "2022-03-06",
     "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineEnd": 2021,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio",
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9578,14 +9406,12 @@
     "episodeNumber": 13,
     "title": "Warlords",
     "airDate": "2022-03-13",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "riverbend"
     ],
     "characterIds": [
       "negan-smith",
@@ -9608,14 +9434,12 @@
     "episodeNumber": 14,
     "title": "The Rotten Core",
     "airDate": "2022-03-20",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "riverbend"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9641,14 +9465,13 @@
     "episodeNumber": 15,
     "title": "Trust",
     "airDate": "2022-03-27",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio",
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9674,14 +9497,13 @@
     "episodeNumber": 16,
     "title": "Acts of God",
     "airDate": "2022-04-03",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio",
+      "rural-virginia"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9706,14 +9528,12 @@
     "episodeNumber": 17,
     "title": "Lockdown",
     "airDate": "2022-10-02",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9747,14 +9567,12 @@
     "episodeNumber": 18,
     "title": "A New Deal",
     "airDate": "2022-10-02",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9786,14 +9604,12 @@
     "episodeNumber": 19,
     "title": "Variant",
     "airDate": "2022-10-09",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9822,14 +9638,12 @@
     "episodeNumber": 20,
     "title": "What's Been Lost",
     "airDate": "2022-10-16",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9852,14 +9666,12 @@
     "episodeNumber": 21,
     "title": "Outpost 22",
     "airDate": "2022-10-23",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "ohio-virginia-wilds"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9890,14 +9702,12 @@
     "episodeNumber": 22,
     "title": "Faith",
     "airDate": "2022-10-30",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
@@ -9927,14 +9737,12 @@
     "episodeNumber": 23,
     "title": "Family",
     "airDate": "2022-11-06",
-    "timelineStart": 2021,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "approximate",
+    "timelineStart": 2022,
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "daryl-dixon",
@@ -9962,14 +9770,12 @@
     "episodeNumber": 24,
     "title": "Rest in Peace",
     "airDate": "2022-11-20",
-    "timelineStart": 2021,
+    "timelineStart": 2022,
     "timelineEnd": 2023,
     "timelinePrecision": "range",
-    "certainty": "approximate",
+    "certainty": "confirmed",
     "locationIds": [
-      "alexandria",
-      "commonwealth",
-      "hilltop"
+      "commonwealth-ohio"
     ],
     "characterIds": [
       "rick-grimes",
@@ -10009,6 +9815,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
+      "lincoln-nebraska",
       "omaha"
     ],
     "characterIds": [
@@ -10035,7 +9842,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha"
+      "nebraska"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10061,7 +9868,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha"
+      "nebraska"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10087,7 +9894,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha"
+      "iowa"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10114,7 +9921,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha"
+      "iowa"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10140,7 +9947,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha"
+      "iowa"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10167,7 +9974,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha"
+      "iowa"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10193,7 +10000,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha"
+      "iowa"
     ],
     "characterIds": [
       "hope-bennett",
@@ -10218,7 +10025,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha"
+      "iowa"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10244,7 +10051,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha"
+      "new-york-city"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10265,13 +10072,12 @@
     "episodeNumber": 1,
     "title": "Konsekans",
     "airDate": "2021-10-03",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
-      "portland"
+      "perimeter"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10292,13 +10098,12 @@
     "episodeNumber": 2,
     "title": "Foothold",
     "airDate": "2021-10-10",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
-      "portland"
+      "perimeter"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10320,13 +10125,12 @@
     "episodeNumber": 3,
     "title": "Exit Wounds",
     "airDate": "2021-10-17",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
-      "portland"
+      "perimeter"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10347,13 +10151,12 @@
     "episodeNumber": 4,
     "title": "Family Is A Four Letter Word",
     "airDate": "2021-10-24",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
-      "portland"
+      "albany-new-york"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10378,13 +10181,12 @@
     "episodeNumber": 5,
     "title": "Quatervois",
     "airDate": "2021-10-31",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
-      "portland"
+      "albany-new-york"
     ],
     "characterIds": [
       "jadis-stokes",
@@ -10406,13 +10208,12 @@
     "episodeNumber": 6,
     "title": "Who Are You?",
     "airDate": "2021-11-07",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
-      "portland"
+      "watkins-glen"
     ],
     "characterIds": [
       "jadis-stokes",
@@ -10435,12 +10236,11 @@
     "episodeNumber": 7,
     "title": "Blood and Lies",
     "airDate": "2021-11-14",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
       "portland"
     ],
     "characterIds": [
@@ -10464,12 +10264,11 @@
     "episodeNumber": 8,
     "title": "Returning Point",
     "airDate": "2021-11-21",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
       "portland"
     ],
     "characterIds": [
@@ -10492,12 +10291,11 @@
     "episodeNumber": 9,
     "title": "Death and the Dead",
     "airDate": "2021-11-28",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
       "portland"
     ],
     "characterIds": [
@@ -10521,13 +10319,13 @@
     "episodeNumber": 10,
     "title": "The Last Light",
     "airDate": "2021-12-05",
-    "timelineStart": 2021,
-    "timelineEnd": 2021,
+    "timelineStart": 2020,
+    "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "omaha",
-      "portland"
+      "portland",
+      "civic-republic-research-facility"
     ],
     "characterIds": [
       "jadis-stokes",

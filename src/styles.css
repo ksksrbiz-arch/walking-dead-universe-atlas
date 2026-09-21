@@ -27,7 +27,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #dce5e2;outline-offse
 .map{position:absolute;inset:0;overflow:hidden;background:#71888c;isolation:isolate}
 .mapAtmosphere{position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 48% 42%,#d7e0df30,transparent 38%),linear-gradient(180deg,#9aafb1 0%,#71888c 100%);pointer-events:none}
 .mapSurface{position:absolute;inset:0;z-index:1;contain:layout paint;overflow:hidden}
-.mapSurface svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform-origin:50% 50%;transform:translate3d(0,0,0) scale(1);touch-action:none;user-select:none;-webkit-user-select:none;will-change:transform}
+.mapSurface svg{position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;transform:translate3d(0,0,0) scale(1);touch-action:none;user-select:none;-webkit-user-select:none;will-change:transform}
 .mapSurface svg.dragging{cursor:grabbing}
 .countries path{stroke:#727b77aa;stroke-width:.65;vector-effect:non-scaling-stroke}
 .landShadow{filter:none}
@@ -76,13 +76,20 @@ button:focus-visible,input:focus-visible{outline:2px solid #dce5e2;outline-offse
 .liveDot{width:8px;height:8px;border-radius:50%;background:#58c392;box-shadow:0 0 0 5px #58c39220}
 .mapTopLeft>strong{display:block;margin-top:8px;font-size:22px;line-height:1}
 .mapTopLeft>strong small{font-size:8px;letter-spacing:.12em;color:#778587}
-.mapTopRight{right:22px;top:94px;display:flex;flex-direction:column;gap:7px;padding:7px;border-radius:15px}
+.mapTopRight{right:calc(min(410px,34vw) + 40px);top:94px;display:flex;flex-direction:column;gap:7px;padding:7px;border-radius:15px}
 .mapTopRight button{display:grid;place-items:center;width:42px;height:42px;border:1px solid #ffffff18;border-radius:11px;background:#111b1cdc;color:#e6ecea}
 .mapTopRight svg{width:19px;height:19px}
 .zoomBadge{padding:3px 0;text-align:center;color:#6f7d7f;font:700 7px "Space Mono",monospace}
 .seriesRail{position:absolute;z-index:31;left:50%;top:92px;transform:translateX(-50%);display:flex;gap:6px;max-width:min(60vw,760px);overflow-x:auto;overflow-y:hidden;padding:4px;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x}.seriesRail::-webkit-scrollbar{display:none}
 .seriesRail button{height:34px;padding:0 13px;border:1px solid #ffffff1c;border-radius:999px;background:#0a1213d9;color:#899596;font:700 8px "Space Mono",monospace;letter-spacing:.06em;white-space:nowrap;box-shadow:0 7px 20px #0003}
 .seriesRail button.active{background:#edf1ee;color:#101617;border-color:#edf1ee}
+.mapLayerRail{position:absolute;z-index:31;left:50%;top:134px;transform:translateX(-50%);display:flex;align-items:center;gap:5px;max-width:min(72vw,900px);overflow-x:auto;overflow-y:hidden;padding:3px 4px;scrollbar-width:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x}
+.mapLayerRail::-webkit-scrollbar{display:none}
+.mapLayerLabel{display:flex;align-items:center;gap:4px;padding:0 6px;color:#7f8c8d;font:700 7px "Space Mono",monospace;letter-spacing:.08em;white-space:nowrap}
+.mapLayerLabel svg{width:13px;height:13px}
+.mapLayerRail button{height:27px;padding:0 10px;border:1px solid #ffffff16;border-radius:999px;background:#081011d9;color:#7f8b8c;font:700 7px "Space Mono",monospace;letter-spacing:.04em;white-space:nowrap;box-shadow:0 5px 16px #0003}
+.mapLayerRail button.active{background:#dfe5e2;color:#101617;border-color:#dfe5e2}
+.mapLayerRail button:focus-visible{outline:2px solid #e9efed;outline-offset:2px}
 .mapCompass{position:absolute;z-index:20;left:24px;bottom:205px;display:none}
 .mapLegend{position:absolute;z-index:30;left:22px;bottom:314px;display:grid;grid-template-columns:repeat(4,auto);gap:6px 12px;padding:12px 14px;border:1px solid #ffffff20;border-radius:13px;background:#0a1213cc;color:#8c9899;font-size:8px;box-shadow:0 12px 30px #0004}
 .mapLegend small{grid-column:1/-1;font:700 7px "Space Mono",monospace;letter-spacing:.12em;color:#6f7c7e}
@@ -177,6 +184,9 @@ button:focus-visible,input:focus-visible{outline:2px solid #dce5e2;outline-offse
   .mapTopLeft{left:12px;top:78px;min-width:124px;padding:10px 12px;border-radius:13px}.locationKicker{font-size:7px}.mapTopLeft>strong{font-size:18px}.mapTopLeft>strong small{font-size:7px}
   .mapTopRight{right:12px;top:78px;padding:5px;border-radius:13px}.mapTopRight button{width:38px;height:38px}.mapTopRight button:nth-child(3){display:grid}
   .seriesRail{left:12px;right:12px;top:128px;transform:none;max-width:none;padding:0 18px 0 0;gap:5px;scroll-snap-type:x proximity;mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 18px),transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 18px),transparent 100%)}
+  .mapLayerRail{left:12px;right:12px;top:164px;transform:none;max-width:none;padding:0 18px 0 0;gap:4px;scroll-snap-type:x proximity;mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 18px),transparent 100%);-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 18px),transparent 100%)}
+  .mapLayerRail button{height:30px;padding:0 9px;font-size:6.5px;flex:0 0 auto}
+  .mapLayerLabel{font-size:6.5px;flex:0 0 auto}
   .seriesRail button{height:30px;padding:0 10px;font-size:7px;scroll-snap-align:start;flex:0 0 auto}
   .mapLabels text{font-size:9px}
   .mapLegend{display:none}
@@ -211,23 +221,14 @@ button:focus-visible,input:focus-visible{outline:2px solid #dce5e2;outline-offse
   .searchOverlayResults>button{padding:12px 8px;background:#101a1c;border:1px solid #1f2c2e;margin-bottom:5px}
   .timeMachine{display:none}
 }
-@media(min-width:700px){
-  /* Left-anchored, stacked below mapTopLeft: a right:22px anchor here sits directly
-     under the content sidebar (also right:22px, higher z-index than mapChrome), making
-     zoom/reset dead on every desktop and tablet width — the sidebar is open by default
-     with no way to know it's blocking anything underneath. Scoped to min-width:700px so
-     the phone-only .mapTopRight positioning (which sets right but not left) is untouched. */
-  .mapTopRight{left:22px;right:auto;top:180px}
-}
-@media(min-width:700px) and (max-width:1100px){
-  /* At this width the fixed 380px sidebar can cover over half the screen with no way
-     to dismiss it (panelGrab, the collapse handle mobile relies on, is display:none
-     outside the phone breakpoint) — locking users out of most of the map. Give tablet
-     widths the same collapsible affordance, shrinking width instead of height since
-     this is a right-anchored sidebar rather than a bottom sheet. */
-  .contentPanel{width:380px;transition:width 160ms ease}
+@media(min-width:700px) and (max-width:1099px){
+  /* At this width the sidebar (see the min(360px,36vw) rule further down) can still
+     cover a large share of the screen with no way to dismiss it — panelGrab, the
+     collapse handle mobile relies on, is display:none outside the phone breakpoint.
+     Give tablet widths the same collapsible affordance, shrinking width instead of
+     height since this is a right-anchored sidebar rather than a bottom sheet. */
+  .contentPanel{transition:width 160ms ease}
   .contentPanel.peek{width:40px}
-  .atlasTimelineDock{right:420px}.topbar{grid-template-columns:auto minmax(240px,1fr) auto}
   .panelGrab{
     display:grid;place-items:center;position:absolute;z-index:4;
     top:0;left:0;bottom:0;width:26px;border:0;border-right:1px solid #ffffff10;background:transparent;
@@ -939,7 +940,19 @@ button:active{transform:translateY(1px)}
 .guidePaths>button>svg{width:14px;height:14px;color:#667577}
 .guideSecondary{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0 16px}
 .guideSecondary>div{padding:12px;border:1px solid #293638;border-radius:12px;background:#101a1c}
-.guideSecondary small,.guideStatus small{display:block;color:#6f7d7f;font:700 7px "Space Mono",monospace;letter-spacing:.1em}
+.guideSecondary small,
+.sourceDirectory{display:grid;gap:7px;margin-top:10px}
+.sourceDirectoryItem{display:grid;grid-template-columns:minmax(0,1fr) 16px;gap:10px;align-items:center;padding:11px 12px;border:1px solid #ffffff12;border-radius:13px;background:#0b1416;color:inherit;text-decoration:none}
+.sourceDirectoryItem:hover{border-color:#ffffff25;background:#101a1c}
+.sourceDirectoryItem>span{display:grid;gap:3px;min-width:0}
+.sourceDirectoryItem small{font:700 7px "Space Mono",monospace;letter-spacing:.08em;color:#718081}
+.sourceDirectoryItem b{font-size:11px;color:#d7dedc}
+.sourceDirectoryItem em{font-size:9px;line-height:1.4;color:#879392;font-style:normal}
+.sourceDirectoryItem svg{width:14px;color:#aeb8b8}
+.sourceMethodology{display:grid;gap:5px;margin:10px 0 18px;padding:12px;border:1px solid #ffffff12;border-radius:13px;background:#081113}
+.sourceMethodology b{font:700 7px "Space Mono",monospace;letter-spacing:.08em;color:#aeb8b8}
+.sourceMethodology span{font-size:9px;line-height:1.45;color:#7f8d8b}
+.guideStatus small{display:block;color:#6f7d7f;font:700 7px "Space Mono",monospace;letter-spacing:.1em}
 .guideSecondary b{display:block;margin:6px 0 3px;font:700 13px "Space Mono",monospace}
 .guideSecondary span,.guideStatus span{display:block;color:#748284;font-size:8px;line-height:1.4}
 .guideStatus{display:grid;gap:8px;margin:8px 0 8px;padding:12px;border:1px solid #293638;border-radius:13px;background:#0d1718}
@@ -958,7 +971,7 @@ button:active{transform:translateY(1px)}
     top:490px;
     z-index:72;
   }
-  .map.view-map .mapTopRight{z-index:75}
+  .map.view-map .mapTopRight{right:12px;z-index:76}
 }
 @media(max-width:390px){
   .map.view-map .seriesRail{top:470px}
@@ -1097,3 +1110,200 @@ button:active{transform:translateY(1px)}
 .errorFallback b{font-size:15px}
 .errorFallback p{margin:0;color:#a99;font-size:11px;line-height:1.5;font-family:"Space Mono",monospace}
 .errorFallback button{justify-self:start;min-height:38px;padding:0 16px;border:1px solid #ffffff20;border-radius:10px;background:#241616;color:#edf1ef}
+
+.marker.episodeContext .markerCore{r:2.4;stroke:#f4f1df;stroke-width:1.2}.marker.episodeContext .markerGlyph{filter:drop-shadow(0 0 3px currentColor)}
+
+.locationHistoryStrip{display:grid;grid-template-columns:1fr 2fr .7fr;gap:8px;margin:12px 0;padding:10px;border:1px solid #ffffff18;border-radius:14px;background:#07101180}.locationHistoryStrip span{min-width:0}.locationHistoryStrip small{display:block;font:600 8px "Space Mono",monospace;letter-spacing:.12em;opacity:.58}.locationHistoryStrip b{display:block;margin-top:4px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.locationHistoryStrip span:first-child b{font-family:"Space Mono",monospace}@media(max-width:699px){.locationHistoryStrip{grid-template-columns:1fr 1.7fr .6fr}.locationHistoryStrip b{font-size:11px}}
+
+
+/* Connection focus mode */
+.marker.connectionContext .markerCore{r:2.8;stroke:#fff2c9;stroke-width:1.4}
+.marker.connectionContext .markerGlyph{filter:drop-shadow(0 0 5px #fff2c9)}
+.marker.connectionContext .markerLabel{font-weight:800}
+.connectionHero{position:relative;overflow:hidden;min-height:154px;margin-bottom:12px;padding:18px;border:1px solid #ffffff20;border-radius:16px;background:radial-gradient(circle at 90% 10%,#d8c58a18,transparent 48%),linear-gradient(145deg,#101c1d,#0a1314)}
+.connectionHero:after{content:"";position:absolute;inset:auto -30% -60% 25%;height:120px;background:radial-gradient(circle,#d8c58a14,transparent 68%);pointer-events:none}
+.connectionHero>span{display:block;color:#899596;font:700 7px "Space Mono",monospace;letter-spacing:.1em}
+.connectionHero h3{position:relative;z-index:1;margin:9px 0 6px;max-width:620px;font-size:21px;line-height:1.08;letter-spacing:-.02em}
+.connectionHero p{position:relative;z-index:1;margin:0;color:#819091;font-size:9px}
+.connectionEndpoints{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 14px}
+.connectionEndpoint{min-width:0;padding:11px;border:1px solid #293638;border-radius:12px;background:#0e1819}
+.connectionEndpoint small{display:block;color:#6f7e80;font:700 6.5px "Space Mono",monospace;letter-spacing:.1em}
+.connectionEndpoint b{display:block;margin:5px 0 8px;color:#d5dddb;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.connectionEndpoint button{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:30px;padding:0 8px;border:1px solid #ffffff12;border-radius:8px;background:#101c1d;color:#9da9a8;font:700 6.5px "Space Mono",monospace;letter-spacing:.06em}
+.connectionEndpoint button svg{width:12px}
+.connectionFocusCard{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;margin:8px 0 14px;padding:11px;border:1px solid #d8c58a28;border-radius:13px;background:linear-gradient(90deg,#171b1b,#101819)}
+.connectionFocusCard small{display:block;color:#7c8989;font:700 6.5px "Space Mono",monospace;letter-spacing:.1em}
+.connectionFocusCard b{display:block;margin:5px 0 3px;font:700 13px "Space Mono",monospace;color:#e0e6e4}
+.connectionFocusCard span{display:block;color:#758385;font-size:8px;line-height:1.4}
+.connectionFocusCard>button{display:flex;align-items:center;gap:6px;min-height:42px;padding:0 11px;border:1px solid #d8c58a44;border-radius:10px;background:#d8c58a;color:#101718;font:700 7px "Space Mono",monospace;letter-spacing:.05em;white-space:nowrap}
+.connectionFocusCard>button svg{width:14px}
+.connectionFocusButton{display:grid;grid-template-columns:minmax(0,1fr) 14px;align-items:center;gap:8px;width:100%;margin-top:6px;padding:8px 9px;border:1px solid #293638;border-radius:9px;background:#0d1718;color:#dfe6e4;text-align:left}
+.connectionFocusButton b{margin:0!important;display:block;min-width:0;white-space:normal;line-height:1.25}
+.connectionFocusButton span{display:block;color:#6f7e80;font-size:7px;margin-top:3px}
+.connectionFocusButton svg{width:12px;color:#738284}
+.connectionEvidenceEpisodes{gap:7px}
+@media(max-width:699px){
+ .connectionHero{min-height:138px;padding:15px}
+ .connectionHero h3{font-size:18px}
+ .connectionEndpoints{grid-template-columns:1fr}
+ .connectionFocusCard{grid-template-columns:1fr}
+ .connectionFocusCard>button{justify-content:center;width:100%}
+}
+
+
+/* Character journey map context */
+.marker.characterJourneyContext .markerCore{r:2.8;stroke:#dfe9e6;stroke-width:1.3}
+.marker.characterJourneyContext .markerGlyph{filter:drop-shadow(0 0 5px currentColor)}
+.journeyMapAction{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;margin:8px 0 14px;padding:11px;border:1px solid #72a9c533;border-radius:13px;background:linear-gradient(90deg,#0f191b,#101819)}
+.journeyMapAction small{display:block;color:#718082;font:700 6.5px "Space Mono",monospace;letter-spacing:.1em}
+.journeyMapAction b{display:block;margin:5px 0 3px;color:#d5dddb;font-size:11px}
+.journeyMapAction span{display:block;color:#758385;font-size:8px;line-height:1.4}
+.journeyMapAction>button{display:flex;align-items:center;gap:6px;min-height:42px;padding:0 11px;border:1px solid #72a9c555;border-radius:10px;background:#72a9c5;color:#091314;font:700 7px "Space Mono",monospace;letter-spacing:.05em;white-space:nowrap}
+.journeyMapAction>button svg{width:14px}
+@media(max-width:699px){
+ .journeyMapAction{grid-template-columns:1fr}
+ .journeyMapAction>button{justify-content:center;width:100%}
+}
+
+
+.timelineSecondaryToggle{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;width:100%;margin:8px 0 10px;padding:10px 11px;border:1px solid #ffffff16;border-radius:11px;background:#0c1617;color:#d4dcda;text-align:left}
+.timelineSecondaryToggle>span{color:#718081;font:700 6px "Space Mono",monospace;letter-spacing:.08em}
+.timelineSecondaryToggle b{font-size:9px}
+.timelineSecondaryToggle small{grid-column:2/3;color:#718081;font-size:7px;line-height:1.35}
+.timelineSecondaryToggle svg{grid-column:3;grid-row:1/3;width:13px}
+.timelineSecondaryToggle.active{border-color:#72a9c544;background:#101c1e}
+.webisodeLayer{margin-top:14px;padding-top:3px}
+.webisodeRow{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid #ffffff0d}
+.webisodeRow>strong{font:700 11px "Space Mono",monospace;color:#bfc9c7}
+.webisodeRow small{display:block;color:#718081;font:700 6.5px "Space Mono",monospace;letter-spacing:.05em}
+.webisodeRow b{display:block;margin:3px 0;color:#d4dcda;font-size:10px}
+.webisodeRow span{display:block;color:#718081;font-size:7px}
+.webisodeLayer>.muted{margin:10px 0 0;font-size:8px;line-height:1.5}
+@media(max-width:699px){
+ .timelineSecondaryToggle{grid-template-columns:auto minmax(0,1fr) 14px}
+ .timelineSecondaryToggle small{font-size:6.5px}
+}
+
+.universeEventList{display:grid;gap:0;margin:8px 0 16px}.universeEventRow{display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid #ffffff0d}.universeEventRow>strong{font:700 11px "Space Mono",monospace;color:#cbd2d0}.universeEventRow>div{display:grid;gap:3px}.universeEventRow small{font:700 7px "Space Mono",monospace;letter-spacing:.06em;color:#718081}.universeEventRow b{font-size:11px;color:#d7dedc}.universeEventRow span{font-size:9px;line-height:1.4;color:#879392}
+.universeEventRow{width:100%;font:inherit;color:inherit;text-align:left;background:transparent;border-left:0;border-right:0;border-top:0}
+button.universeEventRow{cursor:pointer;grid-template-columns:48px minmax(0,1fr) 18px}
+button.universeEventRow:hover{background:#ffffff04}
+.universeEventRow em{font:700 7px "Space Mono",monospace;color:#b9c3c1;font-style:normal;letter-spacing:.04em}.atlasTimelineItem.universe-event{border:1px solid #fff2c9;background:#fff2c9;opacity:.85}.atlasTimelineItem.universe-event i{display:block;width:5px;height:5px;border-radius:50%;background:#fff2c9}
+
+.entityTagButton{display:inline-flex;align-items:center;min-height:34px;padding:7px 10px;border:1px solid #293638;border-radius:999px;background:#111b1d;color:#aeb8b8;font-size:9px;cursor:pointer}.entityTagButton:hover{border-color:#ffffff28;background:#152022}.entityFocusClear{margin:10px 0 0;padding:7px 9px;border:1px solid #ffffff18;border-radius:9px;background:#0b1416;color:#7f8d8b;font:700 7px "Space Mono",monospace;letter-spacing:.06em}
+
+.mediaAuditGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0}.mediaAuditGrid>div{display:grid;gap:3px;padding:10px;border:1px solid #ffffff12;border-radius:11px;background:#0b1416}.mediaAuditGrid small{font:700 7px "Space Mono",monospace;color:#718081}.mediaAuditGrid b{font-size:14px;color:#d7dedc}.mediaAuditGrid span{font-size:8px;color:#879392}.mediaGapNote{display:grid;gap:5px;margin:0 0 14px;padding:10px;border:1px solid #ffffff12;border-radius:11px;background:#0b1416}.mediaGapNote b{font:700 7px "Space Mono",monospace;color:#aeb8b8}.mediaGapNote span{font-size:8px;line-height:1.45;color:#879392}
+
+
+/* Responsive layout correction: final viewport-owned control stack.
+   Keep mobile map controls in a deterministic vertical stack and give
+   tablet layouts a non-overlapping left map rail beside the detail panel. */
+@media (max-width:699px){
+  .map.view-map .mapTopLeft{
+    top:72px;
+    left:10px;
+    right:auto;
+  }
+  .map.view-map .seriesRail{
+    top:124px !important;
+    left:10px !important;
+    right:10px !important;
+    transform:none !important;
+    max-width:none !important;
+    height:40px;
+    z-index:72;
+  }
+  .map.view-map .mapLayerRail{
+    top:166px !important;
+    left:10px !important;
+    right:10px !important;
+    transform:none !important;
+    max-width:none !important;
+    height:34px;
+    z-index:73;
+    padding-right:36px;
+  }
+  .map.view-map .mapTopRight{
+    top:208px !important;
+    right:10px !important;
+    z-index:76;
+  }
+  .map.view-map .mapSurface{
+    inset:0 0 calc(var(--mobile-nav) + 70px) 0;
+  }
+  .map.view-map .seriesRailHint{
+    display:none !important;
+  }
+}
+@media (max-width:390px){
+  .map.view-map .mapTopLeft{top:70px}
+  .map.view-map .seriesRail{top:122px !important}
+  .map.view-map .mapLayerRail{top:164px !important}
+  .map.view-map .mapTopRight{top:206px !important}
+}
+
+@media (min-width:700px) and (max-width:1099px){
+  .topbar{
+    grid-template-columns:auto minmax(260px,1fr) auto;
+    gap:12px;
+    padding-left:14px;
+    padding-right:14px;
+  }
+  .topbar .brand b{font-size:18px}
+  .topbar .brand small{font-size:7px}
+  .searchWrap{min-width:0}
+  .contentPanel{
+    right:14px;
+    width:min(360px,36vw);
+    top:86px;
+    bottom:84px;
+  }
+  .atlasTimelineDock{
+    left:14px;
+    right:calc(min(360px,36vw) + 28px);
+    bottom:84px;
+    height:190px;
+  }
+  .mapTopLeft{
+    left:14px;
+    top:86px;
+  }
+  .mapTopRight{
+    right:calc(min(360px,36vw) + 28px);
+    top:86px;
+  }
+  .seriesRail{
+    left:14px;
+    right:calc(min(360px,36vw) + 28px);
+    transform:none;
+    max-width:none;
+    overflow-x:auto;
+  }
+  .mapLayerRail{
+    left:14px;
+    right:calc(min(360px,36vw) + 28px);
+    transform:none;
+    max-width:none;
+    overflow-x:auto;
+  }
+}
+
+
+/* Desktop map rail correction: reserve the left geography card and the
+   right-side map controls/detail panel instead of centering rails beneath them. */
+@media (min-width:1100px){
+  .map.view-map .seriesRail{
+    left:190px !important;
+    right:calc(min(410px,34vw) + 110px) !important;
+    transform:none !important;
+    max-width:none !important;
+    overflow-x:auto;
+  }
+  .map.view-map .mapLayerRail{
+    left:190px !important;
+    right:calc(min(410px,34vw) + 110px) !important;
+    transform:none !important;
+    max-width:none !important;
+    overflow-x:auto;
+  }
+}
