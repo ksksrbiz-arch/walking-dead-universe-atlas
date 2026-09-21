@@ -6,7 +6,7 @@ import type {CSSProperties} from "react";
 import world from "@cublya/world-atlas/countries-50m.json";
 import {atlasData,Location,SeriesKey} from "./data";
 import {validateAtlasData} from "./lib/validateData";
-import {buildChronology,getEpisodeWatchOrder,describeEra} from "./lib/chronology";
+import {buildChronology,getEpisodeWatchOrder,describeEra,UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR,yearToPercent} from "./lib/chronology";
 import episodeMedia from "../data/episodeMedia.json";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
@@ -586,9 +586,10 @@ function TimelineContent({episodes,onEpisode,onUniverseEvent,onConnections,onYea
 function ChronologyMatrix({year,onYearChange,series,onEpisode,onConnections}:{year:number;onYearChange:(year:number)=>void;series:SeriesKey|"ALL";onEpisode:(id:string)=>void;onConnections:()=>void}){
  const [mode,setMode]=useState<"overview"|"focus">("overview");
  const all=useMemo(()=>buildChronology(),[]);
- const min=2010,max=2028;
+ const min=UNIVERSE_MIN_YEAR,max=UNIVERSE_MAX_YEAR;
  const focusYear=Math.round(year);
- const pos=(y:number)=>((Math.max(min,Math.min(max,y))-min)/(max-min))*100;
+ const pos=(y:number)=>yearToPercent(y,min,max);
+ const era=useMemo(()=>describeEra(focusYear),[focusYear]);
  const lanes=useMemo(()=>Object.keys(META).filter(k=>all.some(x=>x.seriesId===META[k as SeriesKey].id)) as SeriesKey[],[all]);
  const visible=useMemo(()=>all.filter(x=>series==="ALL"||x.seriesId===META[series].id),[all,series]);
  const byLaneYear=useMemo(()=>{
@@ -615,7 +616,7 @@ function ChronologyMatrix({year,onYearChange,series,onEpisode,onConnections}:{ye
  const jump=(y:number)=>onYearChange(Math.max(min,Math.min(max,y)));
  return <section className={"chronologyAtlas"+(mode==="focus"?" focusMode":"")} aria-label="Universe chronology atlas">
   <header className="chronologyAtlasHead">
-   <div className="chronologyAtlasTitle"><span className="chronologyAtlasLive"/><div><small>CHRONOLOGY ATLAS</small><h3>See the whole universe at once</h3><p>{visible.length} chronology records · selected year <b>{focusYear}</b></p></div></div>
+   <div className="chronologyAtlasTitle"><span className="chronologyAtlasLive"/><div><small>CHRONOLOGY ATLAS</small><h3>See the whole universe at once</h3><p>{visible.length} chronology records · selected year <b>{focusYear}</b> <em className="chronologyAtlasEra">{era.short}</em></p></div></div>
    <div className="chronologyAtlasTools"><button className="chronologyModeButton" onClick={()=>setMode(m=>m==="overview"?"focus":"overview")}>{mode==="overview"?"YEAR FOCUS":"OVERVIEW"}</button><button onClick={()=>jump(focusYear-1)} aria-label="Previous year">−</button><output>{focusYear}</output><button onClick={()=>jump(focusYear+1)} aria-label="Next year">+</button><button className="matrixLinks" onClick={onConnections}>LINKS</button></div>
   </header>
   <div className="chronologyAtlasRead"><span>READING THE ATLAS</span><b>Each block shows how much story activity exists in that series during a year.</b><small>Tap any year column to move the global timeline. Brighter blocks indicate more recorded chronology.</small></div>
@@ -644,7 +645,7 @@ function ChronologyMatrix({year,onYearChange,series,onEpisode,onConnections}:{ye
   </div>
   <div className="chronologyAtlasControls"><div><b>{focusYear}</b><span>UNIVERSE YEAR</span></div><input type="range" min={min} max={max} step="1" value={focusYear} onChange={e=>jump(Number(e.target.value))} aria-label="Select universe year"/><button onClick={()=>{const next=focusYear>=max?min:focusYear+1;jump(next)}}>{focusYear>=max?"START":"NEXT YEAR"} <span>→</span></button></div>
   <div className="chronologyAtlasFocus">
-   <div className="chronologyAtlasFocusHead"><div><small>YEAR FOCUS</small><b>{focusYear}</b></div><span>{focusEpisodes.length} episodes · {focusEvents.length} events</span></div>
+   <div className="chronologyAtlasFocusHead"><div><small>YEAR FOCUS</small><b>{focusYear}</b><em className="chronologyAtlasEra">{era.short}</em></div><span>{focusEpisodes.length} episodes · {focusEvents.length} events</span></div>
    {(focusEpisodes.length||focusEvents.length)?<div className="chronologyFocusList">{focusItems.slice(0,8).map(item=><button key={item.kind+":"+item.id} onClick={()=>item.kind==="episode"?onEpisode(item.id):jump(item.start)}><strong>{META[(Object.keys(META) as SeriesKey[]).find(k=>META[k].id===item.seriesId) as SeriesKey]?.short||item.seriesId}</strong><span><small>{item.kind==="episode"?"EPISODE":"EVENT"}</small><b>{item.title}</b></span><i>{Math.round(item.start)}{item.end!==item.start?"–"+Math.round(item.end):""}</i></button>)}{focusItems.length>8&&<small className="chronologyFocusMore">+{focusItems.length-8} more records in the episode list below.</small>}</div>:<p className="muted">No chronology records overlap this year.</p>}
   </div>
  </section>;
