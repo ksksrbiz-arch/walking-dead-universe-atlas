@@ -53,6 +53,22 @@ export function getSeriesWatchOrder(){
  return atlasData.watchOrder.filter((x:any)=>x.type!=="note");
 }
 
+// events.json is a curated set of named story-era markers (e.g. "TWD S3 — Prison /
+// Woodbury", "Dead City — Manhattan") anchored to the same in-universe year system as
+// everything else. The current year is otherwise shown as a bare number everywhere in
+// the UI, which tells a visitor *when* they are but not *where in the story* — the
+// product's stated loop is Time -> Story -> Geography, so the year needs a narrative
+// label riding along with it. Sorting once and reusing (like buildChronology's cache)
+// avoids re-sorting ~15 items on every year-scrub tick.
+let eraCache:{year:number;title:string}[]|null=null;
+export function describeEra(year:number):{title:string;short:string}{
+ if(!eraCache)eraCache=[...atlasData.events].map((e:any)=>({year:Number(e.year),title:e.title})).sort((a,b)=>b.year-a.year);
+ const era=eraCache.find(e=>e.year<=year)??eraCache[eraCache.length-1];
+ if(!era)return {title:"Unmapped era",short:"UNMAPPED"};
+ const short=era.title.includes(" — ")?era.title.split(" — ")[1]:era.title;
+ return {title:era.title,short};
+}
+
 export type EpisodeWatchOrderItem=ChronologyItem & {
  sequence:number;
  chronologyStatus:"anchored"|"shared-year"|"unknown";
