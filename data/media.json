@@ -105,6 +105,11 @@
     "negan": {
       "kind": "character",
       "status": "needs-official-portrait"
+    },
+    "rick-grimes": {
+      "kind": "character",
+      "image": "/media/characters/rick-grimes.svg",
+      "sourcePage": "Generated Atlas character artwork"
     }
   }
 }
