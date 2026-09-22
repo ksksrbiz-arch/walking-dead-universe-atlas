@@ -775,7 +775,7 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
  const links=atlasData.connections.filter((x:any)=>x.fromId===characterId||x.toId===characterId);
  const media=(atlasData as any).media?.characters?.[characterId];
  const characterImage=media?.image||(atlasData as any).media?.series?.[character.seriesIds?.[0]]?.keyArt;
- const characterMediaFallback=!media?.image&&Boolean(characterImage);
+ const characterMediaFallback=!media?.image&&Boolean(characterImage); const characterGallery=eps.map((e:any)=>{const m=(episodeMedia as any).episodes?.[e.id];return {src:m?.image,title:e.title,meta:e.seriesId?SERIES_BY_ID[e.seriesId]?.short:""}}).filter((x:any)=>x.src).slice(0,18);
  const endpointName=(id:string)=>{const pools:any=[atlasData.characters,atlasData.locations,atlasData.communities,atlasData.factions,atlasData.series,atlasData.connections];for(const pool of pools){const item=pool.find((x:any)=>x.id===id);if(item)return item.name||item.title||item.label||id}return id};
  const seriesSpans=useMemo(()=>{
    const spans:any[]=[];
@@ -792,6 +792,7 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
    {characterImage&&<img src={atlasImageUrl(characterImage,1200)} onError={e=>onAtlasImageError(e,characterImage)} srcSet={atlasImageSrcSet(characterImage)} sizes="(max-width: 699px) 92vw, 470px" loading="eager" decoding="async" alt="" className="entityArt"/>}
    <div className="entityHeroCopy"><span>CHARACTER · {(character.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")}</span><h3>{character.name}</h3><p>{character.certainty||"tracked"} · {eps.length} linked episodes{characterMediaFallback?" · series art fallback":""}</p></div>
   </div>
+  <MediaStrip items={characterGallery} label="VISUAL ARCHIVE"/>
   <div className="detailGrid"><div><small>EPISODES</small><b>{eps.length}</b></div><div><small>LOCATIONS</small><b>{locations.length}</b></div><div><small>SERIES</small><b>{(character.seriesIds||[]).length}</b></div><div><small>LINKS</small><b>{links.length}</b></div></div>
   <MiniTimeline items={eps.filter((e:any)=>e.timelineStart!=null||e.timelineEnd!=null).map((e:any)=>({id:e.id,start:Number(e.timelineStart??e.timelineEnd),end:Number(e.timelineEnd??e.timelineStart),title:e.title,color:SERIES_BY_ID[e.seriesId]?.color}))} onSelect={onEpisode} emptyLabel="No episode-anchored chronology recorded for this character yet."/>
   <div className="sectionTitle">SERIES JOURNEY <span>{seriesSpans.length}</span></div>
