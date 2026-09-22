@@ -1,0 +1,66 @@
+name: Fandom TV Universe enrichment
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/data-enrichment-pipeline
+
+permissions:
+  contents: read
+
+jobs:
+  fandom-enrichment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ENRICHMENT_LIMIT: "5000"
+      FANDOM_REQUEST_DELAY_MS: "150"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Ingest full TV Universe categories
+        run: npm run enrich:fandom-atlas
+
+      - name: Enrich character, location and episode pages
+        run: npm run enrich:fandom-pages
+
+      - name: Write enrichment summary
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const candidate = JSON.parse(fs.readFileSync('data/enrichment/fandom-atlas-candidates.json', 'utf8'));
+          const pages = JSON.parse(fs.readFileSync('data/enrichment/fandom-page-enrichment-summary.json', 'utf8'));
+          const lines = [
+            '# Fandom TV Universe enrichment',
+            '',
+            '| Entity | Category records | Matched | Unmatched | Pages fetched | Page errors |',
+            '|---|---:|---:|---:|---:|---:|',
+            '| Characters | ' + candidate.characters.sourceRecords + ' | ' + candidate.characters.matched + ' | ' + candidate.characters.unmatched + ' | ' + pages.summary.characters.fetched + ' | ' + pages.summary.characters.errors + ' |',
+            '| Locations | ' + candidate.locations.sourceRecords + ' | ' + candidate.locations.matched + ' | ' + candidate.locations.unmatched + ' | ' + pages.summary.locations.fetched + ' | ' + pages.summary.locations.errors + ' |',
+            '| Episodes | ' + candidate.episodes.sourceRecords + ' | ' + candidate.episodes.matched + ' | ' + candidate.episodes.unmatched + ' | ' + pages.summary.episodes.fetched + ' | ' + pages.summary.episodes.errors + ' |',
+            '',
+            'Generated: ' + pages.generatedAt
+          ];
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
+          NODE
+
+      - name: Upload enrichment artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: fandom-tv-universe-enrichment
+          path: |
+            data/enrichment/fandom-atlas-candidates.json
+            data/enrichment/fandom-page-enrichment.json
+            data/enrichment/fandom-page-enrichment-summary.json
+          retention-days: 14
