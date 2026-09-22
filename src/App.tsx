@@ -312,15 +312,25 @@ export default function App(){
    // down the screen. Centering blind to that puts the cluster right behind it
    // (and its markers behind it too, un-tappable). This is a single scalar cutoff
    // (one line, not per-column), so any of these elements — even a corner-anchored
-   // one that never crosses the horizontal middle, like the locations chip or the
-   // zoom-control stack — can still sit directly over content a bit further down
-   // the map and must count toward it.
+   // one that never crosses the horizontal middle, like the locations chip — can
+   // still sit directly over content a bit further down the map and must count
+   // toward it. Whether zoom controls count depends on where the current layout
+   // actually put them (top-anchored on most breakpoints, bottom-anchored on
+   // portrait phones to clear the timeline dock) — a fixed include/exclude list
+   // here would silently drift out of sync with that the moment either changes,
+   // exactly like the earlier bug this replaced. So this checks each element's
+   // own measured position instead: only chrome that sits closer to the top of
+   // the map surface than to its bottom counts as "top" chrome at all. (A plain
+   // top-half/bottom-half split isn't enough on short phones, where a tall
+   // bottom-anchored stack's own top edge can still land in the upper half.)
    let topExclusion=surfaceRect.top;
    [".mapTopLeft",".mapTopRight",".seriesRail",".mapLayerRail",".mobileLocationsButton"].forEach(sel=>{
      const chromeEl=document.querySelector(sel);
      if(!chromeEl)return;
      const r=chromeEl.getBoundingClientRect();
      if(r.width===0&&r.height===0)return;
+     const distFromTop=r.top-surfaceRect.top,distFromBottom=surfaceRect.top+h-r.bottom;
+     if(distFromBottom<distFromTop)return;
      topExclusion=Math.max(topExclusion,r.bottom);
    });
    const topExclusionRel=clamp(topExclusion-surfaceRect.top+12,0,h);
