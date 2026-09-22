@@ -379,19 +379,19 @@ async function enrichEntityType(entityType, result, limit) {
 
   for (let offset = 0; offset < unique.length; offset += BATCH_SIZE) {
     const batch = unique.slice(offset, offset + BATCH_SIZE);
-    const pageIds = batch.map((record) => Number(record.candidate.sourceRecordId)).filter(Number.isInteger);
+    const titles = batch.map((record) => record.candidate?.name).filter(Boolean);
 
-    if (!pageIds.length) continue;
+    if (!titles.length) continue;
 
     try {
-      const payload = await fetchPages(pageIds);
+      const payload = await fetchPages(titles);
       for (const page of payload?.query?.pages || []) {
-        const candidate = candidateMap.get(String(page.pageid));
+        const candidate = batch.find((record) => record.candidate?.name === page.title);
         pages.push(flattenPage(page, entityType, candidate));
       }
     } catch (error) {
       errors.push({
-        pageIds,
+        titles,
         error: error?.message || String(error)
       });
     }
