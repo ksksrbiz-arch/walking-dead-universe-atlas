@@ -279,14 +279,12 @@ function buildPageUrl(title) {
   return WIKI + encodeURIComponent(title.replaceAll(" ", "_"));
 }
 
-async function fetchCategoryPageBatch(category, continueValue = null) {
+async function fetchPageBatch(pageIds) {
+  if (!pageIds.length) return [];
+
   const params = new URLSearchParams({
     action: "query",
-    generator: "categorymembers",
-    gcmtitle: category,
-    gcmlimit: String(BATCH_SIZE),
-    gcmnamespace: "0",
-    gcmtype: "page",
+    pageids: pageIds.join("|"),
     prop: "info|pageimages",
     inprop: "url",
     piprop: "name|original|thumbnail",
@@ -296,28 +294,41 @@ async function fetchCategoryPageBatch(category, continueValue = null) {
     formatversion: "2"
   });
 
-  if (continueValue) {
-    params.set("gcmcontinue", continueValue);
-  }
-
-  return fetchJson(API + "?" + params.toString());
+  const payload = await fetchJson(API + "?" + params.toString());
+  return (payload?.query?.pages || []).filter(
+    (page) => page.ns === 0 && !page.missing
+  );
 }
 
-async function fetchRevisions(revids) {
-  if (!revids.length) return [];
+async function mapWithConcurrency(items, concurrency, worker) {
+  const results = new Array(items.length);
+  let cursor = 0;
 
-  const params = new URLSearchParams({
-    action: "query",
-    revids: revids.join("|"),
-    prop: "revisions",
-    rvprop: "ids|timestamp|content",
-    rvslots: "main",
-    format: "json",
-    formatversion: "2"
-  });
+  async function run() {
+    while (true) {
+      const index = cursor;
+      cursor += 1;
+      if (index >= items.length) return;
 
-  const payload = await fetchJson(API + "?" + params.toString());
-  return payload?.query?.pages || [];
+      try {
+        results[index] = await worker(items[index], index);
+      } catch (error) {
+        results[index] = {
+          error: error?.message || String(error),
+          item: items[index]
+        };
+      }
+    }
+  }
+
+  await Promise.all(
+    Array.from(
+      { length: Math.min(concurrency, Math.max(1, items.length)) },
+      () => run()
+    )
+  );
+
+  return results;
 }
 
 function extractLeadText(wikitext) {
@@ -396,73 +407,59 @@ async function enrichEntityType(entityType, result, limit) {
       .filter(([id]) => id)
   ).values()].slice(0, limit);
 
-  const candidateByPageId = new Map(
-    uniqueCandidates.map((record) => [
-      String(record.candidate.sourceRecordId),
-      record
-    ])
-  );
-
-  const categories = [...new Set(
-    uniqueCandidates
-      .map((record) => record.candidate?.fields?.category)
-      .filter(Boolean)
-  )];
-
-  const pagesById = new Map();
-  const errors = [];
-  let categoryBatches = 0;
-
-  for (const category of categories) {
-    let continueValue = null;
-
-    do {
-      try {
-        const payload = await fetchCategoryPageBatch(category, continueValue);
-        const pages = (payload?.query?.pages || [])
-          .filter((page) => page.ns === 0 && !page.missing)
-          .filter((page) => candidateByPageId.has(String(page.pageid)));
-
-        const revids = pages
-          .map((page) => Number(page.lastrevid))
-          .filter((revid) => Number.isInteger(revid) && revid > 0);
-
-        const revisionPages = await fetchRevisions(revids);
-        const revisionsByPageId = new Map(
-          revisionPages.map((page) => [
-            String(page.pageid),
-            page.revisions?.[0] || null
-          ])
-        );
-
-        for (const page of pages) {
-          pagesById.set(
-            String(page.pageid),
-            flattenPage(
-              page,
-              revisionsByPageId.get(String(page.pageid)),
-              entityType,
-              candidateByPageId.get(String(page.pageid))
-            )
-          );
-        }
-
-        categoryBatches += 1;
-        continueValue = payload?.continue?.gcmcontinue || null;
-
-        if (continueValue) await sleep(REQUEST_DELAY_MS);
-      } catch (error) {
-        errors.push({
-          category,
-          continuation: continueValue,
-          error: error?.message || String(error)
-        });
-        break;
-      }
-    } while (continueValue);
-
-    if (!continueValue) await sleep(REQUEST_DELAY_MS);
+  const batches = [];
+  for (let i = 0; i < uniqueCandidates.length; i += BATCH_SIZE) {
+    const batch = uniqueCandidates.slice(i, i + BATCH_SIZE);
+    batches.push({
+      candidates: batch,
+      pageIds: batch.map((record) => String(record.candidate.sourceRecordId))
+    });
   }
+
+  const errors = [];
+  const pagesById = new Map();
+
+  const results = await mapWithConcurrency(batches, 8, async (batch) => {
+    const pages = await fetchPageBatch(batch.pageIds);
+    const revids = pages
+      .map((page) => Number(page.lastrevid))
+      .filter((revid) => Number.isInteger(revid) && revid > 0);
+
+    const revisionPages = await fetchRevisions(revids);
+    const revisionsByPageId = new Map(
+      revisionPages.map((page) => [
+        String(page.pageid),
+        page.revisions?.[0] || null
+      ])
+    );
+
+    return pages.map((page) =>
+      flattenPage(
+        page,
+        revisionsByPageId.get(String(page.pageid)),
+        entityType,
+        batch.candidates.find(
+          (record) => String(record.candidate.sourceRecordId) === String(page.pageid)
+        )
+      )
+    );
+  });
+
+  for (const batchResult of results) {
+    if (batchResult?.error) {
+      errors.push({
+        pageIds: batchResult.item.pageIds,
+        error: batchResult.error
+      });
+      continue;
+    }
+
+    for (const page of batchResult || []) {
+      pagesById.set(String(page.pageid), page);
+    }
+  }
+
+  if (REQUEST_DELAY_MS > 0) await sleep(REQUEST_DELAY_MS);
 
   return {
     entityType,
@@ -470,8 +467,7 @@ async function enrichEntityType(entityType, result, limit) {
     generatedAt: new Date().toISOString(),
     requested: uniqueCandidates.length,
     fetched: pagesById.size,
-    categoryCount: categories.length,
-    categoryBatches,
+    batchCount: batches.length,
     errors,
     pages: [...pagesById.values()]
   };
