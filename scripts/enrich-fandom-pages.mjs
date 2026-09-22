@@ -279,91 +279,55 @@ function buildPageUrl(title) {
   return WIKI + encodeURIComponent(title.replaceAll(" ", "_"));
 }
 
-async function fetchCategoryPageBatch(category, continueValue = null) {
+async function fetchPageBatch(pageIds) {
+  if (!pageIds.length) return [];
+
   const params = new URLSearchParams({
     action: "query",
-    generator: "categorymembers",
-    gcmtitle: category,
-    gcmlimit: String(BATCH_SIZE),
-    gcmnamespace: "0",
-    gcmtype: "page",
-    prop: "info|pageimages|extracts|revisions",
+    pageids: pageIds.join("|"),
+    prop: "info|pageimages",
     inprop: "url",
     piprop: "name|original|thumbnail",
     pithumbsize: "1200",
-    exintro: "1",
-    explaintext: "1",
-    exchars: "1200",
-    rvprop: "ids|timestamp|content",
-    rvslots: "main",
-    rvlimit: "1",
     redirects: "1",
     format: "json",
     formatversion: "2"
   });
 
-  if (continueValue) {
-    params.set("gcmcontinue", continueValue);
+  const payload = await fetchJson(API + "?" + params.toString());
+  return (payload?.query?.pages || []).filter(
+    (page) => page.ns === 0 && !page.missing
+  );
+}
+
+async function mapWithConcurrency(items, concurrency, worker) {
+  const results = new Array(items.length);
+  let cursor = 0;
+
+  async function run() {
+    while (true) {
+      const index = cursor++;
+      if (index >= items.length) return;
+      try {
+        results[index] = await worker(items[index], index);
+      } catch (error) {
+        results[index] = {
+          error: error?.message || String(error),
+          item: items[index]
+        };
+      }
+    }
   }
 
-  return fetchJson(API + "?" + params.toString());
+  await Promise.all(
+    Array.from(
+      { length: Math.min(concurrency, Math.max(1, items.length)) },
+      () => run()
+    )
+  );
+
+  return results;
 }
-
-function flattenPage(page, entityType, candidate) {
-  const revision = page.revisions?.[0] || {};
-  const wikitext = revision.slots?.main?.content || "";
-  const infoboxes = findInfoboxes(wikitext);
-
-  return {
-    entityType,
-    sourceId: "walking-dead-wiki",
-    sourceRecordId: String(page.pageid),
-    sourceUrl: page.fullurl || buildPageUrl(page.title),
-    retrievedAt: new Date().toISOString(),
-    page: {
-      pageId: page.pageid,
-      title: page.title,
-      namespace: page.ns,
-      touched: page.touched || null,
-      canonicalUrl: page.canonicalurl || page.fullurl || buildPageUrl(page.title),
-      fullUrl: page.fullurl || buildPageUrl(page.title),
-      redirect: page.redirect || false
-    },
-    revision: {
-      revisionId: revision.revid || null,
-      parentId: revision.parentid || null,
-      timestamp: revision.timestamp || null
-    },
-    image: page.original || page.thumbnail || page.pageimage
-      ? {
-          fileName: page.pageimage || null,
-          original: page.original || null,
-          thumbnail: page.thumbnail?.source || null,
-          width: page.original?.width || page.thumbnail?.width || null,
-          height: page.original?.height || page.thumbnail?.height || null
-        }
-      : null,
-    extract: page.extract || null,
-    templates: infoboxes.map((template) => template.name),
-    infoboxes,
-    hints: buildHints(entityType, infoboxes),
-    candidate: candidate
-      ? {
-          canonicalId: candidate.match?.canonicalId || null,
-          matchStatus: candidate.match?.status || "unmatched",
-          matchScore: candidate.match?.score || 0,
-          matchReasons: candidate.match?.reasons || [],
-          seriesId: candidate.candidate?.fields?.seriesId || null,
-          category: candidate.candidate?.fields?.category || null
-        }
-      : null,
-    raw: {
-      wikitext,
-      hash: sha256(wikitext)
-    }
-  };
-}
-
 async function enrichEntityType(entityType, result, limit) {
   const config = ENTITY_CONFIG[entityType];
   const sourceResult = result[config.inputKey];
@@ -374,57 +338,59 @@ async function enrichEntityType(entityType, result, limit) {
       .filter(([id]) => id)
   ).values()].slice(0, limit);
 
-  const candidateByPageId = new Map(
-    uniqueCandidates.map((record) => [
-      String(record.candidate.sourceRecordId),
-      record
-    ])
-  );
-
-  const categories = [...new Set(
-    uniqueCandidates
-      .map((record) => record.candidate?.fields?.category)
-      .filter(Boolean)
-  )];
-
-  const pagesById = new Map();
-  const errors = [];
-  let categoryBatches = 0;
-
-  for (const category of categories) {
-    let continueValue = null;
-
-    do {
-      try {
-        const payload = await fetchCategoryPageBatch(category, continueValue);
-        const pages = payload?.query?.pages || [];
-
-        for (const page of pages) {
-          if (page.ns !== 0 || page.missing) continue;
-          if (candidateByPageId.has(String(page.pageid))) {
-            pagesById.set(
-              String(page.pageid),
-              flattenPage(page, entityType, candidateByPageId.get(String(page.pageid)))
-            );
-          }
-        }
-
-        categoryBatches += 1;
-        continueValue = payload?.continue?.gcmcontinue || null;
-
-        if (continueValue) await sleep(REQUEST_DELAY_MS);
-      } catch (error) {
-        errors.push({
-          category,
-          continuation: continueValue,
-          error: error?.message || String(error)
-        });
-        break;
-      }
-    } while (continueValue);
-
-    if (!continueValue) await sleep(REQUEST_DELAY_MS);
+  const batches = [];
+  for (let i = 0; i < uniqueCandidates.length; i += BATCH_SIZE) {
+    const batch = uniqueCandidates.slice(i, i + BATCH_SIZE);
+    batches.push({
+      candidates: batch,
+      pageIds: batch.map((record) => String(record.candidate.sourceRecordId))
+    });
   }
+
+  const errors = [];
+  const pagesById = new Map();
+
+  const results = await mapWithConcurrency(batches, 8, async (batch) => {
+    const pages = await fetchPageBatch(batch.pageIds);
+    const revids = pages
+      .map((page) => Number(page.lastrevid))
+      .filter((revid) => Number.isInteger(revid) && revid > 0);
+
+    const revisionPages = await fetchRevisions(revids);
+    const revisionsByPageId = new Map(
+      revisionPages.map((page) => [
+        String(page.pageid),
+        page.revisions?.[0] || null
+      ])
+    );
+
+    return pages.map((page) =>
+      flattenPage(
+        page,
+        revisionsByPageId.get(String(page.pageid)),
+        entityType,
+        batch.candidates.find(
+          (record) => String(record.candidate.sourceRecordId) === String(page.pageid)
+        )
+      )
+    );
+  });
+
+  for (const batchResult of results) {
+    if (batchResult?.error) {
+      errors.push({
+        pageIds: batchResult.item.pageIds,
+        error: batchResult.error
+      });
+      continue;
+    }
+
+    for (const page of batchResult || []) {
+      pagesById.set(String(page.sourceRecordId), page);
+    }
+  }
+
+  if (REQUEST_DELAY_MS > 0) await sleep(REQUEST_DELAY_MS);
 
   return {
     entityType,
@@ -432,72 +398,9 @@ async function enrichEntityType(entityType, result, limit) {
     generatedAt: new Date().toISOString(),
     requested: uniqueCandidates.length,
     fetched: pagesById.size,
-    categoryCount: categories.length,
-    categoryBatches,
+    batchCount: batches.length,
     errors,
     pages: [...pagesById.values()]
   };
 }
 
-async function main() {
-  const limit = Number(process.env.ENRICHMENT_LIMIT || DEFAULT_LIMIT);
-  const input = await readJson(new URL("fandom-atlas-candidates.json", OUT_DIR));
-
-  await mkdir(OUT_DIR, { recursive: true });
-
-  const result = {
-    generatedAt: new Date().toISOString(),
-    source: "walking-dead-wiki",
-    api: API,
-    limit,
-    characters: await enrichEntityType("character", input, limit),
-    locations: await enrichEntityType("location", input, limit),
-    episodes: await enrichEntityType("episode", input, limit)
-  };
-
-  await writeFile(
-    new URL("fandom-page-enrichment.json", OUT_DIR),
-    JSON.stringify(result, null, 2) + "\n"
-  );
-
-  const summary = {
-    characters: {
-      requested: result.characters.requested,
-      fetched: result.characters.fetched,
-      errors: result.characters.errors.length,
-      categoryCount: result.characters.categoryCount,
-      categoryBatches: result.characters.categoryBatches
-    },
-    locations: {
-      requested: result.locations.requested,
-      fetched: result.locations.fetched,
-      errors: result.locations.errors.length,
-      categoryCount: result.locations.categoryCount,
-      categoryBatches: result.locations.categoryBatches
-    },
-    episodes: {
-      requested: result.episodes.requested,
-      fetched: result.episodes.fetched,
-      errors: result.episodes.errors.length,
-      categoryCount: result.episodes.categoryCount,
-      categoryBatches: result.episodes.categoryBatches
-    }
-  };
-
-  await writeFile(
-    new URL("fandom-page-enrichment-summary.json", OUT_DIR),
-    JSON.stringify({
-      generatedAt: result.generatedAt,
-      source: result.source,
-      limit,
-      summary
-    }, null, 2) + "\n"
-  );
-
-  console.log(JSON.stringify(summary, null, 2));
-}
-
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
