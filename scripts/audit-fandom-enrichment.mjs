@@ -112,6 +112,10 @@ function pageCoverage(pageResult) {
   const withImage = pages.filter((page) => page.image);
   const withExtract = pages.filter((page) => page.extract);
   const withHints = pages.filter((page) => Object.keys(page.hints || {}).length);
+  const withGallery = pages.filter((page) => (page.details?.imageFiles?.length || page.hints?.imageGallery?.length));
+  const withSections = pages.filter((page) => page.details?.sections?.length);
+  const withLinks = pages.filter((page) => page.details?.linkedPages?.length);
+  const withDetail = pages.filter((page) => page.extract || page.details?.sections?.length || page.details?.linkedPages?.length || Object.keys(page.hints || {}).length);
 
   return {
     requested: pageResult.requested,
@@ -119,8 +123,12 @@ function pageCoverage(pageResult) {
     errors: pageResult.errors?.length || 0,
     infoboxCoverage: pages.length ? withInfobox.length / pages.length : 0,
     imageCoverage: pages.length ? withImage.length / pages.length : 0,
+    galleryCoverage: pages.length ? withGallery.length / pages.length : 0,
     extractCoverage: pages.length ? withExtract.length / pages.length : 0,
-    hintCoverage: pages.length ? withHints.length / pages.length : 0
+    hintCoverage: pages.length ? withHints.length / pages.length : 0,
+    sectionsCoverage: pages.length ? withSections.length / pages.length : 0,
+    linkedPagesCoverage: pages.length ? withLinks.length / pages.length : 0,
+    detailCoverage: pages.length ? withDetail.length / pages.length : 0
   };
 }
 
