@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run enrich:fandom-full && npm run audit:enrichment && npm run publish:enrichment-preview && vite build",
+  "outputDirectory": "dist",
+  "framework": "vite"
+}
