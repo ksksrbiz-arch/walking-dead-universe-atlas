@@ -10,7 +10,15 @@
     "ingest:media": "node scripts/ingest-amc-media.mjs",
     "audit:atlas": "node scripts/audit-atlas.mjs",
     "build:with-media": "npm run ingest:media && npm run cache:media && npm run audit:atlas && vite build",
-    "cache:media": "node scripts/cache-amc-media.mjs"
+    "cache:media": "node scripts/cache-amc-media.mjs",
+    "enrich:probe": "node scripts/enrich-atlas.mjs --probe",
+    "enrich:fandom": "node scripts/enrich-atlas.mjs --fandom-characters",
+    "enrich:all": "npm run enrich:probe && npm run enrich:fandom-full",
+    "enrich:fandom-atlas": "node scripts/ingest-fandom-atlas.mjs",
+    "enrich:fandom-pages": "node scripts/enrich-fandom-pages.mjs",
+    "enrich:fandom-full": "npm run enrich:fandom-atlas && npm run enrich:fandom-pages",
+    "audit:enrichment": "node scripts/audit-fandom-enrichment.mjs",
+    "publish:enrichment-preview": "node scripts/publish-enrichment-preview.mjs"
   },
   "dependencies": {
     "react": "^19.1.1",

@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "policy": {
+    "runtimeDependency": false,
+    "externalSourcesAreIngestionOnly": true,
+    "neverOverwriteCanonicalWithoutEvidence": true,
+    "retainProvenance": true
+  },
+  "sources": [
+    {
+      "id": "amc",
+      "name": "AMC / AMC Networks",
+      "kind": "official",
+      "status": "active",
+      "baseUrl": "https://www.amc.com",
+      "capabilities": [
+        "series",
+        "episodes",
+        "episode-media"
+      ],
+      "priority": 100,
+      "notes": "Primary official source for series and episode metadata/media where publicly accessible."
+    },
+    {
+      "id": "walking-dead-wiki",
+      "name": "Walking Dead Wiki",
+      "kind": "community-structured",
+      "status": "active",
+      "baseUrl": "https://walkingdead.fandom.com",
+      "apiUrl": "https://walkingdead.fandom.com/api.php",
+      "capabilities": [
+        "characters",
+        "locations",
+        "episodes",
+        "relationships",
+        "timeline",
+        "categories",
+        "page-metadata"
+      ],
+      "priority": 70,
+      "notes": "High-value structured secondary source. TV Universe categories must be isolated from comic/game/non-canon continuity."
+    },
+    {
+      "id": "walking-dead-api",
+      "name": "The Walking Dead API",
+      "kind": "community-api",
+      "status": "unverified",
+      "baseUrl": "https://thewalkingdead-api.onrender.com",
+      "capabilities": [
+        "unknown"
+      ],
+      "priority": 40,
+      "notes": "Public listing exists, but endpoint health/documentation must be verified before ingestion."
+    },
+    {
+      "id": "api-twd-characters",
+      "name": "API-TWD-Characters",
+      "kind": "community-api",
+      "status": "unverified",
+      "capabilities": [
+        "characters"
+      ],
+      "priority": 40,
+      "notes": "Character API surfaced by discovery. Endpoint/repository identity must be verified before use."
+    },
+    {
+      "id": "wikidata",
+      "name": "Wikidata",
+      "kind": "structured-secondary",
+      "status": "planned",
+      "baseUrl": "https://www.wikidata.org",
+      "capabilities": [
+        "entity-resolution",
+        "actors",
+        "external-identifiers",
+        "locations"
+      ],
+      "priority": 30,
+      "notes": "Use for entity reconciliation and external identifiers, not as the primary TWDU canon source."
+    }
+  ]
+}

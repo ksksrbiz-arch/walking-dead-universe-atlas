@@ -52,3 +52,22 @@
 - [ ] Physical-device verification (real touch hardware, screen reader, actual gesture feel) — still open
 
 See `docs/QUALITY_AUDIT_2026-09-20.md` for the current ten-part quality audit and the remaining live-browser verification gate.
+
+## Phase 6 — External data enrichment
+- [x] Source registry with official/community/structured source tiers
+- [x] Provenance and canonical-overwrite policy
+- [x] External source health probing
+- [x] Fandom MediaWiki category ingestion foundation
+- [x] Character/location/episode candidate matching foundation
+- [ ] Verify the standalone Walking Dead API endpoints and schema
+- [ ] Verify API-TWD-Characters endpoint/repository and schema
+- [ ] Fetch Fandom page-level structured metadata and media
+- [ ] Build enrichment review queue
+- [ ] Approve/promote enrichment patches into canonical data
+- [ ] Add external IDs and entity reconciliation
+- [ ] Enrich character dossiers
+- [ ] Enrich location dossiers
+- [ ] Enrich episode dossiers
+- [ ] Add source/provenance UI
+- [ ] Add character travel/journey enrichment
+- [ ] Automate scheduled source snapshots and change detection

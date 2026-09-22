@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build:with-media"
+  command = "npm run enrich:fandom-full && npm run audit:enrichment && npm run publish:enrichment-preview && vite build"
   publish = "dist"
 
 [build.environment]
