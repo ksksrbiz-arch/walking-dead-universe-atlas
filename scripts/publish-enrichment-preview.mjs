@@ -9,7 +9,8 @@ const DEST = new URL("public/_enrichment/", ROOT);
 const files = [
   "fandom-atlas-candidates.json",
   "fandom-page-enrichment-summary.json",
-  "fandom-enrichment-audit.json"
+  "fandom-enrichment-audit.json",
+  "fandom-enrichment-review-queue.json"
 ];
 
 await mkdir(DEST, { recursive: true });
