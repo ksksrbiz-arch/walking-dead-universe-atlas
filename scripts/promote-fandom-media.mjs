@@ -20,12 +20,20 @@ async function readJson(url) {
 
 function imageSources(page) {
   const values = [
+    page?.image?.original?.source,
     page?.image?.original,
+    page?.image?.thumbnail?.source,
     page?.image?.thumbnail,
+    ...(Array.isArray(page?.details?.imageFiles) ? page.details.imageFiles.flatMap((item) => [item?.url, item?.thumbnail]) : []),
     ...(Array.isArray(page?.hints?.imageGallery) ? page.hints.imageGallery : []),
     ...(Array.isArray(page?.hints?.image) ? page.hints.image : [page?.hints?.image]),
   ].filter(Boolean);
-  return [...new Set(values.filter((value) => /^https?:\/\//i.test(String(value))))];
+
+  return [...new Set(
+    values
+      .map((value) => typeof value === "string" ? value : value?.source || value?.url || "")
+      .filter((value) => /^https?:\/\//i.test(String(value)))
+  )];
 }
 
 async function main() {
