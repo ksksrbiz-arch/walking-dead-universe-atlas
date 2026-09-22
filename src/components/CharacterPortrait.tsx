@@ -4,6 +4,7 @@ import {atlasImageUrl} from "../lib/media";
 type CharacterPortraitProps={
   character:{id:string;name:string};
   image?:string|null;
+  gallery?:string[];
   size?:number;
   className?:string;
 };
@@ -15,7 +16,8 @@ function initials(name:string){
 export default function CharacterPortrait({character,image,size=64,className}:CharacterPortraitProps){
   const safe=character.id.replace(/[^a-z0-9_-]/gi,"-");
   const clip=`character-portrait-${safe}`;
-  const src=image ? atlasImageUrl(image, Math.max(320,size*4), 82) : "";
+  const primary=image || gallery?.[0] || "";
+  const src=primary ? atlasImageUrl(primary, Math.max(320,size*4), 82) : "";
   const style={"--portrait-size":`${size}px`} as CSSProperties;
 
   return (
