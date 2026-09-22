@@ -370,7 +370,7 @@ async function fetchImageFiles(fileTitles) {
   const result = new Map();
   for (const page of payload?.query?.pages || []) {
     const info = page.imageinfo?.[0];
-    if (!info?.url || !/^image\\//i.test(String(info.mime || ""))) continue;
+    if (!info?.url || !/^image\//i.test(String(info.mime || ""))) continue;
     result.set(String(page.title || "").toLowerCase(), {
       url: info.url,
       thumbnail: info.thumburl || null,
