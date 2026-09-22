@@ -23,7 +23,13 @@ const CURATED_ALIASES = {
   "laurent": ["Laurent Carrière (Daryl Series)", "Laurent Carrière"],
   "genet": ["Marion Genet (Daryl Series)", "Marion Genet"],
   "jonathan-beale": ["Johnathan Beale (The Ones Who Live)", "Johnathan Beale", "Major General Beale"],
-  "mason-beale": ["Mason Beale (World Beyond)", "Mason Beale"]
+  "mason-beale": ["Mason Beale (World Beyond)", "Mason Beale"],
+  // Location identities whose Fandom page titles include universe/region disambiguation.
+  "atlanta": ["Atlanta, Georgia (TV Universe)"],
+  "king-county": ["King County, Georgia (TV Universe)"],
+  "los-angeles": ["Los Angeles, California"],
+  "cdc-atlanta": ["Center for Disease Control (TV Universe)"],
+  "hershel-farm": ["Greene Family Farm (TV Series)"]
 };
 
 function seriesCompatible(candidate, canonical) {
