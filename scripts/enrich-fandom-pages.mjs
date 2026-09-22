@@ -10,7 +10,9 @@ const OUT_DIR = new URL("data/enrichment/", ROOT);
 
 const BATCH_SIZE = 50;
 const DEFAULT_LIMIT = 5000;
-const REQUEST_DELAY_MS = Number(process.env.FANDOM_REQUEST_DELAY_MS || 100);
+const REQUEST_DELAY_MS = Number(process.env.FANDOM_REQUEST_DELAY_MS || 150);
+const REQUEST_RETRIES = Number(process.env.FANDOM_REQUEST_RETRIES || 4);
+const REQUEST_CONCURRENCY = Number(process.env.FANDOM_REQUEST_CONCURRENCY || 4);
 
 const ENTITY_CONFIG = {
   character: {
@@ -74,29 +76,53 @@ async function readJson(path) {
 }
 
 async function fetchJson(url) {
-  const response = await fetch(url, {
-    headers: {
-      accept: "application/json",
-      "user-agent": "TWDU-Atlas-Fandom-Page-Enrichment/3.0"
-    },
-    signal: AbortSignal.timeout(30000)
-  });
+  let lastError = null;
 
-  const text = await response.text();
-  if (!response.ok) {
-    throw new Error(response.status + " " + response.statusText + ": " + text.slice(0, 500));
+  for (let attempt = 1; attempt <= REQUEST_RETRIES; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          accept: "application/json",
+          "user-agent": "TWDU-Atlas-Fandom-Page-Enrichment/4.0 (+https://github.com/ksksrbiz-arch/walking-dead-universe-atlas)",
+          "accept-language": "en-US,en;q=0.8"
+        },
+        signal: AbortSignal.timeout(30000)
+      });
+
+      const text = await response.text();
+
+      if (!response.ok) {
+        const retryable = response.status === 408 || response.status === 425 ||
+          response.status === 429 || response.status >= 500;
+        const error = new Error(
+          response.status + " " + response.statusText + ": " + text.slice(0, 500)
+        );
+        if (!retryable || attempt === REQUEST_RETRIES) throw error;
+
+        const retryAfter = Number(response.headers.get("retry-after") || 0);
+        const backoff = retryAfter > 0 ? retryAfter * 1000 : Math.min(10000, 750 * 2 ** (attempt - 1));
+        await sleep(backoff);
+        continue;
+      }
+
+      const payload = JSON.parse(text);
+      if (payload?.error) {
+        throw new Error(
+          (payload.error.code || "api-error") +
+          ": " +
+          (payload.error.info || "Unknown MediaWiki API error")
+        );
+      }
+
+      return payload;
+    } catch (error) {
+      lastError = error;
+      if (attempt === REQUEST_RETRIES) break;
+      await sleep(Math.min(10000, 750 * 2 ** (attempt - 1)));
+    }
   }
 
-  const payload = JSON.parse(text);
-  if (payload?.error) {
-    throw new Error(
-      (payload.error.code || "api-error") +
-      ": " +
-      (payload.error.info || "Unknown MediaWiki API error")
-    );
-  }
-
-  return payload;
+  throw lastError || new Error("Fandom request failed");
 }
 
 function splitTopLevel(value, delimiter = "|") {
@@ -557,7 +583,7 @@ async function enrichEntityType(entityType, result, limit) {
   const errors = [];
   const pagesById = new Map();
 
-  const results = await mapWithConcurrency(batches, 8, async (batch) => {
+  const results = await mapWithConcurrency(batches, REQUEST_CONCURRENCY, async (batch) => {
     const pages = await fetchPageBatch(batch.pageIds);
     const revids = pages
       .map((page) => Number(page.lastrevid))
