@@ -4,6 +4,8 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { sourceRecord, summarizeMatches } from "./lib/enrichment.mjs";
 
 const API = "https://walkingdead.fandom.com/api.php";
+const REQUEST_RETRIES = Number(process.env.FANDOM_REQUEST_RETRIES || 4);
+const REQUEST_DELAY_MS = Number(process.env.FANDOM_REQUEST_DELAY_MS || 150);
 const WIKI = "https://walkingdead.fandom.com/wiki/";
 const ROOT = new URL("../", import.meta.url);
 const OUT_DIR = new URL("data/enrichment/", ROOT);
@@ -46,16 +48,34 @@ async function readJson(name) {
 }
 
 async function fetchJson(url) {
-  const response = await fetch(url, {
-    headers: {
-      accept: "application/json",
-      "user-agent": "TWDU-Atlas-Fandom-Ingest/1.0"
-    },
-    signal: AbortSignal.timeout(15000)
-  });
-  const text = await response.text();
-  if (!response.ok) throw new Error(response.status + " " + response.statusText + ": " + text.slice(0, 300));
-  return JSON.parse(text);
+  let lastError = null;
+  for (let attempt = 1; attempt <= REQUEST_RETRIES; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          accept: "application/json",
+          "user-agent": "TWDU-Atlas-Fandom-Ingest/2.0 (+https://github.com/ksksrbiz-arch/walking-dead-universe-atlas)",
+          "accept-language": "en-US,en;q=0.8"
+        },
+        signal: AbortSignal.timeout(30000)
+      });
+      const text = await response.text();
+      if (!response.ok) {
+        const retryable = response.status === 408 || response.status === 425 || response.status === 429 || response.status >= 500;
+        const error = new Error(response.status + " " + response.statusText + ": " + text.slice(0, 500));
+        if (!retryable || attempt === REQUEST_RETRIES) throw error;
+        const retryAfter = Number(response.headers.get("retry-after") || 0);
+        await new Promise((resolve) => setTimeout(resolve, retryAfter > 0 ? retryAfter * 1000 : Math.min(10000, 750 * 2 ** (attempt - 1))));
+        continue;
+      }
+      return JSON.parse(text);
+    } catch (error) {
+      lastError = error;
+      if (attempt === REQUEST_RETRIES) break;
+      await new Promise((resolve) => setTimeout(resolve, Math.min(10000, 750 * 2 ** (attempt - 1))));
+    }
+  }
+  throw lastError || new Error("Fandom request failed");
 }
 
 async function fetchCategory(category, limit) {
@@ -112,6 +132,7 @@ async function ingestType(entityType, canonicalFile, limit) {
         category,
         error: error?.message || String(error)
       });
+      await new Promise((resolve) => setTimeout(resolve, REQUEST_DELAY_MS));
     }
   }
 
