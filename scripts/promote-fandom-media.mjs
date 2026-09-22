@@ -32,6 +32,25 @@ async function main() {
   const media = await readJson(new URL("media.json", DATA));
   const enrichment = await readJson(new URL("fandom-page-enrichment.json", ENRICH));
   const candidates = await readJson(new URL("fandom-atlas-candidates.json", ENRICH));
+  const canonicals = {
+    characters: await readJson(new URL("characters.json", DATA)),
+    locations: await readJson(new URL("locations.json", DATA)),
+    episodes: await readJson(new URL("episodes.json", DATA))
+  };
+
+  const normalize = (value) => String(value || "")
+    .toLowerCase()
+    .replace(/[_-]+/g, " ")
+    .replace(/[^a-z0-9 ]+/g, " ")
+    .replace(/\\s+/g, " ")
+    .trim();
+
+  const exactCanonicalId = (entityKey, title) => {
+    const key = normalize(title);
+    if (!key) return null;
+    const matches = (canonicals[entityKey] || []).filter((item) => normalize(item.name) === key);
+    return matches.length === 1 ? matches[0].id : null;
+  };
 
   const keys = [
     ["characters", "characters"],
@@ -55,9 +74,14 @@ async function main() {
       const sources = imageSources(page);
       const source = sources[0] || null;
       const candidate = candidateMap.get(String(page.sourceRecordId));
-      const canonicalId = page.candidate?.canonicalId || candidate?.match?.canonicalId;
+      // Prefer the reconciled match. If reconciliation missed a page but the Fandom
+      // title exactly equals one canonical Atlas entity, use that identity only.
+      // This is deliberately exact-name matching: no fuzzy promotion of imagery.
+      const canonicalId = page.candidate?.canonicalId || candidate?.match?.canonicalId || exactCanonicalId(mediaKey === "places" ? "locations" : entityKey, page.page?.title);
+      const reconciled = page.candidate?.matchStatus === "matched" || candidate?.match?.status === "matched";
+      const exactTitleMatch = Boolean(exactCanonicalId(mediaKey === "places" ? "locations" : entityKey, page.page?.title));
 
-      if (!sources.length || !canonicalId || page.candidate?.matchStatus !== "matched" && candidate?.match?.status !== "matched") {
+      if (!sources.length || !canonicalId || (!reconciled && !exactTitleMatch)) {
         stats.skipped += 1;
         continue;
       }
