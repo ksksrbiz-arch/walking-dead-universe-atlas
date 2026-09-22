@@ -18,8 +18,13 @@ async function readJson(url) {
   return JSON.parse(await readFile(url, "utf8"));
 }
 
-function imageSource(page) {
-  return page?.image?.original || page?.image?.thumbnail || null;
+function imageSources(page) {
+  const values = [
+    page?.image?.original,
+    page?.image?.thumbnail,
+    ...(Array.isArray(page?.hints?.image) ? page.hints.image : [page?.hints?.image]),
+  ].filter(Boolean);
+  return [...new Set(values.filter((value) => /^https?:\\/\\//i.test(String(value))))];
 }
 
 async function main() {
@@ -33,7 +38,7 @@ async function main() {
     ["episodes", "episodes"]
   ];
 
-  const stats = { promoted: 0, existing: 0, skipped: 0 };
+  const stats = { promoted: 0, existing: 0, galleryAdded: 0, skipped: 0 };
 
   for (const [entityKey, mediaKey] of keys) {
     media[mediaKey] ||= {};
@@ -46,18 +51,27 @@ async function main() {
     );
 
     for (const page of enrichment[entityKey]?.pages || []) {
-      const source = imageSource(page);
+      const sources = imageSources(page);
+      const source = sources[0] || null;
       const candidate = candidateMap.get(String(page.sourceRecordId));
       const canonicalId = page.candidate?.canonicalId || candidate?.match?.canonicalId;
 
-      if (!source || !canonicalId || page.candidate?.matchStatus !== "matched" && candidate?.match?.status !== "matched") {
+      if (!sources.length || !canonicalId || page.candidate?.matchStatus !== "matched" && candidate?.match?.status !== "matched") {
         stats.skipped += 1;
         continue;
       }
 
       const existing = media[mediaKey][canonicalId];
       if (existing?.image) {
-        stats.existing += 1;
+        const gallery = new Set(existing.gallery || []);
+        for (const candidateSource of sources) gallery.add(candidateSource);
+        const nextGallery = [...gallery].slice(0, 12);
+        if (nextGallery.length !== (existing.gallery || []).length) {
+          media[mediaKey][canonicalId] = { ...existing, gallery: nextGallery };
+          stats.galleryAdded += Math.max(0, nextGallery.length - (existing.gallery || []).length);
+        } else {
+          stats.existing += 1;
+        }
         continue;
       }
 
@@ -65,6 +79,7 @@ async function main() {
         ...(existing || {}),
         kind: mediaKey === "characters" ? "character-portrait" : mediaKey === "places" ? "location-image" : "episode-image",
         image: source,
+        gallery: sources.slice(0, 12),
         sourcePage: page.sourceUrl || page.page?.canonicalUrl || null,
         source: "walking-dead-fandom",
         provenance: {
