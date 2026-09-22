@@ -89,7 +89,11 @@ async function fetchJson(url) {
   if (!response.ok) {
     throw new Error(response.status + " " + response.statusText + ": " + text.slice(0, 500));
   }
-  return JSON.parse(text);
+  const payload = JSON.parse(text);
+  if (payload?.error) {
+    throw new Error((payload.error.code || "api-error") + ": " + (payload.error.info || "Unknown MediaWiki API error"));
+  }
+  return payload;
 }
 
 function splitTopLevel(value, delimiter = "|") {
