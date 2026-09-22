@@ -5,7 +5,7 @@ import { sourceRecord, summarizeMatches } from "./lib/enrichment.mjs";
 
 const ROOT = new URL("../", import.meta.url);
 const DATA = (name) => new URL("data/" + name, ROOT);
-const OUT_DIR = new URL("../data/enrichment/", ROOT);
+const OUT_DIR = new URL("data/enrichment/", ROOT);
 
 const SOURCES = {
   fandom: {
