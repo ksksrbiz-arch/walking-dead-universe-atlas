@@ -328,6 +328,71 @@ async function mapWithConcurrency(items, concurrency, worker) {
 
   return results;
 }
+function extractLeadText(wikitext) {
+  const lead = String(wikitext || "").split(/\n\s*==[^=][^=]*==/i)[0];
+  return cleanValue(
+    lead
+      .replace(/^\s*#redirect[^\n]*/i, "")
+      .replace(/\[\[Category:[^\]]+\]\]/gi, "")
+      .slice(0, 5000)
+  );
+}
+
+function flattenPage(page, revision, entityType, candidate) {
+  const wikitext = revision?.slots?.main?.content || "";
+  const infoboxes = findInfoboxes(wikitext);
+
+  return {
+    entityType,
+    sourceId: "walking-dead-wiki",
+    sourceRecordId: String(page.pageid),
+    sourceUrl: page.fullurl || buildPageUrl(page.title),
+    retrievedAt: new Date().toISOString(),
+    page: {
+      pageId: page.pageid,
+      title: page.title,
+      namespace: page.ns,
+      touched: page.touched || null,
+      lastRevisionId: page.lastrevid || revision?.revid || null,
+      canonicalUrl: page.canonicalurl || page.fullurl || buildPageUrl(page.title),
+      fullUrl: page.fullurl || page.canonicalurl || buildPageUrl(page.title),
+      redirect: page.redirect || false
+    },
+    revision: {
+      revisionId: revision?.revid || page.lastrevid || null,
+      parentId: revision?.parentid || null,
+      timestamp: revision?.timestamp || null
+    },
+    image: page.original || page.thumbnail || page.pageimage
+      ? {
+          fileName: page.pageimage || null,
+          original: page.original || null,
+          thumbnail: page.thumbnail?.source || null,
+          width: page.original?.width || page.thumbnail?.width || null,
+          height: page.original?.height || page.thumbnail?.height || null
+        }
+      : null,
+    extract: extractLeadText(wikitext),
+    templates: infoboxes.map((template) => template.name),
+    infoboxes,
+    hints: buildHints(entityType, infoboxes),
+    candidate: candidate
+      ? {
+          canonicalId: candidate.match?.canonicalId || null,
+          matchStatus: candidate.match?.status || "unmatched",
+          matchScore: candidate.match?.score || 0,
+          matchReasons: candidate.match?.reasons || [],
+          seriesId: candidate.candidate?.fields?.seriesId || null,
+          category: candidate.candidate?.fields?.category || null
+        }
+      : null,
+    raw: {
+      wikitext,
+      hash: sha256(wikitext)
+    }
+  };
+}
+
 async function enrichEntityType(entityType, result, limit) {
   const config = ENTITY_CONFIG[entityType];
   const sourceResult = result[config.inputKey];
@@ -404,3 +469,64 @@ async function enrichEntityType(entityType, result, limit) {
   };
 }
 
+
+
+async function main() {
+  const limit = Number(process.env.ENRICHMENT_LIMIT || DEFAULT_LIMIT);
+  const input = await readJson(new URL("fandom-atlas-candidates.json", OUT_DIR));
+
+  await mkdir(OUT_DIR, { recursive: true });
+
+  const result = {
+    generatedAt: new Date().toISOString(),
+    source: "walking-dead-wiki",
+    api: API,
+    limit,
+    characters: await enrichEntityType("character", input, limit),
+    locations: await enrichEntityType("location", input, limit),
+    episodes: await enrichEntityType("episode", input, limit)
+  };
+
+  await writeFile(
+    new URL("fandom-page-enrichment.json", OUT_DIR),
+    JSON.stringify(result, null, 2) + "\n"
+  );
+
+  const summary = {
+    characters: {
+      requested: result.characters.requested,
+      fetched: result.characters.fetched,
+      errors: result.characters.errors.length,
+      batchCount: result.characters.batchCount
+    },
+    locations: {
+      requested: result.locations.requested,
+      fetched: result.locations.fetched,
+      errors: result.locations.errors.length,
+      batchCount: result.locations.batchCount
+    },
+    episodes: {
+      requested: result.episodes.requested,
+      fetched: result.episodes.fetched,
+      errors: result.episodes.errors.length,
+      batchCount: result.episodes.batchCount
+    }
+  };
+
+  await writeFile(
+    new URL("fandom-page-enrichment-summary.json", OUT_DIR),
+    JSON.stringify({
+      generatedAt: result.generatedAt,
+      source: result.source,
+      limit,
+      summary
+    }, null, 2) + "\n"
+  );
+
+  console.log(JSON.stringify(summary, null, 2));
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
