@@ -270,7 +270,28 @@ function getHintValue(parameters, aliases) {
   return null;
 }
 
-function buildHints(entityType, infoboxes) {
+function extractImageUrls(wikitext, infoboxes) {
+  const urls = new Set();
+  const add = (value) => {
+    if (!value) return;
+    const text = String(value)
+      .replace(/\\[\\[([^\\]|]+)\\|[^\\]]+\\]\\]/g, "$1")
+      .replace(/<[^>]+>/g, " ");
+    for (const match of text.matchAll(/https?:\\/\\/[^\\s\\]<>|}]+/gi)) {
+      const url = match[0].replace(/[),.;]+$/, "");
+      if (/\\.(?:jpe?g|png|webp|gif)(?:[?#].*)?$/i.test(url)) urls.add(url);
+    }
+  };
+  for (const infobox of infoboxes) {
+    for (const [key, parameter] of Object.entries(infobox.parameters)) {
+      if (/image|photo|poster|portrait|file/.test(key)) add(parameter.raw);
+    }
+  }
+  add(wikitext);
+  return [...urls].slice(0, 20);
+}
+
+function buildHints(entityType, infoboxes, wikitext = "") {
   const hints = {};
   const config = ENTITY_CONFIG[entityType];
 
@@ -284,6 +305,8 @@ function buildHints(entityType, infoboxes) {
     }
   }
 
+  const gallery = extractImageUrls(wikitext, infoboxes);
+  if (gallery.length) hints.imageGallery = gallery;
   return hints;
 }
 
@@ -404,7 +427,7 @@ function flattenPage(page, revision, entityType, candidate) {
     extract: extractLeadText(wikitext),
     templates: infoboxes.map((template) => template.name),
     infoboxes,
-    hints: buildHints(entityType, infoboxes),
+    hints: buildHints(entityType, infoboxes, wikitext),
     candidate: candidate
       ? {
           canonicalId: candidate.match?.canonicalId || null,
