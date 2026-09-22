@@ -248,7 +248,7 @@ async function fetchText(url) {
     }
   }
   throw lastError || new Error("AMC request failed");
-}!/usr/bin/env node
+}
 /**
  * Bulk-ingest official AMC episode imagery into data/episodeMedia.json.
  *
