@@ -138,6 +138,10 @@ export default function App(){
  const [isDragging,setIsDragging]=useState(false);
  const [sheet,setSheet]=useState<"peek"|"open">("open");
  const [searchOpen,setSearchOpen]=useState(false);
+ const [clusterIds,setClusterIds]=useState<string[]|null>(null);
+ const searchTriggerRef=useRef<HTMLButtonElement|null>(null);
+ const searchInputRef=useRef<HTMLInputElement|null>(null);
+ const searchHistoryRef=useRef(false);
  const [timeOpen,setTimeOpen]=useState(false);
  const [playing,setPlaying]=useState(false);
  const drag=useRef({x:0,y:0,px:0,py:0,moved:false});
@@ -151,11 +155,11 @@ export default function App(){
  const raf=useRef<number|null>(null);
  const visual=useRef({x:0,y:0,zoom:1});
  const didAutoHome=useRef(false);
- const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
+ const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&(window.innerWidth<700||(window.innerWidth<=900&&window.innerHeight<=600)));
  useEffect(()=>{initAtlasPerformance();void getRuntimeMeta().then(meta=>{if(meta)trackAtlasMetric("runtime-ready",1,{version:String(meta.version??"unknown"),episodes:Number(meta.counts?.episodes??0),characters:Number(meta.counts?.characters??0),locations:Number(meta.counts?.locations??0)})})},[]);
 
  useEffect(()=>setDataErrors(validateAtlasData()),[]);
- useEffect(()=>{const onResize=()=>setIsMobileMap(window.innerWidth<700);window.addEventListener("resize",onResize);return()=>window.removeEventListener("resize",onResize)},[]);
+ useEffect(()=>{const onResize=()=>setIsMobileMap(window.innerWidth<700||(window.innerWidth<=900&&window.innerHeight<=600));window.addEventListener("resize",onResize);return()=>window.removeEventListener("resize",onResize)},[]);
  useEffect(()=>{
    if(view!=="map")return;
    const frame=window.requestAnimationFrame(()=>{
@@ -199,8 +203,12 @@ export default function App(){
  },[playing]);
  useEffect(()=>{
    const onKey=(e:KeyboardEvent)=>{
+     if(e.key==="Escape"){
+       if(searchOpen){e.preventDefault();closeSearch();return;}
+       if(clusterIds){e.preventDefault();setClusterIds(null);return;}
+       if(selectedLocation||selectedEpisode||selectedCharacter||selectedConnection||selectedCommunity||selectedFaction){e.preventDefault();clearFocus();setJourneyMapMode(false);return;}
+     }
      if((e.target as HTMLElement)?.tagName==="INPUT")return;
-     if(e.key==="Escape"){setSearchOpen(false);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false)}
      if(e.key==="+"||e.key==="=")setZoomValue(zoom+0.5);
      if(e.key==="-"||e.key==="_")setZoomValue(zoom-0.5);
      if(e.key==="0")resetMap();
@@ -229,7 +237,24 @@ export default function App(){
  const mapLocations=useMemo(()=>{
    const source=journeyMapMode&&selectedCharacter?atlasData.locations.filter(l=>characterJourneyLocationIds.has(l.id)):locations;
    return source.filter(l=>mapLayer==="ALL"||locationMapLayer(l.type)===mapLayer);
- },[journeyMapMode,selectedCharacter,characterJourneyLocationIds,locations,mapLayer]);
+
+ const closeSearch=()=>{
+   setSearchOpen(false);
+   if(searchHistoryRef.current){searchHistoryRef.current=false;try{window.history.back()}catch{}}
+   window.setTimeout(()=>searchTriggerRef.current?.focus(),0);
+ };
+ const openSearch=()=>{
+   setSearchOpen(true);
+   if(!searchHistoryRef.current){try{window.history.pushState({atlasSearch:true},"",window.location.href);searchHistoryRef.current=true}catch{}}
+   window.setTimeout(()=>searchInputRef.current?.focus(),0);
+ };
+ useEffect(()=>{
+   const onPopState=()=>{if(searchOpen){searchHistoryRef.current=false;setSearchOpen(false);window.setTimeout(()=>searchTriggerRef.current?.focus(),0);}};
+   window.addEventListener("popstate",onPopState);
+   return()=>window.removeEventListener("popstate",onPopState);
+ },[searchOpen]);
+ useEffect(()=>{if(searchOpen)window.setTimeout(()=>searchInputRef.current?.focus(),0)},[searchOpen]);
+ const locations=useMemo(()=>atlasData.locations.filter(l=>{
 
  const searchResults=useMemo(()=>{
    const q=query.trim().toLowerCase();
@@ -319,7 +344,7 @@ export default function App(){
    clearPeopleFocus();setView("guide");setWatchOrderOpen(true);setJourneyMapMode(false);setSheet("open");
  };
  const selectCharacter=(id:string)=>{clearPeopleFocus();const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const ids=getCharacterEpisodeIds(id);const eps=ids.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).sort(compareEpisodesChronologically);const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setSelectedConnection(null);setJourneyMapMode(false);setView("people");setSheet("open");trackAtlasMetric("character-select",eps.length,{character:id});void getRuntimeRelationships("character",id).then(remote=>{if(remote)trackAtlasMetric("runtime-character-relationships",remote.episodeIds.length,{character:id,remoteIndexed:true})});};
- const selectLocation=(l:Location)=>{ clearPeopleFocus(); const focusStarted=performance.now();
+ const selectLocation=(l:Location)=>{ clearPeopleFocus(); setClusterIds(null); const focusStarted=performance.now();
    void getRuntimeRelationships("location",l.id).then(remote=>{if(remote)trackAtlasMetric("runtime-location-relationships",remote.episodeIds.length,{location:l.id,remoteIndexed:true})});
    if(Number(l.year)>0)setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setView("map");setSheet("open");
    window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
@@ -460,27 +485,28 @@ export default function App(){
    }
  };
  const wheel=(e:React.WheelEvent<SVGSVGElement>)=>{e.preventDefault();const next=clamp(visual.current.zoom*(e.deltaY<0?1.12:.89),1,5);visual.current.zoom=next;applyMapTransform(visual.current.x,visual.current.y,next,false);setZoom(next)};
- const goView=(v:View)=>{clearPeopleFocus();setView(v);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setWatchOrderOpen(false);setSheet("open")};
+ const goView=(v:View)=>{clearPeopleFocus();closeSearch();setClusterIds(null);setView(v);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setWatchOrderOpen(false);setSheet("open")};
  const mapYearCount=mapLocations.filter(hasMapCoordinates).length;
  const visibleSeries=series==="ALL"?"THE WORLD":META[series].short;
 
  return <div className="app">
   <header className="topbar">
-   <button className="brand" onClick={()=>{setView("map");setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false)}} aria-label="Return to atlas map">
+   <button className="brand" onClick={()=>{closeSearch();setClusterIds(null);setView("map");setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false)}} aria-label="Return to atlas map">
     <span className="logoMark">◈</span><span><b>TWDU ATLAS</b><small>THE WALKING DEAD UNIVERSE · FIELD GUIDE</small></span>
    </button>
-   <button className="mobileSearchButton" onClick={()=>setSearchOpen(true)} aria-label="Open atlas search"><Icon name="search"/></button>
+   <button ref={searchTriggerRef} className="mobileSearchButton" onClick={()=>searchOpen?closeSearch():openSearch()} aria-label={searchOpen?"Close atlas search":"Open atlas search"} aria-expanded={searchOpen}><Icon name={searchOpen?"close":"search"}/></button>
    <div className="searchWrap">
     <Icon name="search"/>
-    <input value={query} onFocus={()=>setSearchOpen(true)} onChange={e=>{setQuery(e.target.value);setSearchOpen(true)}} placeholder="Search a place, person, episode…" aria-label="Search atlas"/>
-    {query&&<button className="clearSearch" onClick={()=>{setQuery("");setSearchOpen(false)}} aria-label="Clear atlas search"><Icon name="close"/></button>}
+    <input value={query} onFocus={openSearch} onChange={e=>{setQuery(e.target.value);openSearch()}} placeholder="Search a place, person, episode…" aria-label="Search atlas" aria-expanded={searchOpen} aria-controls="atlas-search-overlay"/>
+    {query&&<button className="clearSearch" onClick={()=>{setQuery("");closeSearch()}} aria-label="Clear atlas search"><Icon name="close"/></button>}
     {searchOpen&&query&&<div className="searchResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}
    </div>
    <div className="headerMeta"><span>LIVE ATLAS</span><b>{year}</b><em>{currentEra.short}</em></div>
   </header>
 
   <main className="atlasMain">
-   <section className={"map view-"+view+(selectedLocation||selectedEpisode||selectedCharacter||selectedConnection||selectedCommunity||selectedFaction||watchOrderOpen?" detailOpen":"")} aria-label="Interactive Walking Dead Universe map">
+   <section className={"map view-"+view+(selectedLocation||selectedEpisode||selectedCharacter||selectedConnection||selectedCommunity||selectedFaction||watchOrderOpen?" detailOpen":"")} aria-labelledby="atlas-map-heading">
+    <h1 id="atlas-map-heading" className="srOnly">Atlas map</h1>
     <div className="mapAtmosphere"/>
     <div className="mapSurface">
      <svg ref={mapSvgRef} viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
@@ -495,12 +521,24 @@ export default function App(){
       <g ref={mapWorldRef} className="mapWorld">
       <MapGeography/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
-      <g className="markers">{mapLocations.filter(hasMapCoordinates).map(l=>{const p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];const isSelected=selectedLocation===l.id;const isEpisodeContext=episodeContextLocationIds.has(l.id);
- const isConnectionContext=connectionContextLocationIds.has(l.id);
- const isCharacterJourneyContext=journeyMapMode&&characterJourneyLocationIds.has(l.id);const iconSize=isSelected?20:18;const iconHalf=iconSize/2;const markerTitle=`${l.name} · ${l.type} · ${meta.short} · ${l.year}+ · ${l.certainty}`;return <g key={l.id} data-location-id={l.id} className={"marker"+(isSelected?" selected":"")+(isEpisodeContext?" episodeContext":"")+(isConnectionContext?" connectionContext":"")+(isCharacterJourneyContext?" characterJourneyContext":"")} transform={`translate(${p.x} ${p.y})`} role="button" tabIndex={0} aria-label={`Open ${l.name} location`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}}>
+      <g className="markers">{markerGroups.map(group=>{
+       if(group.locations.length>1){
+        const ids=group.locations.map(l=>l.id);
+        const label=ids.length+" locations at this map point";
+        return <g key={"cluster-"+ids.join("-")} className="markerCluster" transform={"translate("+group.x+" "+group.y+")"} role="button" tabIndex={0} aria-label={"Open "+label} onClick={()=>setClusterIds(ids)} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setClusterIds(ids)}}}>
+          <circle className="markerClusterHit" r={22/zoom} fill="transparent"/>
+          <circle className="markerClusterRing" r={18/zoom}/>
+          <circle className="markerClusterCore" r={13/zoom}/>
+          <text className="markerClusterCount" textAnchor="middle" dominantBaseline="central">{ids.length}</text>
+        </g>;
+       }
+       const l=group.locations[0],p=project(l.lat,l.lng),meta=SERIES_BY_ID[l.seriesId];const isSelected=selectedLocation===l.id;const isEpisodeContext=episodeContextLocationIds.has(l.id);
+       const isConnectionContext=connectionContextLocationIds.has(l.id);
+       const isCharacterJourneyContext=journeyMapMode&&characterJourneyLocationIds.has(l.id);const iconSize=isSelected?20:18;const iconHalf=iconSize/2;const markerTitle=l.name+" · "+l.type+" · "+meta.short+" · "+l.year+"+ · "+l.certainty;return <g key={l.id} data-location-id={l.id} className={"marker"+(isSelected?" selected":"")+(isEpisodeContext?" episodeContext":"")+(isConnectionContext?" connectionContext":"")+(isCharacterJourneyContext?" characterJourneyContext":"")} transform={"translate("+p.x+" "+p.y+")"} role="button" tabIndex={0} aria-label={"Open "+l.name+" location"} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectLocation(l)}}}>
        <title>{markerTitle}</title>
-       <circle className="markerHit" r={(isMobileMap?16:11)/zoom} fill="transparent"/><g className="markerGlyph" transform={`scale(${1/zoom}) translate(${-iconHalf} ${-iconHalf})`} style={{color:meta.color}}><g className="markerIcon" transform={`scale(${iconSize/24})`} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type) as any}/></g><circle className="markerCore" cx={iconHalf} cy={iconHalf} r={1.2} fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||isSelected|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
-      </g>})}</g>
+       <circle className="markerHit" r={(isMobileMap?16:11)/zoom} fill="transparent"/><g className="markerGlyph" transform={"scale("+(1/zoom)+") translate(-"+iconHalf+" -"+iconHalf+")"} style={{color:meta.color}}><g className="markerIcon" transform={"scale("+(iconSize/24)+")"} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type) as any}/></g><circle className="markerCore" cx={iconHalf} cy={iconHalf} r={1.2} fill="currentColor"/></g>{(!isMobileMap&&(zoom>1.34||isSelected|| (l.year<=year&&l.name.length<22&&["Alexandria","Hilltop","King County","Woodbury","Oceanside","Commonwealth","Terminus"].includes(l.name))))&&<text x="5" y=".5" className="markerLabel">{l.name}</text>}
+      </g>;
+      })}</g>
      </g>
      </svg>
     </div>
@@ -510,12 +548,16 @@ export default function App(){
       <strong>{mapYearCount} <small>{MAP_LAYER_LABELS[mapLayer]} · {year}</small></strong>
     </div>
 
+    <button className="mobileLocationsButton" onClick={()=>setSheet("open")} aria-label={`Open ${mapYearCount} mapped locations`}><Icon name="pin"/><span>LOCATIONS</span><b>{mapYearCount}</b></button>
+
     <div className="mapChrome mapTopRight">
       <button onClick={()=>setZoomValue(zoom+.5)} aria-label="Zoom in"><Icon name="plus"/></button>
       <button onClick={()=>setZoomValue(zoom-.5)} aria-label="Zoom out"><Icon name="minus"/></button>
       <button onClick={resetMap} aria-label="Reset map"><Icon name="locate"/></button>
       <div className="zoomBadge">{Math.round(zoom*100)}%</div>
     </div>
+
+    {clusterIds&&<div className="markerClusterSheet" role="dialog" aria-modal="false" aria-labelledby="cluster-sheet-title"><div className="markerClusterSheetHead"><div><small>MAP LOCATION CLUSTER</small><b id="cluster-sheet-title">{clusterIds.length} locations</b></div><button onClick={()=>setClusterIds(null)} aria-label="Close location cluster"><Icon name="close"/></button></div><div className="markerClusterList">{clusterIds.map(id=>{const l=atlasData.locations.find(x=>x.id===id);if(!l)return null;const meta=SERIES_BY_ID[l.seriesId];return <button key={id} onClick={()=>selectLocation(l)}><span className="clusterListIcon" style={{color:meta?.color}}><AtlasIconGlyph name={locationIconName(l.type) as any}/></span><span><b>{l.name}</b><small>{meta?.short||l.seriesId} · {l.type} · {l.year}+</small></span><Icon name="chevron"/></button>})}</div></div>}
 
     <div className="mapCompass" aria-hidden="true"><span>N</span><i></i><small>1:50m</small></div>
     <div className={`mapLegend ${sheet==="open"?"sheetOpen":""}`} aria-label="Map legend"><small>SERIES LAYER</small>{SERIES_KEYS.map(k=><span key={k}><i style={{background:META[k].color}}/>{META[k].short}</span>)}</div>
@@ -533,7 +575,7 @@ export default function App(){
 
     {isMobileMap&&view==="map"&&!selectedLocation&&!selectedEpisode&&!selectedCharacter&&<MobileTimeBar year={year} playing={playing} onYearChange={y=>{setPlaying(false);setYear(y)}} onTogglePlaying={()=>setPlaying(v=>!v)}/>}
 
-    {searchOpen&&<div className="searchOverlay"><div className="searchOverlayHead"><b>SEARCH THE ATLAS</b><button onClick={()=>setSearchOpen(false)} aria-label="Close search"><Icon name="close"/></button></div><div className="searchOverlayInput"><Icon name="search"/><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Place, person, episode, faction…"/>{query&&<button onClick={()=>setQuery("")}><Icon name="close"/></button>}</div>{query&&<div className="searchOverlayResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}</div>}
+    {searchOpen&&<div id="atlas-search-overlay" className="searchOverlay" role="dialog" aria-modal="true" aria-labelledby="atlas-search-title"><div className="searchOverlayHead"><b id="atlas-search-title">SEARCH THE ATLAS</b><button onClick={closeSearch} aria-label="Close atlas search"><Icon name="close"/></button></div><div className="searchOverlayInput"><Icon name="search"/><input ref={searchInputRef} autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Place, person, episode, faction…" aria-label="Search the atlas"/>{query&&<button onClick={()=>setQuery("")} aria-label="Clear search"><Icon name="close"/></button>}</div>{query&&<div className="searchOverlayResults" aria-live="polite">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");closeSearch()}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch"><b>No matching atlas records.</b><span>Try a place, person, episode, or faction.</span><button onClick={()=>setQuery("")}>CLEAR SEARCH</button></div>}</div>}<button className="searchOverlayMapBack" onClick={()=>{setQuery("");closeSearch();goView("map")}}>BACK TO MAP</button></div>}
 
     <section className={`contentPanel ${sheet} ${selectedLoc||selectedEp||selectedCharacter||selectedConnection||selectedCommunity||selectedFaction||watchOrderOpen?"hasDetail":""}`}>
       <button className="panelGrab" onClick={()=>setSheet(v=>v==="open"?"peek":"open")} aria-expanded={sheet==="open"} aria-label={sheet==="open"?"Collapse information panel":"Expand information panel"}><span/></button>
