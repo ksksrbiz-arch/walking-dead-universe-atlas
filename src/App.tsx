@@ -237,6 +237,7 @@ export default function App(){
  const mapLocations=useMemo(()=>{
    const source=journeyMapMode&&selectedCharacter?atlasData.locations.filter(l=>characterJourneyLocationIds.has(l.id)):locations;
    return source.filter(l=>mapLayer==="ALL"||locationMapLayer(l.type)===mapLayer);
+ },[journeyMapMode,selectedCharacter,characterJourneyLocationIds,locations,mapLayer]);
 
  const closeSearch=()=>{
    setSearchOpen(false);
@@ -254,7 +255,20 @@ export default function App(){
    return()=>window.removeEventListener("popstate",onPopState);
  },[searchOpen]);
  useEffect(()=>{if(searchOpen)window.setTimeout(()=>searchInputRef.current?.focus(),0)},[searchOpen]);
- const locations=useMemo(()=>atlasData.locations.filter(l=>{
+
+ const markerGroups=useMemo(()=>{
+   const threshold=zoom<1.55?22:zoom<2.25?15:10;
+   const groups:Array<{locations:Location[];x:number;y:number}>=[];
+   for(const location of mapLocations.filter(hasMapCoordinates)){
+     const p=project(location.lat,location.lng);
+     let target=groups.find(g=>Math.hypot(g.x-p.x,g.y-p.y)<=threshold);
+     if(!target){target={locations:[],x:p.x,y:p.y};groups.push(target);}
+     target.locations.push(location);
+     const n=target.locations.length;
+     target.x=(target.x*(n-1)+p.x)/n;target.y=(target.y*(n-1)+p.y)/n;
+   }
+   return groups;
+ },[mapLocations,zoom]);
 
  const searchResults=useMemo(()=>{
    const q=query.trim().toLowerCase();
