@@ -120,7 +120,8 @@ async function ingestType(entityType, canonicalFile, limit) {
     record
   ])).values()];
 
-  const matchFields = entityType === "episode" ? ["title", "name"] : ["name"];\n  const matches = summarizeMatches(deduped, canonical, matchFields);
+  const matchFields = entityType === "episode" ? ["title", "name"] : ["name"];
+  const matches = summarizeMatches(deduped, canonical, matchFields);
 
   return {
     entityType,
