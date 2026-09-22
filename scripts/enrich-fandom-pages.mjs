@@ -300,6 +300,23 @@ async function fetchPageBatch(pageIds) {
   );
 }
 
+async function fetchRevisions(revids) {
+  if (!revids.length) return [];
+
+  const params = new URLSearchParams({
+    action: "query",
+    revids: revids.join("|"),
+    prop: "revisions",
+    rvprop: "ids|timestamp|content",
+    rvslots: "main",
+    format: "json",
+    formatversion: "2"
+  });
+
+  const payload = await fetchJson(API + "?" + params.toString());
+  return (payload?.query?.pages || []).filter((page) => !page.missing);
+}
+
 async function mapWithConcurrency(items, concurrency, worker) {
   const results = new Array(items.length);
   let cursor = 0;
