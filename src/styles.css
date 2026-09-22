@@ -961,7 +961,8 @@ button.miniTimelineItem{cursor:pointer}
 .guidePaths div>span{display:block;color:#7f8d8e;font-size:8px;line-height:1.35}
 .guidePaths>button>svg{width:14px;height:14px;color:#667577}
 .guideSecondary{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0 16px}
-.guideSecondary>div{padding:12px;border:1px solid #293638;border-radius:12px;background:#101a1c}
+.guideSecondary>div,.guideSecondary>button{display:block;width:100%;padding:12px;border:1px solid #293638;border-radius:12px;background:#101a1c;color:inherit;text-align:left}
+.guideSecondary>button:hover{border-color:#465456;background:#142022}
 .guideSecondary small,
 .sourceDirectory{display:grid;gap:7px;margin-top:10px}
 .sourceDirectoryItem{display:grid;grid-template-columns:minmax(0,1fr) 16px;gap:10px;align-items:center;padding:11px 12px;border:1px solid #ffffff12;border-radius:13px;background:#0b1416;color:inherit;text-decoration:none}
@@ -1186,6 +1187,24 @@ button.miniTimelineItem{cursor:pointer}
  .journeyMapAction{grid-template-columns:1fr}
  .journeyMapAction>button{justify-content:center;width:100%}
 }
+
+.watchProgress{display:grid;gap:6px;margin:10px 0 4px}
+.watchProgressBar{height:6px;border-radius:999px;background:#101a1c;border:1px solid #293638;overflow:hidden}
+.watchProgressBar>i{display:block;height:100%;background:#72a9c5;border-radius:999px}
+.watchProgressStats{display:flex;align-items:baseline;justify-content:space-between;font:700 9px "Space Mono",monospace;color:#aeb8b7}
+.watchProgressStats span{color:#718082}
+.watchResetButton{margin:2px 0 4px}
+.watchOrderList{display:grid;gap:6px}
+.watchOrderRow{display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:center}
+.watchOrderCheck{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:1px solid #293638;border-radius:11px;background:#101a1c;color:#72a9c5;font:700 14px "Space Mono",monospace}
+.watchOrderRow.isWatched .watchOrderCheck{background:#72a9c5;border-color:#72a9c5;color:#091314}
+.watchOrderMeta{display:grid;grid-template-columns:30px minmax(0,1fr) 16px;gap:10px;align-items:center;width:100%;padding:9px 11px;border:1px solid #293638;border-radius:12px;background:#101a1c;color:#e2e8e6;text-align:left}
+.watchOrderMeta:hover{border-color:#465456;background:#142022}
+.watchOrderMeta>svg{width:14px;color:#667577}
+.watchOrderSeq{font:700 10px "Space Mono",monospace;color:#728082}
+.watchOrderInfo small{display:block;color:#728082;font:700 7px "Space Mono",monospace;letter-spacing:.05em}
+.watchOrderInfo b{display:block;margin:3px 0 0;font-size:10.5px;color:#e2e8e6}
+.watchOrderRow.isWatched .watchOrderMeta{opacity:.55}
 
 
 .timelineSecondaryToggle{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;width:100%;margin:8px 0 10px;padding:10px 11px;border:1px solid #ffffff16;border-radius:11px;background:#0c1617;color:#d4dcda;text-align:left}
