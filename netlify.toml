@@ -1,5 +1,5 @@
 [build]
-  command = "npm run ingest:media && npm run enrich:fandom-full && npm run audit:enrichment && npm run publish:enrichment-preview && npm run ensure:fandom-canonical && npm run cache:media && vite build"
+  command = "npm run ingest:media && npm run enrich:fandom-netlify && npm run audit:enrichment && npm run publish:enrichment-preview && npm run ensure:fandom-canonical && npm run cache:media && vite build"
   publish = "dist"
 
 [build.environment]
