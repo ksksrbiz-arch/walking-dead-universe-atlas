@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "source": "Walking Dead Wiki character appearance tables and character pages; Wikipedia episode and character articles for the 2026-09 roster expansion",
+  "source": "Walking Dead Wiki character appearance tables and character pages; Wikipedia episode and character articles for the 2026-09 roster expansion; episode-backing fix for 15 roster characters declared with zero episode presence (2026-09-22)",
   "sourceUrls": [
     "https://walkingdead.fandom.com/wiki/Character_Appearances_(TV_Series)",
     "https://walkingdead.fandom.com/wiki/Character_Appearances_(Daryl_Series)",
@@ -18,7 +18,24 @@
     "https://en.wikipedia.org/wiki/The_Walking_Dead:_World_Beyond",
     "https://en.wikipedia.org/wiki/The_Walking_Dead:_The_Ones_Who_Live",
     "https://walkingdead.fandom.com/wiki/Ginny_(Dead_City)",
-    "https://walkingdead.fandom.com/wiki/Perlie_Armstrong_(Dead_City)"
+    "https://walkingdead.fandom.com/wiki/Perlie_Armstrong_(Dead_City)",
+    "https://en.wikipedia.org/wiki/Live_Bait_(The_Walking_Dead)",
+    "https://en.wikipedia.org/wiki/Aaron_(The_Walking_Dead)",
+    "https://en.wikipedia.org/wiki/30_Days_Without_an_Accident",
+    "https://walkingdead.fandom.com/wiki/Jerry_(TV_Series)",
+    "https://en.wikipedia.org/wiki/Siddiq_(The_Walking_Dead)",
+    "https://en.wikipedia.org/wiki/Look_at_the_Flowers",
+    "https://en.wikipedia.org/wiki/Pamela_Milton",
+    "https://en.wikipedia.org/wiki/New_Haunts",
+    "https://walkingdead.fandom.com/wiki/Leah_Shaw_(TV_Series)",
+    "https://en.wikipedia.org/wiki/Find_Me_(The_Walking_Dead)",
+    "https://walkingdead.fandom.com/wiki/Pope_(TV_Series)",
+    "https://en.wikipedia.org/wiki/Mercer_(The_Walking_Dead)",
+    "https://en.wikipedia.org/wiki/Acheron:_Part_I",
+    "https://walkingdead.fandom.com/wiki/Luciana_Galvez_(Fear)",
+    "https://en.wikipedia.org/wiki/Another_Day_in_the_Diamond",
+    "https://walkingdead.fandom.com/wiki/Mile_Jurkovic_(Dead_City)",
+    "https://screenrant.com/walking-dead-daryl-dixon-genet-villain-pouvoir-du-vivant-explained/"
   ],
   "generatedAt": "2026-09-19T21:35:40.850Z",
   "episodesByCharacter": {
@@ -1898,6 +1915,51 @@
     ],
     "huck": [
       "wb-s01-e01"
+    ],
+    "tara-chambler": [
+      "twd-s04-e06"
+    ],
+    "aaron": [
+      "twd-s05-e10"
+    ],
+    "bob-stookey": [
+      "twd-s04-e01"
+    ],
+    "jerry": [
+      "twd-s07-e02"
+    ],
+    "siddiq": [
+      "twd-s08-e01"
+    ],
+    "princess-juanita-sanchez": [
+      "twd-s10-e14"
+    ],
+    "pamela-milton": [
+      "twd-s11-e10"
+    ],
+    "leah-shaw": [
+      "twd-s10-e18"
+    ],
+    "pope": [
+      "twd-s11-e03"
+    ],
+    "mercer": [
+      "twd-s11-e01"
+    ],
+    "luciana-galvez": [
+      "ftwd-s04-e01"
+    ],
+    "john-dorie": [
+      "ftwd-s04-e01"
+    ],
+    "charlie": [
+      "ftwd-s04-e02"
+    ],
+    "the-croat": [
+      "dead-s01-e01"
+    ],
+    "genet": [
+      "daryl-s01-e01"
     ]
   },
   "updatedAt": "2026-09-22"
