@@ -17,7 +17,8 @@
     "enrich:fandom-atlas": "node scripts/ingest-fandom-atlas.mjs",
     "enrich:fandom-pages": "node scripts/enrich-fandom-pages.mjs",
     "enrich:fandom-full": "npm run enrich:fandom-atlas && npm run enrich:fandom-pages",
-    "audit:enrichment": "node scripts/audit-fandom-enrichment.mjs"
+    "audit:enrichment": "node scripts/audit-fandom-enrichment.mjs",
+    "publish:enrichment-preview": "node scripts/publish-enrichment-preview.mjs"
   },
   "dependencies": {
     "react": "^19.1.1",
