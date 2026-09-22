@@ -86,8 +86,33 @@ export type EpisodeWatchOrderItem=ChronologyItem & {
  orderingBasis:"timeline-anchor"|"timeline-window";
 };
 
+const seasonNumberBySeasonId=new Map((atlasData.seasons as any[]).map(s=>[s.id,s.season]));
+
+// Many episodes only carry year-level timeline precision (an entire season, or even
+// several consecutive seasons, sharing one approximate year), so sorting purely on
+// start/end left large same-year clusters ordered by nothing but title text — season 2
+// could sort ahead of season 1's pilot, and cross-series ties resolved alphabetically
+// rather than by the curated cross-series sequence. watchOrder.json's series-level
+// scaffold exists specifically to break those ties (its own note says episode-level
+// chronology should still win whenever it actually differs); this was previously wired
+// up (getSeriesWatchOrder) but never consulted by the actual episode ordering.
+const seriesWatchScaffold=(atlasData.watchOrder as any[]).filter(x=>x.type!=="note");
+function scaffoldIndex(seriesId:string,seasonNumber:number|undefined):number{
+ if(seasonNumber==null)return Infinity;
+ const index=seriesWatchScaffold.findIndex(w=>w.seriesId===seriesId&&seasonNumber>=w.startSeason&&seasonNumber<=w.endSeason);
+ return index===-1?Infinity:index;
+}
+
 export function buildEpisodeWatchOrder(){
- const episodes=buildChronology().filter(x=>x.kind==="episode");
+ const episodes=[...buildChronology().filter(x=>x.kind==="episode")].sort((a,b)=>{
+  const seasonA=seasonNumberBySeasonId.get(a.seasonId||""),seasonB=seasonNumberBySeasonId.get(b.seasonId||"");
+  return a.start-b.start
+   ||a.end-b.end
+   ||scaffoldIndex(a.seriesId,seasonA)-scaffoldIndex(b.seriesId,seasonB)
+   ||(seasonA??Infinity)-(seasonB??Infinity)
+   ||(a.episodeNumber??Infinity)-(b.episodeNumber??Infinity)
+   ||a.title.localeCompare(b.title);
+ });
  return episodes.map((item,index,all)=>{
   const sameWindow=all.some(other=>other.id!==item.id&&other.start===item.start&&other.end===item.end);
   const unknown=item.precision==="unknown"||!Number.isFinite(item.start)||item.start<=0;
