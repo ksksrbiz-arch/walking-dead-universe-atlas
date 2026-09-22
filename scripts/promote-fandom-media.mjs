@@ -25,7 +25,7 @@ function imageSources(page) {
     ...(Array.isArray(page?.hints?.imageGallery) ? page.hints.imageGallery : []),
     ...(Array.isArray(page?.hints?.image) ? page.hints.image : [page?.hints?.image]),
   ].filter(Boolean);
-  return [...new Set(values.filter((value) => /^https?:\\/\\//i.test(String(value))))];
+  return [...new Set(values.filter((value) => /^https?:\/\//i.test(String(value))))];
 }
 
 async function main() {
