@@ -54,6 +54,21 @@ function seriesBreakdown(records) {
   return counts;
 }
 
+
+function canonicalIdentityCollisions(entities) {
+  const bySurname = {};
+  for (const entity of entities) {
+    const parts = String(entity.name || "").trim().split(/\\s+/).filter(Boolean);
+    if (parts.length < 2) continue;
+    const surname = parts[parts.length - 1].toLowerCase();
+    bySurname[surname] ||= [];
+    bySurname[surname].push({ id: entity.id, name: entity.name });
+  }
+  return Object.entries(bySurname)
+    .filter(([, members]) => members.length > 1)
+    .map(([surname, members]) => ({ surname, members }));
+}
+
 function topUnmatched(records, limit = 50) {
   return records
     .filter((item) => item.match?.status !== "matched")
@@ -143,7 +158,8 @@ async function main() {
       seriesBreakdown: seriesBreakdown(records),
       topUnmatched: unmatched.slice(0, 50),
       reviewQueueCount: unmatched.length,
-      pageCoverage: pageCoverage(pageResult)
+      pageCoverage: pageCoverage(pageResult),
+      identityCollisions: canonicalIdentityCollisions(canonical[key])
     };
   }
 
