@@ -13,7 +13,7 @@ function initials(name:string){
   return name.split(/\s+/).filter(Boolean).slice(0,2).map(v=>v[0]).join("").toUpperCase();
 }
 
-export default function CharacterPortrait({character,image,size=64,className}:CharacterPortraitProps){
+export default function CharacterPortrait({character,image,gallery,size=64,className}:CharacterPortraitProps){
   const safe=character.id.replace(/[^a-z0-9_-]/gi,"-");
   const clip=`character-portrait-${safe}`;
   const primary=image || gallery?.[0] || "";

@@ -1587,10 +1587,10 @@ button.universeEventRow:hover{background:#ffffff04}
     top:68px!important;
     right:105px!important;
   }
-  .contentPanel.open:not(.hasDetail){
+  .map.view-map .contentPanel.open:not(.hasDetail){
     transform:translateY(calc(100% - 62px))!important;
   }
-  .contentPanel.peek:not(.hasDetail){
+  .map.view-map .contentPanel.peek:not(.hasDetail){
     transform:translateY(calc(100% - 62px))!important;
   }
   .contentPanel{
@@ -1822,8 +1822,8 @@ button.universeEventRow:hover{background:#ffffff04}
     max-height:min(64dvh,520px)!important;
     border-radius:17px!important;
   }
-  .contentPanel.open:not(.hasDetail),
-  .contentPanel.peek:not(.hasDetail){
+  .map.view-map .contentPanel.open:not(.hasDetail),
+  .map.view-map .contentPanel.peek:not(.hasDetail){
     transform:translateY(calc(100% - 54px))!important;
   }
   .panelGrab{min-height:38px!important}
