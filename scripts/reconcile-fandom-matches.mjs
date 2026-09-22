@@ -11,6 +11,20 @@ async function readJson(url) {
   return JSON.parse(await readFile(url, "utf8"));
 }
 
+const CURATED_ALIASES = {
+  "jadis-stokes": ["Anne (TV Universe)", "Jadis Stokes"],
+  "paul-rovia": ["Paul Rovia (TV Universe)", "Jesus"],
+  "alpha": ["Alpha (TV Universe)", "Dee"],
+  "edwin-jenner": ["Edwin Jenner (TV Universe)", "Dr. Edwin Jenner"],
+  "andrea-harrison": ["Andrea (TV Series)", "Andrea Harrison (TV Series)"],
+  "princess-juanita-sanchez": ["Juanita Sanchez (TV Series)", "Princess"],
+  "mercer": ["Michael Mercer (TV Series)", "Mercer"],
+  "nick-clark": ["Nick Clark (TV Series)"],
+  "laurent": ["Laurent Carrière (Daryl Series)", "Laurent Carrière"],
+  "genet": ["Marion Genet (Daryl Series)", "Marion Genet"],
+  "jonathan-beale": ["Johnathan Beale (The Ones Who Live)", "Major General Beale"]
+};
+
 function seriesCompatible(candidate, canonical) {
   const candidateSeries = candidate?.fields?.seriesId;
   if (!candidateSeries) return true;
@@ -42,9 +56,29 @@ function reconcileRecord(record, page, canonicals) {
 
   const matches = canonicals.filter((canonical) => {
     if (!seriesCompatible(record.candidate, canonical)) return false;
+    const curated = CURATED_ALIASES[canonical.id] || [];
     return keys.has(normalizeName(canonical.name)) ||
+      curated.some((alias) => keys.has(normalizeName(alias))) ||
       (Array.isArray(canonical.aliases) && canonical.aliases.some((alias) => keys.has(normalizeName(alias))));
   });
+
+  // If the Fandom page title uniquely identifies one canonical entity,
+  // allow a series-agnostic exact-title reconciliation. This handles
+  // Fandom category inconsistencies without introducing fuzzy matches.
+  const uniqueTitleMatches = canonicals.filter((canonical) => {
+    const curated = CURATED_ALIASES[canonical.id] || [];
+    return keys.has(normalizeName(canonical.name)) ||
+      curated.some((alias) => keys.has(normalizeName(alias))) ||
+      (Array.isArray(canonical.aliases) && canonical.aliases.some((alias) => keys.has(normalizeName(alias))));
+  });
+  if (uniqueTitleMatches.length === 1 && matches.length === 0) {
+    return {
+      status: "matched",
+      score: 0.97,
+      canonicalId: uniqueTitleMatches[0].id,
+      reasons: ["fandom-unique-title"]
+    };
+  }
 
   if (matches.length === 1) {
     return {
