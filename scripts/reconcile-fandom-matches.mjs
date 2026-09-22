@@ -19,7 +19,7 @@ const CURATED_ALIASES = {
   "andrea-harrison": ["Andrea (TV Series)", "Andrea Harrison (TV Series)"],
   "princess-juanita-sanchez": ["Juanita Sanchez (TV Series)", "Princess"],
   "mercer": ["Michael Mercer (TV Series)", "Mercer"],
-  "nick-clark": ["Nick Clark (TV Series)"],
+  "nick-clark": ["Nick Clark (TV Series)", "Nicholas Clark (Fear)"],
   "laurent": ["Laurent Carrière (Daryl Series)", "Laurent Carrière"],
   "genet": ["Marion Genet (Daryl Series)", "Marion Genet"],
   "jonathan-beale": ["Johnathan Beale (The Ones Who Live)", "Major General Beale"]
