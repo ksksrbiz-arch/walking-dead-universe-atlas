@@ -49,8 +49,10 @@ export function filterChronology(year:number,seriesId?:string){
  return buildChronology().filter(x=>x.start<=year&&(!seriesId||x.seriesId===seriesId));
 }
 
+let seriesWatchOrderCache:any[]|null=null;
 export function getSeriesWatchOrder(){
- return atlasData.watchOrder.filter((x:any)=>x.type!=="note");
+ if(!seriesWatchOrderCache)seriesWatchOrderCache=atlasData.watchOrder.filter((x:any)=>x.type!=="note");
+ return seriesWatchOrderCache;
 }
 
 // The universe year axis (outbreak through the latest anchored story year) is used by
@@ -96,23 +98,33 @@ const seasonNumberBySeasonId=new Map((atlasData.seasons as any[]).map(s=>[s.id,s
 // scaffold exists specifically to break those ties (its own note says episode-level
 // chronology should still win whenever it actually differs); this was previously wired
 // up (getSeriesWatchOrder) but never consulted by the actual episode ordering.
-const seriesWatchScaffold=(atlasData.watchOrder as any[]).filter(x=>x.type!=="note");
 function scaffoldIndex(seriesId:string,seasonNumber:number|undefined):number{
  if(seasonNumber==null)return Infinity;
- const index=seriesWatchScaffold.findIndex(w=>w.seriesId===seriesId&&seasonNumber>=w.startSeason&&seasonNumber<=w.endSeason);
+ const scaffold=getSeriesWatchOrder();
+ const index=scaffold.findIndex((w:any)=>w.seriesId===seriesId&&seasonNumber>=w.startSeason&&seasonNumber<=w.endSeason);
  return index===-1?Infinity:index;
 }
 
+const resolveStart=(e:any):number=>Number(e.start??e.timelineStart??e.timelineEnd??9999);
+const resolveEnd=(e:any):number=>Number(e.end??e.timelineEnd??e.timelineStart??9999);
+
+// Shared by every place in the app that lists a character's/group's/year's
+// episodes and needs them in genuine story order, not just "same approximate
+// year, whatever order the source data happened to be in" — accepts either a
+// raw episodes.json record (timelineStart/timelineEnd) or a ChronologyItem
+// (start/end).
+export function compareEpisodesChronologically(a:any,b:any):number{
+ const seasonA=seasonNumberBySeasonId.get(a.seasonId||""),seasonB=seasonNumberBySeasonId.get(b.seasonId||"");
+ return resolveStart(a)-resolveStart(b)
+  ||resolveEnd(a)-resolveEnd(b)
+  ||scaffoldIndex(a.seriesId,seasonA)-scaffoldIndex(b.seriesId,seasonB)
+  ||(seasonA??Infinity)-(seasonB??Infinity)
+  ||(a.episodeNumber??Infinity)-(b.episodeNumber??Infinity)
+  ||String(a.title||"").localeCompare(String(b.title||""));
+}
+
 export function buildEpisodeWatchOrder(){
- const episodes=[...buildChronology().filter(x=>x.kind==="episode")].sort((a,b)=>{
-  const seasonA=seasonNumberBySeasonId.get(a.seasonId||""),seasonB=seasonNumberBySeasonId.get(b.seasonId||"");
-  return a.start-b.start
-   ||a.end-b.end
-   ||scaffoldIndex(a.seriesId,seasonA)-scaffoldIndex(b.seriesId,seasonB)
-   ||(seasonA??Infinity)-(seasonB??Infinity)
-   ||(a.episodeNumber??Infinity)-(b.episodeNumber??Infinity)
-   ||a.title.localeCompare(b.title);
- });
+ const episodes=[...buildChronology().filter(x=>x.kind==="episode")].sort(compareEpisodesChronologically);
  return episodes.map((item,index,all)=>{
   const sameWindow=all.some(other=>other.id!==item.id&&other.start===item.start&&other.end===item.end);
   const unknown=item.precision==="unknown"||!Number.isFinite(item.start)||item.start<=0;

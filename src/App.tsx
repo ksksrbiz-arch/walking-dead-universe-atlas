@@ -6,7 +6,7 @@ import type {CSSProperties} from "react";
 import world from "@cublya/world-atlas/countries-50m.json";
 import {atlasData,Location,SeriesKey} from "./data";
 import {validateAtlasData} from "./lib/validateData";
-import {buildChronology,getEpisodeWatchOrder,describeEra,UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR,yearToPercent} from "./lib/chronology";
+import {buildChronology,filterChronology,getEpisodeWatchOrder,compareEpisodesChronologically,describeEra,UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR,yearToPercent} from "./lib/chronology";
 import type {EpisodeWatchOrderItem} from "./lib/chronology";
 import episodeMedia from "../data/episodeMedia.json";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
@@ -214,7 +214,7 @@ export default function App(){
    const meta=SERIES_BY_ID[l.seriesId];
    return !!meta&&(series==="ALL"||l.seriesId===META[series].id)&&l.year<=year;
  }),[series,year]);
- const chronology=useMemo(()=>buildChronology().filter(e=>e.start<=year&&(series==="ALL"||e.seriesId===META[series].id)),[series,year]);
+ const chronology=useMemo(()=>filterChronology(year,series==="ALL"?undefined:META[series].id),[series,year]);
  const currentEra=useMemo(()=>describeEra(year),[year]);
  const episodes=useMemo(()=>chronology.filter(e=>e.kind==="episode"),[chronology]);
  const selectedLoc=atlasData.locations.find(l=>l.id===selectedLocation)??null;
@@ -318,7 +318,7 @@ export default function App(){
  const openWatchOrder=()=>{
    clearPeopleFocus();setView("guide");setWatchOrderOpen(true);setJourneyMapMode(false);setSheet("open");
  };
- const selectCharacter=(id:string)=>{clearPeopleFocus();const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const ids=getCharacterEpisodeIds(id);const eps=ids.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setSelectedConnection(null);setJourneyMapMode(false);setView("people");setSheet("open");trackAtlasMetric("character-select",eps.length,{character:id});void getRuntimeRelationships("character",id).then(remote=>{if(remote)trackAtlasMetric("runtime-character-relationships",remote.episodeIds.length,{character:id,remoteIndexed:true})});};
+ const selectCharacter=(id:string)=>{clearPeopleFocus();const character=atlasData.characters.find((x:any)=>x.id===id) as any;if(!character)return;const ids=getCharacterEpisodeIds(id);const eps=ids.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).sort(compareEpisodesChronologically);const firstYear=eps[0]?.timelineStart??eps[0]?.timelineEnd;if(firstYear)setYear(Number(firstYear));setSelectedCharacter(id);setSelectedLocation(null);setSelectedEpisode(null);setSelectedConnection(null);setJourneyMapMode(false);setView("people");setSheet("open");trackAtlasMetric("character-select",eps.length,{character:id});void getRuntimeRelationships("character",id).then(remote=>{if(remote)trackAtlasMetric("runtime-character-relationships",remote.episodeIds.length,{character:id,remoteIndexed:true})});};
  const selectLocation=(l:Location)=>{ clearPeopleFocus(); const focusStarted=performance.now();
    void getRuntimeRelationships("location",l.id).then(remote=>{if(remote)trackAtlasMetric("runtime-location-relationships",remote.episodeIds.length,{location:l.id,remoteIndexed:true})});
    if(Number(l.year)>0)setYear(Number(l.year));setSelectedLocation(l.id);setSelectedEpisode(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setView("map");setSheet("open");
@@ -664,7 +664,7 @@ function ChronologyMatrix({year,onYearChange,series,onEpisode,onConnections}:{ye
   }
   return result;
  },[visible,lanes]);
- const focusItems=useMemo(()=>visible.filter(x=>x.start<=focusYear&&x.end>=focusYear).sort((a,b)=>a.start-b.start||a.title.localeCompare(b.title)),[visible,focusYear]);
+ const focusItems=useMemo(()=>visible.filter(x=>x.start<=focusYear&&x.end>=focusYear).sort(compareEpisodesChronologically),[visible,focusYear]);
  const focusEpisodes=focusItems.filter(x=>x.kind==="episode");
  const focusEvents=focusItems.filter(x=>x.kind!=="episode");
  const maxCount=useMemo(()=>Math.max(1,...[...byLaneYear.values()].flatMap(m=>[...m.values()].map(v=>v.count))),[byLaneYear]);
@@ -711,10 +711,7 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
  useEffect(()=>{let active=true;void getRuntimeEpisodeIds("character",characterId).then(ids=>{if(active)setRuntimeEpisodeIds(ids)});return()=>{active=false}},[characterId]);
  const character=atlasData.characters.find((x:any)=>x.id===characterId) as any;
  if(!character)return null;
- const eps=(runtimeEpisodeIds??getCharacterEpisodeIds(characterId)).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean).sort((a:any,b:any)=>{
-   const ay=Number(a.timelineStart??a.timelineEnd??9999), by=Number(b.timelineStart??b.timelineEnd??9999);
-   return ay-by || Number(a.episodeNumber??0)-Number(b.episodeNumber??0);
- });
+ const eps=(runtimeEpisodeIds??getCharacterEpisodeIds(characterId)).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean).sort(compareEpisodesChronologically);
  const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))].map(id=>atlasData.locations.find(l=>l.id===id)).filter(Boolean) as Location[];
  const links=atlasData.connections.filter((x:any)=>x.fromId===characterId||x.toId===characterId);
  const media=(atlasData as any).media?.characters?.[characterId];
@@ -759,7 +756,7 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
 function GroupDetail({kind,groupId,onCharacter,onLocation,onEpisode,onConnection,onCommunity,onFaction}:{kind:"community"|"faction";groupId:string;onCharacter:(id:string)=>void;onLocation:(l:Location)=>void;onEpisode:(id:string)=>void;onConnection:(id:string)=>void;onCommunity:(id:string)=>void;onFaction:(id:string)=>void}){
  const group=(kind==="community"?atlasData.communities:atlasData.factions).find((x:any)=>x.id===groupId) as any;
  if(!group)return <div className="contentScroll"><p className="muted">{kind==="community"?"Community":"Faction"} record not found.</p></div>;
- const eps=getGroupEpisodeIds(kind,groupId).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999)) as any[];
+ const eps=getGroupEpisodeIds(kind,groupId).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean).sort(compareEpisodesChronologically) as any[];
  const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))].map(id=>atlasData.locations.find(l=>l.id===id)).filter(Boolean) as Location[];
  const members=[...new Set(eps.flatMap((e:any)=>e.characterIds??[]))].map(id=>atlasData.characters.find((c:any)=>c.id===id)).filter(Boolean) as any[];
  const links=atlasData.connections.filter((x:any)=>x.fromId===groupId||x.toId===groupId);
