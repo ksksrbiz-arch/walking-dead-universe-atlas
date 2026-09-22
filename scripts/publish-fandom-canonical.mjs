@@ -13,6 +13,12 @@ function mergeHints(pages){
     if(!id || page?.candidate?.matchStatus!=="matched") continue;
     const current=out[id]||{};
     const hints={...current.hints};
+    const fields={...current.fields};
+    for(const box of page.infoboxes||[]) for(const [rawKey,rawValue] of Object.entries(box.parameters||{})){
+      const key=String(rawKey||"").trim().toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"");
+      const value=Array.isArray(rawValue)?rawValue.join(" · "):String(rawValue??"").trim();
+      if(key&&value) fields[key]=value;
+    }
     for(const [key,value] of Object.entries(page.hints||{})){
       if(value==null || (Array.isArray(value)&&!value.length) || String(value).trim()==="") continue;
       if(hints[key]==null) hints[key]=value;
@@ -30,6 +36,7 @@ function mergeHints(pages){
       pageTitle:page.page?.title||null,
       extract:page.extract||current.extract||"",
       hints,
+      fields,
       details:{
         sections:[...new Set([...(current.details?.sections||[]),...(page.details?.sections||[])])].slice(0,100),
         linkedPages:[...new Set([...(current.details?.linkedPages||[]),...(page.details?.linkedPages||[])])].slice(0,250),
