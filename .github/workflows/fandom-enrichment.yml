@@ -35,6 +35,9 @@ jobs:
       - name: Enrich character, location and episode pages
         run: npm run enrich:fandom-pages
 
+      - name: Audit candidate and page coverage
+        run: npm run audit:enrichment
+
       - name: Write enrichment summary
         run: |
           node - <<'NODE'
@@ -63,4 +66,5 @@ jobs:
             data/enrichment/fandom-atlas-candidates.json
             data/enrichment/fandom-page-enrichment.json
             data/enrichment/fandom-page-enrichment-summary.json
+            data/enrichment/fandom-enrichment-audit.json
           retention-days: 14
