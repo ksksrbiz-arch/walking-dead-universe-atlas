@@ -22,7 +22,8 @@ const CURATED_ALIASES = {
   "nick-clark": ["Nick Clark (TV Series)", "Nicholas Clark (Fear)"],
   "laurent": ["Laurent Carrière (Daryl Series)", "Laurent Carrière"],
   "genet": ["Marion Genet (Daryl Series)", "Marion Genet"],
-  "jonathan-beale": ["Johnathan Beale (The Ones Who Live)", "Major General Beale"]
+  "jonathan-beale": ["Johnathan Beale (The Ones Who Live)", "Johnathan Beale", "Major General Beale"],
+  "mason-beale": ["Mason Beale (World Beyond)", "Mason Beale"]
 };
 
 function seriesCompatible(candidate, canonical) {
@@ -48,108 +49,75 @@ function buildKeys(page) {
   return keys;
 }
 
+function canonicalMatchEvidence(page, canonical) {
+  const titleKey = normalizeName(page?.page?.title || "");
+  const canonicalKey = normalizeName(canonical?.name || "");
+  const curated = CURATED_ALIASES[canonical.id] || [];
+  const canonicalAliases = Array.isArray(canonical.aliases) ? canonical.aliases : [];
+
+  if (titleKey && titleKey === canonicalKey) return "exact-canonical-name";
+  if (curated.some((alias) => titleKey === normalizeName(alias))) return "exact-curated-fandom-title";
+  if (canonicalAliases.some((alias) => titleKey === normalizeName(alias))) return "exact-canonical-alias";
+
+  const pageKeys = buildKeys(page);
+  if (curated.some((alias) => pageKeys.has(normalizeName(alias)))) return "curated-page-alias";
+  if (canonicalAliases.some((alias) => pageKeys.has(normalizeName(alias)))) return "canonical-page-alias";
+
+  return null;
+}
+
 function reconcileRecord(record, page, canonicals) {
   if (record.match?.status === "matched") return record.match;
 
-  const keys = buildKeys(page);
-  if (!keys.size) return record.match;
+  if (!page?.page?.title) return record.match;
 
-  const matches = canonicals.filter((canonical) => {
-    if (!seriesCompatible(record.candidate, canonical)) return false;
-    const curated = CURATED_ALIASES[canonical.id] || [];
-    return keys.has(normalizeName(canonical.name)) ||
-      curated.some((alias) => keys.has(normalizeName(alias))) ||
-      (Array.isArray(canonical.aliases) && canonical.aliases.some((alias) => keys.has(normalizeName(alias))));
-  });
+  const evidence = canonicals
+    .map((canonical) => ({ canonical, reason: canonicalMatchEvidence(page, canonical) }))
+    .filter((item) => item.reason);
 
-  // If the Fandom page title uniquely identifies one canonical entity,
-  // allow a series-agnostic exact-title reconciliation. This handles
-  // Fandom category inconsistencies without introducing fuzzy matches.
-  const uniqueTitleMatches = canonicals.filter((canonical) => {
-    const curated = CURATED_ALIASES[canonical.id] || [];
-    return keys.has(normalizeName(canonical.name)) ||
-      curated.some((alias) => keys.has(normalizeName(alias))) ||
-      (Array.isArray(canonical.aliases) && canonical.aliases.some((alias) => keys.has(normalizeName(alias))));
-  });
-  if (uniqueTitleMatches.length === 1 && matches.length === 0) {
+  const compatible = evidence.filter(({ canonical }) => seriesCompatible(record.candidate, canonical));
+
+  // Exact page identity is preferred over inferred aliases. A page such as
+  // "Johnathan Beale" must never be collapsed into a generic "Beale" identity,
+  // especially when a distinct Mason Beale canonical record exists.
+  if (compatible.length === 1) {
     return {
       status: "matched",
-      score: 0.97,
-      canonicalId: uniqueTitleMatches[0].id,
-      reasons: ["fandom-unique-title"]
+      score: compatible[0].reason.startsWith("exact-") ? 1 : 0.97,
+      canonicalId: compatible[0].canonical.id,
+      reasons: [`fandom-${compatible[0].reason}`]
     };
   }
 
-  if (matches.length === 1) {
-    return {
-      status: "matched",
-      score: 0.97,
-      canonicalId: matches[0].id,
-      reasons: ["fandom-page-alias"]
-    };
-  }
-
-  if (matches.length > 1) {
+  if (compatible.length > 1) {
     return {
       status: "ambiguous",
       score: 0,
-      reasons: ["multiple-canonical-alias-matches"],
-      candidateCanonicalIds: matches.map((match) => match.id)
+      reasons: ["multiple-canonical-identity-matches"],
+      candidateCanonicalIds: compatible.map((match) => match.canonical.id)
+    };
+  }
+
+  // If Fandom's series classification is inconsistent, allow only a unique
+  // exact page identity. Never use a generic surname or fuzzy identity here.
+  if (evidence.length === 1 && evidence[0].reason.startsWith("exact-")) {
+    return {
+      status: "matched",
+      score: 0.97,
+      canonicalId: evidence[0].canonical.id,
+      reasons: ["fandom-unique-exact-title"]
+    };
+  }
+
+  if (evidence.length > 1) {
+    return {
+      status: "ambiguous",
+      score: 0,
+      reasons: ["multiple-canonical-identity-matches"],
+      candidateCanonicalIds: evidence.map((match) => match.canonical.id)
     };
   }
 
   return record.match;
 }
 
-async function main() {
-  const candidates = await readJson(new URL("fandom-atlas-candidates.json", DIR));
-  const pages = await readJson(new URL("fandom-page-enrichment.json", DIR));
-
-  const configs = [
-    ["characters", "characters.json"],
-    ["locations", "locations.json"],
-    ["episodes", "episodes.json"]
-  ];
-
-  const stats = {};
-
-  for (const [key, file] of configs) {
-    const canonicals = await readJson(new URL(file, DATA));
-    const pageMap = new Map((pages[key]?.pages || []).map((page) => [String(page.sourceRecordId), page]));
-    let aliasMatched = 0;
-    let ambiguous = 0;
-
-    for (const record of candidates[key].records || []) {
-      if (record.match?.status === "matched") continue;
-
-      const page = pageMap.get(String(record.candidate?.sourceRecordId));
-      const nextMatch = reconcileRecord(record, page, canonicals);
-
-      if (nextMatch?.status === "matched") aliasMatched += 1;
-      if (nextMatch?.status === "ambiguous") ambiguous += 1;
-
-      record.match = nextMatch;
-      if (page) {
-        page.candidate = {
-          ...(page.candidate || {}),
-          canonicalId: nextMatch?.canonicalId || null,
-          matchStatus: nextMatch?.status || "unmatched",
-          matchScore: nextMatch?.score || 0,
-          matchReasons: nextMatch?.reasons || []
-        };
-      }
-    }
-
-    stats[key] = { aliasMatched, ambiguous };
-  }
-
-  await writeFile(new URL("fandom-atlas-candidates.json", DIR), JSON.stringify(candidates, null, 2) + "\n");
-  await writeFile(new URL("fandom-page-enrichment.json", DIR), JSON.stringify(pages, null, 2) + "\n");
-
-  console.log(JSON.stringify(stats, null, 2));
-}
-
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
