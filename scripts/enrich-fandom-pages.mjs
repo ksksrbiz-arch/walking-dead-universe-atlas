@@ -322,7 +322,7 @@ function buildHints(entityType, infoboxes, wikitext = "") {
 }
 
 function extractSections(wikitext) {
-  return [...String(wikitext || "").matchAll(/^(={2,4})\\s*(.+?)\\s*\\1\\s*$/gm)]
+  return [...String(wikitext || "").matchAll(/^(={2,4})\s*(.+?)\s*\1\s*$/gm)]
     .map((match) => cleanValue(match[2]))
     .filter(Boolean)
     .slice(0, 80);
@@ -331,7 +331,7 @@ function extractSections(wikitext) {
 function extractWikiLinks(wikitext) {
   const links = [];
   const seen = new Set();
-  for (const match of String(wikitext || "").matchAll(/\\[\\[([^\\]|:#]+)(?:\\|[^\\]]*)?\\]\\]/g)) {
+  for (const match of String(wikitext || "").matchAll(/\[\[([^\]|:#]+)(?:\|[^\]]*)?\]\]/g)) {
     const title = cleanValue(match[1]);
     if (!title || seen.has(title.toLowerCase())) continue;
     seen.add(title.toLowerCase());
