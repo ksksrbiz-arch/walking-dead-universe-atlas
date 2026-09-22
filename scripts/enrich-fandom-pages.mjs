@@ -455,7 +455,7 @@ async function enrichEntityType(entityType, result, limit) {
     }
 
     for (const page of batchResult || []) {
-      pagesById.set(String(page.pageid), page);
+      pagesById.set(String(page.sourceRecordId), page);
     }
   }
 
