@@ -71,3 +71,18 @@ See `docs/QUALITY_AUDIT_2026-09-20.md` for the current ten-part quality audit an
 - [ ] Add source/provenance UI
 - [ ] Add character travel/journey enrichment
 - [ ] Automate scheduled source snapshots and change detection
+
+### Fandom full-TV-Universe validation results
+- Full TV-Universe category ingestion was executed against the configured character, location and episode categories.
+- Candidate set observed:
+  - Characters: 2,319 source records
+  - Locations: 686 source records
+  - Episodes: 429 source records
+- Current canonical-name matcher results:
+  - Characters: 74 matched / 2,245 unmatched
+  - Locations: 72 matched / 614 unmatched
+  - Episodes: 0 matched / 429 unmatched
+- The zero episode-match result is now treated as a data-model/matching gap rather than a source failure. Episode reconciliation needs series + season/episode context and title aliases instead of plain-name matching.
+- Page-level Fandom enrichment is implemented for characters, locations and episodes. It retrieves page metadata/images, latest revisions by exact revision ID, raw wikitext, parsed infoboxes, normalized field hints, lead text and provenance hashes without mutating canonical data.
+- Enrichment execution was validated in a successful branch deployment after fixing MediaWiki generator/revision constraints.
+
