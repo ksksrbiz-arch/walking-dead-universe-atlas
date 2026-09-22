@@ -1,0 +1,1 @@
+Character artwork assets used by the Walking Dead Universe Atlas.
