@@ -22,6 +22,7 @@ function imageSources(page) {
   const values = [
     page?.image?.original,
     page?.image?.thumbnail,
+    ...(Array.isArray(page?.hints?.imageGallery) ? page.hints.imageGallery : []),
     ...(Array.isArray(page?.hints?.image) ? page.hints.image : [page?.hints?.image]),
   ].filter(Boolean);
   return [...new Set(values.filter((value) => /^https?:\\/\\//i.test(String(value))))];
