@@ -287,16 +287,10 @@ async function fetchCategoryPageBatch(category, continueValue = null) {
     gcmlimit: String(BATCH_SIZE),
     gcmnamespace: "0",
     gcmtype: "page",
-    prop: "info|pageimages|extracts|revisions",
+    prop: "info|pageimages",
     inprop: "url",
     piprop: "name|original|thumbnail",
     pithumbsize: "1200",
-    exintro: "1",
-    explaintext: "1",
-    exchars: "1200",
-    rvprop: "ids|timestamp|content",
-    rvslots: "main",
-    rvlimit: "1",
     redirects: "1",
     format: "json",
     formatversion: "2"
@@ -309,9 +303,36 @@ async function fetchCategoryPageBatch(category, continueValue = null) {
   return fetchJson(API + "?" + params.toString());
 }
 
-function flattenPage(page, entityType, candidate) {
-  const revision = page.revisions?.[0] || {};
-  const wikitext = revision.slots?.main?.content || "";
+async function fetchRevisions(revids) {
+  if (!revids.length) return [];
+
+  const params = new URLSearchParams({
+    action: "query",
+    revids: revids.join("|"),
+    prop: "revisions",
+    rvprop: "ids|timestamp|content",
+    rvslots: "main",
+    format: "json",
+    formatversion: "2"
+  });
+
+  const payload = await fetchJson(API + "?" + params.toString());
+  return payload?.query?.pages || [];
+}
+
+function extractLeadText(wikitext) {
+  const lead = String(wikitext || "").split(/\n\s*==[^=][^=]*==/i)[0];
+
+  return cleanValue(
+    lead
+      .replace(/^\s*#redirect[^\n]*/i, "")
+      .replace(/\[\[Category:[^\]]+\]\]/gi, "")
+      .slice(0, 5000)
+  );
+}
+
+function flattenPage(page, revision, entityType, candidate) {
+  const wikitext = revision?.slots?.main?.content || "";
   const infoboxes = findInfoboxes(wikitext);
 
   return {
@@ -325,14 +346,15 @@ function flattenPage(page, entityType, candidate) {
       title: page.title,
       namespace: page.ns,
       touched: page.touched || null,
+      lastRevisionId: page.lastrevid || revision?.revid || null,
       canonicalUrl: page.canonicalurl || page.fullurl || buildPageUrl(page.title),
       fullUrl: page.fullurl || buildPageUrl(page.title),
       redirect: page.redirect || false
     },
     revision: {
-      revisionId: revision.revid || null,
-      parentId: revision.parentid || null,
-      timestamp: revision.timestamp || null
+      revisionId: revision?.revid || page.lastrevid || null,
+      parentId: revision?.parentid || null,
+      timestamp: revision?.timestamp || null
     },
     image: page.original || page.thumbnail || page.pageimage
       ? {
@@ -343,7 +365,7 @@ function flattenPage(page, entityType, candidate) {
           height: page.original?.height || page.thumbnail?.height || null
         }
       : null,
-    extract: page.extract || null,
+    extract: extractLeadText(wikitext),
     templates: infoboxes.map((template) => template.name),
     infoboxes,
     hints: buildHints(entityType, infoboxes),
