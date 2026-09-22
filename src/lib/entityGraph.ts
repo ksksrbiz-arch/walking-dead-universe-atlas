@@ -135,6 +135,11 @@ export function getCharacterEpisodeIds(characterId:string){
   return [...new Set([...indexed,...source])];
 }
 
+export function getGroupEpisodeIds(kind:"community"|"faction",groupId:string){
+  const field=kind==="community"?"communityIds":"factionIds";
+  return atlasData.episodes.filter((e:any)=>(e[field]??[]).includes(groupId)).map((e:any)=>e.id) as string[];
+}
+
 export function getLocationEpisodeIds(locationId:string){
   // Location history may intentionally include episodes where a location is
   // referenced by the broader atlas chronology but is not an episode-level
