@@ -242,11 +242,22 @@ function parseTemplate(rawTemplate) {
 }
 
 function findInfoboxes(wikitext) {
+  const acceptedNames = new Set([
+    "infobox",
+    "character info",
+    "character infobox",
+    "location info",
+    "location infobox",
+    "episode info",
+    "episode infobox"
+  ]);
+
   return extractBalancedTemplates(wikitext)
     .map(parseTemplate)
     .filter((template) =>
+      acceptedNames.has(template.normalizedName) ||
       /(^| )infobox( |$)/i.test(template.normalizedName) ||
-      /^(character|location|episode) infobox/i.test(template.normalizedName)
+      /^(character|location|episode) (info|infobox)$/i.test(template.normalizedName)
     );
 }
 
