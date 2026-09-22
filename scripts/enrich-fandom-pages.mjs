@@ -19,10 +19,10 @@ const ENTITY_CONFIG = {
       aliases: ["alias", "aliases", "other_names", "other name", "nickname", "nicknames"],
       actor: ["actor", "portrayed_by", "portrayed by", "portrayer"],
       status: ["status", "death", "died"],
-      firstAppearance: ["first", "first_appearance", "first appearance", "debut"],
-      lastAppearance: ["last", "last_appearance", "last appearance"],
+      firstAppearance: ["first", "first_appearance", "first appearance", "debut", "tvfirst", "fearfirst", "towlfirst", "osfirst"],
+      lastAppearance: ["last", "last_appearance", "last appearance", "tvlast", "fearlast", "towllast", "oslast"],
       occupation: ["occupation", "occupations"],
-      affiliation: ["affiliation", "affiliations", "group", "groups"],
+      affiliation: ["affiliation", "affiliations", "group", "groups", "community", "communities"],
       family: ["family", "relatives"],
       relationships: ["relationships", "romances"],
       image: ["image", "image_file", "image file"]
@@ -34,8 +34,8 @@ const ENTITY_CONFIG = {
       type: ["type", "location_type", "location type"],
       region: ["state", "region", "province", "country", "location"],
       status: ["status", "condition"],
-      firstAppearance: ["first", "first_appearance", "first appearance", "debut"],
-      lastAppearance: ["last", "last_appearance", "last appearance"],
+      firstAppearance: ["first", "first_appearance", "first appearance", "debut", "tvfirst", "fearfirst", "towlfirst", "osfirst"],
+      lastAppearance: ["last", "last_appearance", "last appearance", "tvlast", "fearlast", "towllast", "oslast"],
       residents: ["residents", "inhabitants", "population"],
       affiliation: ["affiliation", "affiliations", "community", "communities"],
       coordinates: ["coordinates", "coordinate", "coords", "latitude", "longitude"],
@@ -249,7 +249,8 @@ function findInfoboxes(wikitext) {
     "location info",
     "location infobox",
     "episode info",
-    "episode infobox"
+    "episode infobox",
+    "episode"
   ]);
 
   return extractBalancedTemplates(wikitext)
