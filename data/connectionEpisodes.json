@@ -173,6 +173,146 @@
         "https://www.amc.com/shows/the-walking-dead-dead-city/episodes/season-1-old-acquaintances--1063092",
         "https://www.amc.com/blogs/the-walking-dead-dead-city-q-and-a-gaius-charles-on-armstrong-s-commitment-to-law-and-order--1063306"
       ]
+    },
+    "rick-lori": {
+      "episodeIds": [
+        "twd-s01-e01"
+      ],
+      "basis": "Rick reunites with Lori and Carl in the season 1 premiere",
+      "evidenceKind": "direct"
+    },
+    "abraham-eugene": {
+      "episodeIds": [
+        "twd-s04-e10"
+      ],
+      "basis": "Abraham's group forms around escorting Eugene in \"Inmates\"",
+      "evidenceKind": "direct"
+    },
+    "tyreese-sasha": {
+      "episodeIds": [
+        "twd-s03-e08"
+      ],
+      "basis": "Tyreese and Sasha are both episode-level character entities in \"Made to Suffer\"",
+      "evidenceKind": "co-presence"
+    },
+    "daryl-beth": {
+      "episodeIds": [
+        "twd-s04-e13"
+      ],
+      "basis": "Daryl and Beth's survival arc in \"Alone\"",
+      "evidenceKind": "direct"
+    },
+    "eugene-rosita": {
+      "episodeIds": [
+        "twd-s04-e10"
+      ],
+      "basis": "Eugene and Rosita are both episode-level character entities in \"Inmates\"",
+      "evidenceKind": "co-presence"
+    },
+    "andrea-dale": {
+      "episodeIds": [
+        "twd-s01-e01"
+      ],
+      "basis": "Andrea and Dale are both episode-level character entities in the season 1 premiere",
+      "evidenceKind": "co-presence"
+    },
+    "connie-kelly": {
+      "episodeIds": [
+        "twd-s09-e10"
+      ],
+      "basis": "Connie and Kelly are both episode-level character entities in \"Omega\"",
+      "evidenceKind": "co-presence"
+    },
+    "magna-yumiko": {
+      "episodeIds": [
+        "twd-s09-e10"
+      ],
+      "basis": "Magna and Yumiko are both episode-level character entities in \"Omega\"",
+      "evidenceKind": "co-presence"
+    },
+    "madison-travis": {
+      "episodeIds": [
+        "ftwd-s01-e01"
+      ],
+      "basis": "Madison and Travis are introduced together in the Fear pilot",
+      "evidenceKind": "direct"
+    },
+    "alicia-nick": {
+      "episodeIds": [
+        "ftwd-s01-e01"
+      ],
+      "basis": "Alicia and Nick are both episode-level character entities in the Fear pilot",
+      "evidenceKind": "co-presence"
+    },
+    "strand-madison": {
+      "episodeIds": [
+        "ftwd-s01-e04"
+      ],
+      "basis": "Strand's debut and early alliance with Madison in \"Not Fade Away\"",
+      "evidenceKind": "direct"
+    },
+    "daniel-ofelia": {
+      "episodeIds": [
+        "ftwd-s01-e01"
+      ],
+      "basis": "Daniel and Ofelia are both episode-level character entities in the Fear pilot",
+      "evidenceKind": "co-presence"
+    },
+    "isabelle-laurent": {
+      "episodeIds": [
+        "daryl-s01-e01"
+      ],
+      "basis": "Isabelle and Laurent are introduced together in the Daryl Dixon premiere",
+      "evidenceKind": "direct"
+    },
+    "daryl-quinn": {
+      "episodeIds": [
+        "daryl-s01-e04"
+      ],
+      "basis": "Daryl and Quinn's negotiation in \"La Dame de Fer\"",
+      "evidenceKind": "direct"
+    },
+    "elton-silas": {
+      "episodeIds": [
+        "wb-s01-e01"
+      ],
+      "basis": "Elton and Silas are both episode-level character entities in \"Brave\"",
+      "evidenceKind": "co-presence"
+    },
+    "felix-huck": {
+      "episodeIds": [
+        "wb-s01-e01"
+      ],
+      "basis": "Felix and Huck are both episode-level character entities in \"Brave\"",
+      "evidenceKind": "co-presence"
+    },
+    "thorne-beale": {
+      "episodeIds": [
+        "owl-s01-e01"
+      ],
+      "basis": "Thorne and Beale are both episode-level character entities in \"Years\"",
+      "evidenceKind": "co-presence"
+    },
+    "negan-ginny": {
+      "episodeIds": [
+        "dead-s01-e01"
+      ],
+      "basis": "Ginny's introduction living with Negan in \"Old Acquaintances\"",
+      "evidenceKind": "direct"
+    },
+    "perlie-maggie": {
+      "episodeIds": [
+        "dead-s01-e01"
+      ],
+      "basis": "Perlie and Maggie are both episode-level character entities in \"Old Acquaintances\"",
+      "evidenceKind": "co-presence"
+    },
+    "gregory-maggie": {
+      "episodeIds": [
+        "twd-s07-e05"
+      ],
+      "basis": "Gregory and Maggie's leadership conflict in \"Go Getters\"",
+      "evidenceKind": "direct"
     }
   }
 }

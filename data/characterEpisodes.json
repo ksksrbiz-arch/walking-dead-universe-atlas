@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "source": "Walking Dead Wiki character appearance tables and character pages",
+  "source": "Walking Dead Wiki character appearance tables and character pages; Wikipedia episode and character articles for the 2026-09 roster expansion",
   "sourceUrls": [
     "https://walkingdead.fandom.com/wiki/Character_Appearances_(TV_Series)",
     "https://walkingdead.fandom.com/wiki/Character_Appearances_(Daryl_Series)",
@@ -8,7 +8,17 @@
     "https://walkingdead.fandom.com/wiki/Anne_(TV_Universe)",
     "https://walkingdead.fandom.com/wiki/Edwin_Jenner_(TV_Universe)",
     "https://walkingdead.fandom.com/wiki/Jennifer_Mallick_(World_Beyond)",
-    "https://walkingdead.fandom.com/wiki/Samuel_Abbott_(World_Beyond)"
+    "https://walkingdead.fandom.com/wiki/Samuel_Abbott_(World_Beyond)",
+    "https://en.wikipedia.org/wiki/Eugene_Porter",
+    "https://en.wikipedia.org/wiki/Made_to_Suffer",
+    "https://en.wikipedia.org/wiki/Go_Getters",
+    "https://en.wikipedia.org/wiki/Bounty_(The_Walking_Dead)",
+    "https://en.wikipedia.org/wiki/Omega_(The_Walking_Dead)",
+    "https://en.wikipedia.org/wiki/The_Walking_Dead:_Daryl_Dixon",
+    "https://en.wikipedia.org/wiki/The_Walking_Dead:_World_Beyond",
+    "https://en.wikipedia.org/wiki/The_Walking_Dead:_The_Ones_Who_Live",
+    "https://walkingdead.fandom.com/wiki/Ginny_(Dead_City)",
+    "https://walkingdead.fandom.com/wiki/Perlie_Armstrong_(Dead_City)"
   ],
   "generatedAt": "2026-09-19T21:35:40.850Z",
   "episodesByCharacter": {
@@ -1794,7 +1804,101 @@
       "wb-s02-e08",
       "wb-s02-e09",
       "wb-s02-e10"
+    ],
+    "isabelle": [
+      "daryl-s01-e01"
+    ],
+    "laurent": [
+      "daryl-s01-e01"
+    ],
+    "quinn": [
+      "daryl-s01-e04"
+    ],
+    "ginny": [
+      "dead-s01-e01"
+    ],
+    "perlie-armstrong": [
+      "dead-s01-e01"
+    ],
+    "madison-clark": [
+      "ftwd-s01-e01",
+      "ftwd-s01-e04"
+    ],
+    "travis-manawa": [
+      "ftwd-s01-e01"
+    ],
+    "alicia-clark": [
+      "ftwd-s01-e01"
+    ],
+    "nick-clark": [
+      "ftwd-s01-e01"
+    ],
+    "daniel-salazar": [
+      "ftwd-s01-e01"
+    ],
+    "ofelia-salazar": [
+      "ftwd-s01-e01"
+    ],
+    "victor-strand": [
+      "ftwd-s01-e04"
+    ],
+    "pearl-thorne": [
+      "owl-s01-e01"
+    ],
+    "jonathan-beale": [
+      "owl-s01-e01"
+    ],
+    "lori-grimes": [
+      "twd-s01-e01"
+    ],
+    "andrea-harrison": [
+      "twd-s01-e01"
+    ],
+    "dale-horvath": [
+      "twd-s01-e01"
+    ],
+    "tyreese-williams": [
+      "twd-s03-e08"
+    ],
+    "sasha-williams": [
+      "twd-s03-e08"
+    ],
+    "abraham-ford": [
+      "twd-s04-e10"
+    ],
+    "eugene-porter": [
+      "twd-s04-e10"
+    ],
+    "beth-greene": [
+      "twd-s04-e13"
+    ],
+    "gregory": [
+      "twd-s07-e05"
+    ],
+    "connie": [
+      "twd-s09-e10"
+    ],
+    "kelly": [
+      "twd-s09-e10"
+    ],
+    "magna": [
+      "twd-s09-e10"
+    ],
+    "yumiko-okumura": [
+      "twd-s09-e10"
+    ],
+    "elton-ortiz": [
+      "wb-s01-e01"
+    ],
+    "silas-plaskett": [
+      "wb-s01-e01"
+    ],
+    "felix-carlucci": [
+      "wb-s01-e01"
+    ],
+    "huck": [
+      "wb-s01-e01"
     ]
   },
-  "updatedAt": "2026-09-19T21:39:00.770Z"
+  "updatedAt": "2026-09-22"
 }
