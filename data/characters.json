@@ -704,5 +704,20 @@
       "owl"
     ],
     "episodeCount": 1
+  },
+  {
+    "id": "mason-beale",
+    "name": "Mason Beale",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 5,
+    "aliases": [
+      "Mason Beale (World Beyond)"
+    ],
+    "familyIds": [
+      "jonathan-beale"
+    ]
   }
 ]
