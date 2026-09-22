@@ -137,7 +137,7 @@ async function main() {
       canonicalUnmatchedEntities,
       duplicateCanonicalMatches: Object.entries(canonicalMatchCounts)
         .filter(([, count]) => count > 1)
-        .map(([canonicalId, count]) => ({ canonicalId, count }))
+        .map(([canonicalId, count]) => ({ canonicalId, count })),
       matchStatuses: byStatus(records),
       matchScoreBuckets: matchScoreBuckets(records),
       seriesBreakdown: seriesBreakdown(records),
