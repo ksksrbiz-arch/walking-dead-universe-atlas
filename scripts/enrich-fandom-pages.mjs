@@ -347,7 +347,7 @@ function buildPageUrl(title) {
 function extractFileTitles(wikitext) {
   const titles = new Set();
   const text = String(wikitext || "");
-  for (const match of text.matchAll(/\\[\\[(?:File|Image):([^\\]|]+)(?:\\|[^\\]]*)?\\]\\]/gi)) {
+  for (const match of text.matchAll(/\[\[(?:File|Image):([^\]|]+)(?:\|[^\]]*)?\]\]/gi)) {
     const title = String(match[1] || "").trim().replace(/_/g, " ");
     if (title) titles.add("File:" + title);
   }
@@ -559,7 +559,6 @@ async function enrichEntityType(entityType, result, limit) {
 
   const results = await mapWithConcurrency(batches, 8, async (batch) => {
     const pages = await fetchPageBatch(batch.pageIds);
-    const allFileTitles = [...new Set(pages.flatMap(() => []))];
     const revids = pages
       .map((page) => Number(page.lastrevid))
       .filter((revid) => Number.isInteger(revid) && revid > 0);
