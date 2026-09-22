@@ -9,6 +9,7 @@ import {validateAtlasData} from "./lib/validateData";
 import {buildChronology,filterChronology,getEpisodeWatchOrder,compareEpisodesChronologically,describeEra,UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR,yearToPercent} from "./lib/chronology";
 import type {EpisodeWatchOrderItem} from "./lib/chronology";
 import episodeMedia from "../data/episodeMedia.json";
+import fandomCanonical from "../data/enrichment/fandom-canonical.json";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import MobileTimeBar from "./components/MobileTimeBar";
 import EntityGraphView from "./components/EntityGraphView";
@@ -611,6 +612,25 @@ export default function App(){
  </div>;
 }
 
+function FandomIntelligence({entityType,entityId}:{entityType:"characters"|"locations"|"episodes";entityId:string}){
+ const record=(fandomCanonical as any)?.[entityType]?.[entityId];
+ if(!record)return null;
+ const hints=record.hints||{};
+ const labels:any={aliases:"ALIASES",actor:"PORTRAYED BY",status:"STATUS",firstAppearance:"FIRST APPEARANCE",lastAppearance:"LAST APPEARANCE",occupation:"OCCUPATION",affiliation:"AFFILIATION",family:"FAMILY",relationships:"RELATIONSHIPS",type:"TYPE",region:"REGION",residents:"RESIDENTS",coordinates:"COORDINATES",season:"SEASON",episodeNumber:"EPISODE",airDate:"AIR DATE",director:"DIRECTOR",writer:"WRITERS",cast:"CAST",locations:"FILMED / FEATURED LOCATIONS",productionCode:"PRODUCTION CODE",viewership:"VIEWERSHIP"};
+ const entries=Object.entries(hints).filter(([key,value])=>key!=="image"&&value!=null&&String(value).trim()!=="");
+ const asText=(value:any)=>Array.isArray(value)?value.join(" · "):String(value);
+ const sections=Array.isArray(record.details?.sections)?record.details.sections:[];
+ const links=Array.isArray(record.details?.linkedPages)?record.details.linkedPages:[];
+ return <section className="fandomIntel">
+  <div className="sectionTitle">WIKI INTELLIGENCE <span>FANDOM</span></div>
+  {record.extract&&<div className="fandomExtract">{record.extract}</div>}
+  {entries.length>0&&<div className="fandomFacts">{entries.map(([key,value])=><div key={key}><small>{labels[key]||key.replaceAll("_"," ").toUpperCase()}</small><b>{asText(value)}</b></div>)}</div>}
+  {sections.length>0&&<><div className="fandomSubhead">PAGE SECTIONS</div><div className="fandomTags">{sections.slice(0,24).map((s:string)=><span key={s}>{s}</span>)}</div></>}
+  {links.length>0&&<><div className="fandomSubhead">LINKED WIKI PAGES <span>{links.length}</span></div><div className="fandomTags">{links.slice(0,30).map((s:string)=><span key={s}>{s}</span>)}</div></>}
+  <a className="fandomSource" href={record.sourceUrl} target="_blank" rel="noreferrer"><span>WALKING DEAD WIKI · SOURCE PAGE</span><Icon name="arrow"/></a>
+ </section>;
+}
+
 function MediaStrip({items,label="MEDIA"}:{items:{src?:string;title:string;meta?:string}[];label?:string}){const valid=items.filter(x=>x.src);if(!valid.length)return null;return <><div className="sectionTitle">{label}<span>{valid.length}</span></div><div className="mediaStrip">{valid.map((item,i)=><figure key={item.title+"-"+i}><img src={atlasImageUrl(item.src!,520)} srcSet={atlasImageSrcSet(item.src!,[320,520])} sizes="180px" loading="lazy" decoding="async" alt="" onError={e=>onAtlasImageError(e,item.src!)}/><figcaption><b>{item.title}</b>{item.meta&&<small>{item.meta}</small>}</figcaption></figure>)}</div></>}
 
 function LocationDetail({location,onEpisode,onCharacter,onLocation,onConnection,onCommunity,onFaction}:{location:Location;onEpisode:(id:string)=>void;onCharacter:(id:string)=>void;onLocation:(l:Location)=>void;onConnection:(id:string)=>void;onCommunity:(id:string)=>void;onFaction:(id:string)=>void}){
@@ -661,6 +681,7 @@ function EpisodeDetail({episode,onLocation,onEpisode,onCharacter,onConnection,on
  return <div className="contentScroll">
   <div className="episodeHero" style={{"--accent":meta.color} as CSSProperties}>{media?.image&&<img src={atlasImageUrl(media.image,1200)} onError={e=>onAtlasImageError(e,media.image)} srcSet={atlasImageSrcSet(media.image)} sizes="(max-width: 699px) 94vw, 470px" loading="eager" decoding="async" fetchPriority="high" alt="" className="episodeArt"/>}<div className="episodeHeroCopy"><span>{meta.name} · {episode.seasonId?.toUpperCase()}E{String(episode.episodeNumber).padStart(2,"0")}</span><h3>{episode.title}</h3><div className="episodeMeta"><b>{episode.start===episode.end?episode.start:`${episode.start}–${episode.end}`}</b><em>{episode.certainty}</em><em>{episode.precision}</em></div>{raw?.airDate&&<p className="episodeAirDate">AIRED {new Date(raw.airDate+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}).toUpperCase()}</p>}</div></div>
   {episodeGallery.length>1&&<MediaStrip items={episodeGallery.map((image:string,i:number)=>({id:episode.id+"-"+i,image,title:i===0?"PRIMARY FRAME":`FRAME ${String(i+1).padStart(2,"0")}`,subtitle:meta.short}))} label="VISUAL ARCHIVE"/>}
+  <FandomIntelligence entityType="episodes" entityId={episode.id}/>
   {locations.length>0&&<><div className="sectionTitle">LOCATIONS <span>{locations.length}</span></div><div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}><Icon name="pin"/>{l.name}</button>)}</div></>}
   {derivedConnectionIds.length>0&&<><div className="sectionTitle">UNIVERSE CONNECTIONS <span>{derivedConnectionIds.length}</span></div><div className="connectionLinks">{derivedConnectionIds.map((id:string)=>{const c=atlasData.connections.find((x:any)=>x.id===id);const evidence=(atlasData as any).connectionEpisodes?.connections?.[id];return c?<article key={id}><small>{c.type.replaceAll("-"," ").toUpperCase()} · {evidence?.evidenceKind==="direct"?"EPISODE EVIDENCE":"CURATED CONTEXT"}</small><button className="connectionFocusButton" onClick={()=>onConnection(id)}><b>{c.label}</b><span>{endpointName(c.fromId)} ↔ {endpointName(c.toId)} · {c.certainty}</span><Icon name="chevron"/></button></article>:null})}</div></>}
   <div className="sectionTitle">CHRONOLOGY NAVIGATION</div>
@@ -799,6 +820,7 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
    <div className="entityHeroCopy"><span>CHARACTER · {(character.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")}</span><h3>{character.name}</h3><p>{character.certainty||"tracked"} · {eps.length} linked episodes{characterMediaFallback?" · series art fallback":""}</p></div>
   </div>
   <MediaStrip items={characterGallery} label="VISUAL ARCHIVE"/>
+  <FandomIntelligence entityType="characters" entityId={characterId}/>
   <div className="detailGrid"><div><small>EPISODES</small><b>{eps.length}</b></div><div><small>LOCATIONS</small><b>{locations.length}</b></div><div><small>SERIES</small><b>{(character.seriesIds||[]).length}</b></div><div><small>LINKS</small><b>{links.length}</b></div></div>
   <MiniTimeline items={eps.filter((e:any)=>e.timelineStart!=null||e.timelineEnd!=null).map((e:any)=>({id:e.id,start:Number(e.timelineStart??e.timelineEnd),end:Number(e.timelineEnd??e.timelineStart),title:e.title,color:SERIES_BY_ID[e.seriesId]?.color}))} onSelect={onEpisode} emptyLabel="No episode-anchored chronology recorded for this character yet."/>
   <div className="sectionTitle">SERIES JOURNEY <span>{seriesSpans.length}</span></div>
