@@ -16,7 +16,9 @@
     "characterIds": [
       "daryl-dixon",
       "carol-peletier",
-      "sophia-peletier"
+      "sophia-peletier",
+      "isabelle",
+      "laurent"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -91,7 +93,8 @@
     ],
     "characterIds": [
       "daryl-dixon",
-      "sophia-peletier"
+      "sophia-peletier",
+      "quinn"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -503,7 +506,9 @@
     "characterIds": [
       "negan-smith",
       "maggie-rhee",
-      "hershel-rhee"
+      "hershel-rhee",
+      "ginny",
+      "perlie-armstrong"
     ],
     "communityIds": [],
     "factionIds": [
@@ -1080,7 +1085,14 @@
       "los-angeles",
       "san-diego"
     ],
-    "characterIds": [],
+    "characterIds": [
+      "madison-clark",
+      "travis-manawa",
+      "alicia-clark",
+      "nick-clark",
+      "daniel-salazar",
+      "ofelia-salazar"
+    ],
     "communityIds": [],
     "factionIds": [],
     "connectionIds": [],
@@ -1149,7 +1161,10 @@
       "los-angeles",
       "san-diego"
     ],
-    "characterIds": [],
+    "characterIds": [
+      "victor-strand",
+      "madison-clark"
+    ],
     "communityIds": [],
     "factionIds": [],
     "connectionIds": [],
@@ -3912,7 +3927,9 @@
     ],
     "characterIds": [
       "rick-grimes",
-      "michonne"
+      "michonne",
+      "pearl-thorne",
+      "jonathan-beale"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -4221,7 +4238,10 @@
       "morgan-jones",
       "carl-grimes",
       "glenn-rhee",
-      "shane-walsh"
+      "shane-walsh",
+      "lori-grimes",
+      "andrea-harrison",
+      "dale-horvath"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -5022,7 +5042,9 @@
       "maggie-rhee",
       "glenn-rhee",
       "merle-dixon",
-      "shane-walsh"
+      "shane-walsh",
+      "tyreese-williams",
+      "sasha-williams"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -5554,7 +5576,9 @@
       "judith-grimes",
       "maggie-rhee",
       "glenn-rhee",
-      "rosita-espinosa"
+      "rosita-espinosa",
+      "abraham-ford",
+      "eugene-porter"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -5633,7 +5657,8 @@
     "characterIds": [
       "daryl-dixon",
       "maggie-rhee",
-      "glenn-rhee"
+      "glenn-rhee",
+      "beth-greene"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -6902,7 +6927,8 @@
       "carl-grimes",
       "maggie-rhee",
       "paul-rovia",
-      "simon"
+      "simon",
+      "gregory"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -8184,7 +8210,11 @@
       "michonne",
       "daryl-dixon",
       "alpha",
-      "lydia"
+      "lydia",
+      "connie",
+      "kelly",
+      "magna",
+      "yumiko-okumura"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -9821,7 +9851,11 @@
     "characterIds": [
       "jennifer-mallick",
       "hope-bennett",
-      "iris-bennett"
+      "iris-bennett",
+      "elton-ortiz",
+      "silas-plaskett",
+      "felix-carlucci",
+      "huck"
     ],
     "communityIds": [],
     "factionIds": [],

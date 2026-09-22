@@ -290,5 +290,421 @@
       "owl"
     ],
     "episodeCount": 7
+  },
+  {
+    "id": "eugene-porter",
+    "name": "Eugene Porter",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "abraham-ford",
+    "name": "Abraham Ford",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "tara-chambler",
+    "name": "Tara Chambler",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "aaron",
+    "name": "Aaron",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "tyreese-williams",
+    "name": "Tyreese Williams",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "sasha-williams",
+    "name": "Sasha Williams",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "bob-stookey",
+    "name": "Bob Stookey",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "beth-greene",
+    "name": "Beth Greene",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "andrea-harrison",
+    "name": "Andrea",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "dale-horvath",
+    "name": "Dale Horvath",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "lori-grimes",
+    "name": "Lori Grimes",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "gregory",
+    "name": "Gregory",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "jerry",
+    "name": "Jerry",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "connie",
+    "name": "Connie",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "kelly",
+    "name": "Kelly",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "magna",
+    "name": "Magna",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "yumiko-okumura",
+    "name": "Yumiko Okumura",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "siddiq",
+    "name": "Siddiq",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "princess-juanita-sanchez",
+    "name": "Princess (Juanita Sanchez)",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "pamela-milton",
+    "name": "Pamela Milton",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "leah-shaw",
+    "name": "Leah Shaw",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "pope",
+    "name": "Pope",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "mercer",
+    "name": "Mercer",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "dead"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "madison-clark",
+    "name": "Madison Clark",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 2
+  },
+  {
+    "id": "travis-manawa",
+    "name": "Travis Manawa",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "alicia-clark",
+    "name": "Alicia Clark",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "nick-clark",
+    "name": "Nick Clark",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "victor-strand",
+    "name": "Victor Strand",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "luciana-galvez",
+    "name": "Luciana Galvez",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "daniel-salazar",
+    "name": "Daniel Salazar",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "ofelia-salazar",
+    "name": "Ofelia Salazar",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "john-dorie",
+    "name": "John Dorie",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "charlie",
+    "name": "Charlie",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "ginny",
+    "name": "Ginny",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd",
+      "dead"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "perlie-armstrong",
+    "name": "Perlie Armstrong",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "dead"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "the-croat",
+    "name": "The Croat",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "dead"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "elton-ortiz",
+    "name": "Elton Ortiz",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "silas-plaskett",
+    "name": "Silas Plaskett",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "huck",
+    "name": "Huck",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "felix-carlucci",
+    "name": "Felix Carlucci",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "isabelle",
+    "name": "Isabelle",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "daryl"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "laurent",
+    "name": "Laurent",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "daryl"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "quinn",
+    "name": "Quinn",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "daryl"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "genet",
+    "name": "Genet",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "daryl"
+    ],
+    "episodeCount": 0
+  },
+  {
+    "id": "pearl-thorne",
+    "name": "Pearl Thorne",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "owl"
+    ],
+    "episodeCount": 1
+  },
+  {
+    "id": "jonathan-beale",
+    "name": "Jonathan Beale",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "owl"
+    ],
+    "episodeCount": 1
   }
 ]

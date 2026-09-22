@@ -182,5 +182,165 @@
     "toId": "dead",
     "label": "New Babylon is a major post-TWD power",
     "certainty": "confirmed"
+  },
+  {
+    "id": "rick-lori",
+    "type": "character-character",
+    "fromId": "rick-grimes",
+    "toId": "lori-grimes",
+    "label": "Married before the outbreak",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "abraham-eugene",
+    "type": "character-character",
+    "fromId": "abraham-ford",
+    "toId": "eugene-porter",
+    "label": "Escorts Eugene to Washington",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "tyreese-sasha",
+    "type": "character-character",
+    "fromId": "tyreese-williams",
+    "toId": "sasha-williams",
+    "label": "Siblings who join the prison group",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "daryl-beth",
+    "type": "character-character",
+    "fromId": "daryl-dixon",
+    "toId": "beth-greene",
+    "label": "Survive together after the prison falls",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "eugene-rosita",
+    "type": "character-character",
+    "fromId": "eugene-porter",
+    "toId": "rosita-espinosa",
+    "label": "Part of the same group escorting Eugene",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "andrea-dale",
+    "type": "character-character",
+    "fromId": "andrea-harrison",
+    "toId": "dale-horvath",
+    "label": "Dale is Andrea's closest confidant",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "connie-kelly",
+    "type": "character-character",
+    "fromId": "connie",
+    "toId": "kelly",
+    "label": "Sisters who survive together",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "magna-yumiko",
+    "type": "character-character",
+    "fromId": "magna",
+    "toId": "yumiko-okumura",
+    "label": "Partners who arrive with Connie's group",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "madison-travis",
+    "type": "character-character",
+    "fromId": "madison-clark",
+    "toId": "travis-manawa",
+    "label": "Partners raising their children together",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "alicia-nick",
+    "type": "character-character",
+    "fromId": "alicia-clark",
+    "toId": "nick-clark",
+    "label": "Madison's children",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "strand-madison",
+    "type": "character-character",
+    "fromId": "victor-strand",
+    "toId": "madison-clark",
+    "label": "Uneasy alliance after the outbreak",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "daniel-ofelia",
+    "type": "character-character",
+    "fromId": "daniel-salazar",
+    "toId": "ofelia-salazar",
+    "label": "Daniel is Ofelia's father",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "isabelle-laurent",
+    "type": "character-character",
+    "fromId": "isabelle",
+    "toId": "laurent",
+    "label": "Isabelle becomes Laurent's protector in France",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "daryl-quinn",
+    "type": "character-character",
+    "fromId": "daryl-dixon",
+    "toId": "quinn",
+    "label": "Daryl negotiates with Quinn at the Demimonde",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "elton-silas",
+    "type": "character-character",
+    "fromId": "elton-ortiz",
+    "toId": "silas-plaskett",
+    "label": "Part of the Campus Colony scouting quartet",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "felix-huck",
+    "type": "character-character",
+    "fromId": "felix-carlucci",
+    "toId": "huck",
+    "label": "Serve together as Campus Colony security",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "thorne-beale",
+    "type": "character-character",
+    "fromId": "pearl-thorne",
+    "toId": "jonathan-beale",
+    "label": "Thorne serves under Beale in the CRM",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "negan-ginny",
+    "type": "character-character",
+    "fromId": "negan-smith",
+    "toId": "ginny",
+    "label": "Negan cares for Ginny after her father's death",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "perlie-maggie",
+    "type": "character-character",
+    "fromId": "perlie-armstrong",
+    "toId": "maggie-rhee",
+    "label": "Comes to respect Maggie's leadership in Dead City",
+    "certainty": "confirmed"
+  },
+  {
+    "id": "gregory-maggie",
+    "type": "character-character",
+    "fromId": "gregory",
+    "toId": "maggie-rhee",
+    "label": "Gregory resists Maggie's rise as Hilltop's leader",
+    "certainty": "confirmed"
   }
 ]
