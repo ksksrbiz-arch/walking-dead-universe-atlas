@@ -291,17 +291,28 @@ function extractImageUrls(wikitext, infoboxes) {
   return [...urls].slice(0, 20);
 }
 
+function getHintValues(parameters, aliases) {
+  const values = [];
+  for (const alias of aliases) {
+    const key = normalizeKey(alias);
+    const parameter = parameters[key];
+    if (!parameter?.value) continue;
+    const cleaned = cleanValue(parameter.value);
+    if (cleaned) values.push(cleaned);
+  }
+  return [...new Set(values)];
+}
+
 function buildHints(entityType, infoboxes, wikitext = "") {
   const hints = {};
   const config = ENTITY_CONFIG[entityType];
 
   for (const [hint, aliases] of Object.entries(config.hintKeys)) {
-    for (const infobox of infoboxes) {
-      const value = getHintValue(infobox.parameters, aliases);
-      if (value) {
-        hints[hint] = value;
-        break;
-      }
+    const values = [];
+    for (const infobox of infoboxes) values.push(...getHintValues(infobox.parameters, aliases));
+    const unique = [...new Set(values.filter(Boolean))];
+    if (unique.length) {
+      hints[hint] = unique.length === 1 ? unique[0] : unique;
     }
   }
 
@@ -310,8 +321,65 @@ function buildHints(entityType, infoboxes, wikitext = "") {
   return hints;
 }
 
+function extractSections(wikitext) {
+  return [...String(wikitext || "").matchAll(/^(={2,4})\\s*(.+?)\\s*\\1\\s*$/gm)]
+    .map((match) => cleanValue(match[2]))
+    .filter(Boolean)
+    .slice(0, 80);
+}
+
+function extractWikiLinks(wikitext) {
+  const links = [];
+  const seen = new Set();
+  for (const match of String(wikitext || "").matchAll(/\\[\\[([^\\]|:#]+)(?:\\|[^\\]]*)?\\]\\]/g)) {
+    const title = cleanValue(match[1]);
+    if (!title || seen.has(title.toLowerCase())) continue;
+    seen.add(title.toLowerCase());
+    links.push(title);
+  }
+  return links.slice(0, 200);
+}
+
 function buildPageUrl(title) {
   return WIKI + encodeURIComponent(title.replaceAll(" ", "_"));
+}
+
+function extractFileTitles(wikitext) {
+  const titles = new Set();
+  const text = String(wikitext || "");
+  for (const match of text.matchAll(/\\[\\[(?:File|Image):([^\\]|]+)(?:\\|[^\\]]*)?\\]\\]/gi)) {
+    const title = String(match[1] || "").trim().replace(/_/g, " ");
+    if (title) titles.add("File:" + title);
+  }
+  return [...titles].slice(0, 24);
+}
+
+async function fetchImageFiles(fileTitles) {
+  if (!fileTitles.length) return new Map();
+  const params = new URLSearchParams({
+    action: "query",
+    titles: fileTitles.join("|"),
+    prop: "imageinfo",
+    iiprop: "url|size|mime",
+    iiurlwidth: "1400",
+    redirects: "1",
+    format: "json",
+    formatversion: "2"
+  });
+  const payload = await fetchJson(API + "?" + params.toString());
+  const result = new Map();
+  for (const page of payload?.query?.pages || []) {
+    const info = page.imageinfo?.[0];
+    if (!info?.url || !/^image\\//i.test(String(info.mime || ""))) continue;
+    result.set(String(page.title || "").toLowerCase(), {
+      url: info.url,
+      thumbnail: info.thumburl || null,
+      width: info.width || null,
+      height: info.height || null,
+      mime: info.mime || null
+    });
+  }
+  return result;
 }
 
 async function fetchPageBatch(pageIds) {
@@ -390,9 +458,20 @@ function extractLeadText(wikitext) {
   );
 }
 
-function flattenPage(page, revision, entityType, candidate) {
+function flattenPage(page, revision, entityType, candidate, fileImages = new Map()) {
   const wikitext = revision?.slots?.main?.content || "";
   const infoboxes = findInfoboxes(wikitext);
+  const fileTitles = extractFileTitles(wikitext);
+  const fileGallery = fileTitles
+    .map((title) => fileImages.get(title.toLowerCase()))
+    .filter(Boolean)
+    .map((item) => item.url);
+  const inlineGallery = extractImageUrls(wikitext, infoboxes);
+  const imageGallery = [...new Set([
+    ...(page.original ? [page.original] : []),
+    ...fileGallery,
+    ...inlineGallery
+  ])].slice(0, 24);
 
   return {
     entityType,
@@ -427,7 +506,18 @@ function flattenPage(page, revision, entityType, candidate) {
     extract: extractLeadText(wikitext),
     templates: infoboxes.map((template) => template.name),
     infoboxes,
-    hints: buildHints(entityType, infoboxes, wikitext),
+    hints: {
+      ...buildHints(entityType, infoboxes, wikitext),
+      ...(imageGallery.length ? { imageGallery } : {})
+    },
+    details: {
+      sections: extractSections(wikitext),
+      linkedPages: extractWikiLinks(wikitext),
+      imageFiles: fileTitles.map((title) => ({
+        title,
+        ...(fileImages.get(title.toLowerCase()) || {})
+      })).filter((item) => item.url).slice(0, 24)
+    },
     candidate: candidate
       ? {
           canonicalId: candidate.match?.canonicalId || null,
@@ -469,6 +559,7 @@ async function enrichEntityType(entityType, result, limit) {
 
   const results = await mapWithConcurrency(batches, 8, async (batch) => {
     const pages = await fetchPageBatch(batch.pageIds);
+    const allFileTitles = [...new Set(pages.flatMap(() => []))];
     const revids = pages
       .map((page) => Number(page.lastrevid))
       .filter((revid) => Number.isInteger(revid) && revid > 0);
@@ -480,6 +571,10 @@ async function enrichEntityType(entityType, result, limit) {
         page.revisions?.[0] || null
       ])
     );
+    const fileTitles = [...new Set(
+      revisionPages.flatMap((page) => extractFileTitles(page.revisions?.[0]?.slots?.main?.content || ""))
+    )];
+    const fileImages = await fetchImageFiles(fileTitles);
 
     return pages.map((page) =>
       flattenPage(
@@ -488,7 +583,8 @@ async function enrichEntityType(entityType, result, limit) {
         entityType,
         batch.candidates.find(
           (record) => String(record.candidate.sourceRecordId) === String(page.pageid)
-        )
+        ),
+        fileImages
       )
     );
   });
