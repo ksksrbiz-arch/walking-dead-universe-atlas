@@ -135,7 +135,7 @@ async function ingestType(entityType, canonicalFile, limit) {
 }
 
 async function main() {
-  const limit = Number(process.env.ENRICHMENT_LIMIT || 1000);
+  const limit = Number(process.env.ENRICHMENT_LIMIT || 5000);
   await mkdir(OUT_DIR, { recursive: true });
 
   const result = {
