@@ -1197,8 +1197,9 @@ button.miniTimelineItem{cursor:pointer}
 .timelineSecondaryToggle>span{color:#718081;font:700 6px "Space Mono",monospace;letter-spacing:.08em}
 .timelineSecondaryToggle b{font-size:9px}
 .timelineSecondaryToggle small{grid-column:2/3;color:#718081;font-size:7px;line-height:1.35}
-.timelineSecondaryToggle svg{grid-column:3;grid-row:1/3;width:13px}
+.timelineSecondaryToggle svg{grid-column:3;grid-row:1/3;width:13px;transition:transform .15s ease}
 .timelineSecondaryToggle.active{border-color:#72a9c544;background:#101c1e}
+.timelineSecondaryToggle.active svg{transform:rotate(-90deg)}
 .webisodeLayer{margin-top:14px;padding-top:3px}
 .webisodeRow{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid #ffffff0d}
 .webisodeRow>strong{font:700 11px "Space Mono",monospace;color:#bfc9c7}
