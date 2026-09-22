@@ -107,6 +107,14 @@ async function main() {
         .map((item) => item.match?.canonicalId)
         .filter(Boolean)
     );
+    const canonicalMatchCounts = records.reduce((acc, item) => {
+      const id = item.match?.canonicalId;
+      if (id) acc[id] = (acc[id] || 0) + 1;
+      return acc;
+    }, {});
+    const canonicalUnmatchedEntities = canonical[key]
+      .filter((entity) => !matchedCanonicalIds.has(entity.id))
+      .map((entity) => ({ id: entity.id, name: entity.name, seriesId: entity.seriesId || null, seriesIds: entity.seriesIds || null }));
     const unmatched = records
       .filter((item) => item.match?.status !== "matched")
       .map((item) => ({
@@ -126,6 +134,10 @@ async function main() {
       canonicalMatched: matchedCanonicalIds.size,
       canonicalUnmatched: Math.max(0, canonical[key].length - matchedCanonicalIds.size),
       canonicalCoverage: canonical[key].length ? matchedCanonicalIds.size / canonical[key].length : 0,
+      canonicalUnmatchedEntities,
+      duplicateCanonicalMatches: Object.entries(canonicalMatchCounts)
+        .filter(([, count]) => count > 1)
+        .map(([canonicalId, count]) => ({ canonicalId, count }))
       matchStatuses: byStatus(records),
       matchScoreBuckets: matchScoreBuckets(records),
       seriesBreakdown: seriesBreakdown(records),
