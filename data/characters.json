@@ -316,7 +316,7 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "aaron",
@@ -325,7 +325,7 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "tyreese-williams",
@@ -352,7 +352,7 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "beth-greene",
@@ -406,7 +406,7 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "connie",
@@ -451,7 +451,7 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "princess-juanita-sanchez",
@@ -460,7 +460,7 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "pamela-milton",
@@ -469,7 +469,7 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "leah-shaw",
@@ -478,7 +478,7 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "pope",
@@ -487,17 +487,16 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "mercer",
     "name": "Mercer",
     "certainty": "confirmed",
     "seriesIds": [
-      "twd",
-      "dead"
+      "twd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "madison-clark",
@@ -551,7 +550,7 @@
     "seriesIds": [
       "ftwd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "daniel-salazar",
@@ -578,7 +577,7 @@
     "seriesIds": [
       "ftwd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "charlie",
@@ -587,14 +586,13 @@
     "seriesIds": [
       "ftwd"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "ginny",
     "name": "Ginny",
     "certainty": "confirmed",
     "seriesIds": [
-      "twd",
       "dead"
     ],
     "episodeCount": 1
@@ -615,7 +613,7 @@
     "seriesIds": [
       "dead"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "elton-ortiz",
@@ -687,7 +685,7 @@
     "seriesIds": [
       "daryl"
     ],
-    "episodeCount": 0
+    "episodeCount": 1
   },
   {
     "id": "pearl-thorne",

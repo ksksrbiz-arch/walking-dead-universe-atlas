@@ -18,7 +18,8 @@
       "carol-peletier",
       "sophia-peletier",
       "isabelle",
-      "laurent"
+      "laurent",
+      "genet"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -508,7 +509,8 @@
       "maggie-rhee",
       "hershel-rhee",
       "ginny",
-      "perlie-armstrong"
+      "perlie-armstrong",
+      "the-croat"
     ],
     "communityIds": [],
     "factionIds": [
@@ -1973,7 +1975,9 @@
     "characterIds": [
       "rick-grimes",
       "morgan-jones",
-      "althea-szprygocki"
+      "althea-szprygocki",
+      "luciana-galvez",
+      "john-dorie"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -1999,7 +2003,8 @@
     ],
     "characterIds": [
       "morgan-jones",
-      "althea-szprygocki"
+      "althea-szprygocki",
+      "charlie"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -5325,7 +5330,8 @@
       "carl-grimes",
       "judith-grimes",
       "maggie-rhee",
-      "glenn-rhee"
+      "glenn-rhee",
+      "bob-stookey"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -5466,7 +5472,9 @@
     "locationIds": [
       "prison"
     ],
-    "characterIds": [],
+    "characterIds": [
+      "tara-chambler"
+    ],
     "communityIds": [],
     "factionIds": [],
     "connectionIds": [],
@@ -6053,7 +6061,8 @@
       "maggie-rhee",
       "glenn-rhee",
       "rosita-espinosa",
-      "gabriel-stokes"
+      "gabriel-stokes",
+      "aaron"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -6832,7 +6841,8 @@
     "characterIds": [
       "morgan-jones",
       "carol-peletier",
-      "ezekiel-sutton"
+      "ezekiel-sutton",
+      "jerry"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -7333,7 +7343,8 @@
       "paul-rovia",
       "ezekiel-sutton",
       "dwight",
-      "simon"
+      "simon",
+      "siddiq"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -8842,7 +8853,8 @@
       "carol-peletier",
       "rosita-espinosa",
       "ezekiel-sutton",
-      "alpha"
+      "alpha",
+      "princess-juanita-sanchez"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -8961,7 +8973,8 @@
     ],
     "characterIds": [
       "daryl-dixon",
-      "carol-peletier"
+      "carol-peletier",
+      "leah-shaw"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -9097,7 +9110,8 @@
       "rosita-espinosa",
       "gabriel-stokes",
       "ezekiel-sutton",
-      "lydia"
+      "lydia",
+      "mercer"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -9156,7 +9170,8 @@
       "maggie-rhee",
       "hershel-rhee",
       "rosita-espinosa",
-      "gabriel-stokes"
+      "gabriel-stokes",
+      "pope"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -9364,7 +9379,8 @@
       "judith-grimes",
       "rosita-espinosa",
       "gabriel-stokes",
-      "ezekiel-sutton"
+      "ezekiel-sutton",
+      "pamela-milton"
     ],
     "communityIds": [],
     "factionIds": [],
