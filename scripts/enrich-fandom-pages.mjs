@@ -275,11 +275,11 @@ function extractImageUrls(wikitext, infoboxes) {
   const add = (value) => {
     if (!value) return;
     const text = String(value)
-      .replace(/\\[\\[([^\\]|]+)\\|[^\\]]+\\]\\]/g, "$1")
+      .replace(/\[\[([^\]|]+)\|[^\]]+\]\]/g, "$1")
       .replace(/<[^>]+>/g, " ");
-    for (const match of text.matchAll(/https?:\\/\\/[^\\s\\]<>|}]+/gi)) {
+    for (const match of text.matchAll(/https?:\/\/[^\s\]<>|}]+/gi)) {
       const url = match[0].replace(/[),.;]+$/, "");
-      if (/\\.(?:jpe?g|png|webp|gif)(?:[?#].*)?$/i.test(url)) urls.add(url);
+      if (/\.(?:jpe?g|png|webp|gif)(?:[?#].*)?$/i.test(url)) urls.add(url);
     }
   };
   for (const infobox of infoboxes) {
