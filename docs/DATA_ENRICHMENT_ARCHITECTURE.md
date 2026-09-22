@@ -75,3 +75,7 @@ These commands create diagnostic/candidate files under data/enrichment/. They do
 8. Regenerate indexes.
 9. Run the full Atlas audit.
 10. Deploy only after validation passes.
+
+## Deployment trigger
+
+This branch uses Netlify deploy previews for enrichment validation; pushing a new commit to the branch triggers the configured preview build.
