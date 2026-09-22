@@ -21,7 +21,8 @@
     "audit:enrichment": "node scripts/audit-fandom-enrichment.mjs",
     "publish:enrichment-preview": "node scripts/publish-enrichment-preview.mjs",
     "reconcile:fandom": "node scripts/reconcile-fandom-matches.mjs",
-    "promote:fandom-media": "node scripts/promote-fandom-media.mjs"
+    "promote:fandom-media": "node scripts/promote-fandom-media.mjs",
+    "ensure:fandom-canonical": "node scripts/ensure-fandom-canonical.mjs"
   },
   "dependencies": {
     "react": "^19.1.1",
@@ -41,4 +42,4 @@
     "@types/d3-geo": "^3.1.1",
     "@netlify/vite-plugin": "^3.0.1"
   }
-}
+}\n
