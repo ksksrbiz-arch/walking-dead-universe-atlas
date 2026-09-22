@@ -10,13 +10,11 @@ const OUT_DIR = new URL("data/enrichment/", ROOT);
 
 const BATCH_SIZE = 50;
 const DEFAULT_LIMIT = 5000;
-const REVISION_CONCURRENCY = Number(process.env.FANDOM_REVISION_CONCURRENCY || 8);
-const REQUEST_DELAY_MS = Number(process.env.FANDOM_REQUEST_DELAY_MS || 50);
+const REQUEST_DELAY_MS = Number(process.env.FANDOM_REQUEST_DELAY_MS || 100);
 
 const ENTITY_CONFIG = {
   character: {
     inputKey: "characters",
-    matchFields: ["name"],
     hintKeys: {
       aliases: ["alias", "aliases", "other_names", "other name", "nickname", "nicknames"],
       actor: ["actor", "portrayed_by", "portrayed by", "portrayer"],
@@ -32,7 +30,6 @@ const ENTITY_CONFIG = {
   },
   location: {
     inputKey: "locations",
-    matchFields: ["name"],
     hintKeys: {
       type: ["type", "location_type", "location type"],
       region: ["state", "region", "province", "country", "location"],
@@ -47,7 +44,6 @@ const ENTITY_CONFIG = {
   },
   episode: {
     inputKey: "episodes",
-    matchFields: ["title", "name"],
     hintKeys: {
       season: ["season", "season_number", "season number"],
       episodeNumber: ["episode", "episode_number", "episode number", "number"],
@@ -81,18 +77,25 @@ async function fetchJson(url) {
   const response = await fetch(url, {
     headers: {
       accept: "application/json",
-      "user-agent": "TWDU-Atlas-Fandom-Page-Enrichment/2.0"
+      "user-agent": "TWDU-Atlas-Fandom-Page-Enrichment/3.0"
     },
     signal: AbortSignal.timeout(30000)
   });
+
   const text = await response.text();
   if (!response.ok) {
     throw new Error(response.status + " " + response.statusText + ": " + text.slice(0, 500));
   }
+
   const payload = JSON.parse(text);
   if (payload?.error) {
-    throw new Error((payload.error.code || "api-error") + ": " + (payload.error.info || "Unknown MediaWiki API error"));
+    throw new Error(
+      (payload.error.code || "api-error") +
+      ": " +
+      (payload.error.info || "Unknown MediaWiki API error")
+    );
   }
+
   return payload;
 }
 
@@ -218,6 +221,7 @@ function parseTemplate(rawTemplate) {
   for (const part of parts) {
     const eq = part.indexOf("=");
     if (eq === -1) continue;
+
     const key = normalizeKey(part.slice(0, eq));
     if (!key) continue;
 
@@ -271,63 +275,44 @@ function buildHints(entityType, infoboxes) {
   return hints;
 }
 
-function extractCategoryNames(categories = []) {
-  return categories
-    .map((item) => item.title || "")
-    .filter(Boolean)
-    .map((title) => title.replace(/^Category:/, ""));
-}
-
 function buildPageUrl(title) {
   return WIKI + encodeURIComponent(title.replaceAll(" ", "_"));
 }
 
-function candidateMap(result) {
-  const map = new Map();
-  for (const record of result?.records || []) {
-    const id = String(record.candidate?.sourceRecordId || "");
-    if (id) map.set(id, record);
-  }
-  return map;
-}
-
-async function fetchPageMetadata(pageIds) {
+async function fetchCategoryPageBatch(category, continueValue = null) {
   const params = new URLSearchParams({
     action: "query",
-    pageids: pageIds.join("|"),
-    prop: "info|categories|pageimages",
+    generator: "categorymembers",
+    gcmtitle: category,
+    gcmlimit: String(BATCH_SIZE),
+    gcmnamespace: "0",
+    gcmtype: "page",
+    prop: "info|pageimages|extracts|revisions",
     inprop: "url",
-    cllimit: "max",
     piprop: "name|original|thumbnail",
     pithumbsize: "1200",
+    exintro: "1",
+    explaintext: "1",
+    exchars: "1200",
+    rvprop: "ids|timestamp|content",
+    rvslots: "main",
+    rvlimit: "1",
     redirects: "1",
     format: "json",
     formatversion: "2"
   });
 
+  if (continueValue) {
+    params.set("gcmcontinue", continueValue);
+  }
+
   return fetchJson(API + "?" + params.toString());
 }
 
-async function fetchPageRevision(pageId) {
-  const params = new URLSearchParams({
-    action: "query",
-    pageids: String(pageId),
-    prop: "revisions",
-    rvprop: "ids|timestamp|content",
-    rvslots: "main",
-    rvlimit: "1",
-    format: "json",
-    formatversion: "2"
-  });
-
-  const payload = await fetchJson(API + "?" + params.toString());
-  return payload?.query?.pages?.[0] || null;
-}
-
-function flattenPage(page, entityType, candidate, revisionPage = null) {
-  const revision = revisionPage?.revisions?.[0] || {};
+function flattenPage(page, entityType, candidate) {
+  const revision = page.revisions?.[0] || {};
   const wikitext = revision.slots?.main?.content || "";
-  const infoboxes = wikitext ? findInfoboxes(wikitext) : [];
+  const infoboxes = findInfoboxes(wikitext);
 
   return {
     entityType,
@@ -344,13 +329,11 @@ function flattenPage(page, entityType, candidate, revisionPage = null) {
       fullUrl: page.fullurl || buildPageUrl(page.title),
       redirect: page.redirect || false
     },
-    revision: revision.revid
-      ? {
-          revisionId: revision.revid,
-          parentId: revision.parentid || null,
-          timestamp: revision.timestamp || null
-        }
-      : null,
+    revision: {
+      revisionId: revision.revid || null,
+      parentId: revision.parentid || null,
+      timestamp: revision.timestamp || null
+    },
     image: page.original || page.thumbnail || page.pageimage
       ? {
           fileName: page.pageimage || null,
@@ -360,7 +343,7 @@ function flattenPage(page, entityType, candidate, revisionPage = null) {
           height: page.original?.height || page.thumbnail?.height || null
         }
       : null,
-    categories: extractCategoryNames(page.categories),
+    extract: page.extract || null,
     templates: infoboxes.map((template) => template.name),
     infoboxes,
     hints: buildHints(entityType, infoboxes),
@@ -374,113 +357,85 @@ function flattenPage(page, entityType, candidate, revisionPage = null) {
           category: candidate.candidate?.fields?.category || null
         }
       : null,
-    raw: wikitext
-      ? {
-          wikitext,
-          hash: sha256(wikitext)
-        }
-      : null
-  };
-}
-
-async function mapWithConcurrency(items, concurrency, worker) {
-  const results = new Array(items.length);
-  let next = 0;
-
-  async function run() {
-    while (true) {
-      const index = next++;
-      if (index >= items.length) return;
-
-      try {
-        results[index] = await worker(items[index], index);
-      } catch (error) {
-        results[index] = {
-          error: error?.message || String(error),
-          item: items[index]
-        };
-      }
-
-      if (REQUEST_DELAY_MS) await sleep(REQUEST_DELAY_MS);
+    raw: {
+      wikitext,
+      hash: sha256(wikitext)
     }
-  }
-
-  await Promise.all(
-    Array.from({ length: Math.min(concurrency, items.length) }, () => run())
-  );
-
-  return results;
+  };
 }
 
 async function enrichEntityType(entityType, result, limit) {
   const config = ENTITY_CONFIG[entityType];
-  const records = [...new Map(
-    (result[config.inputKey]?.records || [])
+  const sourceResult = result[config.inputKey];
+  const candidates = sourceResult?.records || [];
+  const uniqueCandidates = [...new Map(
+    candidates
       .map((record) => [String(record.candidate?.sourceRecordId || ""), record])
       .filter(([id]) => id)
   ).values()].slice(0, limit);
 
-  const pages = [];
+  const candidateByPageId = new Map(
+    uniqueCandidates.map((record) => [
+      String(record.candidate.sourceRecordId),
+      record
+    ])
+  );
+
+  const categories = [...new Set(
+    uniqueCandidates
+      .map((record) => record.candidate?.fields?.category)
+      .filter(Boolean)
+  )];
+
+  const pagesById = new Map();
   const errors = [];
+  let categoryBatches = 0;
 
-  for (let offset = 0; offset < records.length; offset += BATCH_SIZE) {
-    const batch = records.slice(offset, offset + BATCH_SIZE);
-    const pageIds = batch.map((record) => Number(record.candidate.sourceRecordId)).filter(Number.isInteger);
+  for (const category of categories) {
+    let continueValue = null;
 
-    if (!pageIds.length) continue;
+    do {
+      try {
+        const payload = await fetchCategoryPageBatch(category, continueValue);
+        const pages = payload?.query?.pages || [];
 
-    try {
-      const payload = await fetchPageMetadata(pageIds);
-      for (const page of payload?.query?.pages || []) {
-        pages.push({
-          page,
-          candidate: candidateMap(result[config.inputKey]).get(String(page.pageid))
+        for (const page of pages) {
+          if (page.ns !== 0 || page.missing) continue;
+          if (candidateByPageId.has(String(page.pageid))) {
+            pagesById.set(
+              String(page.pageid),
+              flattenPage(page, entityType, candidateByPageId.get(String(page.pageid)))
+            );
+          }
+        }
+
+        categoryBatches += 1;
+        continueValue = payload?.continue?.gcmcontinue || null;
+
+        if (continueValue) await sleep(REQUEST_DELAY_MS);
+      } catch (error) {
+        errors.push({
+          category,
+          continuation: continueValue,
+          error: error?.message || String(error)
         });
+        break;
       }
-    } catch (error) {
-      errors.push({ pageIds, stage: "metadata", error: error?.message || String(error) });
-    }
+    } while (continueValue);
+
+    if (!continueValue) await sleep(REQUEST_DELAY_MS);
   }
-
-  const matchedPages = pages.filter((item) => item.candidate?.match?.status === "matched");
-
-  const revisions = await mapWithConcurrency(
-    matchedPages,
-    REVISION_CONCURRENCY,
-    async ({ page, candidate }) => ({
-      pageId: page.pageid,
-      revisionPage: await fetchPageRevision(page.pageid),
-      candidate
-    })
-  );
-
-  const revisionMap = new Map();
-  for (const item of revisions) {
-    if (item?.error) {
-      errors.push({
-        pageId: item.item?.page?.pageid || null,
-        stage: "revision",
-        error: item.error
-      });
-      continue;
-    }
-    revisionMap.set(String(item.pageId), item.revisionPage);
-  }
-
-  const enriched = pages.map(({ page, candidate }) =>
-    flattenPage(page, entityType, candidate, revisionMap.get(String(page.pageid)) || null)
-  );
 
   return {
     entityType,
     source: "walking-dead-wiki",
     generatedAt: new Date().toISOString(),
-    requested: records.length,
-    metadataFetched: pages.length,
-    matchedForRevision: matchedPages.length,
-    revisionsFetched: revisionMap.size,
+    requested: uniqueCandidates.length,
+    fetched: pagesById.size,
+    categoryCount: categories.length,
+    categoryBatches,
     errors,
-    pages: enriched
+    pages: [...pagesById.values()]
   };
 }
 
@@ -505,43 +460,41 @@ async function main() {
     JSON.stringify(result, null, 2) + "\n"
   );
 
+  const summary = {
+    characters: {
+      requested: result.characters.requested,
+      fetched: result.characters.fetched,
+      errors: result.characters.errors.length,
+      categoryCount: result.characters.categoryCount,
+      categoryBatches: result.characters.categoryBatches
+    },
+    locations: {
+      requested: result.locations.requested,
+      fetched: result.locations.fetched,
+      errors: result.locations.errors.length,
+      categoryCount: result.locations.categoryCount,
+      categoryBatches: result.locations.categoryBatches
+    },
+    episodes: {
+      requested: result.episodes.requested,
+      fetched: result.episodes.fetched,
+      errors: result.episodes.errors.length,
+      categoryCount: result.episodes.categoryCount,
+      categoryBatches: result.episodes.categoryBatches
+    }
+  };
+
   await writeFile(
     new URL("fandom-page-enrichment-summary.json", OUT_DIR),
     JSON.stringify({
       generatedAt: result.generatedAt,
       source: result.source,
       limit,
-      summary: {
-        characters: {
-          requested: result.characters.requested,
-          metadataFetched: result.characters.metadataFetched,
-          matchedForRevision: result.characters.matchedForRevision,
-          revisionsFetched: result.characters.revisionsFetched,
-          errors: result.characters.errors.length
-        },
-        locations: {
-          requested: result.locations.requested,
-          metadataFetched: result.locations.metadataFetched,
-          matchedForRevision: result.locations.matchedForRevision,
-          revisionsFetched: result.locations.revisionsFetched,
-          errors: result.locations.errors.length
-        },
-        episodes: {
-          requested: result.episodes.requested,
-          metadataFetched: result.episodes.metadataFetched,
-          matchedForRevision: result.episodes.matchedForRevision,
-          revisionsFetched: result.episodes.revisionsFetched,
-          errors: result.episodes.errors.length
-        }
-      }
+      summary
     }, null, 2) + "\n"
   );
 
-  console.log(JSON.stringify({
-    characters: result.characters,
-    locations: result.locations,
-    episodes: result.episodes
-  }, null, 2));
+  console.log(JSON.stringify(summary, null, 2));
 }
 
 main().catch((error) => {
