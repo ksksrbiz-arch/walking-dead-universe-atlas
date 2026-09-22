@@ -127,3 +127,57 @@ function reconcileRecord(record, page, canonicals) {
   return record.match;
 }
 
+async function main() {
+  const candidates = await readJson(new URL("fandom-atlas-candidates.json", DIR));
+  const pages = await readJson(new URL("fandom-page-enrichment.json", DIR));
+  const canonical = {
+    characters: await readJson(new URL("characters.json", DATA)),
+    locations: await readJson(new URL("locations.json", DATA)),
+    episodes: await readJson(new URL("episodes.json", DATA))
+  };
+
+  const stats = {};
+  for (const key of ["characters", "locations", "episodes"]) {
+    const pageMap = new Map(
+      (pages[key]?.pages || []).map((page) => [String(page.sourceRecordId || ""), page])
+    );
+    const records = candidates[key]?.records || [];
+    let matched = 0;
+    let ambiguous = 0;
+    let unchanged = 0;
+
+    for (const record of records) {
+      const sourceId = String(record.candidate?.sourceRecordId || "");
+      const page = pageMap.get(sourceId);
+      if (!page) {
+        unchanged += 1;
+        continue;
+      }
+      const match = reconcileRecord(record, page, canonical[key] || []);
+      if (match) record.match = match;
+      if (match?.status === "matched") matched += 1;
+      else if (match?.status === "ambiguous") ambiguous += 1;
+      else unchanged += 1;
+    }
+
+    stats[key] = { records: records.length, matched, ambiguous, unchanged };
+  }
+
+  candidates.version = candidates.version || 1;
+  candidates.reconciledAt = new Date().toISOString();
+  candidates.reconciliation = {
+    policy: "Exact canonical names, curated Fandom titles, and explicit canonical aliases only. No fuzzy image identity promotion.",
+    stats
+  };
+
+  await writeFile(
+    new URL("fandom-atlas-candidates.json", DIR),
+    JSON.stringify(candidates, null, 2) + "\n"
+  );
+  console.log(JSON.stringify(stats, null, 2));
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
