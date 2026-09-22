@@ -6,7 +6,7 @@ import { sourceRecord, summarizeMatches } from "./lib/enrichment.mjs";
 const API = "https://walkingdead.fandom.com/api.php";
 const WIKI = "https://walkingdead.fandom.com/wiki/";
 const ROOT = new URL("../", import.meta.url);
-const OUT_DIR = new URL("../data/enrichment/", ROOT);
+const OUT_DIR = new URL("data/enrichment/", ROOT);
 
 const SOURCES = {
   character: {
