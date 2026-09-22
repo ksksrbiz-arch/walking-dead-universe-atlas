@@ -24,6 +24,7 @@ export default function MobileTimeBar({year,playing,onYearChange,onTogglePlaying
       <span className="mobileTimeSummaryMeta">{era.short}</span>
     </button>
     <button className={"mobileTimePlay "+(playing?"playing":"")} onClick={e=>{e.stopPropagation();onTogglePlaying()}} aria-label={playing?"Pause chronology":"Play chronology"}>{playing?"Ⅱ":"▶"}</button>
+    <div className="mobileTimeInstruction" aria-hidden="true">SWIPE TO EXPLORE YEARS</div>
     <div className="mobileTimeTrackWrap">
       <div className="mobileTimeTrack" aria-hidden="true">
         <span className="mobileTimeProgress" style={{width:percent+"%"}}/>
