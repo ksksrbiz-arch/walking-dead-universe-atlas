@@ -1398,3 +1398,321 @@ button.universeEventRow:hover{background:#ffffff04}
  .chronologyAtlasFocusHead small{font-size:6px!important}.chronologyAtlasFocusHead b{font-size:14px!important}.chronologyAtlasFocusHead>span{font-size:7px!important}
  .chronologyFocusList b{font-size:9px!important}.chronologyFocusList small,.chronologyFocusList i{font-size:6px!important}
 }
+
+
+/* ========================================================================== */
+/* 2026-09-22 FIELD AUDIT FIXES                                              */
+/* Responsive mode, search recovery, marker disambiguation, mobile density. */
+/* ========================================================================== */
+
+.srOnly{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+
+.mobileLocationsButton{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-height:42px;
+  padding:0 10px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:11px;
+  background:rgba(8,16,17,.9);
+  color:#e5ebe8;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+  font:700 10px "Space Mono",monospace;
+  letter-spacing:.04em;
+  z-index:95;
+}
+.mobileLocationsButton svg{width:16px;height:16px}
+.mobileLocationsButton b{color:#aebbb8;font:700 10px "Space Mono",monospace}
+
+.markerCluster{cursor:pointer;outline:none}
+.markerCluster:focus-visible .markerClusterRing{stroke:#fff;stroke-width:2px}
+.markerClusterRing{fill:rgba(9,20,21,.86);stroke:rgba(231,239,235,.85);stroke-width:1.5px}
+.markerClusterCore{fill:rgba(65,87,88,.92);stroke:rgba(255,255,255,.2);stroke-width:1px}
+.markerClusterHit{pointer-events:all}
+.markerClusterCount{fill:#f0f4f1;font:700 9px "Space Mono",monospace;pointer-events:none}
+
+.markerClusterSheet{
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:calc(var(--mobile-nav,64px) + 12px);
+  max-height:min(58dvh,460px);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  z-index:310;
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:16px;
+  background:rgba(8,16,17,.97);
+  box-shadow:0 22px 60px rgba(0,0,0,.45);
+  backdrop-filter:blur(16px);
+}
+.markerClusterSheetHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.markerClusterSheetHead small{display:block;color:#718082;font:700 7px "Space Mono",monospace;letter-spacing:.12em}
+.markerClusterSheetHead b{display:block;margin-top:3px;color:#e6ece9;font-size:13px}
+.markerClusterSheetHead button{
+  width:40px;height:40px;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.16);border-radius:10px;
+  background:#111b1d;color:#e6ece9;
+}
+.markerClusterSheetHead svg{width:18px;height:18px}
+.markerClusterList{
+  overflow:auto;
+  overscroll-behavior:contain;
+  padding:7px;
+}
+.markerClusterList>button{
+  width:100%;
+  min-height:52px;
+  display:grid;
+  grid-template-columns:30px minmax(0,1fr) 18px;
+  align-items:center;
+  gap:9px;
+  padding:8px 9px;
+  border:1px solid transparent;
+  border-radius:10px;
+  background:transparent;
+  color:#e5ebe8;
+  text-align:left;
+}
+.markerClusterList>button:hover,
+.markerClusterList>button:focus-visible{
+  background:#142021;
+  border-color:#3d4c4d;
+}
+.markerClusterList>button b{display:block;font-size:12px;line-height:1.2}
+.markerClusterList>button small{display:block;margin-top:3px;color:#758284;font:700 8px "Space Mono",monospace}
+.clusterListIcon{width:28px;height:28px;display:grid;place-items:center}
+.clusterListIcon svg{width:20px;height:20px}
+
+.searchOverlay{
+  z-index:1000!important;
+  overscroll-behavior:contain;
+}
+.searchOverlayHead button,
+.searchOverlayInput>button,
+.searchOverlayMapBack{
+  min-width:44px;
+  min-height:44px;
+}
+.searchOverlayMapBack{
+  display:block;
+  width:100%;
+  margin-top:12px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;
+  background:#121d1f;
+  color:#dfe6e3;
+  font:700 10px "Space Mono",monospace;
+  letter-spacing:.08em;
+}
+.emptySearch{
+  display:grid;
+  gap:5px;
+  padding:18px 12px;
+  color:#aab6b3;
+  text-align:center;
+}
+.emptySearch b{color:#e5ebe8;font-size:13px}
+.emptySearch span{color:#718082;font-size:11px}
+.emptySearch button{
+  justify-self:center;
+  min-height:42px;
+  margin-top:6px;
+  padding:0 14px;
+  border:1px solid #465354;
+  border-radius:9px;
+  background:#142021;
+  color:#e3e9e6;
+  font:700 9px "Space Mono",monospace;
+}
+
+.seriesRail,
+.mapLayerRail{
+  scrollbar-width:thin;
+  scrollbar-color:rgba(220,230,226,.3) transparent;
+}
+.seriesRailHint{
+  position:absolute!important;
+  right:3px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:4;
+  display:flex!important;
+  align-items:center;
+  height:24px;
+  padding:0 7px;
+  border-left:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(90deg,transparent,rgba(7,16,17,.96) 22%);
+  color:#b8c4c1;
+  font:700 8px "Space Mono",monospace;
+  letter-spacing:.08em;
+  pointer-events:none;
+}
+.seriesRail::after,
+.mapLayerRail::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  width:30px;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(7,16,17,.8));
+  border-radius:inherit;
+}
+.seriesRail button{font-size:11px!important;line-height:1.1!important;white-space:nowrap}
+.mapLayerRail button{font-size:10px!important;line-height:1.1!important;white-space:nowrap}
+.mapLayerLabel{font-size:9px!important}
+
+.mobileTimeInstruction{
+  display:none;
+  color:#738183;
+  font:700 7px "Space Mono",monospace;
+  letter-spacing:.1em;
+  text-align:center;
+  text-transform:uppercase;
+}
+.mobileTimeTrackWrap{position:relative}
+
+@media (max-width:699px){
+  .mobileLocationsButton{
+    display:flex;
+    position:absolute;
+    top:214px;
+    left:10px;
+  }
+  .seriesRail,
+  .mapLayerRail{overscroll-behavior-x:contain}
+  .seriesRail button{min-width:max-content;min-height:32px;font-size:11px!important}
+  .mapLayerRail button{min-width:max-content;min-height:28px;font-size:10px!important}
+  .seriesRailHint{display:flex!important}
+  .mobileTimeInstruction{display:block;margin:0 10px 4px}
+  .bottomNav small{font-size:10px!important;line-height:1.1!important}
+  .bottomNav button{min-height:50px}
+  .markerClusterCount{font-size:9px}
+}
+
+/* Short landscape phones and small tablets: switch from the desktop composition
+   to a single-surface mobile mode. */
+@media (min-width:700px) and (max-width:900px) and (max-height:600px){
+  .topbar{
+    min-height:58px!important;
+    height:58px!important;
+    padding:7px 10px!important;
+    grid-template-columns:minmax(150px,1fr) auto!important;
+  }
+  .topbar .brand small{display:none!important}
+  .searchWrap{display:none!important}
+  .headerMeta{display:none!important}
+  .mobileSearchButton{display:grid!important}
+  .mapSurface{inset:58px 0 var(--mobile-nav,64px) 0!important}
+  .atlasTimelineDock{display:none!important}
+  .mapLegend{display:none!important}
+  .mapTopLeft{top:68px!important;left:10px!important}
+  .mapTopRight{top:68px!important;right:10px!important}
+  .seriesRail{
+    top:105px!important;
+    left:10px!important;
+    right:150px!important;
+    transform:none!important;
+    max-width:none!important;
+    height:34px!important;
+    overflow-x:auto!important;
+  }
+  .mapLayerRail{
+    top:143px!important;
+    left:10px!important;
+    right:150px!important;
+    transform:none!important;
+    max-width:none!important;
+    height:31px!important;
+    overflow-x:auto!important;
+  }
+  .mobileLocationsButton{
+    display:flex!important;
+    position:absolute!important;
+    top:68px!important;
+    right:105px!important;
+  }
+  .contentPanel.open:not(.hasDetail){
+    transform:translateY(calc(100% - 62px))!important;
+  }
+  .contentPanel.peek:not(.hasDetail){
+    transform:translateY(calc(100% - 62px))!important;
+  }
+  .contentPanel{
+    left:8px!important;
+    right:8px!important;
+    width:auto!important;
+    max-height:calc(100dvh - 74px)!important;
+    bottom:calc(var(--mobile-nav,64px) + 6px)!important;
+    top:auto!important;
+    border-radius:16px!important;
+    z-index:240!important;
+  }
+  .contentPanel.hasDetail{
+    max-height:calc(100dvh - 74px)!important;
+  }
+  .panelGrab{min-height:42px!important}
+  .panelHeader{min-height:48px!important}
+  .bottomNav{z-index:260!important}
+  .markerClusterSheet{z-index:320!important}
+}
+
+/* Portrait mobile: keep information surfaces below the map chrome and make the
+   location browser explicit rather than relying only on marker taps. */
+@media (max-width:699px){
+  .contentPanel{
+    left:8px!important;
+    right:8px!important;
+    width:auto!important;
+    max-width:none!important;
+    z-index:240!important;
+  }
+  .contentPanel.open:not(.hasDetail){
+    max-height:min(62dvh,500px);
+  }
+  .map.view-map .mobileLocationsButton{
+    top:214px!important;
+    z-index:96!important;
+  }
+  .map.view-map .mapSurface{
+    z-index:1;
+  }
+  .map.view-map .seriesRail,
+  .map.view-map .mapLayerRail,
+  .map.view-map .mapTopLeft,
+  .map.view-map .mapTopRight{
+    z-index:90!important;
+  }
+}
+
+/* Respect reduced motion without changing the interaction model. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
