@@ -55,19 +55,43 @@ function seriesBreakdown(records) {
 }
 
 
-function canonicalIdentityCollisions(entities) {
-  const bySurname = {};
-  for (const entity of entities) {
-    const parts = String(entity.name || "").trim().split(/\\s+/).filter(Boolean);
-    if (parts.length < 2) continue;
-    const surname = parts[parts.length - 1].toLowerCase();
-    bySurname[surname] ||= [];
-    bySurname[surname].push({ id: entity.id, name: entity.name });
+function identityCollisionReport(entities) {
+  const dimensions = [
+    ["exactName", (e) => String(e.name || "").trim().toLowerCase()],
+    ["surname", (e) => {
+      const parts = String(e.name || "").trim().split(/\\s+/).filter(Boolean);
+      return parts.length > 1 ? parts.at(-1).toLowerCase() : "";
+    }],
+    ["firstName", (e) => {
+      const parts = String(e.name || "").trim().split(/\\s+/).filter(Boolean);
+      return parts.length > 1 ? parts[0].toLowerCase() : "";
+    }],
+    ["actor", (e) => String(e.actor || e.portrayedBy || "").trim().toLowerCase()],
+    ["alias", (e) => Array.isArray(e.aliases) ? e.aliases.map((v) => String(v).trim().toLowerCase()).filter(Boolean) : []]
+  ];
+
+  const report = {};
+  for (const [dimension, getter] of dimensions) {
+    const buckets = {};
+    for (const entity of entities) {
+      const values = getter(entity);
+      const list = Array.isArray(values) ? values : [values];
+      for (const value of list.filter(Boolean)) {
+        buckets[value] ||= [];
+        buckets[value].push({ id: entity.id, name: entity.name, seriesIds: entity.seriesIds || [entity.seriesId].filter(Boolean) });
+      }
+    }
+    report[dimension] = Object.entries(buckets)
+      .filter(([, members]) => members.length > 1)
+      .map(([value, members]) => ({ value, members }));
   }
-  return Object.entries(bySurname)
-    .filter(([, members]) => members.length > 1)
-    .map(([surname, members]) => ({ surname, members }));
+  return report;
 }
+
+function canonicalIdentityCollisions(entities) {
+  return identityCollisionReport(entities).surname;
+}
+
 
 function topUnmatched(records, limit = 50) {
   return records
@@ -159,7 +183,14 @@ async function main() {
       topUnmatched: unmatched.slice(0, 50),
       reviewQueueCount: unmatched.length,
       pageCoverage: pageCoverage(pageResult),
-      identityCollisions: canonicalIdentityCollisions(canonical[key])
+      identityCollisions: identityCollisionReport(canonical[key]),
+      identityCollisionSummary: {
+        exactName: identityCollisionReport(canonical[key]).exactName.length,
+        surname: identityCollisionReport(canonical[key]).surname.length,
+        firstName: identityCollisionReport(canonical[key]).firstName.length,
+        actor: identityCollisionReport(canonical[key]).actor.length,
+        alias: identityCollisionReport(canonical[key]).alias.length
+      }
     };
   }
 
