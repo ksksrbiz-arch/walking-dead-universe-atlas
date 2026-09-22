@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "source": "Walking Dead Wiki character appearance tables and character pages; Wikipedia episode and character articles for the 2026-09 roster expansion; episode-backing fix for 15 roster characters declared with zero episode presence (2026-09-22)",
+  "source": "Walking Dead Wiki character appearance tables and character pages; Wikipedia episode and character articles for the 2026-09 roster expansion; episode-backing fix for 15 roster characters declared with zero episode presence (2026-09-22); corrected Andrea Harrison's mistagged debut episode (2026-09-22)",
   "sourceUrls": [
     "https://walkingdead.fandom.com/wiki/Character_Appearances_(TV_Series)",
     "https://walkingdead.fandom.com/wiki/Character_Appearances_(Daryl_Series)",
@@ -35,7 +35,9 @@
     "https://walkingdead.fandom.com/wiki/Luciana_Galvez_(Fear)",
     "https://en.wikipedia.org/wiki/Another_Day_in_the_Diamond",
     "https://walkingdead.fandom.com/wiki/Mile_Jurkovic_(Dead_City)",
-    "https://screenrant.com/walking-dead-daryl-dixon-genet-villain-pouvoir-du-vivant-explained/"
+    "https://screenrant.com/walking-dead-daryl-dixon-genet-villain-pouvoir-du-vivant-explained/",
+    "https://en.wikipedia.org/wiki/Andrea_(The_Walking_Dead)",
+    "https://en.wikipedia.org/wiki/Guts_(The_Walking_Dead)"
   ],
   "generatedAt": "2026-09-19T21:35:40.850Z",
   "episodesByCharacter": {
@@ -1869,10 +1871,11 @@
       "twd-s01-e01"
     ],
     "andrea-harrison": [
-      "twd-s01-e01"
+      "twd-s01-e02"
     ],
     "dale-horvath": [
-      "twd-s01-e01"
+      "twd-s01-e01",
+      "twd-s01-e02"
     ],
     "tyreese-williams": [
       "twd-s03-e08"

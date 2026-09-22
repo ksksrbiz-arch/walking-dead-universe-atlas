@@ -211,9 +211,9 @@
     },
     "andrea-dale": {
       "episodeIds": [
-        "twd-s01-e01"
+        "twd-s01-e02"
       ],
-      "basis": "Andrea and Dale are both episode-level character entities in the season 1 premiere",
+      "basis": "Andrea and Dale are both episode-level character entities in \"Guts\", Andrea's actual TV debut (not the premiere)",
       "evidenceKind": "co-presence"
     },
     "connie-kelly": {
