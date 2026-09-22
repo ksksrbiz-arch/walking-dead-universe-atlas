@@ -419,16 +419,32 @@ async function enrichEntityType(entityType, result, limit) {
     do {
       try {
         const payload = await fetchCategoryPageBatch(category, continueValue);
-        const pages = payload?.query?.pages || [];
+        const pages = (payload?.query?.pages || [])
+          .filter((page) => page.ns === 0 && !page.missing)
+          .filter((page) => candidateByPageId.has(String(page.pageid)));
+
+        const revids = pages
+          .map((page) => Number(page.lastrevid))
+          .filter((revid) => Number.isInteger(revid) && revid > 0);
+
+        const revisionPages = await fetchRevisions(revids);
+        const revisionsByPageId = new Map(
+          revisionPages.map((page) => [
+            String(page.pageid),
+            page.revisions?.[0] || null
+          ])
+        );
 
         for (const page of pages) {
-          if (page.ns !== 0 || page.missing) continue;
-          if (candidateByPageId.has(String(page.pageid))) {
-            pagesById.set(
-              String(page.pageid),
-              flattenPage(page, entityType, candidateByPageId.get(String(page.pageid)))
-            );
-          }
+          pagesById.set(
+            String(page.pageid),
+            flattenPage(
+              page,
+              revisionsByPageId.get(String(page.pageid)),
+              entityType,
+              candidateByPageId.get(String(page.pageid))
+            )
+          );
         }
 
         categoryBatches += 1;
