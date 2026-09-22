@@ -44,14 +44,102 @@ async function fetchMedia(source){
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),20000);
     try{
-      const response=await fetch(source,{headers:{"user-agent":"TWDU-Atlas-media-cache/2.0",accept:"image/avif,image/webp,image/jpeg,image/png,*/*;q=0.8",referer:"https://www.amc.com/"},signal:controller.signal});
+      const response=await fetch(source,{
+        headers:{
+          "user-agent":"TWDU-Atlas-media-cache/2.0",
+          accept:"image/avif,image/webp,image/jpeg,image/png,*/*;q=0.8",
+          referer:"https://www.amc.com/"
+        },
+        signal:controller.signal
+      });
       const type=response.headers.get("content-type")||"";
-      if(!response.ok){lastError=new Error(response.status+" "+response.statusText); const retryable=response.status===408||response.status===425||response.status===429||response.status>=500; if(!retryable||attempt===REQUEST_RETRIES) break; await sleep(Math.min(5000,500*2**(attempt-1))); continue;}
+      if(!response.ok){
+        lastError=new Error(response.status+" "+response.statusText);
+        const retryable=response.status===408||response.status===425||response.status===429||response.status>=500;
+        if(!retryable||attempt===REQUEST_RETRIES) break;
+        await sleep(Math.min(5000,500*2**(attempt-1)));
+        continue;
+      }
       if(!type.startsWith("image/"))throw new Error("unexpected content-type "+(type||"unknown"));
       const bytes=Buffer.from(await response.arrayBuffer());
       if(bytes.length<512)throw new Error("image response is unexpectedly small");
       return {bytes,ext:extension(source,type)};
-    }catch(error){lastError=error;if(attempt<REQUEST_RETRIES)await sleep(Math.min(5000,500*2**(attempt-1)));}finally{clearTimeout(timeout);}
+    }catch(error){
+      lastError=error;
+      if(attempt<REQUEST_RETRIES)await sleep(Math.min(5000,500*2**(attempt-1)));
+    }finally{
+      clearTimeout(timeout);
+    }
   }
   throw lastError||new Error("media request failed");
 }
+async function main(){
+  const media=JSON.parse(await readFile(MEDIA_FILE,"utf8"));
+  const episodeMedia=JSON.parse(await readFile(EPISODE_MEDIA_FILE,"utf8"));
+  const sources=new Set();
+
+  for(const item of Object.values(media.series??{})){
+    if(item?.keyArt) sources.add(item.keyArt);
+  }
+  for(const item of Object.values(media.places??{})){
+    if(item?.image) sources.add(item.image);
+    for(const source of item?.gallery??[]) if(source) sources.add(source);
+  }
+  for(const item of Object.values(media.characters??{})){
+    if(item?.image) sources.add(item.image);
+    for(const source of item?.gallery??[]) if(source) sources.add(source);
+  }
+  for(const item of Object.values(media.episodes??{})){
+    if(item?.image) sources.add(item.image);
+    for(const source of item?.gallery??[]) if(source) sources.add(source);
+  }
+  for(const item of Object.values(episodeMedia.episodes??{})){
+    if(item?.image) sources.add(item.image);
+  }
+
+  await mkdir(OUTPUT_DIR,{recursive:true});
+  await mkdir(path.dirname(INDEX_FILE),{recursive:true});
+
+  let existing={};
+  try{existing=JSON.parse(await readFile(INDEX_FILE,"utf8"));}catch{}
+
+  const local={...existing};
+  let downloaded=0, reused=0, failed=0, skipped=0;
+  let failureLogs=0;
+
+  for(const source of sources){
+    if(!/^https:\/\//i.test(source)){skipped++;continue;}
+    const key=keyFor(source);
+    const known=local[source];
+    if(known){
+      try{
+        await access(path.join("public",known.replace(/^\//,"")));
+        reused++;
+        continue;
+      }catch{}
+    }
+
+    try{
+      const result=await fetchMedia(source);
+      const relative=`/media-cache/${key}.${result.ext}`;
+      const outputPath=path.join("public",relative.replace(/^\//,""));
+      await mkdir(path.dirname(outputPath),{recursive:true});
+      await writeFile(outputPath,result.bytes);
+      local[source]=relative;
+      downloaded++;
+      console.log(`Cached media: ${source} -> ${relative}`);
+      await sleep(REQUEST_DELAY_MS);
+    }catch(error){
+      failed++;
+      if(failureLogs<MAX_FAILURE_LOGS){ console.warn(`Media cache failed: ${source} — ${error?.message||error}`); failureLogs++; }
+    }
+  }
+
+  await writeFile(INDEX_FILE,JSON.stringify(local,null,2)+"\n");
+  console.log(`Media cache complete: ${Object.keys(local).length} mapped, ${downloaded} downloaded, ${reused} reused, ${failed} unavailable, ${skipped} skipped.`);
+}
+
+main().catch(error=>{
+  console.error("Media cache failed:",error);
+  process.exit(1);
+});
