@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run ingest:media && npm run cache:media && vite build",
+    "build": "npm run ingest:media && npm run ensure:fandom-canonical && npm run cache:media && vite build",
     "preview": "vite preview",
     "ingest:media": "node scripts/ingest-amc-media.mjs",
     "audit:atlas": "node scripts/audit-atlas.mjs",
-    "build:with-media": "npm run ingest:media && npm run cache:media && npm run audit:atlas && vite build",
+    "build:with-media": "npm run ingest:media && npm run ensure:fandom-canonical && npm run cache:media && npm run audit:atlas && vite build",
     "cache:media": "node scripts/cache-amc-media.mjs",
     "enrich:probe": "node scripts/enrich-atlas.mjs --probe",
     "enrich:fandom": "node scripts/enrich-atlas.mjs --fandom-characters",
@@ -42,4 +42,4 @@
     "@types/d3-geo": "^3.1.1",
     "@netlify/vite-plugin": "^3.0.1"
   }
-}\n
+}
