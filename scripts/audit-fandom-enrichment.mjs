@@ -88,6 +88,11 @@ function pageCoverage(pageResult) {
 async function main() {
   const candidates = await readJson("fandom-atlas-candidates.json");
   const pages = await readJson("fandom-page-enrichment.json");
+  const canonical = {
+    characters: await readJson(new URL("../characters.json", DIR).pathname),
+    locations: await readJson(new URL("../locations.json", DIR).pathname),
+    episodes: await readJson(new URL("../episodes.json", DIR).pathname)
+  };
 
   const entities = ["characters", "locations", "episodes"];
   const summary = {};
@@ -97,14 +102,35 @@ async function main() {
     const pageResult = pages[key];
     const records = candidateResult.records || [];
 
+    const matchedCanonicalIds = new Set(
+      records
+        .map((item) => item.match?.canonicalId)
+        .filter(Boolean)
+    );
+    const unmatched = records
+      .filter((item) => item.match?.status !== "matched")
+      .map((item) => ({
+        sourceRecordId: item.candidate?.sourceRecordId,
+        name: item.candidate?.name,
+        seriesId: item.candidate?.fields?.seriesId,
+        category: item.candidate?.fields?.category,
+        sourceUrl: item.candidate?.sourceUrl,
+        reason: item.match?.reasons?.[0] || "unmatched"
+      }));
+
     summary[key] = {
       candidates: candidateResult.sourceRecords,
       matched: candidateResult.matched,
       unmatched: candidateResult.unmatched,
+      canonicalEntities: canonical[key].length,
+      canonicalMatched: matchedCanonicalIds.size,
+      canonicalUnmatched: Math.max(0, canonical[key].length - matchedCanonicalIds.size),
+      canonicalCoverage: canonical[key].length ? matchedCanonicalIds.size / canonical[key].length : 0,
       matchStatuses: byStatus(records),
       matchScoreBuckets: matchScoreBuckets(records),
       seriesBreakdown: seriesBreakdown(records),
-      topUnmatched: topUnmatched(records),
+      topUnmatched: unmatched.slice(0, 50),
+      reviewQueueCount: unmatched.length,
       pageCoverage: pageCoverage(pageResult)
     };
   }
@@ -114,6 +140,32 @@ async function main() {
     source: "walking-dead-wiki",
     summary
   };
+
+  const reviewQueue = {
+    generatedAt: report.generatedAt,
+    source: report.source,
+    policy: "unmatched Fandom records are review-only and must not overwrite canonical Atlas data",
+    characters: summary.characters.reviewQueueCount,
+    locations: summary.locations.reviewQueueCount,
+    episodes: summary.episodes.reviewQueueCount,
+    records: Object.fromEntries(
+      entities.map((key) => [key, (candidates[key].records || [])
+        .filter((item) => item.match?.status !== "matched")
+        .map((item) => ({
+          sourceRecordId: item.candidate?.sourceRecordId,
+          name: item.candidate?.name,
+          seriesId: item.candidate?.fields?.seriesId,
+          category: item.candidate?.fields?.category,
+          sourceUrl: item.candidate?.sourceUrl,
+          match: item.match || null
+        }))])
+    )
+  };
+
+  await writeFile(
+    new URL("fandom-enrichment-review-queue.json", DIR),
+    JSON.stringify(reviewQueue, null, 2) + "\\n"
+  );
 
   await writeFile(
     new URL("fandom-enrichment-audit.json", DIR),
