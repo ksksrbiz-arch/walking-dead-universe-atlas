@@ -8,7 +8,7 @@ const WIKI = "https://walkingdead.fandom.com/wiki/";
 const ROOT = new URL("../", import.meta.url);
 const OUT_DIR = new URL("data/enrichment/", ROOT);
 
-const BATCH_SIZE = 50;
+const BATCH_SIZE = 20;
 const DEFAULT_LIMIT = 5000;
 const REQUEST_DELAY_MS = Number(process.env.FANDOM_REQUEST_DELAY_MS || 100);
 
