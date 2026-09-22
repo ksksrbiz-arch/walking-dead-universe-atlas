@@ -282,10 +282,10 @@ function canonicalCandidateMap(result) {
   return map;
 }
 
-async function fetchPages(pageIds) {
+async function fetchPages(titles) {
   const params = new URLSearchParams({
     action: "query",
-    pageids: pageIds.join("|"),
+    titles: titles.join("|"),
     prop: "info|categories|pageimages|extracts|revisions",
     inprop: "url",
     cllimit: "max",
