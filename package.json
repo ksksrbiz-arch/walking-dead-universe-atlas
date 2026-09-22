@@ -10,7 +10,10 @@
     "ingest:media": "node scripts/ingest-amc-media.mjs",
     "audit:atlas": "node scripts/audit-atlas.mjs",
     "build:with-media": "npm run ingest:media && npm run cache:media && npm run audit:atlas && vite build",
-    "cache:media": "node scripts/cache-amc-media.mjs"
+    "cache:media": "node scripts/cache-amc-media.mjs",
+    "enrich:probe": "node scripts/enrich-atlas.mjs --probe",
+    "enrich:fandom": "node scripts/enrich-atlas.mjs --fandom-characters",
+    "enrich:all": "node scripts/enrich-atlas.mjs --probe --fandom-characters"
   },
   "dependencies": {
     "react": "^19.1.1",
@@ -27,6 +30,7 @@
     "typescript": "^5.9.2",
     "vite": "^7.1.7",
     "@types/topojson-client": "^3.1.5",
+    "@types/d3-geo": "^3.1.1",
     "@types/d3-geo": "^3.1.1",
     "@netlify/vite-plugin": "^3.0.1"
   }
