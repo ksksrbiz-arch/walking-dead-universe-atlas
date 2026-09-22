@@ -618,6 +618,8 @@ function FandomIntelligence({entityType,entityId}:{entityType:"characters"|"loca
  const hints=record.hints||{};
  const labels:any={aliases:"ALIASES",actor:"PORTRAYED BY",status:"STATUS",firstAppearance:"FIRST APPEARANCE",lastAppearance:"LAST APPEARANCE",occupation:"OCCUPATION",affiliation:"AFFILIATION",family:"FAMILY",relationships:"RELATIONSHIPS",type:"TYPE",region:"REGION",residents:"RESIDENTS",coordinates:"COORDINATES",season:"SEASON",episodeNumber:"EPISODE",airDate:"AIR DATE",director:"DIRECTOR",writer:"WRITERS",cast:"CAST",locations:"FILMED / FEATURED LOCATIONS",productionCode:"PRODUCTION CODE",viewership:"VIEWERSHIP"};
  const entries=Object.entries(hints).filter(([key,value])=>key!=="image"&&value!=null&&String(value).trim()!=="");
+ const knownKeys=new Set(entries.map(([key])=>key));
+ const allFields=Object.entries(record.fields||{}).filter(([key,value])=>!knownKeys.has(key)&&value!=null&&String(value).trim()!=="");
  const asText=(value:any)=>Array.isArray(value)?value.join(" · "):String(value);
  const sections=Array.isArray(record.details?.sections)?record.details.sections:[];
  const links=Array.isArray(record.details?.linkedPages)?record.details.linkedPages:[];
@@ -627,6 +629,7 @@ function FandomIntelligence({entityType,entityId}:{entityType:"characters"|"loca
   {entries.length>0&&<div className="fandomFacts">{entries.map(([key,value])=><div key={key}><small>{labels[key]||key.replaceAll("_"," ").toUpperCase()}</small><b>{asText(value)}</b></div>)}</div>}
   {sections.length>0&&<><div className="fandomSubhead">PAGE SECTIONS</div><div className="fandomTags">{sections.slice(0,24).map((s:string)=><span key={s}>{s}</span>)}</div></>}
   {links.length>0&&<><div className="fandomSubhead">LINKED WIKI PAGES <span>{links.length}</span></div><div className="fandomTags">{links.slice(0,30).map((s:string)=><span key={s}>{s}</span>)}</div></>}
+  {allFields.length>0&&<details className="fandomMore"><summary>ALL WIKI FIELDS <span>{allFields.length}</span></summary><div className="fandomMoreGrid">{allFields.map(([key,value])=><div key={key}><small>{key.replaceAll("_"," ").toUpperCase()}</small><b>{asText(value)}</b></div>)}</div></details>}
   <a className="fandomSource" href={record.sourceUrl} target="_blank" rel="noreferrer"><span>WALKING DEAD WIKI · SOURCE PAGE</span><Icon name="arrow"/></a>
  </section>;
 }
