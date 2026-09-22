@@ -8,13 +8,15 @@ const WIKI = "https://walkingdead.fandom.com/wiki/";
 const ROOT = new URL("../", import.meta.url);
 const OUT_DIR = new URL("data/enrichment/", ROOT);
 
-const BATCH_SIZE = 20;
+const BATCH_SIZE = 50;
 const DEFAULT_LIMIT = 5000;
-const REQUEST_DELAY_MS = Number(process.env.FANDOM_REQUEST_DELAY_MS || 100);
+const REVISION_CONCURRENCY = Number(process.env.FANDOM_REVISION_CONCURRENCY || 8);
+const REQUEST_DELAY_MS = Number(process.env.FANDOM_REQUEST_DELAY_MS || 50);
 
 const ENTITY_CONFIG = {
   character: {
     inputKey: "characters",
+    matchFields: ["name"],
     hintKeys: {
       aliases: ["alias", "aliases", "other_names", "other name", "nickname", "nicknames"],
       actor: ["actor", "portrayed_by", "portrayed by", "portrayer"],
@@ -30,6 +32,7 @@ const ENTITY_CONFIG = {
   },
   location: {
     inputKey: "locations",
+    matchFields: ["name"],
     hintKeys: {
       type: ["type", "location_type", "location type"],
       region: ["state", "region", "province", "country", "location"],
@@ -44,6 +47,7 @@ const ENTITY_CONFIG = {
   },
   episode: {
     inputKey: "episodes",
+    matchFields: ["title", "name"],
     hintKeys: {
       season: ["season", "season_number", "season number"],
       episodeNumber: ["episode", "episode_number", "episode number", "number"],
@@ -77,7 +81,7 @@ async function fetchJson(url) {
   const response = await fetch(url, {
     headers: {
       accept: "application/json",
-      "user-agent": "TWDU-Atlas-Fandom-Page-Enrichment/1.0"
+      "user-agent": "TWDU-Atlas-Fandom-Page-Enrichment/2.0"
     },
     signal: AbortSignal.timeout(30000)
   });
@@ -188,7 +192,7 @@ function cleanValue(value) {
     text = text.replace(/{{[^{}]*}}/g, " ");
   }
 
-  text = text
+  return text
     .replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, "$2")
     .replace(/\[\[([^\]]+)\]\]/g, "$1")
     .replace(/'''/g, "")
@@ -199,8 +203,6 @@ function cleanValue(value) {
     .replace(/&#39;/g, "'")
     .replace(/\s+/g, " ")
     .trim();
-
-  return text;
 }
 
 function parseTemplate(rawTemplate) {
@@ -234,7 +236,10 @@ function parseTemplate(rawTemplate) {
 function findInfoboxes(wikitext) {
   return extractBalancedTemplates(wikitext)
     .map(parseTemplate)
-    .filter((template) => /(^| )infobox( |$)/i.test(template.normalizedName) || /^(character|location|episode) infobox/i.test(template.normalizedName));
+    .filter((template) =>
+      /(^| )infobox( |$)/i.test(template.normalizedName) ||
+      /^(character|location|episode) infobox/i.test(template.normalizedName)
+    );
 }
 
 function getHintValue(parameters, aliases) {
@@ -273,30 +278,24 @@ function buildPageUrl(title) {
   return WIKI + encodeURIComponent(title.replaceAll(" ", "_"));
 }
 
-function canonicalCandidateMap(result) {
+function candidateMap(result) {
   const map = new Map();
   for (const record of result?.records || []) {
-    const key = String(record.candidate?.sourceRecordId || "");
-    if (key) map.set(key, record);
+    const id = String(record.candidate?.sourceRecordId || "");
+    if (id) map.set(id, record);
   }
   return map;
 }
 
-async function fetchPages(titles) {
+async function fetchPageMetadata(pageIds) {
   const params = new URLSearchParams({
     action: "query",
-    titles: titles.join("|"),
-    prop: "info|categories|pageimages|extracts|revisions",
+    pageids: pageIds.join("|"),
+    prop: "info|categories|pageimages",
     inprop: "url",
     cllimit: "max",
     piprop: "name|original|thumbnail",
     pithumbsize: "1200",
-    exintro: "1",
-    explaintext: "1",
-    exchars: "1200",
-    rvprop: "ids|timestamp|content",
-    rvslots: "main",
-    rvlimit: "1",
     redirects: "1",
     format: "json",
     formatversion: "2"
@@ -305,12 +304,28 @@ async function fetchPages(titles) {
   return fetchJson(API + "?" + params.toString());
 }
 
-function flattenPage(page, entityType, candidate) {
-  const revision = page.revisions?.[0] || {};
-  const wikitext = revision.slots?.main?.content || "";
-  const infoboxes = findInfoboxes(wikitext);
+async function fetchPageRevision(pageId) {
+  const params = new URLSearchParams({
+    action: "query",
+    pageids: String(pageId),
+    prop: "revisions",
+    rvprop: "ids|timestamp|content",
+    rvslots: "main",
+    rvlimit: "1",
+    format: "json",
+    formatversion: "2"
+  });
 
-  const pageData = {
+  const payload = await fetchJson(API + "?" + params.toString());
+  return payload?.query?.pages?.[0] || null;
+}
+
+function flattenPage(page, entityType, candidate, revisionPage = null) {
+  const revision = revisionPage?.revisions?.[0] || {};
+  const wikitext = revision.slots?.main?.content || "";
+  const infoboxes = wikitext ? findInfoboxes(wikitext) : [];
+
+  return {
     entityType,
     sourceId: "walking-dead-wiki",
     sourceRecordId: String(page.pageid),
@@ -325,11 +340,13 @@ function flattenPage(page, entityType, candidate) {
       fullUrl: page.fullurl || buildPageUrl(page.title),
       redirect: page.redirect || false
     },
-    revision: {
-      revisionId: revision.revid || null,
-      parentId: revision.parentid || null,
-      timestamp: revision.timestamp || null
-    },
+    revision: revision.revid
+      ? {
+          revisionId: revision.revid,
+          parentId: revision.parentid || null,
+          timestamp: revision.timestamp || null
+        }
+      : null,
     image: page.original || page.thumbnail || page.pageimage
       ? {
           fileName: page.pageimage || null,
@@ -339,7 +356,6 @@ function flattenPage(page, entityType, candidate) {
           height: page.original?.height || page.thumbnail?.height || null
         }
       : null,
-    extract: page.extract || null,
     categories: extractCategoryNames(page.categories),
     templates: infoboxes.map((template) => template.name),
     infoboxes,
@@ -354,59 +370,113 @@ function flattenPage(page, entityType, candidate) {
           category: candidate.candidate?.fields?.category || null
         }
       : null,
-    raw: {
-      wikitext,
-      hash: sha256(wikitext)
-    }
+    raw: wikitext
+      ? {
+          wikitext,
+          hash: sha256(wikitext)
+        }
+      : null
   };
+}
 
-  return pageData;
+async function mapWithConcurrency(items, concurrency, worker) {
+  const results = new Array(items.length);
+  let next = 0;
+
+  async function run() {
+    while (true) {
+      const index = next++;
+      if (index >= items.length) return;
+
+      try {
+        results[index] = await worker(items[index], index);
+      } catch (error) {
+        results[index] = {
+          error: error?.message || String(error),
+          item: items[index]
+        };
+      }
+
+      if (REQUEST_DELAY_MS) await sleep(REQUEST_DELAY_MS);
+    }
+  }
+
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, items.length) }, () => run())
+  );
+
+  return results;
 }
 
 async function enrichEntityType(entityType, result, limit) {
   const config = ENTITY_CONFIG[entityType];
-  const sourceResult = result[config.inputKey];
-  const candidates = sourceResult?.records || [];
-  const unique = [...new Map(
-    candidates
+  const records = [...new Map(
+    (result[config.inputKey]?.records || [])
       .map((record) => [String(record.candidate?.sourceRecordId || ""), record])
       .filter(([id]) => id)
   ).values()].slice(0, limit);
 
-  const candidateMap = canonicalCandidateMap(sourceResult);
   const pages = [];
   const errors = [];
 
-  for (let offset = 0; offset < unique.length; offset += BATCH_SIZE) {
-    const batch = unique.slice(offset, offset + BATCH_SIZE);
-    const titles = batch.map((record) => record.candidate?.name).filter(Boolean);
+  for (let offset = 0; offset < records.length; offset += BATCH_SIZE) {
+    const batch = records.slice(offset, offset + BATCH_SIZE);
+    const pageIds = batch.map((record) => Number(record.candidate.sourceRecordId)).filter(Number.isInteger);
 
-    if (!titles.length) continue;
+    if (!pageIds.length) continue;
 
     try {
-      const payload = await fetchPages(titles);
+      const payload = await fetchPageMetadata(pageIds);
       for (const page of payload?.query?.pages || []) {
-        const candidate = batch.find((record) => record.candidate?.name === page.title);
-        pages.push(flattenPage(page, entityType, candidate));
+        pages.push({
+          page,
+          candidate: candidateMap(result[config.inputKey]).get(String(page.pageid))
+        });
       }
     } catch (error) {
-      errors.push({
-        titles,
-        error: error?.message || String(error)
-      });
+      errors.push({ pageIds, stage: "metadata", error: error?.message || String(error) });
     }
-
-    if (offset + BATCH_SIZE < unique.length) await sleep(REQUEST_DELAY_MS);
   }
+
+  const matchedPages = pages.filter((item) => item.candidate?.match?.status === "matched");
+
+  const revisions = await mapWithConcurrency(
+    matchedPages,
+    REVISION_CONCURRENCY,
+    async ({ page, candidate }) => ({
+      pageId: page.pageid,
+      revisionPage: await fetchPageRevision(page.pageid),
+      candidate
+    })
+  );
+
+  const revisionMap = new Map();
+  for (const item of revisions) {
+    if (item?.error) {
+      errors.push({
+        pageId: item.item?.page?.pageid || null,
+        stage: "revision",
+        error: item.error
+      });
+      continue;
+    }
+    revisionMap.set(String(item.pageId), item.revisionPage);
+  }
+
+  const enriched = pages.map(({ page, candidate }) =>
+    flattenPage(page, entityType, candidate, revisionMap.get(String(page.pageid)) || null)
+  );
 
   return {
     entityType,
     source: "walking-dead-wiki",
     generatedAt: new Date().toISOString(),
-    requested: unique.length,
-    fetched: pages.length,
+    requested: records.length,
+    metadataFetched: pages.length,
+    matchedForRevision: matchedPages.length,
+    revisionsFetched: revisionMap.size,
     errors,
-    pages
+    pages: enriched
   };
 }
 
@@ -431,35 +501,43 @@ async function main() {
     JSON.stringify(result, null, 2) + "\n"
   );
 
-  const summary = {
-    characters: {
-      requested: result.characters.requested,
-      fetched: result.characters.fetched,
-      errors: result.characters.errors.length
-    },
-    locations: {
-      requested: result.locations.requested,
-      fetched: result.locations.fetched,
-      errors: result.locations.errors.length
-    },
-    episodes: {
-      requested: result.episodes.requested,
-      fetched: result.episodes.fetched,
-      errors: result.episodes.errors.length
-    }
-  };
-
   await writeFile(
     new URL("fandom-page-enrichment-summary.json", OUT_DIR),
     JSON.stringify({
       generatedAt: result.generatedAt,
       source: result.source,
       limit,
-      summary
+      summary: {
+        characters: {
+          requested: result.characters.requested,
+          metadataFetched: result.characters.metadataFetched,
+          matchedForRevision: result.characters.matchedForRevision,
+          revisionsFetched: result.characters.revisionsFetched,
+          errors: result.characters.errors.length
+        },
+        locations: {
+          requested: result.locations.requested,
+          metadataFetched: result.locations.metadataFetched,
+          matchedForRevision: result.locations.matchedForRevision,
+          revisionsFetched: result.locations.revisionsFetched,
+          errors: result.locations.errors.length
+        },
+        episodes: {
+          requested: result.episodes.requested,
+          metadataFetched: result.episodes.metadataFetched,
+          matchedForRevision: result.episodes.matchedForRevision,
+          revisionsFetched: result.episodes.revisionsFetched,
+          errors: result.episodes.errors.length
+        }
+      }
     }, null, 2) + "\n"
   );
 
-  console.log(JSON.stringify(summary, null, 2));
+  console.log(JSON.stringify({
+    characters: result.characters,
+    locations: result.locations,
+    episodes: result.episodes
+  }, null, 2));
 }
 
 main().catch((error) => {
