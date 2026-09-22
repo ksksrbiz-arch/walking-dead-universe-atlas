@@ -649,12 +649,18 @@ function EpisodeDetail({episode,onLocation,onEpisode,onCharacter,onConnection,on
  const derivedConnectionIds=getEpisodeConnectionIds(episode.id);
  const endpointName=(id:string)=>{const pools:any=[atlasData.characters,atlasData.locations,atlasData.communities,atlasData.factions,atlasData.series,atlasData.connections];for(const pool of pools){const item=pool.find((x:any)=>x.id===id);if(item)return item.name||item.title||item.label||id}return id};
  const media=((atlasData as any).media?.episodes?.[episode.id] ?? (episodeMedia as any).episodes?.[episode.id] ?? (atlasData as any).media?.series?.[episode.seriesId]);
+ const episodeGallery=[...new Set([
+   ...(Array.isArray(media?.gallery)?media.gallery:[]),
+   ...(media?.image?[media.image]:[]),
+   ...((episodeMedia as any).episodes?.[episode.id]?.gallery??[])
+ ].filter(Boolean))].slice(0,18);
  const locations=atlasData.locations.filter(l=>raw?.locationIds?.includes(l.id));
  const ordered=buildChronology().filter(x=>x.kind==="episode");
  const index=ordered.findIndex(x=>x.id===episode.id);
  const prev=ordered[index-1],next=ordered[index+1];
  return <div className="contentScroll">
   <div className="episodeHero" style={{"--accent":meta.color} as CSSProperties}>{media?.image&&<img src={atlasImageUrl(media.image,1200)} onError={e=>onAtlasImageError(e,media.image)} srcSet={atlasImageSrcSet(media.image)} sizes="(max-width: 699px) 94vw, 470px" loading="eager" decoding="async" fetchPriority="high" alt="" className="episodeArt"/>}<div className="episodeHeroCopy"><span>{meta.name} · {episode.seasonId?.toUpperCase()}E{String(episode.episodeNumber).padStart(2,"0")}</span><h3>{episode.title}</h3><div className="episodeMeta"><b>{episode.start===episode.end?episode.start:`${episode.start}–${episode.end}`}</b><em>{episode.certainty}</em><em>{episode.precision}</em></div>{raw?.airDate&&<p className="episodeAirDate">AIRED {new Date(raw.airDate+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}).toUpperCase()}</p>}</div></div>
+  {episodeGallery.length>1&&<MediaStrip items={episodeGallery.map((image:string,i:number)=>({id:episode.id+"-"+i,image,title:i===0?"PRIMARY FRAME":`FRAME ${String(i+1).padStart(2,"0")}`,subtitle:meta.short}))} label="VISUAL ARCHIVE"/>}
   {locations.length>0&&<><div className="sectionTitle">LOCATIONS <span>{locations.length}</span></div><div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}><Icon name="pin"/>{l.name}</button>)}</div></>}
   {derivedConnectionIds.length>0&&<><div className="sectionTitle">UNIVERSE CONNECTIONS <span>{derivedConnectionIds.length}</span></div><div className="connectionLinks">{derivedConnectionIds.map((id:string)=>{const c=atlasData.connections.find((x:any)=>x.id===id);const evidence=(atlasData as any).connectionEpisodes?.connections?.[id];return c?<article key={id}><small>{c.type.replaceAll("-"," ").toUpperCase()} · {evidence?.evidenceKind==="direct"?"EPISODE EVIDENCE":"CURATED CONTEXT"}</small><button className="connectionFocusButton" onClick={()=>onConnection(id)}><b>{c.label}</b><span>{endpointName(c.fromId)} ↔ {endpointName(c.toId)} · {c.certainty}</span><Icon name="chevron"/></button></article>:null})}</div></>}
   <div className="sectionTitle">CHRONOLOGY NAVIGATION</div>
