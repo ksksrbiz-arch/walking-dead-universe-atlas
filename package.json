@@ -23,7 +23,8 @@
     "reconcile:fandom": "node scripts/reconcile-fandom-matches.mjs",
     "promote:fandom-media": "node scripts/promote-fandom-media.mjs",
     "ensure:fandom-canonical": "node scripts/ensure-fandom-canonical.mjs",
-    "enrich:fandom-netlify": "node scripts/run-fandom-enrichment-netlify.mjs"
+    "enrich:fandom-netlify": "node scripts/run-fandom-enrichment-netlify.mjs",
+    "ensure:fandom-artifacts": "node scripts/ensure-fandom-artifacts.mjs"
   },
   "dependencies": {
     "react": "^19.1.1",
