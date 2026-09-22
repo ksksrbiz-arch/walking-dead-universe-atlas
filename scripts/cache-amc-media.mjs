@@ -68,12 +68,15 @@ async function main(){
   }
   for(const item of Object.values(media.places??{})){
     if(item?.image) sources.add(item.image);
+    for(const source of item?.gallery??[]) if(source) sources.add(source);
   }
   for(const item of Object.values(media.characters??{})){
     if(item?.image) sources.add(item.image);
+    for(const source of item?.gallery??[]) if(source) sources.add(source);
   }
   for(const item of Object.values(media.episodes??{})){
     if(item?.image) sources.add(item.image);
+    for(const source of item?.gallery??[]) if(source) sources.add(source);
   }
   for(const item of Object.values(episodeMedia.episodes??{})){
     if(item?.image) sources.add(item.image);
