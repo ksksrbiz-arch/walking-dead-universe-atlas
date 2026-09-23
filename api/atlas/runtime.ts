@@ -56,7 +56,7 @@ const json=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status,
 export default async function handler(req:Request){
   if(req.method!=="GET")return json({error:"Method not allowed."},405);
   try{
-    const url=new URL(req.url);
+    const url=new URL(req.url, `https://${req.headers.get("host") || "localhost"}`);
     const resource=url.searchParams.get("resource")??"meta";
     const kind=url.searchParams.get("kind");
     const id=url.searchParams.get("id");
