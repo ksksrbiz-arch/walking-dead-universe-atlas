@@ -50,6 +50,9 @@ function mergeHints(pages){
 async function main(){
   const pages=await readJson("fandom-page-enrichment.json");
   const candidates=await readJson("fandom-atlas-candidates.json");
+  let galleryManifest=null;
+  try{ galleryManifest=await readJson("fandom-gallery-media.json"); }catch{}
+
   const result={version:1,generatedAt:new Date().toISOString(),source:"walking-dead-wiki",policy:"Matched Fandom enrichment is display-only enrichment. Canonical Atlas fields remain authoritative unless explicitly reconciled.",characters:{},locations:{},episodes:{}};
   for(const key of ["characters","locations","episodes"]){
     const candidateMap=new Map((candidates[key]?.records||[]).map(r=>[String(r.candidate?.sourceRecordId||""),r]));
@@ -58,6 +61,49 @@ async function main(){
       return reconciled?{...page,candidate:{...(page.candidate||{}),canonicalId:reconciled.match?.canonicalId||null,matchStatus:reconciled.match?.status||"unmatched"}}:page;
     });
     result[key]=mergeHints(matchedPages);
+  }
+
+  // Merge the exhaustive gallery crawl into the canonical snapshot. This is
+  // intentionally additive: gallery media is candidate imagery and never
+  // changes canonical Atlas identity or factual fields. Keeping the gallery
+  // URLs in the runtime snapshot lets the client choose an entity-specific
+  // image even when the page's primary image is generic series artwork.
+  if(galleryManifest?.records?.length){
+    const normalizeTitle=(value)=>String(value||"")
+      .toLowerCase()
+      .replace(/\\/Gallery$/i,"")
+      .replace(/[_-]+/g," ")
+      .replace(/[^a-z0-9 ]+/g," ")
+      .replace(/\\s+/g," ")
+      .trim();
+    const canonicalByType={
+      characters:new Map((await readJson("../characters.json")).map(x=>[normalizeTitle(x.name),x.id])),
+      locations:new Map((await readJson("../locations.json")).map(x=>[normalizeTitle(x.name),x.id])),
+      episodes:new Map((await readJson("../episodes.json")).map(x=>[normalizeTitle(x.title),x.id]))
+    };
+    for(const record of galleryManifest.records){
+      const title=normalizeTitle(record.title);
+      const entityType=record.categories?.some((x)=>/location/i.test(x))?"locations"
+        :record.categories?.some((x)=>/episode/i.test(x))?"episodes"
+        :record.categories?.some((x)=>/character|series galleries/i.test(x))?"characters":null;
+      if(!entityType)continue;
+      const canonicalId=canonicalByType[entityType].get(title);
+      if(!canonicalId)continue;
+      const urls=[...(record.media||[]).map((item)=>item?.url),...(record.directUrls||[])].filter((x)=>/^https?:\\/\\//i.test(String(x)));
+      if(!urls.length)continue;
+      const current=result[entityType][canonicalId]||{};
+      const imageFiles=[...(current.details?.imageFiles||[])];
+      const hints=[...(Array.isArray(current.hints?.imageGallery)?current.hints.imageGallery:[])];
+      for(const url of urls){
+        if(!imageFiles.some((item)=>item?.url===url))imageFiles.push({url,title:record.title||null});
+        if(!hints.includes(url))hints.push(url);
+      }
+      result[entityType][canonicalId]={
+        ...current,
+        hints:{...current.hints,imageGallery:hints.slice(0,100)},
+        details:{...current.details,imageFiles:imageFiles.slice(0,100)}
+      };
+    }
   }
   await writeFile(new URL("fandom-canonical.json",DIR),JSON.stringify(result,null,2)+"\n");
   console.log(JSON.stringify({characters:Object.keys(result.characters).length,locations:Object.keys(result.locations).length,episodes:Object.keys(result.episodes).length},null,2));
