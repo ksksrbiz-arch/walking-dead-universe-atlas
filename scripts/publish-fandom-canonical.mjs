@@ -76,19 +76,19 @@ async function main(){
       .replace(/[^a-z0-9 ]+/g," ")
       .replace(/\s+/g," ")
       .trim();
-    const canonicalByType={
-      characters:new Map((await readJson("../characters.json")).map(x=>[normalizeTitle(x.name),x.id])),
-      locations:new Map((await readJson("../locations.json")).map(x=>[normalizeTitle(x.name),x.id])),
-      episodes:new Map((await readJson("../episodes.json")).map(x=>[normalizeTitle(x.title),x.id]))
-    };
+    const canonicalByTitle=new Map();
+    for(const key of ["characters","locations","episodes"]){
+      const rows=await readJson(`../${key}.json`);
+      for(const row of rows){
+        const title=normalizeTitle(row.name||row.title);
+        if(title&&!canonicalByTitle.has(title)) canonicalByTitle.set(title,{entityType:key,canonicalId:row.id});
+      }
+    }
     for(const record of galleryManifest.records){
       const title=normalizeTitle(record.title);
-      const entityType=record.categories?.some((x)=>/location/i.test(x))?"locations"
-        :record.categories?.some((x)=>/episode/i.test(x))?"episodes"
-        :record.categories?.some((x)=>/character|series galleries/i.test(x))?"characters":null;
-      if(!entityType)continue;
-      const canonicalId=canonicalByType[entityType].get(title);
-      if(!canonicalId)continue;
+      const match=canonicalByTitle.get(title);
+      if(!match)continue;
+      const {entityType,canonicalId}=match;
       const urls=[...(record.media||[]).map((item)=>item?.url),...(record.directUrls||[])].filter((x)=>/^https?:\/\//i.test(String(x)));
       if(!urls.length)continue;
       const current=result[entityType][canonicalId]||{};
