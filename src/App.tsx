@@ -295,7 +295,7 @@ export default function App(){
    const q=query.trim().toLowerCase();
    if(!q)return [] as {kind:SearchKind;id:string;title:string;meta:string}[];
    const result:{kind:SearchKind;id:string;title:string;meta:string}[]=[];
-   atlasData.locations.forEach(x=>{if([x.name,x.type].join(" ").toLowerCase().includes(q))result.push({kind:"location",id:x.id,title:x.name,meta:`${SERIES_BY_ID[x.seriesId]?.short} · ${x.year}`})});
+   atlasData.locations.forEach(x=>{const aliases=x.id==="cdc-atlanta"?["cdc","center for disease control","centers for disease control"]:[];if([x.name,x.type,...aliases].join(" ").toLowerCase().includes(q))result.push({kind:"location",id:x.id,title:x.name,meta:`${SERIES_BY_ID[x.seriesId]?.short} · ${x.year}`})});
    atlasData.characters.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"character",id:x.id,title:x.name,meta:"CHARACTER"})});
    atlasData.communities.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"community",id:x.id,title:x.name,meta:"COMMUNITY"})});
    atlasData.factions.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"faction",id:x.id,title:x.name,meta:"FACTION"})});
@@ -847,7 +847,7 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
  const media=(atlasData as any).media?.characters?.[characterId];
  const fandomImage=fandomEntityImage("characters",characterId,character.name);
  const existingImage=media?.image||"";
- const existingIsSeriesArt=/images\\.cds\\.amcn\\.com|series.?art|key.?art/i.test(existingImage);
+ const existingIsSeriesArt=/images\.cds\\.amcn\\.com|series.?art|key.?art/i.test(existingImage);
  const characterImage=fandomImage||(!existingIsSeriesArt?existingImage:"")||(atlasData as any).media?.series?.[character.seriesIds?.[0]]?.keyArt;
  const characterMediaFallback=!media?.image&&Boolean(characterImage); const characterGallery=eps.map((e:any)=>{const m=(episodeMedia as any).episodes?.[e.id];return {src:m?.image,title:e.title,meta:e.seriesId?SERIES_BY_ID[e.seriesId]?.short:""}}).filter((x:any)=>x.src).slice(0,18);
  const endpointName=(id:string)=>{const pools:any=[atlasData.characters,atlasData.locations,atlasData.communities,atlasData.factions,atlasData.series,atlasData.connections];for(const pool of pools){const item=pool.find((x:any)=>x.id===id);if(item)return item.name||item.title||item.label||id}return id};
