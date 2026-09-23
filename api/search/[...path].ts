@@ -1,4 +1,4 @@
-import { readBlobJson, cachedJson, json } from "../../../lib/vercel-atlas";
+import { readBlobJson, cachedJson, json } from "../../lib/vercel-atlas";
 
 export default async function handler(req: Request) {
   if (req.method !== "GET") return new Response("Method Not Allowed", { status: 405, headers: { Allow: "GET" } });
