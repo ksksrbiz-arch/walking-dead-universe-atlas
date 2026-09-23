@@ -83,7 +83,7 @@ async function pageBatch(pageIds){
 }
 
 function clean(value){
-  return String(value||"").replace(/<!--[\\s\\S]*?-->/g," ").replace(/<ref(?: [^>]*)?>[\\s\\S]*?<\\/ref>/gi," ").replace(/<[^>]+>/g," ").trim();
+  return String(value||"").replace(/<!--[\s\S]*?-->/g," ").replace(/<ref(?: [^>]*)?>[\s\S]*?<\/ref>/gi," ").replace(/<[^>]+>/g," ").trim();
 }
 
 function extractFileTitles(text){
@@ -92,9 +92,9 @@ function extractFileTitles(text){
     const title=String(raw||"").trim().replace(/_/g," ");
     if(title) out.add("File:"+title);
   };
-  for(const m of String(text||"").matchAll(/\\[\\[(?:File|Image):([^\\]|]+)(?:\\|[^\\]]*)?\\]\\]/gi)) add(m[1]);
-  for(const m of String(text||"").matchAll(/<gallery[^>]*>([\\s\\S]*?)<\\/gallery>/gi)){
-    for(const line of m[1].split(/\\r?\\n/)){
+  for(const m of String(text||"").matchAll(/\[\[(?:File|Image):([^\]|]+)(?:\|[^\]]*)?\]\]/gi)) add(m[1]);
+  for(const m of String(text||"").matchAll(/<gallery[^>]*>([\s\S]*?)<\/gallery>/gi)){
+    for(const line of m[1].split(/\r?\n/)){
       const value=line.trim().replace(/^File:/i,"").replace(/^Image:/i,"").split("|")[0].trim();
       if(value&&!/^<!--/.test(value)&&!/^#/.test(value)) add(value);
     }
@@ -104,9 +104,9 @@ function extractFileTitles(text){
 
 function extractDirectUrls(text){
   const out=new Set();
-  for(const m of String(text||"").matchAll(/https?:\\/\\/[^\\s\\]<>|}]+/gi)){
+  for(const m of String(text||"").matchAll(/https?:\/\/[^\s\]<>|}]+/gi)){
     const u=m[0].replace(/[),.;]+$/,"");
-    if(/\\.(?:jpe?g|png|webp|gif|avif)(?:[?#].*)?$/i.test(u))out.add(u);
+    if(/\.(?:jpe?g|png|webp|gif|avif)(?:[?#].*)?$/i.test(u))out.add(u);
   }
   return [...out];
 }
@@ -123,7 +123,7 @@ async function imageInfo(titles){
     const data=await fetchJson(API+"?"+p);
     for(const page of data?.query?.pages||[]){
       const info=page.imageinfo?.[0];
-      if(!info?.url||!/^image\\//i.test(String(info.mime||"")))continue;
+      if(!info?.url||!/^image\//i.test(String(info.mime||"")))continue;
       out.push({
         title:page.title,
         url:info.url,
@@ -157,7 +157,7 @@ async function main(){
   for(const result of categoryRows){
     if(result?.error)continue;
     for(const page of result.rows||[]){
-      if(!/\\/Gallery$/i.test(page.title)&&!/^Promo Pictures$/i.test(page.title)&&!/^Cover Gallery$/i.test(page.title))continue;
+      if(!/\/Gallery$/i.test(page.title)&&!/^Promo Pictures$/i.test(page.title)&&!/^Cover Gallery$/i.test(page.title))continue;
       galleryPages.set(String(page.pageid),{page,...{categories:[result.category]}});
     }
   }
@@ -210,11 +210,11 @@ async function main(){
     uniqueMediaUrls:unique.size,
     records
   };
-  await writeFile(new URL("fandom-gallery-media.json",OUT_DIR),JSON.stringify(result,null,2)+"\\n");
+  await writeFile(new URL("fandom-gallery-media.json",OUT_DIR),JSON.stringify(result,null,2)+"\n");
   await writeFile(new URL("fandom-gallery-media-summary.json",OUT_DIR),JSON.stringify({
     generatedAt:result.generatedAt,galleryPages:records.length,mediaReferences:mediaCount,uniqueMediaUrls:unique.size,
     categories:CATEGORIES
-  },null,2)+"\\n");
+  },null,2)+"\n");
   console.log(JSON.stringify({galleryPages:records.length,mediaReferences:mediaCount,uniqueMediaUrls:unique.size},null,2));
 }
 main().catch(e=>{console.error(e);process.exitCode=1});
