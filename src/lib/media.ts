@@ -1,6 +1,6 @@
 import localMedia from "../generated/media-local.json";
 
-const FANDOM_PROXY="/api/fandom-image";
+const MEDIA_PROXY="https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
 const LOCAL_MEDIA=localMedia as Record<string,string>;
 
 function isFandomImage(source:string){
@@ -12,8 +12,8 @@ export function atlasImageUrl(source:string|undefined|null,width=1200,quality=78
   if(source.startsWith("/"))return source;
   const local=LOCAL_MEDIA[source];
   if(local)return local;
-  if(isFandomImage(source)){
-    const url=new URL(FANDOM_PROXY,window.location.origin);
+  if(isFandomImage(source)||/^https?:\/\/(?:images|dimages)\.cds\.amcn\.com\//i.test(source)){
+    const url=new URL(MEDIA_PROXY);
     url.searchParams.set("url",source);
     return url.pathname+url.search;
   }
