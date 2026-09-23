@@ -20,11 +20,11 @@ const OUTPUT_DIR="public/media-cache";
 const INDEX_FILE="src/generated/media-local.json";
 
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
-const REQUEST_RETRIES=Number(process.env.MEDIA_CACHE_RETRIES||2);
+const REQUEST_RETRIES=Number(process.env.MEDIA_CACHE_RETRIES||1);
 const FANDOM_HOSTS=new Set(["static.wikia.nocookie.net","vignette.wikia.nocookie.net"]);
-const REQUEST_DELAY_MS=Number(process.env.MEDIA_CACHE_DELAY_MS||75);
-const MAX_FAILURE_LOGS=Number(process.env.MEDIA_CACHE_MAX_FAILURE_LOGS||40);
-const CONCURRENCY=Number(process.env.MEDIA_CACHE_CONCURRENCY||6);
+const REQUEST_DELAY_MS=Number(process.env.MEDIA_CACHE_DELAY_MS||25);
+const MAX_FAILURE_LOGS=Number(process.env.MEDIA_CACHE_MAX_FAILURE_LOGS||20);
+const CONCURRENCY=Number(process.env.MEDIA_CACHE_CONCURRENCY||4);
 
 function extension(url,contentType=""){
   const pathname=new URL(url).pathname.toLowerCase();
@@ -101,7 +101,7 @@ async function main(){
 
 
 
-  for(const item of Object.values(episodeMedia.episodes??{})){
+  // Prefer the checked-in manifests during Vercel builds; remote discovery is intentionally not part of the build path.\n  for(const item of Object.values(episodeMedia.episodes??{})){
     if(item?.image) sources.add(item.image);
   }
 
