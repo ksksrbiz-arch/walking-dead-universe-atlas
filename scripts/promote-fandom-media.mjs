@@ -23,7 +23,7 @@ function normalizeImageText(value) {
     .toLowerCase()
     .replace(/[_-]+/g, " ")
     .replace(/[^a-z0-9 ]+/g, " ")
-    .replace(/\\s+/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
@@ -66,8 +66,8 @@ function imageCandidates(page) {
     const matched = titleTokens.filter((token) => haystack.includes(token));
     value += matched.length * 18;
     if (titleTokens.length && matched.length === titleTokens.length) value += 35;
-    if (/\\b(?:logo|title card|titlecard|key art|keyart|series art|franchise)\\b/.test(haystack)) value -= 40;
-    if (/\\b(?:promo|poster)\\b/.test(haystack) && matched.length === 0) value -= 15;
+    if (/\b(?:logo|title card|titlecard|key art|keyart|series art|franchise)\\b/.test(haystack)) value -= 40;
+    if (/\b(?:promo|poster)\\b/.test(haystack) && matched.length === 0) value -= 15;
     return value;
   };
 
@@ -87,7 +87,10 @@ async function main() {
   const media = await readJson(new URL("media.json", DATA));
   const enrichment = await readJson(new URL("fandom-page-enrichment.json", ENRICH));
   const candidates = await readJson(new URL("fandom-atlas-candidates.json", ENRICH));
-  let galleryManifest = null;\n  try { galleryManifest = await readJson(new URL("fandom-gallery-media.json", ENRICH)); } catch {}\n\n  const canonicals = {
+  let galleryManifest = null;
+  try { galleryManifest = await readJson(new URL("fandom-gallery-media.json", ENRICH)); } catch {}
+
+  const canonicals = {
     characters: await readJson(new URL("characters.json", DATA)),
     locations: await readJson(new URL("locations.json", DATA)),
     episodes: await readJson(new URL("episodes.json", DATA))
@@ -97,7 +100,7 @@ async function main() {
     .toLowerCase()
     .replace(/[_-]+/g, " ")
     .replace(/[^a-z0-9 ]+/g, " ")
-    .replace(/\\s+/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
 
   const exactCanonicalId = (entityKey, title) => {
@@ -126,7 +129,7 @@ async function main() {
     );
 
     for (const page of enrichment[entityKey]?.pages || []) {
-      const sources = imageSources(page);
+      const sources = imageCandidates(page);
       const source = sources[0] || null;
       const candidate = candidateMap.get(String(page.sourceRecordId));
       // Prefer the reconciled match. If reconciliation missed a page but the Fandom
@@ -211,7 +214,8 @@ async function main() {
   media.policy = "Prefer official AMC/AMC Networks media. Verified Fandom page imagery may be used as attributed enrichment when no approved official asset exists. Preserve provenance and never overwrite an existing approved image.";
   media.updatedAt = new Date().toISOString();
 
-  await writeFile(new URL("media.json", DATA), JSON.stringify(media, null, 2) + "\n");
+  await writeFile(new URL("media.json", DATA), JSON.stringify(media, null, 2) + "
+");
   console.log(JSON.stringify(stats, null, 2));
 }
 
