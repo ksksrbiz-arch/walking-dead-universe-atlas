@@ -1,6 +1,6 @@
 import localMedia from "../generated/media-local.json";
 
-const MEDIA_PROXY="https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
+const MEDIA_PROXY=import.meta.env.VITE_ATLAS_MEDIA_PROXY||"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
 const LOCAL_MEDIA=localMedia as Record<string,string>;
 
 function isFandomImage(source:string){
