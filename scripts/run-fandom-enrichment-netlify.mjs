@@ -10,6 +10,7 @@ const statusFile = fileURLToPath(new URL("../data/enrichment/fandom-netlify-run.
 const steps = [
   ["enrich:fandom-atlas", "Discover Fandom candidate records"],
   ["enrich:fandom-pages", "Fetch and enrich Fandom pages"],
+  ["enrich:fandom-galleries", "Exhaustively crawl Fandom character, location, episode and promo galleries"],
   ["reconcile:fandom", "Reconcile Fandom records to canonical Atlas entities"],
   ["publish:fandom-canonical", "Publish the matched canonical enrichment snapshot"],
   ["promote:fandom-media", "Promote approved Fandom media with provenance"]
