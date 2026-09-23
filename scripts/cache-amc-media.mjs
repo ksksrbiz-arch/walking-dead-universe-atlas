@@ -24,6 +24,7 @@ const REQUEST_RETRIES=Number(process.env.MEDIA_CACHE_RETRIES||2);
 const FANDOM_HOSTS=new Set(["static.wikia.nocookie.net","vignette.wikia.nocookie.net"]);
 const REQUEST_DELAY_MS=Number(process.env.MEDIA_CACHE_DELAY_MS||75);
 const MAX_FAILURE_LOGS=Number(process.env.MEDIA_CACHE_MAX_FAILURE_LOGS||40);
+const CONCURRENCY=Number(process.env.MEDIA_CACHE_CONCURRENCY||6);
 
 function extension(url,contentType=""){
   const pathname=new URL(url).pathname.toLowerCase();
@@ -86,28 +87,19 @@ async function main(){
   }
   for(const item of Object.values(media.places??{})){
     if(item?.image) sources.add(item.image);
-    for(const source of item?.gallery??[]) if(source) sources.add(source);
   }
   for(const item of Object.values(media.characters??{})){
     if(item?.image) sources.add(item.image);
-    for(const source of item?.gallery??[]) if(source) sources.add(source);
   }
   for(const item of Object.values(media.episodes??{})){
     if(item?.image) sources.add(item.image);
-    for(const source of item?.gallery??[]) if(source) sources.add(source);
   }
   try{
     const amcInventory=JSON.parse(await readFile("data/enrichment/amc-media-inventory.json","utf8"));
     for(const record of amcInventory.records??[]) for(const source of record.images??[]) if(source) sources.add(source);
   }catch{}
 
-  try{
-    const galleryManifest=JSON.parse(await readFile("data/enrichment/fandom-gallery-media.json","utf8"));
-    for(const record of galleryManifest.records??[]){
-      for(const item of record.media??[]) if(item?.url) sources.add(item.url);
-      for(const source of record.directUrls??[]) if(source) sources.add(source);
-    }
-  }catch{}
+
 
   for(const item of Object.values(episodeMedia.episodes??{})){
     if(item?.image) sources.add(item.image);
@@ -123,36 +115,46 @@ async function main(){
   let downloaded=0, reused=0, failed=0, skipped=0;
   let failureLogs=0;
 
-  for(const source of sources){
-    if(!/^https:\/\//i.test(source)){skipped++;continue;}
-    const sourceHost=new URL(source).hostname.toLowerCase();
-    const isFandom=FANDOM_HOSTS.has(sourceHost);
-    if(isFandom) console.log(`Caching Fandom entity media: ${source}`);
-    const key=keyFor(source);
-    const known=local[source];
-    if(known){
+  const queue=[...sources];
+  let cursor=0;
+  async function worker(){
+    while(true){
+      const index=cursor++;
+      if(index>=queue.length) return;
+      const source=queue[index];
+      if(!/^https:\/\//i.test(source)){skipped++;continue;}
+      const sourceHost=new URL(source).hostname.toLowerCase();
+      const isFandom=FANDOM_HOSTS.has(sourceHost);
+      if(isFandom) console.log(`Caching Fandom entity media: ${source}`);
+      const key=keyFor(source);
+      const known=local[source];
+      if(known){
+        try{
+          await access(path.join("public",known.replace(/^\//,"")));
+          reused++;
+          continue;
+        }catch{}
+      }
       try{
-        await access(path.join("public",known.replace(/^\//,"")));
-        reused++;
-        continue;
-      }catch{}
-    }
-
-    try{
-      const result=await fetchMedia(source);
-      const relative=`/media-cache/${key}.${result.ext}`;
-      const outputPath=path.join("public",relative.replace(/^\//,""));
-      await mkdir(path.dirname(outputPath),{recursive:true});
-      await writeFile(outputPath,result.bytes);
-      local[source]=relative;
-      downloaded++;
-      console.log(`Cached media: ${source} -> ${relative}`);
-      await sleep(REQUEST_DELAY_MS);
-    }catch(error){
-      failed++;
-      if(failureLogs<MAX_FAILURE_LOGS){ console.warn(`Media cache failed: ${source} — ${error?.message||error}`); failureLogs++; }
+        const result=await fetchMedia(source);
+        const relative=`/media-cache/${key}.${result.ext}`;
+        const outputPath=path.join("public",relative.replace(/^\//,""));
+        await mkdir(path.dirname(outputPath),{recursive:true});
+        await writeFile(outputPath,result.bytes);
+        local[source]=relative;
+        downloaded++;
+        console.log(`Cached media: ${source} -> ${relative}`);
+      }catch(error){
+        failed++;
+        if(failureLogs<MAX_FAILURE_LOGS){
+          console.warn(`Media cache failed: ${source} — ${error?.message||error}`);
+          failureLogs++;
+        }
+      }
+      if(REQUEST_DELAY_MS) await sleep(REQUEST_DELAY_MS);
     }
   }
+  await Promise.all(Array.from({length:Math.min(CONCURRENCY,Math.max(1,queue.length))},()=>worker()));
 
   await writeFile(INDEX_FILE,JSON.stringify(local,null,2)+"\n");
   console.log(`Media cache complete: ${Object.keys(local).length} mapped, ${downloaded} downloaded, ${reused} reused, ${failed} unavailable, ${skipped} skipped.`);
