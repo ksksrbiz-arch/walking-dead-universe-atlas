@@ -21,7 +21,7 @@ const INDEX_FILE="src/generated/media-local.json";
 
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
 const REQUEST_RETRIES=Number(process.env.MEDIA_CACHE_RETRIES||1);
-const FANDOM_HOSTS=new Set(["static.wikia.nocookie.net","vignette.wikia.nocookie.net"]);
+const FANDOM_HOSTS=new Set(["static.wikia.nocookie.net","vignette.wikia.nocookie.net","images.wikia.nocookie.net"]);\nconst MEDIA_PROXY=process.env.ATLAS_MEDIA_PROXY||"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
 const REQUEST_DELAY_MS=Number(process.env.MEDIA_CACHE_DELAY_MS||25);
 const MAX_FAILURE_LOGS=Number(process.env.MEDIA_CACHE_MAX_FAILURE_LOGS||20);
 const CONCURRENCY=Number(process.env.MEDIA_CACHE_CONCURRENCY||4);
@@ -48,7 +48,7 @@ async function fetchMedia(source){
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),20000);
     try{
-      const response=await fetch(source,{
+      const response=await fetch(requestUrl,{
         headers:{
           "user-agent":"TWDU-Atlas-media-cache/2.0",
           accept:"image/avif,image/webp,image/jpeg,image/png,*/*;q=0.8",
