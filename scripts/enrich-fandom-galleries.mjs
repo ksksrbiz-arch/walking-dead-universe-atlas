@@ -177,27 +177,38 @@ async function main(){
   const batchResults=await mapConcurrent(batches,async(idsBatch)=>pageBatch(idsBatch));
   for(const result of batchResults)if(Array.isArray(result))pages.push(...result);
 
-  const records=[];
-  for(const page of pages){
+  console.log(JSON.stringify({galleryPagesDiscovered:pages.length},null,2));
+
+  // Extract all file references first, then resolve them in global 50-title
+  // batches. The previous implementation resolved imageinfo once per gallery
+  // page, which can turn a large gallery crawl into thousands of sequential
+  // requests and make Netlify appear hung.
+  const parsed=pages.map(page=>{
     const revision=page.revisions?.[0];
     const wikitext=revision?.slots?.main?.content||"";
-    const fileTitles=extractFileTitles(wikitext);
-    let files=[];
-    try{files=await imageInfo(fileTitles)}catch(e){files=[];}
-    const direct=extractDirectUrls(wikitext);
-    records.push({
-      sourceId:"walking-dead-wiki",
-      sourceRecordId:String(page.pageid),
-      sourceUrl:page.fullurl||page.canonicalurl||WIKI+encodeURIComponent(String(page.title).replaceAll(" ","_")),
-      title:page.title,
-      retrievedAt:new Date().toISOString(),
-      categories:galleryPages.get(String(page.pageid))?.categories||[],
-      revisionId:revision?.revid||page.lastrevid||null,
-      revisionTimestamp:revision?.timestamp||null,
-      media:files,
-      directUrls:direct
-    });
-  }
+    return {
+      page,
+      revision,
+      fileTitles:extractFileTitles(wikitext),
+      directUrls:extractDirectUrls(wikitext)
+    };
+  });
+  const allTitles=[...new Set(parsed.flatMap(x=>x.fileTitles))];
+  console.log(JSON.stringify({uniqueFileTitles:allTitles.length},null,2));
+  const resolved=await imageInfo(allTitles);
+  const filesByTitle=new Map(resolved.map(x=>[x.title,x]));
+  const records=parsed.map(({page,revision,fileTitles,directUrls})=>({
+    sourceId:"walking-dead-wiki",
+    sourceRecordId:String(page.pageid),
+    sourceUrl:page.fullurl||page.canonicalurl||WIKI+encodeURIComponent(String(page.title).replaceAll(" ","_")),
+    title:page.title,
+    retrievedAt:new Date().toISOString(),
+    categories:galleryPages.get(String(page.pageid))?.categories||[],
+    revisionId:revision?.revid||page.lastrevid||null,
+    revisionTimestamp:revision?.timestamp||null,
+    media:fileTitles.map(title=>filesByTitle.get(title)).filter(Boolean),
+    directUrls
+  }));
 
   const mediaCount=records.reduce((n,r)=>n+r.media.length+r.directUrls.length,0);
   const unique=new Set(records.flatMap(r=>[...r.media.map(x=>x.url),...r.directUrls]));
