@@ -8,17 +8,17 @@
       "destination": "https://walking-dead-universe-atlas.netlify.app/api/:path*"
     },
     {
-      "source": "/.netlify/images",
-      "destination": "https://walking-dead-universe-atlas.netlify.app/.netlify/images"
+      "source": "/.netlify/images/:path*",
+      "destination": "https://walking-dead-universe-atlas.netlify.app/.netlify/images/:path*"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!assets/|data/|api/|\.netlify/).*)",
       "destination": "/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/assets/(.*)",
+      "source": "/assets/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -27,7 +27,7 @@
       ]
     },
     {
-      "source": "/data/(.*)",
+      "source": "/data/:path*",
       "headers": [
         {
           "key": "Cache-Control",
