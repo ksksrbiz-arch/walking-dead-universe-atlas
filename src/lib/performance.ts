@@ -1,6 +1,7 @@
 type AtlasMetric={name:string;value:number;ts:number;details?:Record<string,string|number|boolean|null>};
 
-const TELEMETRY_ENDPOINT="https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-telemetry";\nconst queue:AtlasMetric[]=[];
+const TELEMETRY_ENDPOINT="https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-telemetry";
+const queue:AtlasMetric[]=[];
 let flushTimer:number|undefined;
 const sessionId=(()=>{try{return crypto.randomUUID()}catch{return Math.random().toString(36).slice(2)}})();
 
