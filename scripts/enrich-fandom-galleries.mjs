@@ -158,7 +158,9 @@ async function main(){
     if(result?.error)continue;
     for(const page of result.rows||[]){
       if(!/\/Gallery$/i.test(page.title)&&!/^Promo Pictures$/i.test(page.title)&&!/^Cover Gallery$/i.test(page.title))continue;
-      galleryPages.set(String(page.pageid),{page,...{categories:[result.category]}});
+      const key=String(page.pageid);
+      const existing=galleryPages.get(key);
+      galleryPages.set(key,{page,categories:[...(existing?.categories||[]),result.category]});
     }
   }
   for(const title of SPECIAL_PAGES){
