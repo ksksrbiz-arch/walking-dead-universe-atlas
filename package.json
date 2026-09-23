@@ -19,6 +19,7 @@
     "enrich:fandom-full": "npm run enrich:fandom-atlas && npm run enrich:fandom-pages && npm run reconcile:fandom && npm run publish:fandom-canonical && npm run promote:fandom-media",
     "publish:fandom-canonical": "node scripts/publish-fandom-canonical.mjs",
     "audit:enrichment": "node scripts/audit-fandom-enrichment.mjs",
+    "audit:media-quality": "node scripts/audit-media-quality.mjs",
     "publish:enrichment-preview": "node scripts/publish-enrichment-preview.mjs",
     "reconcile:fandom": "node scripts/reconcile-fandom-matches.mjs",
     "promote:fandom-media": "node scripts/promote-fandom-media.mjs",
