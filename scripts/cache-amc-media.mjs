@@ -154,7 +154,7 @@ async function main(){
     }
   }
 
-  await writeFile(INDEX_FILE,JSON.stringify(local,null,2)+"\\n");
+  await writeFile(INDEX_FILE,JSON.stringify(local,null,2)+"\n");
   console.log(`Media cache complete: ${Object.keys(local).length} mapped, ${downloaded} downloaded, ${reused} reused, ${failed} unavailable, ${skipped} skipped.`);
 }
 
