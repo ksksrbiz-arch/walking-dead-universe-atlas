@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run ingest:media && npm run ensure:fandom-canonical && npm run cache:media && vite build",
+    "build": "npm run build:vercel",
     "preview": "vite preview",
     "ingest:media": "node scripts/ingest-amc-media.mjs",
     "audit:atlas": "node scripts/audit-atlas.mjs",
@@ -29,7 +29,9 @@
     "ensure:fandom-artifacts": "node scripts/ensure-fandom-artifacts.mjs",
     "enrich:fandom-galleries": "node scripts/enrich-fandom-galleries.mjs",
     "ingest:amc-media-exhaustive": "node scripts/ingest-amc-media-exhaustive.mjs",
-    "build:enrichment": "npm run ingest:media && npm run ensure:fandom-canonical && npm run cache:media && npm run audit:atlas && vite build"
+    "build:enrichment": "npm run ingest:media && npm run ensure:fandom-canonical && npm run cache:media && npm run audit:atlas && vite build",
+    "build:vercel": "vite build",
+    "sync:vercel": "node scripts/sync-vercel-atlas.mjs"
   },
   "dependencies": {
     "react": "^19.1.1",
