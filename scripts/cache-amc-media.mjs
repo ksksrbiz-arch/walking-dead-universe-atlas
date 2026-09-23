@@ -103,6 +103,16 @@ async function main(){
 
 
 
+  try{
+    const fandomCanonical=JSON.parse(await readFile("data/enrichment/fandom-canonical.json","utf8"));
+    for(const bucket of Object.values(fandomCanonical??{})){
+      if(!bucket || typeof bucket !== "object") continue;
+      for(const record of Object.values(bucket)){
+        for(const source of record?.image_urls??[]) if(typeof source === "string" && source) sources.add(source);
+      }
+    }
+  }catch{}
+
   // Prefer the checked-in manifests during Vercel builds; remote discovery is intentionally not part of the build path.
   for(const item of Object.values(episodeMedia.episodes??{})){
     if(item?.image) sources.add(item.image);
