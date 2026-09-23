@@ -53,7 +53,7 @@ function imageCandidates(page) {
       : page?.hints?.image
         ? { url: page.hints.image, label: "", kind: "hint" }
         : null
-  ].filter((item) => item?.url && /^https?:\\/\\//i.test(String(item.url)));
+  ].filter((item) => item?.url && /^https?:\/\//i.test(String(item.url)));
 
   const title = normalizeImageText(page?.page?.title || "");
   const titleTokens = title
@@ -66,8 +66,8 @@ function imageCandidates(page) {
     const matched = titleTokens.filter((token) => haystack.includes(token));
     value += matched.length * 18;
     if (titleTokens.length && matched.length === titleTokens.length) value += 35;
-    if (/\b(?:logo|title card|titlecard|key art|keyart|series art|franchise)\\b/.test(haystack)) value -= 40;
-    if (/\b(?:promo|poster)\\b/.test(haystack) && matched.length === 0) value -= 15;
+    if (/\b(?:logo|title card|titlecard|key art|keyart|series art|franchise)\b/.test(haystack)) value -= 40;
+    if (/\b(?:promo|poster)\b/.test(haystack) && matched.length === 0) value -= 15;
     return value;
   };
 
@@ -178,7 +178,7 @@ async function main() {
 
   if (galleryManifest?.records?.length) {
     for (const record of galleryManifest.records) {
-      const baseTitle = String(record.title || "").replace(/\\/Gallery$/i, "").trim();
+      const baseTitle = String(record.title || "").replace(/\/Gallery$/i, "").trim();
       const entityKey = record.categories?.some((x) => /location/i.test(x)) ? "locations"
         : record.categories?.some((x) => /episode/i.test(x)) ? "episodes"
         : record.categories?.some((x) => /character|series galleries/i.test(x)) ? "characters"
