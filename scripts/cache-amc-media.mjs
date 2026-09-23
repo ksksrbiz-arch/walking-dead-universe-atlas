@@ -96,7 +96,7 @@ async function main(){
     if(item?.image) sources.add(item.image);
     for(const source of item?.gallery??[]) if(source) sources.add(source);
   }
-  try{\n    const galleryManifest=JSON.parse(await readFile("data/enrichment/fandom-gallery-media.json","utf8"));\n    for(const record of galleryManifest.records??[]){\n      for(const item of record.media??[]) if(item?.url) sources.add(item.url);\n      for(const source of record.directUrls??[]) if(source) sources.add(source);\n    }\n  }catch{}\n\n  for(const item of Object.values(episodeMedia.episodes??{})){
+  try{\n    const amcInventory=JSON.parse(await readFile("data/enrichment/amc-media-inventory.json","utf8"));\n    for(const record of amcInventory.records??[]) for(const source of record.images??[]) if(source) sources.add(source);\n  }catch{}\n\n  try{\n    const galleryManifest=JSON.parse(await readFile("data/enrichment/fandom-gallery-media.json","utf8"));\n    for(const record of galleryManifest.records??[]){\n      for(const item of record.media??[]) if(item?.url) sources.add(item.url);\n      for(const source of record.directUrls??[]) if(source) sources.add(source);\n    }\n  }catch{}\n\n  for(const item of Object.values(episodeMedia.episodes??{})){
     if(item?.image) sources.add(item.image);
   }
 
