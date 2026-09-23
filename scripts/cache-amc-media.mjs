@@ -21,7 +21,8 @@ const INDEX_FILE="src/generated/media-local.json";
 
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
 const REQUEST_RETRIES=Number(process.env.MEDIA_CACHE_RETRIES||1);
-const FANDOM_HOSTS=new Set(["static.wikia.nocookie.net","vignette.wikia.nocookie.net","images.wikia.nocookie.net"]);\nconst MEDIA_PROXY=process.env.ATLAS_MEDIA_PROXY||"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
+const FANDOM_HOSTS=new Set(["static.wikia.nocookie.net","vignette.wikia.nocookie.net","images.wikia.nocookie.net"]);
+const MEDIA_PROXY=process.env.ATLAS_MEDIA_PROXY||"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
 const REQUEST_DELAY_MS=Number(process.env.MEDIA_CACHE_DELAY_MS||25);
 const MAX_FAILURE_LOGS=Number(process.env.MEDIA_CACHE_MAX_FAILURE_LOGS||20);
 const CONCURRENCY=Number(process.env.MEDIA_CACHE_CONCURRENCY||4);
@@ -43,6 +44,7 @@ function keyFor(source){
 async function fetchMedia(source){
   const sourceHost=new URL(source).hostname.toLowerCase();
   const isFandom=FANDOM_HOSTS.has(sourceHost);
+  const requestUrl=isFandom?`${MEDIA_PROXY}?url=${encodeURIComponent(source)}`:source;
   let lastError=null;
   for(let attempt=1;attempt<=REQUEST_RETRIES;attempt+=1){
     const controller=new AbortController();
