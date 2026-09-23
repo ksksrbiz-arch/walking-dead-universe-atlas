@@ -1,17 +1,10 @@
-import episodes from "../data/episodes.json";
-import characters from "../data/characters.json";
-import locations from "../data/locations.json";
-import communities from "../data/communities.json";
-import factions from "../data/factions.json";
-import connections from "../data/connections.json";
-import characterEpisodes from "../../data/characterEpisodes.json";
-import locationEpisodes from "../../data/locationEpisodes.json";
+import {atlasData} from "../data";
 
 export type RuntimeRelationship={kind:string;id:string;episodeIds:string[]};
 
-const collections:Record<string,any[]>={character:characters as any,location:locations as any,community:communities as any,faction:factions as any,connection:connections as any};
-const episodeList=episodes as any[];
-const curated:any={character:characterEpisodes,location:locationEpisodes};
+const collections:Record<string,any[]>={character:atlasData.characters as any,location:atlasData.locations as any,community:atlasData.communities as any,faction:atlasData.factions as any,connection:atlasData.connections as any};
+const episodeList=atlasData.episodes as any[];
+const curated:any={character:atlasData.characterEpisodes,location:atlasData.locationEpisodes};
 
 function directEpisodeIds(kind:string,id:string){
   const field=kind==="character"?"characterIds":kind==="location"?"locationIds":kind==="community"?"communityIds":kind==="faction"?"factionIds":kind==="connection"?"connectionIds":null;
@@ -20,7 +13,14 @@ function directEpisodeIds(kind:string,id:string){
 }
 
 export async function getRuntimeMeta(){
-  return {version:"5-local",generatedAt:"bundled",counts:{episodes:episodeList.length,characters:(characters as any[]).length,locations:(locations as any[]).length,communities:(communities as any[]).length,factions:(factions as any[]).length,connections:(connections as any[]).length}};
+  return {version:"5-local",generatedAt:"bundled",counts:{
+    episodes:episodeList.length,
+    characters:atlasData.characters.length,
+    locations:atlasData.locations.length,
+    communities:atlasData.communities.length,
+    factions:atlasData.factions.length,
+    connections:atlasData.connections.length,
+  }};
 }
 
 export async function getRuntimeRelationships(kind:string,id:string):Promise<RuntimeRelationship|null>{
