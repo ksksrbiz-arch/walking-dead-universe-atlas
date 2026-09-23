@@ -214,8 +214,7 @@ async function main() {
   media.policy = "Prefer official AMC/AMC Networks media. Verified Fandom page imagery may be used as attributed enrichment when no approved official asset exists. Preserve provenance and never overwrite an existing approved image.";
   media.updatedAt = new Date().toISOString();
 
-  await writeFile(new URL("media.json", DATA), JSON.stringify(media, null, 2) + "
-");
+  await writeFile(new URL("media.json", DATA), JSON.stringify(media, null, 2) + "\n");
   console.log(JSON.stringify(stats, null, 2));
 }
 
