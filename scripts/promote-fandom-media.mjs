@@ -18,22 +18,69 @@ async function readJson(url) {
   return JSON.parse(await readFile(url, "utf8"));
 }
 
-function imageSources(page) {
-  const values = [
-    page?.image?.original?.source,
-    page?.image?.original,
-    page?.image?.thumbnail?.source,
-    page?.image?.thumbnail,
-    ...(Array.isArray(page?.details?.imageFiles) ? page.details.imageFiles.flatMap((item) => [item?.url, item?.thumbnail]) : []),
-    ...(Array.isArray(page?.hints?.imageGallery) ? page.hints.imageGallery : []),
-    ...(Array.isArray(page?.hints?.image) ? page.hints.image : [page?.hints?.image]),
-  ].filter(Boolean);
+function normalizeImageText(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[_-]+/g, " ")
+    .replace(/[^a-z0-9 ]+/g, " ")
+    .replace(/\\s+/g, " ")
+    .trim();
+}
 
-  return [...new Set(
-    values
-      .map((value) => typeof value === "string" ? value : value?.source || value?.url || "")
-      .filter((value) => /^https?:\/\//i.test(String(value)))
-  )];
+function imageCandidates(page) {
+  const candidates = [
+    ...(Array.isArray(page?.details?.imageFiles)
+      ? page.details.imageFiles.flatMap((item) => [
+          item?.url ? { url: item.url, label: item.title, kind: "file" } : null,
+          item?.thumbnail ? { url: item.thumbnail, label: item.title, kind: "thumbnail" } : null
+        ])
+      : []),
+    ...(Array.isArray(page?.hints?.imageGallery)
+      ? page.hints.imageGallery.map((url) => ({ url, label: "", kind: "gallery" }))
+      : []),
+    page?.image?.original?.source
+      ? { url: page.image.original.source, label: page.image.fileName, kind: "primary" }
+      : page?.image?.original
+        ? { url: page.image.original, label: page.image.fileName, kind: "primary" }
+        : null,
+    page?.image?.thumbnail?.source
+      ? { url: page.image.thumbnail.source, label: page.image.fileName, kind: "thumbnail" }
+      : page?.image?.thumbnail
+        ? { url: page.image.thumbnail, label: page.image.fileName, kind: "thumbnail" }
+        : null,
+    Array.isArray(page?.hints?.image)
+      ? page.hints.image.map((url) => ({ url, label: "", kind: "hint" }))
+      : page?.hints?.image
+        ? { url: page.hints.image, label: "", kind: "hint" }
+        : null
+  ].filter((item) => item?.url && /^https?:\\/\\//i.test(String(item.url)));
+
+  const title = normalizeImageText(page?.page?.title || "");
+  const titleTokens = title
+    .split(" ")
+    .filter((token) => token.length >= 3 && !["tv", "universe", "series", "the"].includes(token));
+
+  const score = (item) => {
+    const haystack = normalizeImageText([item.label, item.url].filter(Boolean).join(" "));
+    let value = item.kind === "file" ? 30 : item.kind === "gallery" ? 24 : item.kind === "primary" ? 18 : 10;
+    const matched = titleTokens.filter((token) => haystack.includes(token));
+    value += matched.length * 18;
+    if (titleTokens.length && matched.length === titleTokens.length) value += 35;
+    if (/\\b(?:logo|title card|titlecard|key art|keyart|series art|franchise)\\b/.test(haystack)) value -= 40;
+    if (/\\b(?:promo|poster)\\b/.test(haystack) && matched.length === 0) value -= 15;
+    return value;
+  };
+
+  const deduped = new Map();
+  for (const item of candidates) {
+    const url = String(item.url);
+    const existing = deduped.get(url);
+    if (!existing || score(item) > score(existing)) deduped.set(url, item);
+  }
+
+  return [...deduped.values()]
+    .sort((a, b) => score(b) - score(a))
+    .map((item) => item.url);
 }
 
 async function main() {
