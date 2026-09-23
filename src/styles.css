@@ -1909,3 +1909,22 @@ button.universeEventRow:hover{background:#ffffff04}
 .fandomAtlasLinks small{grid-area:kind;color:#738183;font:700 7px "Space Mono",monospace;letter-spacing:.09em}
 .fandomAtlasLinks b{grid-area:name;margin-top:3px;font-size:11px;line-height:1.25}
 .fandomAtlasLinks svg{grid-area:icon;width:14px;height:14px;color:#8d9a97}
+
+/* Landscape phones: keep the detail sheet clear of the time bar and bottom navigation. */
+@media (max-width:900px) and (orientation:landscape) and (max-height:520px){
+  .map.view-map .contentPanel.hasDetail{
+    top:24%;
+    bottom:calc(var(--mobile-nav) + 78px);
+    max-height:calc(100dvh - var(--mobile-nav) - 92px);
+  }
+  .map.view-map .contentPanel.hasDetail .contentScroll{
+    padding-bottom:18px;
+  }
+  .map.view-map .mobileTimeBar{
+    bottom:calc(var(--mobile-nav) + 6px);
+    min-height:54px;
+  }
+  .map.view-map .bottomNav{
+    bottom:6px;
+  }
+}
