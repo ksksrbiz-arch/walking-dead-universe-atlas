@@ -71,10 +71,10 @@ async function main(){
   if(galleryManifest?.records?.length){
     const normalizeTitle=(value)=>String(value||"")
       .toLowerCase()
-      .replace(/\\/Gallery$/i,"")
+      .replace(/\/Gallery$/i,"")
       .replace(/[_-]+/g," ")
       .replace(/[^a-z0-9 ]+/g," ")
-      .replace(/\\s+/g," ")
+      .replace(/\s+/g," ")
       .trim();
     const canonicalByType={
       characters:new Map((await readJson("../characters.json")).map(x=>[normalizeTitle(x.name),x.id])),
@@ -89,7 +89,7 @@ async function main(){
       if(!entityType)continue;
       const canonicalId=canonicalByType[entityType].get(title);
       if(!canonicalId)continue;
-      const urls=[...(record.media||[]).map((item)=>item?.url),...(record.directUrls||[])].filter((x)=>/^https?:\\/\\//i.test(String(x)));
+      const urls=[...(record.media||[]).map((item)=>item?.url),...(record.directUrls||[])].filter((x)=>/^https?:\/\//i.test(String(x)));
       if(!urls.length)continue;
       const current=result[entityType][canonicalId]||{};
       const imageFiles=[...(current.details?.imageFiles||[])];
