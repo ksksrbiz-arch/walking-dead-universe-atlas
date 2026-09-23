@@ -24,7 +24,8 @@
     "promote:fandom-media": "node scripts/promote-fandom-media.mjs",
     "ensure:fandom-canonical": "node scripts/ensure-fandom-canonical.mjs",
     "enrich:fandom-netlify": "node scripts/run-fandom-enrichment-netlify.mjs",
-    "ensure:fandom-artifacts": "node scripts/ensure-fandom-artifacts.mjs"
+    "ensure:fandom-artifacts": "node scripts/ensure-fandom-artifacts.mjs",
+    "enrich:fandom-galleries": "node scripts/enrich-fandom-galleries.mjs"
   },
   "dependencies": {
     "react": "^19.1.1",
