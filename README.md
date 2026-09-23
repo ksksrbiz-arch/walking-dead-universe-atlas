@@ -4,15 +4,13 @@ A mobile-first, data-driven atlas for the television **Walking Dead Universe (TW
 
 ## Current architecture
 
-The application is now being migrated from the original standalone prototype to:
+The application is now deployed through **Vercel** with GitHub as the source of truth. The existing Netlify runtime/API layer remains temporarily available during the migration.
 
 - **React**
 - **TypeScript**
 - **Vite**
-- **Cloudflare Pages**
+- **Vercel**
 - normalized JSON data registries
-
-Cloudflare's React (Vite) preset uses `npm run build` and `dist` as the build directory.
 
 ## Current application
 
@@ -69,12 +67,12 @@ The Atlas deliberately avoids inventing exact dates or fictional travel routes w
 
 ## Build
 
-For Cloudflare Pages:
+For Vercel:
 
 - Production branch: `main`
-- Framework preset: **React (Vite)**
+- Framework: **Vite**
 - Build command: `npm run build`
-- Build directory: `dist`
+- Output directory: `dist`
 - Root directory: `/`
 
 ## Roadmap
