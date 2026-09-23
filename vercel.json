@@ -3,29 +3,13 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    {
-      "source": "/api/fandom-image",
-      "destination": "https://walking-dead-universe-atlas.netlify.app/api/fandom-image"
-    }
+    {"source":"/api/fandom-image","destination":"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/fandom-image"},
+    {"source":"/api/atlas/bookmarks","destination":"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-bookmarks"},
+    {"source":"/api/atlas/state","destination":"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-state"},
+    {"source":"/api/atlas/telemetry","destination":"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-telemetry"}
   ],
-  "headers": [
-    {
-      "source": "/assets/:path*",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/data/:path*",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
-        }
-      ]
-    }
+  "headers":[
+    {"source":"/assets/:path*","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
+    {"source":"/data/:path*","headers":[{"key":"Cache-Control","value":"public, max-age=86400, stale-while-revalidate=604800"}]}
   ]
 }
