@@ -356,12 +356,12 @@ button:active{transform:translateY(1px)}
 @media(max-width:699px){
   :root{
     --mobile-header:66px;
-    --mobile-nav:62px;
+    --nav:62px;
     --mobile-sheet-gap:10px;
   }
 
   .map.view-map .mapSurface{
-    inset:0 0 calc(var(--mobile-nav) + 70px) 0;
+    inset:0 0 calc(var(--nav) + 70px) 0;
   }
 
   .map.view-map .contentPanel:not(.hasDetail){
@@ -372,7 +372,7 @@ button:active{transform:translateY(1px)}
     top:42%;
     left:8px;
     right:8px;
-    bottom:calc(var(--mobile-nav) + 10px);
+    bottom:calc(var(--nav) + 10px);
     height:auto;
     border-radius:22px;
   }
@@ -392,7 +392,7 @@ button:active{transform:translateY(1px)}
     z-index:75;
     left:10px;
     right:10px;
-    bottom:calc(var(--mobile-nav) + 8px);
+    bottom:calc(var(--nav) + 8px);
     min-height:58px;
     grid-template-columns:minmax(0,1fr) 48px;
     grid-template-rows:auto auto;
@@ -565,7 +565,7 @@ button:active{transform:translateY(1px)}
   .map.view-people .contentPanel,
   .map.view-guide .contentPanel{
     display:flex;
-    inset:66px 0 calc(var(--mobile-nav) + 8px) 0;
+    inset:66px 0 calc(var(--nav) + 8px) 0;
     width:auto;
     height:auto;
     max-height:none;
@@ -588,7 +588,7 @@ button:active{transform:translateY(1px)}
   .map.view-timeline .contentScroll,
   .map.view-people .contentScroll,
   .map.view-guide .contentScroll{
-    padding:12px 14px calc(var(--mobile-nav) + 22px);
+    padding:12px 14px calc(var(--nav) + 22px);
   }
 
   .map.view-timeline .panelGrab,
@@ -798,7 +798,7 @@ button:active{transform:translateY(1px)}
     font-size:6px;
   }
   .map.view-map .mapSurface{
-    inset:0 0 calc(var(--mobile-nav) + 70px) 0;
+    inset:0 0 calc(var(--nav) + 70px) 0;
     background:#51696e;
   }
   .map.view-map .mapSurface:after{
@@ -815,7 +815,7 @@ button:active{transform:translateY(1px)}
   .map.view-map .mobileTimeBar{
     left:10px;
     right:10px;
-    bottom:calc(var(--mobile-nav) + 8px);
+    bottom:calc(var(--nav) + 8px);
     min-height:64px;
     border-radius:18px;
     border-color:#314043;
@@ -854,7 +854,7 @@ button:active{transform:translateY(1px)}
 }
 
 @media(max-width:390px){
-  .map.view-map .mobileTimeBar{bottom:calc(var(--mobile-nav) + 7px)}
+  .map.view-map .mobileTimeBar{bottom:calc(var(--nav) + 7px)}
 }
 
 
@@ -1057,7 +1057,7 @@ button.miniTimelineItem{cursor:pointer}
   .map.view-map.detailOpen .mobileTimeBar{display:none!important}
   .map.view-map.detailOpen .contentPanel.hasDetail{
     top:39%;
-    bottom:calc(var(--mobile-nav) + 9px);
+    bottom:calc(var(--nav) + 9px);
     height:auto;
     max-height:none;
     z-index:90;
@@ -1383,7 +1383,7 @@ button.universeEventRow:hover{background:#ffffff04}
   position:absolute;
   left:12px;
   right:12px;
-  bottom:calc(var(--mobile-nav,64px) + 12px);
+  bottom:calc(var(--nav,64px) + 12px);
   max-height:min(58dvh,460px);
   overflow:hidden;
   display:flex;
@@ -1559,7 +1559,7 @@ button.universeEventRow:hover{background:#ffffff04}
   .searchWrap{display:none!important}
   .headerMeta{display:none!important}
   .mobileSearchButton{display:grid!important}
-  .mapSurface{inset:58px 0 var(--mobile-nav,64px) 0!important}
+  .mapSurface{inset:58px 0 var(--nav,64px) 0!important}
   .atlasTimelineDock{display:none!important}
   .mapLegend{display:none!important}
   .mapTopLeft{top:68px!important;left:10px!important}
@@ -1599,7 +1599,7 @@ button.universeEventRow:hover{background:#ffffff04}
     right:8px!important;
     width:auto!important;
     max-height:calc(100dvh - 74px)!important;
-    bottom:calc(var(--mobile-nav,64px) + 6px)!important;
+    bottom:calc(var(--nav,64px) + 6px)!important;
     top:auto!important;
     border-radius:16px!important;
     z-index:240!important;
@@ -1790,7 +1790,7 @@ button.universeEventRow:hover{background:#ffffff04}
      ----------------------------------------------------------------------- */
   .map.view-map .mapTopRight{
     top:auto!important;
-    bottom:calc(var(--mobile-nav,62px) + 140px)!important;
+    bottom:calc(var(--nav,62px) + 140px)!important;
     right:10px!important;
     display:flex!important;flex-direction:column!important;
     gap:6px!important;padding:5px!important;
@@ -1818,7 +1818,7 @@ button.universeEventRow:hover{background:#ffffff04}
   }
 
   .contentPanel{
-    bottom:calc(var(--mobile-nav,68px) + 8px)!important;
+    bottom:calc(var(--nav,68px) + 8px)!important;
     left:8px!important;right:8px!important;
     max-height:min(64dvh,520px)!important;
     border-radius:17px!important;
@@ -1834,7 +1834,7 @@ button.universeEventRow:hover{background:#ffffff04}
 
   .markerClusterSheet{
     left:8px!important;right:8px!important;
-    bottom:calc(var(--mobile-nav,68px) + 8px)!important;
+    bottom:calc(var(--nav,68px) + 8px)!important;
     max-height:min(58dvh,460px)!important;
   }
 }
@@ -1898,7 +1898,7 @@ button.universeEventRow:hover{background:#ffffff04}
   .mapAtmosphere:after{height:132px!important}
   .contentPanel{
     max-height:calc(100dvh - 70px)!important;
-    bottom:calc(var(--mobile-nav,64px) + 5px)!important;
+    bottom:calc(var(--nav,64px) + 5px)!important;
   }
 }
 
@@ -1914,14 +1914,14 @@ button.universeEventRow:hover{background:#ffffff04}
 @media (max-width:900px) and (orientation:landscape) and (max-height:520px){
   .map.view-map .contentPanel.hasDetail{
     top:24%;
-    bottom:calc(var(--mobile-nav) + 78px);
-    max-height:calc(100dvh - var(--mobile-nav) - 92px);
+    bottom:calc(var(--nav) + 78px);
+    max-height:calc(100dvh - var(--nav) - 92px);
   }
   .map.view-map .contentPanel.hasDetail .contentScroll{
     padding-bottom:18px;
   }
   .map.view-map .mobileTimeBar{
-    bottom:calc(var(--mobile-nav) + 6px);
+    bottom:calc(var(--nav) + 6px);
     min-height:54px;
   }
   .map.view-map .bottomNav{
