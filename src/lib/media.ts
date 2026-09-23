@@ -4,7 +4,7 @@ const FANDOM_PROXY="/api/fandom-image";
 const LOCAL_MEDIA=localMedia as Record<string,string>;
 
 function isFandomImage(source:string){
-  return /^https?:\\/\\/(?:static\\.wikia\\.nocookie\\.net|vignette\\.wikia\\.nocookie\\.net)\\//i.test(source);
+  return /^https?:\/\/(?:static\.wikia\.nocookie\.net|vignette\.wikia\.nocookie\.net)\//i.test(source);
 }
 
 export function atlasImageUrl(source:string|undefined|null,width=1200,quality=78){
