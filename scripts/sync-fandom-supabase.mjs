@@ -16,7 +16,7 @@ const res=await fetch(ENDPOINT,{
   method:"POST",
   headers:{"content-type":"application/json"},
   body:JSON.stringify({entities}),
-  signal:AbortSignal.timeout(120000)
+  signal:AbortSignal.timeout(110000)
 });
 const text=await res.text();
 if(!res.ok)throw new Error("Fandom sync HTTP "+res.status+": "+text.slice(0,1000));
