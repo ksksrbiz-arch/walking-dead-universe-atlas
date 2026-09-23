@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run ingest:media && npm run ensure:fandom-canonical && npm run cache:media && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "ingest:media": "node scripts/ingest-amc-media.mjs",
     "audit:atlas": "node scripts/audit-atlas.mjs",
@@ -27,17 +27,15 @@
     "enrich:fandom-netlify": "node scripts/run-fandom-enrichment-netlify.mjs",
     "ensure:fandom-artifacts": "node scripts/ensure-fandom-artifacts.mjs",
     "enrich:fandom-galleries": "node scripts/enrich-fandom-galleries.mjs",
-    "ingest:amc-media-exhaustive": "node scripts/ingest-amc-media-exhaustive.mjs"
+    "ingest:amc-media-exhaustive": "node scripts/ingest-amc-media-exhaustive.mjs",
+    "build:enrichment": "npm run ingest:media && npm run ensure:fandom-canonical && npm run cache:media && npm run audit:atlas && vite build"
   },
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "d3-geo": "^3.1.1",
     "topojson-client": "^3.1.0",
-    "@cublya/world-atlas": "^3.0.0-beta.1",
-    "@netlify/blobs": "^11.1.0",
-    "@netlify/database": "latest",
-    "@netlify/functions": "^6.0.0"
+    "@cublya/world-atlas": "^3.0.0-beta.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.4",
