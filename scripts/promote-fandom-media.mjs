@@ -87,7 +87,7 @@ async function main() {
   const media = await readJson(new URL("media.json", DATA));
   const enrichment = await readJson(new URL("fandom-page-enrichment.json", ENRICH));
   const candidates = await readJson(new URL("fandom-atlas-candidates.json", ENRICH));
-  const canonicals = {
+  let galleryManifest = null;\n  try { galleryManifest = await readJson(new URL("fandom-gallery-media.json", ENRICH)); } catch {}\n\n  const canonicals = {
     characters: await readJson(new URL("characters.json", DATA)),
     locations: await readJson(new URL("locations.json", DATA)),
     episodes: await readJson(new URL("episodes.json", DATA))
@@ -173,7 +173,41 @@ async function main() {
     }
   }
 
-  media.version = 3;
+  if (galleryManifest?.records?.length) {
+    for (const record of galleryManifest.records) {
+      const baseTitle = String(record.title || "").replace(/\\/Gallery$/i, "").trim();
+      const entityKey = record.categories?.some((x) => /location/i.test(x)) ? "locations"
+        : record.categories?.some((x) => /episode/i.test(x)) ? "episodes"
+        : record.categories?.some((x) => /character|series galleries/i.test(x)) ? "characters"
+        : null;
+      if (!entityKey) continue;
+      const canonicalId = exactCanonicalId(entityKey, baseTitle);
+      if (!canonicalId) continue;
+      const sources = [
+        ...(record.media || []).map((item) => item?.url).filter(Boolean),
+        ...(record.directUrls || [])
+      ];
+      if (!sources.length) continue;
+      const mediaKey = entityKey === "locations" ? "places" : entityKey;
+      media[mediaKey] ||= {};
+      const existing = media[mediaKey][canonicalId] || {};
+      const gallery = new Set(existing.gallery || []);
+      for (const source of sources) gallery.add(source);
+      const next = [...gallery];
+      media[mediaKey][canonicalId] = {
+        ...existing,
+        gallery: next.slice(0, 100),
+        galleryMediaCount: next.length,
+        gallerySourcePage: record.sourceUrl || existing.gallerySourcePage || null
+      };
+      if (!existing.image) {
+        media[mediaKey][canonicalId].image = next[0] || null;
+        media[mediaKey][canonicalId].source = existing.source || "walking-dead-fandom-gallery";
+      }
+    }
+  }
+
+  media.version = 4;
   media.policy = "Prefer official AMC/AMC Networks media. Verified Fandom page imagery may be used as attributed enrichment when no approved official asset exists. Preserve provenance and never overwrite an existing approved image.";
   media.updatedAt = new Date().toISOString();
 
