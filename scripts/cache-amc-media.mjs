@@ -40,6 +40,8 @@ function keyFor(source){
 }
 
 async function fetchMedia(source){
+  const sourceHost=new URL(source).hostname.toLowerCase();
+  const isFandom=FANDOM_HOSTS.has(sourceHost);
   let lastError=null;
   for(let attempt=1;attempt<=REQUEST_RETRIES;attempt+=1){
     const controller=new AbortController();
@@ -49,7 +51,7 @@ async function fetchMedia(source){
         headers:{
           "user-agent":"TWDU-Atlas-media-cache/2.0",
           accept:"image/avif,image/webp,image/jpeg,image/png,*/*;q=0.8",
-          referer:"https://www.amc.com/"
+          referer:isFandom?"https://walkingdead.fandom.com/":"https://www.amc.com/"
         },
         signal:controller.signal
       });
@@ -94,7 +96,7 @@ async function main(){
     if(item?.image) sources.add(item.image);
     for(const source of item?.gallery??[]) if(source) sources.add(source);
   }
-  for(const item of Object.values(episodeMedia.episodes??{})){
+  try{\n    const galleryManifest=JSON.parse(await readFile("data/enrichment/fandom-gallery-media.json","utf8"));\n    for(const record of galleryManifest.records??[]){\n      for(const item of record.media??[]) if(item?.url) sources.add(item.url);\n      for(const source of record.directUrls??[]) if(source) sources.add(source);\n    }\n  }catch{}\n\n  for(const item of Object.values(episodeMedia.episodes??{})){
     if(item?.image) sources.add(item.image);
   }
 
