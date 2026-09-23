@@ -5,6 +5,7 @@ on:
   push:
     branches: [main]
     paths:
+      - ".github/workflows/fandom-enrichment.yml"
       - "scripts/enrich-fandom-*.mjs"
       - "scripts/reconcile-fandom-matches.mjs"
       - "scripts/publish-fandom-canonical.mjs"
