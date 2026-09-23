@@ -7,7 +7,7 @@ const files={
   locations:"data/locations.json",
   episodes:"data/episodes.json"
 };
-const MAX_PER_TYPE=Number(process.env.FANDOM_SYNC_MAX_PER_TYPE||300);
+const MAX_PER_TYPE=Number(process.env.FANDOM_SYNC_MAX_PER_TYPE||500);
 const BATCH_SIZE=Number(process.env.FANDOM_SYNC_BATCH_SIZE||150);
 const entities={};
 for(const [key,path] of Object.entries(files)){
