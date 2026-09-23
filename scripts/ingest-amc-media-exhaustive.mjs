@@ -40,36 +40,36 @@ async function fetchText(url){
   throw last||new Error("AMC request failed");
 }
 function urlsFromXml(xml){
-  return [...String(xml||"").matchAll(/<loc>\\s*(.*?)\\s*<\\/loc>/gis)].map(m=>m[1].trim());
+  return [...String(xml||"").matchAll(/<loc>\s*(.*?)\s*<\/loc>/gis)].map(m=>m[1].trim());
 }
 async function sitemapTree(root,seen=new Set()){
   if(seen.has(root))return[];seen.add(root);
   let xml;try{xml=await fetchText(root)}catch{return[]}
   const entries=urlsFromXml(xml),out=[];
   for(const u of entries){
-    if(/\\.xml(?:\\?|$)/i.test(u))out.push(...await sitemapTree(u,seen));
+    if(/\.xml(?:\?|$)/i.test(u))out.push(...await sitemapTree(u,seen));
     else out.push(u);
   }
   return out;
 }
 function relevant(url){
   const s=String(url).toLowerCase();
-  return TERMS.some(t=>s.includes(t.replace(/\\s+/g,"-"))||s.includes(t));
+  return TERMS.some(t=>s.includes(t.replace(/\s+/g,"-"))||s.includes(t));
 }
 function absolute(value){
   try{return new URL(value,BASE).href}catch{return null}
 }
 function extractImages(html){
   const out=new Set();
-  const add=v=>{const u=absolute(String(v||"").trim());if(u&&/^https?:\\/\\/www\\.amc\\.com\\/|^https?:\\/\\/images\\./i.test(u))out.add(u)};
+  const add=v=>{const u=absolute(String(v||"").trim());if(u&&/^https?:\/\/www\.amc\.com\/|^https?:\/\/images\./i.test(u))out.add(u)};
   for(const m of String(html||"").matchAll(/<meta[^>]+(?:property|name)=["'](?:og:image|twitter:image|twitter:image:src)["'][^>]+content=["']([^"']+)["']/gi))add(m[1]);
   for(const m of String(html||"").matchAll(/<img[^>]+(?:src|data-src|data-original)=["']([^"']+)["']/gi))add(m[1]);
   for(const m of String(html||"").matchAll(/<img[^>]+srcset=["']([^"']+)["']/gi)){
-    for(const item of m[1].split(","))add(item.trim().split(/\\s+/)[0]);
+    for(const item of m[1].split(","))add(item.trim().split(/\s+/)[0]);
   }
-  for(const m of String(html||"").matchAll(/https?:\\/\\/[^"'<>()\\s]+/gi)){
+  for(const m of String(html||"").matchAll(/https?:\/\/[^"'<>()\s]+/gi)){
     const u=m[0].replace(/[),.;]+$/,"");
-    if(/\\.(?:jpe?g|png|webp|gif)(?:[?#].*)?$/i.test(u))add(u);
+    if(/\.(?:jpe?g|png|webp|gif)(?:[?#].*)?$/i.test(u))add(u);
   }
   return [...out];
 }
@@ -99,8 +99,8 @@ async function main(){
   const records=results.filter(x=>x&&!x.error);
   const unique=new Set(records.flatMap(x=>x.images));
   const result={version:1,source:"amc",generatedAt:new Date().toISOString(),pagesDiscovered:urls.length,pagesFetched:records.length,uniqueMediaUrls:unique.size,records};
-  await writeFile(new URL("amc-media-inventory.json",OUT),JSON.stringify(result,null,2)+"\\n");
-  await writeFile(new URL("amc-media-inventory-summary.json",OUT),JSON.stringify({generatedAt:result.generatedAt,pagesDiscovered:urls.length,pagesFetched:records.length,uniqueMediaUrls:unique.size},null,2)+"\\n");
+  await writeFile(new URL("amc-media-inventory.json",OUT),JSON.stringify(result,null,2)+"\n");
+  await writeFile(new URL("amc-media-inventory-summary.json",OUT),JSON.stringify({generatedAt:result.generatedAt,pagesDiscovered:urls.length,pagesFetched:records.length,uniqueMediaUrls:unique.size},null,2)+"\n");
   console.log(JSON.stringify({pagesDiscovered:urls.length,pagesFetched:records.length,uniqueMediaUrls:unique.size},null,2));
 }
 main().catch(e=>{console.error(e);process.exitCode=1});
