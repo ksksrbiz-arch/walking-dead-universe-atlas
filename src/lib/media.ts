@@ -15,7 +15,7 @@ export function atlasImageUrl(source:string|undefined|null,width=1200,quality=78
   if(isFandomImage(source)||/^https?:\/\/(?:images|dimages)\.cds\.amcn\.com\//i.test(source)){
     const url=new URL(MEDIA_PROXY);
     url.searchParams.set("url",source);
-    return url.pathname+url.search;
+    return url.toString();
   }
   return source;
 }
