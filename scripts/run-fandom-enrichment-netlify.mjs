@@ -8,6 +8,7 @@ const OUT = fileURLToPath(new URL("../data/enrichment/", import.meta.url));
 const statusFile = fileURLToPath(new URL("../data/enrichment/fandom-netlify-run.json", import.meta.url));
 
 const steps = [
+  ["ingest:amc-media-exhaustive", "Exhaustively inventory AMC TWDU media pages"],
   ["enrich:fandom-atlas", "Discover Fandom candidate records"],
   ["enrich:fandom-pages", "Fetch and enrich Fandom pages"],
   ["enrich:fandom-galleries", "Exhaustively crawl Fandom character, location, episode and promo galleries"],
