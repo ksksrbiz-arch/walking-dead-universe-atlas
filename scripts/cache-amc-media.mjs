@@ -21,6 +21,7 @@ const INDEX_FILE="src/generated/media-local.json";
 
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
 const REQUEST_RETRIES=Number(process.env.MEDIA_CACHE_RETRIES||2);
+const FANDOM_HOSTS=new Set(["static.wikia.nocookie.net","vignette.wikia.nocookie.net"]);
 const REQUEST_DELAY_MS=Number(process.env.MEDIA_CACHE_DELAY_MS||75);
 const MAX_FAILURE_LOGS=Number(process.env.MEDIA_CACHE_MAX_FAILURE_LOGS||40);
 
@@ -109,6 +110,9 @@ async function main(){
 
   for(const source of sources){
     if(!/^https:\/\//i.test(source)){skipped++;continue;}
+    const sourceHost=new URL(source).hostname.toLowerCase();
+    const isFandom=FANDOM_HOSTS.has(sourceHost);
+    if(isFandom) console.log(`Caching Fandom entity media: ${source}`);
     const key=keyFor(source);
     const known=local[source];
     if(known){
