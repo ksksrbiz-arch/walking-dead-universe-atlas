@@ -12,7 +12,7 @@
       "destination": "https://walking-dead-universe-atlas.netlify.app/.netlify/images/:path*"
     },
     {
-      "source": "/((?!assets/|data/|api/|\.netlify/).*)",
+      "source": "/((?!assets|data|api|\\.netlify)(.*))",
       "destination": "/index.html"
     }
   ],
