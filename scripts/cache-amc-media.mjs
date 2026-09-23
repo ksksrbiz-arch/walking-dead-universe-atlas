@@ -101,7 +101,8 @@ async function main(){
 
 
 
-  // Prefer the checked-in manifests during Vercel builds; remote discovery is intentionally not part of the build path.\n  for(const item of Object.values(episodeMedia.episodes??{})){
+  // Prefer the checked-in manifests during Vercel builds; remote discovery is intentionally not part of the build path.
+  for(const item of Object.values(episodeMedia.episodes??{})){
     if(item?.image) sources.add(item.image);
   }
 
