@@ -2,18 +2,17 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
   "rewrites": [
     {
       "source": "/api/:path*",
       "destination": "https://walking-dead-universe-atlas.netlify.app/api/:path*"
     },
     {
-      "source": "/.netlify/images/:path*",
-      "destination": "https://walking-dead-universe-atlas.netlify.app/.netlify/images/:path*"
+      "source": "/.netlify/images",
+      "destination": "https://walking-dead-universe-atlas.netlify.app/.netlify/images"
     },
     {
-      "source": "/((?!assets/|data/|api/|\.netlify/).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
