@@ -37,7 +37,7 @@ export function flushAtlasTelemetry(){
   });
   try{
     if(navigator.sendBeacon){
-      const ok=navigator.sendBeacon(TELEMETRY_ENDPOINT,new Blob([payload],{type:"application/json"}));
+      const ok=navigator.sendBeacon(TELEMETRY_ENDPOINT,new Blob([payload],{type:"text/plain;charset=UTF-8"}));
       if(ok)return Promise.resolve();
     }
   }catch{}
