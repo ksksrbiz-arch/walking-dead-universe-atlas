@@ -1,0 +1,61 @@
+name: Fandom enrichment
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/enrich-fandom-*.mjs"
+      - "scripts/reconcile-fandom-matches.mjs"
+      - "scripts/publish-fandom-canonical.mjs"
+      - "scripts/promote-fandom-media.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fandom-enrichment
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm install --no-audit --no-fund
+
+      - name: Run Fandom enrichment
+        env:
+          FANDOM_REQUEST_RETRIES: "5"
+          FANDOM_REQUEST_DELAY_MS: "250"
+          FANDOM_REQUEST_CONCURRENCY: "3"
+          FANDOM_GALLERY_CONCURRENCY: "3"
+        run: npm run enrich:fandom-full
+
+      - name: Audit enrichment
+        run: npm run audit:enrichment
+        continue-on-error: true
+
+      - name: Commit generated enrichment
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/enrichment data/media.json
+          if git diff --cached --quiet; then
+            echo "No enrichment changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: refresh Fandom enrichment and media"
+          git push
