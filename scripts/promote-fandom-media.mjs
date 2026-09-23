@@ -64,10 +64,11 @@ function imageCandidates(page) {
     const haystack = normalizeImageText([item.label, item.url].filter(Boolean).join(" "));
     let value = item.kind === "file" ? 30 : item.kind === "gallery" ? 24 : item.kind === "primary" ? 18 : 10;
     const matched = titleTokens.filter((token) => haystack.includes(token));
-    value += matched.length * 18;
-    if (titleTokens.length && matched.length === titleTokens.length) value += 35;
-    if (/\b(?:logo|title card|titlecard|key art|keyart|series art|franchise)\b/.test(haystack)) value -= 40;
-    if (/\b(?:promo|poster)\b/.test(haystack) && matched.length === 0) value -= 15;
+    value += matched.length * 24;
+    if (titleTokens.length && matched.length === titleTokens.length) value += 60;
+    if (/\b(?:logo|title card|titlecard|key art|keyart|series art|franchise|ensemble|group photo|cast photo|promo stills?)\b/.test(haystack)) value -= 80;
+    if (/\b(?:promo|poster|banner|background|wallpaper)\b/.test(haystack) && matched.length === 0) value -= 35;
+    if (matched.length === 0 && item.kind !== "primary") value -= 25;
     return value;
   };
 
