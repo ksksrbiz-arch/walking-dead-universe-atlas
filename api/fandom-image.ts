@@ -2,7 +2,7 @@ const ALLOWED_HOSTS=new Set(["static.wikia.nocookie.net","vignette.wikia.nocooki
 const MAX_BYTES=8*1024*1024;
 
 export default async function handler(request:Request){
-  const source=new URL(request.url).searchParams.get("url");
+  const source=new URL(request.url, `https://${request.headers.get("host") || "localhost"}`).searchParams.get("url");
   if(!source)return new Response("Missing image URL",{status:400});
   let target:URL;
   try{target=new URL(source)}catch{return new Response("Invalid image URL",{status:400})}
