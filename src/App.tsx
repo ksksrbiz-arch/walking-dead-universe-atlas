@@ -572,7 +572,7 @@ export default function App(){
        if(group.locations.length>1){
         const ids=group.locations.map(l=>l.id);
         const label=ids.length+" locations at this map point";
-        return <g key={"cluster-"+ids.join("-")} className="markerCluster" transform={"translate("+group.x+" "+group.y+")"} role="button" tabIndex={0} aria-label={"Open "+label} onClick={()=>setClusterIds(ids)} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setClusterIds(ids)}}}>
+        return <g key={"cluster-"+ids.join("-")} className="markerCluster" transform={"translate("+group.x+" "+group.y+")"} role="button" tabIndex={0} aria-label={"Open "+label} onPointerDown={e=>e.stopPropagation()} onPointerUp={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();setClusterIds(ids)}} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();setClusterIds(ids)}}}>
           <circle className="markerClusterHit" r={22/zoom} fill="transparent"/>
           <circle className="markerClusterRing" r={18/zoom}/>
           <circle className="markerClusterCore" r={13/zoom}/>
