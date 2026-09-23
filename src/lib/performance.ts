@@ -1,6 +1,6 @@
 type AtlasMetric={name:string;value:number;ts:number;details?:Record<string,string|number|boolean|null>};
 
-const queue:AtlasMetric[]=[];
+const TELEMETRY_ENDPOINT="https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-telemetry";\nconst queue:AtlasMetric[]=[];
 let flushTimer:number|undefined;
 const sessionId=(()=>{try{return crypto.randomUUID()}catch{return Math.random().toString(36).slice(2)}})();
 
@@ -36,11 +36,11 @@ export function flushAtlasTelemetry(){
   });
   try{
     if(navigator.sendBeacon){
-      const ok=navigator.sendBeacon("/api/atlas/telemetry",new Blob([payload],{type:"application/json"}));
+      const ok=navigator.sendBeacon(TELEMETRY_ENDPOINT,new Blob([payload],{type:"application/json"}));
       if(ok)return Promise.resolve();
     }
   }catch{}
-  return fetch("/api/atlas/telemetry",{method:"POST",headers:{"content-type":"application/json"},body:payload,keepalive:true}).then(()=>undefined).catch(()=>undefined);
+  return fetch(TELEMETRY_ENDPOINT,{method:"POST",headers:{"content-type":"application/json"},body:payload,keepalive:true}).then(()=>undefined).catch(()=>undefined);
 }
 
 let observed=false;
