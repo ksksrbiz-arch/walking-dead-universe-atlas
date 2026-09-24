@@ -1168,6 +1168,9 @@ button.miniTimelineItem{cursor:pointer}
 /* Character journey map context */
 .marker.characterJourneyContext .markerCore{r:2.8;stroke:#dfe9e6;stroke-width:1.3}
 .marker.characterJourneyContext .markerGlyph{filter:drop-shadow(0 0 5px currentColor)}
+.journeyRoute path{stroke:#72a9c5;stroke-width:1.6;stroke-dasharray:5 4;opacity:.85;vector-effect:non-scaling-stroke}
+.journeyStop circle{fill:#0d1718;stroke:#72a9c5;stroke-width:1.4;vector-effect:non-scaling-stroke}
+.journeyStop text{fill:#e7edeb;font:700 8px "Space Mono",monospace}
 .journeyMapAction{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;margin:8px 0 14px;padding:11px;border:1px solid #72a9c533;border-radius:13px;background:linear-gradient(90deg,#0f191b,#101819)}
 .journeyMapAction small{display:block;color:#718082;font:700 6.5px "Space Mono",monospace;letter-spacing:.1em}
 .journeyMapAction b{display:block;margin:5px 0 3px;color:#d5dddb;font-size:11px}
