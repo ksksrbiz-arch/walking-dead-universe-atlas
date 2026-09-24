@@ -57,14 +57,15 @@
       "id": "api-twd-characters",
       "name": "API-TWD-Characters",
       "kind": "community-api",
-      "status": "not-a-service",
+      "status": "dead",
+      "baseUrl": "https://api-twd-characters-production.up.railway.app",
       "capabilities": [
         "characters"
       ],
       "priority": 0,
       "verifiedAt": "2026-09-24",
       "repoUrl": "https://github.com/pedrocpacheco/API-TWD-Characters",
-      "notes": "Identified as a small unhosted student-project repository (no public base URL, no deployment), not a running API — this session's GitHub access is scoped to this repo only, so its contents couldn't be inspected further. Nothing to ingest without cloning and running someone else's unmaintained service ourselves, which is out of proportion to what it would add over the Fandom wiki API already in use. Not pursued further; revisit only if a live, documented endpoint surfaces."
+      "notes": "Repo: github.com/pedrocpacheco/API-TWD-Characters (a small Java/Maven project). Its advertised Railway deployment (baseUrl above, and /characters, /api/characters, /docs, /swagger-ui, /health) all return Railway's own \"Application not found\" 404 — the app is not currently running, not merely undocumented. This session's GitHub access is scoped to this repo only, so the source couldn't be inspected further; nothing to ingest without cloning and hosting someone else's unmaintained service ourselves, which is out of proportion to what it would add over the Fandom wiki API already in use. Not pursued further; revisit only if the Railway app comes back up or a live, documented endpoint surfaces."
     },
     {
       "id": "wikidata",

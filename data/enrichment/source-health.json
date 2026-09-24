@@ -60,6 +60,54 @@
         "elapsedMs": 354,
         "sample": "{\"batchcomplete\":\"\",\"query\":{\"general\":{\"mainpage\":\"The Walking Dead Wiki\",\"base\":\"https://walkingdead.fandom.com/wiki/The_Walking_Dead_Wiki\",\"sitename\":\"Walking Dead Wiki\",\"logo\":\"https://images.wikia.com/walkingdead/images/b/bc/Wiki.png\",\"generator\":\"MediaWiki 1.43.9\",\"phpversion\":\"8.3.33\",\"phpsapi\":\"fpm-fcgi\",\"dbtype\":\"mysql\",\"dbversion\":\"8.0.44-35\",\"externalimages\":[\"https://images.wikia.com/\",\"https://images.wikia.com\",\"https://static.wikia.com\",\"https://static.wikia.nocookie.net\",\"https://"
       }
+    },
+    {
+      "sourceId": "api-twd-characters",
+      "url": "https://api-twd-characters-production.up.railway.app",
+      "result": {
+        "ok": false,
+        "status": 404,
+        "finalUrl": "https://api-twd-characters-production.up.railway.app",
+        "contentType": "text/html",
+        "elapsedMs": 418,
+        "sample": "<!doctype html><meta name=viewport content=\"width=device-width,initial-scale=1\"><meta charset=utf-8><title>404 Not Found</title><style media=screen>\n      :root {\n        --bg: hsl(250, 24%, 9%);\n        --fg: hsl(0, 0%, 100%);\n        --pink: hsl(270, 60%, 52%);\n        --pink-600: hsl(270, 70%, 65%);\n        --green-600: hsl(152, 38%, 60%);\n        --red-600: hsl(1, 62%, 60%);\n        --gray-100: hsl(246, 18%, 15%);\n        --gray-500: hsl(246,  6%, 55%);\n      }\n\n      html,\n      body {\n    "
+      }
+    },
+    {
+      "sourceId": "api-twd-characters-characters",
+      "url": "https://api-twd-characters-production.up.railway.app/characters",
+      "result": {
+        "ok": false,
+        "status": 404,
+        "finalUrl": "https://api-twd-characters-production.up.railway.app/characters",
+        "contentType": "text/html",
+        "elapsedMs": 152,
+        "sample": "<!doctype html><meta name=viewport content=\"width=device-width,initial-scale=1\"><meta charset=utf-8><title>404 Not Found</title><style media=screen>\n      :root {\n        --bg: hsl(250, 24%, 9%);\n        --fg: hsl(0, 0%, 100%);\n        --pink: hsl(270, 60%, 52%);\n        --pink-600: hsl(270, 70%, 65%);\n        --green-600: hsl(152, 38%, 60%);\n        --red-600: hsl(1, 62%, 60%);\n        --gray-100: hsl(246, 18%, 15%);\n        --gray-500: hsl(246,  6%, 55%);\n      }\n\n      html,\n      body {\n    "
+      }
+    },
+    {
+      "sourceId": "api-twd-characters-api-characters",
+      "url": "https://api-twd-characters-production.up.railway.app/api/characters",
+      "result": {
+        "ok": false,
+        "status": 404,
+        "finalUrl": "https://api-twd-characters-production.up.railway.app/api/characters",
+        "contentType": "text/html",
+        "elapsedMs": 181,
+        "sample": "<!doctype html><meta name=viewport content=\"width=device-width,initial-scale=1\"><meta charset=utf-8><title>404 Not Found</title><style media=screen>\n      :root {\n        --bg: hsl(250, 24%, 9%);\n        --fg: hsl(0, 0%, 100%);\n        --pink: hsl(270, 60%, 52%);\n        --pink-600: hsl(270, 70%, 65%);\n        --green-600: hsl(152, 38%, 60%);\n        --red-600: hsl(1, 62%, 60%);\n        --gray-100: hsl(246, 18%, 15%);\n        --gray-500: hsl(246,  6%, 55%);\n      }\n\n      html,\n      body {\n    "
+      }
+    },
+    {
+      "sourceId": "api-twd-characters-docs",
+      "url": "https://api-twd-characters-production.up.railway.app/docs",
+      "result": {
+        "ok": false,
+        "status": 404,
+        "finalUrl": "https://api-twd-characters-production.up.railway.app/docs",
+        "contentType": "text/html",
+        "elapsedMs": 167,
+        "sample": "<!doctype html><meta name=viewport content=\"width=device-width,initial-scale=1\"><meta charset=utf-8><title>404 Not Found</title><style media=screen>\n      :root {\n        --bg: hsl(250, 24%, 9%);\n        --fg: hsl(0, 0%, 100%);\n        --pink: hsl(270, 60%, 52%);\n        --pink-600: hsl(270, 70%, 65%);\n        --green-600: hsl(152, 38%, 60%);\n        --red-600: hsl(1, 62%, 60%);\n        --gray-100: hsl(246, 18%, 15%);\n        --gray-500: hsl(246,  6%, 55%);\n      }\n\n      html,\n      body {\n    "
+      }
     }
   ]
 }
