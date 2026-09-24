@@ -42,15 +42,7 @@ export function buildChronology(){
   id:e.id,kind:"universe-event",seriesId:e.seriesId,title:e.title,start:Number(e.year),end:Number(e.year),
   precision:e.date?"day":"year",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[]
  }));
- // Webisode catalog currently provides release windows and episode counts, not
- // verified in-universe anchors. Keep these records visible in the chronology
- // dataset with an explicit unanchored sentinel; never mistake release years for story years.
- const webisodeItems:ChronologyItem[]=(atlasData as any).webisodes?.series?.map((w:any)=>({
-  id:w.id,kind:"webisode",seriesId:w.seriesId,title:w.title,start:0,end:0,
-  precision:"unknown",certainty:"release-window-only",sources:[(atlasData as any).webisodes?.source??""] ,
-  episodeNumber:w.episodeCount
- }))??[];
- chronologyCache=[...episodeItems,...eventItems,...universeEventItems,...webisodeItems].sort((a,b)=>(a.start||Infinity)-(b.start||Infinity)||(a.end||Infinity)-(b.end||Infinity)||a.title.localeCompare(b.title));
+ chronologyCache=[...episodeItems,...eventItems,...universeEventItems].sort((a,b)=>(a.start||Infinity)-(b.start||Infinity)||(a.end||Infinity)-(b.end||Infinity)||a.title.localeCompare(b.title));
  return chronologyCache;
 }
 
@@ -146,6 +138,13 @@ export function buildEpisodeWatchOrder(){
    orderingBasis:item.precision==="year"?"timeline-window":"timeline-anchor"
   } as EpisodeWatchOrderItem;
  });
+}
+
+/** Webisodes are watchable extras, kept out of the in-universe timeline unless story anchors are sourced. */
+export type WebisodeWatchItem={id:string;seriesId:string;title:string;episodeCount:number;releaseStart:string;releaseEnd:string;kind:"webisode";orderingBasis:"release-window";chronologyStatus:"unanchored"};
+export function getWebisodeWatchOrder(seriesId?:string):WebisodeWatchItem[]{
+ const groups=(atlasData as any).webisodes?.series??[];
+ return groups.filter((item:any)=>!seriesId||item.seriesId===seriesId).map((item:any)=>({...item,kind:"webisode",orderingBasis:"release-window",chronologyStatus:"unanchored"}));
 }
 
 export function getEpisodeWatchOrder(seriesId?:string){
