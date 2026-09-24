@@ -81,7 +81,7 @@ export default async function handler(req: Request) {
     const blob = result.blobs.find(item => item.pathname === mediaBase + pathname);
     if (!blob) return new Response("Media not found", { status: 404 });
 
-    const response = await get(blob.url, { access: "private", ...(req.method === "HEAD" ? { head: true } : {}) });
+    const response = await get(blob.url, { access: "private" });
     if (!response) return new Response("Media not found", { status: 404 });
 
     return new Response(req.method === "HEAD" ? null : response.stream, {
