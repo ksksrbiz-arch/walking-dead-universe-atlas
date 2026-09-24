@@ -1,4 +1,5 @@
 import {atlasData} from "../data";
+import {getAnchorYearBounds,normalizeTemporalAnchor,compareTemporalAnchors} from "./temporalEngine";
 
 export type ChronologyItem={
  id:string;
@@ -60,8 +61,9 @@ export function getSeriesWatchOrder(){
 // bar, and any mini-timeline embedded in an entity detail panel. Defining it once here
 // means a future chronology correction that pushes the latest year further only needs
 // updating in one place, instead of the three-plus hardcoded copies this replaced.
-export const UNIVERSE_MIN_YEAR=2010;
-export const UNIVERSE_MAX_YEAR=2028;
+const yearBounds=getAnchorYearBounds(buildChronology().filter(x=>x.start>0));
+export const UNIVERSE_MIN_YEAR=Math.min(2010,yearBounds.min);
+export const UNIVERSE_MAX_YEAR=Math.max(2028,yearBounds.max);
 export function yearToPercent(year:number,min=UNIVERSE_MIN_YEAR,max=UNIVERSE_MAX_YEAR){
  return ((Math.max(min,Math.min(max,year))-min)/(max-min))*100;
 }
@@ -105,8 +107,8 @@ function scaffoldIndex(seriesId:string,seasonNumber:number|undefined):number{
  return index===-1?Infinity:index;
 }
 
-const resolveStart=(e:any):number=>Number(e.start??e.timelineStart??e.timelineEnd??9999);
-const resolveEnd=(e:any):number=>Number(e.end??e.timelineEnd??e.timelineStart??9999);
+const resolveStart=(e:any):number=>{const anchor=normalizeTemporalAnchor(e);return anchor.start==null?Number.POSITIVE_INFINITY:anchor.start;};
+const resolveEnd=(e:any):number=>{const anchor=normalizeTemporalAnchor(e);return anchor.end==null?Number.POSITIVE_INFINITY:anchor.end;};
 
 // Shared by every place in the app that lists a character's/group's/year's
 // episodes and needs them in genuine story order, not just "same approximate
@@ -115,7 +117,9 @@ const resolveEnd=(e:any):number=>Number(e.end??e.timelineEnd??e.timelineStart??9
 // (start/end).
 export function compareEpisodesChronologically(a:any,b:any):number{
  const seasonA=seasonNumberBySeasonId.get(a.seasonId||""),seasonB=seasonNumberBySeasonId.get(b.seasonId||"");
- return resolveStart(a)-resolveStart(b)
+ const temporal=compareTemporalAnchors(normalizeTemporalAnchor(a),normalizeTemporalAnchor(b));
+ return (temporal==="before"?-1:temporal==="after"?1:0)
+  ||resolveStart(a)-resolveStart(b)
   ||resolveEnd(a)-resolveEnd(b)
   ||scaffoldIndex(a.seriesId,seasonA)-scaffoldIndex(b.seriesId,seasonB)
   ||(seasonA??Infinity)-(seasonB??Infinity)
