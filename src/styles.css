@@ -244,12 +244,18 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .watchToggle.on .icon{opacity:1;transform:scale(1.1)}
 .watchToggle.compact{width:40px;height:40px;padding:0;margin-right:8px;border-radius:50%}
 
+.followToggle{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;width:44px;padding:0;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--text-2);transition:background .2s,color .2s,border-color .2s}
+.followToggle .icon{width:18px;height:18px;opacity:.45;transition:opacity .2s,transform .2s var(--ease)}
+.followToggle.on{background:rgba(224,176,87,.16);border-color:rgba(224,176,87,.6);color:var(--warn)}
+.followToggle.on .icon{opacity:1;transform:scale(1.1);fill:currentColor}
+
 .chip{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 10px;border-radius:13px;background:rgba(236,235,228,.09);font-size:12px;font-weight:600;color:var(--text-2);backdrop-filter:blur(6px)}
 .chip-good,.chip-warn,.chip-muted{text-transform:capitalize}
 .chip .icon{width:13px;height:13px}
 .chip-good{color:#a4e0bc;background:rgba(124,196,154,.15)}
 .chip-warn{color:#f1cd84;background:rgba(224,176,87,.15)}
 .chipRow{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.aliasLine{margin:4px 0 0;font-size:13px;color:var(--text-2)}
 .chipList{display:flex;flex-wrap:wrap;gap:8px}
 .linkChip{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 13px;border-radius:19px;background:var(--surface-2);border:1px solid var(--line);font-size:14px;font-weight:500}
 .linkChip .icon{width:16px;height:16px;color:var(--c,var(--text-3))}
@@ -356,6 +362,8 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .segmented button.active b{color:rgba(10,13,12,.6)}
 .segmented.small{margin:0;grid-auto-columns:auto;padding:3px;border-radius:12px}
 .segmented.small button{height:32px;padding:0 10px;font-size:13px}
+.segmented.small .icon{width:14px;height:14px}
+.segmented.small button.active .icon{fill:currentColor}
 .filterRow{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:12px -16px 4px;padding:0 16px;touch-action:pan-x}
 .filterRow button{flex:none;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:18px;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);font-weight:600;font-size:13px}
 .filterRow button i{width:8px;height:8px;border-radius:50%;background:var(--c)}
@@ -410,11 +418,13 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .eventRow .eventGlyph{background:transparent;color:var(--c)}
 
 .peopleGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
-.personCard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px 12px;border-radius:18px;background:var(--surface-2);border:1px solid var(--line);text-align:center;min-width:0}
+.personCard{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px 12px;border-radius:18px;background:var(--surface-2);border:1px solid var(--line);text-align:center;min-width:0}
 .personCard:active{transform:scale(.98)}
 .personCard b{font-size:14px;font-weight:600;line-height:1.2;overflow-wrap:anywhere}
 .personCard small{font-size:12px;color:var(--text-3)}
 .personCard .portrait{--c:inherit}
+.followBadge{position:absolute;top:8px;right:8px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(224,176,87,.2);color:var(--warn)}
+.followBadge .icon{width:12px;height:12px;fill:currentColor}
 .seriesDots{display:flex;gap:4px}
 .seriesDots i{width:7px;height:7px;border-radius:50%}
 .miniProgress{width:60%;height:4px;border-radius:2px;background:var(--surface-3);overflow:hidden}

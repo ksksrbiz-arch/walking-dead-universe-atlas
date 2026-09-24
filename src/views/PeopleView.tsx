@@ -13,8 +13,9 @@ import {ConnectionRow,PortraitImage} from "./details/shared";
 type Tab="people"|"groups"|"links";
 
 export default function PeopleView(){
- const {openCharacter,openCommunity,openFaction,watched}=useAtlas();
+ const {openCharacter,openCommunity,openFaction,watched,followed}=useAtlas();
  const [tab,setTab]=useState<Tab>("people");
+ const [onlyFollowed,setOnlyFollowed]=useState(false);
  const [query,setQuery]=useState("");
  const q=query.trim().toLowerCase();
  const firstYear=useMemo(()=>{
@@ -36,7 +37,7 @@ export default function PeopleView(){
   ...(atlasData.communities as any[]).map(g=>({...g,kind:"community" as const,episodes:getGroupEpisodeIds("community",g.id).length})),
   ...(atlasData.factions as any[]).map(g=>({...g,kind:"faction" as const,episodes:getGroupEpisodeIds("faction",g.id).length}))
  ].sort((a,b)=>b.episodes-a.episodes||a.name.localeCompare(b.name)),[]);
- const shownPeople=people.filter(c=>!q||c.name.toLowerCase().includes(q));
+ const shownPeople=people.filter(c=>(!q||c.name.toLowerCase().includes(q))&&(!onlyFollowed||followed.has(c.id)));
  const shownGroups=groups.filter(g=>!q||g.name.toLowerCase().includes(q));
  const shownLinks=(atlasData.connections as any[]).filter(c=>!q||c.label.toLowerCase().includes(q));
  const tabs:[Tab,string,number][]=[["people","People",shownPeople.length],["groups","Groups",shownGroups.length],["links","Links",shownLinks.length]];
@@ -44,15 +45,20 @@ export default function PeopleView(){
   <header className="pageHead"><div><small>Who's who</small><h1>People & groups</h1></div></header>
   <label className="field"><Icon name="search"/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder={tab==="people"?"Find a character":tab==="groups"?"Find a community or faction":"Find a relationship"} aria-label="Filter"/>{query&&<button onClick={()=>setQuery("")} aria-label="Clear filter"><Icon name="close"/></button>}</label>
   <div className="segmented" role="tablist">{tabs.map(([id,label,n])=><button key={id} role="tab" aria-selected={tab===id} className={tab===id?"active":""} onClick={()=>setTab(id)}>{label}<b>{n}</b></button>)}</div>
+  {tab==="people"&&followed.size>0&&<div className="segmented small" role="group">
+   <button className={!onlyFollowed?"active":""} aria-pressed={!onlyFollowed} onClick={()=>setOnlyFollowed(false)}>All</button>
+   <button className={onlyFollowed?"active":""} aria-pressed={onlyFollowed} onClick={()=>setOnlyFollowed(true)}><Icon name="star"/>Following<b>{followed.size}</b></button>
+  </div>}
 
   {tab==="people"&&<div className="peopleGrid">{shownPeople.map(c=>{const count=characterEpisodeCounts.get(c.id)??0;const seen=seenBy.get(c.id)??0;return <button key={c.id} className="personCard" onClick={()=>openCharacter(c.id)} style={{"--c":seriesColor(c.seriesIds?.[0])} as CSSProperties}>
+   {followed.has(c.id)&&<span className="followBadge"><Icon name="star"/></span>}
    <PortraitImage id={c.id} name={c.name} size="lg"/>
    <b>{c.name}</b>
    <span className="seriesDots">{(c.seriesIds||[]).map((s:string)=><i key={s} style={{background:seriesColor(s)}}/>)}</span>
    <small>{count} ep{firstYear.get(c.id)?` · ${firstYear.get(c.id)}`:""}</small>
    {count>0&&seen>0&&<span className="miniProgress" aria-label={`${seen} of ${count} watched`}><i style={{width:Math.round(seen/count*100)+"%"}}/></span>}
   </button>})}
-  {!shownPeople.length&&<p className="empty">No character matches "{query}".</p>}</div>}
+  {!shownPeople.length&&<p className="empty">{onlyFollowed?"No followed characters match.":`No character matches "${query}".`}</p>}</div>}
 
   {tab==="groups"&&<div className="stack">{shownGroups.map(g=><button key={g.kind+g.id} className="row groupRow" onClick={()=>g.kind==="community"?openCommunity(g.id):openFaction(g.id)}>
    <span className="linkGlyph"><Icon name={g.kind==="community"?"people":"flag"}/></span>

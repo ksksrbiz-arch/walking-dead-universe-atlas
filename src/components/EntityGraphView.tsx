@@ -1,6 +1,8 @@
 import {useEffect,useMemo,useState} from "react";
 import {atlasData} from "../data";
 import {entityGraph as graph} from "../lib/entityGraph";
+import {connectionById} from "../lib/lookup";
+import {connectionCategoryLabel} from "../lib/atlasHelpers";
 import {atlasImageUrl,resolveCharacterImage,onAtlasImageError} from "../lib/media";
 import AtlasIcon,{type AtlasIconName} from "./AtlasIcon";
 
@@ -59,6 +61,7 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConn
  const [root,setRoot]=useState<string>(rootProp??"character:michonne");
  useEffect(()=>{if(rootProp!==undefined)setRoot(rootProp)},[rootProp]);
  const [filter,setFilter]=useState<Filter>("ALL");
+ const [categoryFilter,setCategoryFilter]=useState<string>("ALL");
  const [collapsed,setCollapsed]=useState(defaultCollapsed);
  const rootNode=graph.nodes.get(root);
  const edges=rootNode?graph.adjacency.get(root)||[]:[];
@@ -71,9 +74,18 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConn
      const existing=grouped.get(k);
      if(existing)existing.edges.push(edge); else grouped.set(k,{other,edges:[edge]});
    }
-   return [...grouped.values()];
+   // A connection's category (family/affiliation/conflict/crossover, see
+   // data/README.md) rides on the direct endpoint-to-endpoint edge's
+   // evidenceId, which is the connection's own id when the edge came from a
+   // real documented connection rather than an episode-context bridge.
+   return [...grouped.values()].map(g=>({...g,category:g.edges.map((e:any)=>connectionById.get(e.evidenceId)?.category).find(Boolean) as string|undefined}));
  },[edges,rootNode]);
- const visible=filter==="ALL"?related:related.filter(x=>x.other.kind===filter);
+ const kindFiltered=filter==="ALL"?related:related.filter(x=>x.other.kind===filter);
+ const categoryCounts=kindFiltered.reduce<Record<string,number>>((acc,x)=>{
+   if(x.category)acc[x.category]=(acc[x.category]||0)+1;
+   return acc;
+ },{});
+ const visible=categoryFilter==="ALL"?kindFiltered:kindFiltered.filter(x=>x.category===categoryFilter);
  const counts=related.reduce<Record<string,number>>((acc,x)=>{
    acc[x.other.kind]=(acc[x.other.kind]||0)+1;
    return acc;
@@ -83,6 +95,7 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConn
  const select=(kind:string,id:string)=>{
    setRoot(kind+":"+id);
    setFilter("ALL");
+   setCategoryFilter("ALL");
    setCollapsed(false);
    if(kind==="character")onCharacter(id);
    if(kind==="location")onLocation(id);
@@ -108,10 +121,19 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConn
    </div>
 
    {!collapsed&&related.length>0&&<div className="entityGraphFilters" aria-label="Relationship filters" role="group">
-    <button className={filter==="ALL"?"active":""} onClick={()=>setFilter("ALL")} aria-pressed={filter==="ALL"}>ALL <b>{related.length}</b></button>
+    <button className={filter==="ALL"?"active":""} onClick={()=>{setFilter("ALL");setCategoryFilter("ALL")}} aria-pressed={filter==="ALL"}>ALL <b>{related.length}</b></button>
     {Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)).map(([kind,count])=>
-      <button key={kind} className={filter===kind?"active":""} onClick={()=>setFilter(kind as Filter)} aria-pressed={filter===kind}>
+      <button key={kind} className={filter===kind?"active":""} onClick={()=>{setFilter(kind as Filter);setCategoryFilter("ALL")}} aria-pressed={filter===kind}>
         {labels[kind]||kind.toUpperCase()} <b>{count}</b>
+      </button>
+    )}
+   </div>}
+
+   {!collapsed&&Object.keys(categoryCounts).length>0&&<div className="entityGraphFilters entityGraphCategoryFilters" aria-label="Relationship category filters" role="group">
+    <button className={categoryFilter==="ALL"?"active":""} onClick={()=>setCategoryFilter("ALL")} aria-pressed={categoryFilter==="ALL"}>ALL TYPES <b>{kindFiltered.length}</b></button>
+    {Object.entries(categoryCounts).sort(([a],[b])=>a.localeCompare(b)).map(([category,count])=>
+      <button key={category} className={categoryFilter===category?"active":""} onClick={()=>setCategoryFilter(category)} aria-pressed={categoryFilter===category}>
+        {connectionCategoryLabel(category).toUpperCase()} <b>{count}</b>
       </button>
     )}
    </div>}

@@ -43,7 +43,7 @@ export function WikiSection({entityType,entityId}:{entityType:"characters"|"loca
  return <Section title="From the wiki" collapsible defaultOpen={Boolean(record.extract)}>
   {record.extract&&<p className="prose">{record.extract}</p>}
   {facts.length>0&&<dl className="facts">{facts.map(([key,value])=><div key={key}><dt>{FACT_LABELS[key]||prettyType(key.replaceAll("_"," "))}</dt><dd>{asText(value)}</dd></div>)}</dl>}
-  {linked.length>0&&<><h4 className="subhead">Also in the atlas</h4><div className="chipList">{linked.map(x=><button key={x.kind+x.id} className="linkChip" onClick={()=>open(x)}><Icon name={x.kind==="character"?"person":x.kind==="location"?"pin":"film"}/>{entityName(x.id)}</button>)}</div></>}
+  {linked.length>0&&<><h4 className="subhead">Also in the atlas</h4><div className="chipList">{linked.map(x=><button key={x.kind+x.id} className="linkChip" onClick={()=>open(x)}><Icon name={x.kind==="character"?"person":x.kind==="location"?"pin":"film"}/>{entityName(x.id,x.kind)}</button>)}</div></>}
   {extra.length>0&&<details className="disclosure"><summary>All wiki fields ({extra.length})</summary><dl className="facts">{extra.map(([key,value])=><div key={key}><dt>{prettyType(key.replaceAll("_"," "))}</dt><dd>{asText(value)}</dd></div>)}</dl></details>}
   {record.sourceUrl&&<a className="sourceLink" href={record.sourceUrl} target="_blank" rel="noreferrer"><span>Walking Dead Wiki source page</span><Icon name="external"/></a>}
  </Section>;
@@ -71,13 +71,13 @@ export function ConnectionRow({id,perspective}:{id:string;perspective?:string}){
  const c=connectionById.get(id) as any;
  if(!c)return null;
  const from=resolveConnectionEndpoint(c,"from"),to=resolveConnectionEndpoint(c,"to");
- const other=perspective?(c.fromId===perspective?c.toId:c.fromId):null;
+ const otherRef=perspective?(c.fromId===perspective?to:from):null;
  return <button className="row connectionRow" onClick={()=>openConnection(id)}>
   <span className="linkGlyph"><Icon name="link"/></span>
   <span className="rowText">
    <small>{connectionTypeLabel(c.type)} · {c.certainty}</small>
    <b>{c.label}</b>
-   <em>{other?`with ${entityName(other)}`:`${entityName(from?.id??c.fromId)} ↔ ${entityName(to?.id??c.toId)}`}</em>
+   <em>{otherRef?`with ${entityName(otherRef.id,otherRef.kind)}`:`${entityName(from?.id??c.fromId,from?.kind)} ↔ ${entityName(to?.id??c.toId,to?.kind)}`}</em>
   </span>
   <Icon name="chevron" className="rowChevron"/>
  </button>;
