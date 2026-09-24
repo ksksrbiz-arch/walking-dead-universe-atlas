@@ -32,8 +32,8 @@ export function normalizeTemporalAnchor(record:any):TemporalAnchor {
 export type TemporalRelation="before"|"after"|"overlaps"|"unknown";
 export function compareTemporalAnchors(a:TemporalAnchor,b:TemporalAnchor):TemporalRelation{
  if(a.start==null||a.end==null||b.start==null||b.end==null)return "unknown";
- if(a.end<b.start)return "before";
- if(a.start>b.end)return "after";
+ if(a.end<=b.start)return "before";
+ if(a.start>=b.end)return "after";
  return "overlaps";
 }
 export function getAnchorYearBounds(items:{start:number;end:number}[]){
@@ -41,9 +41,36 @@ export function getAnchorYearBounds(items:{start:number;end:number}[]){
  return {min:years.length?Math.floor(Math.min(...years)):2010,max:years.length?Math.ceil(Math.max(...years)):2028};
 }
 export type OrderingConflict={before:string;after:string;reason:string};
-export function stableTopologicalOrder<T extends {id:string}>(items:T[],constraints:{before:string;after:string;reason?:string}[]){
- const byId=new Map(items.map(x=>[x.id,x])),incoming=new Map(items.map(x=>[x.id,0])),edges=new Map<string,string[]>();
- const conflicts:OrderingConflict[]=[];
+export type OrderingConstraint={before:string;after:string;reason?:string};
+export type OrderingValidation={errors:string[];warnings:string[]};
+export function validateOrderingConstraints(ids:string[],constraints:OrderingConstraint[]):OrderingValidation{
+ const known=new Set(ids),errors:string[]=[],warnings:string[]=[],edges=new Map<string,string[]>();
+ const seen=new Set<string>();
+ for(const edge of constraints){
+  if(!known.has(edge.before)||!known.has(edge.after)){
+   errors.push(`Ordering rule references missing item: ${edge.before} -> ${edge.after}`);continue;
+  }
+  if(edge.before===edge.after){errors.push(`Ordering rule is self-referential: ${edge.before}`);continue;}
+  const key=edge.before+"\\u0000"+edge.after;
+  if(seen.has(key)){warnings.push(`Duplicate ordering rule: ${edge.before} -> ${edge.after}`);continue;}
+  seen.add(key);
+  const next=edges.get(edge.before)??[];next.push(edge.after);edges.set(edge.before,next);
+ }
+ const state=new Map<string,number>(),stack:string[]=[];
+ const visit=(id:string)=>{
+  state.set(id,1);stack.push(id);
+  for(const next of edges.get(id)??[]){
+   if(state.get(next)===1){const cycle=[...stack.slice(stack.indexOf(next)),next];errors.push("Ordering constraint cycle: "+cycle.join(" -> "));}
+   else if(!state.has(next))visit(next);
+  }
+  stack.pop();state.set(id,2);
+ };
+ for(const id of ids)if(!state.has(id))visit(id);
+ return {errors:[...new Set(errors)],warnings:[...new Set(warnings)]};
+}
+export function stableTopologicalOrder<T extends {id:string}>(items:T[],constraints:OrderingConstraint[]){
+ const byId=new Map(items.map(x=>[x.id,x])),validation=validateOrderingConstraints(items.map(x=>x.id),constraints);
+ const incoming=new Map(items.map(x=>[x.id,0])),edges=new Map<string,string[]>();
  for(const edge of constraints){
   if(!byId.has(edge.before)||!byId.has(edge.after)||edge.before===edge.after)continue;
   const list=edges.get(edge.before)??[];
@@ -56,9 +83,6 @@ export function stableTopologicalOrder<T extends {id:string}>(items:T[],constrai
   for(const id of edges.get(next.id)??[]){const n=(incoming.get(id)??1)-1;incoming.set(id,n);if(n===0)ready.push(byId.get(id)!);}
  }
  const included=new Set(ordered.map(x=>x.id));
- if(ordered.length!==items.length){
-  for(const item of items)if(!included.has(item.id))ordered.push(item);
-  for(const edge of constraints)if(!included.has(edge.before)&&!included.has(edge.after))conflicts.push({before:edge.before,after:edge.after,reason:edge.reason??"Conflicting temporal constraints"});
- }
- return {ordered,conflicts};
+ if(ordered.length!==items.length)for(const item of items)if(!included.has(item.id))ordered.push(item);
+ return {ordered,conflicts:validation.errors.map(reason=>({before:"",after:"",reason})),warnings:validation.warnings};
 }
