@@ -11,6 +11,15 @@ export function normalizeTemporalAnchor(record:any):TemporalAnchor {
  const rawStart=record?.timelineStart??record?.start??record?.year;
  const rawEnd=record?.timelineEnd??record?.end??rawStart;
  const precision=String(record?.timelinePrecision??record?.precision??(record?.date?"day":rawStart!=null?"year":"unknown")).toLowerCase() as TemporalPrecision;
+ // A record's own declared precision of "unknown" is authoritative and must
+ // win over any numeric start/end that happens to be present (buildChronology
+ // falls back to an air-date year when timelineStart/timelineEnd are null,
+ // which otherwise leaks through here as if it were a real year-precision
+ // anchor — e.g. tales-s01-e06 is explicitly timelinePrecision:"unknown" but
+ // was sorting as a confident year-2022 anchor). Flattening an explicit
+ // "we don't know" into false precision is exactly what AGENTS.md's data
+ // policy forbids.
+ if(precision==="unknown")return {start:null,end:null,precision:"unknown",label:"Unanchored",valid:true};
  const date=record?.date??record?.airDate;
  if(date&&isValidIsoDate(date)){
   const t=Date.parse(date+"T00:00:00.000Z");
@@ -32,6 +41,18 @@ export function normalizeTemporalAnchor(record:any):TemporalAnchor {
 export type TemporalRelation="before"|"after"|"overlaps"|"unknown";
 export function compareTemporalAnchors(a:TemporalAnchor,b:TemporalAnchor):TemporalRelation{
  if(a.start==null||a.end==null||b.start==null||b.end==null)return "unknown";
+ // Two identical zero-width points (the common case: same-year episodes, both
+ // [2011,2011]) are genuinely simultaneous, not ordered. Without this guard,
+ // the half-open a.end<=b.start / a.start>=b.end checks below return "before"
+ // for BOTH (a,b) and (b,a) whenever a.start===a.end===b.start===b.end,
+ // breaking the antisymmetry Array.prototype.sort's comparator contract
+ // requires -- 357 of 363 episodes in the current dataset share a same-year
+ // anchor with at least one other episode, so this made buildEpisodeWatchOrder
+ // scramble entire same-year seasons (verified: TWD S1 came out e05,e04,e06,
+ // e03,e02,e01 instead of e01..e06). Day-precision anchors are half-open
+ // ([ordinal, ordinal+1/daysInYear)) and never zero-width, so they still fall
+ // through to the exact adjacency check below unaffected.
+ if(a.start===a.end&&b.start===b.end&&a.start===b.start)return "overlaps";
  if(a.end<=b.start)return "before";
  if(a.start>=b.end)return "after";
  return "overlaps";

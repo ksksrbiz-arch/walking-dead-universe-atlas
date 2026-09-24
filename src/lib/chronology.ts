@@ -18,6 +18,11 @@ export type ChronologyItem={
  factionIds?:string[];
  connectionIds?:string[];
  sources?:string[];
+ // Position in the untouched data/episodes.json array (season/episode-number
+ // order), preserved through buildChronology's own start/end/title sort so
+ // buildEpisodeWatchOrder's same-anchor tie-break has something meaningful to
+ // fall back on instead of that sort's incidental alphabetical-by-title order.
+ catalogIndex?:number;
 };
 
 // atlasData is static after load, so the built (and sorted) chronology never changes
@@ -28,11 +33,12 @@ let chronologyCache:ChronologyItem[]|null=null;
 export function buildChronology(){
  if(chronologyCache)return chronologyCache;
  const episodes=(atlasData as any).episodes ?? [];
- const episodeItems:ChronologyItem[]=episodes.map((e:any)=>({
+ const episodeItems:ChronologyItem[]=episodes.map((e:any,catalogIndex:number)=>({
   id:e.id,kind:"episode",seriesId:e.seriesId,seasonId:e.seasonId,episodeNumber:e.episodeNumber,
   title:e.title,start:e.timelineStart ?? e.timelineEnd ?? e.airDate?.slice(0,4) ?? 0,
   end:e.timelineEnd ?? e.timelineStart ?? e.airDate?.slice(0,4) ?? 0,
-  precision:e.timelinePrecision ?? "unknown",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[]
+  precision:e.timelinePrecision ?? "unknown",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[],
+  catalogIndex
  }));
  const eventItems:ChronologyItem[]=atlasData.events.map((e:any)=>({
   id:e.id,kind:"event",seriesId:e.seriesId,title:e.title,start:e.year,end:e.year,
@@ -90,26 +96,6 @@ export type EpisodeWatchOrderItem=ChronologyItem & {
  orderingBasis:"timeline-anchor"|"timeline-window";
 };
 
-const seasonNumberBySeasonId=new Map((atlasData.seasons as any[]).map(s=>[s.id,s.season]));
-
-// Many episodes only carry year-level timeline precision (an entire season, or even
-// several consecutive seasons, sharing one approximate year), so sorting purely on
-// start/end left large same-year clusters ordered by nothing but title text — season 2
-// could sort ahead of season 1's pilot, and cross-series ties resolved alphabetically
-// rather than by the curated cross-series sequence. watchOrder.json's series-level
-// scaffold exists specifically to break those ties (its own note says episode-level
-// chronology should still win whenever it actually differs); this was previously wired
-// up (getSeriesWatchOrder) but never consulted by the actual episode ordering.
-function scaffoldIndex(seriesId:string,seasonNumber:number|undefined):number{
- if(seasonNumber==null)return Infinity;
- const scaffold=getSeriesWatchOrder();
- const index=scaffold.findIndex((w:any)=>w.seriesId===seriesId&&seasonNumber>=w.startSeason&&seasonNumber<=w.endSeason);
- return index===-1?Infinity:index;
-}
-
-const resolveStart=(e:any):number=>{const anchor=normalizeTemporalAnchor(e);return anchor.start==null?Number.POSITIVE_INFINITY:anchor.start;};
-const resolveEnd=(e:any):number=>{const anchor=normalizeTemporalAnchor(e);return anchor.end==null?Number.POSITIVE_INFINITY:anchor.end;};
-
 // Shared by every place in the app that lists a character's/group's/year's
 // episodes and needs them in genuine story order, not just "same approximate
 // year, whatever order the source data happened to be in" — accepts either a
@@ -122,12 +108,12 @@ export function compareEpisodesChronologically(a:any,b:any):number{
  // are not "resolved" by a season scaffold; preserve catalog order deterministically.
  if(temporal==="before")return -1;
  if(temporal==="after")return 1;
- return (a._catalogIndex??0)-(b._catalogIndex??0)
+ return (a.catalogIndex??Infinity)-(b.catalogIndex??Infinity)
   ||String(a.id||"").localeCompare(String(b.id||""));
 }
 
 export function buildEpisodeWatchOrder(){
- const episodes=[...buildChronology().filter(x=>x.kind==="episode")].map((item,index)=>({...item,_catalogIndex:index})).sort(compareEpisodesChronologically);
+ const episodes=[...buildChronology().filter(x=>x.kind==="episode")].sort(compareEpisodesChronologically);
  return episodes.map((item,index,all)=>{
   const sameWindow=all.some(other=>other.id!==item.id&&other.start===item.start&&other.end===item.end);
   const unknown=item.precision==="unknown"||!Number.isFinite(item.start)||item.start<=0;
