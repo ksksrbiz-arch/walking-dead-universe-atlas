@@ -1,0 +1,217 @@
+#!/usr/bin/env node
+/**
+ * Builds an end-to-end media manifest for the Atlas.
+ *
+ * This does NOT trust upload counts or deployment status. For every character,
+ * location and episode it replicates the exact resolution order the live app
+ * uses (src/App.tsx: curated data/media.json / data/episodeMedia.json first,
+ * then the Fandom canonical heuristic match, then series key art) and then
+ * makes a real HTTP request through the same delivery path the browser would
+ * use (the Supabase atlas-media proxy for Fandom/AMC sources, a local file
+ * check for /media/... static assets) to confirm the asset actually resolves.
+ *
+ * Output: data/enrichment/media-manifest.json
+ */
+import { readFile, writeFile, access } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import path from "node:path";
+
+const ROOT = new URL("../", import.meta.url);
+const DATA = new URL("data/", ROOT);
+const OUT = new URL("data/enrichment/", ROOT);
+
+const MEDIA_PROXY = "https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
+const CONCURRENCY = Number(process.env.MEDIA_VERIFY_CONCURRENCY || 8);
+const TIMEOUT_S = Number(process.env.MEDIA_VERIFY_TIMEOUT || 15);
+const SKIP_VERIFY = process.env.MEDIA_MANIFEST_SKIP_VERIFY === "1";
+
+const readJson = async (url) => JSON.parse(await readFile(url, "utf8"));
+
+// Mirrors fandomEntityImage() in src/App.tsx. Keep these in sync; this script
+// exists specifically so drift between "what we think resolves" and "what the
+// app actually renders" gets caught instead of assumed away.
+function fandomEntityImage(fandomCanonical, entityType, id, name) {
+  const record = fandomCanonical?.[entityType]?.[id];
+  const candidates = [
+    ...(Array.isArray(record?.image_urls) ? record.image_urls : []),
+    ...(record?.details?.imageFiles || []).flatMap((x) => [x?.url, x?.thumbnail].filter(Boolean)),
+    ...(Array.isArray(record?.hints?.imageGallery) ? record.hints.imageGallery : []),
+    ...(Array.isArray(record?.hints?.image) ? record.hints.image : record?.hints?.image ? [record.hints.image] : []),
+  ].filter((x) => typeof x === "string" && /^https?:\/\//i.test(x));
+  if (!candidates.length) return "";
+  const tokens = String(name).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/)
+    .filter((x) => x.length >= 3 && !["the", "tv", "universe", "series"].includes(x));
+  const generic = /logo|title.?card|key.?art|series.?art|franchise|ensemble|group.?photo|cast.?photo|promo|poster|banner|background|wallpaper/i;
+  const scored = [...new Set(candidates)].map((url) => {
+    const hay = url.toLowerCase().replace(/[_-]+/g, " ");
+    const matches = tokens.filter((t) => hay.includes(t)).length;
+    let score = matches * 30 + (matches === tokens.length && tokens.length ? 70 : 0);
+    if (generic.test(hay)) score -= 90;
+    return { url, score };
+  }).sort((a, b) => b.score - a.score);
+  return scored[0]?.score > 0 ? scored[0].url : "";
+}
+
+function isFandomImage(source) {
+  return /^https?:\/\/(?:static\.wikia\.nocookie\.net|vignette\.wikia\.nocookie\.net|images\.wikia\.nocookie\.net)\//i.test(source);
+}
+function isAmcImage(source) {
+  return /^https?:\/\/(?:images|dimages)\.cds\.amcn\.com\//i.test(source);
+}
+
+// Mirrors atlasImageUrl() in src/lib/media.ts (LOCAL_MEDIA is always {} today,
+// so that branch is intentionally omitted here).
+function deliveryFor(source) {
+  if (!source) return null;
+  if (source.startsWith("/")) return { kind: "local-static", requestUrl: source };
+  if (isFandomImage(source) || isAmcImage(source)) {
+    const url = new URL(MEDIA_PROXY);
+    url.searchParams.set("url", source);
+    return { kind: "supabase-proxy", requestUrl: url.toString() };
+  }
+  return { kind: "direct", requestUrl: source };
+}
+
+function curlCheck(url) {
+  return new Promise((resolve) => {
+    execFile("curl", [
+      "-s", "-L", "-o", "/dev/null",
+      "-w", "%{http_code} %{content_type}",
+      "--max-time", String(TIMEOUT_S),
+      url,
+    ], { timeout: (TIMEOUT_S + 5) * 1000 }, (error, stdout) => {
+      if (error) return resolve({ ok: false, httpStatus: null, contentType: null, error: error.message });
+      const [code, ...rest] = String(stdout).trim().split(" ");
+      const status = Number(code) || null;
+      const contentType = rest.join(" ") || null;
+      resolve({ ok: Boolean(status && status >= 200 && status < 400), httpStatus: status, contentType });
+    });
+  });
+}
+
+async function localStaticCheck(publicPath) {
+  const filePath = new URL("public" + publicPath, ROOT);
+  try {
+    await access(filePath);
+    return { ok: true, httpStatus: 200, contentType: "local-file" };
+  } catch {
+    return { ok: false, httpStatus: 404, contentType: null, error: "file not found under public/" };
+  }
+}
+
+async function verify(delivery) {
+  if (!delivery) return { ok: false, httpStatus: null, contentType: null, error: "unresolved" };
+  if (SKIP_VERIFY) return { ok: null, httpStatus: null, contentType: null, error: "skipped" };
+  if (delivery.kind === "local-static") return localStaticCheck(delivery.requestUrl);
+  return curlCheck(delivery.requestUrl);
+}
+
+async function pool(items, limit, worker) {
+  const results = new Array(items.length);
+  let cursor = 0;
+  async function run() {
+    while (cursor < items.length) {
+      const i = cursor++;
+      results[i] = await worker(items[i], i);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, run));
+  return results;
+}
+
+async function main() {
+  const [characters, locations, episodes, series, media, episodeMedia, fandomCanonical] = await Promise.all([
+    readJson(new URL("characters.json", DATA)),
+    readJson(new URL("locations.json", DATA)),
+    readJson(new URL("episodes.json", DATA)),
+    readJson(new URL("series.json", DATA)),
+    readJson(new URL("media.json", DATA)),
+    readJson(new URL("episodeMedia.json", DATA)),
+    readJson(new URL("enrichment/fandom-canonical.json", DATA)).catch(() => ({})),
+  ]);
+
+  const seriesKeyArt = Object.fromEntries(Object.entries(media.series || {}).map(([id, s]) => [id, s.image || s.keyArt]));
+
+  const entries = [];
+
+  for (const c of characters) {
+    const curated = media.characters?.[c.id];
+    const fandomImage = fandomEntityImage(fandomCanonical, "characters", c.id, c.name);
+    const fallback = seriesKeyArt[c.seriesIds?.[0]];
+    const source = curated?.image || fandomImage || fallback || "";
+    const method = curated?.image ? "curated" : fandomImage ? "fandom-heuristic" : fallback ? "series-keyart-fallback" : "none";
+    entries.push({ entityType: "characters", id: c.id, name: c.name, source, method, curatedStatus: curated?.status || null });
+  }
+
+  for (const l of locations) {
+    const curated = media.places?.[l.id];
+    const fandomImage = fandomEntityImage(fandomCanonical, "locations", l.id, l.name);
+    const fallback = seriesKeyArt[l.seriesId];
+    const source = curated?.image || fandomImage || fallback || "";
+    const method = curated?.image ? "curated" : fandomImage ? "fandom-heuristic" : fallback ? "series-keyart-fallback" : "none";
+    entries.push({ entityType: "locations", id: l.id, name: l.name, source, method, curatedStatus: curated?.status || null });
+  }
+
+  for (const e of episodes) {
+    const curated = media.episodes?.[e.id];
+    const legacy = episodeMedia.episodes?.[e.id];
+    const fandomImage = fandomEntityImage(fandomCanonical, "episodes", e.id, e.title);
+    const fallback = seriesKeyArt[e.seriesId];
+    const source = curated?.image || legacy?.image || fandomImage || fallback || "";
+    const method = curated?.image ? "curated" : legacy?.image ? "legacy-episode-media" : fandomImage ? "fandom-heuristic" : fallback ? "series-keyart-fallback" : "none";
+    entries.push({ entityType: "episodes", id: e.id, name: e.title, source, method, curatedStatus: legacy?.status || null });
+  }
+
+  const withDelivery = entries.map((entry) => ({ ...entry, delivery: deliveryFor(entry.source) }));
+
+  console.log(`Verifying ${withDelivery.filter((x) => x.delivery).length} resolved assets (concurrency ${CONCURRENCY})...`);
+  const verified = await pool(withDelivery, CONCURRENCY, async (entry) => {
+    const result = await verify(entry.delivery);
+    return { ...entry, verification: result };
+  });
+
+  const manifest = {
+    generatedAt: new Date().toISOString(),
+    version: 1,
+    notes: "Reflects the actual live resolution order in src/App.tsx (curated data/media.json or data/episodeMedia.json > Fandom canonical heuristic match > series key art), not the Vercel Blob pipeline, which is not currently wired into image rendering.",
+    summary: {},
+    entities: verified.map((v) => ({
+      entityType: v.entityType,
+      id: v.id,
+      name: v.name,
+      resolvedSource: v.source || null,
+      resolutionMethod: v.method,
+      curatedStatus: v.curatedStatus,
+      deliveryKind: v.delivery?.kind || null,
+      verificationStatus: v.verification.ok === true ? "verified" : v.verification.ok === false ? "broken" : v.verification.ok === null ? "skipped" : "unresolved",
+      httpStatus: v.verification.httpStatus,
+      contentType: v.verification.contentType,
+      checkedAt: new Date().toISOString(),
+    })),
+  };
+
+  for (const type of ["characters", "locations", "episodes"]) {
+    const rows = manifest.entities.filter((x) => x.entityType === type);
+    manifest.summary[type] = {
+      total: rows.length,
+      resolved: rows.filter((x) => x.resolvedSource).length,
+      unresolved: rows.filter((x) => !x.resolvedSource).length,
+      verified: rows.filter((x) => x.verificationStatus === "verified").length,
+      broken: rows.filter((x) => x.verificationStatus === "broken").length,
+      byMethod: Object.fromEntries(
+        [...new Set(rows.map((x) => x.resolutionMethod))].map((m) => [m, rows.filter((x) => x.resolutionMethod === m).length]),
+      ),
+    };
+  }
+
+  await writeFile(new URL("media-manifest.json", OUT), JSON.stringify(manifest, null, 2) + "\n");
+  console.log(JSON.stringify(manifest.summary, null, 2));
+
+  const broken = manifest.entities.filter((x) => x.verificationStatus === "broken");
+  if (broken.length) {
+    console.log(`\n${broken.length} broken/unreachable asset(s):`);
+    for (const b of broken.slice(0, 30)) console.log(`  [${b.entityType}] ${b.id} (${b.name}) -> ${b.httpStatus ?? "?"} ${b.resolvedSource}`);
+  }
+}
+
+main().catch((error) => { console.error(error); process.exitCode = 1; });

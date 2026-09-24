@@ -24,11 +24,11 @@
     "omaha":{"kind":"place","status":"needs-ingestion"}
   },
   "characters": {
-    "rick":{"kind":"character","image":"/media/characters/rick-grimes.webp","sourcePage":"ChatGPT user-supplied artwork","status":"user-supplied-portrait"},
-    "daryl":{"kind":"character","status":"needs-official-portrait"},
-    "carol":{"kind":"character","status":"needs-official-portrait"},
+    "rick-grimes":{"kind":"character","image":"/media/characters/rick-grimes.webp","sourcePage":"ChatGPT user-supplied artwork","status":"user-supplied-portrait"},
+    "daryl-dixon":{"kind":"character","status":"needs-official-portrait"},
+    "carol-peletier":{"kind":"character","status":"needs-official-portrait"},
     "michonne":{"kind":"character","status":"needs-official-portrait"},
-    "maggie":{"kind":"character","image":"https://images.cds.amcn.com/amcn/tve/TWDDC_MaggieNYPD.jpg","sourcePage":"https://www.amc.com/blogs/the-walking-dead-universe-turns-to-the-big-city--1064220"},
-    "negan":{"kind":"character","status":"needs-official-portrait"}
+    "maggie-rhee":{"kind":"character","image":"https://static.wikia.nocookie.net/walkingdead/images/e/ee/Season_three_maggie_rhee_dc.png/revision/latest?cb=20260821011107","sourcePage":"https://walkingdead.fandom.com/wiki/Maggie_Rhee","status":"verified","note":"Previous AMC asset (TWDDC_MaggieNYPD.jpg, ~19.2MB) exceeded the media proxy's size cap and returned 413 on 2026-09-24."},
+    "negan-smith":{"kind":"character","status":"needs-official-portrait"}
   }
 }

@@ -5,7 +5,12 @@ import { put } from "@vercel/blob";
 
 const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, "data");
-const MEDIA_DIR = path.join(ROOT, "public", "media-cache");
+const PUBLIC_DIR = path.join(ROOT, "public");
+// Every directory under public/ that can hold entity artwork (Fandom/AMC cache,
+// user-supplied character portraits, and any future generated galleries).
+// Add new directories here rather than swapping MEDIA_DIRS, so nothing already
+// synced silently drops out of the inventory.
+const MEDIA_DIRS = ["media-cache", "media"].map(name => path.join(PUBLIC_DIR, name));
 const DATA_ALLOW = new Set([
   "characters.json", "locations.json", "episodes.json", "series.json", "seasons.json",
   "communities.json", "factions.json", "connections.json", "characterEpisodes.json",
@@ -60,14 +65,22 @@ async function main() {
   }
 
   let mediaPaths = [];
-  try { mediaPaths = await walkFiles(MEDIA_DIR); }
-  catch (error) {
-    if (error?.code !== "ENOENT") throw error;
+  const scannedDirs = [];
+  for (const dir of MEDIA_DIRS) {
+    try {
+      mediaPaths.push(...await walkFiles(dir));
+      scannedDirs.push(path.relative(PUBLIC_DIR, dir));
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+    }
   }
 
   const uploadedMedia = [];
   for (const filePath of mediaPaths.sort()) {
-    const relative = path.relative(MEDIA_DIR, filePath).split(path.sep).join("/");
+    // Relative to public/, not to the individual media directory, so the
+    // uploaded pathname preserves which source directory the asset came from
+    // (e.g. media/characters/rick-grimes.webp vs media-cache/foo.jpg).
+    const relative = path.relative(PUBLIC_DIR, filePath).split(path.sep).join("/");
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME.get(ext);
     if (!contentType) continue;
@@ -85,6 +98,7 @@ async function main() {
     ok: true,
     dataFiles: uploadedData.length,
     dataBytes: uploadedData.reduce((sum, item) => sum + item.size, 0),
+    mediaDirsScanned: scannedDirs,
     mediaFiles: uploadedMedia.length,
     mediaBytes: uploadedMedia.reduce((sum, item) => sum + item.size, 0),
     skippedUnsupportedMedia: mediaPaths.length - uploadedMedia.length
