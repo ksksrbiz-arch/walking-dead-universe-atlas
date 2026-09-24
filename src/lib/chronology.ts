@@ -3,7 +3,7 @@ import {getAnchorYearBounds,normalizeTemporalAnchor,compareTemporalAnchors} from
 
 export type ChronologyItem={
  id:string;
- kind:"episode"|"event"|"universe-event";
+ kind:"episode"|"event"|"universe-event"|"webisode";
  seriesId:string;
  seasonId?:string;
  episodeNumber?:number;
@@ -42,7 +42,15 @@ export function buildChronology(){
   id:e.id,kind:"universe-event",seriesId:e.seriesId,title:e.title,start:Number(e.year),end:Number(e.year),
   precision:e.date?"day":"year",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[]
  }));
- chronologyCache=[...episodeItems,...eventItems,...universeEventItems].sort((a,b)=>a.start-b.start||a.end-b.end||a.title.localeCompare(b.title));
+ // Webisode catalog currently provides release windows and episode counts, not
+ // verified in-universe anchors. Keep these records visible in the chronology
+ // dataset with an explicit unanchored sentinel; never mistake release years for story years.
+ const webisodeItems:ChronologyItem[]=(atlasData as any).webisodes?.series?.map((w:any)=>({
+  id:w.id,kind:"webisode",seriesId:w.seriesId,title:w.title,start:0,end:0,
+  precision:"unknown",certainty:"release-window-only",sources:[(atlasData as any).webisodes?.source??""] ,
+  episodeNumber:w.episodeCount
+ }))??[];
+ chronologyCache=[...episodeItems,...eventItems,...universeEventItems,...webisodeItems].sort((a,b)=>(a.start||Infinity)-(b.start||Infinity)||(a.end||Infinity)-(b.end||Infinity)||a.title.localeCompare(b.title));
  return chronologyCache;
 }
 
@@ -128,14 +136,14 @@ export function compareEpisodesChronologically(a:any,b:any):number{
 }
 
 export function buildEpisodeWatchOrder(){
- const episodes=[...buildChronology().filter(x=>x.kind==="episode")].sort(compareEpisodesChronologically);
+ const episodes=[...buildChronology().filter(x=>x.kind==="episode")].map((item,index)=>({...item,_catalogIndex:index})).sort(compareEpisodesChronologically);
  return episodes.map((item,index,all)=>{
   const sameWindow=all.some(other=>other.id!==item.id&&other.start===item.start&&other.end===item.end);
   const unknown=item.precision==="unknown"||!Number.isFinite(item.start)||item.start<=0;
   return {
    ...item,
    sequence:index+1,
-   chronologyStatus:unknown?"unknown":sameWindow?"shared-year":"anchored",
+   chronologyStatus:unknown?"unknown":sameWindow||item.precision!=="day"?"shared-year":"anchored",
    orderingBasis:item.precision==="year"?"timeline-window":"timeline-anchor"
   } as EpisodeWatchOrderItem;
  });
