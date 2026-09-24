@@ -53,7 +53,7 @@ export function validateAtlasData(){
     const start=Number(episode.timelineStart??episode.timelineEnd);
     const end=Number(episode.timelineEnd??episode.timelineStart);
     if(Number.isFinite(start)&&Number.isFinite(end)&&end<start)errors.push(`Episode ${episode.id} has timelineEnd before timelineStart`);
-    if(episode.airDate&&!/^\d{4}-\d{2}-\d{2}$/.test(episode.airDate))errors.push(`Episode ${episode.id} has malformed airDate ${episode.airDate}`);
+    if(episode.airDate&&!isValidIsoDate(episode.airDate))errors.push(`Episode ${episode.id} has invalid calendar airDate ${episode.airDate}`);
     for(const id of episode.locationIds??[])if(!locationIds.has(id))errors.push(`Episode ${episode.id} references missing location ${id}`);
     for(const id of episode.characterIds??[])if(!characterIds.has(id))errors.push(`Episode ${episode.id} references missing character ${id}`);
     for(const id of episode.communityIds??[])if(!communityIds.has(id))errors.push(`Episode ${episode.id} references missing community ${id}`);
