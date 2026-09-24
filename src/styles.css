@@ -285,6 +285,9 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .chip-warn{color:#f1cd84;background:rgba(224,176,87,.15)}
 .chipRow{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .aliasLine{margin:4px 0 0;font-size:13px;color:var(--text-2)}
+.deathLine{display:inline-flex;align-items:center;gap:6px;margin-top:8px;height:30px;padding:0 10px 0 8px;border-radius:15px;border:0;background:rgba(236,235,228,.09);backdrop-filter:blur(6px);color:#f1cd84;font-size:12px;font-weight:600}
+.deathLine .icon{width:13px;height:13px}
+.deathLine .rowChevron{width:14px;height:14px;color:inherit;opacity:.6}
 .chipList{display:flex;flex-wrap:wrap;gap:8px}
 .linkChip{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 13px;border-radius:19px;background:var(--surface-2);border:1px solid var(--line);font-size:14px;font-weight:500}
 .linkChip .icon{width:16px;height:16px;color:var(--c,var(--text-3))}
@@ -458,6 +461,7 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .personCard .portrait{--c:inherit}
 .followBadge{position:absolute;top:8px;right:8px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(224,176,87,.2);color:var(--warn)}
 .followBadge .icon{width:12px;height:12px;fill:currentColor}
+.deceasedMark{width:12px;height:12px;margin-left:4px;color:var(--text-3);vertical-align:-1px}
 .seriesDots{display:flex;gap:4px}
 .seriesDots i{width:7px;height:7px;border-radius:50%}
 .miniProgress{width:60%;height:4px;border-radius:2px;background:var(--surface-3);overflow:hidden}

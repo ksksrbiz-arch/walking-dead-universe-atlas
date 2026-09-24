@@ -5,15 +5,18 @@ import MiniTimeline from "../../components/MiniTimeline";
 import {ActionBar,Chip,EpisodeRow,Hero,PlaceChips,Section,Stats,certaintyTone} from "../../components/ui";
 import {useAtlas} from "../../lib/atlasContext";
 import {atlasData} from "../../data";
-import {characterById,episodesFor,locationsFor} from "../../lib/lookup";
+import {characterById,episodeById,episodesFor,locationsFor} from "../../lib/lookup";
 import {getCharacterEpisodeIds} from "../../lib/entityGraph";
 import {getRuntimeEpisodeIds} from "../../lib/runtime";
 import {characterImage,hasMapCoordinates} from "../../lib/atlasHelpers";
 import {seriesColor,seriesShort} from "../../lib/series";
 import {ConnectionList,Gallery,GraphSection,WikiSection,fandomRecord,useEntityPhotos,useLightbox} from "./shared";
 
-// Wiki status text is free-form ("Deceased", "Alive", "Missing"); read it for
-// a coarse tone rather than asserting a status we haven't sourced.
+// data/characters.json's own status (alive/deceased/unknown, sourced from
+// the character's Fandom infobox — see data/README.md) wins when present;
+// the Fandom-hints path is free-form ("Deceased", "Missing") and only a
+// fallback for the day that enrichment stage actually publishes it.
+const STATUS_LABELS:Record<string,string>={alive:"Alive",deceased:"Deceased",unknown:"Unknown fate"};
 function statusTone(status:unknown):"good"|"warn"|"muted"{
  const text=(Array.isArray(status)?status.join(" "):String(status)).toLowerCase();
  if(/deceased|dead|killed/.test(text))return "warn";
@@ -22,10 +25,12 @@ function statusTone(status:unknown):"good"|"warn"|"muted"{
 }
 
 export default function CharacterDetail({id}:{id:string}){
- const {showCharacterJourney,watched,followed,toggleFollowed,jumpToTimelineYear}=useAtlas();
+ const {showCharacterJourney,watched,followed,toggleFollowed,jumpToTimelineYear,openEpisode}=useAtlas();
  const character=characterById.get(id) as any;
  const wiki=fandomRecord("characters",id);
- const status=wiki?.hints?.status??wiki?.fields?.status;
+ const status=character.status??(wiki?.hints?.status??wiki?.fields?.status);
+ const statusLabel=STATUS_LABELS[status]??(Array.isArray(status)?status.join(" · "):status);
+ const deathEpisode=character.deathEpisodeId?episodeById.get(character.deathEpisodeId) as any:null;
  const aliases=wiki?.hints?.aliases??wiki?.fields?.aliases;
  const isFollowed=followed.has(id);
  const [runtimeIds,setRuntimeIds]=useState<string[]|null>(null);
@@ -57,7 +62,8 @@ export default function CharacterDetail({id}:{id:string}){
  return <div className="detail">
   <Hero portrait image={hero} creditPage={page} onImage={()=>lightbox.open(photos.items,0)} accent={accent} icon="person" kicker={<>Character · {(character.seriesIds||[]).map((s:string)=>seriesShort(s)).join(" · ")}</>} title={character.name}>
    {aliases&&<p className="aliasLine">Also known as {Array.isArray(aliases)?aliases.join(" · "):aliases}</p>}
-   <div className="chipRow">{firstYear?<Chip icon="clock">From {firstYear}</Chip>:null}<Chip tone={certaintyTone(character.certainty)}>{character.certainty||"tracked"}</Chip>{status&&<Chip tone={statusTone(status)}>{Array.isArray(status)?status.join(" · "):status}</Chip>}</div>
+   <div className="chipRow">{firstYear?<Chip icon="clock">From {firstYear}</Chip>:null}<Chip tone={certaintyTone(character.certainty)}>{character.certainty||"tracked"}</Chip>{status&&<Chip tone={statusTone(status)}>{statusLabel}</Chip>}</div>
+   {deathEpisode&&<button className="deathLine" onClick={()=>openEpisode(deathEpisode.id)}><Icon name="skull"/>Died in "{deathEpisode.title}"<Icon name="chevron" className="rowChevron"/></button>}
   </Hero>
   <ActionBar>
    <button className="btn primary" disabled={!mappedPlaces} onClick={()=>showCharacterJourney(id)}><Icon name="route"/>{mappedPlaces?`Trace journey · ${mappedPlaces} places`:"No mapped journey"}</button>

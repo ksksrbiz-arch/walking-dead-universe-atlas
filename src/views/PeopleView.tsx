@@ -53,7 +53,7 @@ export default function PeopleView(){
   {tab==="people"&&<div className="peopleGrid">{shownPeople.map(c=>{const count=characterEpisodeCounts.get(c.id)??0;const seen=seenBy.get(c.id)??0;return <button key={c.id} className="personCard" onClick={()=>openCharacter(c.id)} style={{"--c":seriesColor(c.seriesIds?.[0])} as CSSProperties}>
    {followed.has(c.id)&&<span className="followBadge"><Icon name="star"/></span>}
    <PortraitImage id={c.id} name={c.name} size="lg"/>
-   <b>{c.name}</b>
+   <b>{c.name}{c.status==="deceased"&&<Icon name="skull" className="deceasedMark"/>}</b>
    <span className="seriesDots">{(c.seriesIds||[]).map((s:string)=><i key={s} style={{background:seriesColor(s)}}/>)}</span>
    <small>{count} ep{firstYear.get(c.id)?` · ${firstYear.get(c.id)}`:""}</small>
    {count>0&&seen>0&&<span className="miniProgress" aria-label={`${seen} of ${count} watched`}><i style={{width:Math.round(seen/count*100)+"%"}}/></span>}
