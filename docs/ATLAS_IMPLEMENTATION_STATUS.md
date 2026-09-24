@@ -93,6 +93,13 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - Fixed entity-graph root synchronization so community/faction focus selections actually replace the graph root instead of leaving the initial character root mounted.
 - Completed search-to-graph navigation for community and faction results so search opens the selected entity relationship context.
 
+### Character intelligence pass — follow, dossier, relationship categories
+- [x] Character follow/favorites, persisted per-viewer (localStorage, mirrors watch progress) and surfaced as a filter + badge in People.
+- [x] Character Hero surfaces verified status and aliases when the Fandom enrichment record carries them (display-only; no character in the current enrichment snapshot has these fields populated yet, so this is dormant until that data lands).
+- [x] Fixed `entityName()` to resolve by kind when the caller already knows it, instead of always preferring `location` over `community`/`faction` for ids the two intentionally share (`alexandria`, `hilltop`, `civic-republic`, `burazi`, …). Documented the collision pattern in `data/README.md`.
+- [x] Added a `category` (family/affiliation/conflict/crossover) to every connection, classified from its existing label — no new relationship facts. Documented in `data/README.md`, enforced by `scripts/audit-atlas.mjs`, exposed as a second filter row in the relationship graph.
+- Not attempted this pass (real per-character research needed to avoid inventing data): death/disappearance/status-change provenance, and character-to-universe-event navigation (the 9 recorded universe events carry no `characterIds` yet).
+
 ## Validation
 
 The repository has a data validator and a deployment-time AMC media ingestion step.

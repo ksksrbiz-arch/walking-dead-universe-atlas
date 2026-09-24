@@ -19,10 +19,18 @@ export const sourceById=index(atlasData.sources as any[]);
 export const episodesFor=(ids:string[])=>ids.map(id=>episodeById.get(id)).filter(Boolean).sort(compareEpisodesChronologically) as any[];
 export const locationsFor=(ids:Iterable<string>)=>[...new Set(ids)].map(id=>locationById.get(id)).filter(Boolean) as Location[];
 
-// Display name for any registry id, used where a record's kind is not known.
-// Prefer resolveConnectionEndpoint when the kind *is* known (ids collide across kinds).
-export function entityName(id:string){
- const item:any=characterById.get(id)??locationById.get(id)??communityById.get(id)??factionById.get(id)??seriesById.get(id)??connectionById.get(id)??episodeById.get(id);
+const byKind:Record<string,Map<string,any>>={
+ character:characterById,location:locationById,community:communityById,faction:factionById,
+ series:seriesById,connection:connectionById,episode:episodeById
+};
+
+// Display name for any registry id. Some ids are intentionally shared across
+// kinds (a place and the community living there, e.g. "alexandria") — pass
+// kind whenever it's already known (resolveConnectionEndpoint, a graph node)
+// so the right record wins instead of the default character/location-first scan.
+export function entityName(id:string,kind?:string){
+ const typed=kind&&byKind[kind]?.get(id);
+ const item:any=typed??characterById.get(id)??locationById.get(id)??communityById.get(id)??factionById.get(id)??seriesById.get(id)??connectionById.get(id)??episodeById.get(id);
  return item?.name||item?.title||item?.label||id;
 }
 

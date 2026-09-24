@@ -12,6 +12,7 @@ import {useAtlasFocusController} from "./lib/entityFocus";
 import type {AtlasFocus,AtlasFocusKind} from "./lib/entityFocus";
 import {getCharacterEpisodeIds,getLocationEpisodeIds} from "./lib/entityGraph";
 import {useWatchProgress} from "./lib/watchProgress";
+import {useFollowedCharacters} from "./lib/followedCharacters";
 import {initAtlasPerformance,trackAtlasMetric} from "./lib/performance";
 import {getRuntimeMeta,getRuntimeRelationships} from "./lib/runtime";
 import {AtlasContext} from "./lib/atlasContext";
@@ -94,6 +95,7 @@ export default function App(){
  const [navStack,setNavStack]=useState<NavEntry[]>([]);
  const [journeyId,setJourneyId]=useState<string|null>(null);
  const {watched,toggleWatched,resetWatched}=useWatchProgress();
+ const {followed,toggleFollowed}=useFollowedCharacters();
  const [dataErrors,setDataErrors]=useState<string[]>([]);
  const [layout,setLayout]=useState(readLayout);
  const isPanel=layout.panel,isMobileMap=layout.touch;
@@ -414,7 +416,7 @@ export default function App(){
   requestAnimationFrame(()=>sheetRef.current?.focus({preventScroll:true}));
  };
 
- const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,showConnectionOnMap,setYear,year,watched,toggleWatched,resetWatched};
+ const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,showConnectionOnMap,setYear,year,watched,toggleWatched,resetWatched,followed,toggleFollowed};
 
  // ---- Browser back closes overlays / walks the detail stack -------------------
  const somethingOpen=searchOpen||!!focus||!!clusterIds;
@@ -601,7 +603,7 @@ export default function App(){
  // ---- Render -----------------------------------------------------------------
  const era=describeEra(year);
  const journeyName=journeyId?characterById.get(journeyId)?.name:null;
- const focusTitle=focus?(focus.kind==="episode"?(episodeById.get(focus.id) as any)?.title:focus.kind==="connection"?(connectionById.get(focus.id) as any)?.label:focus.kind==="community"?communityById.get(focus.id)?.name:focus.kind==="faction"?factionById.get(focus.id)?.name:entityName(focus.id)):"";
+ const focusTitle=focus?(focus.kind==="episode"?(episodeById.get(focus.id) as any)?.title:focus.kind==="connection"?(connectionById.get(focus.id) as any)?.label:focus.kind==="community"?communityById.get(focus.id)?.name:focus.kind==="faction"?factionById.get(focus.id)?.name:entityName(focus.id,focus.kind)):"";
  const sheetStyle=!isPanel&&view==="map"?{height:sheetHeightFor(snap)+"px"} as CSSProperties:undefined;
  const detail=focus&&(focus.kind==="location"?<LocationDetail id={focus.id}/>:focus.kind==="episode"?<EpisodeDetail id={focus.id}/>:focus.kind==="character"?<CharacterDetail id={focus.id}/>:focus.kind==="connection"?<ConnectionDetail id={focus.id}/>:<GroupDetail kind={focus.kind} id={focus.id}/>);
  const page=view==="timeline"?<TimelineView/>:view==="people"?<PeopleView/>:view==="watch"?<WatchView errors={dataErrors}/>:<MapOverview year={year} seriesId={seriesId} locations={mapLocations} onOpenTimeline={()=>goView("timeline")}/>;

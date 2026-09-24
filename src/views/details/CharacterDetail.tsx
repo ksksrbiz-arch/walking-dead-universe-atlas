@@ -10,11 +10,24 @@ import {getCharacterEpisodeIds} from "../../lib/entityGraph";
 import {getRuntimeEpisodeIds} from "../../lib/runtime";
 import {characterImage,hasMapCoordinates} from "../../lib/atlasHelpers";
 import {seriesColor,seriesShort} from "../../lib/series";
-import {ConnectionList,GraphSection,WikiSection} from "./shared";
+import {ConnectionList,GraphSection,WikiSection,fandomRecord} from "./shared";
+
+// Wiki status text is free-form ("Deceased", "Alive", "Missing"); read it for
+// a coarse tone rather than asserting a status we haven't sourced.
+function statusTone(status:unknown):"good"|"warn"|"muted"{
+ const text=(Array.isArray(status)?status.join(" "):String(status)).toLowerCase();
+ if(/deceased|dead|killed/.test(text))return "warn";
+ if(/missing|unknown|presumed/.test(text))return "muted";
+ return "good";
+}
 
 export default function CharacterDetail({id}:{id:string}){
- const {showCharacterJourney,watched}=useAtlas();
+ const {showCharacterJourney,watched,followed,toggleFollowed}=useAtlas();
  const character=characterById.get(id) as any;
+ const wiki=fandomRecord("characters",id);
+ const status=wiki?.hints?.status??wiki?.fields?.status;
+ const aliases=wiki?.hints?.aliases??wiki?.fields?.aliases;
+ const isFollowed=followed.has(id);
  const [runtimeIds,setRuntimeIds]=useState<string[]|null>(null);
  const [showAll,setShowAll]=useState(false);
  useEffect(()=>{let active=true;setRuntimeIds(null);setShowAll(false);void getRuntimeEpisodeIds("character",id).then(ids=>{if(active)setRuntimeIds(ids)});return()=>{active=false}},[id]);
@@ -38,10 +51,12 @@ export default function CharacterDetail({id}:{id:string}){
  const mappedPlaces=places.filter(hasMapCoordinates).length;
  return <div className="detail">
   <Hero portrait image={characterImage(character)} accent={accent} icon="person" kicker={<>Character · {(character.seriesIds||[]).map((s:string)=>seriesShort(s)).join(" · ")}</>} title={character.name}>
-   <div className="chipRow">{firstYear?<Chip icon="clock">From {firstYear}</Chip>:null}<Chip tone={certaintyTone(character.certainty)}>{character.certainty||"tracked"}</Chip></div>
+   {aliases&&<p className="aliasLine">Also known as {Array.isArray(aliases)?aliases.join(" · "):aliases}</p>}
+   <div className="chipRow">{firstYear?<Chip icon="clock">From {firstYear}</Chip>:null}<Chip tone={certaintyTone(character.certainty)}>{character.certainty||"tracked"}</Chip>{status&&<Chip tone={statusTone(status)}>{Array.isArray(status)?status.join(" · "):status}</Chip>}</div>
   </Hero>
   <ActionBar>
    <button className="btn primary" disabled={!mappedPlaces} onClick={()=>showCharacterJourney(id)}><Icon name="route"/>{mappedPlaces?`Trace journey · ${mappedPlaces} places`:"No mapped journey"}</button>
+   <button className={"followToggle"+(isFollowed?" on":"")} aria-pressed={isFollowed} aria-label={isFollowed?`Unfollow ${character.name}`:`Follow ${character.name}`} onClick={()=>toggleFollowed(id)}><Icon name="star"/></button>
   </ActionBar>
   <Stats items={[{label:"Episodes",value:eps.length},{label:"Places",value:places.length},{label:"Series",value:(character.seriesIds||[]).length},{label:"You've seen",value:eps.length?`${Math.round(seen/eps.length*100)}%`:"—"}]}/>
   {spans.length>0&&<Section title="Journey across the universe">

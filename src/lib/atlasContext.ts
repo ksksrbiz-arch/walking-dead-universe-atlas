@@ -18,6 +18,8 @@ export type AtlasActions={
  watched:Set<string>;
  toggleWatched:(id:string)=>void;
  resetWatched:()=>void;
+ followed:Set<string>;
+ toggleFollowed:(id:string)=>void;
 };
 
 export const AtlasContext=createContext<AtlasActions|null>(null);

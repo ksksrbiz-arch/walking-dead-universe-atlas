@@ -96,9 +96,11 @@ const endpointKinds={
   "character-faction":["characters","factions"],"character-location":["characters","locations"],"character-character":["characters","characters"],"character-community":["characters","communities"],"community-community":["communities","communities"],
   "community-faction":["communities","factions"],"faction-community":["factions","communities"],"community-series":["communities","series"],"faction-series":["factions","series"],"cross-series":["characters","series"],"lore":["characters","series"]
 };
+const connectionCategories=new Set(["family","conflict","affiliation","crossover"]);
 for(const c of connections){
   if(c.fromId===c.toId)fail.push(`Connection ${c.id}: self-reference`);
   if(!c.label?.trim())fail.push(`Connection ${c.id}: missing label`);
+  if(!connectionCategories.has(c.category))fail.push(`Connection ${c.id}: invalid category ${c.category}`);
   const expected=endpointKinds[c.type];
   if(expected){
     const fromSet=sets[expected[0]];

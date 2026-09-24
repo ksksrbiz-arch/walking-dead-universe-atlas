@@ -5,7 +5,8 @@
     "fromId": "rick-grimes",
     "toId": "crm",
     "label": "Rick is captured and held by the CRM",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "conflict"
   },
   {
     "id": "morgan-twd-ftwd",
@@ -13,7 +14,8 @@
     "fromId": "morgan-jones",
     "toId": "ftwd",
     "label": "Morgan continues his story in Fear",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "daryl-europe",
@@ -21,7 +23,8 @@
     "fromId": "daryl-dixon",
     "toId": "france",
     "label": "Daryl's European storyline",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "carol-daryl",
@@ -29,7 +32,8 @@
     "fromId": "carol-peletier",
     "toId": "daryl-dixon",
     "label": "Long-running survivor partnership",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "maggie-negan",
@@ -37,7 +41,8 @@
     "fromId": "maggie-rhee",
     "toId": "negan-smith",
     "label": "Dead City central relationship",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "rick-michonne",
@@ -45,7 +50,8 @@
     "fromId": "rick-grimes",
     "toId": "michonne",
     "label": "Rick and Michonne",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "dwight-fear",
@@ -53,7 +59,8 @@
     "fromId": "dwight",
     "toId": "ftwd",
     "label": "Dwight crosses into Fear",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "sherry-fear",
@@ -61,7 +68,8 @@
     "fromId": "sherry",
     "toId": "ftwd",
     "label": "Sherry crosses into Fear",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "jadis-world-beyond",
@@ -69,7 +77,8 @@
     "fromId": "jadis-stokes",
     "toId": "wb",
     "label": "Anne/Jadis appears in World Beyond",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "jadis-owl",
@@ -77,7 +86,8 @@
     "fromId": "jadis-stokes",
     "toId": "owl",
     "label": "Jadis/Anne returns in The Ones Who Live",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "michonne-owl",
@@ -85,7 +95,8 @@
     "fromId": "michonne",
     "toId": "owl",
     "label": "Michonne is a central protagonist",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "maggie-dead-city",
@@ -93,7 +104,8 @@
     "fromId": "maggie-rhee",
     "toId": "dead",
     "label": "Maggie leads Dead City",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "negan-dead-city",
@@ -101,7 +113,8 @@
     "fromId": "negan-smith",
     "toId": "dead",
     "label": "Negan leads Dead City",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "alpha-tales",
@@ -109,7 +122,8 @@
     "fromId": "alpha",
     "toId": "tales",
     "label": "Alpha's backstory appears in Tales",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "lydia-tales",
@@ -117,7 +131,8 @@
     "fromId": "lydia",
     "toId": "tales",
     "label": "Lydia appears in the Alpha/Dee story",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "jenner-world-beyond",
@@ -125,7 +140,8 @@
     "fromId": "edwin-jenner",
     "toId": "wb",
     "label": "Jenner appears through archived video",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "jenner-variant-lore",
@@ -133,7 +149,8 @@
     "fromId": "edwin-jenner",
     "toId": "twd",
     "label": "Jenner connects early CDC research to later outbreak lore",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "campus-omaha",
@@ -141,7 +158,8 @@
     "fromId": "campus-colony",
     "toId": "omaha",
     "label": "Campus Colony is part of the broader Alliance of the Three era",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "crm-omaha",
@@ -149,7 +167,8 @@
     "fromId": "crm",
     "toId": "omaha",
     "label": "CRM destroys Omaha",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "conflict"
   },
   {
     "id": "crm-portland",
@@ -157,7 +176,8 @@
     "fromId": "crm",
     "toId": "portland-alliance",
     "label": "CRM targets Portland",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "conflict"
   },
   {
     "id": "commonwealth-twd",
@@ -165,7 +185,8 @@
     "fromId": "commonwealth",
     "toId": "twd",
     "label": "Commonwealth becomes the late-series civilization center",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "burazi-dead-city",
@@ -173,7 +194,8 @@
     "fromId": "burazi",
     "toId": "dead",
     "label": "Burazi control Manhattan in Dead City",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "new-babylon-dead-city",
@@ -181,7 +203,8 @@
     "fromId": "new-babylon-federation",
     "toId": "dead",
     "label": "New Babylon is a major post-TWD power",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "crossover"
   },
   {
     "id": "rick-lori",
@@ -189,7 +212,8 @@
     "fromId": "rick-grimes",
     "toId": "lori-grimes",
     "label": "Married before the outbreak",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "family"
   },
   {
     "id": "abraham-eugene",
@@ -197,7 +221,8 @@
     "fromId": "abraham-ford",
     "toId": "eugene-porter",
     "label": "Escorts Eugene to Washington",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "tyreese-sasha",
@@ -205,7 +230,8 @@
     "fromId": "tyreese-williams",
     "toId": "sasha-williams",
     "label": "Siblings who join the prison group",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "family"
   },
   {
     "id": "daryl-beth",
@@ -213,7 +239,8 @@
     "fromId": "daryl-dixon",
     "toId": "beth-greene",
     "label": "Survive together after the prison falls",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "eugene-rosita",
@@ -221,7 +248,8 @@
     "fromId": "eugene-porter",
     "toId": "rosita-espinosa",
     "label": "Part of the same group escorting Eugene",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "andrea-dale",
@@ -229,7 +257,8 @@
     "fromId": "andrea-harrison",
     "toId": "dale-horvath",
     "label": "Dale is Andrea's closest confidant",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "connie-kelly",
@@ -237,7 +266,8 @@
     "fromId": "connie",
     "toId": "kelly",
     "label": "Sisters who survive together",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "family"
   },
   {
     "id": "magna-yumiko",
@@ -245,7 +275,8 @@
     "fromId": "magna",
     "toId": "yumiko-okumura",
     "label": "Partners who arrive with Connie's group",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "madison-travis",
@@ -253,7 +284,8 @@
     "fromId": "madison-clark",
     "toId": "travis-manawa",
     "label": "Partners raising their children together",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "family"
   },
   {
     "id": "alicia-nick",
@@ -261,7 +293,8 @@
     "fromId": "alicia-clark",
     "toId": "nick-clark",
     "label": "Madison's children",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "family"
   },
   {
     "id": "strand-madison",
@@ -269,7 +302,8 @@
     "fromId": "victor-strand",
     "toId": "madison-clark",
     "label": "Uneasy alliance after the outbreak",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "conflict"
   },
   {
     "id": "daniel-ofelia",
@@ -277,7 +311,8 @@
     "fromId": "daniel-salazar",
     "toId": "ofelia-salazar",
     "label": "Daniel is Ofelia's father",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "family"
   },
   {
     "id": "isabelle-laurent",
@@ -285,7 +320,8 @@
     "fromId": "isabelle",
     "toId": "laurent",
     "label": "Isabelle becomes Laurent's protector in France",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "daryl-quinn",
@@ -293,7 +329,8 @@
     "fromId": "daryl-dixon",
     "toId": "quinn",
     "label": "Daryl negotiates with Quinn at the Demimonde",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "elton-silas",
@@ -301,7 +338,8 @@
     "fromId": "elton-ortiz",
     "toId": "silas-plaskett",
     "label": "Part of the Campus Colony scouting quartet",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "felix-huck",
@@ -309,7 +347,8 @@
     "fromId": "felix-carlucci",
     "toId": "huck",
     "label": "Serve together as Campus Colony security",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "thorne-beale",
@@ -317,7 +356,8 @@
     "fromId": "pearl-thorne",
     "toId": "jonathan-beale",
     "label": "Thorne serves under Beale in the CRM",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "negan-ginny",
@@ -325,7 +365,8 @@
     "fromId": "negan-smith",
     "toId": "ginny",
     "label": "Negan cares for Ginny after her father's death",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "perlie-maggie",
@@ -333,7 +374,8 @@
     "fromId": "perlie-armstrong",
     "toId": "maggie-rhee",
     "label": "Comes to respect Maggie's leadership in Dead City",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "affiliation"
   },
   {
     "id": "gregory-maggie",
@@ -341,6 +383,7 @@
     "fromId": "gregory",
     "toId": "maggie-rhee",
     "label": "Gregory resists Maggie's rise as Hilltop's leader",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "category": "conflict"
   }
 ]
