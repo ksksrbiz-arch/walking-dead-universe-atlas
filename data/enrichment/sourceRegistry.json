@@ -44,24 +44,28 @@
       "id": "walking-dead-api",
       "name": "The Walking Dead API",
       "kind": "community-api",
-      "status": "unverified",
+      "status": "dead",
       "baseUrl": "https://thewalkingdead-api.onrender.com",
       "capabilities": [
         "unknown"
       ],
-      "priority": 40,
-      "notes": "Public listing exists, but endpoint health/documentation must be verified before ingestion."
+      "priority": 0,
+      "verifiedAt": "2026-09-24",
+      "notes": "Verified via `npm run enrich:probe` (data/enrichment/source-health.json): the root, /api, /characters and /swagger paths all 404 on a free-tier Render host. Not usable for ingestion; keep the record for provenance but do not re-probe on a schedule."
     },
     {
       "id": "api-twd-characters",
       "name": "API-TWD-Characters",
       "kind": "community-api",
-      "status": "unverified",
+      "status": "dead",
+      "baseUrl": "https://api-twd-characters-production.up.railway.app",
       "capabilities": [
         "characters"
       ],
-      "priority": 40,
-      "notes": "Character API surfaced by discovery. Endpoint/repository identity must be verified before use."
+      "priority": 0,
+      "verifiedAt": "2026-09-24",
+      "repoUrl": "https://github.com/pedrocpacheco/API-TWD-Characters",
+      "notes": "Repo: github.com/pedrocpacheco/API-TWD-Characters (a small Java/Maven project). Its advertised Railway deployment (baseUrl above, and /characters, /api/characters, /docs, /swagger-ui, /health) all return Railway's own \"Application not found\" 404 — the app is not currently running, not merely undocumented. This session's GitHub access is scoped to this repo only, so the source couldn't be inspected further; nothing to ingest without cloning and hosting someone else's unmaintained service ourselves, which is out of proportion to what it would add over the Fandom wiki API already in use. Not pursued further; revisit only if the Railway app comes back up or a live, documented endpoint surfaces."
     },
     {
       "id": "wikidata",

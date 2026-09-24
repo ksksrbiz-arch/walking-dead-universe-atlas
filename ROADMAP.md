@@ -63,15 +63,15 @@ See `docs/QUALITY_AUDIT_2026-09-20.md` for the current ten-part quality audit an
 - [x] External source health probing
 - [x] Fandom MediaWiki category ingestion foundation
 - [x] Character/location/episode candidate matching foundation
-- [ ] Verify the standalone Walking Dead API endpoints and schema
-- [ ] Verify API-TWD-Characters endpoint/repository and schema
-- [ ] Fetch Fandom page-level structured metadata and media
+- [x] Verify the standalone Walking Dead API endpoints — the four tested paths (root, `/api`, `/characters`, `/swagger`) are all unavailable (404); no schema was ever returned to verify (`data/enrichment/sourceRegistry.json` id `walking-dead-api`)
+- [x] Verify API-TWD-Characters endpoint — its advertised Railway deployment is unavailable (404 on every tested path); no schema was ever returned to verify (`sourceRegistry.json` id `api-twd-characters`)
+- [x] Fetch Fandom page-level structured metadata and media — `data/enrichment/fandom-canonical.json` (per-entity pages) + `public/data/fandom-galleries/*` (per-entity galleries, 77/77 characters, 75/79 locations, 360/363 episodes)
+- [x] Enrich character dossiers — aliases, wiki status, Fandom portraits/galleries, journeys (#49/#50, Journeys v2)
+- [x] Enrich location dossiers — Fandom images/galleries, map-layer typing
+- [x] Enrich episode dossiers — Fandom stills (354/363 episode-specific), AMC frames, per-episode galleries
+- [x] Add character travel/journey enrichment — reconsidered: Journeys v2 derives routes from episode/place data at render time rather than writing travel data into the dataset, specifically so nothing is invented (see `context/references/journeys-and-sharing.md`). Done under that constraint; revisit only if a real source of travel dates/routes ever exists.
 - [ ] Build enrichment review queue
 - [ ] Approve/promote enrichment patches into canonical data
-- [ ] Add external IDs and entity reconciliation
-- [ ] Enrich character dossiers
-- [ ] Enrich location dossiers
-- [ ] Enrich episode dossiers
+- [ ] Add external IDs and entity reconciliation (start with Wikidata, currently `planned` in `sourceRegistry.json`)
 - [ ] Add source/provenance UI
-- [ ] Add character travel/journey enrichment
-- [ ] Automate scheduled source snapshots and change detection
+- [ ] Automate scheduled source snapshots and change detection — partially built (`.github/workflows/fandom-enrichment.yml` runs on push to enrichment scripts/manual dispatch; `api/cron/fandom-sync.ts` + `api/cron/media-sync.ts` are wired to daily Vercel crons but forward to a `FANDOM_SYNC_ENDPOINT`/`MEDIA_SYNC_ENDPOINT` that isn't configured, so they 503 today) — not a real timer-based schedule yet
