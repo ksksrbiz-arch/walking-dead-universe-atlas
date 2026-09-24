@@ -33,7 +33,7 @@
     "enrich:fandom-galleries": "node scripts/enrich-fandom-galleries.mjs",
     "ingest:amc-media-exhaustive": "node scripts/ingest-amc-media-exhaustive.mjs",
     "build:enrichment": "npm run ingest:media && npm run ensure:fandom-canonical && npm run cache:media && npm run audit:atlas && vite build",
-    "build:vercel": "vite build",
+    "build:vercel": "vite build --emptyOutDir",
     "sync:vercel": "node scripts/sync-vercel-atlas.mjs"
   },
   "dependencies": {
