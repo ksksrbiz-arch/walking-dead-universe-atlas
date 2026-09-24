@@ -1,6 +1,7 @@
 import {useEffect,useMemo,useState} from "react";
 import {atlasData} from "../data";
 import {entityGraph as graph} from "../lib/entityGraph";
+import {atlasImageUrl,resolveCharacterImage,onAtlasImageError} from "../lib/media";
 import AtlasIcon,{type AtlasIconName} from "./AtlasIcon";
 
 type Props={
@@ -122,9 +123,11 @@ export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConn
       const episode=other.kind==="episode"?atlasData.episodes.find((e:any)=>e.id===other.id):null;
       const types=[...new Set(edgeList.map((edge:any)=>edge.type.replaceAll("_"," ")))];
       const evidence=edgeList.filter((edge:any)=>edge.evidenceId).length;
+      const characterRecord=other.kind==="character"?atlasData.characters.find((c:any)=>c.id===other.id) as any:null;
+      const portrait=characterRecord?resolveCharacterImage(characterRecord.id,characterRecord.name,characterRecord.seriesIds).image:"";
       return <button key={other.kind+":"+other.id} className={"entityGraphNode kind-"+other.kind} onClick={()=>select(other.kind,other.id)}>
        <span className="entityGraphNodeTop"><i><AtlasIcon name={iconForKind(other.kind)} />{labels[other.kind]||other.kind.toUpperCase()}</i><em><AtlasIcon name={iconForEdge(primary.type)} />{confidenceLabel(primary.confidence)}</em></span>
-       <b><AtlasIcon name={iconForEdge(primary.type)} />{text}</b>
+       <b>{portrait&&<img className="entityGraphNodeAvatar" src={atlasImageUrl(portrait,80)} onError={e=>onAtlasImageError(e,portrait)} loading="lazy" decoding="async" alt=""/>}{!portrait&&<AtlasIcon name={iconForEdge(primary.type)} />}{text}</b>
        {episode
          ? <small>{episode.seriesId?.toUpperCase()} · S{String(episode.seasonId).slice(-2)}E{String(episode.episodeNumber).padStart(2,"0")} · {episode.timelineStart??"?"}{edgeList.length>1?" · "+edgeList.length+" indexed links":""}</small>
          : <small>{types.slice(0,2).join(" · ")}{types.length>2?" · +"+(types.length-2)+" types":""}{evidence?" · "+evidence+" episode evidence"+(evidence===1?"":"s"):""}{primary.to.kind==="connection"||primary.from.kind==="connection"?" · DOCUMENTED LINK":""}</small>}

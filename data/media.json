@@ -36,6 +36,11 @@
       "name": "The Walking Dead: Dead City",
       "keyArt": "https://images.cds.amcn.com/amcn/tve/DeadCity_308_ultrawide.jpg",
       "sourcePage": "https://www.amc.com/shows/the-walking-dead-dead-city"
+    },
+    "more-tales": {
+      "name": "More Tales from the TWDU",
+      "status": "announced-not-yet-released",
+      "note": "0 episodes in the current dataset; no official key art exists yet for this announced anthology series."
     }
   },
   "episodes": {
@@ -245,6 +250,18 @@
     "negan-smith": {
       "kind": "character",
       "status": "needs-official-portrait"
+    },
+    "genet": {
+      "kind": "character",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/4/49/Season_two_marion_genet.png/revision/latest?cb=20241021220755",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Marion_Genet_(Daryl_Series)",
+      "status": "verified",
+      "note": "Fandom's own auto-matched candidate for this character (Season_two_adrien.png) was a different character; resolved directly via the Fandom page's own designated page image instead."
+    },
+    "isabelle": {
+      "kind": "character",
+      "status": "needs-official-portrait",
+      "note": "Isabelle's Fandom page has no page image and no gallery entry yet; only unrelated stock image found. Left on the generic series key-art fallback rather than guessed."
     }
   }
 }
