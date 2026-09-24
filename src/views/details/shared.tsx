@@ -28,6 +28,13 @@ export function fandomRecord(entityType:"characters"|"locations"|"episodes",id:s
 
 // Wiki facts, summary and cross-links. Summary + key facts are shown inline;
 // the long tail (page sections, every raw field) sits behind a disclosure.
+//
+// The enrichment sync currently ships a "raw sync" record (identity +
+// provenance + image_urls only — see data/enrichment/fandom-canonical.json's
+// own `policy` string). hints/fields/extract/details.linkedPages belong to a
+// later publish step that hasn't run for this snapshot, so every field below
+// is read defensively: real today (sourceUrl, revision, synced_at) or a
+// future publish stage populates it, never both silently empty.
 export function WikiSection({entityType,entityId}:{entityType:"characters"|"locations"|"episodes";entityId:string}){
  const {openCharacter,openLocation,openEpisode}=useAtlas();
  const record=fandomRecord(entityType,entityId);
@@ -40,12 +47,17 @@ export function WikiSection({entityType,entityId}:{entityType:"characters"|"loca
  const entities=atlasEntities();
  const linked=links.map(page=>{const key=normalize(page);return entities.find(x=>x.keys.includes(key))}).filter(Boolean).filter((x,i,a)=>a.findIndex(y=>y!.kind===x!.kind&&y!.id===x!.id)===i).slice(0,24) as {kind:string;id:string}[];
  const open=(x:{kind:string;id:string})=>x.kind==="character"?openCharacter(x.id):x.kind==="location"?openLocation(x.id):openEpisode(x.id);
+ const sourceUrl:string|undefined=record.sourceUrl||record.fandom_url||record.metadata?.sourceUrl;
+ const syncedDate=typeof record.synced_at==="string"?record.synced_at.slice(0,10):null;
+ const hasContent=Boolean(record.extract)||facts.length>0||extra.length>0||linked.length>0||Boolean(sourceUrl);
+ if(!hasContent)return null;
  return <Section title="From the wiki" collapsible defaultOpen={Boolean(record.extract)}>
   {record.extract&&<p className="prose">{record.extract}</p>}
   {facts.length>0&&<dl className="facts">{facts.map(([key,value])=><div key={key}><dt>{FACT_LABELS[key]||prettyType(key.replaceAll("_"," "))}</dt><dd>{asText(value)}</dd></div>)}</dl>}
   {linked.length>0&&<><h4 className="subhead">Also in the atlas</h4><div className="chipList">{linked.map(x=><button key={x.kind+x.id} className="linkChip" onClick={()=>open(x)}><Icon name={x.kind==="character"?"person":x.kind==="location"?"pin":"film"}/>{entityName(x.id,x.kind)}</button>)}</div></>}
   {extra.length>0&&<details className="disclosure"><summary>All wiki fields ({extra.length})</summary><dl className="facts">{extra.map(([key,value])=><div key={key}><dt>{prettyType(key.replaceAll("_"," "))}</dt><dd>{asText(value)}</dd></div>)}</dl></details>}
-  {record.sourceUrl&&<a className="sourceLink" href={record.sourceUrl} target="_blank" rel="noreferrer"><span>Walking Dead Wiki source page</span><Icon name="external"/></a>}
+  {sourceUrl&&<a className="sourceLink" href={sourceUrl} target="_blank" rel="noreferrer"><span>Walking Dead Wiki source page</span><Icon name="external"/></a>}
+  {sourceUrl&&syncedDate&&<p className="provenanceNote">Synced {syncedDate}{record.fandom_revision?` · revision ${record.fandom_revision}`:""}</p>}
  </Section>;
 }
 

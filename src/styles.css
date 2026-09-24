@@ -334,6 +334,7 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .facts dd{margin:2px 0 0;font-size:14px;overflow-wrap:anywhere}
 .sourceLink{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;min-height:46px;padding:0 14px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);text-decoration:none;font-size:14px}
 .sourceLink .icon{width:16px}
+.provenanceNote{margin:6px 2px 0;font-size:12px;color:var(--text-3)}
 .disclosure{margin-top:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);padding:0 12px}
 .disclosure summary{min-height:46px;display:flex;align-items:center;font-weight:600;font-size:14px;cursor:pointer;list-style:none}
 .disclosure summary::-webkit-details-marker{display:none}
