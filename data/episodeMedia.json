@@ -54,9 +54,11 @@
       "title": "Deux Amours",
       "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc-card",
-      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050006_walking-dead-dixon_105__img_wide_16x9.jpg",
-      "verifiedAt": "2026-09-19T22:06:12.763Z"
+      "source": "fandom",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/b/bb/Daryl_Dixon_1x05_Gladiator_Daryl.jpg/revision/latest?cb=20231011075145",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Deux_Amours",
+      "verifiedAt": "2026-09-24T17:24:00.000Z",
+      "note": "Replaced dead AMC CDN asset (episode_tms_EP048017050006...) which returned 403 upstream / 502 through the media proxy on 2026-09-24."
     },
     "daryl-s01-e06": {
       "seriesId": "daryl",
@@ -153,9 +155,11 @@
       "title": "La Ofrenda",
       "status": "verified",
       "kind": "official-episode-image",
-      "source": "amc-card",
-      "image": "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050047_walking-dead-dixon_302__img_wide_16x9_o7tmi1i7wse.jpg",
-      "verifiedAt": "2026-09-19T22:06:12.763Z"
+      "source": "fandom",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/5/59/Daryl_Dixon_3x02_News.jpg/revision/latest?cb=20250916220506",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/La_Ofrenda",
+      "verifiedAt": "2026-09-24T17:24:00.000Z",
+      "note": "Replaced dead AMC CDN asset (episode_tms_EP048017050047...) which returned 403 upstream / 502 through the media proxy on 2026-09-24."
     },
     "daryl-s03-e03": {
       "seriesId": "daryl",
