@@ -70,6 +70,10 @@ img{display:block}
 .clusterRing{fill:#0d1211;stroke:currentColor;stroke-width:2.5}
 .clusterCount{fill:#f3f1e8;font:700 12px var(--font);pointer-events:none}
 .markerCluster.context .clusterRing{stroke-width:3.5;filter:drop-shadow(0 0 5px currentColor)}
+.journeyRoute path{fill:none;stroke:var(--accent-2);stroke-width:2;stroke-dasharray:6 5;opacity:.8;vector-effect:non-scaling-stroke;pointer-events:none}
+.journeyStop{pointer-events:none}
+.journeyStop circle{fill:var(--accent);stroke:#0d1211;stroke-width:1.5}
+.journeyStop text{fill:#fff;font:800 9px var(--font)}
 .has-context .marker:not(.context):not(.selected),.has-context .markerCluster:not(.context){opacity:.4}
 
 /* ---- Top bar -------------------------------------------------------------- */
@@ -222,6 +226,8 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .rowMain{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:8px 6px 8px 12px;min-height:58px;background:none;border:0;border-radius:14px;text-align:left}
 .rowThumb{position:relative;flex:none;width:76px;height:46px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 26%,#181d1a),#181d1a);display:grid;place-items:center;color:rgba(236,235,228,.25)}
 .rowThumb img,.episodeCardArt img,.upNextArt img,.heroMedia img,.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rowThumb.small{width:56px;height:34px;border-radius:7px}
+.rowThumb.small .icon{width:16px;height:16px}
 .isWatched .rowText b{color:var(--text-2)}
 .isWatched .rowThumb img,.isWatched .episodeCardArt img{filter:grayscale(.7) brightness(.6)}
 .placeGlyph,.linkGlyph,.eventGlyph,.endpointGlyph{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--c,#9aa6a1) 16%,transparent);color:var(--c,var(--text-2))}
@@ -486,6 +492,7 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .entityGraphNodeTop svg,.entityGraphNode b svg{width:14px;height:14px;flex:none}
 .entityGraphNode b{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .entityGraphNode small{font-size:11.5px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:capitalize}
+.entityGraphNodeAvatar{width:20px;height:20px;border-radius:50%;object-fit:cover;flex:none;background:var(--surface-3)}
 .entityGraphMore{grid-column:1/-1;text-align:center;font-size:12px;color:var(--text-3);padding:6px}
 
 .miniTimeline{padding:10px 12px 12px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)}

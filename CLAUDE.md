@@ -39,4 +39,4 @@ src/views/details/          Episode/Location/Character/Group/Connection detail
 
 ## Commands
 
-`npm run typecheck` · `npm run build` · `npm run audit:atlas` · `npm run test:ui` (needs a running `vite preview` on :4173 and Playwright — see script header)
+`npm run typecheck` · `npm run build` · `npm run audit:atlas` · `npm run media:manifest` (after media edits) · `npm run test:ui` (needs a running `vite preview` on :4173 and Playwright — see script header)

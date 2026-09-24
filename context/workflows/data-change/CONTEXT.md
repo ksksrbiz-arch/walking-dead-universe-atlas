@@ -16,7 +16,8 @@
 1. Modify source data with provenance and certainty.
 2. Regenerate derived indexes (`characterEpisodes`, `locationEpisodes`, `connectionEpisodes`) where relationships changed.
 3. `npm run audit:atlas` — check reverse references, chronology and coordinates.
-4. Unknown coordinates stay `(0,0)` + `certainty: "unknown"`; the UI lists them as "not placed".
+4. Unknown coordinates stay `(0,0)` (the UI treats `(0,0)` as unplaced regardless of certainty and lists it as "not placed").
+5. Media changes (`data/media.json`, `data/episodeMedia.json`): `npm run media:manifest` must report 0 broken.
 
 ## Completion
 - Audit PASS; episode count still 363 unless the change is an intentional addition documented in `data/README.md`.

@@ -50,7 +50,7 @@ export default function WatchView({errors}:{errors:string[]}){
   <Section title={series?`${seriesShort(series)} in story order`:"Full story order"} count={rows.length} action={<div className="segmented small" role="group">{(["todo","all","done"] as Filter[]).map(f=><button key={f} className={filter===f?"active":""} aria-pressed={filter===f} onClick={()=>setFilter(f)}>{f==="todo"?"To watch":f==="all"?"All":"Watched"}</button>)}</div>}>
    <div className="stack watchList" ref={listRef}>{rows.map(e=>{const ep=episodeById.get(e.id) as any;return <div key={e.id} className={"row watchRow"+(watched.has(e.id)?" isWatched":"")} style={{"--c":seriesColor(e.seriesId)} as CSSProperties}>
     <span className="seq">{e.sequence}</span>
-    <button className="rowMain" onClick={()=>openEpisode(e.id)}><span className="rowText"><small><span className="dot"/>{seriesShort(e.seriesId)} · {episodeCode(ep)} · {storyRange(ep)}{e.chronologyStatus!=="anchored"?" · "+e.chronologyStatus.replace("-"," "):""}</small><b>{e.title}</b></span></button>
+    <button className="rowMain" onClick={()=>openEpisode(e.id)}><span className="rowThumb small"><Icon name="film"/><AtlasImage src={episodeImage(ep)} width={160} sizes="56px"/></span><span className="rowText"><small><span className="dot"/>{seriesShort(e.seriesId)} · {episodeCode(ep)} · {storyRange(ep)}{e.chronologyStatus!=="anchored"?" · "+e.chronologyStatus.replace("-"," "):""}</small><b>{e.title}</b></span></button>
     <WatchToggle id={e.id} title={e.title} compact/>
    </div>})}
    {!rows.length&&<p className="empty">Nothing here with this filter.</p>}</div>

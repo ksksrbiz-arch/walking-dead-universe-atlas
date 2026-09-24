@@ -6,6 +6,7 @@ import {atlasData} from "../data";
 import {characterEpisodeCounts,episodeCode,locationEpisodeCounts,locationById,characterById} from "../lib/lookup";
 import {seriesColor,seriesShort} from "../lib/series";
 import {prettyType} from "../lib/atlasHelpers";
+import {PortraitImage} from "../views/details/shared";
 
 export type SearchKind="location"|"character"|"community"|"faction"|"episode";
 type Result={kind:SearchKind;id:string;title:string;meta:string;color?:string};
@@ -84,7 +85,7 @@ export default function SearchOverlay({onClose,onPick}:{onClose:()=>void;onPick:
     {q&&!results.length&&<p className="empty">Nothing matches "{query}". Try a name, a place, or an episode title.</p>}
     {q&&GROUPS.map(g=>{const items=results.filter(r=>r.kind===g.kind).slice(0,g.kind==="episode"?8:6);if(!items.length)return null;return <section key={g.kind} className="searchGroup">
      <h4 className="subhead">{g.label}</h4>
-     <div className="stack">{items.map(r=><button key={r.kind+r.id} className="row" style={{"--c":r.color||"#9aa6a1"} as CSSProperties} onClick={()=>pick(r.kind,r.id)}><span className="linkGlyph"><Icon name={g.icon}/></span><span className="rowText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron" className="rowChevron"/></button>)}</div>
+     <div className="stack">{items.map(r=><button key={r.kind+r.id} className="row" style={{"--c":r.color||"#9aa6a1"} as CSSProperties} onClick={()=>pick(r.kind,r.id)}>{r.kind==="character"?<PortraitImage id={r.id} name={r.title} size="sm"/>:<span className="linkGlyph"><Icon name={g.icon}/></span>}<span className="rowText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron" className="rowChevron"/></button>)}</div>
     </section>})}
    </div>
   </div>

@@ -7,7 +7,7 @@ import {atlasData} from "../../data";
 import {characterById,episodesFor,locationById} from "../../lib/lookup";
 import {getLocationEpisodeIds} from "../../lib/entityGraph";
 import {getRuntimeEpisodeIds} from "../../lib/runtime";
-import {hasMapCoordinates,locationImage,prettyType,seriesKeyArt} from "../../lib/atlasHelpers";
+import {hasMapCoordinates,locationImage,prettyType} from "../../lib/atlasHelpers";
 import {SERIES_BY_ID,seriesColor} from "../../lib/series";
 import {ConnectionList,GraphSection,PortraitStrip,WikiSection} from "./shared";
 
@@ -32,7 +32,7 @@ export default function LocationDetail({id}:{id:string}){
  const seen=direct.filter(e=>watched.has(e.id)).length;
  const mapped=hasMapCoordinates(location);
  return <div className="detail">
-  <Hero image={locationImage(location)||seriesKeyArt(location.seriesId)} accent={meta?.color} icon="pin" kicker={<><span className="dot" style={{background:seriesColor(location.seriesId)}}/>{meta?.name} · {prettyType(location.type)}</>} title={location.name}>
+  <Hero image={locationImage(location)} accent={meta?.color} icon="pin" kicker={<><span className="dot" style={{background:seriesColor(location.seriesId)}}/>{meta?.name} · {prettyType(location.type)}</>} title={location.name}>
    <div className="chipRow"><Chip icon="clock">First seen {location.year}</Chip><Chip tone={certaintyTone(location.certainty)}>{location.certainty}</Chip></div>
   </Hero>
   <ActionBar>

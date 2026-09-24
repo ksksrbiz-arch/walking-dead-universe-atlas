@@ -4,7 +4,7 @@
  *
  * This does NOT trust upload counts or deployment status. For every character,
  * location and episode it replicates the exact resolution order the live app
- * uses (src/lib/atlasHelpers.ts: curated data/media.json / data/episodeMedia.json first,
+ * uses (src/lib/media.ts: curated data/media.json / data/episodeMedia.json first,
  * then the Fandom canonical heuristic match, then series key art) and then
  * makes a real HTTP request through the same delivery path the browser would
  * use (the Supabase atlas-media proxy for Fandom/AMC sources, a local file
@@ -27,7 +27,7 @@ const SKIP_VERIFY = process.env.MEDIA_MANIFEST_SKIP_VERIFY === "1";
 
 const readJson = async (url) => JSON.parse(await readFile(url, "utf8"));
 
-// Mirrors fandomEntityImage() in src/lib/atlasHelpers.ts. Keep these in sync; this script
+// Mirrors fandomEntityImage() in src/lib/media.ts. Keep these in sync; this script
 // exists specifically so drift between "what we think resolves" and "what the
 // app actually renders" gets caught instead of assumed away.
 function fandomEntityImage(fandomCanonical, entityType, id, name) {
@@ -72,7 +72,7 @@ function deliveryFor(source) {
   return { kind: "direct", requestUrl: source };
 }
 
-function curlCheck(url) {
+function curlCheckOnce(url) {
   return new Promise((resolve) => {
     execFile("curl", [
       "-s", "-L", "-o", "/dev/null",
@@ -87,6 +87,15 @@ function curlCheck(url) {
       resolve({ ok: Boolean(status && status >= 200 && status < 400), httpStatus: status, contentType });
     });
   });
+}
+
+// A single dropped connection under concurrent load shouldn't get reported as a broken
+// asset - retry once before concluding it's actually down.
+async function curlCheck(url) {
+  const first = await curlCheckOnce(url);
+  if (first.ok) return first;
+  await new Promise((r) => setTimeout(r, 800));
+  return curlCheckOnce(url);
 }
 
 async function localStaticCheck(publicPath) {
@@ -120,7 +129,7 @@ async function pool(items, limit, worker) {
 }
 
 async function main() {
-  const [characters, locations, episodes, series, media, episodeMedia, fandomCanonical] = await Promise.all([
+  const [characters, locations, episodes, seriesList, media, episodeMedia, fandomCanonical] = await Promise.all([
     readJson(new URL("characters.json", DATA)),
     readJson(new URL("locations.json", DATA)),
     readJson(new URL("episodes.json", DATA)),
@@ -162,6 +171,13 @@ async function main() {
     entries.push({ entityType: "episodes", id: e.id, name: e.title, source, method, curatedStatus: legacy?.status || null });
   }
 
+  for (const s of seriesList) {
+    const curated = media.series?.[s.id];
+    const source = curated?.image || curated?.keyArt || "";
+    const method = source ? "curated" : "none";
+    entries.push({ entityType: "series", id: s.id, name: s.title || s.shortTitle || s.id, source, method, curatedStatus: curated?.status || null });
+  }
+
   const withDelivery = entries.map((entry) => ({ ...entry, delivery: deliveryFor(entry.source) }));
 
   console.log(`Verifying ${withDelivery.filter((x) => x.delivery).length} resolved assets (concurrency ${CONCURRENCY})...`);
@@ -173,7 +189,7 @@ async function main() {
   const manifest = {
     generatedAt: new Date().toISOString(),
     version: 1,
-    notes: "Reflects the actual live resolution order in src/lib/atlasHelpers.ts (curated data/media.json or data/episodeMedia.json > Fandom canonical heuristic match > series key art), not the Vercel Blob pipeline, which is not currently wired into image rendering.",
+    notes: "Reflects the actual live resolution order in src/lib/media.ts (curated data/media.json or data/episodeMedia.json > Fandom canonical heuristic match > series key art), not the Vercel Blob pipeline, which is not currently wired into image rendering.",
     summary: {},
     entities: verified.map((v) => ({
       entityType: v.entityType,
@@ -183,14 +199,17 @@ async function main() {
       resolutionMethod: v.method,
       curatedStatus: v.curatedStatus,
       deliveryKind: v.delivery?.kind || null,
-      verificationStatus: v.verification.ok === true ? "verified" : v.verification.ok === false ? "broken" : v.verification.ok === null ? "skipped" : "unresolved",
+      // Entities with no resolved source at all (method "none") never had a URL to check -
+      // that's "unresolved", not "broken". "broken" is reserved for a real URL that failed
+      // verification, which is a materially different, more urgent thing to fix.
+      verificationStatus: !v.source ? "unresolved" : v.verification.ok === true ? "verified" : v.verification.ok === false ? "broken" : v.verification.ok === null ? "skipped" : "unresolved",
       httpStatus: v.verification.httpStatus,
       contentType: v.verification.contentType,
       checkedAt: new Date().toISOString(),
     })),
   };
 
-  for (const type of ["characters", "locations", "episodes"]) {
+  for (const type of ["characters", "locations", "episodes", "series"]) {
     const rows = manifest.entities.filter((x) => x.entityType === type);
     manifest.summary[type] = {
       total: rows.length,
@@ -211,6 +230,10 @@ async function main() {
   if (broken.length) {
     console.log(`\n${broken.length} broken/unreachable asset(s):`);
     for (const b of broken.slice(0, 30)) console.log(`  [${b.entityType}] ${b.id} (${b.name}) -> ${b.httpStatus ?? "?"} ${b.resolvedSource}`);
+    // A real URL that stopped resolving is exactly the "asset silently disappeared" case this
+    // manifest exists to catch - fail the run so it can gate a deploy/CI step, same convention
+    // as scripts/audit-atlas.mjs.
+    process.exitCode = 1;
   }
 }
 

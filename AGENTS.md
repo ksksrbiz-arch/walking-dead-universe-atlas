@@ -54,6 +54,8 @@ Current core dataset: **363 episodes**.
 
 When episode/location relationships change: modify source data, regenerate derived indexes, run the structural audit, check reverse references, chronology, and coordinates, then proceed to UI changes.
 
+When character/location/episode/series media (`data/media.json`, `data/episodeMedia.json`) changes: run `npm run media:manifest` (see `docs/DATA_ENRICHMENT_ARCHITECTURE.md`) and confirm 0 broken before considering the change done. It exits non-zero on a broken asset.
+
 Unknown geographic coordinates must not silently render at `(0,0)`.
 
 ## Bug-prevention principle

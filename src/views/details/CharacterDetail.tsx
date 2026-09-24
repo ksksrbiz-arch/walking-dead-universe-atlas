@@ -8,7 +8,7 @@ import {atlasData} from "../../data";
 import {characterById,episodesFor,locationsFor} from "../../lib/lookup";
 import {getCharacterEpisodeIds} from "../../lib/entityGraph";
 import {getRuntimeEpisodeIds} from "../../lib/runtime";
-import {characterImage,hasMapCoordinates,seriesKeyArt} from "../../lib/atlasHelpers";
+import {characterImage,hasMapCoordinates} from "../../lib/atlasHelpers";
 import {seriesColor,seriesShort} from "../../lib/series";
 import {ConnectionList,GraphSection,WikiSection} from "./shared";
 
@@ -37,7 +37,7 @@ export default function CharacterDetail({id}:{id:string}){
  const visible=showAll?eps:eps.slice(0,6);
  const mappedPlaces=places.filter(hasMapCoordinates).length;
  return <div className="detail">
-  <Hero portrait image={characterImage(character)||seriesKeyArt(character.seriesIds?.[0])} accent={accent} icon="person" kicker={<>Character · {(character.seriesIds||[]).map((s:string)=>seriesShort(s)).join(" · ")}</>} title={character.name}>
+  <Hero portrait image={characterImage(character)} accent={accent} icon="person" kicker={<>Character · {(character.seriesIds||[]).map((s:string)=>seriesShort(s)).join(" · ")}</>} title={character.name}>
    <div className="chipRow">{firstYear?<Chip icon="clock">From {firstYear}</Chip>:null}<Chip tone={certaintyTone(character.certainty)}>{character.certainty||"tracked"}</Chip></div>
   </Hero>
   <ActionBar>

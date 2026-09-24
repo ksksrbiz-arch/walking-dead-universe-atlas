@@ -116,6 +116,12 @@ export function buildEntityGraph(){
     const to=resolveConnectionEndpoint(x,"to");
     if(from)addEdge({kind:"connection",id:x.id},from,"FROM",x.certainty==="confirmed"?"confirmed":"source-derived");
     if(to)addEdge({kind:"connection",id:x.id},to,"TO",x.certainty==="confirmed"?"confirmed":"source-derived");
+    // Without this, the only way to reach the other side of a documented relationship is
+    // through the abstract "connection" node itself - Rick's graph never shows Michonne
+    // directly, only a LINKS entry that happens to point at her. A direct edge between the
+    // two real endpoints (still traceable back to this connection via evidenceId) lets every
+    // detail view's relationship graph surface the actual person/place/group on the other end.
+    if(from&&to)addEdge(from,to,x.type,x.certainty==="confirmed"?"confirmed":"source-derived",x.id);
   }
 
   const adjacency=new Map<string,EntityEdge[]>();

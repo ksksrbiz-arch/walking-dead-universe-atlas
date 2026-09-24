@@ -1,9 +1,11 @@
-import type {SyntheticEvent} from "react";
 import {atlasData} from "../data";
 import type {Location} from "../data";
-import fandomCanonical from "../../data/enrichment/fandom-canonical.json";
 import episodeMedia from "../../data/episodeMedia.json";
-import {observeImageError} from "./performance";
+import {fandomEntityImage,onAtlasImageError,resolveCharacterImage} from "./media";
+
+// Image candidate scoring and the character priority chain live in ./media
+// (single source of truth, also used by EntityGraphView and the media manifest).
+export {fandomEntityImage,onAtlasImageError};
 
 export const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
 
@@ -31,8 +33,9 @@ const ICON_ALIASES:Record<string,LocationIcon>={
 };
 export const locationIconName=(type:string):LocationIcon=>DIRECT_ICONS.has(type)?type as LocationIcon:(ICON_ALIASES[type]||"facility");
 
-// Unknown (0,0) placements must never render at null island.
-export const hasMapCoordinates=(location:Location)=>Number.isFinite(Number(location.lat))&&Number.isFinite(Number(location.lng))&&!(Number(location.lat)===0&&Number(location.lng)===0&&location.certainty==="unknown");
+// (0,0) is the source data's "coordinates not yet researched" sentinel, never a
+// real TWDU location — treat it as unplaced regardless of the certainty field.
+export const hasMapCoordinates=(location:Location)=>Number.isFinite(Number(location.lat))&&Number.isFinite(Number(location.lng))&&!(Number(location.lat)===0&&Number(location.lng)===0);
 
 export const prettyType=(type?:string)=>String(type||"").replaceAll("-"," ");
 const CONNECTION_TYPE_LABELS:Record<string,string>={
@@ -43,38 +46,10 @@ const CONNECTION_TYPE_LABELS:Record<string,string>={
 export const connectionTypeLabel=(type?:string)=>CONNECTION_TYPE_LABELS[String(type)]||prettyType(type);
 
 // ---- Images ---------------------------------------------------------------
-// First failure retries the unproxied source; a second failure hides the image
-// so the styled placeholder behind it shows instead of a broken-image glyph.
-export const onAtlasImageError=(e:SyntheticEvent<HTMLImageElement>,source:string)=>{
- const img=e.currentTarget;
- if(!source||img.dataset.fallback==="1"){img.dataset.failed="1";img.style.visibility="hidden";return;}
- observeImageError(source);img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;
-};
-
-export const fandomEntityImage=(entityType:"characters"|"locations"|"episodes",id:string,name:string)=>{
- const record=(fandomCanonical as any)?.[entityType]?.[id];
- const candidates=[
-  ...(Array.isArray(record?.image_urls)?record.image_urls:[]),
-  ...(record?.details?.imageFiles||[]).flatMap((x:any)=>[x?.url,x?.thumbnail].filter(Boolean)),
-  ...(Array.isArray(record?.hints?.imageGallery)?record.hints.imageGallery:[]),
-  ...(Array.isArray(record?.hints?.image)?record.hints.image:record?.hints?.image?[record.hints.image]:[])
- ].filter((x:any)=>typeof x==="string"&&/^https?:\/\//i.test(x));
- if(!candidates.length)return "";
- const tokens=String(name).toLowerCase().replace(/[^a-z0-9 ]+/g," ").split(/\s+/).filter((x)=>x.length>=3&&!["the","tv","universe","series"].includes(x));
- const generic=/logo|title.?card|key.?art|series.?art|franchise|ensemble|group.?photo|cast.?photo|promo|poster|banner|background|wallpaper/i;
- const scored=[...new Set(candidates)].map((url:string)=>{
-  const hay=url.toLowerCase().replace(/[_-]+/g," ");
-  const matches=tokens.filter(t=>hay.includes(t)).length;
-  let score=matches*30+(matches===tokens.length&&tokens.length?70:0);
-  if(generic.test(hay))score-=90;
-  return {url,score};
- }).sort((a,b)=>b.score-a.score);
- return scored[0]?.score>0?scored[0].url:"";
-};
-
 const media=(atlasData as any).media;
 export const episodeMediaRecord=(id:string)=>(episodeMedia as any).episodes?.[id];
 export const episodeImage=(e:{id:string;title:string;seriesId?:string})=>media?.episodes?.[e.id]?.image||episodeMediaRecord(e.id)?.image||fandomEntityImage("episodes",e.id,e.title)||"";
 export const locationImage=(l:{id:string;name:string})=>media?.places?.[l.id]?.image||fandomEntityImage("locations",l.id,l.name)||"";
-export const characterImage=(c:{id:string;name:string})=>media?.characters?.[c.id]?.image||fandomEntityImage("characters",c.id,c.name)||"";
-export const seriesKeyArt=(seriesId?:string)=>seriesId?media?.series?.[seriesId]?.keyArt||"":"";
+// Curated > Fandom match > series art, via the shared resolver.
+export const characterImage=(c:{id:string;name:string;seriesIds?:string[]})=>resolveCharacterImage(c.id,c.name,c.seriesIds).image;
+export const seriesKeyArt=(seriesId?:string)=>seriesId?media?.series?.[seriesId]?.image||media?.series?.[seriesId]?.keyArt||"":"";

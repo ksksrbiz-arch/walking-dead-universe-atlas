@@ -151,6 +151,17 @@ export default function App(){
   for(const eid of getCharacterEpisodeIds(journeyId))for(const id of (episodeById.get(eid) as any)?.locationIds??[])ids.add(id);
   return ids;
  },[journeyId]);
+ // In-universe order (not air order); consecutive repeats collapse, a later return still
+ // draws as its own leg, and unplaced (0,0) locations are skipped rather than routed through.
+ const journeySequence=useMemo(()=>{
+  if(!journeyId)return [] as Location[];
+  const eps=getCharacterEpisodeIds(journeyId).map(e=>episodeById.get(e)).filter(Boolean).sort(compareEpisodesChronologically) as any[];
+  const seq:Location[]=[];
+  for(const e of eps)for(const id of e.locationIds??[]){const l=locationById.get(id);if(l&&hasMapCoordinates(l)&&seq[seq.length-1]?.id!==l.id)seq.push(l)}
+  return seq;
+ },[journeyId]);
+ // Stop number = order in which each distinct place is first reached.
+ const journeyStops=useMemo(()=>{const m=new Map<string,number>();for(const l of journeySequence)if(!m.has(l.id))m.set(l.id,m.size+1);return m},[journeySequence]);
  const yearLocations=useMemo(()=>(atlasData.locations as Location[]).filter(l=>!!SERIES_BY_ID[l.seriesId]&&(!seriesId||l.seriesId===seriesId)&&l.year<=year),[seriesId,year]);
  const mapLocations=useMemo(()=>{
   const source=journeyId?(atlasData.locations as Location[]).filter(l=>journeyLocationIds.has(l.id)):yearLocations;
@@ -612,6 +623,9 @@ export default function App(){
      <g ref={mapWorldRef} className="mapWorld">
       <MapGeography/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
+      {journeySequence.length>1&&<g className="journeyRoute" aria-hidden="true">
+       <path d={journeySequence.map((l,i)=>{const p=project(l.lat,l.lng);return (i===0?"M":"L")+p.x+" "+p.y}).join(" ")}/>
+      </g>}
       <g className="markers">{markerGroups.map(group=>{
        if(group.locations.length>1){
         const ids=group.locations.map(l=>l.id);
@@ -639,6 +653,7 @@ export default function App(){
          <circle className="markerBody" r={isSelected?13:10}/>
          <g className="markerGlyph" transform={`translate(${isSelected?-8:-6.5} ${isSelected?-8:-6.5}) scale(${isSelected?16/24:13/24})`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type)}/></g>
          {showLabel&&<text className="markerLabel" x={isSelected?17:14} y="4">{l.name}</text>}
+         {isJourney&&journeyStops.has(l.id)&&<g className="journeyStop" transform="translate(10 -10)"><circle r="7.5"/><text textAnchor="middle" dominantBaseline="central">{journeyStops.get(l.id)}</text></g>}
         </g>
        </g>;
       })}</g>

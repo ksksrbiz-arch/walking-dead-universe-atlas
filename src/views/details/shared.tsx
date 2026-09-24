@@ -5,7 +5,7 @@ import EntityGraphView from "../../components/EntityGraphView";
 import {AtlasImage,Section,ShowMore} from "../../components/ui";
 import {useAtlas} from "../../lib/atlasContext";
 import {resolveConnectionEndpoint} from "../../lib/entityGraph";
-import {connectionById,entityName} from "../../lib/lookup";
+import {characterById,connectionById,entityName} from "../../lib/lookup";
 import {prettyType,characterImage,connectionTypeLabel} from "../../lib/atlasHelpers";
 
 const FACT_LABELS:Record<string,string>={aliases:"Aliases",actor:"Portrayed by",status:"Status",firstAppearance:"First appearance",lastAppearance:"Last appearance",occupation:"Occupation",affiliation:"Affiliation",family:"Family",relationships:"Relationships",type:"Type",region:"Region",residents:"Residents",coordinates:"Coordinates",season:"Season",episodeNumber:"Episode",airDate:"Air date",director:"Director",writer:"Writers",cast:"Cast",locations:"Featured locations",productionCode:"Production code",viewership:"Viewership"};
@@ -96,7 +96,7 @@ export function PortraitStrip({characters}:{characters:{id:string;name:string;co
 }
 
 export function PortraitImage({id,name,size="md"}:{id:string;name:string;size?:"sm"|"md"|"lg"}){
- const image=characterImage({id,name});
+ const image=characterImage({id,name,seriesIds:(characterById.get(id) as any)?.seriesIds});
  const initials=name.split(/\s+/).filter(Boolean).slice(0,2).map(v=>v[0]).join("").toUpperCase();
  return <span className={"portrait portrait-"+size}><span className="portraitInitials">{initials}</span><AtlasImage src={image} width={320} sizes="96px"/></span>;
 }
