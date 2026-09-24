@@ -92,16 +92,31 @@ export default async function handler(req: Request) {
     if (!validBlobUrl(blob.url)) return new Response("Invalid media origin", { status: 502 });
     const response = await get(blob.url, { access: "private" });
     if (!response) return new Response("Media not found", { status: 404 });
-    const bytes = await response.stream.getReader().read();
-    if (bytes.value && bytes.value.byteLength > MAX_MEDIA_BYTES) return new Response("Media exceeds size limit", { status: 413 });
+    const reader = response.stream.getReader();
+    const chunks: Uint8Array[] = [];
+    let total = 0;
+    while (true) {
+      const part = await reader.read();
+      if (part.done) break;
+      if (!part.value) continue;
+      total += part.value.byteLength;
+      if (total > MAX_MEDIA_BYTES) {
+        await reader.cancel();
+        return new Response("Media exceeds size limit", { status: 413 });
+      }
+      chunks.push(part.value);
+    }
+    const payload = new Uint8Array(total);
+    let offset = 0;
+    for (const chunk of chunks) { payload.set(chunk, offset); offset += chunk.byteLength; }
 
-    return new Response(req.method === "HEAD" ? null : bytes.value || null, {
+    return new Response(req.method === "HEAD" ? null : payload, {
       status: 200,
       headers: {
         "Content-Type": response.blob.contentType || "application/octet-stream",
         "Cache-Control": MEDIA_CACHE,
         "X-Content-Type-Options": "nosniff",
-        ...(bytes.value ? { "Content-Length": String(bytes.value.byteLength) } : {}),
+        "Content-Length": String(total),
         ...(response.blob.etag ? { ETag: response.blob.etag } : {}),
       },
     });
