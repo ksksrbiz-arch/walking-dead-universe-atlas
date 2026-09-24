@@ -40,13 +40,13 @@ Apply transforms to `mapWorldRef` only.
 
 ## Before modifying map code
 
-Inspect these together: `src/App.tsx` (`mapSvgRef`, `mapWorldRef`, `applyMapTransform`, `getMapPanLimits`, pointer handlers, map JSX hierarchy) and `src/styles.css` (`.mapSurface`, `.mapSurface svg`, mobile map rules).
+Inspect these together: `src/App.tsx` (`mapSvgRef`, `mapWorldRef`, `applyMapTransform`, `getMapPanLimits`, `getVisibleRect`, `flyTo`, `focusMapOn`, pointer handlers, map JSX hierarchy) and `src/styles.css` (`.mapSurface`, `.mapSurface svg`, marker rules). Floating UI over the map must declare `data-map-chrome` so framing avoids it.
 
 ## Regression testing
 
 After map changes: verify fixed SVG viewport, movable `.mapWorld`, ocean outside `.mapWorld`, root SVG not transformed, base-zoom dragging, full traversal to North America and back toward Europe/Asia, pinch zoom, zoomed panning, reset, marker attachment, and data/index integrity.
 
-Static validation is useful, but it does not replace a live mobile browser smoke test when one is available.
+`npm run test:ui` automates most of this with real touch input against `vite preview`. Static validation and scripted checks do not replace a live mobile device test when one is available.
 
 ## Data integrity
 
@@ -64,4 +64,4 @@ Prefer fixing the underlying coordinate-space, DOM, or rendering-model problem o
 
 ## Documentation
 
-Maintain the mobile map contract in `docs/MOBILE_MAP_GESTURE_ARCHITECTURE.md` and the broader product architecture in `docs/ATLAS_ARCHITECTURE.md`. Update documentation when changing the map rendering model.
+Maintain the mobile map contract in `docs/MOBILE_MAP_GESTURE_ARCHITECTURE.md`, the broader product architecture in `docs/ATLAS_ARCHITECTURE.md`, and UI tokens/layout/component rules in `context/references/ui-design-system.md`. Update documentation when changing the map rendering model or the design system. Task routing: `CLAUDE.md`.

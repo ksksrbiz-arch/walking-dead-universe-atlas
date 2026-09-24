@@ -92,7 +92,7 @@ manually-verified image URLs — checked first. `fandomEntityImage()` (`src/lib/
 `data/enrichment/fandom-canonical.json` against the entity name and picks the best match.
 `resolveCharacterImage()` (same file) is the one place that priority chain is implemented for
 characters — every surface that renders a character image (people grid, search, character dossier,
-the relationship graph, `ConnectionDetail`'s endpoint cards) calls it rather than re-deriving the
+the relationship graph, link endpoint cards — via `characterImage()` in `src/lib/atlasHelpers.ts`) calls it rather than re-deriving the
 priority itself, specifically so those surfaces can't drift out of sync with each other again. Series
 key art is the last-resort fallback for locations/characters with no curated or Fandom match. Whatever
 URL comes out of that chain goes through `atlasImageUrl()` (`src/lib/media.ts`), which proxies any

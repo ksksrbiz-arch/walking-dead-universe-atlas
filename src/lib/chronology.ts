@@ -123,10 +123,14 @@ export function compareEpisodesChronologically(a:any,b:any):number{
   ||String(a.title||"").localeCompare(String(b.title||""));
 }
 
+let watchOrderCache:EpisodeWatchOrderItem[]|null=null;
 export function buildEpisodeWatchOrder(){
+ if(watchOrderCache)return watchOrderCache;
  const episodes=[...buildChronology().filter(x=>x.kind==="episode")].sort(compareEpisodesChronologically);
- return episodes.map((item,index,all)=>{
-  const sameWindow=all.some(other=>other.id!==item.id&&other.start===item.start&&other.end===item.end);
+ const windows=new Map<string,number>();
+ for(const e of episodes)windows.set(e.start+"|"+e.end,(windows.get(e.start+"|"+e.end)??0)+1);
+ watchOrderCache=episodes.map((item,index)=>{
+  const sameWindow=(windows.get(item.start+"|"+item.end)??0)>1;
   const unknown=item.precision==="unknown"||!Number.isFinite(item.start)||item.start<=0;
   return {
    ...item,
@@ -135,6 +139,7 @@ export function buildEpisodeWatchOrder(){
    orderingBasis:item.precision==="year"?"timeline-window":"timeline-anchor"
   } as EpisodeWatchOrderItem;
  });
+ return watchOrderCache;
 }
 
 export function getEpisodeWatchOrder(seriesId?:string){

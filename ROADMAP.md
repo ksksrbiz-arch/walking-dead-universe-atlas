@@ -51,6 +51,9 @@
 - [x] Scripted production-build browser regression — pan/pinch/tap gesture dispatch + hit-testing across phone, tablet, and desktop viewports (PR #14); not a substitute for the item below
 - [ ] Physical-device verification (real touch hardware, screen reader, actual gesture feel) — still open
 
+- [x] UI audit and full mobile-first redesign (sheet detents, time scrubber, watch tracker, back navigation, design system) — `docs/UI_AUDIT_AND_REDESIGN_2026-09.md`
+- [x] Automated browser regression for the map contract and core loop (`npm run test:ui`)
+
 See `docs/QUALITY_AUDIT_2026-09-20.md` for the current ten-part quality audit and the remaining live-browser verification gate.
 
 ## Phase 6 — External data enrichment

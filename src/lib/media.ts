@@ -74,11 +74,11 @@ export function atlasImageUrl(source:string|undefined|null,width=1200,quality=78
 
 // A proxied Fandom/AMC URL can fail (proxy hiccup, size cap, dead upstream) even when the
 // raw source itself still resolves. On first failure, retry once against the raw source
-// directly, bypassing the proxy; a second failure just leaves the broken-image state alone
-// rather than looping.
+// directly, bypassing the proxy. A second failure hides the image (no loop, and no
+// broken-image glyph) so whatever placeholder sits behind it shows instead.
 export function onAtlasImageError(e:SyntheticEvent<HTMLImageElement>,source:string){
   const img=e.currentTarget;
-  if(!source||img.dataset.fallback==="1")return;
+  if(!source||img.dataset.fallback==="1"){img.dataset.failed="1";img.style.visibility="hidden";return;}
   observeImageError(source);
   img.dataset.fallback="1";
   img.removeAttribute("srcset");
