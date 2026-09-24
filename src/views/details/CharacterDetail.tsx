@@ -22,7 +22,7 @@ function statusTone(status:unknown):"good"|"warn"|"muted"{
 }
 
 export default function CharacterDetail({id}:{id:string}){
- const {showCharacterJourney,watched,followed,toggleFollowed}=useAtlas();
+ const {showCharacterJourney,watched,followed,toggleFollowed,jumpToTimelineYear}=useAtlas();
  const character=characterById.get(id) as any;
  const wiki=fandomRecord("characters",id);
  const status=wiki?.hints?.status??wiki?.fields?.status;
@@ -33,6 +33,7 @@ export default function CharacterDetail({id}:{id:string}){
  useEffect(()=>{let active=true;setRuntimeIds(null);setShowAll(false);void getRuntimeEpisodeIds("character",id).then(ids=>{if(active)setRuntimeIds(ids)});return()=>{active=false}},[id]);
  const eps=useMemo(()=>episodesFor(runtimeIds??getCharacterEpisodeIds(id)),[id,runtimeIds]);
  const places=useMemo(()=>locationsFor(eps.flatMap(e=>e.locationIds??[])),[eps]);
+ const universeEvents=useMemo(()=>((atlasData as any).universeEvents as any[]).filter(ev=>(ev.characterIds??[]).includes(id)),[id]);
  const spans=useMemo(()=>{
   const out:{seriesId:string;count:number;start:number;end:number}[]=[];
   for(const e of eps){
@@ -72,6 +73,17 @@ export default function CharacterDetail({id}:{id:string}){
    :<p className="empty">No episode-level appearances recorded yet.</p>}
   </Section>
   {places.length>0&&<Section title="Places" count={places.length}><PlaceChips locations={places}/></Section>}
+  {universeEvents.length>0&&<Section title="Universe events" count={universeEvents.length}>
+   <div className="stack">{universeEvents.map(ev=><button key={ev.id} className="row eventRow" style={{"--c":seriesColor(ev.seriesId)} as CSSProperties} onClick={()=>jumpToTimelineYear(ev.year)}>
+    <span className="eventGlyph"><Icon name="spark"/></span>
+    <span className="rowText">
+     <small>{seriesShort(ev.seriesId)} · {ev.year}{ev.date?" · "+ev.date:""}{ev.locationIds?.length?" · "+locationsFor(ev.locationIds).map((l:any)=>l.name).join(", "):""}</small>
+     <b>{ev.title}</b>
+     {ev.description&&<em>{ev.description}</em>}
+    </span>
+    <Icon name="chevron" className="rowChevron"/>
+   </button>)}</div>
+  </Section>}
   <ConnectionList ids={links} perspective={id}/>
   <WikiSection entityType="characters" entityId={id}/>
   <GraphSection root={"character:"+id}/>
