@@ -1,7 +1,7 @@
 import {atlasData} from "../data";
 import type {Location} from "../data";
 import episodeMedia from "../../data/episodeMedia.json";
-import {fandomEntityImage,onAtlasImageError,resolveCharacterImage} from "./media";
+import {fandomEntityImage,fandomPrimaryImage,onAtlasImageError,resolveCharacterImage} from "./media";
 
 // Image candidate scoring and the character priority chain live in ./media
 // (single source of truth, also used by EntityGraphView and the media manifest).
@@ -48,7 +48,13 @@ export const connectionTypeLabel=(type?:string)=>CONNECTION_TYPE_LABELS[String(t
 // ---- Images ---------------------------------------------------------------
 const media=(atlasData as any).media;
 export const episodeMediaRecord=(id:string)=>(episodeMedia as any).episodes?.[id];
-export const episodeImage=(e:{id:string;title:string;seriesId?:string})=>media?.episodes?.[e.id]?.image||episodeMediaRecord(e.id)?.image||fandomEntityImage("episodes",e.id,e.title)||"";
+// Curated > verified official AMC still > the episode's own Fandom still >
+// the series key-art fallback recorded in episodeMedia. 316 episodes only had
+// that generic key art before Fandom stills were preferred over it.
+export const episodeImage=(e:{id:string;title:string;seriesId?:string})=>{
+ const rec=episodeMediaRecord(e.id);
+ return media?.episodes?.[e.id]?.image||(rec?.status==="verified"?rec.image:"")||fandomPrimaryImage("episodes",e.id)||fandomEntityImage("episodes",e.id,e.title)||rec?.image||"";
+};
 export const locationImage=(l:{id:string;name:string})=>media?.places?.[l.id]?.image||fandomEntityImage("locations",l.id,l.name)||"";
 // Curated > Fandom match > series art, via the shared resolver.
 export const characterImage=(c:{id:string;name:string;seriesIds?:string[]})=>resolveCharacterImage(c.id,c.name,c.seriesIds).image;

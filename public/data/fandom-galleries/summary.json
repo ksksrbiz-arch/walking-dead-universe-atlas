@@ -1,0 +1,20 @@
+{
+ "generatedAt": "2026-09-24T20:15:44.726Z",
+ "source": "https://walkingdead.fandom.com (MediaWiki API)",
+ "license": "Images remain the property of their rights holders; displayed with attribution to the Walking Dead Wiki.",
+ "characters": {
+  "entities": 77,
+  "withGallery": 77,
+  "images": 2075
+ },
+ "locations": {
+  "entities": 79,
+  "withGallery": 75,
+  "images": 222
+ },
+ "episodes": {
+  "entities": 363,
+  "withGallery": 360,
+  "images": 4784
+ }
+}

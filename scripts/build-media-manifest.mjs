@@ -59,14 +59,27 @@ function isAmcImage(source) {
   return /^https?:\/\/(?:images|dimages)\.cds\.amcn\.com\//i.test(source);
 }
 
-// Mirrors atlasImageUrl() in src/lib/media.ts (LOCAL_MEDIA is always {} today,
-// so that branch is intentionally omitted here).
+// Mirrors atlasImageUrl() in src/lib/media.ts: local resized variants
+// (src/generated/media-local.json, npm run media:resize) win for AMC sources;
+// Fandom sources are requested CDN-resized through the proxy.
+let LOCAL_MEDIA = {};
+try { LOCAL_MEDIA = JSON.parse(await import("node:fs/promises").then(fs => fs.readFile(new URL("../src/generated/media-local.json", import.meta.url), "utf8"))); } catch {}
 function deliveryFor(source) {
   if (!source) return null;
   if (source.startsWith("/")) return { kind: "local-static", requestUrl: source };
+  const local = LOCAL_MEDIA[source];
+  if (local) {
+    const variants = typeof local === "string" ? [local] : Object.values(local);
+    return { kind: "local-resized", requestUrl: variants[variants.length - 1], localPaths: variants };
+  }
   if (isFandomImage(source) || isAmcImage(source)) {
     const url = new URL(MEDIA_PROXY);
-    url.searchParams.set("url", source);
+    // The app never requests a Fandom original (some are >10 MB and exceed the
+    // proxy's size cap); it asks the Fandom CDN for the display width. Check
+    // the largest routine request (1200px), mirroring fandomScaled().
+    const requested = isFandomImage(source) && /\/revision\/latest/.test(source) && !/scale-to-width/.test(source)
+      ? source.replace(/\/revision\/latest/, "/revision/latest/scale-to-width-down/1200") : source;
+    url.searchParams.set("url", requested);
     return { kind: "supabase-proxy", requestUrl: url.toString() };
   }
   return { kind: "direct", requestUrl: source };
@@ -112,6 +125,10 @@ async function verify(delivery) {
   if (!delivery) return { ok: false, httpStatus: null, contentType: null, error: "unresolved" };
   if (SKIP_VERIFY) return { ok: null, httpStatus: null, contentType: null, error: "skipped" };
   if (delivery.kind === "local-static") return localStaticCheck(delivery.requestUrl);
+  if (delivery.kind === "local-resized") {
+    for (const p of delivery.localPaths) { const r = await localStaticCheck(p); if (!r.ok) return { ...r, error: "resized variant missing: " + p }; }
+    return { ok: true, httpStatus: 200, contentType: "local-resized" };
+  }
   return curlCheck(delivery.requestUrl);
 }
 
@@ -164,10 +181,15 @@ async function main() {
   for (const e of episodes) {
     const curated = media.episodes?.[e.id];
     const legacy = episodeMedia.episodes?.[e.id];
-    const fandomImage = fandomEntityImage(fandomCanonical, "episodes", e.id, e.title);
+    // Mirrors fandomPrimaryImage() then fandomEntityImage() in src/lib/media.ts.
+    const primary = (fandomCanonical.episodes?.[e.id]?.image_urls || []).find(u => typeof u === "string" && /^https?:\/\//.test(u) && !/logo|title.?card|key.?art|series.?art|franchise|poster|banner|wallpaper/i.test(u)) || "";
+    const fandomImage = primary || fandomEntityImage(fandomCanonical, "episodes", e.id, e.title);
     const fallback = seriesKeyArt[e.seriesId];
-    const source = curated?.image || legacy?.image || fandomImage || fallback || "";
-    const method = curated?.image ? "curated" : legacy?.image ? "legacy-episode-media" : fandomImage ? "fandom-heuristic" : fallback ? "series-keyart-fallback" : "none";
+    // Mirrors episodeImage() in src/lib/atlasHelpers.ts: a verified official still beats the
+    // episode's own Fandom still, which beats the series key-art "fallback" record.
+    const verified = legacy?.status === "verified" ? legacy.image : "";
+    const source = curated?.image || verified || fandomImage || legacy?.image || fallback || "";
+    const method = curated?.image ? "curated" : verified ? "verified-episode-media" : fandomImage ? "fandom-heuristic" : legacy?.image ? "legacy-episode-media" : fallback ? "series-keyart-fallback" : "none";
     entries.push({ entityType: "episodes", id: e.id, name: e.title, source, method, curatedStatus: legacy?.status || null });
   }
 
@@ -189,7 +211,7 @@ async function main() {
   const manifest = {
     generatedAt: new Date().toISOString(),
     version: 1,
-    notes: "Reflects the actual live resolution order in src/lib/media.ts (curated data/media.json or data/episodeMedia.json > Fandom canonical heuristic match > series key art), not the Vercel Blob pipeline, which is not currently wired into image rendering.",
+    notes: "Reflects the actual live resolution order in src/lib/media.ts + atlasHelpers.ts (curated data/media.json > verified episodeMedia still > Fandom canonical heuristic match > series key art; AMC served from local resized variants), not the Vercel Blob pipeline, which is not currently wired into image rendering.",
     summary: {},
     entities: verified.map((v) => ({
       entityType: v.entityType,

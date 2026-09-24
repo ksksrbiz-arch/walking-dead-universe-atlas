@@ -1,1 +1,272 @@
-{}
+{
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/amcplus/DeadCity_302.jpg": {
+  "320": "/media/amc/4e28392f72e4aae7-320.webp",
+  "640": "/media/amc/4e28392f72e4aae7-640.webp",
+  "1280": "/media/amc/4e28392f72e4aae7-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/amcplus/episode_tms_EP047027920026_walking-dead-dead-city_207__img_wide_16x9_fw7clumbfz.jpg": {
+  "320": "/media/amc/3c96b987fc3937ec-320.webp",
+  "640": "/media/amc/3c96b987fc3937ec-640.webp",
+  "1280": "/media/amc/3c96b987fc3937ec-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/amcplus/processed/episode_tms_EP047027920038_walking-dead-dead-city_307__img_wide_16x9.jpg": {
+  "320": "/media/amc/cf83f49ca4780b0c-320.webp",
+  "640": "/media/amc/cf83f49ca4780b0c-640.webp",
+  "1280": "/media/amc/cf83f49ca4780b0c-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_201_1920x1080.jpg": {
+  "320": "/media/amc/e5fadc29adf95b69-320.webp",
+  "640": "/media/amc/e5fadc29adf95b69-640.webp",
+  "1280": "/media/amc/e5fadc29adf95b69-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_202.jpg": {
+  "320": "/media/amc/0fc2b37d2f902e8f-320.webp",
+  "640": "/media/amc/0fc2b37d2f902e8f-640.webp",
+  "1280": "/media/amc/0fc2b37d2f902e8f-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_203.jpg": {
+  "320": "/media/amc/a1296a2bde671f6e-320.webp",
+  "640": "/media/amc/a1296a2bde671f6e-640.webp",
+  "1280": "/media/amc/a1296a2bde671f6e-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_204.jpg": {
+  "320": "/media/amc/dfa8f2020c1e53f9-320.webp",
+  "640": "/media/amc/dfa8f2020c1e53f9-640.webp",
+  "1280": "/media/amc/dfa8f2020c1e53f9-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/DeadCity_306.jpg": {
+  "320": "/media/amc/6bd7dd476f108a66-320.webp",
+  "640": "/media/amc/6bd7dd476f108a66-640.webp",
+  "1280": "/media/amc/6bd7dd476f108a66-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_101_Platform_1920x1080.jpg": {
+  "320": "/media/amc/477c1841ea588b53-320.webp",
+  "640": "/media/amc/477c1841ea588b53-640.webp",
+  "1280": "/media/amc/477c1841ea588b53-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_102_Platform_1920x1080.jpg": {
+  "320": "/media/amc/f5423f8a592e7ae9-320.webp",
+  "640": "/media/amc/f5423f8a592e7ae9-640.webp",
+  "1280": "/media/amc/f5423f8a592e7ae9-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_103_Platform_1920x1080.jpg": {
+  "320": "/media/amc/ee661b1c8b964187-320.webp",
+  "640": "/media/amc/ee661b1c8b964187-640.webp",
+  "1280": "/media/amc/ee661b1c8b964187-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_104_Platform_1920x1080.jpg": {
+  "320": "/media/amc/da2fad7a449af17c-320.webp",
+  "640": "/media/amc/da2fad7a449af17c-640.webp",
+  "1280": "/media/amc/da2fad7a449af17c-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWDDC_105_Platform_1920x1080.jpg": {
+  "320": "/media/amc/c07cce57343b2506-320.webp",
+  "640": "/media/amc/c07cce57343b2506-640.webp",
+  "1280": "/media/amc/c07cce57343b2506-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/TWD_DeadCity_205.jpg": {
+  "320": "/media/amc/b8ce535b614c2a29-320.webp",
+  "640": "/media/amc/b8ce535b614c2a29-640.webp",
+  "1280": "/media/amc/b8ce535b614c2a29-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_206.jpg": {
+  "320": "/media/amc/9bb6104d04b1d3c8-320.webp",
+  "640": "/media/amc/9bb6104d04b1d3c8-640.webp",
+  "1280": "/media/amc/9bb6104d04b1d3c8-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_208.jpg": {
+  "320": "/media/amc/0fa400c30c6c4358-320.webp",
+  "640": "/media/amc/0fa400c30c6c4358-640.webp",
+  "1280": "/media/amc/0fa400c30c6c4358-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_301.jpg": {
+  "320": "/media/amc/2961545b1bc263cf-320.webp",
+  "640": "/media/amc/2961545b1bc263cf-640.webp",
+  "1280": "/media/amc/2961545b1bc263cf-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_303.jpg": {
+  "320": "/media/amc/424fe7ad5c238db6-320.webp",
+  "640": "/media/amc/424fe7ad5c238db6-640.webp",
+  "1280": "/media/amc/424fe7ad5c238db6-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_304.jpg": {
+  "320": "/media/amc/09fc670030ef0b47-320.webp",
+  "640": "/media/amc/09fc670030ef0b47-640.webp",
+  "1280": "/media/amc/09fc670030ef0b47-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_305.jpg": {
+  "320": "/media/amc/f724132abe90d899-320.webp",
+  "640": "/media/amc/f724132abe90d899-640.webp",
+  "1280": "/media/amc/f724132abe90d899-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/DeadCity_308.jpg": {
+  "320": "/media/amc/2d5fd029a480e5c9-320.webp",
+  "640": "/media/amc/2d5fd029a480e5c9-640.webp",
+  "1280": "/media/amc/2d5fd029a480e5c9-1280.webp"
+ },
+ "https://dimages.cds.amcn.com/335x188/filters:quality(90):format(jpg)/images.cds.amcn.com/amcn/tve/amc/TWDDC_106_Platform_1920x1080.jpg": {
+  "320": "/media/amc/00686622e48f0a92-320.webp",
+  "640": "/media/amc/00686622e48f0a92-640.webp",
+  "1280": "/media/amc/00686622e48f0a92-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/AMC_DD_S3_SDCC_Desktop_Web_Hero_3200x1440.jpg": {
+  "320": "/media/amc/c589f7ca6ef10569-320.webp",
+  "640": "/media/amc/c589f7ca6ef10569-640.webp",
+  "1280": "/media/amc/c589f7ca6ef10569-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg": {
+  "320": "/media/amc/7bc27315e50aa052-320.webp",
+  "640": "/media/amc/7bc27315e50aa052-640.webp",
+  "1280": "/media/amc/7bc27315e50aa052-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190001_tales-of-the-walking-dead_101__img_wide_16x9.jpg": {
+  "320": "/media/amc/b938f46e8b004e47-320.webp",
+  "640": "/media/amc/b938f46e8b004e47-640.webp",
+  "1280": "/media/amc/b938f46e8b004e47-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190002_tales-of-the-walking-dead_102__img_wide_16x9.jpg": {
+  "320": "/media/amc/b449a72e5ad4ba63-320.webp",
+  "640": "/media/amc/b449a72e5ad4ba63-640.webp",
+  "1280": "/media/amc/b449a72e5ad4ba63-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190003_tales-of-the-walking-dead_103__img_wide_16x9.jpg": {
+  "320": "/media/amc/cbcdfa0cc8ae1135-320.webp",
+  "640": "/media/amc/cbcdfa0cc8ae1135-640.webp",
+  "1280": "/media/amc/cbcdfa0cc8ae1135-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190004_tales-of-the-walking-dead_104__img_wide_16x9.jpg": {
+  "320": "/media/amc/127ed7ec7dce1c41-320.webp",
+  "640": "/media/amc/127ed7ec7dce1c41-640.webp",
+  "1280": "/media/amc/127ed7ec7dce1c41-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190005_tales-of-the-walking-dead_105__img_wide_16x9.jpg": {
+  "320": "/media/amc/851c4b07581e981e-320.webp",
+  "640": "/media/amc/851c4b07581e981e-640.webp",
+  "1280": "/media/amc/851c4b07581e981e-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP043399190006_tales-of-the-walking-dead_106__img_wide_16x9.jpg": {
+  "320": "/media/amc/230dc0c3a699f078-320.webp",
+  "640": "/media/amc/230dc0c3a699f078-640.webp",
+  "1280": "/media/amc/230dc0c3a699f078-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050002_walking-dead-daryl-dixon_101__img_wide_16x9.jpg": {
+  "320": "/media/amc/2ce2a4b6e4e4eef8-320.webp",
+  "640": "/media/amc/2ce2a4b6e4e4eef8-640.webp",
+  "1280": "/media/amc/2ce2a4b6e4e4eef8-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050003_walking-dead-daryl-dixon_102__img_wide_16x9.jpg": {
+  "320": "/media/amc/59fe9db70f920a5c-320.webp",
+  "640": "/media/amc/59fe9db70f920a5c-640.webp",
+  "1280": "/media/amc/59fe9db70f920a5c-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050004_walking-dead-daryl-dixon_103__img_wide_16x9.jpg": {
+  "320": "/media/amc/c04eca52b61087d1-320.webp",
+  "640": "/media/amc/c04eca52b61087d1-640.webp",
+  "1280": "/media/amc/c04eca52b61087d1-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050005_walking-dead-daryl-dixon_104__img_wide_16x9.jpg": {
+  "320": "/media/amc/b0e28fe54d79c2da-320.webp",
+  "640": "/media/amc/b0e28fe54d79c2da-640.webp",
+  "1280": "/media/amc/b0e28fe54d79c2da-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050007_walking-dead-daryl-dixon_106__img_wide_16x9.jpg": {
+  "320": "/media/amc/5a387ac69b0b5ff6-320.webp",
+  "640": "/media/amc/5a387ac69b0b5ff6-640.webp",
+  "1280": "/media/amc/5a387ac69b0b5ff6-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050024_walking-dead-daryl-dixon_201__img_wide_16x9_02rqij565nek.jpg": {
+  "320": "/media/amc/054f8dbfa4fe93a5-320.webp",
+  "640": "/media/amc/054f8dbfa4fe93a5-640.webp",
+  "1280": "/media/amc/054f8dbfa4fe93a5-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050025_walking-dead-daryl-dixon_202__img_wide_16x9_nchuc9fv2.jpg": {
+  "320": "/media/amc/46d539d93ff827aa-320.webp",
+  "640": "/media/amc/46d539d93ff827aa-640.webp",
+  "1280": "/media/amc/46d539d93ff827aa-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050029_walking-dead-daryl-dixon_206__img_wide_16x9_k7va62byt8.jpg": {
+  "320": "/media/amc/6cd1d61217ce8c77-320.webp",
+  "640": "/media/amc/6cd1d61217ce8c77-640.webp",
+  "1280": "/media/amc/6cd1d61217ce8c77-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050046_walking-dead-daryl-dixon_301__img_wide_16x9_6drxqil3r1f.jpg": {
+  "320": "/media/amc/2b7feaae8668d342-320.webp",
+  "640": "/media/amc/2b7feaae8668d342-640.webp",
+  "1280": "/media/amc/2b7feaae8668d342-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050048_walking-dead-daryl-dixon_303__img_wide_16x9_652rl8v16ya.jpg": {
+  "320": "/media/amc/c0fbf2ed292f91d4-320.webp",
+  "640": "/media/amc/c0fbf2ed292f91d4-640.webp",
+  "1280": "/media/amc/c0fbf2ed292f91d4-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050049_walking-dead-daryl-dixon_304__img_wide_16x9_v88w9ss1sjg.jpg": {
+  "320": "/media/amc/1aebcc794e5b1999-320.webp",
+  "640": "/media/amc/1aebcc794e5b1999-640.webp",
+  "1280": "/media/amc/1aebcc794e5b1999-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050051_walking-dead-daryl-dixon_306__img_wide_16x9.jpg": {
+  "320": "/media/amc/b69486dd4a69c12b-320.webp",
+  "640": "/media/amc/b69486dd4a69c12b-640.webp",
+  "1280": "/media/amc/b69486dd4a69c12b-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/episode_tms_EP048017050052_walking-dead-daryl-dixon_307__img_wide_16x9_1siiryjpi18j.jpg": {
+  "320": "/media/amc/68db3564ba505634-320.webp",
+  "640": "/media/amc/68db3564ba505634-640.webp",
+  "1280": "/media/amc/68db3564ba505634-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/processed/episode_tms_EP048017050026_walking-dead-daryl-dixon_203__img_wide_16x9.jpg": {
+  "320": "/media/amc/a5af50da9ebc7dab-320.webp",
+  "640": "/media/amc/a5af50da9ebc7dab-640.webp",
+  "1280": "/media/amc/a5af50da9ebc7dab-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/processed/episode_tms_EP048017050027_walking-dead-daryl-dixon_204__img_wide_16x9.jpg": {
+  "320": "/media/amc/ceb3cd0afa431f81-320.webp",
+  "640": "/media/amc/ceb3cd0afa431f81-640.webp",
+  "1280": "/media/amc/ceb3cd0afa431f81-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/processed/episode_tms_EP048017050028_walking-dead-daryl-dixon_205__img_wide_16x9.jpg": {
+  "320": "/media/amc/f58f197ca67b2f3b-320.webp",
+  "640": "/media/amc/f58f197ca67b2f3b-640.webp",
+  "1280": "/media/amc/f58f197ca67b2f3b-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg": {
+  "320": "/media/amc/fa582dd95db816c8-320.webp",
+  "640": "/media/amc/fa582dd95db816c8-640.webp",
+  "1280": "/media/amc/fa582dd95db816c8-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH043399190000_tales-of-the-walking-dead__img_wide_16x9.jpg": {
+  "320": "/media/amc/46ad0536dfe649c1-320.webp",
+  "640": "/media/amc/46ad0536dfe649c1-640.webp",
+  "1280": "/media/amc/46ad0536dfe649c1-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/episode_tms_EP048017050050_walking-dead-daryl-dixon_305__img_wide_16x9_1.jpg": {
+  "320": "/media/amc/f5c845210aff6781-320.webp",
+  "640": "/media/amc/f5c845210aff6781-640.webp",
+  "1280": "/media/amc/f5c845210aff6781-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg": {
+  "320": "/media/amc/1073eca054513ea1-320.webp",
+  "640": "/media/amc/1073eca054513ea1-640.webp",
+  "1280": "/media/amc/1073eca054513ea1-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/tve/DeadCity_308_ultrawide.jpg": {
+  "320": "/media/amc/56281073c5cb4851-320.webp",
+  "640": "/media/amc/56281073c5cb4851-640.webp",
+  "1280": "/media/amc/56281073c5cb4851-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg": {
+  "320": "/media/amc/1e1cf4c8068d2a20-320.webp",
+  "640": "/media/amc/1e1cf4c8068d2a20-640.webp",
+  "1280": "/media/amc/1e1cf4c8068d2a20-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/tve/TWDU_GoesToTheBigCity_AMCTalk_1920x1080.jpg": {
+  "320": "/media/amc/fd0c5c51f242ea71-320.webp",
+  "640": "/media/amc/fd0c5c51f242ea71-640.webp",
+  "1280": "/media/amc/fd0c5c51f242ea71-1280.webp"
+ },
+ "https://images.cds.amcn.com/amcn/tve/amc/DeadCity_301.jpg": {
+  "320": "/media/amc/a3c87f87a9180eaa-320.webp",
+  "640": "/media/amc/a3c87f87a9180eaa-640.webp",
+  "1280": "/media/amc/a3c87f87a9180eaa-1280.webp"
+ }
+}

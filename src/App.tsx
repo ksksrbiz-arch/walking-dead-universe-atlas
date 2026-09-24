@@ -20,7 +20,7 @@ import {META,SERIES_KEYS,SERIES_BY_ID,seriesColor} from "./lib/series";
 import {characterById,connectionById,communityById,episodeById,factionById,locationById,entityName} from "./lib/lookup";
 import {MAP_LAYERS,MAP_LAYER_LABELS,clamp,hasMapCoordinates,locationIconName,locationMapLayer,prettyType} from "./lib/atlasHelpers";
 import type {MapLayer} from "./lib/atlasHelpers";
-import {AtlasIconGlyph} from "./components/AtlasIcon";
+import AtlasIcon,{AtlasIconGlyph} from "./components/AtlasIcon";
 import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Icon from "./components/Icon";
@@ -651,7 +651,7 @@ export default function App(){
          <circle className="markerHit" r={isMobileMap?20:13}/>
          {(isFresh||isSelected)&&<circle className="markerPulse" r="11"/>}
          <circle className="markerBody" r={isSelected?13:10}/>
-         <g className="markerGlyph" transform={`translate(${isSelected?-8:-6.5} ${isSelected?-8:-6.5}) scale(${isSelected?16/24:13/24})`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type)}/></g>
+         <g className="markerGlyph"><AtlasIconGlyph name={locationIconName(l.type)} size={isSelected?16:13} x={isSelected?-8:-6.5} y={isSelected?-8:-6.5} strokeWidth={2.2}/></g>
          {showLabel&&<text className="markerLabel" x={isSelected?17:14} y="4">{l.name}</text>}
          {isJourney&&journeyStops.has(l.id)&&<g className="journeyStop" transform="translate(10 -10)"><circle r="7.5"/><text textAnchor="middle" dominantBaseline="central">{journeyStops.get(l.id)}</text></g>}
         </g>
@@ -684,7 +684,7 @@ export default function App(){
 
    {clusterIds&&<div className="popover clusterSheet" role="dialog" aria-labelledby="cluster-title">
     <header><b id="cluster-title">{clusterIds.length} places here</b><button className="iconBtn ghost" onClick={()=>setClusterIds(null)} aria-label="Close"><Icon name="close"/></button></header>
-    <div className="stack">{clusterIds.map(id=>{const l=locationById.get(id);if(!l)return null;return <button key={id} className="row placeRow" style={{"--c":seriesColor(l.seriesId)} as CSSProperties} onClick={()=>{setClusterIds(null);openLocation(id)}}><span className="placeGlyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(l.type)}/></svg></span><span className="rowText"><small>{SERIES_BY_ID[l.seriesId]?.short} · {prettyType(l.type)} · {l.year}</small><b>{l.name}</b></span><Icon name="chevron" className="rowChevron"/></button>})}</div>
+    <div className="stack">{clusterIds.map(id=>{const l=locationById.get(id);if(!l)return null;return <button key={id} className="row placeRow" style={{"--c":seriesColor(l.seriesId)} as CSSProperties} onClick={()=>{setClusterIds(null);openLocation(id)}}><span className="placeGlyph"><AtlasIcon name={locationIconName(l.type)}/></span><span className="rowText"><small>{SERIES_BY_ID[l.seriesId]?.short} · {prettyType(l.type)} · {l.year}</small><b>{l.name}</b></span><Icon name="chevron" className="rowChevron"/></button>})}</div>
    </div>}
 
    {/* Sheet (phones/portrait tablets) or side panel (wide screens) */}
