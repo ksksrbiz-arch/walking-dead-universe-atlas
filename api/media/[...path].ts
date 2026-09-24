@@ -1,14 +1,16 @@
 import { get, list } from "@vercel/blob";
 
 const MEDIA_CACHE = "public, max-age=86400, stale-while-revalidate=604800";
+const MAX_MEDIA_BYTES = 12 * 1024 * 1024;
+const BLOB_HOST_SUFFIXES = [".public.blob.vercel-storage.com", ".blob.vercel-storage.com"];
 
 function validBlobUrl(value: unknown): value is string {
   if (typeof value !== "string") return false;
   try {
     const url = new URL(value);
-    return url.protocol === "https:" &&
-      (url.hostname.endsWith(".public.blob.vercel-storage.com") ||
-       url.hostname.endsWith(".blob.vercel-storage.com"));
+    return url.protocol === "https:" && !url.username && !url.password && !url.port &&
+      BLOB_HOST_SUFFIXES.some(suffix => url.hostname.length > suffix.length && url.hostname.endsWith(suffix)) &&
+      !url.hostname.includes("..");
   } catch {
     return false;
   }
@@ -44,7 +46,8 @@ export default async function handler(req: Request) {
       } catch {
         return new Response("Invalid media index configuration", { status: 503 });
       }
-      if (parsedIndex.protocol !== "https:") {
+      if (parsedIndex.protocol !== "https:" || parsedIndex.username || parsedIndex.password || parsedIndex.port ||
+          !BLOB_HOST_SUFFIXES.some(suffix => parsedIndex.hostname.length > suffix.length && parsedIndex.hostname.endsWith(suffix))) {
         return new Response("Invalid media index configuration", { status: 503 });
       }
 
@@ -63,7 +66,11 @@ export default async function handler(req: Request) {
         redirect: "error",
         signal: AbortSignal.timeout(10000),
       });
-      if (!upstream.ok) return new Response("Media not found", { status: upstream.status === 404 ? 404 : 502 });
+      if (!upstream.ok) return new Response(upstream.status === 404 ? "Media not found" : "Media upstream error", { status: upstream.status === 404 ? 404 : 502 });
+      const declaredLength = Number(upstream.headers.get("content-length") || 0);
+      if (declaredLength > MAX_MEDIA_BYTES) return new Response("Media exceeds size limit", { status: 413 });
+      const bytes = await upstream.arrayBuffer();
+      if (bytes.byteLength > MAX_MEDIA_BYTES) return new Response("Media exceeds size limit", { status: 413 });
 
       const headers = new Headers();
       headers.set("Cache-Control", MEDIA_CACHE);
@@ -74,22 +81,27 @@ export default async function handler(req: Request) {
       if (etag) headers.set("ETag", etag);
       const length = upstream.headers.get("content-length");
       if (length) headers.set("Content-Length", length);
-      return new Response(req.method === "HEAD" ? null : upstream.body, { status: 200, headers });
+      headers.set("Content-Length", String(bytes.byteLength));
+      return new Response(req.method === "HEAD" ? null : bytes, { status: 200, headers });
     }
 
     const result = await list({ prefix: mediaBase + pathname, limit: 100 });
     const blob = result.blobs.find(item => item.pathname === mediaBase + pathname);
     if (!blob) return new Response("Media not found", { status: 404 });
 
+    if (!validBlobUrl(blob.url)) return new Response("Invalid media origin", { status: 502 });
     const response = await get(blob.url, { access: "private" });
     if (!response) return new Response("Media not found", { status: 404 });
+    const bytes = await response.stream.getReader().read();
+    if (bytes.value && bytes.value.byteLength > MAX_MEDIA_BYTES) return new Response("Media exceeds size limit", { status: 413 });
 
-    return new Response(req.method === "HEAD" ? null : response.stream, {
+    return new Response(req.method === "HEAD" ? null : bytes.value || null, {
       status: 200,
       headers: {
         "Content-Type": response.blob.contentType || "application/octet-stream",
         "Cache-Control": MEDIA_CACHE,
         "X-Content-Type-Options": "nosniff",
+        ...(bytes.value ? { "Content-Length": String(bytes.value.byteLength) } : {}),
         ...(response.blob.etag ? { ETag: response.blob.etag } : {}),
       },
     });
