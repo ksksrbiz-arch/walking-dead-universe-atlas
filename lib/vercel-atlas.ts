@@ -34,8 +34,11 @@ export async function cachedJson<T>(key: string, loader: () => Promise<T>, ttl =
 }
 
 export async function findBlob(pathname: string, prefix: string) {
-  const result = await list({ prefix: prefix + pathname, limit: 1 });
-  return result.blobs[0] || null;
+  // Blob list uses prefix matching, not exact-path matching. Require the exact
+  // pathname so similarly named JSON files cannot be returned accidentally.
+  const expectedPath = prefix + pathname;
+  const result = await list({ prefix: expectedPath, limit: 100 });
+  return result.blobs.find(blob => blob.pathname === expectedPath) || null;
 }
 
 export async function readBlobJson<T>(pathname: string): Promise<T | null> {
