@@ -181,8 +181,12 @@ for(const id of mediaKeys)if(!episodeIds.has(id))fail.push(`Media entry referenc
 if(verified+fallback!==available)fail.push(`Media status accounting is ${verified} verified + ${fallback} fallback vs ${available} available`);
 for(const [id,m] of Object.entries(mediaMap)){if(m.status==="fallback"&&m.fallbackForEpisode!==true)fail.push(`Media ${id}: fallback missing fallbackForEpisode=true`);if(m.status==="verified"&&m.kind==="series-key-art-fallback")fail.push(`Media ${id}: verified entry marked as fallback`)}
 
-for(const e of events){if(!sets.series.has(e.seriesId))fail.push(`Event ${e.id}: missing series ${e.seriesId}`);if(!Number.isInteger(e.year))fail.push(`Event ${e.id}: invalid year`)}
-for(const e of universeEvents){if(!sets.series.has(e.seriesId))fail.push(`Universe event ${e.id}: missing series ${e.seriesId}`);if(!Number.isInteger(e.year))fail.push(`Universe event ${e.id}: invalid year`);if(e.date&&(!/^\d{4}-\d{2}-\d{2}$/.test(e.date)||Number(e.date.slice(0,4))!==e.year))fail.push(`Universe event ${e.id}: date/year mismatch`)}
+const checkEventRefs=(label,e)=>{
+  for(const id of e.locationIds??[])if(!sets.locations.has(id))fail.push(`${label} ${e.id}: unknown location ${id}`);
+  for(const id of e.characterIds??[])if(!sets.characters.has(id))fail.push(`${label} ${e.id}: unknown character ${id}`);
+};
+for(const e of events){if(!sets.series.has(e.seriesId))fail.push(`Event ${e.id}: missing series ${e.seriesId}`);if(!Number.isInteger(e.year))fail.push(`Event ${e.id}: invalid year`);checkEventRefs("Event",e)}
+for(const e of universeEvents){if(!sets.series.has(e.seriesId))fail.push(`Universe event ${e.id}: missing series ${e.seriesId}`);if(!Number.isInteger(e.year))fail.push(`Universe event ${e.id}: invalid year`);if(e.date&&(!/^\d{4}-\d{2}-\d{2}$/.test(e.date)||Number(e.date.slice(0,4))!==e.year))fail.push(`Universe event ${e.id}: date/year mismatch`);checkEventRefs("Universe event",e)}
 for(const w of watchOrder){if(w.seriesId&&!sets.series.has(w.seriesId))fail.push(`Watch order ${w.id}: unknown series ${w.seriesId}`);if(w.seriesId&&w.startSeason>w.endSeason)fail.push(`Watch order ${w.id}: inverted season range`);if(w.seriesId&&(!Number.isInteger(w.startSeason)||!Number.isInteger(w.endSeason)))fail.push(`Watch order ${w.id}: invalid season range`)}
 for(const w of webisodes.series??[]){if(!sets.series.has(w.seriesId))fail.push(`Webisode ${w.id}: unknown series ${w.seriesId}`);if(!Number.isInteger(w.episodeCount)||w.episodeCount<1)fail.push(`Webisode ${w.id}: invalid episodeCount`)}
 const webTotal=(webisodes.series??[]).reduce((n,x)=>n+x.episodeCount,0);if(Number.isInteger(webisodes.totalEpisodes)&&webTotal!==webisodes.totalEpisodes)fail.push(`Webisode total ${webisodes.totalEpisodes} vs series sum ${webTotal}`);

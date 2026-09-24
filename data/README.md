@@ -61,3 +61,13 @@ already documented) so the relationship graph can filter by it:
 
 `scripts/audit-atlas.mjs` fails the build if a connection is missing a
 `category` or uses one outside this set.
+
+## Universe event character links
+
+`data/universeEvents.json` records carry `characterIds` only where the
+event's own `title` already names the character (e.g. `daryl-france` →
+"Daryl Dixon reaches France" → `daryl-dixon`) — never inferred from outside
+knowledge. Most universe events are institutional or too broad to name a
+person (`monument-day`, `crm-omaha-destruction`) and correctly have no
+`characterIds`; leave those empty rather than guessing. `scripts/audit-atlas.mjs`
+validates every `characterIds`/`locationIds` entry against the real registries.

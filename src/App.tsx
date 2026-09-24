@@ -344,6 +344,7 @@ export default function App(){
  },[view,focus?.kind,focus?.id]);
  const closeDetail=()=>{clearFocus();setNavStack([]);if(view==="map")setSnap("peek")};
  const goView=(v:View)=>{setView(v);clearFocus();setNavStack([]);setSearchOpen(false);setClusterIds(null);setLayersOpen(false);if(v==="map")setSnap("peek")};
+ const jumpToTimelineYear=(y:number)=>{setYear(y);goView("timeline")};
  const ensureVisible=(l:Location)=>{
   if(seriesId&&l.seriesId!==seriesId)setSeries("ALL");
   if(mapLayer!=="ALL"&&locationMapLayer(l.type)!==mapLayer)setMapLayer("ALL");
@@ -416,7 +417,7 @@ export default function App(){
   requestAnimationFrame(()=>sheetRef.current?.focus({preventScroll:true}));
  };
 
- const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,showConnectionOnMap,setYear,year,watched,toggleWatched,resetWatched,followed,toggleFollowed};
+ const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,showConnectionOnMap,setYear,jumpToTimelineYear,year,watched,toggleWatched,resetWatched,followed,toggleFollowed};
 
  // ---- Browser back closes overlays / walks the detail stack -------------------
  const somethingOpen=searchOpen||!!focus||!!clusterIds;

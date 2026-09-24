@@ -5,7 +5,7 @@ import {EpisodeRow,Section} from "../components/ui";
 import {useAtlas} from "../lib/atlasContext";
 import {atlasData} from "../data";
 import {buildChronology,buildEpisodeWatchOrder,describeEra,UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR} from "../lib/chronology";
-import {episodeById} from "../lib/lookup";
+import {episodeById,characterById} from "../lib/lookup";
 import {META,SERIES_KEYS,SERIES_BY_ID,seriesColor,seriesShort} from "../lib/series";
 import {clamp} from "../lib/atlasHelpers";
 
@@ -46,7 +46,7 @@ export function ActivityHeatmap({year,onYear,seriesId}:{year:number;onYear:(y:nu
 }
 
 export default function TimelineView(){
- const {year,setYear}=useAtlas();
+ const {year,setYear,openCharacter}=useAtlas();
  const [filter,setFilter]=useState<string|null>(null);
  const listRef=useRef<HTMLDivElement|null>(null);
  const order=useMemo(()=>buildEpisodeWatchOrder(),[]);
@@ -79,7 +79,9 @@ export default function TimelineView(){
   <div className="yearList" ref={listRef}>
    {groups.map(([y,g])=><section key={y} id={"tl-"+y} className={"yearGroup"+(y===year?" isCurrent":"")}>
     <button className="yearHead" onClick={()=>y&&setYear(y)}><b>{y||"Undated"}</b>{y>0&&<span>{describeEra(y).short}</span>}<small>{g.episodes.length} ep</small></button>
-    {g.events.map((ev:any)=><div key={ev.id} className="row eventRow" style={{"--c":seriesColor(ev.seriesId)} as CSSProperties}><span className="eventGlyph"><Icon name="spark"/></span><span className="rowText"><small>{seriesShort(ev.seriesId)} · universe event{ev.date?" · "+ev.date:""}</small><b>{ev.title}</b>{ev.description&&<em>{ev.description}</em>}</span></div>)}
+    {g.events.map((ev:any)=><div key={ev.id} className="row eventRow" style={{"--c":seriesColor(ev.seriesId)} as CSSProperties}><span className="eventGlyph"><Icon name="spark"/></span><span className="rowText"><small>{seriesShort(ev.seriesId)} · universe event{ev.date?" · "+ev.date:""}</small><b>{ev.title}</b>{ev.description&&<em>{ev.description}</em>}
+     {ev.characterIds?.length>0&&<span className="chipList">{ev.characterIds.map((cid:string)=>{const c=characterById.get(cid) as any;return c&&<button key={cid} className="linkChip" onClick={()=>openCharacter(cid)}><Icon name="person"/>{c.name}</button>})}</span>}
+    </span></div>)}
     <div className="stack">{g.episodes.map(e=><EpisodeRow key={e.id} episode={e}/>)}</div>
    </section>)}
   </div>

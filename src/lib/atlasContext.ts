@@ -14,6 +14,7 @@ export type AtlasActions={
  showCharacterJourney:(id:string)=>void;
  showConnectionOnMap:(id:string)=>void;
  setYear:(year:number)=>void;
+ jumpToTimelineYear:(year:number)=>void;
  year:number;
  watched:Set<string>;
  toggleWatched:(id:string)=>void;

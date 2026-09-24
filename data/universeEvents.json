@@ -42,7 +42,10 @@
     "year": 2014,
     "title": "Rick is taken by the CRM",
     "seriesId": "twd",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "characterIds": [
+      "rick-grimes"
+    ]
   },
   {
     "id": "rick-michonne-reunion-era",
@@ -52,6 +55,10 @@
     "certainty": "confirmed",
     "locationIds": [
       "philadelphia"
+    ],
+    "characterIds": [
+      "rick-grimes",
+      "michonne"
     ]
   },
   {
@@ -62,6 +69,10 @@
     "certainty": "confirmed",
     "locationIds": [
       "manhattan"
+    ],
+    "characterIds": [
+      "maggie-rhee",
+      "negan-smith"
     ]
   },
   {
@@ -72,6 +83,9 @@
     "certainty": "confirmed",
     "locationIds": [
       "france"
+    ],
+    "characterIds": [
+      "daryl-dixon"
     ]
   },
   {
@@ -82,6 +96,10 @@
     "certainty": "confirmed",
     "locationIds": [
       "spain"
+    ],
+    "characterIds": [
+      "daryl-dixon",
+      "carol-peletier"
     ]
   }
 ]
