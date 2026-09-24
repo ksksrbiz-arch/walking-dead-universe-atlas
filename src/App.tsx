@@ -16,7 +16,7 @@ import EntityGraphView from "./components/EntityGraphView";
 import MiniTimeline from "./components/MiniTimeline";
 import {useAtlasFocusController} from "./lib/entityFocus";
 import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
-import {getCharacterEpisodeIds,getLocationEpisodeIds,getEpisodeConnectionIds,getGroupEpisodeIds} from "./lib/entityGraph";
+import {getCharacterEpisodeIds,getLocationEpisodeIds,getEpisodeConnectionIds,getGroupEpisodeIds,resolveConnectionEndpoint} from "./lib/entityGraph";
 import {useWatchProgress} from "./lib/watchProgress";
 import AtlasIcon,{AtlasIconGlyph} from "./components/AtlasIcon";
 import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
@@ -59,6 +59,15 @@ const fandomEntityImage=(entityType:"characters"|"locations"|"episodes",id:strin
  }).sort((a,b)=>b.score-a.score);
  return scored[0]?.score>0?scored[0].url:"";
 };
+
+// Some entity IDs are intentionally reused across kinds (e.g. "kingdom" and
+// "commonwealth" are both a location and a community — the place and the
+// group of survivors who live there). Looking an id up across pools in a
+// fixed order silently returns whichever kind is checked first, which is
+// wrong whenever a connection's own recorded type says otherwise, so
+// endpoint resolution for a connection goes through resolveConnectionEndpoint
+// (src/lib/entityGraph.ts), which already knows each type's endpoint kinds.
+const ENTITY_POOLS:Record<string,any[]>={character:atlasData.characters,location:atlasData.locations,community:atlasData.communities,faction:atlasData.factions,series:atlasData.series};
 
 type MapLayer="ALL"|"SETTLEMENTS"|"FACILITIES"|"LANDMARKS"|"INFRASTRUCTURE"|"REGIONS";
 const MAP_LAYER_LABELS:Record<MapLayer,string>={ALL:"ALL",SETTLEMENTS:"SETTLEMENTS",FACILITIES:"FACILITIES",LANDMARKS:"LANDMARKS",INFRASTRUCTURE:"INFRASTRUCTURE",REGIONS:"REGIONS"};
@@ -596,7 +605,7 @@ export default function App(){
       <strong>{mapYearCount} <small>{MAP_LAYER_LABELS[mapLayer]} · {year}</small></strong>
     </div>
 
-    <button className="mobileLocationsButton" onClick={()=>setSheet("open")} aria-label={`Open ${mapYearCount} mapped locations`}><Icon name="pin"/><span>LOCATIONS</span><b>{mapYearCount}</b></button>
+    {sheet==="peek"&&<button className="mobileLocationsButton" onClick={()=>setSheet("open")} aria-label={`Open ${mapYearCount} mapped locations`}><Icon name="pin"/><span>LOCATIONS</span><b>{mapYearCount}</b></button>}
 
     <div className="mapChrome mapTopRight">
       <button onClick={()=>setZoomValue(zoom+.5)} aria-label="Zoom in"><Icon name="plus"/></button>
@@ -687,16 +696,17 @@ function ConnectionDetail({connectionId,onCharacter,onLocation,onEpisode,onConne
  const evidence=((atlasData as any).connectionEpisodes?.connections?.[connectionId]??{}) as any;
  const episodeIds=(evidence.episodeIds??[]) as string[];
  const episodes=episodeIds.map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean) as any[];
- const endpoint=(id:string)=>{const pools:any=[atlasData.characters,atlasData.locations,atlasData.communities,atlasData.factions,atlasData.series];for(const pool of pools){const item=pool.find((x:any)=>x.id===id);if(item)return item}return null};
- const from=endpoint(connection.fromId),to=endpoint(connection.toId);
+ const fromRef=resolveConnectionEndpoint(connection,"from");
+ const toRef=resolveConnectionEndpoint(connection,"to");
+ const from=fromRef?ENTITY_POOLS[fromRef.kind]?.find((x:any)=>x.id===fromRef.id):null;
+ const to=toRef?ENTITY_POOLS[toRef.kind]?.find((x:any)=>x.id===toRef.id):null;
  const endpointLabel=(item:any,id:string)=>item?.name||item?.title||id;
- const endpointKind=(item:any)=>{if(atlasData.characters.some((x:any)=>x.id===item?.id))return "CHARACTER";if(atlasData.locations.some((x:any)=>x.id===item?.id))return "LOCATION";if(atlasData.communities.some((x:any)=>x.id===item?.id))return "COMMUNITY";if(atlasData.factions.some((x:any)=>x.id===item?.id))return "FACTION";if(atlasData.series.some((x:any)=>x.id===item?.id))return "SERIES";return "ENTITY"};
  const contextLocations=[...new Set(episodes.flatMap((e:any)=>e.locationIds??[]))].map(id=>atlasData.locations.find(l=>l.id===id)).filter(Boolean) as Location[];
- const openEndpoint=(item:any)=>{if(!item)return;const id=item.id;if(atlasData.characters.some((x:any)=>x.id===id))onCharacter(id);else if(atlasData.locations.some((x:any)=>x.id===id))onLocation(item as Location)};
+ const openEndpoint=(item:any,kind:string|null)=>{if(!item||!kind)return;const id=item.id;if(kind==="character")onCharacter(id);else if(kind==="location")onLocation(item as Location);else if(kind==="community")onCommunity(id);else if(kind==="faction")onFaction(id)};
  return <div className="contentScroll">
   <div className="connectionHero"><span>UNIVERSE CONNECTION · {connection.type.replaceAll("-"," ").toUpperCase()}</span><h3>{connection.label}</h3><p>{connection.certainty} · {evidence.evidenceKind==="direct"?"episode-level evidence":"curated relationship evidence"}</p></div>
   <div className="connectionEndpoints">
-   {[{side:"FROM",item:from,id:connection.fromId},{side:"TO",item:to,id:connection.toId}].map((entry:any)=><article key={entry.side} className="connectionEndpoint"><small>{entry.side} · {endpointKind(entry.item)}</small><b>{endpointLabel(entry.item,entry.id)}</b>{(atlasData.characters.some((x:any)=>x.id===entry.id)||atlasData.locations.some((x:any)=>x.id===entry.id))&&<button onClick={()=>openEndpoint(entry.item)}><span>OPEN ENTITY</span><Icon name="chevron"/></button>}</article>)}
+   {[{side:"FROM",item:from,id:connection.fromId,kind:fromRef?.kind||null},{side:"TO",item:to,id:connection.toId,kind:toRef?.kind||null}].map((entry:any)=><article key={entry.side} className="connectionEndpoint"><small>{entry.side} · {entry.kind?String(entry.kind).toUpperCase():"ENTITY"}</small><b>{endpointLabel(entry.item,entry.id)}</b>{entry.item&&(entry.kind==="character"||entry.kind==="location"||entry.kind==="community"||entry.kind==="faction")&&<button onClick={()=>openEndpoint(entry.item,entry.kind)}><span>OPEN ENTITY</span><Icon name="chevron"/></button>}</article>)}
   </div>
   <div className="sectionTitle">RELATIONSHIP FOCUS</div>
   <div className="connectionFocusCard"><div><small>MAP CONTEXT</small><b>{contextLocations.length||"No mapped"} {contextLocations.length===1?"location":"locations"}</b><span>Episode evidence geography is highlighted on the map. Character geography is not inferred beyond the documented evidence.</span></div><button onClick={()=>onConnection(connectionId)}><Icon name="map"/><span>FOCUS BOTH ENDS</span></button></div>

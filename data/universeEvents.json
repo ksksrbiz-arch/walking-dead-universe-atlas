@@ -22,14 +22,20 @@
     "year": 2020,
     "title": "CRM destroys Omaha",
     "seriesId": "wb",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "locationIds": [
+      "omaha"
+    ]
   },
   {
     "id": "crm-portland-plan",
     "year": 2020,
     "title": "CRM plan against Portland is exposed",
     "seriesId": "wb",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "locationIds": [
+      "portland"
+    ]
   },
   {
     "id": "rick-captured-crm",
@@ -43,27 +49,39 @@
     "year": 2022,
     "title": "Rick and Michonne's CRM storyline reaches Philadelphia",
     "seriesId": "owl",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "locationIds": [
+      "philadelphia"
+    ]
   },
   {
     "id": "dead-city-manhattan",
     "year": 2027,
     "title": "Maggie and Negan enter Manhattan",
     "seriesId": "dead",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "locationIds": [
+      "manhattan"
+    ]
   },
   {
     "id": "daryl-france",
     "year": 2023,
     "title": "Daryl Dixon reaches France",
     "seriesId": "daryl",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "locationIds": [
+      "france"
+    ]
   },
   {
     "id": "daryl-spain",
     "year": 2023,
     "title": "Daryl and Carol continue into Spain",
     "seriesId": "daryl",
-    "certainty": "confirmed"
+    "certainty": "confirmed",
+    "locationIds": [
+      "spain"
+    ]
   }
 ]

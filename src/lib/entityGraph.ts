@@ -49,7 +49,7 @@ function resolveEntityKind(id:string):EntityKind|null{
   return null;
 }
 
-function resolveConnectionEndpoint(connection:ConnectionRecord,side:"from"|"to"):EntityRef|null{
+export function resolveConnectionEndpoint(connection:ConnectionRecord,side:"from"|"to"):EntityRef|null{
   const id=side==="from"?connection.fromId:connection.toId;
   if(!id)return null;
   const expected=connectionEndpointKinds[connection.type]?.[side==="from"?0:1];
