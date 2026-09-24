@@ -399,6 +399,8 @@ export default function App(){
  const openFaction=(id:string)=>navigate("faction",id);
  const onSearchPick=(kind:SearchKind,id:string)=>{
   if(kind==="location")openLocation(id);else if(kind==="episode")openEpisode(id);else if(kind==="character")openCharacter(id);else if(kind==="community")openCommunity(id);else openFaction(id);
+  // Hand keyboard/screen-reader focus to the panel that now shows the result.
+  requestAnimationFrame(()=>sheetRef.current?.focus({preventScroll:true}));
  };
 
  const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,showConnectionOnMap,setYear,year,watched,toggleWatched,resetWatched};
@@ -671,7 +673,7 @@ export default function App(){
    </div>}
 
    {/* Sheet (phones/portrait tablets) or side panel (wide screens) */}
-   <section ref={sheetRef} className={"sheet snap-"+effectiveSnap+(view==="map"?" onMap":" asPage")} style={sheetStyle} data-map-chrome={isPanel?"right":"bottom"} {...(hasDetail?{"data-detail-open":""}:{})} aria-label={hasDetail?FOCUS_LABEL[focus!.kind]+" details":TABS.find(t=>t.view===view)?.label}>
+   <section ref={sheetRef} tabIndex={-1} className={"sheet snap-"+effectiveSnap+(view==="map"?" onMap":" asPage")} style={sheetStyle} data-map-chrome={isPanel?"right":"bottom"} {...(hasDetail?{"data-detail-open":""}:{})} aria-label={hasDetail?FOCUS_LABEL[focus!.kind]+" details":TABS.find(t=>t.view===view)?.label}>
     <header className="sheetHead" onPointerDown={sheetDown} onPointerMove={sheetMove} onPointerUp={sheetUp} onPointerCancel={sheetUp}>
      {!isPanel&&view==="map"&&<button className="grabber" onClick={e=>{if(e.detail===0)setSnap(s=>s==="peek"?"half":s==="half"?"full":"peek")}} aria-label={snap==="full"?"Collapse panel":"Expand panel"}><span/></button>}
      {hasDetail?<div className="detailBar">

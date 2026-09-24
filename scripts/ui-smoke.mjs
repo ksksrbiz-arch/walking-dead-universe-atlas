@@ -14,6 +14,13 @@
 let chromium;
 try{({chromium}=await import("playwright"))}catch{console.error("playwright is not installed. Run `npm install` (it is a devDependency), then `npx playwright install chromium`.");process.exit(2)}
 
+// Independent re-derivation of the app's projection (src/App.tsx) so marker
+// positions can be checked against geography, not against the DOM itself.
+const {geoEqualEarth}=await import("d3-geo");
+const {readFile}=await import("node:fs/promises");
+const projection=geoEqualEarth().fitExtent([[24,22],[976,578]],{type:"Sphere"});
+const locations=JSON.parse(await readFile(new URL("../data/locations.json",import.meta.url),"utf8"));
+
 const BASE=process.argv[2]||process.env.ATLAS_URL||"http://localhost:4173/";
 const results=[];
 const check=(name,ok,detail="")=>{results.push({name,ok,detail});console.log(`${ok?"PASS":"FAIL"}  ${name}${detail?"  — "+detail:""}`)};
@@ -113,6 +120,19 @@ await page.click(".searchTrigger");await page.waitForTimeout(150);await page.key
 const pinned=await page.evaluate(()=>{const m=document.querySelector("[data-location-id='alexandria']");if(!m)return null;const r=m.querySelector(".markerBody").getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}});
 const vis=await page.evaluate(()=>{const sheet=document.querySelector(".sheet").getBoundingClientRect();return {bottom:sheet.top}});
 check("selected place is framed above the sheet",!!pinned&&pinned.y>100&&pinned.y<vis.bottom,JSON.stringify(pinned));
+// Absolute position: project Alexandria's lat/lng, apply the live .mapWorld
+// transform and the viewport's slice scaling, and compare with the marker.
+const alex=locations.find(l=>l.id==="alexandria");
+const [px,py]=projection([alex.lng,alex.lat]);
+const expected=await page.evaluate(([px,py])=>{
+ const svg=document.querySelector(".mapSurface svg"),r=svg.getBoundingClientRect();
+ const m=/translate\(([-\d.e]+) ([-\d.e]+)\) scale\(([-\d.e]+)\)/.exec(document.querySelector(".mapWorld").getAttribute("transform"));
+ const a=Number(m[1]),b=Number(m[2]),z=Number(m[3]),bs=Math.max(r.width/1000,r.height/600);
+ const vx=a+z*(px-500),vy=b+z*(py-300);
+ return {x:r.left+(r.width-1000*bs)/2+bs*vx,y:r.top+(r.height-600*bs)/2+bs*vy};
+},[px,py]);
+const err=pinned?Math.hypot(pinned.x-expected.x,pinned.y-expected.y):Infinity;
+check("selected marker sits at its projected geographic position",err<1.5,`marker ${JSON.stringify(pinned)} vs projected ${JSON.stringify({x:+expected.x.toFixed(1),y:+expected.y.toFixed(1)})}, error ${err.toFixed(2)}px`);
 s=await state();
 check("selecting a place opens its detail",s.detail);
 
@@ -124,6 +144,12 @@ await drag([200,180],[240,210],6);
 const after=await markerAt();
 const moved=before&&after?{dx:after.x-before.x,dy:after.y-before.y}:null;
 check("selected marker stays attached to its projected position when the map pans",!!moved&&Math.abs(moved.dx-40)<1.5&&Math.abs(moved.dy-30)<1.5,JSON.stringify(moved));
+
+// Picking a search result hands focus to the panel showing it.
+await page.click(".searchTrigger");await page.waitForTimeout(150);await page.keyboard.type("Hilltop");await page.keyboard.press("Enter");await page.waitForTimeout(500);
+const focusOnSheet=await page.evaluate(()=>document.activeElement?.classList.contains("sheet")&&!document.querySelector(".searchOverlay"));
+check("picking a search result moves focus to the opened panel",focusOnSheet);
+await page.keyboard.press("Escape");await page.waitForTimeout(300);
 
 // Search dialog keeps focus inside and hands it back on dismiss.
 await page.focus(".searchTrigger");await page.keyboard.press("Enter");await page.waitForTimeout(300);
