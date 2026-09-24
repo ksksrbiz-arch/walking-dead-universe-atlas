@@ -15,10 +15,13 @@ export type AtlasActions={
  startJourney:(ids:string[])=>void;
  showConnectionOnMap:(id:string)=>void;
  setYear:(year:number)=>void;
+ jumpToTimelineYear:(year:number)=>void;
  year:number;
  watched:Set<string>;
  toggleWatched:(id:string)=>void;
  resetWatched:()=>void;
+ followed:Set<string>;
+ toggleFollowed:(id:string)=>void;
 };
 
 export const AtlasContext=createContext<AtlasActions|null>(null);

@@ -1,5 +1,5 @@
 import type {LucideIcon} from "lucide-react";
-import {ArrowRight,Check,ChevronDown,ChevronLeft,ChevronRight,ChartGantt,Clock,Copy,Expand,ExternalLink,Eye,EyeOff,Film,Flag,Footprints,GitCompareArrows,Images,Info,Layers,Link2,LocateFixed,MapPin,Map as MapIcon,Minus,MonitorPlay,Navigation,Pause,Play,Plus,Route,Search,Share2,Skull,SkipBack,SkipForward,Sparkles,Undo2,User,Users,X} from "lucide-react";
+import {ArrowRight,Check,ChevronDown,ChevronLeft,ChevronRight,ChartGantt,Clock,Copy,Expand,ExternalLink,Eye,EyeOff,Film,Flag,Footprints,GitCompareArrows,Images,Info,Layers,Link2,LocateFixed,MapPin,Map as MapIcon,Minus,MonitorPlay,Navigation,Pause,Play,Plus,Route,Search,Share2,Skull,SkipBack,SkipForward,Sparkles,Star,Undo2,User,Users,X} from "lucide-react";
 
 // App-wide UI icons (lucide). Names are the app's own vocabulary so call sites
 // stay stable if the underlying family ever changes.
@@ -9,7 +9,7 @@ const ICONS={
  layers:Layers,play:Play,pause:Pause,arrow:ArrowRight,external:ExternalLink,pin:MapPin,check:Check,link:Link2,
  film:Film,info:Info,route:Route,spark:Sparkles,flag:Flag,eye:Eye,eyeOff:EyeOff,expand:Expand,images:Images,
  share:Share2,skull:Skull,footprints:Footprints,compare:GitCompareArrows,undo:Undo2,copy:Copy,
- prev:SkipBack,next:SkipForward,navigate:Navigation
+ prev:SkipBack,next:SkipForward,navigate:Navigation,star:Star
 } satisfies Record<string,LucideIcon>;
 export type IconName=keyof typeof ICONS;
 

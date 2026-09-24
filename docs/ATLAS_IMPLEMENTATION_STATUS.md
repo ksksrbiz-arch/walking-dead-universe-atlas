@@ -93,6 +93,20 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - Fixed entity-graph root synchronization so community/faction focus selections actually replace the graph root instead of leaving the initial character root mounted.
 - Completed search-to-graph navigation for community and faction results so search opens the selected entity relationship context.
 
+### Character intelligence pass — follow, dossier, relationship categories
+- [x] Character follow/favorites, persisted per-viewer (localStorage, mirrors watch progress) and surfaced as a filter + badge in People.
+- [x] Character Hero surfaces verified status and aliases when the Fandom enrichment record carries them (display-only; no character in the current enrichment snapshot has these fields populated yet, so this is dormant until that data lands).
+- [x] Fixed `entityName()` to resolve by kind when the caller already knows it, instead of always preferring `location` over `community`/`faction` for ids the two intentionally share (`alexandria`, `hilltop`, `civic-republic`, `burazi`, …). Documented the collision pattern in `data/README.md`.
+- [x] Added a `category` (family/affiliation/conflict/crossover) to every connection, classified from its existing label — no new relationship facts. Documented in `data/README.md`, enforced by `scripts/audit-atlas.mjs`, exposed as a second filter row in the relationship graph.
+- Not attempted this pass (real per-character research needed to avoid inventing data): death/disappearance/status-change provenance.
+
+### Character intelligence pass — character-to-event navigation
+- [x] Added `characterIds` to the 5 (of 9) `data/universeEvents.json` records whose own `title` already names a character (`daryl-france` → Daryl Dixon, `dead-city-manhattan` → Maggie Rhee + Negan Smith, …) — never inferred from outside knowledge. The other 4 events are institutional/too broad to name a person and correctly carry no `characterIds`.
+- [x] `scripts/audit-atlas.mjs` now validates every event's `characterIds`/`locationIds` against the real registries (`events.json` and `universeEvents.json` alike).
+- [x] Character → event: a new "Universe events" section on the character page lists linked events; each jumps the Timeline to that event's year (`jumpToTimelineYear`, a new `AtlasActions` method).
+- [x] Event → character: the Timeline's universe-event rows now show a clickable chip per linked character, opening that character's page.
+- Still open: the 4 institutional universe events, and all 18 `data/events.json` season/location markers, correctly have no character link — that's a data gap (real research), not a wiring gap.
+
 ## Validation
 
 The repository has a data validator and a deployment-time AMC media ingestion step.

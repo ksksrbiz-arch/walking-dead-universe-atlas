@@ -12,6 +12,7 @@ import {useAtlasFocusController} from "./lib/entityFocus";
 import type {AtlasFocus,AtlasFocusKind} from "./lib/entityFocus";
 import {getCharacterEpisodeIds,getLocationEpisodeIds} from "./lib/entityGraph";
 import {useWatchProgress} from "./lib/watchProgress";
+import {useFollowedCharacters} from "./lib/followedCharacters";
 import {initAtlasPerformance,trackAtlasMetric} from "./lib/performance";
 import {getRuntimeMeta,getRuntimeRelationships} from "./lib/runtime";
 import {AtlasContext} from "./lib/atlasContext";
@@ -126,6 +127,7 @@ export default function App(){
  const deepLink=useRef<DeepLink|null>(readDeepLink());
  const journeyFrame=useRef<"all"|"step"|null>(null);
  const {watched,toggleWatched,resetWatched}=useWatchProgress();
+ const {followed,toggleFollowed}=useFollowedCharacters();
  const [dataErrors,setDataErrors]=useState<string[]>([]);
  const [layout,setLayout]=useState(readLayout);
  const isPanel=layout.panel,isMobileMap=layout.touch;
@@ -368,6 +370,7 @@ export default function App(){
  },[view,focus?.kind,focus?.id]);
  const closeDetail=()=>{clearFocus();setNavStack([]);if(view==="map")setSnap("peek")};
  const goView=(v:View)=>{setView(v);clearFocus();setNavStack([]);setSearchOpen(false);setClusterIds(null);setLayersOpen(false);if(v==="map")setSnap("peek")};
+ const jumpToTimelineYear=(y:number)=>{setYear(y);goView("timeline")};
  const ensureVisible=(l:Location)=>{
   if(seriesId&&l.seriesId!==seriesId)setSeries("ALL");
   if(mapLayer!=="ALL"&&locationMapLayer(l.type)!==mapLayer)setMapLayer("ALL");
@@ -510,7 +513,7 @@ export default function App(){
   requestAnimationFrame(()=>sheetRef.current?.focus({preventScroll:true}));
  };
 
- const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,startJourney,showConnectionOnMap,setYear,year,watched,toggleWatched,resetWatched};
+ const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,startJourney,showConnectionOnMap,setYear,jumpToTimelineYear,year,watched,toggleWatched,resetWatched,followed,toggleFollowed};
 
  // ---- URL state (deep links in, shareable state out) --------------------------
  useEffect(()=>{
@@ -724,7 +727,7 @@ export default function App(){
 
  // ---- Render -----------------------------------------------------------------
  const era=describeEra(year);
- const focusTitle=focus?(focus.kind==="episode"?(episodeById.get(focus.id) as any)?.title:focus.kind==="connection"?(connectionById.get(focus.id) as any)?.label:focus.kind==="community"?communityById.get(focus.id)?.name:focus.kind==="faction"?factionById.get(focus.id)?.name:entityName(focus.id)):"";
+ const focusTitle=focus?(focus.kind==="episode"?(episodeById.get(focus.id) as any)?.title:focus.kind==="connection"?(connectionById.get(focus.id) as any)?.label:focus.kind==="community"?communityById.get(focus.id)?.name:focus.kind==="faction"?factionById.get(focus.id)?.name:entityName(focus.id,focus.kind)):"";
  const sheetStyle=!isPanel&&view==="map"?{height:sheetHeightFor(snap)+"px"} as CSSProperties:undefined;
  const detail=focus&&(focus.kind==="location"?<LocationDetail id={focus.id}/>:focus.kind==="episode"?<EpisodeDetail id={focus.id}/>:focus.kind==="character"?<CharacterDetail id={focus.id}/>:focus.kind==="connection"?<ConnectionDetail id={focus.id}/>:<GroupDetail kind={focus.kind} id={focus.id}/>);
  const journeyControls:JourneyControls={

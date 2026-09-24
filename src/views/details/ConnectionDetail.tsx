@@ -27,8 +27,8 @@ export default function ConnectionDetail({id}:{id:string}){
   </Hero>
   <div className="endpoints">
    {ends.map((e,i)=>{const kind=e.ref?.kind;const clickable=kind&&kind!=="series";return <button key={e.side} className="endpoint" disabled={!clickable} onClick={()=>kind&&open(kind,e.id)}>
-    {kind==="character"?<PortraitImage id={e.id} name={entityName(e.id)} size="sm"/>:<span className="endpointGlyph"><Icon name={(kind&&KIND_ICON[kind as keyof typeof KIND_ICON])||"link"}/></span>}
-    <span className="rowText"><small>{kind||"entity"}</small><b>{entityName(e.id)}</b></span>
+    {kind==="character"?<PortraitImage id={e.id} name={entityName(e.id,kind)} size="sm"/>:<span className="endpointGlyph"><Icon name={(kind&&KIND_ICON[kind as keyof typeof KIND_ICON])||"link"}/></span>}
+    <span className="rowText"><small>{kind||"entity"}</small><b>{entityName(e.id,kind)}</b></span>
     {i===0&&<span className="endpointJoin" aria-hidden="true">↔</span>}
    </button>})}
   </div>

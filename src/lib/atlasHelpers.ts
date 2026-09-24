@@ -45,6 +45,11 @@ const CONNECTION_TYPE_LABELS:Record<string,string>={
 };
 export const connectionTypeLabel=(type?:string)=>CONNECTION_TYPE_LABELS[String(type)]||prettyType(type);
 
+// Category is a light classification of each connection's documented label
+// (data/README.md "Connection categories") — never a new relationship fact.
+const CONNECTION_CATEGORY_LABELS:Record<string,string>={family:"Family",conflict:"Conflict",affiliation:"Affiliation",crossover:"Crossover"};
+export const connectionCategoryLabel=(category?:string)=>CONNECTION_CATEGORY_LABELS[String(category)]||prettyType(category);
+
 // ---- Images ---------------------------------------------------------------
 const media=(atlasData as any).media;
 export const episodeMediaRecord=(id:string)=>(episodeMedia as any).episodes?.[id];
