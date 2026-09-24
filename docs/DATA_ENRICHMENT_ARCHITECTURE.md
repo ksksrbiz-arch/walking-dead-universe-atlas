@@ -87,7 +87,7 @@ There are two separate media systems in this repo. Only one of them renders imag
 **Live path (this is what actually serves every character/location/episode image):**
 
 `data/media.json` (characters/places/series) and `data/episodeMedia.json` (episodes) hold curated,
-manually-verified image URLs — checked first. `fandomEntityImage()` in `src/App.tsx` is the fallback:
+manually-verified image URLs — checked first. `fandomEntityImage()` in `src/lib/atlasHelpers.ts` is the fallback:
 it scores every image candidate in `data/enrichment/fandom-canonical.json` against the entity name and
 picks the best match. Series key art is the last-resort fallback for locations/characters with no
 curated or Fandom match. Whatever URL comes out of that chain goes through `atlasImageUrl()`

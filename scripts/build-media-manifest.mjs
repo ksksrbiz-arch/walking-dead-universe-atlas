@@ -4,7 +4,7 @@
  *
  * This does NOT trust upload counts or deployment status. For every character,
  * location and episode it replicates the exact resolution order the live app
- * uses (src/App.tsx: curated data/media.json / data/episodeMedia.json first,
+ * uses (src/lib/atlasHelpers.ts: curated data/media.json / data/episodeMedia.json first,
  * then the Fandom canonical heuristic match, then series key art) and then
  * makes a real HTTP request through the same delivery path the browser would
  * use (the Supabase atlas-media proxy for Fandom/AMC sources, a local file
@@ -27,7 +27,7 @@ const SKIP_VERIFY = process.env.MEDIA_MANIFEST_SKIP_VERIFY === "1";
 
 const readJson = async (url) => JSON.parse(await readFile(url, "utf8"));
 
-// Mirrors fandomEntityImage() in src/App.tsx. Keep these in sync; this script
+// Mirrors fandomEntityImage() in src/lib/atlasHelpers.ts. Keep these in sync; this script
 // exists specifically so drift between "what we think resolves" and "what the
 // app actually renders" gets caught instead of assumed away.
 function fandomEntityImage(fandomCanonical, entityType, id, name) {
@@ -173,7 +173,7 @@ async function main() {
   const manifest = {
     generatedAt: new Date().toISOString(),
     version: 1,
-    notes: "Reflects the actual live resolution order in src/App.tsx (curated data/media.json or data/episodeMedia.json > Fandom canonical heuristic match > series key art), not the Vercel Blob pipeline, which is not currently wired into image rendering.",
+    notes: "Reflects the actual live resolution order in src/lib/atlasHelpers.ts (curated data/media.json or data/episodeMedia.json > Fandom canonical heuristic match > series key art), not the Vercel Blob pipeline, which is not currently wired into image rendering.",
     summary: {},
     entities: verified.map((v) => ({
       entityType: v.entityType,

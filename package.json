@@ -36,7 +36,9 @@
     "build:vercel": "vite build --emptyOutDir",
     "sync:vercel": "node scripts/sync-vercel-atlas.mjs",
     "media:manifest": "node scripts/build-media-manifest.mjs",
-    "media:fill-locations": "node scripts/fill-location-fandom-images.mjs"
+    "media:fill-locations": "node scripts/fill-location-fandom-images.mjs",
+    "typecheck": "tsc --noEmit -p .",
+    "test:ui": "node scripts/ui-smoke.mjs"
   },
   "dependencies": {
     "@cublya/world-atlas": "^3.0.0-beta.1",
@@ -49,7 +51,10 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
+    "@types/d3-geo": "^3.1.1",
     "@types/node": "^22.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@types/topojson-client": "^3.1.5",
     "@vitejs/plugin-react": "^5.0.4",
     "typescript": "^5.9.2",

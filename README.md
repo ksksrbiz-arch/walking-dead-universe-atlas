@@ -14,18 +14,16 @@ The application is now deployed through **Vercel** with GitHub as the source of 
 
 ## Current application
 
-The React shell now provides:
+The React app provides:
 
-- mobile-first map workspace
-- responsive tablet layout
-- universe-year control
-- series filtering
-- location selection
-- timeline view
-- people/relationship view foundation
-- watch-guide foundation
-- normalized series, season, location, event, character, community and faction data
-- initial data-reference validation
+- **Map** — full-bleed dark world map with series-coloured markers, clusters that zoom on tap, a draggable bottom sheet, and a time scrubber with per-series activity for every universe year
+- **Timeline** — series×year heatmap you scrub with a thumb, and all 363 episodes in story order grouped by year
+- **People** — characters (sorted by prominence), communities, factions and documented links
+- **Watch** — chronological watch tracker: progress ring, one-tap "up next", per-series progress, watched state on every episode list (stored in the browser)
+- Detail pages for places, episodes, characters, groups and links with back navigation
+- Global search (`/`), keyboard support, safe-area and reduced-motion aware, phone/tablet/desktop/landscape layouts
+
+UI design rules: `context/references/ui-design-system.md`. Audit and rationale: `docs/UI_AUDIT_AND_REDESIGN_2026-09.md`.
 
 ## Data architecture
 
@@ -65,7 +63,14 @@ Each timeline/geographic entity can carry certainty metadata:
 
 The Atlas deliberately avoids inventing exact dates or fictional travel routes where the source material does not establish them.
 
-## Build
+## Build & checks
+
+```
+npm run typecheck     # TypeScript over src/
+npm run build         # production build
+npm run audit:atlas   # data/graph integrity
+npm run test:ui       # browser regression (needs `vite preview` + Playwright; see scripts/ui-smoke.mjs)
+```
 
 For Vercel:
 

@@ -1,18 +1,9 @@
 import {memo,useMemo,useRef} from "react";
 import type {CSSProperties} from "react";
 import {atlasData,SeriesKey} from "../data";
+import {META} from "../lib/series";
 import {buildChronology,describeEra,UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR,yearToPercent} from "../lib/chronology";
 
-const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
- TWD:{id:"twd",name:"The Walking Dead",color:"#e7e7e1",short:"TWD"},
- FTWD:{id:"ftwd",name:"Fear the Walking Dead",color:"#d4a64b",short:"FEAR"},
- TALES:{id:"tales",name:"Tales of the Walking Dead",color:"#d68168",short:"TALES"},
- WB:{id:"wb",name:"World Beyond",color:"#72a9c5",short:"WORLD BEYOND"},
- OWL:{id:"owl",name:"The Ones Who Live",color:"#d26e6b",short:"TOWL"},
- DARYL:{id:"daryl",name:"Daryl Dixon",color:"#9d88c8",short:"DARYL"},
- DEAD:{id:"dead",name:"Dead City",color:"#5bb29b",short:"DEAD CITY"},
- MORE_TALES:{id:"more-tales",name:"More Tales from the TWDU",color:"#c46b9a",short:"MORE TALES"}
-};
 const ORDER:SeriesKey[]=["TWD","FTWD","TALES","WB","OWL","DARYL","DEAD","MORE_TALES"];
 const MIN_YEAR=UNIVERSE_MIN_YEAR;
 const MAX_YEAR=UNIVERSE_MAX_YEAR;
@@ -80,7 +71,7 @@ export default function AtlasTimelineDock({year,onYearChange,series,onEpisode,se
     {laneOrder.map(key=><TimelineLane key={key} meta={META[key]} items={itemsByLane[key]} active={activeSeries.has(META[key].id)} selectedEpisode={selectedEpisode} year={year} onEpisode={onEpisode} onYearChange={onYearChange}/>)}
     <div className="atlasTimelineCursor" style={{left:pos(year)+"%"}} aria-hidden="true"><span/></div>
    </div>
-   <div className="atlasTimelineFooter"><span>{Object.values(counts).reduce((a,b)=>a+b,0)} chronology records</span><input type="range" min={MIN_YEAR} max={MAX_YEAR} step=".01" value={year} onChange={e=>onYearChange(Number(e.target.value))} aria-label="Scrub universe chronology"/><span>2028</span></div>
+   <div className="atlasTimelineFooter"><span>{Object.values(counts).reduce((a,b)=>a+b,0)} chronology records</span><input type="range" min={MIN_YEAR} max={MAX_YEAR} step="1" value={year} onChange={e=>onYearChange(Number(e.target.value))} aria-label="Scrub universe chronology"/><span>{MAX_YEAR}</span></div>
   </div>
  </section>
 }
