@@ -14,7 +14,10 @@ export function normalizeTemporalAnchor(record:any):TemporalAnchor {
  const date=record?.date??record?.airDate;
  if(date&&isValidIsoDate(date)){
   const t=Date.parse(date+"T00:00:00.000Z");
-  return {start:t,end:t+DAY-1,precision:"day",label:date,valid:true};
+  const d=new Date(t),year=d.getUTCFullYear(),daysInYear=(Date.UTC(year+1,0,1)-Date.UTC(year,0,1))/DAY;
+  const dayOfYear=Math.floor((t-Date.UTC(year,0,1))/DAY);
+  const ordinal=year+dayOfYear/daysInYear;
+  return {start:ordinal,end:ordinal+1/daysInYear,precision:"day",label:date,valid:true};
  }
  const start=Number(rawStart),end=Number(rawEnd);
  if(rawStart==null||rawStart===""||!Number.isFinite(start)||start<1||start>9999||!Number.isFinite(end)||end<start||end>9999)
