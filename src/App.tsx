@@ -66,7 +66,13 @@ const pathGenerator=geoPath(projection);
 const worldCountries:any=feature(world as any,(world as any).objects.countries) as any;
 const worldLand:any=feature(world as any,(world as any).objects.land) as any;
 const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
-const hasMapCoordinates=(location:Location)=>Number.isFinite(Number(location.lat))&&Number.isFinite(Number(location.lng))&&!(Number(location.lat)===0&&Number(location.lng)===0&&location.certainty==="unknown");
+// (0,0) is a real point (the Gulf of Guinea, off West Africa) but never a real Walking Dead
+// Universe location - source data uses it as the "coordinates not yet researched" sentinel
+// (see the 17 locations with certainty:"unknown" at exactly lat:0,lng:0). Treat it as unplaced
+// unconditionally, not only when certainty also happens to say "unknown" - certainty and
+// coordinate confidence are edited independently, and AGENTS.md is explicit that an unknown
+// coordinate must never silently render as a real point on the map.
+const hasMapCoordinates=(location:Location)=>Number.isFinite(Number(location.lat))&&Number.isFinite(Number(location.lng))&&!(Number(location.lat)===0&&Number(location.lng)===0);
 const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
 const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
 const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
@@ -242,6 +248,22 @@ export default function App(){
  const selectedFactionData=selectedFaction?atlasData.factions.find((x:any)=>x.id===selectedFaction) as any:null;
  const episodeWatchOrder=useMemo(()=>getEpisodeWatchOrder(),[]);
  const characterJourneyLocationIds=useMemo(()=>{if(!selectedCharacter)return new Set<string>();const ids=new Set<string>();getCharacterEpisodeIds(selectedCharacter).forEach(eid=>{const e=atlasData.episodes.find((x:any)=>x.id===eid) as any;(e?.locationIds??[]).forEach((id:string)=>ids.add(id))});return ids},[selectedCharacter]);
+ // Ordered by in-universe chronology (not air date) so the drawn route reflects the story's
+ // own timeline, not release order. Consecutive repeats collapse (a return trip later in the
+ // sequence still draws as its own leg); locations without real coordinates are dropped rather
+ // than drawing a route through the ocean-origin (0,0) sentinel.
+ const characterJourneySequence=useMemo(()=>{
+   if(!selectedCharacter)return [] as Location[];
+   const eps=getCharacterEpisodeIds(selectedCharacter).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean).sort(compareEpisodesChronologically) as any[];
+   const seq:Location[]=[];
+   for(const e of eps){
+     for(const locId of e.locationIds??[]){
+       const loc=atlasData.locations.find(l=>l.id===locId);
+       if(loc&&hasMapCoordinates(loc)&&seq[seq.length-1]?.id!==loc.id)seq.push(loc);
+     }
+   }
+   return seq;
+ },[selectedCharacter]);
  const connectionContextLocationIds=useMemo(()=>{const ids=new Set<string>();if(!selectedConnectionData)return ids;[selectedConnectionData.fromId,selectedConnectionData.toId].filter(Boolean).forEach((id:string)=>{const l=atlasData.locations.find(x=>x.id===id);if(l)ids.add(l.id)});const evidence=((atlasData as any).connectionEpisodes?.connections?.[selectedConnectionData.id]?.episodeIds??[]) as string[];evidence.forEach((episodeId:string)=>{const e=atlasData.episodes.find((x:any)=>x.id===episodeId) as any;(e?.locationIds??[]).forEach((id:string)=>ids.add(id))});return ids},[selectedConnectionData]);
  const mapLocations=useMemo(()=>{
    const source=journeyMapMode&&selectedCharacter?atlasData.locations.filter(l=>characterJourneyLocationIds.has(l.id)):locations;
@@ -292,7 +314,43 @@ export default function App(){
  },[query]);
 
  const setZoomValue=(v:number)=>setZoom(clamp(v,1,5));
- const getMapPanLimits=()=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,baseScale=Math.max(w/1000,h/600),z=visual.current.zoom;const worldW=952*baseScale*z,worldH=556*baseScale*z;return {x:Math.max(0,(worldW-w)/2),y:Math.max(0,(worldH-h)/2)}};
+ const getMapPanLimits=(z:number=visual.current.zoom)=>{const el=mapSvgRef.current;if(!el)return {x:0,y:0};const w=el.clientWidth,h=el.clientHeight,baseScale=Math.max(w/1000,h/600);const worldW=952*baseScale*z,worldH=556*baseScale*z;return {x:Math.max(0,(worldW-w)/2),y:Math.max(0,(worldH-h)/2)}};
+ // Centers the map on a set of location ids by projecting their real coordinates directly,
+ // instead of measuring rendered marker DOM elements (the previous approach, which silently did
+ // nothing whenever every target location happened to be merged into a marker cluster - the
+ // common case, not the exception, since clustering is what keeps the map usable at low zoom).
+ // Also fixes a second, independent bug the DOM approach shared no matter how markers were
+ // found: at the default zoom (1), getMapPanLimits() is mathematically 0 on whichever axis
+ // drives the map's base scale - there is no room to pan at all, so any focus request was
+ // silently clamped back to wherever the map already was. Raising zoom enough to guarantee real
+ // pan room (never lowering it - do not undo a user's existing zoom-in) is what computeHomePan
+ // already does for its own case; this generalizes the same fix to every focus target.
+ const focusMapOnLocationIds=(ids:string[],targetZoom=1.8)=>{
+   const usable=[...new Set(ids)].map(id=>atlasData.locations.find(l=>l.id===id)).filter((l):l is Location=>Boolean(l)&&hasMapCoordinates(l as Location));
+   if(!usable.length)return;
+   const svg=mapSvgRef.current;
+   if(!svg)return;
+   const w=svg.clientWidth,h=svg.clientHeight;
+   if(!w||!h)return;
+   const baseScale=Math.max(w/1000,h/600);
+   const pts=usable.map(l=>project(l.lat,l.lng));
+   const wx=pts.reduce((s,p)=>s+p.x,0)/pts.length;
+   const wy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
+   const rect=svg.getBoundingClientRect();
+   const targetScreenX=rect.left+rect.width*.5;
+   const targetScreenY=rect.top+rect.height*.38;
+   const z=Math.max(targetZoom,visual.current.zoom);
+   const cx=500,cy=300;
+   const nextXRaw=targetScreenX-rect.left-baseScale*cx-baseScale*z*(wx-cx);
+   const nextYRaw=targetScreenY-rect.top-baseScale*cy-baseScale*z*(wy-cy);
+   const limits=getMapPanLimits(z);
+   const nextX=clamp(nextXRaw,-limits.x,limits.x);
+   const nextY=clamp(nextYRaw,-limits.y,limits.y);
+   visual.current={x:nextX,y:nextY,zoom:z};
+   applyMapTransform(nextX,nextY,z,true);
+   setPan({x:nextX,y:nextY});
+   if(z!==zoom)setZoom(z);
+ };
  // "Home" is the initial (present-day) location cluster centered in the viewport, not
  // the raw world/viewBox center — on a narrow phone slice the world center is empty
  // ocean, well off from where the story's early locations (Georgia) actually sit.
@@ -303,7 +361,7 @@ export default function App(){
    const w=el.clientWidth,h=el.clientHeight;
    if(!w||!h)return {x:0,y:0,zoom:1};
    const scale=Math.max(w/1000,h/600);
-   const pts=atlasData.locations.filter(l=>l.year<=2010).map(l=>project(l.lat,l.lng));
+   const pts=atlasData.locations.filter(l=>l.year<=2010&&hasMapCoordinates(l)).map(l=>project(l.lat,l.lng));
    if(!pts.length)return {x:0,y:0,zoom:1};
    const cx=pts.reduce((s,p)=>s+p.x,0)/pts.length;
    const cy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
@@ -407,24 +465,8 @@ export default function App(){
    const ids=(raw?.locationIds??[]) as string[];
    if(!ids.length)return;
    window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{
-     const surface=mapSvgRef.current;
-     if(!surface)return;
-     const rect=surface.getBoundingClientRect();
-     const centers=ids.map(id=>surface.querySelector<SVGGElement>(".marker[data-location-id=\""+id+"\"]")).filter(Boolean).map(el=>{
-       const r=(el as SVGGElement).getBoundingClientRect();
-       return {x:r.left+r.width/2,y:r.top+r.height/2};
-     });
-     if(!centers.length)return;
-     const markerX=centers.reduce((sum,p)=>sum+p.x,0)/centers.length;
-     const markerY=centers.reduce((sum,p)=>sum+p.y,0)/centers.length;
-     const targetX=rect.left+rect.width*.5;
-     const targetY=rect.top+rect.height*.38;
-     const limits=getMapPanLimits(); const nextXLimit=limits.x; const nextYLimit=limits.y;
-     const nextX=clamp(visual.current.x+(targetX-markerX),-nextXLimit,nextXLimit);
-     const nextY=clamp(visual.current.y+(targetY-markerY),-nextYLimit,nextYLimit);
-     visual.current={...visual.current,x:nextX,y:nextY};
-     applyMapTransform(nextX,nextY,visual.current.zoom,true);
-     setPan({x:nextX,y:nextY});trackAtlasMetric("episode-geography-focus",performance.now()-focusStarted,{episode:raw?.id||"",locations:ids.length});
+     focusMapOnLocationIds(ids);
+     trackAtlasMetric("episode-geography-focus",performance.now()-focusStarted,{episode:raw?.id||"",locations:ids.length});
    }));
  };
  const selectAtlasEpisode=(id:string)=>{clearPeopleFocus();const raw=atlasData.episodes.find((e:any)=>e.id===id) as any;setYearForEpisode(raw);setSelectedEpisode(id);setSelectedLocation(null);setSelectedCharacter(null);setSelectedConnection(null);setJourneyMapMode(false);setView("map");setSheet("open");focusEpisodeGeography(raw)};
@@ -434,8 +476,8 @@ export default function App(){
    const locationIds=(event.locationIds??[]) as string[];
    if(locationIds.length)focusEpisodeGeography({id:event.id,locationIds});
  };
- const focusCharacterJourney=()=>{if(!selectedCharacter)return;const ids=getCharacterEpisodeIds(selectedCharacter).flatMap(eid=>(atlasData.episodes.find((e:any)=>e.id===eid) as any)?.locationIds??[]);const unique=[...new Set<string>(ids)];const years=getCharacterEpisodeIds(selectedCharacter).map(eid=>atlasData.episodes.find((e:any)=>e.id===eid) as any).filter(Boolean).flatMap((e:any)=>[Number(e.timelineStart??e.timelineEnd??0)]).filter((n:number)=>Number.isFinite(n)&&n>0);if(years.length)setYear(Math.max(...years));setSeries("ALL");setJourneyMapMode(true);setSelectedConnection(null);setSelectedLocation(null);setSelectedEpisode(null);setView("map");setSheet("open");window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{const surface=mapSvgRef.current;if(!surface)return;const rect=surface.getBoundingClientRect();const centers=unique.map(id=>surface.querySelector<SVGGElement>(".marker[data-location-id=\""+id+"\"]")).filter(Boolean).map(el=>{const r=(el as SVGGElement).getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}});if(!centers.length)return;const markerX=centers.reduce((sum,p)=>sum+p.x,0)/centers.length;const markerY=centers.reduce((sum,p)=>sum+p.y,0)/centers.length;const targetX=rect.left+rect.width*.5;const targetY=rect.top+rect.height*.38;const limits=getMapPanLimits();const nextX=clamp(visual.current.x+(targetX-markerX),-limits.x,limits.x);const nextY=clamp(visual.current.y+(targetY-markerY),-limits.y,limits.y);visual.current={...visual.current,x:nextX,y:nextY};applyMapTransform(nextX,nextY,visual.current.zoom,true);setPan({x:nextX,y:nextY});trackAtlasMetric("character-journey-geography-focus",1,{character:selectedCharacter,locations:unique.length})}))};
- const focusConnectionGeography=(ids:string[])=>{const usable=ids.filter(id=>{const l=atlasData.locations.find(x=>x.id===id);return !!l&&hasMapCoordinates(l)});if(!usable.length)return;window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{const surface=mapSvgRef.current;if(!surface)return;const rect=surface.getBoundingClientRect();const centers=usable.map(id=>surface.querySelector<SVGGElement>(".marker[data-location-id=\""+id+"\"]")).filter(Boolean).map(el=>{const r=(el as SVGGElement).getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}});if(!centers.length)return;const markerX=centers.reduce((sum,p)=>sum+p.x,0)/centers.length;const markerY=centers.reduce((sum,p)=>sum+p.y,0)/centers.length;const targetX=rect.left+rect.width*.5;const targetY=rect.top+rect.height*.38;const limits=getMapPanLimits();const nextX=clamp(visual.current.x+(targetX-markerX),-limits.x,limits.x);const nextY=clamp(visual.current.y+(targetY-markerY),-limits.y,limits.y);visual.current={...visual.current,x:nextX,y:nextY};applyMapTransform(nextX,nextY,visual.current.zoom,true);setPan({x:nextX,y:nextY});trackAtlasMetric("connection-geography-focus",1,{locations:usable.length})}))};
+ const focusCharacterJourney=()=>{if(!selectedCharacter)return;const ids=getCharacterEpisodeIds(selectedCharacter).flatMap(eid=>(atlasData.episodes.find((e:any)=>e.id===eid) as any)?.locationIds??[]);const unique=[...new Set<string>(ids)];const years=getCharacterEpisodeIds(selectedCharacter).map(eid=>atlasData.episodes.find((e:any)=>e.id===eid) as any).filter(Boolean).flatMap((e:any)=>[Number(e.timelineStart??e.timelineEnd??0)]).filter((n:number)=>Number.isFinite(n)&&n>0);if(years.length)setYear(Math.max(...years));setSeries("ALL");setJourneyMapMode(true);setSelectedConnection(null);setSelectedLocation(null);setSelectedEpisode(null);setView("map");setSheet("open");window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{focusMapOnLocationIds(unique);trackAtlasMetric("character-journey-geography-focus",1,{character:selectedCharacter,locations:unique.length})}))};
+ const focusConnectionGeography=(ids:string[])=>{const usable=ids.filter(id=>{const l=atlasData.locations.find(x=>x.id===id);return !!l&&hasMapCoordinates(l)});if(!usable.length)return;window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>{focusMapOnLocationIds(usable);trackAtlasMetric("connection-geography-focus",1,{locations:usable.length})}))};
  const selectConnection=(id:string)=>{clearPeopleFocus();const connection=atlasData.connections.find((x:any)=>x.id===id) as any;if(!connection)return;const evidence=((atlasData as any).connectionEpisodes?.connections?.[id]??{}) as any;const episodeIds=(evidence.episodeIds??[]) as string[];const years=episodeIds.map(eid=>atlasData.episodes.find((e:any)=>e.id===eid)).filter(Boolean).map((e:any)=>Number(e.timelineStart??e.timelineEnd??0)).filter((n:number)=>Number.isFinite(n)&&n>0);if(years.length)setYear(Math.min(...years));setSeries("ALL");setSelectedConnection(id);setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null);setJourneyMapMode(false);setView("map");setSheet("open");const contextIds=[connection.fromId,connection.toId,...episodeIds.flatMap(eid=>(atlasData.episodes.find((e:any)=>e.id===eid) as any)?.locationIds??[])].filter(Boolean) as string[];focusConnectionGeography([...new Set(contextIds)]);};
 
  const pointerDown=(e:React.PointerEvent<SVGSVGElement>)=>{
@@ -556,11 +598,18 @@ export default function App(){
       <g ref={mapWorldRef} className="mapWorld">
       <MapGeography/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
+      {journeyMapMode&&selectedCharacter&&characterJourneySequence.length>1&&<g className="journeyRoute" aria-hidden="true">
+       <path d={characterJourneySequence.map((l,i)=>{const p=project(l.lat,l.lng);return (i===0?"M":"L")+p.x+" "+p.y}).join(" ")} fill="none"/>
+       {/* One dot per distinct location, numbered by when it was first reached - a long-running
+           character revisiting the same handful of places hundreds of times should draw as a
+           readable footprint, not a stop for every single episode-appearance. */}
+       {(()=>{const seen=new Set<string>();let stop=0;return characterJourneySequence.map(l=>{if(seen.has(l.id))return null;seen.add(l.id);stop+=1;const p=project(l.lat,l.lng);return <g key={l.id} className="journeyStop" transform={"translate("+p.x+" "+p.y+")"}><circle r="7"/><text textAnchor="middle" dy="3.2">{stop}</text></g>})})()}
+      </g>}
       <g className="markers">{markerGroups.map(group=>{
        if(group.locations.length>1){
         const ids=group.locations.map(l=>l.id);
         const label=ids.length+" locations at this map point";
-        return <g key={"cluster-"+ids.join("-")} className="markerCluster" transform={"translate("+group.x+" "+group.y+")"} role="button" tabIndex={0} aria-label={"Open "+label} onPointerDown={e=>e.stopPropagation()} onPointerUp={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();setClusterIds(ids)}} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();setClusterIds(ids)}}}>
+        return <g key={"cluster-"+ids.join("-")} className="markerCluster" data-location-ids={ids.join(" ")} transform={"translate("+group.x+" "+group.y+")"} role="button" tabIndex={0} aria-label={"Open "+label} onPointerDown={e=>e.stopPropagation()} onPointerUp={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();setClusterIds(ids)}} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();setClusterIds(ids)}}}>
           <circle className="markerClusterHit" r={22/zoom} fill="transparent"/>
           <circle className="markerClusterRing" r={18/zoom}/>
           <circle className="markerClusterCore" r={13/zoom}/>
