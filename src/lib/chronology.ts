@@ -124,15 +124,14 @@ const resolveEnd=(e:any):number=>{const anchor=normalizeTemporalAnchor(e);return
 // raw episodes.json record (timelineStart/timelineEnd) or a ChronologyItem
 // (start/end).
 export function compareEpisodesChronologically(a:any,b:any):number{
- const seasonA=seasonNumberBySeasonId.get(a.seasonId||""),seasonB=seasonNumberBySeasonId.get(b.seasonId||"");
- const temporal=compareTemporalAnchors(normalizeTemporalAnchor(a),normalizeTemporalAnchor(b));
- return (temporal==="before"?-1:temporal==="after"?1:0)
-  ||resolveStart(a)-resolveStart(b)
-  ||resolveEnd(a)-resolveEnd(b)
-  ||scaffoldIndex(a.seriesId,seasonA)-scaffoldIndex(b.seriesId,seasonB)
-  ||(seasonA??Infinity)-(seasonB??Infinity)
-  ||(a.episodeNumber??Infinity)-(b.episodeNumber??Infinity)
-  ||String(a.title||"").localeCompare(String(b.title||""));
+ const anchorA=normalizeTemporalAnchor(a),anchorB=normalizeTemporalAnchor(b);
+ const temporal=compareTemporalAnchors(anchorA,anchorB);
+ // Only disjoint known intervals establish order. Overlapping/unknown anchors
+ // are not "resolved" by a season scaffold; preserve catalog order deterministically.
+ if(temporal==="before")return -1;
+ if(temporal==="after")return 1;
+ return (a._catalogIndex??0)-(b._catalogIndex??0)
+  ||String(a.id||"").localeCompare(String(b.id||""));
 }
 
 export function buildEpisodeWatchOrder(){
