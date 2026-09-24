@@ -1886,6 +1886,19 @@ button.universeEventRow:hover{background:#ffffff04}
     top:74px!important;right:12px!important;
     bottom:76px!important;width:min(430px,44vw)!important;
   }
+  /* The sidebar above is a permanent right-hand column at this width, so map chrome has to
+     end at its left edge - pinning zoom at right:12px put Zoom in/out/Reset entirely under
+     the panel (untappable) and hid the right half of both filter rails. Collapsed ("peek")
+     the panel is only 40px wide, so the chrome slides back out. */
+  /* Keep the collapse toggle working: the !important width above otherwise beats
+     .contentPanel.peek{width:40px}, so "collapse" left the full sidebar in place. */
+  .contentPanel.peek{width:40px!important}
+  .mapTopRight{right:calc(min(430px,44vw) + 24px)!important}
+  .seriesRail,.mapLayerRail{right:calc(min(430px,44vw) + 94px)!important}
+  .map:has(.contentPanel.peek) .mapTopRight{right:64px!important}
+  .map:has(.contentPanel.peek) .seriesRail,.map:has(.contentPanel.peek) .mapLayerRail{right:134px!important}
+  .atlasTimelineDock{right:calc(min(430px,44vw) + 24px)!important}
+  .map:has(.contentPanel.peek) .atlasTimelineDock{right:64px!important}
 }
 
 @media (orientation:landscape) and (max-width:900px){
