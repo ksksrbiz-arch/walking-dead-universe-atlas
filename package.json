@@ -37,19 +37,20 @@
     "sync:vercel": "node scripts/sync-vercel-atlas.mjs"
   },
   "dependencies": {
+    "@cublya/world-atlas": "^3.0.0-beta.1",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/blob": "^2.0.0",
+    "@vercel/functions": "^3.0.0",
+    "d3-geo": "^3.1.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "d3-geo": "^3.1.1",
-    "topojson-client": "^3.1.0",
-    "@cublya/world-atlas": "^3.0.0-beta.1",
-    "@vercel/blob": "^2.0.0",
-    "@vercel/functions": "^3.0.0"
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.2",
-    "vite": "^7.1.7",
-    "@types/topojson-client": "^3.1.5",
     "@types/node": "^22.0.0",
-    "@vitejs/plugin-react": "^5.0.4"
+    "@types/topojson-client": "^3.1.5",
+    "@vitejs/plugin-react": "^5.0.4",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7"
   }
 }
