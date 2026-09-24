@@ -57,6 +57,6 @@ A full audit of the Atlas interface as shipped at `166daa2`, measured on a produ
 
 - `npm run typecheck` (now real: React/d3 types added) and `npm run build` pass.
 - `npm run audit:atlas` PASS — 363 episodes, 667 nodes, 5,997 edges.
-- `npm run test:ui` — 25 browser checks with real touch input on a phone viewport: fixed SVG viewport, untransformed root, ocean outside `.mapWorld`, one-finger pan both directions (Europe/Asia and back to North America), pinch 1×→5× clamp and back to 1×, zoomed pan, reset returns to home, drag-from-marker does not select, tap acts, selected place framed above the sheet, all tabs render, 363-episode watch order, watch progress persists across reload, sheet drag expands/collapses, no runtime errors.
+- `npm run test:ui` — 27 browser checks with real touch input on a phone viewport: fixed SVG viewport, untransformed root, ocean outside `.mapWorld`, one-finger pan both directions (Europe/Asia and back to North America), pinch 1×→5× clamp and back to 1×, zoomed pan, reset returns to home, drag-from-marker does not select, tap acts, selected place framed above the sheet, marker moves exactly with a pan (attached to geography), search dialog traps focus and returns it on dismiss, all tabs render, 363-episode watch order, watch progress persists across reload, sheet drag expands/collapses, no runtime errors.
 - Screenshots reviewed at all four viewports.
 - **Still open:** a physical-device pass (real touch feel, VoiceOver/TalkBack), per `ROADMAP.md`.

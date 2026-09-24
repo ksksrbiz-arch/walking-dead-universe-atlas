@@ -40,17 +40,37 @@ const suggestions=()=>{
 export default function SearchOverlay({onClose,onPick}:{onClose:()=>void;onPick:(kind:SearchKind,id:string)=>void}){
  const [query,setQuery]=useState("");
  const input=useRef<HTMLInputElement|null>(null);
- useEffect(()=>{const t=window.setTimeout(()=>input.current?.focus(),30);return()=>window.clearTimeout(t)},[]);
+ const panel=useRef<HTMLDivElement|null>(null);
+ const picked=useRef(false);
+ // Captured during the first render, before autoFocus moves focus into the
+ // dialog, so closing returns focus to whatever opened search.
+ const returnFocus=useRef<HTMLElement|null>(typeof document!=="undefined"?document.activeElement as HTMLElement|null:null);
+ useEffect(()=>{
+  const t=window.setTimeout(()=>input.current?.focus(),30);
+  const prev=returnFocus.current;
+  // Only a dismissal hands focus back; after picking a result focus belongs
+  // to the newly opened content, not the search trigger.
+  return()=>{window.clearTimeout(t);if(!picked.current&&prev&&prev.isConnected)prev.focus?.()};
+ },[]);
+ // Keep Tab / Shift+Tab inside the dialog (aria-modal alone does not).
+ const trapTab=(e:React.KeyboardEvent)=>{
+  if(e.key!=="Tab"||!panel.current)return;
+  const focusables=[...panel.current.querySelectorAll<HTMLElement>("button:not([disabled]),input,[href],[tabindex]:not([tabindex='-1'])")];
+  if(!focusables.length)return;
+  const first=focusables[0],last=focusables[focusables.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+ };
  const q=query.trim().toLowerCase();
  const results=useMemo(()=>q?search(q):[],[q]);
  const popular=useMemo(suggestions,[]);
- const pick=(kind:SearchKind,id:string)=>{onPick(kind,id);onClose()};
- return <div className="searchOverlay" role="dialog" aria-modal="true" aria-label="Search the atlas" onKeyDown={e=>{if(e.key==="Escape"){e.stopPropagation();onClose()}}}>
+ const pick=(kind:SearchKind,id:string)=>{picked.current=true;onPick(kind,id);onClose()};
+ return <div className="searchOverlay" role="dialog" aria-modal="true" aria-label="Search the atlas" onKeyDown={e=>{trapTab(e);if(e.key==="Escape"){e.stopPropagation();onClose()}}}>
   <div className="searchScrim" onClick={onClose}/>
-  <div className="searchPanel">
+  <div className="searchPanel" ref={panel}>
    <div className="searchBar">
     <Icon name="search"/>
-    <input ref={input} autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="People, places, episodes, factions" aria-label="Search the atlas" enterKeyHint="search" onKeyDown={e=>{if(e.key==="Enter"&&results[0])pick(results[0].kind,results[0].id)}}/>
+    <input ref={input} autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="People, places, episodes, factions" aria-label="Search the atlas" enterKeyHint="search" onKeyDown={e=>{if(e.key==="Enter"&&results[0]){e.preventDefault();pick(results[0].kind,results[0].id)}}}/>
     {query&&<button className="iconBtn ghost" onClick={()=>{setQuery("");input.current?.focus()}} aria-label="Clear search"><Icon name="close"/></button>}
     <button className="textBtn" onClick={onClose}>Cancel</button>
    </div>

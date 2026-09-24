@@ -9,7 +9,7 @@ Hard rules for every task are in `AGENTS.md` (map transform contract, 363-episod
 |---|---|---|
 | Any UI / layout / styling change | `context/references/ui-design-system.md`, `src/styles.css` (tokens at top) | `context/workflows/ui-change/CONTEXT.md` |
 | Map pan / zoom / markers / framing | `docs/MOBILE_MAP_GESTURE_ARCHITECTURE.md`, `src/App.tsx` (map section) | `context/workflows/map-change/CONTEXT.md` |
-| Episode / place / character data | `data/README.md`, `data/EPISODE_SCHEMA.md` | `context/workflows/data-change/CONTEXT.md` |
+| Episode / place / character / link data | `data/README.md`, `data/EPISODE_SCHEMA.md` | `context/workflows/data-change/CONTEXT.md` |
 | Product direction / new modes | `docs/ATLAS_ARCHITECTURE.md` | — |
 | Why the UI looks the way it does | `docs/UI_AUDIT_AND_REDESIGN_2026-09.md` | — |
 | Media / Fandom enrichment | `docs/DATA_ENRICHMENT_ARCHITECTURE.md` | — |

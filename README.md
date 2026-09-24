@@ -69,7 +69,7 @@ The Atlas deliberately avoids inventing exact dates or fictional travel routes w
 npm run typecheck     # TypeScript over src/
 npm run build         # production build
 npm run audit:atlas   # data/graph integrity
-npm run test:ui       # browser regression (needs `vite preview` + Playwright; see scripts/ui-smoke.mjs)
+npm run test:ui       # browser regression: run `npx playwright install chromium` once, then start `vite preview` (see scripts/ui-smoke.mjs)
 ```
 
 For Vercel:

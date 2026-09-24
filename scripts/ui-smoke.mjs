@@ -1,14 +1,18 @@
 #!/usr/bin/env node
 // Browser regression for the mobile map contract and the core UI loop.
 //
+//   npx playwright install chromium        # once per machine
 //   npm run build && npx vite preview --port 4173 &
-//   npx -y -p playwright@1 node scripts/ui-smoke.mjs [baseUrl]
+//   npm run test:ui [-- baseUrl]
+//
+// Playwright is a devDependency. To use an already-installed Chromium instead
+// of downloading one, set CHROMIUM_PATH=/path/to/chromium.
 //
 // Uses real touch input (CDP Input.dispatchTouchEvent) on a phone viewport so
 // pan / pinch / tap go through the same pointer path a device would. It is not
 // a substitute for a physical-device check (docs/MOBILE_MAP_GESTURE_ARCHITECTURE.md).
 let chromium;
-try{({chromium}=await import("playwright"))}catch{console.error("playwright is not installed. Run with: npx -y -p playwright@1 node scripts/ui-smoke.mjs");process.exit(2)}
+try{({chromium}=await import("playwright"))}catch{console.error("playwright is not installed. Run `npm install` (it is a devDependency), then `npx playwright install chromium`.");process.exit(2)}
 
 const BASE=process.argv[2]||process.env.ATLAS_URL||"http://localhost:4173/";
 const results=[];
@@ -111,6 +115,23 @@ const vis=await page.evaluate(()=>{const sheet=document.querySelector(".sheet").
 check("selected place is framed above the sheet",!!pinned&&pinned.y>100&&pinned.y<vis.bottom,JSON.stringify(pinned));
 s=await state();
 check("selecting a place opens its detail",s.detail);
+
+// Markers are attached to geography: a pan moves the selected marker by
+// exactly the pan distance (it lives inside .mapWorld, not the viewport).
+const markerAt=()=>page.evaluate(()=>{const r=document.querySelector("[data-location-id='alexandria'] .markerBody")?.getBoundingClientRect();return r?{x:r.left+r.width/2,y:r.top+r.height/2}:null});
+const before=await markerAt();
+await drag([200,180],[240,210],6);
+const after=await markerAt();
+const moved=before&&after?{dx:after.x-before.x,dy:after.y-before.y}:null;
+check("selected marker stays attached to its projected position when the map pans",!!moved&&Math.abs(moved.dx-40)<1.5&&Math.abs(moved.dy-30)<1.5,JSON.stringify(moved));
+
+// Search dialog keeps focus inside and hands it back on dismiss.
+await page.focus(".searchTrigger");await page.keyboard.press("Enter");await page.waitForTimeout(300);
+for(let i=0;i<8;i++)await page.keyboard.press("Tab");
+const trapped=await page.evaluate(()=>!!document.activeElement?.closest(".searchPanel"));
+await page.keyboard.press("Escape");await page.waitForTimeout(200);
+const returned=await page.evaluate(()=>document.activeElement?.classList.contains("searchTrigger"));
+check("search dialog traps Tab and returns focus on Escape",trapped&&returned,`trapped=${trapped} returned=${returned}`);
 
 // 7. Tabs render and data integrity surfaces in the UI
 for(const [label,sel] of [["Timeline",".heatmap"],["People",".personCard"],["Watch",".watchHero"]]){

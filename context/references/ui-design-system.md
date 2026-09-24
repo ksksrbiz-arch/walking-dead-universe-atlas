@@ -29,7 +29,7 @@ Display: 44 (scrubber year) · 36 (page title) · 34/40 (detail hero) · 22–28
 `Section` (optionally collapsible) · `ShowMore` (preview N rows) · `Hero` · `ActionBar` + `.btn` / `.btn.primary` · `Stats` (4-up) · `Chip` (+ `certaintyTone`) · `EpisodeRow` (thumb, code, story year, watch toggle) · `PlaceRow` · `PlaceChips` · `WatchToggle` · `ProgressRing` · `Note` · `Empty`. Detail-only helpers live in `src/views/details/shared.tsx` (`WikiSection`, `ConnectionRow/List`, `PortraitStrip`, `PortraitImage`, `Gallery`, `GraphSection`).
 
 Rules:
-- Every tappable thing is ≥44px in its smallest dimension (compact watch toggles are 40px inside a 58px row).
+- Every tappable thing is ≥44px in its smallest dimension. The only exception: compact watch toggles are 40px inside a 58px row; on episode cards they are 44px.
 - Rows are `.row`; a row with two actions (open + watch) uses `.rowMain` + `WatchToggle` side by side, never nested buttons.
 - Lists longer than ~6 use `ShowMore`; secondary blocks (wiki, sources, graph) are collapsible and closed unless they carry the page's main content.
 - Episode rows always show the watched state. Any new episode list must use `EpisodeRow` or `EpisodeCard`.
