@@ -8,8 +8,8 @@ export function isValidIsoDate(value:unknown):value is string {
  return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===value;
 }
 export function normalizeTemporalAnchor(record:any):TemporalAnchor {
- const rawStart=record?.timelineStart??record?.year;
- const rawEnd=record?.timelineEnd??rawStart;
+ const rawStart=record?.timelineStart??record?.start??record?.year;
+ const rawEnd=record?.timelineEnd??record?.end??rawStart;
  const precision=String(record?.timelinePrecision??record?.precision??(record?.date?"day":rawStart!=null?"year":"unknown")).toLowerCase() as TemporalPrecision;
  const date=record?.date??record?.airDate;
  if(date&&isValidIsoDate(date)){
@@ -22,9 +22,9 @@ export function normalizeTemporalAnchor(record:any):TemporalAnchor {
  const p:TemporalPrecision=["day","month","year","range"].includes(precision)?precision:"year";
  if(p==="day"||p==="month"){
   // Numeric year-only bounds are retained as a coarse interval unless a valid ISO date exists.
-  return {start:Date.UTC(start,0,1),end:Date.UTC(end,11,31,23,59,59,999),precision:"range",label:start===end?String(start):start+"–"+end,valid:true};
+  return {start,end,precision:"range",label:start===end?String(start):start+"–"+end,valid:true};
  }
- return {start:Date.UTC(start,0,1),end:Date.UTC(end,11,31,23,59,59,999),precision:p,label:start===end?String(start):start+"–"+end,valid:true};
+ return {start,end,precision:p,label:start===end?String(start):start+"–"+end,valid:true};
 }
 export type TemporalRelation="before"|"after"|"overlaps"|"unknown";
 export function compareTemporalAnchors(a:TemporalAnchor,b:TemporalAnchor):TemporalRelation{
