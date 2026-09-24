@@ -39,9 +39,10 @@ const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
 };
 const SERIES_BY_ID=Object.fromEntries(Object.values(META).map(x=>[x.id,x])) as Record<string,typeof META.TWD>;
 const SERIES_KEYS=Object.keys(META) as SeriesKey[];
-const fandomEntityImage=(entityType:"characters"|"locations",id:string,name:string)=>{
+const fandomEntityImage=(entityType:"characters"|"locations"|"episodes",id:string,name:string)=>{
  const record=(fandomCanonical as any)?.[entityType]?.[id];
  const candidates=[
+  ...(Array.isArray(record?.image_urls)?record.image_urls:[]),
   ...(record?.details?.imageFiles||[]).flatMap((x:any)=>[x?.url,x?.thumbnail].filter(Boolean)),
   ...(Array.isArray(record?.hints?.imageGallery)?record.hints.imageGallery:[]),
   ...(Array.isArray(record?.hints?.image)?record.hints.image:record?.hints?.image?[record.hints.image]:[])
