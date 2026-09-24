@@ -107,6 +107,11 @@ The Atlas experience is now defined as a synchronized **Map + Timeline + Connect
 - [x] Event → character: the Timeline's universe-event rows now show a clickable chip per linked character, opening that character's page.
 - Still open: the 4 institutional universe events, and all 18 `data/events.json` season/location markers, correctly have no character link — that's a data gap (real research), not a wiring gap.
 
+### Character intelligence pass — dormant wiki/provenance section fixed
+- [x] Found that `data/enrichment/fandom-canonical.json` is entirely on a "raw sync" schema (`fandom_url`, `metadata.sourceUrl`, `image_urls`, `fandom_revision`, `synced_at` — no `hints`/`fields`/`extract`/`details.linkedPages`) across all 563 records (77 characters, 123 locations, 363 episodes), confirmed via `policy: "Matched Fandom enrichment is display-only enrichment..."`. `WikiSection` (`src/views/details/shared.tsx`) only read the old shape, so every detail page's "From the wiki" section rendered as an empty, clickable-but-content-free shell.
+- [x] Fixed `WikiSection` to read the real fields (source link falls back `sourceUrl → fandom_url → metadata.sourceUrl`), added a provenance line (synced date + Fandom revision — the "source URLs, revisions" the ingestion roadmap asks to retain), and made the section return nothing at all when a record genuinely has no content (the 44 `sync_status: "missing"` locations) instead of an empty shell. Old-shape fields (`hints`/`fields`/`extract`) are still read for forward compatibility if a later publish step populates them.
+- Verified live: Daryl Dixon's and Alexandria's pages now show a working source link + "Synced 2026-09-23 · revision …" line; this fix is shared across every character/location/episode detail page, not character-specific, but most directly completes "character dossiers with verified... source provenance."
+
 ## Validation
 
 The repository has a data validator and a deployment-time AMC media ingestion step.
