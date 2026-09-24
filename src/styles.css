@@ -1951,3 +1951,21 @@ button.universeEventRow:hover{background:#ffffff04}
     bottom:6px;
   }
 }
+
+/* Layer rail tap targets. Every earlier layout block pins these chips at 24-28px tall,
+   which is well under a comfortable touch target. On touch screens they get a 36px floor;
+   with a mouse, 32px. The rail grows to fit (height:auto) rather than clipping the chips.
+   At >=1100px the rail also moves down so it clears the 48px-tall series rail above it. */
+.map.view-map .mapLayerRail.mapLayerRail{height:auto!important;overflow-y:hidden}
+.map.view-map .mapLayerRail.mapLayerRail button{height:32px!important;min-height:32px!important}
+@media (pointer:coarse){
+  .map.view-map .mapLayerRail.mapLayerRail button{height:36px!important;min-height:36px!important}
+}
+@media (min-width:1100px){
+  .map.view-map .mapLayerRail.mapLayerRail{top:146px!important}
+}
+/* 700-1099px: the geography card on the left ends at 160px, so the rails start after it
+   instead of 10px underneath its right edge. */
+@media (min-width:700px) and (max-width:1099px){
+  .map.view-map .seriesRail.seriesRail,.map.view-map .mapLayerRail.mapLayerRail{left:170px!important}
+}
