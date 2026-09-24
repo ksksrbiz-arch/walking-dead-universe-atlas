@@ -15,11 +15,11 @@ import MobileTimeBar from "./components/MobileTimeBar";
 import EntityGraphView from "./components/EntityGraphView";
 import MiniTimeline from "./components/MiniTimeline";
 import {useAtlasFocusController} from "./lib/entityFocus";
-import {atlasImageSrcSet,atlasImageUrl} from "./lib/media";
+import {atlasImageSrcSet,atlasImageUrl,fandomEntityImage,resolveCharacterImage,onAtlasImageError} from "./lib/media";
 import {getCharacterEpisodeIds,getLocationEpisodeIds,getEpisodeConnectionIds,getGroupEpisodeIds,resolveConnectionEndpoint} from "./lib/entityGraph";
 import {useWatchProgress} from "./lib/watchProgress";
 import AtlasIcon,{AtlasIconGlyph} from "./components/AtlasIcon";
-import {initAtlasPerformance,trackAtlasMetric,observeImageError} from "./lib/performance";
+import {initAtlasPerformance,trackAtlasMetric} from "./lib/performance";
 import {getRuntimeMeta,getRuntimeRelationships,getRuntimeEpisodeIds} from "./lib/runtime";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CharacterPortrait from "./components/CharacterPortrait";
@@ -39,27 +39,6 @@ const META:Record<SeriesKey,{id:string;name:string;color:string;short:string}>={
 };
 const SERIES_BY_ID=Object.fromEntries(Object.values(META).map(x=>[x.id,x])) as Record<string,typeof META.TWD>;
 const SERIES_KEYS=Object.keys(META) as SeriesKey[];
-const fandomEntityImage=(entityType:"characters"|"locations"|"episodes",id:string,name:string)=>{
- const record=(fandomCanonical as any)?.[entityType]?.[id];
- const candidates=[
-  ...(Array.isArray(record?.image_urls)?record.image_urls:[]),
-  ...(record?.details?.imageFiles||[]).flatMap((x:any)=>[x?.url,x?.thumbnail].filter(Boolean)),
-  ...(Array.isArray(record?.hints?.imageGallery)?record.hints.imageGallery:[]),
-  ...(Array.isArray(record?.hints?.image)?record.hints.image:record?.hints?.image?[record.hints.image]:[])
- ].filter((x:any)=>typeof x==="string"&&/^https?:\/\//i.test(x));
- if(!candidates.length)return "";
- const tokens=String(name).toLowerCase().replace(/[^a-z0-9 ]+/g," ").split(/\s+/).filter((x)=>x.length>=3&&!["the","tv","universe","series"].includes(x));
- const generic=/logo|title.?card|key.?art|series.?art|franchise|ensemble|group.?photo|cast.?photo|promo|poster|banner|background|wallpaper/i;
- const scored=[...new Set(candidates)].map((url:string)=>{
-  const hay=url.toLowerCase().replace(/[_-]+/g," ");
-  const matches=tokens.filter(t=>hay.includes(t)).length;
-  let score=matches*30+(matches===tokens.length&&tokens.length?70:0);
-  if(generic.test(hay))score-=90;
-  return {url,score};
- }).sort((a,b)=>b.score-a.score);
- return scored[0]?.score>0?scored[0].url:"";
-};
-
 // Some entity IDs are intentionally reused across kinds (e.g. "kingdom" and
 // "commonwealth" are both a location and a community — the place and the
 // group of survivors who live there). Looking an id up across pools in a
@@ -89,7 +68,6 @@ const worldLand:any=feature(world as any,(world as any).objects.land) as any;
 const project=(lat:number,lng:number)=>{const p=projection([lng,lat]);return {x:p?.[0]??0,y:p?.[1]??0}};
 const hasMapCoordinates=(location:Location)=>Number.isFinite(Number(location.lat))&&Number.isFinite(Number(location.lng))&&!(Number(location.lat)===0&&Number(location.lng)===0&&location.certainty==="unknown");
 const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
-const onAtlasImageError=(e:React.SyntheticEvent<HTMLImageElement>,source:string)=>{const img=e.currentTarget;if(!source||img.dataset.fallback==="1")return;observeImageError(source);img.dataset.fallback="1";img.removeAttribute("srcset");img.src=source;};
 const countryPalette=["#c8c3b5","#bfc4bb","#c6c0b0","#b7c0b5","#c9c6b8","#b9c2bf","#c3b9ac","#c4c8bc"];
 const countryTone=(i:number)=>countryPalette[i%countryPalette.length];
 // The projection, topology and per-country fill never change after load, so the geo
@@ -303,10 +281,10 @@ export default function App(){
 
  const searchResults=useMemo(()=>{
    const q=query.trim().toLowerCase();
-   if(!q)return [] as {kind:SearchKind;id:string;title:string;meta:string}[];
-   const result:{kind:SearchKind;id:string;title:string;meta:string}[]=[];
+   if(!q)return [] as {kind:SearchKind;id:string;title:string;meta:string;image?:string}[];
+   const result:{kind:SearchKind;id:string;title:string;meta:string;image?:string}[]=[];
    atlasData.locations.forEach(x=>{const aliases=x.id==="cdc-atlanta"?["cdc","center for disease control","centers for disease control"]:[];if([x.name,x.type,...aliases].join(" ").toLowerCase().includes(q))result.push({kind:"location",id:x.id,title:x.name,meta:`${SERIES_BY_ID[x.seriesId]?.short} · ${x.year}`})});
-   atlasData.characters.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"character",id:x.id,title:x.name,meta:"CHARACTER"})});
+   atlasData.characters.forEach((x:any)=>{if(x.name.toLowerCase().includes(q))result.push({kind:"character",id:x.id,title:x.name,meta:"CHARACTER",image:resolveCharacterImage(x.id,x.name,x.seriesIds).image||undefined})});
    atlasData.communities.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"community",id:x.id,title:x.name,meta:"COMMUNITY"})});
    atlasData.factions.forEach(x=>{if(x.name.toLowerCase().includes(q))result.push({kind:"faction",id:x.id,title:x.name,meta:"FACTION"})});
    atlasData.episodes.forEach((x:any)=>{if([x.title,x.seriesId,x.seasonId].join(" ").toLowerCase().includes(q))result.push({kind:"episode",id:x.id,title:x.title,meta:`${SERIES_BY_ID[x.seriesId]?.short} · S${String(x.seasonId).slice(-2)}E${String(x.episodeNumber).padStart(2,"0")}`})});
@@ -556,7 +534,7 @@ export default function App(){
     <Icon name="search"/>
     <input value={query} onFocus={openSearch} onChange={e=>{setQuery(e.target.value);openSearch()}} placeholder="Search a place, person, episode…" aria-label="Search atlas" aria-expanded={searchOpen} aria-controls="atlas-search-overlay"/>
     {query&&<button className="clearSearch" onClick={()=>{setQuery("");closeSearch()}} aria-label="Clear atlas search"><Icon name="close"/></button>}
-    {searchOpen&&query&&<div className="searchResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}
+    {searchOpen&&query&&<div className="searchResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.image?<img src={atlasImageUrl(r.image,80)} onError={e=>onAtlasImageError(e,r.image!)} loading="lazy" decoding="async" alt=""/>:(r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase())}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}
    </div>
    <div className="headerMeta"><span>LIVE ATLAS</span><b>{year}</b><em>{currentEra.short}</em></div>
   </header>
@@ -632,7 +610,7 @@ export default function App(){
 
     {isMobileMap&&view==="map"&&!selectedLocation&&!selectedEpisode&&!selectedCharacter&&<MobileTimeBar year={year} playing={playing} onYearChange={y=>{setPlaying(false);setYear(y)}} onTogglePlaying={()=>setPlaying(v=>!v)}/>}
 
-    {searchOpen&&<div id="atlas-search-overlay" className="searchOverlay" role="dialog" aria-modal="true" aria-labelledby="atlas-search-title"><div className="searchOverlayHead"><b id="atlas-search-title">SEARCH THE ATLAS</b><button onClick={closeSearch} aria-label="Close atlas search"><Icon name="close"/></button></div><div className="searchOverlayInput"><Icon name="search"/><input ref={searchInputRef} autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Place, person, episode, faction…" aria-label="Search the atlas"/>{query&&<button onClick={()=>setQuery("")} aria-label="Clear search"><Icon name="close"/></button>}</div>{query&&<div className="searchOverlayResults" aria-live="polite">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");closeSearch()}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch"><b>No matching atlas records.</b><span>Try a place, person, episode, or faction.</span><button onClick={()=>setQuery("")}>CLEAR SEARCH</button></div>}</div>}<button className="searchOverlayMapBack" onClick={()=>{setQuery("");closeSearch();goView("map")}}>BACK TO MAP</button></div>}
+    {searchOpen&&<div id="atlas-search-overlay" className="searchOverlay" role="dialog" aria-modal="true" aria-labelledby="atlas-search-title"><div className="searchOverlayHead"><b id="atlas-search-title">SEARCH THE ATLAS</b><button onClick={closeSearch} aria-label="Close atlas search"><Icon name="close"/></button></div><div className="searchOverlayInput"><Icon name="search"/><input ref={searchInputRef} autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Place, person, episode, faction…" aria-label="Search the atlas"/>{query&&<button onClick={()=>setQuery("")} aria-label="Clear search"><Icon name="close"/></button>}</div>{query&&<div className="searchOverlayResults" aria-live="polite">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else if(r.kind==="community"||r.kind==="faction")openPeopleEntity(r.kind,r.id);setQuery("");closeSearch()}}><span className="resultIcon">{r.image?<img src={atlasImageUrl(r.image,80)} onError={e=>onAtlasImageError(e,r.image!)} loading="lazy" decoding="async" alt=""/>:(r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase())}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch"><b>No matching atlas records.</b><span>Try a place, person, episode, or faction.</span><button onClick={()=>setQuery("")}>CLEAR SEARCH</button></div>}</div>}<button className="searchOverlayMapBack" onClick={()=>{setQuery("");closeSearch();goView("map")}}>BACK TO MAP</button></div>}
 
     <section className={`contentPanel ${sheet} ${selectedLoc||selectedEp||selectedCharacter||selectedConnection||selectedCommunity||selectedFaction||watchOrderOpen?"hasDetail":""}`}>
       <button className="panelGrab" onClick={()=>setSheet(v=>v==="open"?"peek":"open")} aria-expanded={sheet==="open"} aria-label={sheet==="open"?"Collapse information panel":"Expand information panel"}><span/></button>
@@ -706,7 +684,7 @@ function ConnectionDetail({connectionId,onCharacter,onLocation,onEpisode,onConne
  return <div className="contentScroll">
   <div className="connectionHero"><span>UNIVERSE CONNECTION · {connection.type.replaceAll("-"," ").toUpperCase()}</span><h3>{connection.label}</h3><p>{connection.certainty} · {evidence.evidenceKind==="direct"?"episode-level evidence":"curated relationship evidence"}</p></div>
   <div className="connectionEndpoints">
-   {[{side:"FROM",item:from,id:connection.fromId,kind:fromRef?.kind||null},{side:"TO",item:to,id:connection.toId,kind:toRef?.kind||null}].map((entry:any)=><article key={entry.side} className="connectionEndpoint"><small>{entry.side} · {entry.kind?String(entry.kind).toUpperCase():"ENTITY"}</small><b>{endpointLabel(entry.item,entry.id)}</b>{entry.item&&(entry.kind==="character"||entry.kind==="location"||entry.kind==="community"||entry.kind==="faction")&&<button onClick={()=>openEndpoint(entry.item,entry.kind)}><span>OPEN ENTITY</span><Icon name="chevron"/></button>}</article>)}
+   {[{side:"FROM",item:from,id:connection.fromId,kind:fromRef?.kind||null},{side:"TO",item:to,id:connection.toId,kind:toRef?.kind||null}].map((entry:any)=>{const portrait=entry.kind==="character"&&entry.item?resolveCharacterImage(entry.item.id,entry.item.name,entry.item.seriesIds).image:"";return <article key={entry.side} className="connectionEndpoint">{portrait&&<img className="connectionEndpointAvatar" src={atlasImageUrl(portrait,120)} onError={e=>onAtlasImageError(e,portrait)} loading="lazy" decoding="async" alt=""/>}<small>{entry.side} · {entry.kind?String(entry.kind).toUpperCase():"ENTITY"}</small><b>{endpointLabel(entry.item,entry.id)}</b>{entry.item&&(entry.kind==="character"||entry.kind==="location"||entry.kind==="community"||entry.kind==="faction")&&<button onClick={()=>openEndpoint(entry.item,entry.kind)}><span>OPEN ENTITY</span><Icon name="chevron"/></button>}</article>})}
   </div>
   <div className="sectionTitle">RELATIONSHIP FOCUS</div>
   <div className="connectionFocusCard"><div><small>MAP CONTEXT</small><b>{contextLocations.length||"No mapped"} {contextLocations.length===1?"location":"locations"}</b><span>Episode evidence geography is highlighted on the map. Character geography is not inferred beyond the documented evidence.</span></div><button onClick={()=>onConnection(connectionId)}><Icon name="map"/><span>FOCUS BOTH ENDS</span></button></div>
@@ -857,11 +835,9 @@ function CharacterDetail({characterId,onEpisode,onLocation,onCharacter,onConnect
  const eps=(runtimeEpisodeIds??getCharacterEpisodeIds(characterId)).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean).sort(compareEpisodesChronologically);
  const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))].map(id=>atlasData.locations.find(l=>l.id===id)).filter(Boolean) as Location[];
  const links=atlasData.connections.filter((x:any)=>x.fromId===characterId||x.toId===characterId);
- const media=(atlasData as any).media?.characters?.[characterId];
- const fandomImage=fandomEntityImage("characters",characterId,character.name);
- const existingImage=media?.image||"";
- const characterImage=existingImage||fandomImage||(atlasData as any).media?.series?.[character.seriesIds?.[0]]?.keyArt;
- const characterMediaFallback=!existingImage&&!fandomImage&&Boolean(characterImage); const characterGallery=eps.map((e:any)=>{const m=(episodeMedia as any).episodes?.[e.id];return {src:m?.image,title:e.title,meta:e.seriesId?SERIES_BY_ID[e.seriesId]?.short:""}}).filter((x:any)=>x.src).slice(0,18);
+ const resolvedImage=resolveCharacterImage(characterId,character.name,character.seriesIds);
+ const characterImage=resolvedImage.image;
+ const characterMediaFallback=resolvedImage.method==="series-fallback"; const characterGallery=eps.map((e:any)=>{const m=(episodeMedia as any).episodes?.[e.id];return {src:m?.image,title:e.title,meta:e.seriesId?SERIES_BY_ID[e.seriesId]?.short:""}}).filter((x:any)=>x.src).slice(0,18);
  const endpointName=(id:string)=>{const pools:any=[atlasData.characters,atlasData.locations,atlasData.communities,atlasData.factions,atlasData.series,atlasData.connections];for(const pool of pools){const item=pool.find((x:any)=>x.id===id);if(item)return item.name||item.title||item.label||id}return id};
  const seriesSpans=useMemo(()=>{
    const spans:any[]=[];
@@ -950,7 +926,7 @@ function PeopleContent({onCharacter,onLocation,onEpisode,onConnection,onCommunit
   <div className="peopleSearch"><span>SEARCH PEOPLE</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Find a character…" aria-label="Search characters"/></div>
   <EntityGraphView heading="EXPLORE CONNECTIONS" onCharacter={onCharacter} onLocation={onLocation} onEpisode={onEpisode} onConnection={onConnection} onCommunity={onCommunity} onFaction={onFaction}/>
   <div className="sectionTitle">CHARACTERS <span>{characters.length} OF {atlasData.characters.length}</span></div>
-  <div className="peopleGrid">{characters.map((c:any)=>{const cm=(atlasData as any).media?.characters?.[c.id];const firstYear=characterFirstYear.get(c.id);const image=cm?.image||fandomEntityImage("characters",c.id,c.name);return <button className="entityCard characterCard" key={c.id} onClick={()=>onCharacter(c.id)}><CharacterPortrait character={c} image={image} gallery={cm?.gallery||[]} size={58}/><span><small>CHARACTER{firstYear!=null&&<em className="characterFirstYear">{firstYear}</em>}</small><b>{c.name}</b><em>{(c.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")||c.certainty}</em></span><Icon name="chevron"/></button>})}</div>
+  <div className="peopleGrid">{characters.map((c:any)=>{const cm=(atlasData as any).media?.characters?.[c.id];const firstYear=characterFirstYear.get(c.id);const image=resolveCharacterImage(c.id,c.name,c.seriesIds).image;return <button className="entityCard characterCard" key={c.id} onClick={()=>onCharacter(c.id)}><CharacterPortrait character={c} image={image} gallery={cm?.gallery||[]} size={58}/><span><small>CHARACTER{firstYear!=null&&<em className="characterFirstYear">{firstYear}</em>}</small><b>{c.name}</b><em>{(c.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")||c.certainty}</em></span><Icon name="chevron"/></button>})}</div>
   {!characters.length&&<p className="muted">No tracked character matches "{query}".</p>}
   <div className="sectionTitle">FACTIONS <span>{atlasData.factions.length}</span></div><div className="miniTags">{atlasData.factions.map((f:any)=><button className="entityTagButton" key={f.id} onClick={()=>onFaction(f.id)}>{f.name}<small className="entityTagMeta">{f.certainty}</small></button>)}</div><div className="sectionTitle">COMMUNITIES <span>{atlasData.communities.length}</span></div><div className="miniTags">{atlasData.communities.map((c:any)=><button className="entityTagButton" key={c.id} onClick={()=>onCommunity(c.id)}>{c.name}<small className="entityTagMeta">{[c.type?.replaceAll("-"," "),c.certainty].filter(Boolean).join(" · ")}</small></button>)}</div>
   <div className="sectionTitle">DOCUMENTED CONNECTIONS <span>{atlasData.connections.length}</span></div><div className="timelineList connectionDirectory">{atlasData.connections.map((c:any)=>{const name=(id:string)=>{const pools:any=[atlasData.characters,atlasData.locations,atlasData.communities,atlasData.factions,atlasData.series,atlasData.connections];for(const pool of pools){const item=pool.find((x:any)=>x.id===id);if(item)return item.name||item.title||item.label||id}return id};return <article key={c.id}><strong>↔</strong><div><small>{c.type.replaceAll("-"," ").toUpperCase()}</small><button className="connectionFocusButton" onClick={()=>onConnection(c.id)}><b>{c.label}</b><Icon name="chevron"/></button><span>{name(c.fromId)} → {name(c.toId)} · {c.certainty}</span></div></article>})}</div>
