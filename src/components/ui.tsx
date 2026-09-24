@@ -1,18 +1,39 @@
-import {useState} from "react";
+import {useCallback,useState} from "react";
 import type {CSSProperties,ReactNode} from "react";
 import Icon from "./Icon";
 import type {IconName} from "./Icon";
-import {AtlasIconGlyph} from "./AtlasIcon";
-import {atlasImageSrcSet,atlasImageUrl} from "../lib/media";
+import AtlasIcon from "./AtlasIcon";
+import {atlasImagePlaceholder,atlasImageSrcSet,atlasImageUrl,mediaCredit} from "../lib/media";
 import {onAtlasImageError,episodeImage,locationIconName,prettyType} from "../lib/atlasHelpers";
 import {seriesColor,seriesShort} from "../lib/series";
 import {episodeCode,storyRange} from "../lib/lookup";
 import {useAtlas} from "../lib/atlasContext";
 import type {Location} from "../data";
 
-export function AtlasImage({src,width=720,className,alt="",sizes,eager}:{src?:string;width?:number;className?:string;alt?:string;sizes?:string;eager?:boolean}){
+// Every remote image in the app goes through here: sized to its display width
+// (Fandom CDN resize / local AMC variants), a ~1 KB blurred placeholder while
+// it loads when the container fills it (`fill`), a fade-in on load, and a
+// self-hiding fallback so a dead image never shows a broken glyph.
+export function AtlasImage({src,width=720,className,alt="",sizes,eager,fill=true,priority}:{src?:string;width?:number;className?:string;alt?:string;sizes?:string;eager?:boolean;fill?:boolean;priority?:boolean}){
+ // Keyed by src (not a boolean reset in an effect): a cached image can fire
+ // load during commit, before any effect would run, and must stay visible.
+ const [loadedSrc,setLoadedSrc]=useState<string|null>(null);
+ const loaded=!!src&&loadedSrc===src;
+ const ref=useCallback((img:HTMLImageElement|null)=>{if(img&&img.complete&&img.naturalWidth>0)setLoadedSrc(img.dataset.src||null)},[]);
  if(!src)return null;
- return <img className={className} src={atlasImageUrl(src,width)} srcSet={atlasImageSrcSet(src)} sizes={sizes} alt={alt} loading={eager?"eager":"lazy"} decoding="async" onError={e=>onAtlasImageError(e,src)}/>;
+ const lqip=fill?atlasImagePlaceholder(src):"";
+ return <>
+  {lqip&&!loaded&&<img className="atlasLqip" src={lqip} alt="" aria-hidden="true" decoding="async"/>}
+  <img ref={ref} key={src} data-src={src} className={"atlasImg"+(loaded?" isLoaded":"")+(className?" "+className:"")} src={atlasImageUrl(src,width)} srcSet={atlasImageSrcSet(src,[Math.round(width/2),width,Math.round(width*1.6)])} sizes={sizes} alt={alt} loading={eager||priority?"eager":"lazy"} decoding="async" {...(priority?{fetchPriority:"high" as const}:{})} onLoad={()=>setLoadedSrc(src)} onError={e=>onAtlasImageError(e,src)}/>
+ </>;
+}
+
+export function Credit({src,page}:{src?:string;page?:string}){
+ const credit=mediaCredit(src,page);
+ if(!credit)return null;
+ return credit.href
+  ?<a className="mediaCredit" href={credit.href} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()}>Image: {credit.label}</a>
+  :<span className="mediaCredit">Image: {credit.label}</span>;
 }
 
 export function Section({title,count,children,action,collapsible=false,defaultOpen=true,id}:{title:string;count?:number|string;children:ReactNode;action?:ReactNode;collapsible?:boolean;defaultOpen?:boolean;id?:string}){
@@ -57,11 +78,13 @@ export function Stats({items}:{items:{label:string;value:ReactNode}[]}){
  return <div className="stats">{items.map(x=><div key={x.label}><b>{x.value}</b><small>{x.label}</small></div>)}</div>;
 }
 
-export function Hero({image,accent,kicker,title,children,icon,portrait}:{image?:string;accent?:string;kicker:ReactNode;title:string;children?:ReactNode;icon?:IconName;portrait?:boolean}){
+export function Hero({image,accent,kicker,title,children,icon,portrait,creditPage,onImage}:{image?:string;accent?:string;kicker:ReactNode;title:string;children?:ReactNode;icon?:IconName;portrait?:boolean;creditPage?:string;onImage?:()=>void}){
  return <div className={"hero"+(image?" hasImage":"")+(portrait?" heroPortrait":"")} style={{"--accent":accent||"#9aa6a1"} as CSSProperties}>
   <div className="heroMedia">
    {icon&&<Icon name={icon} className="heroIcon"/>}
-   <AtlasImage src={image} width={1200} sizes="(max-width: 899px) 100vw, 420px" eager/>
+   <AtlasImage src={image} width={900} sizes="(max-width: 899px) 100vw, 470px" priority/>
+   {image&&onImage&&<button className="heroZoom" onClick={onImage} aria-label="View photos"><Icon name="expand"/></button>}
+   {image&&<Credit src={image} page={creditPage}/>}
   </div>
   <div className="heroCopy">
    <div className="heroKicker">{kicker}</div>
@@ -103,7 +126,7 @@ export function EpisodeRow({episode,thumb=true,note,active}:{episode:any;thumb?:
 export function PlaceRow({location,note,isNew}:{location:Location;note?:ReactNode;isNew?:boolean}){
  const {openLocation}=useAtlas();
  return <button className="row placeRow" style={{"--c":seriesColor(location.seriesId)} as CSSProperties} onClick={()=>openLocation(location.id)}>
-  <span className="placeGlyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><AtlasIconGlyph name={locationIconName(location.type)}/></svg></span>
+  <span className="placeGlyph"><AtlasIcon name={locationIconName(location.type)}/></span>
   <span className="rowText">
    <small>{seriesShort(location.seriesId)} · {prettyType(location.type)} · {location.year}{isNew&&<span className="newBadge">NEW</span>}</small>
    <b>{location.name}</b>

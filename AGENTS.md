@@ -58,6 +58,8 @@ When character/location/episode/series media (`data/media.json`, `data/episodeMe
 
 Unknown geographic coordinates must not silently render at `(0,0)`.
 
+Character journeys (`src/lib/journeys.ts`) are derived from episode appearances and episode places only. Never invent travel routes, waypoints or dates; legs are "next recorded place" and distances are labelled straight-line. Run `npm run test:journeys` after changing the model (`context/references/journeys-and-sharing.md`).
+
 ## Bug-prevention principle
 
 Prefer fixing the underlying coordinate-space, DOM, or rendering-model problem over increasingly restrictive clamps or UI exceptions. When a mobile map regression occurs, reproduce the geometry first.

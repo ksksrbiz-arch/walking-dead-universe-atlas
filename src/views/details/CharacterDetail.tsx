@@ -10,7 +10,7 @@ import {getCharacterEpisodeIds} from "../../lib/entityGraph";
 import {getRuntimeEpisodeIds} from "../../lib/runtime";
 import {characterImage,hasMapCoordinates} from "../../lib/atlasHelpers";
 import {seriesColor,seriesShort} from "../../lib/series";
-import {ConnectionList,GraphSection,WikiSection,fandomRecord} from "./shared";
+import {ConnectionList,Gallery,GraphSection,WikiSection,fandomRecord,useEntityPhotos,useLightbox} from "./shared";
 
 // Wiki status text is free-form ("Deceased", "Alive", "Missing"); read it for
 // a coarse tone rather than asserting a status we haven't sourced.
@@ -43,6 +43,10 @@ export default function CharacterDetail({id}:{id:string}){
   }
   return out;
  },[eps]);
+ const hero=character?characterImage(character):"";
+ const page=fandomRecord("characters",id)?.fandom_url;
+ const photos=useEntityPhotos("characters",id,hero,[],page);
+ const lightbox=useLightbox();
  if(!character)return <p className="empty">Character record not found.</p>;
  const links=(atlasData.connections as any[]).filter(c=>c.fromId===id||c.toId===id).map(c=>c.id);
  const accent=seriesColor(character.seriesIds?.[0]);
@@ -51,7 +55,7 @@ export default function CharacterDetail({id}:{id:string}){
  const visible=showAll?eps:eps.slice(0,6);
  const mappedPlaces=places.filter(hasMapCoordinates).length;
  return <div className="detail">
-  <Hero portrait image={characterImage(character)} accent={accent} icon="person" kicker={<>Character · {(character.seriesIds||[]).map((s:string)=>seriesShort(s)).join(" · ")}</>} title={character.name}>
+  <Hero portrait image={hero} creditPage={page} onImage={()=>lightbox.open(photos.items,0)} accent={accent} icon="person" kicker={<>Character · {(character.seriesIds||[]).map((s:string)=>seriesShort(s)).join(" · ")}</>} title={character.name}>
    {aliases&&<p className="aliasLine">Also known as {Array.isArray(aliases)?aliases.join(" · "):aliases}</p>}
    <div className="chipRow">{firstYear?<Chip icon="clock">From {firstYear}</Chip>:null}<Chip tone={certaintyTone(character.certainty)}>{character.certainty||"tracked"}</Chip>{status&&<Chip tone={statusTone(status)}>{Array.isArray(status)?status.join(" · "):status}</Chip>}</div>
   </Hero>
@@ -72,6 +76,7 @@ export default function CharacterDetail({id}:{id:string}){
    {eps.length>6&&<button className="showMore" onClick={()=>setShowAll(v=>!v)}>{showAll?"Show less":`Show all ${eps.length}`}<Icon name="chevronDown" className={showAll?"flip":""}/></button>}</>
    :<p className="empty">No episode-level appearances recorded yet.</p>}
   </Section>
+  <Gallery items={photos.items} loading={photos.loading} onOpen={i=>lightbox.open(photos.items,i)}/>
   {places.length>0&&<Section title="Places" count={places.length}><PlaceChips locations={places}/></Section>}
   {universeEvents.length>0&&<Section title="Universe events" count={universeEvents.length}>
    <div className="stack">{universeEvents.map(ev=><button key={ev.id} className="row eventRow" style={{"--c":seriesColor(ev.seriesId)} as CSSProperties} onClick={()=>jumpToTimelineYear(ev.year)}>
@@ -87,5 +92,6 @@ export default function CharacterDetail({id}:{id:string}){
   <ConnectionList ids={links} perspective={id}/>
   <WikiSection entityType="characters" entityId={id}/>
   <GraphSection root={"character:"+id}/>
+  {lightbox.view}
  </div>;
 }

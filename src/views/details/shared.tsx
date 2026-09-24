@@ -1,4 +1,9 @@
+import {useState} from "react";
 import fandomCanonical from "../../../data/enrichment/fandom-canonical.json";
+import Lightbox from "../../components/Lightbox";
+import type {LightboxItem} from "../../components/Lightbox";
+import {useFandomGallery} from "../../lib/galleries";
+import type {GalleryKind} from "../../lib/galleries";
 import {atlasData} from "../../data";
 import Icon from "../../components/Icon";
 import EntityGraphView from "../../components/EntityGraphView";
@@ -61,12 +66,34 @@ export function WikiSection({entityType,entityId}:{entityType:"characters"|"loca
  </Section>;
 }
 
-export function Gallery({items,title="Gallery"}:{items:{src?:string;title:string;meta?:string}[];title?:string}){
- const valid=items.filter(x=>x.src);
- if(valid.length<2)return null;
- return <Section title={title} count={valid.length}>
-  <div className="gallery">{valid.map((item,i)=><figure key={item.title+i}><AtlasImage src={item.src} width={520} sizes="180px"/><figcaption><b>{item.title}</b>{item.meta&&<small>{item.meta}</small>}</figcaption></figure>)}</div>
+// Photos for one entity: the hero image first, then `extra` (official AMC
+// stills / curated frames), then the entity's Fandom gallery, de-duplicated.
+export function useEntityPhotos(kind:GalleryKind,id:string,hero?:string,extra:{src?:string;title:string;meta?:string}[]=[],page?:string){
+ const fandom=useFandomGallery(kind,id);
+ const seen=new Set<string>(),items:LightboxItem[]=[];
+ const add=(x:{src?:string;title:string;meta?:string;page?:string})=>{if(x.src&&!seen.has(x.src)){seen.add(x.src);items.push({src:x.src,title:x.title,meta:x.meta,page:x.page})}};
+ if(hero)add({src:hero,title:"Featured image",page});
+ extra.forEach(add);
+ (fandom||[]).forEach(x=>add({src:x.src,title:x.title,page}));
+ return {items,loading:fandom===null};
+}
+
+// Horizontal photo strip; tapping opens the fullscreen swipeable viewer.
+export function Gallery({title="Photos",items,loading,onOpen}:{title?:string;items:LightboxItem[];loading?:boolean;onOpen:(index:number)=>void}){
+ if(!items.length&&!loading)return null;
+ return <Section title={title} count={items.length||undefined}>
+  {items.length?<div className="gallery">{items.map((item,i)=><button key={item.src} className="galleryItem" onClick={()=>onOpen(i)} aria-label={`Open photo: ${item.title}`}>
+   <span className="galleryFrame"><AtlasImage src={item.src} width={360} sizes="180px"/></span>
+   <span className="galleryCaption">{item.title}</span>
+  </button>)}</div>
+  :<div className="gallery" aria-busy="true">{[0,1,2].map(i=><span key={i} className="galleryItem galleryShimmer"/>)}</div>}
  </Section>;
+}
+
+export function useLightbox(){
+ const [state,setState]=useState<{items:LightboxItem[];start:number}|null>(null);
+ const view=state?<Lightbox items={state.items} start={state.start} onClose={()=>setState(null)}/>:null;
+ return {open:(items:LightboxItem[],start=0)=>{if(items.length)setState({items,start})},view};
 }
 
 export function GraphSection({root}:{root:string}){

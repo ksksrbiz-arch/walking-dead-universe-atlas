@@ -86,21 +86,22 @@ There are two separate media systems in this repo. Only one of them renders imag
 
 **Live path (this is what actually serves every character/location/episode image):**
 
-`data/media.json` (characters/places/series) and `data/episodeMedia.json` (episodes) hold curated,
-manually-verified image URLs — checked first. `fandomEntityImage()` (`src/lib/media.ts`, also used by
-`src/components/EntityGraphView.tsx`) is the fallback: it scores every image candidate in
-`data/enrichment/fandom-canonical.json` against the entity name and picks the best match.
-`resolveCharacterImage()` (same file) is the one place that priority chain is implemented for
-characters — every surface that renders a character image (people grid, search, character dossier,
-the relationship graph, link endpoint cards — via `characterImage()` in `src/lib/atlasHelpers.ts`) calls it rather than re-deriving the
-priority itself, specifically so those surfaces can't drift out of sync with each other again. Series
-key art is the last-resort fallback for locations/characters with no curated or Fandom match. Whatever
-URL comes out of that chain goes through `atlasImageUrl()` (`src/lib/media.ts`), which proxies any
-Fandom (`static.wikia.nocookie.net`) or AMC (`images.cds.amcn.com`) URL through a Supabase Edge Function
-(`https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media`) for resizing/caching, and passes
-`/media/...` static paths straight through to Vercel's static file serving from `public/`.
-`src/generated/media-local.json` (an in-repo cache of already-downloaded assets) is currently empty, so
-every Fandom/AMC image is fetched live through the proxy on every load.
+Resolution order (all in `src/lib/media.ts` / `src/lib/atlasHelpers.ts`, mirrored by the manifest):
+
+- **Episodes:** curated `data/media.json` → verified `data/episodeMedia.json` still → `fandomPrimaryImage("episodes")` (the first non-generic image on the episode's *own* Fandom page — this is what lifted episode-specific stills from 47 to 354 of 363) → `fandomEntityImage` name-token heuristic → unverified legacy record → series key art.
+- **Characters:** `resolveCharacterImage()` — curated → Fandom → series art. Every surface (people grid, search, dossier, graph, journey avatars) goes through `characterImage()`, so they can't drift apart.
+- **Locations:** curated → Fandom heuristic; a location hero never falls back to generic series art (the gallery's first photo is used instead).
+
+Delivery (`atlasImageUrl(source, width)`), always sized to the rendered width:
+
+- **Fandom** (`static.wikia.nocookie.net`) — the CDN resizes: `fandomScaled()` rewrites to `/revision/latest/scale-to-width-down/<w>` (a 1.2 MB original becomes ~16 KB at 320px), then goes through the Supabase proxy (`…/functions/v1/atlas-media`), which also enforces a size cap — full-size originals over it return 413, which is why nothing requests originals any more.
+- **AMC** (`images.cds.amcn.com`) — the CDN ignores resize parameters (1.27 MB per key-art image), so `npm run media:resize` (`scripts/resize-amc-media.mjs`, headless Chromium canvas → WebP q0.78) pre-renders 320/640/1280 variants into `public/media/amc/` and maps them in `src/generated/media-local.json`; `atlasImageUrl` picks the smallest variant ≥ the requested width (54 sources, 22.2 MB → 3.3 MB).
+- **`/media/...`** static paths are served from `public/` directly.
+- `AtlasImage` adds `srcset`/`sizes`, a ~1 KB blurred placeholder (`atlasImagePlaceholder`: Fandom at 40px or the smallest local variant), fade-in, and `onAtlasImageError` (one direct retry, then hide). `mediaCredit()` labels every hero/lightbox image (Fandom page link, AMC, or atlas artwork).
+
+Galleries: `npm run enrich:fandom-entity-galleries` (`scripts/ingest-fandom-entity-galleries.mjs`) asks the MediaWiki API for the images on each entity's page and its `/Gallery` subpage, filters out logos/comics/games/non-TV and anything under 360px wide, and writes `public/data/fandom-galleries/{characters,locations,episodes}.json` (77/77 characters, 75/79 locations, 360/363 episodes). The app fetches one file per kind on first use (`src/lib/galleries.ts`), so thousands of references never enter the JS bundle; detail pages show them in `Gallery` → `Lightbox`.
+
+Share previews: `src/lib/shareIndex.ts` picks a Fandom image per entity and asks for `format=original` at 640px so the OG renderer receives JPEG/PNG (it cannot decode WebP); see `context/references/journeys-and-sharing.md`.
 
 **Dormant path (built, deployed, but not wired to anything that renders images):**
 
@@ -148,11 +149,8 @@ manifest to check there. Likewise "maps" here means the interactive SVG map itse
 marker/coordinate data), not a raster image — its correctness is a data/rendering question covered in
 `docs/ATLAS_ARCHITECTURE.md` and `docs/MOBILE_MAP_GESTURE_ARCHITECTURE.md`, not the media pipeline.
 
-**Known content-coverage gap, not a bug:** `data/episodeMedia.json` has zero episodes with a populated
-`gallery` array (every episode has at most one verified still). `EpisodeDetail`'s own "VISUAL ARCHIVE"
-strip already handles this correctly — it only renders when an episode has more than one image — so
-there's no broken UI, just an unfilled dimension (multiple stills per episode) that would need a real
-per-episode gallery ingestion pass to fill in.
+**Known content-coverage gap, not a bug:** `data/episodeMedia.json` still has few multi-image AMC galleries; per-episode
+depth now comes from the Fandom gallery files above (episode "Stills" section), and AMC frames are merged in where they exist.
 
 ## Standing media validation workflow
 

@@ -61,7 +61,11 @@ Each timeline/geographic entity can carry certainty metadata:
 - `announced`
 - `unknown`
 
-The Atlas deliberately avoids inventing exact dates or fictional travel routes where the source material does not establish them.
+The Atlas deliberately avoids inventing exact dates or fictional travel routes where the source material does not establish them. Character journeys are built only from episode appearances and episode places in story order; see `context/references/journeys-and-sharing.md`.
+
+## Journeys & sharing
+
+Pick a character (People tab, a character page, or "Trace a journey" on the map) to see their route in story order: play it back, step stop by stop with the evidence episodes for every leg, compare up to three characters and where their paths crossed, and turn on spoiler-safe mode to limit everything to episodes you've marked watched. Every journey step, place, episode and character has a shareable link (`/j/…`, `/p/…`, `/e/…`, `/c/…`) with a generated preview card.
 
 ## Build & checks
 
@@ -69,7 +73,12 @@ The Atlas deliberately avoids inventing exact dates or fictional travel routes w
 npm run typecheck     # TypeScript over src/
 npm run build         # production build
 npm run audit:atlas   # data/graph integrity
+npm run test:journeys # journey model invariants (story order, evidence, spoiler-safe, crossings)
+npm run test:share    # share pages + OG preview PNGs (run after build)
 npm run test:ui       # browser regression: run `npx playwright install chromium` once, then start `vite preview` (see scripts/ui-smoke.mjs)
+npm run media:manifest # verify every image resolves through the live delivery path (0 broken required)
+npm run media:resize   # regenerate local WebP variants for AMC images (their CDN cannot resize)
+npm run enrich:fandom-entity-galleries # refresh per-entity Fandom galleries (public/data/fandom-galleries)
 ```
 
 For Vercel:

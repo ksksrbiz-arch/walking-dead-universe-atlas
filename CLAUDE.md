@@ -13,6 +13,7 @@ Hard rules for every task are in `AGENTS.md` (map transform contract, 363-episod
 | Product direction / new modes | `docs/ATLAS_ARCHITECTURE.md` | — |
 | Why the UI looks the way it does | `docs/UI_AUDIT_AND_REDESIGN_2026-09.md` | — |
 | Media / Fandom enrichment | `docs/DATA_ENRICHMENT_ARCHITECTURE.md` | — |
+| Journeys, deep links, share previews | `context/references/journeys-and-sharing.md`, `src/lib/journeys.ts` | `context/workflows/map-change/CONTEXT.md` (map layers) |
 
 ## Do not load unless the task is about them
 
@@ -20,7 +21,7 @@ Hard rules for every task are in `AGENTS.md` (map transform contract, 363-episod
 |---|---|
 | `data/enrichment/fandom-canonical.json` (455 KB) | Read through `src/lib/atlasHelpers.ts` / `views/details/shared.tsx` |
 | `package-lock.json`, `dist/` | Generated |
-| `api/`, `netlify/`, `workers/`, `lib/` | Backend/media delivery; unrelated to UI work |
+| `api/`, `netlify/`, `workers/`, `lib/` | Backend/media delivery — except `api/share.ts`, `api/og.ts`, `lib/atlas-share.ts` for share-link work |
 | `scripts/*enrich*`, `scripts/*fandom*` | Ingestion pipeline |
 
 ## Source map (UI)
@@ -31,12 +32,14 @@ src/lib/series.ts           series colours/names (single source)
 src/lib/lookup.ts           O(1) id lookups, episode codes, counts
 src/lib/atlasHelpers.ts     map layers, icons, image resolution
 src/lib/atlasContext.ts     actions + watch state for all views
+src/lib/journeys.ts         journey model (stops, legs, beats, crossings)
+src/lib/media.ts            image sizing/proxy/credits; galleries.ts = Fandom galleries
 src/components/ui.tsx       shared primitives (rows, sections, hero…)
-src/components/TimeScrubber.tsx, SearchOverlay.tsx, Icon.tsx
-src/views/                  MapOverview, TimelineView, PeopleView, WatchView
+src/components/TimeScrubber.tsx, SearchOverlay.tsx, Icon.tsx (lucide), Lightbox.tsx, JourneyLayer.tsx
+src/views/                  MapOverview, TimelineView, PeopleView, WatchView, JourneyPanel
 src/views/details/          Episode/Location/Character/Group/Connection detail
 ```
 
 ## Commands
 
-`npm run typecheck` · `npm run build` · `npm run audit:atlas` · `npm run media:manifest` (after media edits) · `npm run test:ui` (needs a running `vite preview` on :4173 and Playwright — see script header)
+`npm run typecheck` · `npm run build` · `npm run audit:atlas` · `npm run media:manifest` (after media edits) · `npm run test:journeys` · `npm run test:share` (after build) · `npm run test:ui` (needs a running `vite preview` on :4173 and Playwright — see script header)

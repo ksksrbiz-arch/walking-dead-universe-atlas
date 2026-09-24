@@ -9,7 +9,7 @@ import {getLocationEpisodeIds} from "../../lib/entityGraph";
 import {getRuntimeEpisodeIds} from "../../lib/runtime";
 import {hasMapCoordinates,locationImage,prettyType} from "../../lib/atlasHelpers";
 import {SERIES_BY_ID,seriesColor} from "../../lib/series";
-import {ConnectionList,GraphSection,PortraitStrip,WikiSection} from "./shared";
+import {ConnectionList,Gallery,GraphSection,PortraitStrip,WikiSection,fandomRecord,useEntityPhotos,useLightbox} from "./shared";
 
 export default function LocationDetail({id}:{id:string}){
  const {showLocationOnMap,watched}=useAtlas();
@@ -23,6 +23,10 @@ export default function LocationDetail({id}:{id:string}){
   for(const e of direct)for(const c of e.characterIds??[])counts.set(c,(counts.get(c)??0)+1);
   return [...counts.entries()].sort((a,b)=>b[1]-a[1]).slice(0,16).map(([cid,count])=>({...(characterById.get(cid) as any),count})).filter(c=>c.id);
  },[direct]);
+ const hero=location?locationImage(location):"";
+ const page=fandomRecord("locations",id)?.fandom_url;
+ const photos=useEntityPhotos("locations",id,hero,[],page);
+ const lightbox=useLightbox();
  if(!location)return <p className="empty">Location record not found.</p>;
  const meta=SERIES_BY_ID[location.seriesId];
  const events=(atlasData.events as any[]).filter(e=>e.locationIds?.includes(id));
@@ -32,7 +36,7 @@ export default function LocationDetail({id}:{id:string}){
  const seen=direct.filter(e=>watched.has(e.id)).length;
  const mapped=hasMapCoordinates(location);
  return <div className="detail">
-  <Hero image={locationImage(location)} accent={meta?.color} icon="pin" kicker={<><span className="dot" style={{background:seriesColor(location.seriesId)}}/>{meta?.name} · {prettyType(location.type)}</>} title={location.name}>
+  <Hero image={hero||photos.items[0]?.src} creditPage={page} onImage={()=>lightbox.open(photos.items,0)} accent={meta?.color} icon="pin" kicker={<><span className="dot" style={{background:seriesColor(location.seriesId)}}/>{meta?.name} · {prettyType(location.type)}</>} title={location.name}>
    <div className="chipRow"><Chip icon="clock">First seen {location.year}</Chip><Chip tone={certaintyTone(location.certainty)}>{location.certainty}</Chip></div>
   </Hero>
   <ActionBar>
@@ -43,12 +47,14 @@ export default function LocationDetail({id}:{id:string}){
   <Section title="Episodes set here" count={direct.length}>
    {direct.length?<ShowMore items={direct} limit={5} render={e=><EpisodeRow key={e.id} episode={e}/>}/>:<p className="empty">No episode is directly tied to this place yet.</p>}
   </Section>
+  <Gallery items={photos.items} loading={photos.loading} onOpen={i=>lightbox.open(photos.items,i)}/>
   {characters.length>0&&<Section title="Seen here" count={characters.length}><PortraitStrip characters={characters}/></Section>}
   {historical.length>0&&<Section title="Also referenced in" count={historical.length} collapsible defaultOpen={false}><ShowMore items={historical} limit={5} render={e=><EpisodeRow key={e.id} episode={e} thumb={false} note="Broader location association"/>}/></Section>}
   {events.length>0&&<Section title="Story eras here" count={events.length}><div className="stack">{events.map(e=><div className="row staticRow" key={e.id}><span className="yearBadge">{e.year}</span><span className="rowText"><b>{e.title}</b><small>{e.certainty}</small></span></div>)}</div></Section>}
   <ConnectionList ids={links}/>
   <WikiSection entityType="locations" entityId={id}/>
   <GraphSection root={"location:"+id}/>
+  {lightbox.view}
   <Note icon="pin">Direct episode geography is kept separate from broader references. Approximate placements stay labeled.</Note>
  </div>;
 }

@@ -4,8 +4,13 @@ import fandomCanonical from "../../data/enrichment/fandom-canonical.json";
 import mediaData from "../../data/media.json";
 import {observeImageError} from "./performance";
 
-const MEDIA_PROXY=import.meta.env.VITE_ATLAS_MEDIA_PROXY||"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
-const LOCAL_MEDIA=localMedia as Record<string,string>;
+// `?.`: this module is also bundled into the share/OG function (no Vite env there).
+const MEDIA_PROXY=import.meta.env?.VITE_ATLAS_MEDIA_PROXY||"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
+// source URL -> locally generated resized copies. A plain string is a single
+// local file (legacy cache-amc-media output); an object maps width -> path
+// (media:resize output, used for AMC sources whose CDN cannot resize).
+type LocalEntry=string|Record<string,string>;
+const LOCAL_MEDIA=localMedia as Record<string,LocalEntry>;
 
 // Picks the best-matching image candidate for an entity out of the Fandom
 // enrichment data by scoring name-token overlap, penalizing generic
@@ -35,6 +40,15 @@ export function fandomEntityImage(entityType:"characters"|"locations"|"episodes"
  return scored[0]?.score>0?scored[0].url:"";
 }
 
+// The first image on the entity's *own* matched wiki page (its infobox image).
+// For episodes this is the episode's still and needs no name-token match —
+// filenames like "FTWD_1x01_Traffic_Jam.jpg" never contain the title "Pilot".
+const GENERIC_IMAGE=/logo|title.?card|key.?art|series.?art|franchise|poster|banner|wallpaper/i;
+export function fandomPrimaryImage(entityType:"characters"|"locations"|"episodes",id:string){
+ const urls=(fandomCanonical as any)?.[entityType]?.[id]?.image_urls;
+ return (Array.isArray(urls)?urls:[]).find((u:string)=>typeof u==="string"&&/^https?:\/\//.test(u)&&!GENERIC_IMAGE.test(u))||"";
+}
+
 export type EntityImageMethod="curated"|"fandom"|"series-fallback"|"none";
 
 // Curated data/media.json entry (a human- or ingestion-verified pick) always wins over the
@@ -55,21 +69,73 @@ export function resolveCharacterImage(id:string,name:string,seriesIds?:string[],
  return {image:"",method:"none"};
 }
 
-function isFandomImage(source:string){
+export function isFandomImage(source:string){
   return /^https?:\/\/(?:static\.wikia\.nocookie\.net|vignette\.wikia\.nocookie\.net|images\.wikia\.nocookie\.net)\//i.test(source);
 }
+const isAmcImage=(source:string)=>/^https?:\/\/(?:images|dimages)\.cds\.amcn\.com\//i.test(source);
 
-export function atlasImageUrl(source:string|undefined|null,width=1200,quality=78){
+// Fandom's image CDN resizes on request (…/revision/latest/scale-to-width-down/W):
+// a full-size still is ~1.2 MB, the 320px variant ~16 KB. Every Fandom image is
+// requested at the width it is displayed at instead of at source size.
+export function fandomScaled(source:string,width:number){
+  if(!isFandomImage(source))return source;
+  const w=Math.max(16,Math.round(width));
+  if(/\/scale-to-width(?:-down)?\/\d+/.test(source))return source.replace(/\/scale-to-width(?:-down)?\/\d+/,"/scale-to-width-down/"+w);
+  if(/\/revision\/latest/.test(source))return source.replace(/\/revision\/latest/,"/revision/latest/scale-to-width-down/"+w);
+  return source;
+}
+
+function localVariants(source:string):[number,string][]{
+  const entry=LOCAL_MEDIA[source];
+  if(!entry)return [];
+  if(typeof entry==="string")return [[1600,entry]];
+  return Object.entries(entry).map(([w,p])=>[Number(w),p] as [number,string]).sort((a,b)=>a[0]-b[0]);
+}
+
+function proxied(source:string){
+  const url=new URL(MEDIA_PROXY);
+  url.searchParams.set("url",source);
+  return url.toString();
+}
+
+export function atlasImageUrl(source:string|undefined|null,width=1200,_quality=78){
   if(!source)return "";
   if(source.startsWith("/"))return source;
-  const local=LOCAL_MEDIA[source];
-  if(local)return local;
-  if(isFandomImage(source)||/^https?:\/\/(?:images|dimages)\.cds\.amcn\.com\//i.test(source)){
-    const url=new URL(MEDIA_PROXY);
-    url.searchParams.set("url",source);
-    return url.toString();
-  }
+  const local=localVariants(source);
+  if(local.length)return (local.find(([w])=>w>=width)??local[local.length-1])[1];
+  if(isFandomImage(source))return proxied(fandomScaled(source,width));
+  if(isAmcImage(source))return proxied(source);
   return source;
+}
+
+// Responsive candidates. Fandom sources get CDN-resized widths; AMC sources
+// get their locally generated WebP variants (see scripts/resize-amc-media.mjs).
+export function atlasImageSrcSet(source:string|undefined|null,widths=[480,768,1200]){
+  if(!source||source.startsWith("/"))return undefined;
+  const local=localVariants(source);
+  if(local.length>1)return local.map(([w,p])=>`${p} ${w}w`).join(", ");
+  if(isFandomImage(source))return widths.map(w=>`${proxied(fandomScaled(source,w))} ${w}w`).join(", ");
+  return undefined;
+}
+
+// A tiny (~1 KB) version used as a blurred placeholder while the real image
+// loads. Only available where the host can resize (Fandom) or a small local
+// variant exists; otherwise the caller's gradient placeholder shows.
+export function atlasImagePlaceholder(source:string|undefined|null){
+  if(!source)return "";
+  const local=localVariants(source);
+  if(local.length&&local[0][0]<=360)return local[0][1];
+  if(isFandomImage(source))return proxied(fandomScaled(source,40));
+  return "";
+}
+
+export type MediaCredit={label:string;href?:string};
+export function mediaCredit(source:string|undefined|null,page?:string):MediaCredit|null{
+  if(!source)return null;
+  if(isFandomImage(source))return {label:"Walking Dead Wiki (Fandom)",href:page||"https://walkingdead.fandom.com/"};
+  if(isAmcImage(source))return {label:"AMC",href:page||"https://www.amc.com/"};
+  if(source.startsWith("/media/characters/"))return {label:"Atlas artwork"};
+  return null;
 }
 
 // A proxied Fandom/AMC URL can fail (proxy hiccup, size cap, dead upstream) even when the
@@ -82,12 +148,6 @@ export function onAtlasImageError(e:SyntheticEvent<HTMLImageElement>,source:stri
   observeImageError(source);
   img.dataset.fallback="1";
   img.removeAttribute("srcset");
-  img.src=source;
-}
-
-export function atlasImageSrcSet(source:string|undefined|null,widths=[480,768,1200]){
-  if(!source)return undefined;
-  const local=LOCAL_MEDIA[source];
-  if(local)return widths.map(w=>`${local} ${w}w`).join(", ");
-  return undefined;
+  // Direct (unproxied) retry, still resized where the host allows it.
+  img.src=isFandomImage(source)?fandomScaled(source,Math.max(320,Math.round((img.clientWidth||400)*2))):source;
 }

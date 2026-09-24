@@ -8,6 +8,7 @@
 - `docs/MOBILE_MAP_GESTURE_ARCHITECTURE.md` (contract + checklist)
 - `src/App.tsx`: `applyMapTransform`, `getMapPanLimits`, `getVisibleRect`, `panFor`, `flyTo`, `focusMapOn`, `computeHomePan`, pointer handlers, marker JSX
 - `src/styles.css`: `.mapSurface`, marker rules
+- Journey layers: `src/components/JourneyLayer.tsx` + `context/references/journeys-and-sharing.md`
 
 ## Exclude
 - Views and detail pages; data files
@@ -16,6 +17,7 @@
 - Transform `.mapSurface` or the root SVG.
 - Add arbitrary pan caps or disable base-zoom dragging.
 - Hard-code chrome offsets — declare `data-map-chrome` on new floating UI instead.
+- Draw a journey leg that isn't backed by episode evidence, or style `.mapSurface svg` (nested marker glyphs are SVGs too — use `.mapSurface>svg`).
 
 ## Completion
 - `npm run test:ui` passes (pan both ways, pinch 1–5×, reset, tap vs drag, framing above sheet).

@@ -40,6 +40,15 @@ button:disabled{cursor:default}
 .srOnly{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .icon{width:20px;height:20px;flex:none}
 img{display:block}
+/* Remote images: fade in when decoded; a ~1 KB blurred copy sits underneath
+   while loading (AtlasImage). */
+.atlasImg{opacity:0;transition:opacity .45s var(--ease)}
+.atlasImg.isLoaded{opacity:1}
+.atlasLqip{filter:blur(14px) saturate(1.1);transform:scale(1.08)}
+.mediaCredit{position:absolute;right:8px;bottom:8px;z-index:2;max-width:70%;padding:3px 8px;border-radius:8px;background:rgba(10,13,12,.66);color:rgba(236,235,228,.78);font-size:10.5px;font-weight:600;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.hero .mediaCredit{top:10px;bottom:auto;right:10px}
+.heroZoom{position:absolute;z-index:2;right:10px;top:40px;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:rgba(10,13,12,.6);border:1px solid rgba(236,235,228,.18);color:var(--text);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.heroZoom .icon{width:18px;height:18px}
 
 /* ---- App frame --------------------------------------------------------- */
 .app{position:fixed;inset:0;overflow:hidden;background:var(--bg)}
@@ -48,8 +57,8 @@ img{display:block}
 /* ---- Map surface (contract: docs/MOBILE_MAP_GESTURE_ARCHITECTURE.md) ----
    The SVG is the fixed viewport; only .mapWorld is transformed. */
 .mapSurface{position:absolute;inset:0;z-index:1;contain:layout paint;overflow:hidden;background:#0b1212}
-.mapSurface svg{position:absolute;inset:0;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
-.mapSurface svg.dragging{cursor:grabbing}
+.mapSurface>svg{position:absolute;inset:0;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.mapSurface>svg.dragging{cursor:grabbing}
 .mapWorld{will-change:transform}
 .graticule path{fill:none;stroke:rgba(150,190,178,.12);stroke-width:1;vector-effect:non-scaling-stroke}
 .landShadow{fill:#050807;opacity:.55;transform:translate(1px,2.5px)}
@@ -70,10 +79,27 @@ img{display:block}
 .clusterRing{fill:#0d1211;stroke:currentColor;stroke-width:2.5}
 .clusterCount{fill:#f3f1e8;font:700 12px var(--font);pointer-events:none}
 .markerCluster.context .clusterRing{stroke-width:3.5;filter:drop-shadow(0 0 5px currentColor)}
-.journeyRoute path{fill:none;stroke:var(--accent-2);stroke-width:2;stroke-dasharray:6 5;opacity:.8;vector-effect:non-scaling-stroke;pointer-events:none}
+/* Journeys: slot colour --jc per character (lib/journeys JOURNEY_COLORS). */
+.journeyRoutes{pointer-events:none}
+.journeyLeg{fill:none;stroke:var(--jc);stroke-linecap:round;vector-effect:non-scaling-stroke}
+.journeyLeg.done{stroke-width:2.6;opacity:.9}
+.journeyLeg.latest{stroke-width:3.4;stroke-dasharray:1;stroke-dashoffset:1;animation:legDraw .9s var(--ease) forwards;filter:drop-shadow(0 0 4px var(--jc))}
+.journeyLeg.ahead{stroke-width:1.4;stroke-dasharray:.012 .014;opacity:.32}
+@keyframes legDraw{to{stroke-dashoffset:0}}
 .journeyStop{pointer-events:none}
 .journeyStop circle{fill:var(--accent);stroke:#0d1211;stroke-width:1.5}
 .journeyStop text{fill:#fff;font:800 9px var(--font)}
+.marker.ahead{opacity:.38}
+.marker.ahead .markerBody{filter:none;stroke-width:1.5}
+.markerCluster.ahead{opacity:.38}
+.marker.here .markerBody{fill:currentColor;stroke:#f6f4ec}
+.marker.here .markerGlyph{color:#0b0f0e}
+.journeyAvatars{pointer-events:none}
+.journeyAvatarBody{animation:avatarHop .5s var(--ease)}
+@keyframes avatarHop{from{transform:translateY(-8px);opacity:0}}
+.journeyAvatarRing{fill:#0d1211;stroke:var(--jc);stroke-width:3;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}
+.journeyAvatarTail{fill:var(--jc)}
+.journeyAvatarInitials{fill:var(--text);font:700 11px var(--font)}
 .has-context .marker:not(.context):not(.selected),.has-context .markerCluster:not(.context){opacity:.4}
 
 /* ---- Top bar -------------------------------------------------------------- */
@@ -107,12 +133,15 @@ img{display:block}
 .seriesRow button i{width:8px;height:8px;border-radius:50%;background:var(--c)}
 .seriesRow button.active{color:var(--text);border-color:var(--c,var(--text));background:color-mix(in srgb,var(--c,#ecebe4) 24%,rgba(20,25,22,.95))}
 .seriesRow button:first-child.active{background:var(--text);color:var(--bg);border-color:var(--text)}
-.journeyBanner{display:flex;align-items:center;gap:10px;height:52px;padding:0 4px 0 14px;border-radius:26px;background:var(--glass);border:1px solid var(--c);max-width:480px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.journeyBanner>.icon{color:var(--c)}
+.journeyBanner{display:flex;align-items:center;gap:10px;height:52px;padding:0 4px 0 14px;border-radius:26px;background:var(--glass);border:1px solid var(--line-2);max-width:520px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.journeyBanner>.icon{color:var(--accent-2)}
 .journeyBanner span{flex:1;min-width:0;line-height:1.15}
 .journeyBanner small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3)}
 .journeyBanner b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.journeyBanner em{font-style:normal;font-size:12px;color:var(--text-2)}
+.jname{font-style:normal}
+.jname::before{content:"";display:inline-block;width:8px;height:8px;margin:0 5px 1px 0;border-radius:50%;background:var(--jc)}
+.jname+.jname{margin-left:10px}
+.journeyBanner em{font-style:normal;font-size:12px;font-weight:600;color:var(--text-2)}
 .mapControls{position:absolute;z-index:31;right:calc(12px + var(--safe-right));top:calc(var(--top-h) + 50px);display:flex;flex-direction:column;gap:8px}
 .iconBtn{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:var(--glass);border:1px solid var(--line);color:var(--text);padding:0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .iconBtn.ghost{background:transparent;border-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -308,11 +337,14 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .portraitStrip b{font-size:12px;font-weight:500;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .portraitStrip small{font-size:11px;color:var(--text-3)}
 
-.gallery{display:flex;gap:10px;overflow-x:auto;margin:0 -16px;padding:0 16px 4px}
-.gallery figure{flex:none;width:180px;margin:0}
-.gallery img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;background:var(--surface-3)}
-.gallery figcaption b{display:block;margin-top:5px;font-size:12px;font-weight:600}
-.gallery figcaption small{font-size:11px;color:var(--text-3)}
+.gallery{display:flex;gap:10px;overflow-x:auto;margin:0 -16px;padding:0 16px 4px;scroll-snap-type:x proximity}
+.galleryItem{flex:none;width:168px;display:flex;flex-direction:column;gap:6px;padding:0;background:none;border:0;text-align:left;scroll-snap-align:start}
+.galleryFrame{position:relative;display:block;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--surface-3)}
+.galleryFrame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.galleryItem:active .galleryFrame{transform:scale(.98)}
+.galleryCaption{font-size:12px;color:var(--text-2);line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.galleryShimmer{height:126px;border-radius:12px;background:linear-gradient(100deg,var(--surface-2) 30%,var(--surface-3) 50%,var(--surface-2) 70%);background-size:300% 100%;animation:shimmer 1.3s linear infinite}
+@keyframes shimmer{from{background-position:100% 0}to{background-position:0 0}}
 
 .journeyRail{display:flex;gap:6px;overflow-x:auto;margin:0 -16px 12px;padding:0 16px}
 .journeyStep{flex:none;display:flex;flex-direction:column;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,var(--c) 13%,var(--surface-2));border:1px solid color-mix(in srgb,var(--c) 40%,transparent);line-height:1.25}
@@ -470,6 +502,24 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .bullets li{margin:5px 0}
 .bullets b{color:var(--text)}
 
+/* ---- Lightbox ---------------------------------------------------------------- */
+.lightbox{position:fixed;inset:0;z-index:130;background:#050706;display:flex;flex-direction:column;animation:fadeIn .15s}
+.lightboxStage{position:absolute;inset:0;display:grid;place-items:center;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.lightboxStage img{grid-area:1/1;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.lightboxLqip{width:100%!important;height:100%!important;object-fit:contain;filter:blur(18px);opacity:.7}
+.lightboxImg{opacity:0;transition:opacity .35s var(--ease)}
+.lightboxImg.isLoaded{opacity:1}
+.lightboxBar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:calc(var(--safe-top) + 8px) 12px 8px 16px;background:linear-gradient(to bottom,rgba(5,7,6,.85),transparent)}
+.lightboxCount{font-size:13px;font-weight:600;color:var(--text-2)}
+.lightboxNav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:rgba(20,25,22,.7);border:1px solid var(--line-2);color:var(--text)}
+.lightboxNav.prev{left:12px}.lightboxNav.next{right:12px}
+.lightboxCaption{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:3px;padding:24px 16px calc(var(--safe-bottom) + 14px);background:linear-gradient(to top,rgba(5,7,6,.9),transparent)}
+.lightboxCaption b{font-size:15px}
+.lightboxCaption small{font-size:12px;color:var(--text-2)}
+.lightboxCaption a,.lightboxCaption span{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--text-3);text-decoration:none}
+.lightboxCaption .icon{width:13px;height:13px}
+@media (hover:none){.lightboxNav{display:none}}
+
 /* ---- Search ------------------------------------------------------------------ */
 .searchOverlay{position:fixed;inset:0;z-index:100}
 .searchScrim{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:fadeIn .15s}
@@ -597,20 +647,96 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
 
-/* Layer rail tap targets. Every earlier layout block pins these chips at 24-28px tall,
-   which is well under a comfortable touch target. On touch screens they get a 36px floor;
-   with a mouse, 32px. The rail grows to fit (height:auto) rather than clipping the chips.
-   At >=1100px the rail also moves down so it clears the 48px-tall series rail above it. */
-.map.view-map .mapLayerRail.mapLayerRail{height:auto!important;overflow-y:hidden}
-.map.view-map .mapLayerRail.mapLayerRail button{height:32px!important;min-height:32px!important}
-@media (pointer:coarse){
-  .map.view-map .mapLayerRail.mapLayerRail button{height:36px!important;min-height:36px!important}
-}
-@media (min-width:1100px){
-  .map.view-map .mapLayerRail.mapLayerRail{top:146px!important}
-}
-/* 700-1099px: the geography card on the left ends at 160px, so the rails start after it
-   instead of 10px underneath its right edge. */
-@media (min-width:700px) and (max-width:1099px){
-  .map.view-map .seriesRail.seriesRail,.map.view-map .mapLayerRail.mapLayerRail{left:170px!important}
-}
+/* ---- Journeys: player, panel, compare, crossings ----------------------------- */
+.jdot{display:inline-block;flex:none;width:9px;height:9px;border-radius:50%;background:var(--jc);vertical-align:middle;margin-right:6px}
+.journeyPlayer{padding:2px 0 10px;user-select:none;-webkit-user-select:none}
+.journeyPlayerTop{display:flex;align-items:center;gap:4px}
+.journeyPlayerTop .iconBtn:disabled{opacity:.35}
+.journeyPlayerTop .playBtn{margin:0 2px}
+.journeyNow{flex:1;min-width:0;margin-left:8px;line-height:1.2}
+.journeyNow small{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3)}
+.journeyNow b{display:block;font:700 22px/1.1 var(--display);letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.journeyTrack{position:relative;height:34px;margin-top:10px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);touch-action:none;cursor:ew-resize;outline:none;overflow:hidden}
+.journeyTrack:focus-visible{border-color:var(--accent-2)}
+.journeyTrackFill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,rgba(242,184,75,.08),rgba(242,184,75,.22));transition:width .2s var(--ease)}
+.journeyTick{position:absolute;top:50%;width:3px;height:10px;margin:-5px 0 0 -1.5px;border-radius:2px;background:var(--jc);opacity:.35}
+.journeyTick.past{opacity:.95}
+.journeyTick.chapter{height:18px;margin-top:-9px}
+.journeyThumb{position:absolute;top:3px;bottom:3px;width:4px;margin-left:-2px;border-radius:2px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.6);transition:left .2s var(--ease);pointer-events:none}
+.layout-panel .journeyPlayer{position:sticky;top:0;z-index:3;margin:0 -16px;padding:10px 16px 12px;background:var(--surface);border-bottom:1px solid var(--line)}
+
+.journeyHead{display:flex;align-items:center;gap:12px;padding:14px 0 4px}
+.journeyFaces{display:flex;flex:none}
+.journeyFaces>span{--c:var(--jc)}
+.journeyFaces>span+span{margin-left:-18px}
+.journeyFaces .portrait{border-color:var(--jc);box-shadow:0 0 0 3px var(--surface)}
+.journeyFaces .portrait-md{width:56px;height:56px}
+.journeyTitle{flex:1;min-width:0}
+.journeyTitle small{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3)}
+.journeyTitle h1{margin:3px 0 0;font:700 26px/1.05 var(--display);text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere}
+.journeyHeadActions{display:flex;flex:none;align-self:flex-start}
+.compareStats{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.compareStats>div{display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:10px 12px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--jc)}
+.compareStats b{font-size:14px;margin-right:6px}
+.compareStats span{font-size:12.5px;color:var(--text-2)}
+
+.comparePicker{margin-top:12px}
+.compareChips{display:flex;flex-wrap:wrap;gap:6px}
+.compareChip{display:inline-flex;align-items:center;height:36px;padding:0 4px 0 12px;border-radius:18px;background:var(--surface-2);border:1px solid color-mix(in srgb,var(--jc) 55%,transparent);font-size:13px;font-weight:600}
+.compareChip:not(:has(button)){padding-right:12px}
+.compareChip button{width:30px;height:30px;display:grid;place-items:center;background:none;border:0;color:var(--text-3)}
+.compareChip button .icon{width:16px;height:16px}
+.compareAdd{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:18px;background:none;border:1px dashed var(--line-2);color:var(--text-2);font-size:13px;font-weight:600}
+.compareAdd .icon{width:16px;height:16px}
+.comparePanel{margin-top:10px;padding:10px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line)}
+.comparePanel .field{background:var(--surface)}
+.compareList{margin-top:8px;max-height:320px;overflow-y:auto;overscroll-behavior:contain}
+.compareList .row{min-height:52px;background:var(--surface)}
+
+.switchRow{display:flex;align-items:center;gap:12px;margin-top:12px;padding:10px 12px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);cursor:pointer}
+.switchRow span{flex:1;min-width:0;line-height:1.25}
+.switchRow b{display:block;font-size:14px}
+.switchRow small{display:block;font-size:12.5px;color:var(--text-3)}
+.switchRow input{appearance:none;-webkit-appearance:none;flex:none;position:relative;width:48px;height:28px;margin:0;border-radius:14px;background:var(--surface-3);border:1px solid var(--line-2);cursor:pointer;transition:background .2s}
+.switchRow input::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--text-2);transition:transform .2s var(--ease),background .2s}
+.switchRow input:checked{background:var(--good);border-color:var(--good)}
+.switchRow input:checked::after{transform:translateX(20px);background:#fff}
+
+.stopCard{border-radius:18px;background:var(--surface-2);border:1px solid var(--line);border-top:3px solid var(--jc);overflow:hidden}
+.stopCard>.stack,.stopCard>.showMore{margin:0 10px 10px;width:calc(100% - 20px)}
+.stopCardMedia{position:relative;display:block;width:100%;aspect-ratio:16/8;padding:0;border:0;background:linear-gradient(135deg,color-mix(in srgb,var(--jc) 22%,#1a201c),#121614);overflow:hidden}
+.stopCardMedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stopCardMedia::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(18,22,20,.85),transparent 55%)}
+.stopCardBadge{position:absolute;z-index:1;left:12px;bottom:10px;min-width:34px;height:34px;padding:0 8px;display:grid;place-items:center;border-radius:17px;background:var(--jc);color:#0b0f0e;font:800 16px var(--font)}
+.stopCardBody{padding:10px 14px 12px}
+.stopCardBody>small{display:block;font-size:12px;font-weight:600;color:var(--text-3)}
+.stopCardBody h3{margin:3px 0 0;font:700 26px/1.05 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.linkish{padding:0;background:none;border:0;color:inherit;font:inherit;text-align:left;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px}
+.stopCardBody h3 .linkish{text-decoration:none}
+.legEvidence{margin:12px 0 0;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:13.5px}
+.legEvidence p{margin:0}
+.legEvidence>p:first-child,.legEvidence:is(p){display:flex;gap:8px;align-items:flex-start;color:var(--text-2)}
+.legEvidence .icon{width:16px;height:16px;margin-top:2px;color:var(--jc)}
+.legEvidence .evidence{display:grid;grid-template-columns:78px 1fr;gap:8px;margin-top:6px;padding-left:24px}
+.legEvidence .evidence small{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);padding-top:2px}
+.legEvidence .evidence .linkish{font-size:13px;color:var(--text)}
+.waitingRow{display:flex;align-items:center;gap:4px;width:100%;margin:0;padding:12px 14px;border-radius:14px;background:var(--surface-2);border:1px dashed var(--line-2);color:var(--text-2);font-size:14px;text-align:left}
+.waitingRow b{margin:0 4px;color:var(--text)}
+.crossingRow .pairDots{display:flex;flex:none;width:28px}
+.crossingRow .pairDots .jdot{width:14px;height:14px;margin:0;box-shadow:0 0 0 2px var(--surface-2)}
+.crossingRow .pairDots .jdot+.jdot{margin-left:-4px}
+.stopRow{min-height:52px}
+.stopRow .stopNum{flex:none;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--jc) 20%,transparent);border:1.5px solid var(--jc);font:800 12px var(--font)}
+.stopRow.isAhead{opacity:.55}
+.stopRow.isCurrent{border-color:var(--jc);background:color-mix(in srgb,var(--jc) 12%,var(--surface-2))}
+.stopRow.isCurrent .stopNum{background:var(--jc);color:#0b0f0e}
+.stopRow.newChapter{margin-top:10px}
+.stopRow.isCurrent .rowChevron{color:var(--jc)}
+
+.toast{position:fixed;z-index:200;left:50%;bottom:calc(var(--tab-h,0px) + 20px + var(--safe-bottom));transform:translateX(-50%);max-width:calc(100% - 32px);padding:12px 18px;border-radius:14px;background:var(--text);color:var(--bg);font-weight:600;font-size:14px;box-shadow:0 12px 30px rgba(0,0,0,.45);animation:toastIn .25s var(--ease);overflow-wrap:anywhere}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,10px)}}
+@media (prefers-reduced-motion:reduce){.journeyLeg.latest{animation:none;stroke-dashoffset:0}.journeyAvatarBody{animation:none}}
+.journeyStrip .journeyPair{width:96px}
+.pairFaces{display:flex}
+.pairFaces .portrait+.portrait{margin-left:-26px;box-shadow:0 0 0 2px var(--surface)}
+.journeyPair small{color:var(--accent-2);font-weight:700}

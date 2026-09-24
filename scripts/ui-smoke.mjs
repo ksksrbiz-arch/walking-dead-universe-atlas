@@ -185,6 +185,54 @@ const grab2=await page.evaluate(()=>{const r=document.querySelector(".grabber").
 await drag(grab2,[grab2[0],grab2[1]+500],10);await page.waitForTimeout(400);
 const h2=await page.evaluate(()=>document.querySelector(".sheet").getBoundingClientRect().height);
 check("dragging the sheet down collapses it",h2<h1-150,`${h1.toFixed(0)} -> ${h2.toFixed(0)}`);
+
+// ---- Journeys, deep links, share paths ----------------------------------------
+const glyph=await page.evaluate(()=>{const g=document.querySelector(".markerGlyph svg");return g?g.getBoundingClientRect().width:null});
+check("marker icons render at marker size (nested svg not stretched)",glyph!=null&&glyph<40,String(glyph));
+const url=(path)=>new URL(path,BASE).toString();
+await page.goto(url("?j=daryl-dixon,carol-peletier"),{waitUntil:"networkidle"}).catch(()=>{});
+await page.waitForTimeout(1400);
+const jstate=()=>page.evaluate(()=>({
+ banner:document.querySelector(".journeyBanner")?.textContent||"",
+ legs:document.querySelectorAll(".journeyLeg").length,
+ done:document.querySelectorAll(".journeyLeg.done,.journeyLeg.latest").length,
+ avatars:document.querySelectorAll(".journeyAvatar").length,
+ label:document.querySelector(".journeyNow small")?.textContent||"",
+ place:document.querySelector(".journeyNow b")?.textContent||"",
+ search:location.search,path:location.pathname
+}));
+let js=await jstate();
+check("?j= deep link opens a two-character journey",/Daryl Dixon/.test(js.banner)&&/Carol Peletier/.test(js.banner)&&js.avatars===2,JSON.stringify(js.banner));
+check("journey routes are drawn",js.legs>20&&js.done===js.legs,`${js.done}/${js.legs} legs`);
+await page.locator(".journeyPlayer [aria-label='Previous stop']").first().click();await page.waitForTimeout(700);
+const back1=await jstate();
+check("stepping back moves the journey and records it in the URL",back1.label!==js.label&&/at=\d+/.test(back1.search)&&back1.done<js.done,`${js.label} -> ${back1.label} ${back1.search}`);
+await page.locator(".journeyTrack").first().focus();await page.keyboard.press("Home");await page.waitForTimeout(600);
+const start=await jstate();
+check("journey track Home jumps to the first stop",/(Stop|Step) 1 of/.test(start.label)&&start.done<=2,start.label);
+await page.locator(".journeyPlayer .playBtn").first().click();await page.waitForTimeout(3900);
+const played=await jstate();
+await page.locator(".journeyPlayer .playBtn").first().click();
+check("playback advances in story order",played.label!==start.label&&played.done>start.done,`${start.label} -> ${played.label}`);
+const reload=played.search;
+await page.reload({waitUntil:"networkidle"}).catch(()=>{});await page.waitForTimeout(1400);
+const restored=await jstate();
+check("reloading the URL restores the same journey step",restored.label===played.label&&restored.search===reload,`${played.label} vs ${restored.label}`);
+// Spoiler-safe: earlier checks marked exactly one episode watched.
+await page.locator(".grabber").focus();await page.keyboard.press("Enter");await page.keyboard.press("Enter");await page.waitForTimeout(500);
+await page.locator(".switchRow input").click();await page.waitForTimeout(700);
+const safe=await page.evaluate(()=>({legs:document.querySelectorAll(".journeyLeg").length,note:document.querySelector(".switchRow small")?.textContent||""}));
+check("spoiler-safe hides unwatched parts of the journey",safe.legs<js.legs&&/hidden/.test(safe.note),`${safe.legs} legs, "${safe.note}"`);
+await page.locator(".switchRow input").click();await page.waitForTimeout(400);
+await page.keyboard.press("Escape");await page.waitForTimeout(500);
+js=await jstate();
+check("Escape exits the journey and clears it from the URL",!js.banner&&!/j=/.test(js.search),js.search);
+await page.goto(url("j/daryl-dixon"),{waitUntil:"networkidle"}).catch(()=>{});await page.waitForTimeout(1400);
+js=await jstate();
+check("/j/<id> share path opens the journey and normalises the URL",/Daryl Dixon/.test(js.banner)&&js.path==="/"&&/j=daryl-dixon/.test(js.search),`${js.path}${js.search}`);
+await page.goto(url("?place=alexandria"),{waitUntil:"networkidle"}).catch(()=>{});await page.waitForTimeout(1200);
+const placeTitle=await page.evaluate(()=>document.querySelector(".detailBarTitle b")?.textContent||"");
+check("?place= deep link opens that place",placeTitle==="Alexandria",placeTitle);
 check("no runtime errors",!errors.length,errors.join(" | "));
 
 await browser.close();
