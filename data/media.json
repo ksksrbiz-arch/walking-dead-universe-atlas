@@ -76,7 +76,10 @@
     },
     "manhattan": {
       "kind": "place",
-      "status": "needs-ingestion"
+      "status": "verified",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/b/bb/Manhattan_Flag.jpg/revision/latest?cb=20250209012300",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Manhattan%2C_New_York",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
     },
     "paris": {
       "kind": "place",
@@ -85,7 +88,10 @@
     },
     "omaha": {
       "kind": "place",
-      "status": "needs-ingestion"
+      "status": "verified",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/9/91/Omaha_Flag.jpg/revision/latest?cb=20250204100333",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Omaha%2C_Nebraska",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
     },
     "los-angeles": {
       "kind": "place",
@@ -219,6 +225,267 @@
       "sourcePage": "https://walkingdead.fandom.com/wiki/Military_Fuel_Depot",
       "status": "verified",
       "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "san-diego": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/f/fd/San_Diego_Flag.jpg/revision/latest?cb=20250105054834",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/San_Diego%2C_California",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "philadelphia": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/f/f6/Philadelphia_Flag.jpg/revision/latest?cb=20250203112212",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Philadelphia%2C_Pennsylvania",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "commonwealth": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/6/63/11x17_Commonwealth_Protesters.jpg/revision/latest?cb=20221003191100",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Commonwealth_Conflict_(TV_Series)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "woodbury": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/1/13/Vlcsnap-2012-10-29-09h16m37s30.png/revision/latest?cb=20200212214335",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Woodbury%2C_Georgia_(TV_Series)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "portland": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/1/11/Portland_Flag.jpg/revision/latest?cb=20250203111758",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Portland%2C_Oregon",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "civic-republic": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/7/73/CivicRepublicMilitaryBaseTOWL.png/revision/latest?cb=20240226084551",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Civic_Republic_Military_Base",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "mont-saint-michel": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/4/4f/Mont-Saint-Michel_%28Daryl_Series%29.png/revision/latest?cb=20230727002124",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Mont-Saint-Michel%2C_Normandy",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "marseille": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/6/60/Marseille_Flag.jpg/revision/latest?cb=20250204103729",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Marseille%2C_Provence-Alpes-C%C3%B4te_d'Azur",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "barcelona": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/c/ca/Barcelona_Flag.jpg/revision/latest?cb=20251017185131",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Barcelona%2C_Catalonia",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "tijuana": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/c/c3/Tijuana_Flag.jpg/revision/latest?cb=20250105055342",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Tijuana%2C_Baja_California",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "rosarito": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/c/cb/Rosarito%2C_Baja_California.png/revision/latest?cb=20160906165335",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Rosarito%2C_Baja_California",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "valle-guadalupe": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/3/34/8_SC_Body_pile.jpg/revision/latest?cb=20160519175423",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Valle_de_Guadalupe%2C_Baja_California",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "new-york-city": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/b/b5/NYCSubway.jpg/revision/latest?cb=20230518011545",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/New_York_City_Subway_System",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "le-havre": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/9/9b/Le_Havre_Flag.jpg/revision/latest?cb=20250204104757",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Le_Havre%2C_Normandy",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "agen": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/c/cc/Agen_Flag.jpg/revision/latest?cb=20250113123338",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Agen%2C_Aquitaine",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "london": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/2/2b/London_Flag.jpg/revision/latest?cb=20250908035908",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/London%2C_England",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "galicia": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/1/10/SpanishPort.jpg/revision/latest?cb=20260613104752",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Galicia_Boatyard",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "seville": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/3/39/Alcazar_of_Seville.jpeg/revision/latest?cb=20251029074625",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Alc%C3%A1zar_of_Seville",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "ranger-station-tales": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/7/78/ToTWD_1x04_His_Domain.jpg/revision/latest?cb=20220902170918",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Ranger_Station_(Tales)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "catrina-island": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/6/63/Main-qimg-de9dd80003c837bec896de24e5a27ec0.png/revision/latest?cb=20160515194601",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Catrina_Island%2C_California",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "workshop-ftwd": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/3/34/AbandonedBuilding.PNG/revision/latest?cb=20210509073808",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Workshop_(Fear)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "whisperer-woods": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Whisperer Territory, Whisperer Territory (TV Series), Whisperer Territory (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "cumberland": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Commonwealth Route, Commonwealth Route (TV Series), Commonwealth Route (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "mexico-baja": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Baja California Safe Zone, Baja California Safe Zone (TV Series), Baja California Safe Zone (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "dam": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Gonzales Dam, Gonzales Dam (TV Series), Gonzales Dam (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "truck-stop": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Fear Highway Route, Fear Highway Route (TV Series), Fear Highway Route (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "philadelphia-crm": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: CRM Philadelphia, CRM Philadelphia (TV Series), CRM Philadelphia (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "madrid": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Madrid, Madrid (TV Series), Madrid (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "manhattan-island": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Manhattan, Manhattan Island, Manhattan Island (TV Series), Manhattan Island (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "brooklyn-bridge": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Brooklyn Bridge, Brooklyn Bridge (TV Series), Brooklyn Bridge (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "rural-virginia": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Rural Virginia, Rural Virginia (TV Series), Rural Virginia (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "washington-dc-subway": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Washington, D.C. Subway Tunnel, Washington, D.C. Subway Tunnel (TV Series), Washington, D.C. Subway Tunnel (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "reapers-war": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Reapers War Territory, Reapers War Territory (TV Series), Reapers War Territory (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "commonwealth-ohio": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Commonwealth, Ohio, Commonwealth, Ohio (TV Series), Commonwealth, Ohio (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "rural-virginia-hospital": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Rural Virginia Hospital, Rural Virginia Hospital (TV Series), Rural Virginia Hospital (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "west-virginia-train-yard": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: West Virginia Train Yard, West Virginia Train Yard (TV Series), West Virginia Train Yard (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "ohio-virginia-wilds": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Ohio/Virginia Wilds, Ohio/Virginia Wilds (TV Series), Ohio/Virginia Wilds (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "ohio-roadtrip": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Ohio Road Trip, Ohio Road Trip (TV Series), Ohio Road Trip (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "atlantic-bayou": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Atlantic Bayou, Atlantic Bayou (TV Series), Atlantic Bayou (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
+    },
+    "wiregrass-ranger-station": {
+      "kind": "place",
+      "status": "no-verified-image",
+      "note": "scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: Wiregrass Ranger Station, Wiregrass Ranger Station (TV Series), Wiregrass Ranger Station (TV Universe)). Re-check if the location gains a dedicated wiki page.",
+      "checkedAt": "2026-09-24T19:00:12.407Z"
     }
   },
   "characters": {
