@@ -15,8 +15,12 @@ The current implementation intentionally separates the fixed viewport/background
         └── .mapWorld (movable)
              ├── MapGeography
              ├── map labels
-             └── location markers
+             ├── JourneyRoutes (journey mode: legs, under markers)
+             ├── location markers
+             └── JourneyAvatars (journey mode: portrait pins, above markers)
 ```
+
+Journey layers are ordinary children of `.mapWorld`: they move with it and use `scale(1/zoom)` / `vector-effect: non-scaling-stroke` for constant screen size, with `pointer-events: none` so taps still resolve to markers. Marker glyphs are nested lucide `<svg>`s — CSS must target the root viewport as `.mapSurface>svg`, never `.mapSurface svg` (that stretched every glyph to 100% once already).
 
 ### Transform rule
 
@@ -52,7 +56,7 @@ The map surface is now full-bleed behind all chrome (top bar, series row, contro
 data-map-chrome="top" | "bottom" | "left" | "right"
 ```
 
-`getVisibleRect()` measures those elements where they actually are and returns the free rectangle. Home framing, zoom buttons, place focus, episode/link/journey framing and cluster zoom all target the centre of that rectangle — no hard-coded chrome offsets. On phones the sheet is mid-transition when a focus request runs, so callers pass the sheet's *target* top (`sheetTopFor(snap)`), computed from the same function that sizes the sheet.
+`getVisibleRect()` measures those elements where they actually are and returns the free rectangle. Home framing, zoom buttons, place focus, episode/link/journey framing (journey steps frame the leg's two ends, capped at 3.2×) and cluster zoom all target the centre of that rectangle — no hard-coded chrome offsets. On phones the sheet is mid-transition when a focus request runs, so callers pass the sheet's *target* top (`sheetTopFor(snap)`), computed from the same function that sizes the sheet.
 
 Camera moves use `flyTo(x, y, z)`: a requestAnimationFrame tween that calls `applyMapTransform` directly (off the React render path) and commits `pan`/`zoom` state once at the end. Targets are computed from projected coordinates (`panFor`), not from DOM marker positions, and are clamped with `getMapPanLimits(z)` for the *target* zoom.
 

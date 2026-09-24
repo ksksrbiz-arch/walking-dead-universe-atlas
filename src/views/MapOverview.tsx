@@ -4,10 +4,32 @@ import Icon from "../components/Icon";
 import {AtlasImage,PlaceRow,Section,ShowMore,WatchToggle} from "../components/ui";
 import {useAtlas} from "../lib/atlasContext";
 import {buildChronology,describeEra} from "../lib/chronology";
-import {episodeById,episodeCode} from "../lib/lookup";
+import {characterById,episodeById,episodeCode} from "../lib/lookup";
 import {episodeImage,hasMapCoordinates} from "../lib/atlasHelpers";
 import {seriesColor,seriesShort} from "../lib/series";
 import type {Location} from "../data";
+import {journeyCandidates} from "../lib/journeys";
+import {PortraitImage} from "./details/shared";
+
+// Entry point to journeys from the home sheet: the most-travelled characters,
+// plus one ready-made comparison.
+function JourneyStrip(){
+ const {startJourney}=useAtlas();
+ const top=useMemo(()=>journeyCandidates().slice(0,12),[]);
+ const pair=["daryl-dixon","carol-peletier"].filter(id=>characterById.has(id));
+ return <Section title="Trace a journey">
+  <div className="portraitStrip journeyStrip">
+   {pair.length===2&&<button onClick={()=>startJourney(pair)} className="journeyPair" aria-label="Compare Daryl and Carol's journeys">
+    <span className="pairFaces">{pair.map(id=><PortraitImage key={id} id={id} name={(characterById.get(id) as any).name} size="md"/>)}</span>
+    <b>Daryl & Carol</b><small>Compare</small>
+   </button>}
+   {top.map(c=><button key={c.id} onClick={()=>startJourney([c.id])} aria-label={`Trace ${c.name}'s journey`}>
+    <PortraitImage id={c.id} name={c.name} size="md"/>
+    <b>{c.name}</b><small>{c.places} places</small>
+   </button>)}
+  </div>
+ </Section>;
+}
 
 export function EpisodeCard({episode}:{episode:any}){
  const {openEpisode,watched}=useAtlas();
@@ -38,6 +60,7 @@ export default function MapOverview({year,seriesId,locations,onOpenTimeline}:{ye
   <Section title={`Happening in ${year}`} count={active.length} action={active.length>0?<button className="textBtn" onClick={onOpenTimeline}>Timeline<Icon name="chevron"/></button>:undefined}>
    {active.length?<div className="carousel">{active.slice(0,24).map(e=><EpisodeCard key={e.id} episode={e}/>)}</div>:<p className="empty">No episodes are anchored to {year}. Drag the year to explore.</p>}
   </Section>
+  <JourneyStrip/>
   {fresh.length>0&&<Section title={`New in ${year}`} count={fresh.length}><ShowMore items={fresh} limit={6} render={l=><PlaceRow key={l.id} location={l} isNew/>}/></Section>}
   {older.length>0&&<Section title="Already on the map" count={older.length}><ShowMore items={older} limit={fresh.length?4:8} render={l=><PlaceRow key={l.id} location={l}/>}/></Section>}
   {unplaced.length>0&&<Section title="Not placed on map" count={unplaced.length} collapsible defaultOpen={false}><div className="stack">{unplaced.map(l=><PlaceRow key={l.id} location={l} note="Coordinates unknown — not guessed"/>)}</div></Section>}

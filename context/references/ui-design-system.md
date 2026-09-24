@@ -16,6 +16,8 @@ Living contract for the Atlas interface. Tokens live at the top of `src/styles.c
 | `--display` | Barlow Condensed | Titles, years, big numbers — uppercase |
 
 Series colours come only from `src/lib/series.ts` (`META`, `seriesColor`). Pass them to CSS as `--c` on the element; never hard-code a series colour in CSS.
+Journey slot colours come only from `JOURNEY_COLORS` (`src/lib/journeys.ts`), passed as `--jc` (`.jdot`, `.journeyLeg`, stop cards) — see `context/references/journeys-and-sharing.md`.
+Icons: app UI icons are lucide via `components/Icon.tsx` (app vocabulary → glyph); place/entity glyphs via `components/AtlasIcon.tsx` (`AtlasIconGlyph` for SVG markers). Never import lucide directly in a view.
 
 ## Type scale
 Display: 44 (scrubber year) · 36 (page title) · 34/40 (detail hero) · 22–28 (stats, era, up-next). Text: 15 body/row titles · 13–14 secondary · 12 meta · 11 overline (uppercase, +.08em). Inputs are 16px minimum (prevents iOS zoom). Nothing below 10px.
@@ -26,19 +28,19 @@ Display: 44 (scrubber year) · 36 (page title) · 34/40 (detail hero) · 22–28
 - Content max width 760px inside sheets/pages. Side gutters 16px (+ safe areas).
 
 ## Components (src/components/ui.tsx)
-`Section` (optionally collapsible) · `ShowMore` (preview N rows) · `Hero` · `ActionBar` + `.btn` / `.btn.primary` · `Stats` (4-up) · `Chip` (+ `certaintyTone`) · `EpisodeRow` (thumb, code, story year, watch toggle) · `PlaceRow` · `PlaceChips` · `WatchToggle` · `ProgressRing` · `Note` · `Empty`. Detail-only helpers live in `src/views/details/shared.tsx` (`WikiSection`, `ConnectionRow/List`, `PortraitStrip`, `PortraitImage`, `Gallery`, `GraphSection`).
+`Section` (optionally collapsible) · `ShowMore` (preview N rows) · `Hero` · `ActionBar` + `.btn` / `.btn.primary` · `Stats` (4-up) · `Chip` (+ `certaintyTone`) · `EpisodeRow` (thumb, code, story year, watch toggle) · `PlaceRow` · `PlaceChips` · `WatchToggle` · `ProgressRing` · `Note` · `Empty`. Detail-only helpers live in `src/views/details/shared.tsx` (`WikiSection`, `ConnectionRow/List`, `PortraitStrip`, `PortraitImage`, `Gallery`, `useEntityPhotos`, `useLightbox`, `GraphSection`). `Lightbox` (`components/Lightbox.tsx`) is the only fullscreen image viewer. Journey UI: `JourneyPanel` + `JourneyPlayer` (`views/JourneyPanel.tsx`), `.switchRow` for on/off settings, `.toast` for transient confirmations (share).
 
 Rules:
 - Every tappable thing is ≥44px in its smallest dimension. The only exception: compact watch toggles are 40px inside a 58px row; on episode cards they are 44px.
 - Rows are `.row`; a row with two actions (open + watch) uses `.rowMain` + `WatchToggle` side by side, never nested buttons.
 - Lists longer than ~6 use `ShowMore`; secondary blocks (wiki, sources, graph) are collapsible and closed unless they carry the page's main content.
 - Episode rows always show the watched state. Any new episode list must use `EpisodeRow` or `EpisodeCard`.
-- Images go through `AtlasImage`; a failed image hides itself so the gradient placeholder shows. Never render a broken-image glyph.
+- Images go through `AtlasImage` (sized via `width`/`sizes`, blurred placeholder, fade-in, credit via `Credit`/`Hero creditPage`); a failed image hides itself so the gradient placeholder shows. Never render a broken-image glyph.
 - Explanatory copy is a single `Note` at the bottom — never a block above content.
 - One primary (accent) button per screen.
 
 ## Navigation
-`AtlasContext` (`src/lib/atlasContext.ts`) exposes `open*`, `show*OnMap`, year and watch state. Opening an entity pushes the previous `{view, focus, scroll}` onto the back stack; Back restores view, focus and scroll; ✕ clears the stack. Places always open on the map; other entities open in the current tab.
+`AtlasContext` (`src/lib/atlasContext.ts`) exposes `open*`, `show*OnMap`, year and watch state. Opening an entity pushes the previous `{view, focus, scroll}` onto the back stack; Back restores view, focus and scroll; ✕ clears the stack. Places always open on the map; other entities open in the current tab. A journey is a map mode, not a focus: `startJourney` pushes the stack and shows `JourneyPanel` while no detail is open; ✕ on the panel / Esc / browser Back leave it. The URL mirrors journey and focus state (`?j=`, `?place=`, `?ep=`, `?who=`).
 
 ## Motion
-Sheet height 300ms `--ease`; map flights 520ms ease-in-out (skipped under reduced motion); marker pulse only for places new in the current year and the selection. `prefers-reduced-motion` disables all animation.
+Sheet height 300ms `--ease`; map flights 520ms ease-in-out (skipped under reduced motion); marker pulse only for places new in the current year and the selection; the latest journey leg draws in (0.9s) and the avatar hops to its new stop. `prefers-reduced-motion` disables all animation.

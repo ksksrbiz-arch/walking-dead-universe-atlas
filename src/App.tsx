@@ -18,6 +18,10 @@ import {AtlasContext} from "./lib/atlasContext";
 import type {AtlasActions} from "./lib/atlasContext";
 import {META,SERIES_KEYS,SERIES_BY_ID,seriesColor} from "./lib/series";
 import {characterById,connectionById,communityById,episodeById,factionById,locationById,entityName} from "./lib/lookup";
+import {JOURNEY_COLORS,beatForYear,beatYear,buildBeats,buildJourney,parseJourneyIds,positionsAt} from "./lib/journeys";
+import {JourneyAvatars,JourneyRoutes} from "./components/JourneyLayer";
+import JourneyPanel,{JourneyPlayer} from "./views/JourneyPanel";
+import type {JourneyControls} from "./views/JourneyPanel";
 import {MAP_LAYERS,MAP_LAYER_LABELS,clamp,hasMapCoordinates,locationIconName,locationMapLayer,prettyType} from "./lib/atlasHelpers";
 import type {MapLayer} from "./lib/atlasHelpers";
 import AtlasIcon,{AtlasIconGlyph} from "./components/AtlasIcon";
@@ -80,6 +84,26 @@ const readLayout=()=>{
  const w=window.innerWidth,h=window.innerHeight;
  return {panel:w>=900||(w>h&&h<560&&w>=640),touch:w<700||(w<=900&&h<=600)||window.matchMedia?.("(pointer: coarse)").matches};
 };
+// Shareable state lives in the URL: ?j=<ids>&at=<beat> for journeys,
+// ?place= / ?ep= / ?who= for a focused record. /j/…, /p/…, /e/…, /c/… are the
+// short share paths (served with preview cards by api/share.ts on Vercel; any
+// other host falls back to index.html and they are read here).
+type DeepLink={journey?:string[];at?:number;kind?:AtlasFocusKind;id?:string};
+const SHARE_PATHS:Record<string,AtlasFocusKind>={p:"location",e:"episode",c:"character"};
+const QUERY_KEYS:Partial<Record<AtlasFocusKind,string>>={location:"place",episode:"ep",character:"who"};
+function readDeepLink():DeepLink{
+ if(typeof window==="undefined")return {};
+ const u=new URL(window.location.href);
+ const m=u.pathname.match(/^\/(j|p|e|c)\/([^/]+)\/?$/);
+ const at=Number(u.searchParams.get("at"));
+ const journey=parseJourneyIds(m?.[1]==="j"?decodeURIComponent(m[2]):u.searchParams.get("j"));
+ if(journey.length)return {journey,at:Number.isFinite(at)&&u.searchParams.has("at")?at/100:undefined};
+ if(m&&SHARE_PATHS[m[1]])return {kind:SHARE_PATHS[m[1]],id:decodeURIComponent(m[2])};
+ for(const [kind,key] of Object.entries(QUERY_KEYS))if(u.searchParams.get(key!))return {kind:kind as AtlasFocusKind,id:u.searchParams.get(key!)!};
+ return {};
+}
+const SPOILER_KEY="twdu-atlas-spoiler-safe";
+const readSpoilerSafe=()=>{try{return localStorage.getItem(SPOILER_KEY)==="1"}catch{return false}};
 const prefersReducedMotion=()=>typeof window!=="undefined"&&!!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
 export default function App(){
@@ -92,7 +116,15 @@ export default function App(){
  const {focus,selectedLocation,selectedEpisode,selectedConnection,setFocus,clearFocus}=focusCtl;
  const [view,setView]=useState<View>("map");
  const [navStack,setNavStack]=useState<NavEntry[]>([]);
- const [journeyId,setJourneyId]=useState<string|null>(null);
+ const [journeyIds,setJourneyIds]=useState<string[]>([]);
+ // Playback position as a story rank (not a beat index) so it survives adding a
+ // character to compare or toggling spoiler-safe. Infinity = end of the journey.
+ const [journeyRank,setJourneyRank]=useState(Infinity);
+ const [journeyPlaying,setJourneyPlaying]=useState(false);
+ const [spoilerSafe,setSpoilerSafeState]=useState(readSpoilerSafe);
+ const [toast,setToast]=useState<string|null>(null);
+ const deepLink=useRef<DeepLink|null>(readDeepLink());
+ const journeyFrame=useRef<"all"|"step"|null>(null);
  const {watched,toggleWatched,resetWatched}=useWatchProgress();
  const [dataErrors,setDataErrors]=useState<string[]>([]);
  const [layout,setLayout]=useState(readLayout);
@@ -101,7 +133,7 @@ export default function App(){
  const [searchOpen,setSearchOpen]=useState(false);
  const [layersOpen,setLayersOpen]=useState(false);
  const [clusterIds,setClusterIds]=useState<string[]|null>(null);
- const [focusRequest,setFocusRequest]=useState<{ids:string[];mode:"point"|"fit";token:number}|null>(null);
+ const [focusRequest,setFocusRequest]=useState<{ids:string[];mode:"point"|"fit";token:number;maxZ?:number}|null>(null);
  const [viewport,setViewport]=useState(()=>({w:typeof window!=="undefined"?window.innerWidth:1000,h:typeof window!=="undefined"?window.innerHeight:800}));
  // Measured heights of the fixed top bar and bottom tab bar (safe areas included).
  const [chrome,setChrome]=useState({top:64,tab:64});
@@ -145,28 +177,22 @@ export default function App(){
 
  // ---- Derived data -----------------------------------------------------------
  const seriesId=series==="ALL"?undefined:META[series].id;
- const journeyLocationIds=useMemo(()=>{
-  if(!journeyId)return new Set<string>();
-  const ids=new Set<string>();
-  for(const eid of getCharacterEpisodeIds(journeyId))for(const id of (episodeById.get(eid) as any)?.locationIds??[])ids.add(id);
-  return ids;
- },[journeyId]);
- // In-universe order (not air order); consecutive repeats collapse, a later return still
- // draws as its own leg, and unplaced (0,0) locations are skipped rather than routed through.
- const journeySequence=useMemo(()=>{
-  if(!journeyId)return [] as Location[];
-  const eps=getCharacterEpisodeIds(journeyId).map(e=>episodeById.get(e)).filter(Boolean).sort(compareEpisodesChronologically) as any[];
-  const seq:Location[]=[];
-  for(const e of eps)for(const id of e.locationIds??[]){const l=locationById.get(id);if(l&&hasMapCoordinates(l)&&seq[seq.length-1]?.id!==l.id)seq.push(l)}
-  return seq;
- },[journeyId]);
- // Stop number = order in which each distinct place is first reached.
- const journeyStops=useMemo(()=>{const m=new Map<string,number>();for(const l of journeySequence)if(!m.has(l.id))m.set(l.id,m.size+1);return m},[journeySequence]);
+ const journeyActive=journeyIds.length>0;
+ const journeys=useMemo(()=>journeyIds.map(id=>buildJourney(id,{onlyEpisodes:spoilerSafe?watched:null})),[journeyIds,spoilerSafe,spoilerSafe?watched:null]);
+ const beats=useMemo(()=>buildBeats(journeys),[journeys]);
+ const journeyCursor=useMemo(()=>{if(!beats.length)return 0;let i=0;beats.forEach((b,k)=>{if(b.rank<=journeyRank)i=k});return i},[beats,journeyRank]);
+ const journeyPositions=useMemo(()=>positionsAt(journeys,beats,journeyCursor),[journeys,beats,journeyCursor]);
+ const journeyLocationIds=useMemo(()=>new Set(journeys.flatMap(j=>j.stops.map(s=>s.location.id))),[journeys]);
+ // Places already reached by someone at the current step, and where each character is now.
+ const journeyReached=useMemo(()=>new Set(journeys.flatMap((j,ji)=>j.stops.slice(0,journeyPositions[ji]+1).map(s=>s.location.id))),[journeys,journeyPositions]);
+ const journeyCurrent=useMemo(()=>new Set(journeys.map((j,ji)=>j.stops[journeyPositions[ji]]?.location.id).filter(Boolean) as string[]),[journeys,journeyPositions]);
+ // Single journey: numbered badges in first-visit order.
+ const journeyStops=useMemo(()=>{const m=new Map<string,number>();if(journeys.length===1)for(const st of journeys[0].stops)if(!m.has(st.location.id))m.set(st.location.id,st.place);return m},[journeys]);
  const yearLocations=useMemo(()=>(atlasData.locations as Location[]).filter(l=>!!SERIES_BY_ID[l.seriesId]&&(!seriesId||l.seriesId===seriesId)&&l.year<=year),[seriesId,year]);
  const mapLocations=useMemo(()=>{
-  const source=journeyId?(atlasData.locations as Location[]).filter(l=>journeyLocationIds.has(l.id)):yearLocations;
+  const source=journeyActive?(atlasData.locations as Location[]).filter(l=>journeyLocationIds.has(l.id)):yearLocations;
   return source.filter(l=>mapLayer==="ALL"||locationMapLayer(l.type)===mapLayer);
- },[journeyId,journeyLocationIds,yearLocations,mapLayer]);
+ },[journeyActive,journeyLocationIds,yearLocations,mapLayer]);
  const activeEpisodeCount=useMemo(()=>buildChronology().filter(x=>x.kind==="episode"&&x.start<=year&&x.end>=year&&(!seriesId||x.seriesId===seriesId)).length,[year,seriesId]);
  const layerCounts=useMemo(()=>{const c:Record<string,number>={ALL:0};for(const l of yearLocations){if(!hasMapCoordinates(l))continue;c.ALL++;const k=locationMapLayer(l.type);c[k]=(c[k]??0)+1}return c},[yearLocations]);
  const contextLocationIds=useMemo(()=>{
@@ -236,7 +262,7 @@ export default function App(){
   flight.current=requestAnimationFrame(step);
  };
  // Frame a set of locations inside the unobstructed part of the map.
- const focusMapOn=(ids:string[],mode:"point"|"fit",sheetTop?:number)=>{
+ const focusMapOn=(ids:string[],mode:"point"|"fit",sheetTop?:number,maxZ=4.5)=>{
   const el=mapSvgRef.current;if(!el||!el.clientWidth)return;
   const pts=ids.map(id=>locationById.get(id)).filter((l):l is Location=>!!l&&hasMapCoordinates(l)).map(l=>project(l.lat,l.lng));
   if(!pts.length)return;
@@ -247,9 +273,9 @@ export default function App(){
   const spanW=Math.max(maxX-minX,1)*bs,spanH=Math.max(maxY-minY,1)*bs;
   const fitZ=Math.min((vis.x1-vis.x0)*.72/spanW,(vis.y1-vis.y0)*.72/spanH);
   const pointZ=isMobileMap?2.6:2.2;
-  let z=mode==="point"||pts.length===1?Math.max(visual.current.zoom,pointZ):clamp(fitZ,1,4.5);
+  let z=mode==="point"||pts.length===1?Math.max(visual.current.zoom,pointZ):clamp(fitZ,1,maxZ);
   if(pts.length>1&&mode==="point")z=clamp(Math.min(fitZ,Math.max(visual.current.zoom,pointZ)),1,5);
-  z=clamp(z,1,5);
+  z=clamp(z,1,Math.min(5,Math.max(maxZ,mode==="point"?pointZ:1)));
   const target=panFor(c,(vis.x0+vis.x1)/2,(vis.y0+vis.y1)/2,z);
   const lim=getMapPanLimits(z);
   flyTo(clamp(target.x,-lim.x,lim.x),clamp(target.y,-lim.y,lim.y),z);
@@ -288,7 +314,7 @@ export default function App(){
  useEffect(()=>{
   const frame=window.requestAnimationFrame(()=>{
    if(!mapSvgRef.current?.clientWidth)return;
-   if(!didAutoHome.current){didAutoHome.current=true;const home=computeHomePan();visual.current={x:home.x,y:home.y,zoom:home.zoom};setPan({x:home.x,y:home.y});setZoom(home.zoom);applyMapTransform(home.x,home.y,home.zoom);return}
+   if(!didAutoHome.current){didAutoHome.current=true;const home=computeHomePan();visual.current={x:home.x,y:home.y,zoom:home.zoom};setPan({x:home.x,y:home.y});setZoom(home.zoom);applyMapTransform(home.x,home.y,home.zoom);applyDeepLink();return}
    const lim=getMapPanLimits();const nx=clamp(visual.current.x,-lim.x,lim.x),ny=clamp(visual.current.y,-lim.y,lim.y);
    visual.current={...visual.current,x:nx,y:ny};setPan(p=>p.x===nx&&p.y===ny?p:{x:nx,y:ny});applyMapTransform(nx,ny,visual.current.zoom);
   });
@@ -311,10 +337,10 @@ export default function App(){
  // ---- Focus requests -> map flights (after the DOM reflects new filters) ----
  useEffect(()=>{
   if(!focusRequest)return;
-  const id=requestAnimationFrame(()=>focusMapOn(focusRequest.ids,focusRequest.mode,isPanel?undefined:sheetTopFor(snap)));
+  const id=requestAnimationFrame(()=>focusMapOn(focusRequest.ids,focusRequest.mode,isPanel?undefined:sheetTopFor(snap),focusRequest.maxZ));
   return()=>cancelAnimationFrame(id);
  },[focusRequest]);
- const requestFocus=(ids:string[],mode:"point"|"fit")=>setFocusRequest({ids,mode,token:Date.now()});
+ const requestFocus=(ids:string[],mode:"point"|"fit",maxZ?:number)=>setFocusRequest({ids,mode,token:Date.now(),maxZ});
 
  // ---- Navigation -------------------------------------------------------------
  const navigate=(kind:AtlasFocusKind,id:string,targetView:View=view)=>{
@@ -345,7 +371,7 @@ export default function App(){
  const ensureVisible=(l:Location)=>{
   if(seriesId&&l.seriesId!==seriesId)setSeries("ALL");
   if(mapLayer!=="ALL"&&locationMapLayer(l.type)!==mapLayer)setMapLayer("ALL");
-  if(journeyId&&!journeyLocationIds.has(l.id))setJourneyId(null);
+  if(journeyActive&&!journeyLocationIds.has(l.id))exitJourney(false);
 
  };
  const episodeYear=(id:string)=>{const e=episodeById.get(id) as any;const y=Number(e?.timelineStart??e?.timelineEnd??e?.airDate?.slice(0,4));return Number.isFinite(y)&&y>0?y:null};
@@ -354,7 +380,7 @@ export default function App(){
   const l=locationById.get(id);if(!l)return;
   const started=performance.now();
   // Per the atlas contract, tapping a place moves time to that place's history.
-  ensureVisible(l);if(!journeyId&&Number(l.year)>0)setYear(Number(l.year));
+  ensureVisible(l);if(!(journeyActive&&journeyLocationIds.has(id))&&Number(l.year)>0)setYear(Number(l.year));
   navigate("location",id,"map");
   if(hasMapCoordinates(l))requestFocus([id],"point");
   void getRuntimeRelationships("location",id).then(remote=>{if(remote)trackAtlasMetric("runtime-location-relationships",remote.episodeIds.length,{location:id,remoteIndexed:true})});
@@ -363,10 +389,15 @@ export default function App(){
  const openEpisode=(id:string)=>{
   const y=episodeYear(id);if(y)setYear(y);
   navigate("episode",id);
-  if(view==="map"){setJourneyId(null);const ids=((episodeById.get(id) as any)?.locationIds??[]) as string[];if(ids.length)requestFocus(ids,"point")}
+  if(view==="map"){
+   const ids=((episodeById.get(id) as any)?.locationIds??[]) as string[];
+   // Episodes along the journey keep it on screen; anything else leaves it.
+   if(journeyActive&&!ids.every(x=>journeyLocationIds.has(x)||!hasMapCoordinates(locationById.get(x)!)))exitJourney(false);
+   if(ids.length)requestFocus(ids,"point");
+  }
  };
  const showEpisodeOnMap=(id:string)=>{
-  const y=episodeYear(id);if(y)setYear(y);setSeries("ALL");setMapLayer("ALL");setJourneyId(null);
+  const y=episodeYear(id);if(y)setYear(y);setSeries("ALL");setMapLayer("ALL");exitJourney(false);
   navigate("episode",id,"map");
   const ids=((episodeById.get(id) as any)?.locationIds??[]) as string[];
   if(ids.length){requestFocus(ids,"point");trackAtlasMetric("episode-geography-focus",1,{episode:id,locations:ids.length})}
@@ -378,15 +409,80 @@ export default function App(){
   trackAtlasMetric("character-select",eps.length,{character:id});
   void getRuntimeRelationships("character",id).then(remote=>{if(remote)trackAtlasMetric("runtime-character-relationships",remote.episodeIds.length,{character:id,remoteIndexed:true})});
  };
- const showCharacterJourney=(id:string)=>{
-  const eps=getCharacterEpisodeIds(id).map(e=>episodeById.get(e)).filter(Boolean) as any[];
-  const years=eps.map(e=>Number(e.timelineStart??e.timelineEnd)).filter(n=>Number.isFinite(n)&&n>0);
-  if(years.length)setYear(Math.max(...years));
-  setSeries("ALL");setMapLayer("ALL");setJourneyId(id);
-  navigate("character",id,"map");setSnap("peek");
-  const ids=[...new Set(eps.flatMap(e=>e.locationIds??[]))] as string[];
-  requestFocus(ids,"fit");
-  trackAtlasMetric("character-journey-geography-focus",1,{character:id,locations:ids.length});
+ // ---- Journeys -------------------------------------------------------------------
+ const startJourney=(ids:string[],opts:{rank?:number}={})=>{
+  const list=parseJourneyIds(ids.join(","));if(!list.length)return;
+  setNavStack(stack=>focus||view!=="map"?[...stack,{view,focus,scroll:sheetBodyRef.current?.scrollTop??0}].slice(-30):stack);
+  clearFocus();setView("map");setSearchOpen(false);setClusterIds(null);setLayersOpen(false);
+  setSeries("ALL");setMapLayer("ALL");setPlaying(false);setJourneyPlaying(false);
+  setJourneyIds(list);setJourneyRank(opts.rank??Infinity);setSnap("peek");
+  journeyFrame.current=opts.rank==null?"all":"step";
+  trackAtlasMetric("character-journey-geography-focus",1,{character:list.join("+"),compare:list.length});
+ };
+ const showCharacterJourney=(id:string)=>startJourney([id]);
+ function exitJourney(restore=true){
+  if(!journeyIds.length)return;
+  setJourneyIds([]);setJourneyPlaying(false);setJourneyRank(Infinity);
+  if(restore&&!focus){if(navStack.length)goBack();else setSnap("peek")}
+ }
+ const setSpoilerSafe=(on:boolean)=>{setSpoilerSafeState(on);try{localStorage.setItem(SPOILER_KEY,on?"1":"0")}catch{}};
+ // Frame the whole journey on start, or the current leg after a deep link.
+ useEffect(()=>{
+  const mode=journeyFrame.current;if(!mode||!journeys.length)return;
+  journeyFrame.current=null;
+  if(mode==="all"){const ids=[...journeyLocationIds];if(ids.length)requestFocus(ids,"fit")}
+  else frameBeat(journeyCursor);
+ },[journeys]);
+ const frameBeat=(i:number)=>{
+  const beat=beats[i];if(!beat)return;
+  const ids=new Set<string>();
+  for(const m of beat.moves){const j=journeys[m.journey],st=j?.stops[m.stop];if(!st)continue;ids.add(st.location.id);if(st.from!=null)ids.add(j.stops[st.from].location.id)}
+  if(ids.size)requestFocus([...ids],"fit",3.2);
+ };
+ const stepJourney=(i:number,fly=true)=>{
+  const beat=beats[clamp(i,0,Math.max(0,beats.length-1))];if(!beat)return;
+  setJourneyRank(i>=beats.length-1?Infinity:beat.rank);
+  if(fly)frameBeat(clamp(i,0,beats.length-1));
+ };
+ // Story time follows the journey.
+ const cursorYear=journeyActive?beatYear(journeys,beats[journeyCursor]):null;
+ useEffect(()=>{if(cursorYear)setYear(cursorYear)},[cursorYear]);
+ const stepRef=useRef(stepJourney);stepRef.current=stepJourney;
+ const cursorRef=useRef(0);cursorRef.current=journeyCursor;
+ useEffect(()=>{
+  if(!journeyPlaying)return;
+  const id=window.setInterval(()=>{
+   const next=cursorRef.current+1;
+   if(next>=beats.length){setJourneyPlaying(false);return}
+   stepRef.current(next);
+  },prefersReducedMotion()?2600:1700);
+  return()=>window.clearInterval(id);
+ },[journeyPlaying,beats.length]);
+ const toggleJourneyPlay=()=>{
+  if(journeyPlaying){setJourneyPlaying(false);return}
+  setPlaying(false);
+  // Play from the top when parked at the end.
+  if(journeyCursor>=beats.length-1)stepJourney(0);
+  setJourneyPlaying(true);
+ };
+ const onYearScrub=(y:number)=>{
+  setPlaying(false);setYear(y);
+  if(journeyActive){setJourneyPlaying(false);stepJourney(beatForYear(journeys,beats,y))}
+ };
+ const showToast=(msg:string)=>{setToast(msg);window.setTimeout(()=>setToast(t=>t===msg?null:t),2600)};
+ const shareCurrent=async()=>{
+  let path=window.location.pathname+window.location.search,title="TWDU Atlas";
+  if(journeyActive&&!focus){
+   path="/j/"+journeyIds.join("+")+(journeyCursor<beats.length-1&&beats[journeyCursor]?"?at="+Math.round(beats[journeyCursor].rank*100):"");
+   title=journeys.map(j=>j.name).join(" & ")+" — journey · TWDU Atlas";
+  }else if(focus){
+   const short=Object.entries(SHARE_PATHS).find(([,k])=>k===focus.kind)?.[0];
+   if(short)path=`/${short}/${encodeURIComponent(focus.id)}`;
+   title=focusTitle+" · TWDU Atlas";
+  }
+  const url=window.location.origin+path;
+  try{if(navigator.share){await navigator.share({title,url});return}}catch(err){if((err as Error)?.name==="AbortError")return}
+  try{await navigator.clipboard.writeText(url);showToast("Link copied")}catch{showToast(url)}
  };
  const connectionContext=(id:string)=>{
   const c=connectionById.get(id) as any;
@@ -398,11 +494,11 @@ export default function App(){
  const openConnection=(id:string)=>{
   const ctx=connectionContext(id);if(ctx.year)setYear(ctx.year);
   navigate("connection",id);
-  if(view==="map"){setSeries("ALL");setJourneyId(null);if(ctx.ids.length)requestFocus(ctx.ids,"fit")}
+  if(view==="map"){setSeries("ALL");exitJourney(false);if(ctx.ids.length)requestFocus(ctx.ids,"fit")}
  };
  const showConnectionOnMap=(id:string)=>{
   const ctx=connectionContext(id);if(ctx.year)setYear(ctx.year);
-  setSeries("ALL");setMapLayer("ALL");setJourneyId(null);
+  setSeries("ALL");setMapLayer("ALL");exitJourney(false);
   navigate("connection",id,"map");
   if(ctx.ids.length){requestFocus(ctx.ids,"fit");trackAtlasMetric("connection-geography-focus",1,{locations:ctx.ids.length})}
  };
@@ -414,10 +510,32 @@ export default function App(){
   requestAnimationFrame(()=>sheetRef.current?.focus({preventScroll:true}));
  };
 
- const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,showConnectionOnMap,setYear,year,watched,toggleWatched,resetWatched};
+ const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,startJourney,showConnectionOnMap,setYear,year,watched,toggleWatched,resetWatched};
+
+ // ---- URL state (deep links in, shareable state out) --------------------------
+ useEffect(()=>{
+  if(deepLink.current)return; // not applied yet — don't clobber the incoming link
+  const u=new URL(window.location.href);
+  for(const k of ["j","at","place","ep","who"])u.searchParams.delete(k);
+  if(/^\/(j|p|e|c)\//.test(u.pathname))u.pathname="/";
+  if(journeyActive){
+   u.searchParams.set("j",journeyIds.join(","));
+   if(journeyCursor<beats.length-1&&beats[journeyCursor])u.searchParams.set("at",String(Math.round(beats[journeyCursor].rank*100)));
+  }else if(focus&&QUERY_KEYS[focus.kind])u.searchParams.set(QUERY_KEYS[focus.kind]!,focus.id);
+  const next=u.pathname+u.search+u.hash;
+  if(next!==window.location.pathname+window.location.search+window.location.hash){try{window.history.replaceState(window.history.state,"",next)}catch{}}
+ },[journeyActive,journeyIds,journeyCursor,beats,focus]);
+ const applyDeepLink=()=>{
+  const link=deepLink.current;deepLink.current=null;if(!link)return;
+  if(link.journey?.length){startJourney(link.journey,{rank:link.at});return}
+  if(!link.kind||!link.id)return;
+  if(link.kind==="location"&&locationById.has(link.id))openLocation(link.id);
+  else if(link.kind==="episode"&&episodeById.has(link.id))showEpisodeOnMap(link.id);
+  else if(link.kind==="character"&&characterById.has(link.id))openCharacter(link.id);
+ };
 
  // ---- Browser back closes overlays / walks the detail stack -------------------
- const somethingOpen=searchOpen||!!focus||!!clusterIds;
+ const somethingOpen=searchOpen||!!focus||!!clusterIds||journeyActive;
  useEffect(()=>{
   if(somethingOpen&&!historyArmed.current){try{window.history.pushState({atlasOverlay:true},"",window.location.href);historyArmed.current=true}catch{}}
  },[somethingOpen,focus,searchOpen,clusterIds]);
@@ -427,6 +545,7 @@ export default function App(){
   if(searchOpen)setSearchOpen(false);
   else if(clusterIds)setClusterIds(null);
   else if(focus)goBack();
+  else if(journeyActive)exitJourney();
  };
  useEffect(()=>{
   const onPop=()=>backHandler.current();
@@ -442,7 +561,7 @@ export default function App(){
    if(layersOpen){setLayersOpen(false);return}
    if(clusterIds){e.preventDefault();setClusterIds(null);return}
    if(focus){e.preventDefault();closeDetail();return}
-   if(journeyId){setJourneyId(null);return}
+   if(journeyActive){exitJourney();return}
   }
   if(tag==="INPUT"||tag==="TEXTAREA"||(e.target as HTMLElement)?.isContentEditable)return;
   if(e.key==="/"){e.preventDefault();setSearchOpen(true);return}
@@ -450,7 +569,11 @@ export default function App(){
   if(e.key==="+"||e.key==="=")setZoomValue(visual.current.zoom+.5);
   if(e.key==="-"||e.key==="_")setZoomValue(visual.current.zoom-.5);
   if(e.key==="0")resetMap();
-  if(e.key===" "&&tag!=="BUTTON"){e.preventDefault();setPlaying(v=>!v)}
+  if(e.key===" "&&tag!=="BUTTON"){e.preventDefault();if(journeyActive)toggleJourneyPlay();else setPlaying(v=>!v)}
+  if(journeyActive&&!focus&&(e.target as HTMLElement)?.getAttribute?.("role")!=="slider"){
+   if(e.key==="ArrowRight"||e.key==="]"){e.preventDefault();setJourneyPlaying(false);stepJourney(journeyCursor+1)}
+   if(e.key==="ArrowLeft"||e.key==="["){e.preventDefault();setJourneyPlaying(false);stepJourney(journeyCursor-1)}
+  }
  };
  useEffect(()=>{const on=(e:KeyboardEvent)=>keyHandler.current(e);window.addEventListener("keydown",on);return()=>window.removeEventListener("keydown",on)},[]);
 
@@ -472,6 +595,7 @@ export default function App(){
   // always render as their own markers so they never hide inside a cluster.
   const pinned=new Set<string>(selectedLocation?[selectedLocation]:[]);
   if(contextLocationIds.size<=8)contextLocationIds.forEach(id=>pinned.add(id));
+  journeyCurrent.forEach(id=>pinned.add(id));
   if(pinned.size){
    for(const g of groups){
     if(g.locations.length<2)continue;
@@ -482,7 +606,7 @@ export default function App(){
    }
   }
   return groups.filter(g=>g.locations.length);
- },[mapLocations,zoom,selectedLocation,contextLocationIds]);
+ },[mapLocations,zoom,selectedLocation,contextLocationIds,journeyCurrent]);
  const openCluster=(ids:string[])=>{
   const pts=ids.map(id=>locationById.get(id)!).filter(Boolean).map(l=>project(l.lat,l.lng));
   const spread=Math.max(Math.max(...pts.map(p=>p.x))-Math.min(...pts.map(p=>p.x)),Math.max(...pts.map(p=>p.y))-Math.min(...pts.map(p=>p.y)));
@@ -600,12 +724,22 @@ export default function App(){
 
  // ---- Render -----------------------------------------------------------------
  const era=describeEra(year);
- const journeyName=journeyId?characterById.get(journeyId)?.name:null;
  const focusTitle=focus?(focus.kind==="episode"?(episodeById.get(focus.id) as any)?.title:focus.kind==="connection"?(connectionById.get(focus.id) as any)?.label:focus.kind==="community"?communityById.get(focus.id)?.name:focus.kind==="faction"?factionById.get(focus.id)?.name:entityName(focus.id)):"";
  const sheetStyle=!isPanel&&view==="map"?{height:sheetHeightFor(snap)+"px"} as CSSProperties:undefined;
  const detail=focus&&(focus.kind==="location"?<LocationDetail id={focus.id}/>:focus.kind==="episode"?<EpisodeDetail id={focus.id}/>:focus.kind==="character"?<CharacterDetail id={focus.id}/>:focus.kind==="connection"?<ConnectionDetail id={focus.id}/>:<GroupDetail kind={focus.kind} id={focus.id}/>);
- const page=view==="timeline"?<TimelineView/>:view==="people"?<PeopleView/>:view==="watch"?<WatchView errors={dataErrors}/>:<MapOverview year={year} seriesId={seriesId} locations={mapLocations} onOpenTimeline={()=>goView("timeline")}/>;
- const scrubber=<TimeScrubber year={year} onYear={y=>{setPlaying(false);setYear(y)}} playing={playing} onTogglePlay={()=>setPlaying(v=>!v)} seriesId={seriesId} activeCount={activeEpisodeCount} placeCount={mappedCount}/>;
+ const journeyControls:JourneyControls={
+  journeys,beats,cursor:journeyCursor,positions:journeyPositions,playing:journeyPlaying,
+  onTogglePlay:toggleJourneyPlay,
+  onStep:i=>{setJourneyPlaying(false);stepJourney(i)},
+  onStop:(ji,si)=>{const st=journeys[ji]?.stops[si];if(!st)return;const i=beats.findIndex(b=>b.rank===st.rank);if(i>=0){setJourneyPlaying(false);stepJourney(i)}},
+  onAdd:id=>{setJourneyIds(ids=>parseJourneyIds([...ids,id].join(",")));journeyFrame.current="all"},
+  onRemove:id=>setJourneyIds(ids=>ids.filter(x=>x!==id)),
+  spoilerSafe,onSpoilerSafe:setSpoilerSafe,
+  onShare:()=>void shareCurrent(),
+  onExit:()=>exitJourney()
+ };
+ const page=view==="map"&&journeyActive?<JourneyPanel c={journeyControls} showPlayer={isPanel}/>:view==="timeline"?<TimelineView/>:view==="people"?<PeopleView/>:view==="watch"?<WatchView errors={dataErrors}/>:<MapOverview year={year} seriesId={seriesId} locations={mapLocations} onOpenTimeline={()=>goView("timeline")}/>;
+ const scrubber=<TimeScrubber year={year} onYear={onYearScrub} playing={playing} onTogglePlay={()=>setPlaying(v=>!v)} seriesId={seriesId} activeCount={activeEpisodeCount} placeCount={mappedCount}/>;
  const bigDock=viewport.w>=1180&&viewport.h>=760;
  const watchedPct=Math.round(watched.size/Math.max(1,atlasData.episodes.length)*100);
 
@@ -623,17 +757,16 @@ export default function App(){
      <g ref={mapWorldRef} className="mapWorld">
       <MapGeography/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
-      {journeySequence.length>1&&<g className="journeyRoute" aria-hidden="true">
-       <path d={journeySequence.map((l,i)=>{const p=project(l.lat,l.lng);return (i===0?"M":"L")+p.x+" "+p.y}).join(" ")}/>
-      </g>}
+      {journeyActive&&<JourneyRoutes journeys={journeys} positions={journeyPositions} project={project} cursorKey={journeyCursor}/>}
       <g className="markers">{markerGroups.map(group=>{
        if(group.locations.length>1){
         const ids=group.locations.map(l=>l.id);
         const counts=new Map<string,number>();for(const l of group.locations)counts.set(l.seriesId,(counts.get(l.seriesId)??0)+1);
         const lead=[...counts.entries()].sort((a,b)=>b[1]-a[1])[0][0];
-        const fresh=group.locations.some(l=>l.year===year&&!journeyId);
+        const fresh=group.locations.some(l=>l.year===year&&!journeyActive);
+        const ahead=journeyActive&&group.locations.every(l=>!journeyReached.has(l.id));
         const ctx=group.locations.some(l=>contextLocationIds.has(l.id));
-        return <g key={"cluster-"+ids.join("-")} data-cluster-ids={ids.join(",")} className={"markerCluster"+(fresh?" fresh":"")+(ctx?" context":"")} transform={"translate("+group.x+" "+group.y+")"} role="button" tabIndex={0} aria-label={`${ids.length} places here — zoom in`} style={{color:seriesColor(lead)} as CSSProperties} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCluster(ids)}}}>
+        return <g key={"cluster-"+ids.join("-")} data-cluster-ids={ids.join(",")} className={"markerCluster"+(fresh?" fresh":"")+(ctx?" context":"")+(ahead?" ahead":"")} transform={"translate("+group.x+" "+group.y+")"} role="button" tabIndex={0} aria-label={`${ids.length} places here — zoom in`} style={{color:seriesColor(lead)} as CSSProperties} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCluster(ids)}}}>
          <g transform={"scale("+(1/zoom)+")"}>
           <circle className="markerHit" r={isMobileMap?24:18}/>
           {fresh&&<circle className="markerPulse" r="16"/>}
@@ -643,9 +776,10 @@ export default function App(){
         </g>;
        }
        const l=group.locations[0],p=project(l.lat,l.lng);
-       const isSelected=selectedLocation===l.id,isContext=contextLocationIds.has(l.id),isJourney=!!journeyId&&journeyLocationIds.has(l.id),isFresh=l.year===year&&!journeyId;
-       const showLabel=isSelected||isContext||zoom>(isMobileMap?2.3:1.5)||(!isMobileMap&&KEY_PLACES.has(l.name)&&zoom>1.2);
-       return <g key={l.id} data-location-id={l.id} className={"marker"+(isSelected?" selected":"")+(isContext?" context":"")+(isJourney?" journey":"")+(isFresh?" fresh":"")} transform={"translate("+p.x+" "+p.y+")"} style={{color:seriesColor(l.seriesId)} as CSSProperties} role="button" tabIndex={0} aria-label={`${l.name}, ${prettyType(l.type)}, ${SERIES_BY_ID[l.seriesId]?.short}, from ${l.year}`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openLocation(l.id)}}}>
+       const isSelected=selectedLocation===l.id,isContext=contextLocationIds.has(l.id),isJourney=journeyActive&&journeyLocationIds.has(l.id),isFresh=l.year===year&&!journeyActive;
+       const isAhead=isJourney&&!journeyReached.has(l.id),isHere=isJourney&&journeyCurrent.has(l.id);
+       const showLabel=isSelected||isContext||isHere||zoom>(isMobileMap?2.3:1.5)||(!isMobileMap&&KEY_PLACES.has(l.name)&&zoom>1.2);
+       return <g key={l.id} data-location-id={l.id} className={"marker"+(isSelected?" selected":"")+(isContext?" context":"")+(isJourney?" journey":"")+(isAhead?" ahead":"")+(isHere?" here":"")+(isFresh?" fresh":"")} transform={"translate("+p.x+" "+p.y+")"} style={{color:seriesColor(l.seriesId)} as CSSProperties} role="button" tabIndex={0} aria-label={`${l.name}, ${prettyType(l.type)}, ${SERIES_BY_ID[l.seriesId]?.short}, from ${l.year}`} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openLocation(l.id)}}}>
         <title>{l.name} · {prettyType(l.type)} · {SERIES_BY_ID[l.seriesId]?.short} · {l.year}+ · {l.certainty}</title>
         <g transform={"scale("+(1/zoom)+")"}>
          <circle className="markerHit" r={isMobileMap?20:13}/>
@@ -653,17 +787,23 @@ export default function App(){
          <circle className="markerBody" r={isSelected?13:10}/>
          <g className="markerGlyph"><AtlasIconGlyph name={locationIconName(l.type)} size={isSelected?16:13} x={isSelected?-8:-6.5} y={isSelected?-8:-6.5} strokeWidth={2.2}/></g>
          {showLabel&&<text className="markerLabel" x={isSelected?17:14} y="4">{l.name}</text>}
-         {isJourney&&journeyStops.has(l.id)&&<g className="journeyStop" transform="translate(10 -10)"><circle r="7.5"/><text textAnchor="middle" dominantBaseline="central">{journeyStops.get(l.id)}</text></g>}
+         {isJourney&&!isAhead&&journeyStops.has(l.id)&&<g className="journeyStop" transform="translate(10 -10)"><circle r="7.5"/><text textAnchor="middle" dominantBaseline="central">{journeyStops.get(l.id)}</text></g>}
         </g>
        </g>;
       })}</g>
+      {journeyActive&&<JourneyAvatars journeys={journeys} positions={journeyPositions} project={project} zoom={zoom}/>}
      </g>
     </svg>
    </div>
 
    {/* Floating map chrome */}
    <div className="mapTop" data-map-chrome="top">
-    {journeyId?<div className="journeyBanner" style={{"--c":seriesColor(characterById.get(journeyId)?.seriesIds?.[0])} as CSSProperties}><Icon name="route"/><span><small>Journey</small><b>{journeyName}</b></span><em>{mappedCount} places</em><button className="iconBtn ghost" onClick={()=>setJourneyId(null)} aria-label="Exit journey view"><Icon name="close"/></button></div>
+    {journeyActive?<div className="journeyBanner">
+     <Icon name="route"/>
+     <span><small>{journeys.length>1?"Comparing journeys":"Journey"}{spoilerSafe?" · spoiler-safe":""}</small><b>{journeys.map((j,ji)=><i key={j.characterId} className="jname" style={{"--jc":JOURNEY_COLORS[ji]} as CSSProperties}>{j.name}</i>)}</b></span>
+     <em>{journeyReached.size}/{journeyLocationIds.size}</em>
+     <button className="iconBtn ghost" onClick={()=>exitJourney()} aria-label="Exit journey view"><Icon name="close"/></button>
+    </div>
     :<div className="seriesRow" role="group" aria-label="Filter map by series">
      <button className={series==="ALL"?"active":""} aria-pressed={series==="ALL"} onClick={()=>setSeries("ALL")}>All series</button>
      {SERIES_KEYS.map(k=><button key={k} className={series===k?"active":""} aria-pressed={series===k} style={{"--c":META[k].color} as CSSProperties} onClick={()=>setSeries(s=>s===k?"ALL":k)}><i/>{META[k].short}</button>)}
@@ -679,7 +819,7 @@ export default function App(){
     </div>}
    </div>
    {isPanel&&<div className={"dock"+(bigDock?"":" dockMini")} data-map-chrome="bottom">
-    {bigDock?<AtlasTimelineDock year={year} onYearChange={y=>{setPlaying(false);setYear(y)}} series={series} onEpisode={id=>showEpisodeOnMap(id)} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>:scrubber}
+    {bigDock?<AtlasTimelineDock year={year} onYearChange={onYearScrub} series={series} onEpisode={id=>showEpisodeOnMap(id)} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>:scrubber}
    </div>}
 
    {clusterIds&&<div className="popover clusterSheet" role="dialog" aria-labelledby="cluster-title">
@@ -694,8 +834,9 @@ export default function App(){
      {hasDetail?<div className="detailBar">
       {navStack.length>0?<button className="iconBtn ghost" onClick={goBack} aria-label="Back"><Icon name="back"/></button>:<span className="detailBarSpacer"/>}
       <div className="detailBarTitle"><small>{FOCUS_LABEL[focus!.kind]}</small><b>{focusTitle}</b></div>
+      {QUERY_KEYS[focus!.kind]&&<button className="iconBtn ghost" onClick={()=>void shareCurrent()} aria-label="Share"><Icon name="share"/></button>}
       <button className="iconBtn ghost" onClick={closeDetail} aria-label="Close details"><Icon name="close"/></button>
-     </div>:view==="map"&&!isPanel?scrubber:null}
+     </div>:view==="map"&&!isPanel?(journeyActive?<JourneyPlayer c={journeyControls}/>:scrubber):null}
     </header>
     <div className="sheetBody" ref={sheetBodyRef}>
      <ErrorBoundary key={focus?focus.kind+focus.id:view} onReset={()=>{closeDetail();goView("map")}}>
@@ -715,6 +856,7 @@ export default function App(){
 
   {!isPanel&&<nav className="tabbar" ref={tabbarRef} aria-label="Atlas sections">{TABS.map(t=><button key={t.view} className={view===t.view?"active":""} aria-current={view===t.view?"page":undefined} onClick={()=>goView(t.view)}><Icon name={t.icon}/><span>{t.label}</span>{t.view==="watch"&&watched.size>0&&<em>{watchedPct}%</em>}</button>)}</nav>}
 
+  {toast&&<div className="toast" role="status">{toast}</div>}
   {searchOpen&&<SearchOverlay onClose={()=>setSearchOpen(false)} onPick={onSearchPick}/>}
  </div>
  </AtlasContext.Provider>;

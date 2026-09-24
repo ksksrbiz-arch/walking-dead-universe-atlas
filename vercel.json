@@ -4,6 +4,22 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/j/:ids",
+      "destination": "/api/share?kind=j&id=:ids"
+    },
+    {
+      "source": "/p/:id",
+      "destination": "/api/share?kind=p&id=:id"
+    },
+    {
+      "source": "/e/:id",
+      "destination": "/api/share?kind=e&id=:id"
+    },
+    {
+      "source": "/c/:id",
+      "destination": "/api/share?kind=c&id=:id"
+    },
+    {
       "source": "/api/atlas/bookmarks",
       "destination": "https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-bookmarks"
     },

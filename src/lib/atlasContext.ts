@@ -12,6 +12,7 @@ export type AtlasActions={
  showEpisodeOnMap:(id:string)=>void;
  showLocationOnMap:(id:string)=>void;
  showCharacterJourney:(id:string)=>void;
+ startJourney:(ids:string[])=>void;
  showConnectionOnMap:(id:string)=>void;
  setYear:(year:number)=>void;
  year:number;

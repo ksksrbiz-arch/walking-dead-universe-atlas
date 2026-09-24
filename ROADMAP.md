@@ -32,7 +32,8 @@
 - [x] Event overlays (universe events with documented geography)
 - [x] Geographic filters (map layers: all/settlements/facilities/landmarks/infrastructure/regions)
 - [x] Mobile interaction model — pan/zoom/tap verified via scripted touch-gesture + hit-testing regression across phone, tablet portrait/landscape, and desktop (see PR #14)
-- [ ] Route/travel-path overlays (character/episode journeys expose geography today; not yet rendered as routes)
+- [x] Character journey overlays — story-order playback, per-leg evidence episodes, compare up to 3, crossings, spoiler-safe (routes are "next recorded place", never invented travel paths)
+- [x] Shareable deep links with preview cards (`/j/`, `/p/`, `/e/`, `/c/`)
 
 ## Phase 4 — Universe graph
 - [x] Character graph

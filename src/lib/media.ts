@@ -4,7 +4,8 @@ import fandomCanonical from "../../data/enrichment/fandom-canonical.json";
 import mediaData from "../../data/media.json";
 import {observeImageError} from "./performance";
 
-const MEDIA_PROXY=import.meta.env.VITE_ATLAS_MEDIA_PROXY||"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
+// `?.`: this module is also bundled into the share/OG function (no Vite env there).
+const MEDIA_PROXY=import.meta.env?.VITE_ATLAS_MEDIA_PROXY||"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
 // source URL -> locally generated resized copies. A plain string is a single
 // local file (legacy cache-amc-media output); an object maps width -> path
 // (media:resize output, used for AMC sources whose CDN cannot resize).
@@ -68,7 +69,7 @@ export function resolveCharacterImage(id:string,name:string,seriesIds?:string[],
  return {image:"",method:"none"};
 }
 
-function isFandomImage(source:string){
+export function isFandomImage(source:string){
   return /^https?:\/\/(?:static\.wikia\.nocookie\.net|vignette\.wikia\.nocookie\.net|images\.wikia\.nocookie\.net)\//i.test(source);
 }
 const isAmcImage=(source:string)=>/^https?:\/\/(?:images|dimages)\.cds\.amcn\.com\//i.test(source);
