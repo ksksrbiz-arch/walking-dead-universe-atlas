@@ -944,9 +944,12 @@ function WatchOrderContent({episodes,watched,onToggleWatched,onResetWatched,onEp
   <div className="sectionTitle">FULL ORDER <span>{episodes.length}</span></div>
   <div className="watchOrderList">{episodes.map(e=>{
    const isWatched=watched.has(e.id);
+   const em=(episodeMedia as any).episodes?.[e.id];
+   const thumb=em?.image;
    return <div className={"watchOrderRow"+(isWatched?" isWatched":"")} key={e.id}>
     <button className="watchOrderCheck" aria-pressed={isWatched} aria-label={isWatched?`Mark ${e.title} unwatched`:`Mark ${e.title} watched`} onClick={()=>onToggleWatched(e.id)}>{isWatched?"✓":""}</button>
     <button className="watchOrderMeta" onClick={()=>onEpisode(e.id)}>
+     {thumb?<img className="watchOrderThumb" src={atlasImageUrl(thumb,120)} onError={e=>onAtlasImageError(e,thumb)} loading="lazy" decoding="async" alt=""/>:<span className="watchOrderThumb watchOrderThumbEmpty" aria-hidden="true"/>}
      <span className="watchOrderSeq">{e.sequence}</span>
      <span className="watchOrderInfo"><small>{SERIES_BY_ID[e.seriesId]?.short} · S{String(e.seasonId).slice(-2)}E{String(e.episodeNumber).padStart(2,"0")} · {e.start}{e.chronologyStatus!=="anchored"?` · ${e.chronologyStatus.replaceAll("-"," ").toUpperCase()}`:""}</small><b>{e.title}</b></span>
      <Icon name="chevron"/>

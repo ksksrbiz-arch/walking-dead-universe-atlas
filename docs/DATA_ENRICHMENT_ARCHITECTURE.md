@@ -130,4 +130,22 @@ the page" for locations MediaWiki has no page image for (e.g. a page whose only 
 an unrelated character photo) — showing the wrong photo for an entity is worse than the generic series
 key art fallback. Re-run `npm run media:manifest` afterward to confirm the new entries verify, and rerun
 `fill-locations` again later as more Fandom pages gain a proper lead image; it's idempotent and only
-touches locations still on the fallback tier.
+touches locations still on the fallback tier. It also has a second, weaker resolution tier (Fandom's
+own full-text search, filtered to results that contain the location's name) for locations with no
+direct-title match; every automated hit from that tier should still be sanity-checked by hand once
+before trusting it going forward — it has already caught two wrong-canon/wrong-page matches (see
+`EXCLUDE_TITLES` and the comic-canon filter in the script).
+
+**What "media" does and doesn't cover:** every surface above is a photograph associated with a
+character, location, episode or series (portraits, stills, key art). There is no separate "logo" asset
+type in this data model — no per-network/per-series logo image exists anywhere in the app; what reads
+as branding is text (`◈ TWDU ATLAS`) or a colored accent, not an image file, so there is nothing for the
+manifest to check there. Likewise "maps" here means the interactive SVG map itself (topojson data +
+marker/coordinate data), not a raster image — its correctness is a data/rendering question covered in
+`docs/ATLAS_ARCHITECTURE.md` and `docs/MOBILE_MAP_GESTURE_ARCHITECTURE.md`, not the media pipeline.
+
+**Known content-coverage gap, not a bug:** `data/episodeMedia.json` has zero episodes with a populated
+`gallery` array (every episode has at most one verified still). `EpisodeDetail`'s own "VISUAL ARCHIVE"
+strip already handles this correctly — it only renders when an episode has more than one image — so
+there's no broken UI, just an unfilled dimension (multiple stills per episode) that would need a real
+per-episode gallery ingestion pass to fill in.
