@@ -32,6 +32,14 @@ const DRY_RUN = process.argv.includes("--dry-run");
 
 const readJson = async (url) => JSON.parse(await readFile(url, "utf8"));
 
+// Known-bad matches, found by manually checking search-fallback results: real Fandom
+// pages that share a location's name but are the wrong canon (this atlas is TV-canon
+// only) or the wrong kind of page (a faction/personnel page, not the place itself).
+// Not detectable by the name-substring filter alone, so they're excluded explicitly.
+const EXCLUDE_TITLES = new Set([
+  "Civic Republic Military", // the faction, not the "Civic Republic" place entity
+]);
+
 // Known cases where the plain canonical name isn't the actual Fandom page
 // title. Mirrors (and extends) the CURATED_ALIASES map in
 // scripts/reconcile-fandom-matches.mjs for locations specifically.
@@ -58,6 +66,33 @@ const TITLE_HINTS = {
 function titleCandidates(id, name) {
   const hints = TITLE_HINTS[id] || [];
   return [...new Set([...hints, name, `${name} (TV Series)`, `${name} (TV Universe)`])];
+}
+
+function normalize(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+// Fandom's own full-text search, used only as a fallback once direct title guesses fail.
+// Search can return anything vaguely related (a character page, a random article that
+// mentions the location once) so a hit is only trusted when the location's own name
+// actually appears in the candidate title - "Madrid" search returning a Daryl Dixon
+// character page is exactly the false-positive this guards against.
+async function searchCandidateTitles(name) {
+  const url = new URL(API);
+  url.searchParams.set("action", "query");
+  url.searchParams.set("format", "json");
+  url.searchParams.set("list", "search");
+  url.searchParams.set("srlimit", "5");
+  url.searchParams.set("srsearch", name);
+  const data = await fetchJson(url.toString());
+  const nameNorm = normalize(name);
+  return (data?.query?.search || [])
+    .map((r) => r.title)
+    .filter((title) => normalize(title).includes(nameNorm))
+    // This atlas is TV-canon only (see AGENTS.md / docs/DATA_ENRICHMENT_ARCHITECTURE.md) -
+    // a comic-only page is never a valid image source for a TV-universe location.
+    .filter((title) => !/\(comic/i.test(title))
+    .filter((title) => !EXCLUDE_TITLES.has(title));
 }
 
 function fetchJson(url) {
@@ -113,6 +148,7 @@ async function main() {
     if (!gapIds.has(loc.id)) continue;
     const candidates = titleCandidates(loc.id, loc.name);
     let found = null;
+    let allTried = [...candidates];
     for (const title of candidates) {
       try {
         const hit = await findPageImage(title);
@@ -122,7 +158,19 @@ async function main() {
       }
     }
     if (!found) {
-      results.push({ id: loc.id, name: loc.name, status: "no-page-image", triedTitles: candidates });
+      try {
+        const searchTitles = await searchCandidateTitles(loc.name);
+        allTried = [...allTried, ...searchTitles];
+        for (const title of searchTitles) {
+          const hit = await findPageImage(title);
+          if (hit) { found = hit; break; }
+        }
+      } catch {
+        // fall through to no-page-image below
+      }
+    }
+    if (!found) {
+      results.push({ id: loc.id, name: loc.name, status: "no-page-image", triedTitles: allTried });
       continue;
     }
     const proxyUrl = new URL(MEDIA_PROXY);
@@ -146,8 +194,6 @@ async function main() {
     return;
   }
 
-  if (!resolved.length) return;
-
   media.places = media.places || {};
   for (const r of resolved) {
     media.places[r.id] = {
@@ -160,8 +206,23 @@ async function main() {
     };
     delete media.places[r.id].error;
   }
+  // Record the negative result too - a location this script checked and found nothing for
+  // should read differently from one nobody has looked at yet ("needs-ingestion"). Never
+  // overwrites an existing image/status a human or an earlier run already set.
+  const noImage = results.filter((r) => r.status === "no-page-image" || r.status === "image-unreachable");
+  for (const r of noImage) {
+    const existing = media.places[r.id];
+    if (existing?.image) continue;
+    media.places[r.id] = {
+      ...existing,
+      kind: "place",
+      status: "no-verified-image",
+      note: `scripts/fill-location-fandom-images.mjs found no usable Fandom page image (tried: ${(r.triedTitles || []).join(", ") || "n/a"}). Re-check if the location gains a dedicated wiki page.`,
+      checkedAt: new Date().toISOString(),
+    };
+  }
   await writeFile(new URL("media.json", DATA), JSON.stringify(media, null, 2) + "\n");
-  console.log(`\nWrote ${resolved.length} curated location image(s) to data/media.json`);
+  console.log(`\nWrote ${resolved.length} curated location image(s) and ${noImage.length} explicit no-verified-image record(s) to data/media.json`);
 }
 
 main().catch((error) => { console.error(error); process.exitCode = 1; });

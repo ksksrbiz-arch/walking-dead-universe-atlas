@@ -1007,6 +1007,8 @@ button.miniTimelineItem{cursor:pointer}
 .timelineCards .episodeRow>span em{font-size:7px}
 .mediaIndicator{width:5px;height:5px;border-radius:50%;background:#596668;opacity:.7}
 .mediaIndicator.verified{background:#55c59a;opacity:1;box-shadow:0 0 0 3px #55c59a1c}
+.mediaIndicator.fallback{background:#d4a64b;opacity:.85}
+.locationCard .mediaIndicator{position:absolute;top:8px;right:8px}
 @media(max-width:699px){
   .timelineIntro h3{font-size:16px}
   .timelineSnapshot{grid-template-columns:1fr 1fr}
