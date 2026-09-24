@@ -69,6 +69,7 @@ const episodeBySeason=new Map();
 for(const e of episodes){if(!episodeBySeason.has(e.seasonId))episodeBySeason.set(e.seasonId,[]);episodeBySeason.get(e.seasonId).push(e)}
 for(const [seasonId,list] of episodeBySeason){const sorted=[...list].sort((a,b)=>a.episodeNumber-b.episodeNumber);const nums=sorted.map(e=>e.episodeNumber);const d=duplicate(nums.map(n=>({id:String(n)})));if(d.length)fail.push(`Season ${seasonId}: duplicate episode numbers ${d.join(", ")}`);for(let i=1;i<sorted.length;i++)if(sorted[i].airDate<sorted[i-1].airDate)fail.push(`Season ${seasonId}: air-date inversion ${sorted[i-1].id} -> ${sorted[i].id}`)}
 
+const characterStatuses=new Set(["alive","deceased","unknown"]);
 for(const c of characters){
   for(const sid of c.seriesIds??[])if(!sets.series.has(sid))fail.push(`Character ${c.id}: unknown series ${sid}`);
   const actualEpisodes=episodes.filter(e=>(e.characterIds??[]).includes(c.id));
@@ -78,6 +79,11 @@ for(const c of characters){
   if(missingSeries.length)fail.push(`Character ${c.id}: episode data uses undeclared series ${missingSeries.join(", ")}`);
   if(unusedSeries.length)warn.push(`Character ${c.id}: declared series without episode presence ${unusedSeries.join(", ")}`);
   if(Number.isInteger(c.episodeCount)&&c.episodeCount!==actualEpisodes.length)fail.push(`Character ${c.id}: declared episodeCount ${c.episodeCount} vs episode registry ${actualEpisodes.length}`);
+  if(c.status!==undefined&&!characterStatuses.has(c.status))fail.push(`Character ${c.id}: invalid status ${c.status}`);
+  if(c.deathEpisodeId!==undefined){
+    if(c.status!=="deceased")fail.push(`Character ${c.id}: deathEpisodeId set without status deceased`);
+    if(!episodeIds.has(c.deathEpisodeId))fail.push(`Character ${c.id}: deathEpisodeId references unknown episode ${c.deathEpisodeId}`);
+  }
 }
 for(const l of locations){if(!sets.series.has(l.seriesId))fail.push(`Location ${l.id}: unknown series ${l.seriesId}`);if(!Number.isFinite(Number(l.lat))||!Number.isFinite(Number(l.lng)))fail.push(`Location ${l.id}: invalid coordinates`);if(Number(l.lat)<-90||Number(l.lat)>90||Number(l.lng)<-180||Number(l.lng)>180)fail.push(`Location ${l.id}: coordinates out of range`)}
 for(const l of locations){

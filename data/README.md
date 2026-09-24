@@ -71,3 +71,26 @@ knowledge. Most universe events are institutional or too broad to name a
 person (`monument-day`, `crm-omaha-destruction`) and correctly have no
 `characterIds`; leave those empty rather than guessing. `scripts/audit-atlas.mjs`
 validates every `characterIds`/`locationIds` entry against the real registries.
+
+## Character status & death provenance
+
+Every `data/characters.json` record carries `status` (`alive`/`deceased`/`unknown`),
+`statusCertainty` (`confirmed`), `statusSourceUrl`, and `statusSyncedAt` — sourced
+directly from that character's own Walking Dead Wiki infobox `|status = ...` field
+(fetched via the MediaWiki API, `action=parse&prop=wikitext`, not scraped or
+guessed). A `deceased` character additionally carries `deathEpisodeId` when the
+infobox's `|death episode = ...` wikilink matched a real `data/episodes.json`
+title — resolved 39/39 for the 2026-09-24 sync; an unresolved match would be
+left off rather than guessed.
+
+`status: unknown` means the character's fate is itself the documented, unresolved
+canon fact (e.g. Morgan Jones as of the synced revision) — not a data gap.
+
+This is a point-in-time sync of the wiki's stated status, not a live feed: a
+character's status can change as new episodes air. Re-running the same
+MediaWiki API extraction and diffing against the stored `statusSyncedAt` is
+how to refresh it — never hand-edit `status` without also updating
+`statusSourceUrl`/`statusSyncedAt` to match.
+
+`scripts/audit-atlas.mjs` validates the `status` enum and that `deathEpisodeId`
+(when present) references a real episode.
