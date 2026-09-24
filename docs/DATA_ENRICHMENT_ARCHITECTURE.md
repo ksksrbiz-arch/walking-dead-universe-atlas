@@ -87,12 +87,16 @@ There are two separate media systems in this repo. Only one of them renders imag
 **Live path (this is what actually serves every character/location/episode image):**
 
 `data/media.json` (characters/places/series) and `data/episodeMedia.json` (episodes) hold curated,
-manually-verified image URLs — checked first. `fandomEntityImage()` in `src/App.tsx` is the fallback:
-it scores every image candidate in `data/enrichment/fandom-canonical.json` against the entity name and
-picks the best match. Series key art is the last-resort fallback for locations/characters with no
-curated or Fandom match. Whatever URL comes out of that chain goes through `atlasImageUrl()`
-(`src/lib/media.ts`), which proxies any Fandom (`static.wikia.nocookie.net`) or AMC
-(`images.cds.amcn.com`) URL through a Supabase Edge Function
+manually-verified image URLs — checked first. `fandomEntityImage()` (`src/lib/media.ts`, also used by
+`src/components/EntityGraphView.tsx`) is the fallback: it scores every image candidate in
+`data/enrichment/fandom-canonical.json` against the entity name and picks the best match.
+`resolveCharacterImage()` (same file) is the one place that priority chain is implemented for
+characters — every surface that renders a character image (people grid, search, character dossier,
+the relationship graph, `ConnectionDetail`'s endpoint cards) calls it rather than re-deriving the
+priority itself, specifically so those surfaces can't drift out of sync with each other again. Series
+key art is the last-resort fallback for locations/characters with no curated or Fandom match. Whatever
+URL comes out of that chain goes through `atlasImageUrl()` (`src/lib/media.ts`), which proxies any
+Fandom (`static.wikia.nocookie.net`) or AMC (`images.cds.amcn.com`) URL through a Supabase Edge Function
 (`https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media`) for resizing/caching, and passes
 `/media/...` static paths straight through to Vercel's static file serving from `public/`.
 `src/generated/media-local.json` (an in-repo cache of already-downloaded assets) is currently empty, so
@@ -149,3 +153,41 @@ marker/coordinate data), not a raster image — its correctness is a data/render
 strip already handles this correctly — it only renders when an episode has more than one image — so
 there's no broken UI, just an unfilled dimension (multiple stills per episode) that would need a real
 per-episode gallery ingestion pass to fill in.
+
+## Standing media validation workflow
+
+This is the repeatable process referenced above, spelled out end to end. Run it whenever
+`data/media.json`, `data/episodeMedia.json`, or the Fandom canonical data changes, and periodically
+otherwise — AMC's CDN and Fandom's own asset URLs both go stale on their own, independent of anything
+this repo does.
+
+1. **`npm run media:manifest`** (`scripts/build-media-manifest.mjs`). Rebuilds
+   `data/enrichment/media-manifest.json` by replicating the live resolution order for every character,
+   location, episode and series, and makes a real HTTP request through the actual delivery path for
+   each one (not an upload count, not a deployment status). **Exits non-zero if anything comes back
+   `broken`** — a real URL that used to resolve and no longer does — so a broken asset can gate a CI
+   step or a release checklist instead of relying on someone remembering to read the console output.
+   An `unresolved` or `series-keyart-fallback`/`fandom-heuristic` entry is not a failure; it's a
+   coverage gap, and the manifest's `byMethod` breakdown tells you how big.
+2. **`npm run media:fill-locations`** (`scripts/fill-location-fandom-images.mjs`), only for locations
+   still on the fallback tier. Tries Fandom's own page image first, then its full-text search as a
+   weaker fallback, verifies each hit through the live delivery path before writing it, and writes an
+   explicit `"no-verified-image"` record (with what was tried and when) for anything it still can't
+   resolve — so "nobody's checked this yet" and "this was checked and there's nothing" never look the
+   same in the data.
+3. Re-run step 1 to confirm the write from step 2 actually verifies, and to catch anything it might
+   have broken.
+4. For a character or an isolated location/episode that step 2 doesn't cover, resolve it by hand the
+   same way that script does: query the Fandom MediaWiki API directly
+   (`action=query&prop=pageimages&piprop=original&titles=<title>`), verify the result loads through
+   `https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media?url=<encoded source>` (or that a
+   `/media/...` path exists under `public/`), then add it to `data/media.json` /
+   `data/episodeMedia.json` as curated data with a `sourcePage` and a note — never invent an image for
+   an entity nothing confirms, and never accept a same-named-but-wrong-canon or wrong-kind-of-page match
+   without checking the actual image first (this has already happened twice: a comic-canon page for a
+   TV location, and a faction's page for a place).
+
+This is deliberately **not** wired into the Vercel build. Hundreds of requests to third-party CDNs on
+every deploy would make builds slower and occasionally fail for reasons that have nothing to do with
+the code being deployed (a transient AMC/Fandom outage blocking an otherwise-safe deploy). Run it as
+its own step, not as a build gate.

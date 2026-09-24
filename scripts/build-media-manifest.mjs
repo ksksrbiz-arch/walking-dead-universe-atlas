@@ -230,6 +230,10 @@ async function main() {
   if (broken.length) {
     console.log(`\n${broken.length} broken/unreachable asset(s):`);
     for (const b of broken.slice(0, 30)) console.log(`  [${b.entityType}] ${b.id} (${b.name}) -> ${b.httpStatus ?? "?"} ${b.resolvedSource}`);
+    // A real URL that stopped resolving is exactly the "asset silently disappeared" case this
+    // manifest exists to catch - fail the run so it can gate a deploy/CI step, same convention
+    // as scripts/audit-atlas.mjs.
+    process.exitCode = 1;
   }
 }
 
