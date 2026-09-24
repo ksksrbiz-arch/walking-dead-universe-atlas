@@ -71,16 +71,16 @@
       "id": "wikidata",
       "name": "Wikidata",
       "kind": "structured-secondary",
-      "status": "planned",
+      "status": "evaluated-low-priority",
       "baseUrl": "https://www.wikidata.org",
       "capabilities": [
         "entity-resolution",
         "actors",
-        "external-identifiers",
-        "locations"
+        "external-identifiers"
       ],
-      "priority": 30,
-      "notes": "Use for entity reconciliation and external identifiers, not as the primary TWDU canon source."
+      "priority": 15,
+      "evaluatedAt": "2026-09-24",
+      "notes": "Scoped before building any reconciliation pipeline against it (see ROADMAP.md), via wbsearchentities + the public SPARQL endpoint (query.wikidata.org). Findings: (1) Coverage is flagship-TWD-only and partial — 84 distinct items link to the flagship show (wd:Q232737) via 'present in work' (P1441); the other 7 series in this atlas were not separately queried but are expected to be far thinner. (2) Comic-vs-TV-canon ambiguity is real and would need the same manual disambiguation this project has already had to do for Fandom matches: Wikidata carries Rick Grimes as two separate items (comic and TV), distinguished only by a Fandom-slug property (P6262, e.g. 'walkingdead:Rick_Grimes_(TV_Series)' vs '..._(Comic_Series)') that's only populated on ~19% (16/84) of the flagship-show items anyway. (3) External-ID properties (P345 IMDb character ID) exist on individual entity pages (confirmed directly on Rick Grimes' item, Q605417) but did not appear via the public SPARQL endpoint in the same session — the query service lags behind live edits, which matters for anything built to run unattended. (4) No structured data for this atlas's actual differentiator: in-universe fictional places (Alexandria the community, Hilltop, Terminus, ...) aren't modeled in Wikidata as geographic entities, so 'locations' was dropped from capabilities above. Net: the two things Wikidata would add (a partial, ambiguous Fandom-match cross-check for a sliver of characters; real-world actor trivia this atlas doesn't display) don't justify entity-reconciliation infrastructure right now. Revisit only if the product scope grows to include real-world cast/production info, or if a specific canon-collision needs resolving that only Wikidata can settle."
     }
   ]
 }
