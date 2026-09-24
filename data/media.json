@@ -2,33 +2,249 @@
   "version": 2,
   "policy": "Prefer official AMC/AMC Networks media when a stable public asset URL is verified. Keep sourcePage for provenance. Missing episode assets use series-level AMC key art as an explicitly labeled fallback until an episode-specific asset is ingested.",
   "series": {
-    "twd": {"name":"The Walking Dead","keyArt":"https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg","sourcePage":"https://www.amc.com/shows/the-walking-dead"},
-    "ftwd": {"name":"Fear the Walking Dead","keyArt":"https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg","sourcePage":"https://www.amc.com/shows/fear-the-walking-dead"},
-    "tales": {"name":"Tales of the Walking Dead","keyArt":"https://images.cds.amcn.com/amcn/amcplus/series_tms_SH043399190000_tales-of-the-walking-dead__img_wide_16x9.jpg","sourcePage":"https://www.amc.com/shows/the-walking-dead-tales"},
-    "wb": {"name":"The Walking Dead: World Beyond","keyArt":"https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg","sourcePage":"https://www.amc.com/shows/the-walking-dead-world-beyond"},
-    "owl": {"name":"The Walking Dead: The Ones Who Live","keyArt":"https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg","sourcePage":"https://www.amc.com/shows/the-walking-dead-the-ones-who-live"},
-    "daryl": {"name":"The Walking Dead: Daryl Dixon","keyArt":"https://images.cds.amcn.com/amcn/AMC_DD_S3_SDCC_Desktop_Web_Hero_3200x1440.jpg","sourcePage":"https://www.amc.com/shows/the-walking-dead-daryl-dixon"},
-    "dead": {"name":"The Walking Dead: Dead City","keyArt":"https://images.cds.amcn.com/amcn/tve/DeadCity_308_ultrawide.jpg","sourcePage":"https://www.amc.com/shows/the-walking-dead-dead-city"}
+    "twd": {
+      "name": "The Walking Dead",
+      "keyArt": "https://images.cds.amcn.com/amcn/tve/TWDS11C_02_3200x1440_DesktopWebHero.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead"
+    },
+    "ftwd": {
+      "name": "Fear the Walking Dead",
+      "keyArt": "https://images.cds.amcn.com/amcn/tve/AMC_FTWDS8B_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/fear-the-walking-dead"
+    },
+    "tales": {
+      "name": "Tales of the Walking Dead",
+      "keyArt": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH043399190000_tales-of-the-walking-dead__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-tales"
+    },
+    "wb": {
+      "name": "The Walking Dead: World Beyond",
+      "keyArt": "https://images.cds.amcn.com/amcn/amcplus/series_tms_SH034305910000_walking-dead-world-beyond-v2__img_wide_16x9.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-world-beyond"
+    },
+    "owl": {
+      "name": "The Walking Dead: The Ones Who Live",
+      "keyArt": "https://images.cds.amcn.com/amcn/AMC_TWD_TOWL_Desktop_Web_Hero_3200x1440-rev.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-the-ones-who-live"
+    },
+    "daryl": {
+      "name": "The Walking Dead: Daryl Dixon",
+      "keyArt": "https://images.cds.amcn.com/amcn/AMC_DD_S3_SDCC_Desktop_Web_Hero_3200x1440.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-daryl-dixon"
+    },
+    "dead": {
+      "name": "The Walking Dead: Dead City",
+      "keyArt": "https://images.cds.amcn.com/amcn/tve/DeadCity_308_ultrawide.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-dead-city"
+    }
   },
   "episodes": {
-    "dead-s03-e01": {"image":"https://images.cds.amcn.com/amcn/tve/amc/DeadCity_301.jpg","sourcePage":"https://www.amc.com/shows/the-walking-dead-dead-city/episodes/season-3-trillium--1075484","kind":"official-episode-image"}
+    "dead-s03-e01": {
+      "image": "https://images.cds.amcn.com/amcn/tve/amc/DeadCity_301.jpg",
+      "sourcePage": "https://www.amc.com/shows/the-walking-dead-dead-city/episodes/season-3-trillium--1075484",
+      "kind": "official-episode-image"
+    }
   },
   "places": {
-    "atlanta":{"kind":"place","status":"needs-ingestion"},
-    "king-county":{"kind":"place","status":"needs-ingestion"},
-    "alexandria":{"kind":"place","status":"needs-ingestion"},
-    "hilltop":{"kind":"place","status":"needs-ingestion"},
-    "sanctuary":{"kind":"place","status":"needs-ingestion"},
-    "manhattan":{"kind":"place","status":"needs-ingestion"},
-    "paris":{"kind":"place","image":"https://images.cds.amcn.com/amcn/tve/TWDU_GoesToTheBigCity_AMCTalk_1920x1080.jpg","sourcePage":"https://www.amc.com/blogs/the-walking-dead-universe-turns-to-the-big-city--1064220"},
-    "omaha":{"kind":"place","status":"needs-ingestion"}
+    "atlanta": {
+      "kind": "place",
+      "status": "verified",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/b/b4/The_Walking_Dead_Atlanta_Scene.jpg/revision/latest?cb=20260606110125",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Atlanta%2C_Georgia_(TV_Universe)",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "king-county": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "alexandria": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "hilltop": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "sanctuary": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "manhattan": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "paris": {
+      "kind": "place",
+      "image": "https://images.cds.amcn.com/amcn/tve/TWDU_GoesToTheBigCity_AMCTalk_1920x1080.jpg",
+      "sourcePage": "https://www.amc.com/blogs/the-walking-dead-universe-turns-to-the-big-city--1064220"
+    },
+    "omaha": {
+      "kind": "place",
+      "status": "needs-ingestion"
+    },
+    "los-angeles": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/6/61/Los_Angeles_Flag.jpg/revision/latest?cb=20250204104036",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Los_Angeles%2C_California",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "kingdom": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/5/5a/The_Kingdom_%28TV_Series%29.png/revision/latest?cb=20160722204139",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/The_Kingdom_(TV_Series)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "cdc-atlanta": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/f/f4/CDC_outside.jpg/revision/latest?cb=20230420202327",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Center_for_Disease_Control_(TV_Universe)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "hospitals-atlanta": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/3/3c/562315_10101113010055947_1691391246_n.jpg/revision/latest?cb=20131019173036",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Harrison_Memorial_Hospital_(TV_Universe)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "prison": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/a/a4/Litprison.jpg/revision/latest?cb=20221230015002",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/West_Georgia_Correctional_Facility_(TV_Series)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "oceanside": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/6/64/Oceanside_entrance.jpg/revision/latest?cb=20230820173405",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Oceanside_(TV_Series)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "campus-colony": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/5/54/Feast_Day.jpg/revision/latest?cb=20230327194844",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Campus_Colony_of_Omaha",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "bricks": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/7/7d/Hilltop_Colony_%28Dead_City%29.jpg/revision/latest?cb=20230623221915",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/The_Bricks",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "austin": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/5/5c/Season_eleven_austin.png/revision/latest?cb=20220215203444",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Austin_(TV_Series)",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "la-dona-house": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/b/b5/ToTWD_1x06_Eric_and_Idalia.jpg/revision/latest?cb=20220606191552",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/La_Do%C3%B1a_Alma's_House",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "chattahoochee-river": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/2/27/ToTWD_1x04_Walker_Moseley.jpg/revision/latest?cb=20220907175236",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Chattahoochee_River",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "pirates-dock": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/0/06/Season_two_Connor%27s_Boat.png/revision/latest?cb=20160518233133",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/The_Pirates'_Dock",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "geary-family-home": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/d/d8/FTWD_2x02_Melissa_and_Madison.jpg/revision/latest?cb=20250511073822",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Geary_Family_Home",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "abigail-home-experience": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/7/7a/FTWD_2x04_On_the_Move.jpg/revision/latest?cb=20250511075536",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Abigail_Home_Experience",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "mexican-church": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/3/34/8_SC_Body_pile.jpg/revision/latest?cb=20160519175423",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Mexican_Church",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "abigail-vineyard": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/4/4b/AV.PNG/revision/latest?cb=20200621134815",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Abigail_Vineyard",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "rehabilitation-center": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/4/41/RC1.PNG/revision/latest?cb=20210508072846",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Rehabilitation_Center",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "salazar-family-home": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/5/57/FTWD_2x12_Good_Ol%27_Days.jpg/revision/latest?cb=20250508032138",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Salazar_Family_Home",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    },
+    "military-fuel-depot": {
+      "kind": "place",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/5/59/1.2609.jpg/revision/latest?cb=20180331234055",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Military_Fuel_Depot",
+      "status": "verified",
+      "note": "Fandom MediaWiki page image, resolved by scripts/fill-location-fandom-images.mjs"
+    }
   },
   "characters": {
-    "rick-grimes":{"kind":"character","image":"/media/characters/rick-grimes.webp","sourcePage":"ChatGPT user-supplied artwork","status":"user-supplied-portrait"},
-    "daryl-dixon":{"kind":"character","status":"needs-official-portrait"},
-    "carol-peletier":{"kind":"character","status":"needs-official-portrait"},
-    "michonne":{"kind":"character","status":"needs-official-portrait"},
-    "maggie-rhee":{"kind":"character","image":"https://static.wikia.nocookie.net/walkingdead/images/e/ee/Season_three_maggie_rhee_dc.png/revision/latest?cb=20260821011107","sourcePage":"https://walkingdead.fandom.com/wiki/Maggie_Rhee","status":"verified","note":"Previous AMC asset (TWDDC_MaggieNYPD.jpg, ~19.2MB) exceeded the media proxy's size cap and returned 413 on 2026-09-24."},
-    "negan-smith":{"kind":"character","status":"needs-official-portrait"}
+    "rick-grimes": {
+      "kind": "character",
+      "image": "/media/characters/rick-grimes.webp",
+      "sourcePage": "ChatGPT user-supplied artwork",
+      "status": "user-supplied-portrait"
+    },
+    "daryl-dixon": {
+      "kind": "character",
+      "status": "needs-official-portrait"
+    },
+    "carol-peletier": {
+      "kind": "character",
+      "status": "needs-official-portrait"
+    },
+    "michonne": {
+      "kind": "character",
+      "status": "needs-official-portrait"
+    },
+    "maggie-rhee": {
+      "kind": "character",
+      "image": "https://static.wikia.nocookie.net/walkingdead/images/e/ee/Season_three_maggie_rhee_dc.png/revision/latest?cb=20260821011107",
+      "sourcePage": "https://walkingdead.fandom.com/wiki/Maggie_Rhee",
+      "status": "verified",
+      "note": "Previous AMC asset (TWDDC_MaggieNYPD.jpg, ~19.2MB) exceeded the media proxy's size cap and returned 413 on 2026-09-24."
+    },
+    "negan-smith": {
+      "kind": "character",
+      "status": "needs-official-portrait"
+    }
   }
 }

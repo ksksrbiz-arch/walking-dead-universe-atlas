@@ -118,3 +118,16 @@ per-entity `resolutionMethod` and `verificationStatus`. Re-run it after touching
 `data/episodeMedia.json`, or the Fandom canonical data — a deployment being READY does not mean these
 URLs still resolve; AMC's CDN assets and Fandom's proxy size limits have both broken previously-verified
 entries in practice (see the manifest's `broken` counts and the console output listing which ones).
+
+**Closing the location image-coverage gap:** `npm run media:fill-locations`
+(`scripts/fill-location-fandom-images.mjs`) targets locations the manifest reports as
+`series-keyart-fallback` (no curated image, no confident Fandom heuristic match). For each one it asks
+the Fandom MediaWiki API directly for that page's own designated lead/infobox image (`prop=pageimages`)
+using a short list of title guesses, verifies the result loads through the live delivery path, and
+writes it into `data/media.json` as curated data — never a raw gallery grab, so it never guesses at
+which image on a page is the right one. It deliberately does not fall back to "any image referenced on
+the page" for locations MediaWiki has no page image for (e.g. a page whose only image turned out to be
+an unrelated character photo) — showing the wrong photo for an entity is worse than the generic series
+key art fallback. Re-run `npm run media:manifest` afterward to confirm the new entries verify, and rerun
+`fill-locations` again later as more Fandom pages gain a proper lead image; it's idempotent and only
+touches locations still on the fallback tier.
