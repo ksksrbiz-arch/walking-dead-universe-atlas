@@ -92,14 +92,15 @@ const readLayout=()=>{
 type DeepLink={journey?:string[];at?:number;kind?:AtlasFocusKind;id?:string};
 const SHARE_PATHS:Record<string,AtlasFocusKind>={p:"location",e:"episode",c:"character"};
 const QUERY_KEYS:Partial<Record<AtlasFocusKind,string>>={location:"place",episode:"ep",character:"who"};
+const decodePathPart=(value:string)=>{try{return decodeURIComponent(value)}catch{return value}};
 function readDeepLink():DeepLink{
  if(typeof window==="undefined")return {};
  const u=new URL(window.location.href);
  const m=u.pathname.match(/^\/(j|p|e|c)\/([^/]+)\/?$/);
  const at=Number(u.searchParams.get("at"));
- const journey=parseJourneyIds(m?.[1]==="j"?decodeURIComponent(m[2]):u.searchParams.get("j"));
+ const journey=parseJourneyIds(m?.[1]==="j"?decodePathPart(m[2]):u.searchParams.get("j"));
  if(journey.length)return {journey,at:Number.isFinite(at)&&u.searchParams.has("at")?at/100:undefined};
- if(m&&SHARE_PATHS[m[1]])return {kind:SHARE_PATHS[m[1]],id:decodeURIComponent(m[2])};
+ if(m&&SHARE_PATHS[m[1]])return {kind:SHARE_PATHS[m[1]],id:decodePathPart(m[2])};
  for(const [kind,key] of Object.entries(QUERY_KEYS))if(u.searchParams.get(key!))return {kind:kind as AtlasFocusKind,id:u.searchParams.get(key!)!};
  return {};
 }

@@ -71,7 +71,7 @@ export default function SearchOverlay({onClose,onPick}:{onClose:()=>void;onPick:
   <div className="searchPanel" ref={panel}>
    <div className="searchBar">
     <Icon name="search"/>
-    <input ref={input} autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="People, places, episodes, factions" aria-label="Search the atlas" enterKeyHint="search" onKeyDown={e=>{if(e.key==="Enter"&&results[0]){e.preventDefault();pick(results[0].kind,results[0].id)}}}/>
+    <input ref={input} autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="People, places, episodes, factions" aria-label="Search the atlas" enterKeyHint="search" onKeyDown={e=>{if(e.key==="Enter"&&!e.nativeEvent.isComposing&&e.keyCode!==229&&results[0]){e.preventDefault();pick(results[0].kind,results[0].id)}}}/>
     {query&&<button className="iconBtn ghost" onClick={()=>{setQuery("");input.current?.focus()}} aria-label="Clear search"><Icon name="close"/></button>}
     <button className="textBtn" onClick={onClose}>Cancel</button>
    </div>
