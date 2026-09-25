@@ -773,7 +773,7 @@ export default function App(){
      <MapBackground/>
      <g ref={mapWorldRef} className="mapWorld">
       <MapGeography/>
-      <HordeLayer enabled={hordeEnabled} year={year} project={project} onSelect={()=>setHordeSelected(true)}/>
+      <HordeLayer enabled={hordeEnabled} year={year} zoom={zoom} project={project} onSelect={()=>setHordeSelected(true)}/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       {journeyActive&&<JourneyRoutes journeys={journeys} positions={journeyPositions} project={project} cursorKey={journeyCursor}/>}
       <g className="markers">{markerGroups.map(group=>{
