@@ -851,7 +851,11 @@
       "wb-s01-e01"
     ],
     "omaha": [
-      "wb-s01-e01"
+      "wb-s01-e01",
+      "wb-s02-e01"
+    ],
+    "campus-colony": [
+      "wb-s02-e01"
     ],
     "nebraska": [
       "wb-s01-e02",
@@ -865,15 +869,9 @@
       "wb-s01-e08",
       "wb-s01-e09"
     ],
-    "new-york-city": [
-      "wb-s01-e10"
-    ],
     "perimeter": [
-      "wb-s02-e01",
       "wb-s02-e02",
-      "wb-s02-e03"
-    ],
-    "albany-new-york": [
+      "wb-s02-e03",
       "wb-s02-e04",
       "wb-s02-e05"
     ],
@@ -884,6 +882,7 @@
       "wb-s02-e10"
     ],
     "civic-republic-research-facility": [
+      "wb-s02-e05",
       "wb-s02-e10"
     ]
   }

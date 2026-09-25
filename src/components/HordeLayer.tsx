@@ -44,7 +44,10 @@ export default function HordeLayer({enabled,year,zoom,project,onSelect}:Props){
   <g className="hordeSelectable" role="button" tabIndex={0} aria-label="Open simulated horde dossier" onClick={onSelect} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();onSelect()}}}>
    <ellipse className="hordeGlow" cx={x} cy={y} rx={Math.max(24,Math.abs(dx)*0.13)} ry={Math.max(18,Math.abs(dx)*0.085)}/>
    {walkers.map((w,i)=><g key={i} className="hordeWalker" style={{"--walk-delay":w.delay+"s","--walk-duration":w.duration+"s"} as CSSProperties} transform={`translate(${x+w.x} ${y+w.y}) scale(${inv})`}>
-    <circle r={i%8===0?3.5:2.8}/><path d="M0 3v6m0-3-2.6 2.6M0 6l2.6 2.6"/>
+    <circle r={i%8===0?3.5:2.8}/>
+    <line x1="0" y1="3" x2="0" y2="6"/>
+    <line className="hordeLegBack" x1="0" y1="6" x2="-2.6" y2="8.6"/>
+    <line className="hordeLegFront" x1="0" y1="6" x2="2.6" y2="8.6"/>
    </g>)}
    <g transform={`translate(${x} ${y}) scale(${inv})`}><circle className="hordePulse" r="12"/></g>
    <g transform={`translate(${x} ${y}) scale(${inv})`}><text className="hordeTag" x="30" y="-25">SIMULATED HERD · M1</text></g>
