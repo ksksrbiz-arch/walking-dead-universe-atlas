@@ -24,7 +24,8 @@ The default Atlas view combines:
 
 ### Synchronization rules
 
-- Drag the timeline → the universe year changes and the map updates.
+- Drag the timeline → the universe year changes and the map updates (places new in that year pulse).
+- Mark an episode watched anywhere → every list, the People grid and the Watch tracker reflect it.
 - Tap an episode → chronology position changes, its geography becomes relevant, and the episode can be opened.
 - Tap a map location → chronology jumps to that location's history.
 - Select a character → show appearances/journey across time and geography.
@@ -34,10 +35,10 @@ The default Atlas view combines:
 
 ## Secondary Modes
 
-- **Atlas** — synchronized Map + Timeline; default.
-- **Timeline** — expanded chronology explorer.
-- **People** — characters, factions, communities, and relationship graph.
-- **Guide** — watch order, methodology, sources, and data health.
+- **Map** — synchronized Map + time scrubber; default.
+- **Timeline** — series×year heatmap scrubber and the full story-order episode list.
+- **People** — characters, communities/factions, and documented links.
+- **Watch** — chronological watch tracker (progress, up next, per-series progress) plus *About this atlas* (methodology, sources, data health, media coverage).
 
 These are depth modes, not replacements for the Atlas experience.
 
@@ -61,12 +62,12 @@ Mobile is map-first but chronology-visible.
 
 Target hierarchy:
 
-1. Map: ~70–80% of the primary surface.
-2. Timeline dock: compact, persistent, expandable.
-3. Contextual detail: small selection surface that expands when explicitly opened.
-4. Navigation: minimal and secondary.
+1. Map: full-bleed; ~70% visible with the sheet at peek.
+2. Time scrubber: the sheet's peek state — always one glance away, scrubbed with a thumb across the activity histogram.
+3. Contextual detail: the same sheet at half height, expandable to full; Back walks the exploration trail.
+4. Navigation: bottom tab bar (phones) / top-bar tabs (wide screens).
 
-Avoid giant permanent sheets, redundant control stacks, and dashboard-style cards covering the geography.
+Avoid giant permanent sheets, redundant control stacks, and dashboard-style cards covering the geography. Design tokens, layout model and component rules: `context/references/ui-design-system.md`.
 
 ## Performance Contract
 

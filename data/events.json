@@ -1,16 +1,221 @@
 [
-  {"id":"twd-s01-atlanta","year":2010,"title":"TWD S1 — Atlanta","seriesId":"twd","certainty":"confirmed"},
-  {"id":"ftwd-s01-la","year":2010,"title":"Fear S1 — Los Angeles","seriesId":"ftwd","certainty":"confirmed"},
-  {"id":"twd-s02-farm","year":2011,"title":"TWD S2 — The farm","seriesId":"twd","certainty":"approximate"},
-  {"id":"twd-s03-prison","year":2012,"title":"TWD S3 — Prison / Woodbury","seriesId":"twd","certainty":"approximate"},
-  {"id":"twd-s05-alexandria","year":2014,"title":"TWD S5–6 — Alexandria","seriesId":"twd","certainty":"approximate"},
-  {"id":"twd-s06-saviors","year":2016,"title":"TWD S6–7 — Saviors","seriesId":"twd","certainty":"approximate"},
-  {"id":"twd-s08-war","year":2017,"title":"TWD S8 — All Out War","seriesId":"twd","certainty":"approximate"},
-  {"id":"ftwd-s04-morgan","year":2017,"title":"Fear S4 — Morgan crossover era","seriesId":"ftwd","certainty":"approximate"},
-  {"id":"twd-s09-rick","year":2018,"title":"TWD S9 — Rick's disappearance","seriesId":"twd","certainty":"confirmed"},
-  {"id":"wb-crm","year":2020,"title":"World Beyond — CRM / Civic Republic","seriesId":"wb","certainty":"confirmed"},
-  {"id":"daryl-france","year":2023,"title":"Daryl Dixon — France","seriesId":"daryl","certainty":"confirmed"},
-  {"id":"owl-philadelphia","year":2024,"title":"The Ones Who Live — Philadelphia","seriesId":"owl","certainty":"confirmed"},
-  {"id":"dead-manhattan","year":2024,"title":"Dead City — Manhattan","seriesId":"dead","certainty":"confirmed"},
-  {"id":"daryl-spain","year":2025,"title":"Daryl Dixon — Spain","seriesId":"daryl","certainty":"confirmed"}
+  {
+    "id": "twd-s01-atlanta",
+    "year": 2010,
+    "title": "TWD S1 — Atlanta",
+    "seriesId": "twd",
+    "certainty": "confirmed",
+    "locationIds": [
+      "atlanta",
+      "cdc-atlanta",
+      "hospitals-atlanta",
+      "king-county"
+    ]
+  },
+  {
+    "id": "ftwd-s01-la",
+    "year": 2010,
+    "title": "Fear S1 — Los Angeles",
+    "seriesId": "ftwd",
+    "certainty": "confirmed",
+    "locationIds": [
+      "los-angeles",
+      "san-diego"
+    ]
+  },
+  {
+    "id": "twd-s02-farm",
+    "year": 2010,
+    "title": "TWD S2 — The farm",
+    "seriesId": "twd",
+    "certainty": "approximate",
+    "locationIds": [
+      "hershel-farm"
+    ]
+  },
+  {
+    "id": "twd-s03-prison",
+    "year": 2011,
+    "title": "TWD S3 — Prison / Woodbury",
+    "seriesId": "twd",
+    "certainty": "approximate",
+    "locationIds": [
+      "prison",
+      "woodbury"
+    ]
+  },
+  {
+    "id": "twd-s05-alexandria",
+    "year": 2012,
+    "title": "TWD S5–6 — Alexandria",
+    "seriesId": "twd",
+    "certainty": "approximate",
+    "locationIds": [
+      "alexandria",
+      "grady-memorial",
+      "rural-virginia",
+      "sanctuary",
+      "st-sarahs-church",
+      "terminus"
+    ]
+  },
+  {
+    "id": "twd-s06-saviors",
+    "year": 2012,
+    "title": "TWD S6–7 — Saviors",
+    "seriesId": "twd",
+    "certainty": "approximate",
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "oceanside",
+      "sanctuary"
+    ]
+  },
+  {
+    "id": "twd-s08-war",
+    "year": 2012,
+    "title": "TWD S8 — All Out War",
+    "seriesId": "twd",
+    "certainty": "approximate",
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "oceanside",
+      "sanctuary"
+    ]
+  },
+  {
+    "id": "ftwd-s04-morgan",
+    "year": 2012,
+    "title": "Fear S4 — Morgan crossover era",
+    "seriesId": "ftwd",
+    "certainty": "approximate",
+    "locationIds": [
+      "austin",
+      "texas"
+    ]
+  },
+  {
+    "id": "twd-s09-rick",
+    "year": 2014,
+    "title": "TWD S9 — Rick's disappearance",
+    "seriesId": "twd",
+    "certainty": "confirmed",
+    "locationIds": [
+      "alexandria",
+      "hilltop",
+      "kingdom",
+      "whisperer-woods"
+    ]
+  },
+  {
+    "id": "wb-crm",
+    "year": 2020,
+    "title": "World Beyond — CRM / Civic Republic",
+    "seriesId": "wb",
+    "certainty": "confirmed",
+    "locationIds": [
+      "civic-republic",
+      "omaha"
+    ]
+  },
+  {
+    "id": "daryl-france",
+    "year": 2023,
+    "title": "Daryl Dixon — France",
+    "seriesId": "daryl",
+    "certainty": "confirmed",
+    "locationIds": [
+      "france"
+    ]
+  },
+  {
+    "id": "owl-philadelphia",
+    "year": 2022,
+    "title": "The Ones Who Live — Philadelphia",
+    "seriesId": "owl",
+    "certainty": "confirmed",
+    "locationIds": [
+      "civic-republic",
+      "philadelphia"
+    ]
+  },
+  {
+    "id": "dead-manhattan",
+    "year": 2027,
+    "title": "Dead City — Manhattan",
+    "seriesId": "dead",
+    "certainty": "confirmed",
+    "locationIds": [
+      "manhattan"
+    ]
+  },
+  {
+    "id": "daryl-spain",
+    "year": 2023,
+    "title": "Daryl Dixon — Spain",
+    "seriesId": "daryl",
+    "certainty": "confirmed",
+    "locationIds": [
+      "spain"
+    ]
+  },
+  {
+    "id": "twd-s10-s11-commonwealth",
+    "year": 2021,
+    "title": "TWD S10–11 — Commonwealth war",
+    "seriesId": "twd",
+    "certainty": "approximate",
+    "locationIds": [
+      "commonwealth",
+      "alexandria",
+      "bloodsworth-island",
+      "commonwealth-ohio",
+      "mid-atlantic-city",
+      "ohio-virginia-wilds",
+      "reapers-war",
+      "riverbend",
+      "rural-virginia",
+      "rural-virginia-hospital",
+      "washington-dc-subway",
+      "west-virginia-train-yard",
+      "whisperer-woods"
+    ]
+  },
+  {
+    "id": "ftwd-s08-padre",
+    "year": 2022,
+    "title": "Fear S8 — PADRE finale",
+    "seriesId": "ftwd",
+    "certainty": "approximate",
+    "locationIds": [
+      "king-county-ga",
+      "padre",
+      "padre-shipyard",
+      "savannah"
+    ]
+  },
+  {
+    "id": "dead-s02-new-babylon",
+    "year": 2028,
+    "title": "Dead City S2 — New Babylon",
+    "seriesId": "dead",
+    "certainty": "approximate",
+    "locationIds": [
+      "new-babylon"
+    ]
+  },
+  {
+    "id": "tales-davon",
+    "year": 2025,
+    "title": "Tales — Davon",
+    "seriesId": "tales",
+    "certainty": "approximate",
+    "locationIds": [
+      "madawaska-maine"
+    ]
+  }
 ]

@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "policy": {
+    "runtimeDependency": false,
+    "externalSourcesAreIngestionOnly": true,
+    "neverOverwriteCanonicalWithoutEvidence": true,
+    "retainProvenance": true
+  },
+  "sources": [
+    {
+      "id": "amc",
+      "name": "AMC / AMC Networks",
+      "kind": "official",
+      "status": "active",
+      "baseUrl": "https://www.amc.com",
+      "capabilities": [
+        "series",
+        "episodes",
+        "episode-media"
+      ],
+      "priority": 100,
+      "notes": "Primary official source for series and episode metadata/media where publicly accessible."
+    },
+    {
+      "id": "walking-dead-wiki",
+      "name": "Walking Dead Wiki",
+      "kind": "community-structured",
+      "status": "active",
+      "baseUrl": "https://walkingdead.fandom.com",
+      "apiUrl": "https://walkingdead.fandom.com/api.php",
+      "capabilities": [
+        "characters",
+        "locations",
+        "episodes",
+        "relationships",
+        "timeline",
+        "categories",
+        "page-metadata"
+      ],
+      "priority": 70,
+      "notes": "High-value structured secondary source. TV Universe categories must be isolated from comic/game/non-canon continuity."
+    },
+    {
+      "id": "walking-dead-api",
+      "name": "The Walking Dead API",
+      "kind": "community-api",
+      "status": "dead",
+      "baseUrl": "https://thewalkingdead-api.onrender.com",
+      "capabilities": [
+        "unknown"
+      ],
+      "priority": 0,
+      "verifiedAt": "2026-09-24",
+      "notes": "Verified via `npm run enrich:probe` (data/enrichment/source-health.json): the root, /api, /characters and /swagger paths all 404 on a free-tier Render host. Not usable for ingestion; keep the record for provenance but do not re-probe on a schedule."
+    },
+    {
+      "id": "api-twd-characters",
+      "name": "API-TWD-Characters",
+      "kind": "community-api",
+      "status": "dead",
+      "baseUrl": "https://api-twd-characters-production.up.railway.app",
+      "capabilities": [
+        "characters"
+      ],
+      "priority": 0,
+      "verifiedAt": "2026-09-24",
+      "repoUrl": "https://github.com/pedrocpacheco/API-TWD-Characters",
+      "notes": "Repo: github.com/pedrocpacheco/API-TWD-Characters (a small Java/Maven project). Its advertised Railway deployment (baseUrl above, and /characters, /api/characters, /docs, /swagger-ui, /health) all return Railway's own \"Application not found\" 404 — the app is not currently running, not merely undocumented. This session's GitHub access is scoped to this repo only, so the source couldn't be inspected further; nothing to ingest without cloning and hosting someone else's unmaintained service ourselves, which is out of proportion to what it would add over the Fandom wiki API already in use. Not pursued further; revisit only if the Railway app comes back up or a live, documented endpoint surfaces."
+    },
+    {
+      "id": "wikidata",
+      "name": "Wikidata",
+      "kind": "structured-secondary",
+      "status": "evaluated-low-priority",
+      "baseUrl": "https://www.wikidata.org",
+      "capabilities": [
+        "entity-resolution",
+        "actors",
+        "external-identifiers"
+      ],
+      "priority": 15,
+      "evaluatedAt": "2026-09-24",
+      "notes": "Scoped before building any reconciliation pipeline against it (see ROADMAP.md), via wbsearchentities + the public SPARQL endpoint (query.wikidata.org). Findings: (1) Coverage is flagship-TWD-only and partial — 84 distinct items link to the flagship show (wd:Q232737) via 'present in work' (P1441); the other 7 series in this atlas were not separately queried but are expected to be far thinner. (2) Comic-vs-TV-canon ambiguity is real and would need the same manual disambiguation this project has already had to do for Fandom matches: Wikidata carries Rick Grimes as two separate items (comic and TV), distinguished only by a Fandom-slug property (P6262, e.g. 'walkingdead:Rick_Grimes_(TV_Series)' vs '..._(Comic_Series)') that's only populated on ~19% (16/84) of the flagship-show items anyway. (3) External-ID properties (P345 IMDb character ID) exist on individual entity pages (confirmed directly on Rick Grimes' item, Q605417) but did not appear via the public SPARQL endpoint in the same session — the query service lags behind live edits, which matters for anything built to run unattended. (4) No structured data for this atlas's actual differentiator: in-universe fictional places (Alexandria the community, Hilltop, Terminus, ...) aren't modeled in Wikidata as geographic entities, so 'locations' was dropped from capabilities above. Net: the two things Wikidata would add (a partial, ambiguous Fandom-match cross-check for a sliver of characters; real-world actor trivia this atlas doesn't display) don't justify entity-reconciliation infrastructure right now. Revisit only if the product scope grows to include real-world cast/production info, or if a specific canon-collision needs resolving that only Wikidata can settle."
+    }
+  ]
+}

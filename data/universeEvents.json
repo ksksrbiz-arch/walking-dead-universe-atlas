@@ -1,11 +1,105 @@
 [
-  {"id":"wildfire-trials-begin","year":2010,"date":"2010-08-25","title":"The Trials begin","seriesId":"twd","certainty":"confirmed","description":"The Walking Dead television-universe timeline identifies August 25, 2010 as the beginning of the Trials."},
-  {"id":"monument-day","year":2010,"date":"2010-08-27","title":"Monument Day","seriesId":"twd","certainty":"confirmed","description":"August 27, 2010 marks the collapse of organized society in the TV Universe timeline."},
-  {"id":"crm-omaha-destruction","year":2020,"title":"CRM destroys Omaha","seriesId":"wb","certainty":"confirmed"},
-  {"id":"crm-portland-plan","year":2021,"title":"CRM plan against Portland is exposed","seriesId":"wb","certainty":"confirmed"},
-  {"id":"rick-captured-crm","year":2018,"title":"Rick is taken by the CRM","seriesId":"twd","certainty":"confirmed"},
-  {"id":"rick-michonne-reunion-era","year":2024,"title":"Rick and Michonne's CRM storyline reaches Philadelphia","seriesId":"owl","certainty":"confirmed"},
-  {"id":"dead-city-manhattan","year":2023,"title":"Maggie and Negan enter Manhattan","seriesId":"dead","certainty":"confirmed"},
-  {"id":"daryl-france","year":2023,"title":"Daryl Dixon reaches France","seriesId":"daryl","certainty":"confirmed"},
-  {"id":"daryl-spain","year":2025,"title":"Daryl and Carol continue into Spain","seriesId":"daryl","certainty":"confirmed"}
+  {
+    "id": "wildfire-trials-begin",
+    "year": 2010,
+    "date": "2010-08-25",
+    "title": "The Trials begin",
+    "seriesId": "twd",
+    "certainty": "confirmed",
+    "description": "The Walking Dead television-universe timeline identifies August 25, 2010 as the beginning of the Trials."
+  },
+  {
+    "id": "monument-day",
+    "year": 2010,
+    "date": "2010-08-27",
+    "title": "Monument Day",
+    "seriesId": "twd",
+    "certainty": "confirmed",
+    "description": "August 27, 2010 marks the collapse of organized society in the TV Universe timeline."
+  },
+  {
+    "id": "crm-omaha-destruction",
+    "year": 2020,
+    "title": "CRM destroys Omaha",
+    "seriesId": "wb",
+    "certainty": "confirmed",
+    "locationIds": [
+      "omaha"
+    ]
+  },
+  {
+    "id": "crm-portland-plan",
+    "year": 2020,
+    "title": "CRM plan against Portland is exposed",
+    "seriesId": "wb",
+    "certainty": "confirmed",
+    "locationIds": [
+      "portland"
+    ]
+  },
+  {
+    "id": "rick-captured-crm",
+    "year": 2014,
+    "title": "Rick is taken by the CRM",
+    "seriesId": "twd",
+    "certainty": "confirmed",
+    "characterIds": [
+      "rick-grimes"
+    ]
+  },
+  {
+    "id": "rick-michonne-reunion-era",
+    "year": 2022,
+    "title": "Rick and Michonne's CRM storyline reaches Philadelphia",
+    "seriesId": "owl",
+    "certainty": "confirmed",
+    "locationIds": [
+      "philadelphia"
+    ],
+    "characterIds": [
+      "rick-grimes",
+      "michonne"
+    ]
+  },
+  {
+    "id": "dead-city-manhattan",
+    "year": 2027,
+    "title": "Maggie and Negan enter Manhattan",
+    "seriesId": "dead",
+    "certainty": "confirmed",
+    "locationIds": [
+      "manhattan"
+    ],
+    "characterIds": [
+      "maggie-rhee",
+      "negan-smith"
+    ]
+  },
+  {
+    "id": "daryl-france",
+    "year": 2023,
+    "title": "Daryl Dixon reaches France",
+    "seriesId": "daryl",
+    "certainty": "confirmed",
+    "locationIds": [
+      "france"
+    ],
+    "characterIds": [
+      "daryl-dixon"
+    ]
+  },
+  {
+    "id": "daryl-spain",
+    "year": 2023,
+    "title": "Daryl and Carol continue into Spain",
+    "seriesId": "daryl",
+    "certainty": "confirmed",
+    "locationIds": [
+      "spain"
+    ],
+    "characterIds": [
+      "daryl-dixon",
+      "carol-peletier"
+    ]
+  }
 ]

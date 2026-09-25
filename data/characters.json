@@ -8,7 +8,11 @@
       "ftwd",
       "owl"
     ],
-    "episodeCount": 118
+    "episodeCount": 118,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Rick_Grimes_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "michonne",
@@ -18,7 +22,11 @@
       "twd",
       "owl"
     ],
-    "episodeCount": 103
+    "episodeCount": 103,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Michonne_Grimes_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "daryl-dixon",
@@ -28,7 +36,11 @@
       "twd",
       "daryl"
     ],
-    "episodeCount": 167
+    "episodeCount": 167,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Daryl_Dixon_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "negan-smith",
@@ -38,7 +50,11 @@
       "twd",
       "dead"
     ],
-    "episodeCount": 86
+    "episodeCount": 86,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Negan_Smith_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "morgan-jones",
@@ -48,7 +64,11 @@
       "twd",
       "ftwd"
     ],
-    "episodeCount": 98
+    "episodeCount": 98,
+    "status": "unknown",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Morgan_Jones_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "jadis-stokes",
@@ -59,7 +79,12 @@
       "wb",
       "owl"
     ],
-    "episodeCount": 26
+    "episodeCount": 26,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Anne_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "owl-s01-e05"
   },
   {
     "id": "carol-peletier",
@@ -69,7 +94,11 @@
       "twd",
       "daryl"
     ],
-    "episodeCount": 141
+    "episodeCount": 141,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Carol_Peletier_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "carl-grimes",
@@ -78,7 +107,12 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 83
+    "episodeCount": 83,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Carl_Grimes_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s08-e09"
   },
   {
     "id": "judith-grimes",
@@ -88,7 +122,11 @@
       "twd",
       "owl"
     ],
-    "episodeCount": 89
+    "episodeCount": 89,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Judith_Grimes_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "maggie-rhee",
@@ -98,7 +136,11 @@
       "twd",
       "dead"
     ],
-    "episodeCount": 128
+    "episodeCount": 128,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Maggie_Rhee_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "hershel-rhee",
@@ -108,7 +150,11 @@
       "twd",
       "dead"
     ],
-    "episodeCount": 45
+    "episodeCount": 45,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Hershel_Rhee_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "glenn-rhee",
@@ -117,7 +163,12 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 74
+    "episodeCount": 74,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Glenn_Rhee_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s07-e01"
   },
   {
     "id": "rosita-espinosa",
@@ -126,7 +177,12 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 94
+    "episodeCount": 94,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Rosita_Espinosa_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s11-e24"
   },
   {
     "id": "gabriel-stokes",
@@ -136,7 +192,11 @@
       "twd",
       "owl"
     ],
-    "episodeCount": 74
+    "episodeCount": 74,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Gabriel_Stokes_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "paul-rovia",
@@ -145,7 +205,12 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 25
+    "episodeCount": 25,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Paul_Rovia_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s09-e08"
   },
   {
     "id": "ezekiel-sutton",
@@ -154,7 +219,11 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 49
+    "episodeCount": 49,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Ezekiel_Sutton_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "dwight",
@@ -164,7 +233,11 @@
       "twd",
       "ftwd"
     ],
-    "episodeCount": 60
+    "episodeCount": 60,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Dwight_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "sherry",
@@ -174,7 +247,11 @@
       "twd",
       "ftwd"
     ],
-    "episodeCount": 29
+    "episodeCount": 29,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Sherry_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "alpha",
@@ -184,7 +261,12 @@
       "twd",
       "tales"
     ],
-    "episodeCount": 21
+    "episodeCount": 21,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Alpha_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s10-e12"
   },
   {
     "id": "lydia",
@@ -194,7 +276,11 @@
       "twd",
       "tales"
     ],
-    "episodeCount": 34
+    "episodeCount": 34,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Lydia_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "edwin-jenner",
@@ -204,7 +290,12 @@
       "twd",
       "wb"
     ],
-    "episodeCount": 3
+    "episodeCount": 3,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Edwin_Jenner_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s01-e06"
   },
   {
     "id": "sophia-peletier",
@@ -214,7 +305,12 @@
       "twd",
       "daryl"
     ],
-    "episodeCount": 20
+    "episodeCount": 20,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Sophia_Peletier_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s02-e07"
   },
   {
     "id": "simon",
@@ -223,7 +319,12 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 15
+    "episodeCount": 15,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Simon_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s08-e15"
   },
   {
     "id": "merle-dixon",
@@ -233,7 +334,12 @@
       "twd",
       "daryl"
     ],
-    "episodeCount": 18
+    "episodeCount": 18,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Merle_Dixon_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s03-e15"
   },
   {
     "id": "shane-walsh",
@@ -242,7 +348,12 @@
     "seriesIds": [
       "twd"
     ],
-    "episodeCount": 22
+    "episodeCount": 22,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Shane_Walsh_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s02-e12"
   },
   {
     "id": "althea-szprygocki",
@@ -251,7 +362,11 @@
     "seriesIds": [
       "ftwd"
     ],
-    "episodeCount": 30
+    "episodeCount": 34,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Althea_Szewczyk-Przygocki_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "hope-bennett",
@@ -260,7 +375,11 @@
     "seriesIds": [
       "wb"
     ],
-    "episodeCount": 20
+    "episodeCount": 20,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Hope_Bennett_(World_Beyond)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "iris-bennett",
@@ -269,7 +388,11 @@
     "seriesIds": [
       "wb"
     ],
-    "episodeCount": 20
+    "episodeCount": 20,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Iris_Bennett_(World_Beyond)",
+    "statusSyncedAt": "2026-09-24"
   },
   {
     "id": "jennifer-mallick",
@@ -279,7 +402,12 @@
       "wb",
       "owl"
     ],
-    "episodeCount": 20
+    "episodeCount": 20,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Jennifer_Mallick_(World_Beyond)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "wb-s02-e10"
   },
   {
     "id": "samuel-abbott",
@@ -289,6 +417,654 @@
       "wb",
       "owl"
     ],
-    "episodeCount": 7
+    "episodeCount": 7,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Samuel_Abbott_(World_Beyond)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "wb-s01-e04"
+  },
+  {
+    "id": "eugene-porter",
+    "name": "Eugene Porter",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Eugene_Porter_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "abraham-ford",
+    "name": "Abraham Ford",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Abraham_Ford_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s06-e16"
+  },
+  {
+    "id": "tara-chambler",
+    "name": "Tara Chambler",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Tara_Chambler_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s09-e15"
+  },
+  {
+    "id": "aaron",
+    "name": "Aaron",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Aaron_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "tyreese-williams",
+    "name": "Tyreese Williams",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Tyreese_Williams_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s05-e09"
+  },
+  {
+    "id": "sasha-williams",
+    "name": "Sasha Williams",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Sasha_Williams_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s07-e16"
+  },
+  {
+    "id": "bob-stookey",
+    "name": "Bob Stookey",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Bob_Stookey_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s05-e03"
+  },
+  {
+    "id": "beth-greene",
+    "name": "Beth Greene",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Beth_Greene_(TV_Universe)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s05-e08"
+  },
+  {
+    "id": "andrea-harrison",
+    "name": "Andrea",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Andrea",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s03-e16"
+  },
+  {
+    "id": "dale-horvath",
+    "name": "Dale Horvath",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 2,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Dale_Horvath_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s02-e11"
+  },
+  {
+    "id": "lori-grimes",
+    "name": "Lori Grimes",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Lori_Grimes_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s03-e04"
+  },
+  {
+    "id": "gregory",
+    "name": "Gregory",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Gregory_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s09-e01"
+  },
+  {
+    "id": "jerry",
+    "name": "Jerry",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Jerry_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "connie",
+    "name": "Connie",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Connie_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "kelly",
+    "name": "Kelly",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Kelly_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "magna",
+    "name": "Magna",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Magna_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "yumiko-okumura",
+    "name": "Yumiko Okumura",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Yumiko_Okumura_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "siddiq",
+    "name": "Siddiq",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Siddiq_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s10-e07"
+  },
+  {
+    "id": "princess-juanita-sanchez",
+    "name": "Princess (Juanita Sanchez)",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Juanita_Sanchez_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "pamela-milton",
+    "name": "Pamela Milton",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Pamela_Milton_(TV_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "leah-shaw",
+    "name": "Leah Shaw",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Leah_Shaw_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s11-e16"
+  },
+  {
+    "id": "pope",
+    "name": "Pope",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Pope_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s11-e08"
+  },
+  {
+    "id": "mercer",
+    "name": "Mercer",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "twd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Mercer",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "madison-clark",
+    "name": "Madison Clark",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 2,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Madison_Clark_(Fear)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "travis-manawa",
+    "name": "Travis Manawa",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Travis_Manawa_(Fear)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "ftwd-s03-e02"
+  },
+  {
+    "id": "alicia-clark",
+    "name": "Alicia Clark",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Alicia_Clark_(Fear)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "nick-clark",
+    "name": "Nick Clark",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Nicholas_Clark_(Fear)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "ftwd-s04-e03"
+  },
+  {
+    "id": "victor-strand",
+    "name": "Victor Strand",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Victor_Strand_(Fear)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "luciana-galvez",
+    "name": "Luciana Galvez",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Luciana_Galvez_(Fear)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "daniel-salazar",
+    "name": "Daniel Salazar",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Daniel_Salazar_(Fear)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "ofelia-salazar",
+    "name": "Ofelia Salazar",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Ofelia_Salazar_(Fear)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "ftwd-s03-e14"
+  },
+  {
+    "id": "john-dorie",
+    "name": "John Dorie",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/John_Dorie_(Fear)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "ftwd-s06-e08"
+  },
+  {
+    "id": "charlie",
+    "name": "Charlie",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "ftwd"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Charlie_(Fear)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "ftwd-s08-e08"
+  },
+  {
+    "id": "ginny",
+    "name": "Ginny",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "dead"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Ginny_(Dead_City)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "dead-s02-e08"
+  },
+  {
+    "id": "perlie-armstrong",
+    "name": "Perlie Armstrong",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "dead"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Perlie_Armstrong_(Dead_City)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "the-croat",
+    "name": "The Croat",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "dead"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Mile_Jurkovic_(Dead_City)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "dead-s03-e01"
+  },
+  {
+    "id": "elton-ortiz",
+    "name": "Elton Ortiz",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Elton_Ortiz_(World_Beyond)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "silas-plaskett",
+    "name": "Silas Plaskett",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Silas_Plaskett_(World_Beyond)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "huck",
+    "name": "Huck",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Huck_(TV_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "twd-s08-e02"
+  },
+  {
+    "id": "felix-carlucci",
+    "name": "Felix Carlucci",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 1,
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Felix_Carlucci_(World_Beyond)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "isabelle",
+    "name": "Isabelle",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "daryl"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Isabelle",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "daryl-s02-e04"
+  },
+  {
+    "id": "laurent",
+    "name": "Laurent",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "daryl"
+    ],
+    "episodeCount": 1,
+    "status": "unknown",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Laurent_Carri%C3%A8re_(Daryl_Series)",
+    "statusSyncedAt": "2026-09-24"
+  },
+  {
+    "id": "quinn",
+    "name": "Quinn",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "daryl"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Quinn_(Daryl_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "daryl-s01-e06"
+  },
+  {
+    "id": "genet",
+    "name": "Genet",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "daryl"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Adrien_Genet_(Daryl_Series)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "daryl-s02-e03"
+  },
+  {
+    "id": "pearl-thorne",
+    "name": "Pearl Thorne",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "owl"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Pearl_Thorne_(The_Ones_Who_Live)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "owl-s01-e06"
+  },
+  {
+    "id": "jonathan-beale",
+    "name": "Jonathan Beale",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "owl"
+    ],
+    "episodeCount": 1,
+    "status": "deceased",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Johnathan_Beale_(The_Ones_Who_Live)",
+    "statusSyncedAt": "2026-09-24",
+    "deathEpisodeId": "owl-s01-e06"
+  },
+  {
+    "id": "mason-beale",
+    "name": "Mason Beale",
+    "certainty": "confirmed",
+    "seriesIds": [
+      "wb"
+    ],
+    "episodeCount": 5,
+    "aliases": [
+      "Mason Beale (World Beyond)"
+    ],
+    "familyIds": [
+      "jonathan-beale"
+    ],
+    "status": "alive",
+    "statusCertainty": "confirmed",
+    "statusSourceUrl": "https://walkingdead.fandom.com/wiki/Mason_Beale_(World_Beyond)",
+    "statusSyncedAt": "2026-09-24"
   }
 ]

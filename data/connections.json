@@ -1,27 +1,389 @@
 [
-  {"id":"rick-jadis-crm","type":"character-faction","fromId":"rick-grimes","toId":"crm","label":"Rick is captured and held by the CRM","certainty":"confirmed"},
-  {"id":"morgan-twd-ftwd","type":"cross-series","fromId":"morgan-jones","toId":"ftwd","label":"Morgan continues his story in Fear","certainty":"confirmed"},
-  {"id":"daryl-europe","type":"character-location","fromId":"daryl-dixon","toId":"france","label":"Daryl's European storyline","certainty":"confirmed"},
-  {"id":"carol-daryl","type":"character-character","fromId":"carol-peletier","toId":"daryl-dixon","label":"Long-running survivor partnership","certainty":"confirmed"},
-  {"id":"maggie-negan","type":"character-character","fromId":"maggie-rhee","toId":"negan-smith","label":"Dead City central relationship","certainty":"confirmed"},
-  {"id":"rick-michonne","type":"character-character","fromId":"rick-grimes","toId":"michonne","label":"Rick and Michonne","certainty":"confirmed"},
-  {"id":"rick-fear-crossover","type":"cross-series","fromId":"rick-grimes","toId":"ftwd","label":"Rick appears in Fear continuity","certainty":"confirmed"},
-  {"id":"dwight-fear","type":"cross-series","fromId":"dwight","toId":"ftwd","label":"Dwight crosses into Fear","certainty":"confirmed"},
-  {"id":"sherry-fear","type":"cross-series","fromId":"sherry","toId":"ftwd","label":"Sherry crosses into Fear","certainty":"confirmed"},
-  {"id":"jadis-world-beyond","type":"cross-series","fromId":"jadis-stokes","toId":"wb","label":"Anne/Jadis appears in World Beyond","certainty":"confirmed"},
-  {"id":"jadis-owl","type":"cross-series","fromId":"jadis-stokes","toId":"owl","label":"Jadis/Anne returns in The Ones Who Live","certainty":"confirmed"},
-  {"id":"michonne-owl","type":"cross-series","fromId":"michonne","toId":"owl","label":"Michonne is a central protagonist","certainty":"confirmed"},
-  {"id":"maggie-dead-city","type":"cross-series","fromId":"maggie-rhee","toId":"dead","label":"Maggie leads Dead City","certainty":"confirmed"},
-  {"id":"negan-dead-city","type":"cross-series","fromId":"negan-smith","toId":"dead","label":"Negan leads Dead City","certainty":"confirmed"},
-  {"id":"daryl-dead-city","type":"cross-series","fromId":"daryl-dixon","toId":"dead","label":"Daryl appears in Dead City continuity","certainty":"confirmed"},
-  {"id":"alpha-tales","type":"cross-series","fromId":"alpha","toId":"tales","label":"Alpha's backstory appears in Tales","certainty":"confirmed"},
-  {"id":"lydia-tales","type":"cross-series","fromId":"lydia","toId":"tales","label":"Lydia appears in the Alpha/Dee story","certainty":"confirmed"},
-  {"id":"jenner-world-beyond","type":"cross-series","fromId":"edwin-jenner","toId":"wb","label":"Jenner appears through archived video","certainty":"confirmed"},
-  {"id":"jenner-variant-lore","type":"lore","fromId":"edwin-jenner","toId":"twd","label":"Jenner connects early CDC research to later outbreak lore","certainty":"confirmed"},
-  {"id":"campus-omaha","type":"community-faction","fromId":"campus-colony","toId":"omaha","label":"Campus Colony is part of the broader Alliance of the Three era","certainty":"confirmed"},
-  {"id":"crm-omaha","type":"faction-community","fromId":"crm","toId":"omaha","label":"CRM destroys Omaha","certainty":"confirmed"},
-  {"id":"crm-portland","type":"faction-community","fromId":"crm","toId":"portland-alliance","label":"CRM targets Portland","certainty":"confirmed"},
-  {"id":"commonwealth-twd","type":"community-series","fromId":"commonwealth","toId":"twd","label":"Commonwealth becomes the late-series civilization center","certainty":"confirmed"},
-  {"id":"burazi-dead-city","type":"faction-series","fromId":"burazi","toId":"dead","label":"Burazi control Manhattan in Dead City","certainty":"confirmed"},
-  {"id":"new-babylon-dead-city","type":"faction-series","fromId":"new-babylon-federation","toId":"dead","label":"New Babylon is a major post-TWD power","certainty":"confirmed"}
+  {
+    "id": "rick-jadis-crm",
+    "type": "character-faction",
+    "fromId": "rick-grimes",
+    "toId": "crm",
+    "label": "Rick is captured and held by the CRM",
+    "certainty": "confirmed",
+    "category": "conflict"
+  },
+  {
+    "id": "morgan-twd-ftwd",
+    "type": "cross-series",
+    "fromId": "morgan-jones",
+    "toId": "ftwd",
+    "label": "Morgan continues his story in Fear",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "daryl-europe",
+    "type": "character-location",
+    "fromId": "daryl-dixon",
+    "toId": "france",
+    "label": "Daryl's European storyline",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "carol-daryl",
+    "type": "character-character",
+    "fromId": "carol-peletier",
+    "toId": "daryl-dixon",
+    "label": "Long-running survivor partnership",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "maggie-negan",
+    "type": "character-character",
+    "fromId": "maggie-rhee",
+    "toId": "negan-smith",
+    "label": "Dead City central relationship",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "rick-michonne",
+    "type": "character-character",
+    "fromId": "rick-grimes",
+    "toId": "michonne",
+    "label": "Rick and Michonne",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "dwight-fear",
+    "type": "cross-series",
+    "fromId": "dwight",
+    "toId": "ftwd",
+    "label": "Dwight crosses into Fear",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "sherry-fear",
+    "type": "cross-series",
+    "fromId": "sherry",
+    "toId": "ftwd",
+    "label": "Sherry crosses into Fear",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "jadis-world-beyond",
+    "type": "cross-series",
+    "fromId": "jadis-stokes",
+    "toId": "wb",
+    "label": "Anne/Jadis appears in World Beyond",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "jadis-owl",
+    "type": "cross-series",
+    "fromId": "jadis-stokes",
+    "toId": "owl",
+    "label": "Jadis/Anne returns in The Ones Who Live",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "michonne-owl",
+    "type": "cross-series",
+    "fromId": "michonne",
+    "toId": "owl",
+    "label": "Michonne is a central protagonist",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "maggie-dead-city",
+    "type": "cross-series",
+    "fromId": "maggie-rhee",
+    "toId": "dead",
+    "label": "Maggie leads Dead City",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "negan-dead-city",
+    "type": "cross-series",
+    "fromId": "negan-smith",
+    "toId": "dead",
+    "label": "Negan leads Dead City",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "alpha-tales",
+    "type": "cross-series",
+    "fromId": "alpha",
+    "toId": "tales",
+    "label": "Alpha's backstory appears in Tales",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "lydia-tales",
+    "type": "cross-series",
+    "fromId": "lydia",
+    "toId": "tales",
+    "label": "Lydia appears in the Alpha/Dee story",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "jenner-world-beyond",
+    "type": "cross-series",
+    "fromId": "edwin-jenner",
+    "toId": "wb",
+    "label": "Jenner appears through archived video",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "jenner-variant-lore",
+    "type": "lore",
+    "fromId": "edwin-jenner",
+    "toId": "twd",
+    "label": "Jenner connects early CDC research to later outbreak lore",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "campus-omaha",
+    "type": "community-community",
+    "fromId": "campus-colony",
+    "toId": "omaha",
+    "label": "Campus Colony is part of the broader Alliance of the Three era",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "crm-omaha",
+    "type": "faction-community",
+    "fromId": "crm",
+    "toId": "omaha",
+    "label": "CRM destroys Omaha",
+    "certainty": "confirmed",
+    "category": "conflict"
+  },
+  {
+    "id": "crm-portland",
+    "type": "faction-community",
+    "fromId": "crm",
+    "toId": "portland-alliance",
+    "label": "CRM targets Portland",
+    "certainty": "confirmed",
+    "category": "conflict"
+  },
+  {
+    "id": "commonwealth-twd",
+    "type": "community-series",
+    "fromId": "commonwealth",
+    "toId": "twd",
+    "label": "Commonwealth becomes the late-series civilization center",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "burazi-dead-city",
+    "type": "faction-series",
+    "fromId": "burazi",
+    "toId": "dead",
+    "label": "Burazi control Manhattan in Dead City",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "new-babylon-dead-city",
+    "type": "faction-series",
+    "fromId": "new-babylon-federation",
+    "toId": "dead",
+    "label": "New Babylon is a major post-TWD power",
+    "certainty": "confirmed",
+    "category": "crossover"
+  },
+  {
+    "id": "rick-lori",
+    "type": "character-character",
+    "fromId": "rick-grimes",
+    "toId": "lori-grimes",
+    "label": "Married before the outbreak",
+    "certainty": "confirmed",
+    "category": "family"
+  },
+  {
+    "id": "abraham-eugene",
+    "type": "character-character",
+    "fromId": "abraham-ford",
+    "toId": "eugene-porter",
+    "label": "Escorts Eugene to Washington",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "tyreese-sasha",
+    "type": "character-character",
+    "fromId": "tyreese-williams",
+    "toId": "sasha-williams",
+    "label": "Siblings who join the prison group",
+    "certainty": "confirmed",
+    "category": "family"
+  },
+  {
+    "id": "daryl-beth",
+    "type": "character-character",
+    "fromId": "daryl-dixon",
+    "toId": "beth-greene",
+    "label": "Survive together after the prison falls",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "eugene-rosita",
+    "type": "character-character",
+    "fromId": "eugene-porter",
+    "toId": "rosita-espinosa",
+    "label": "Part of the same group escorting Eugene",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "andrea-dale",
+    "type": "character-character",
+    "fromId": "andrea-harrison",
+    "toId": "dale-horvath",
+    "label": "Dale is Andrea's closest confidant",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "connie-kelly",
+    "type": "character-character",
+    "fromId": "connie",
+    "toId": "kelly",
+    "label": "Sisters who survive together",
+    "certainty": "confirmed",
+    "category": "family"
+  },
+  {
+    "id": "magna-yumiko",
+    "type": "character-character",
+    "fromId": "magna",
+    "toId": "yumiko-okumura",
+    "label": "Partners who arrive with Connie's group",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "madison-travis",
+    "type": "character-character",
+    "fromId": "madison-clark",
+    "toId": "travis-manawa",
+    "label": "Partners raising their children together",
+    "certainty": "confirmed",
+    "category": "family"
+  },
+  {
+    "id": "alicia-nick",
+    "type": "character-character",
+    "fromId": "alicia-clark",
+    "toId": "nick-clark",
+    "label": "Madison's children",
+    "certainty": "confirmed",
+    "category": "family"
+  },
+  {
+    "id": "strand-madison",
+    "type": "character-character",
+    "fromId": "victor-strand",
+    "toId": "madison-clark",
+    "label": "Uneasy alliance after the outbreak",
+    "certainty": "confirmed",
+    "category": "conflict"
+  },
+  {
+    "id": "daniel-ofelia",
+    "type": "character-character",
+    "fromId": "daniel-salazar",
+    "toId": "ofelia-salazar",
+    "label": "Daniel is Ofelia's father",
+    "certainty": "confirmed",
+    "category": "family"
+  },
+  {
+    "id": "isabelle-laurent",
+    "type": "character-character",
+    "fromId": "isabelle",
+    "toId": "laurent",
+    "label": "Isabelle becomes Laurent's protector in France",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "daryl-quinn",
+    "type": "character-character",
+    "fromId": "daryl-dixon",
+    "toId": "quinn",
+    "label": "Daryl negotiates with Quinn at the Demimonde",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "elton-silas",
+    "type": "character-character",
+    "fromId": "elton-ortiz",
+    "toId": "silas-plaskett",
+    "label": "Part of the Campus Colony scouting quartet",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "felix-huck",
+    "type": "character-character",
+    "fromId": "felix-carlucci",
+    "toId": "huck",
+    "label": "Serve together as Campus Colony security",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "thorne-beale",
+    "type": "character-character",
+    "fromId": "pearl-thorne",
+    "toId": "jonathan-beale",
+    "label": "Thorne serves under Beale in the CRM",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "negan-ginny",
+    "type": "character-character",
+    "fromId": "negan-smith",
+    "toId": "ginny",
+    "label": "Negan cares for Ginny after her father's death",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "perlie-maggie",
+    "type": "character-character",
+    "fromId": "perlie-armstrong",
+    "toId": "maggie-rhee",
+    "label": "Comes to respect Maggie's leadership in Dead City",
+    "certainty": "confirmed",
+    "category": "affiliation"
+  },
+  {
+    "id": "gregory-maggie",
+    "type": "character-character",
+    "fromId": "gregory",
+    "toId": "maggie-rhee",
+    "label": "Gregory resists Maggie's rise as Hilltop's leader",
+    "certainty": "confirmed",
+    "category": "conflict"
+  }
 ]

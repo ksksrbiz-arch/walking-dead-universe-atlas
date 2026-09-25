@@ -1,0 +1,59 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build:vercel",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/j/:ids",
+      "destination": "/api/share?kind=j&id=:ids"
+    },
+    {
+      "source": "/p/:id",
+      "destination": "/api/share?kind=p&id=:id"
+    },
+    {
+      "source": "/e/:id",
+      "destination": "/api/share?kind=e&id=:id"
+    },
+    {
+      "source": "/c/:id",
+      "destination": "/api/share?kind=c&id=:id"
+    },
+    {
+      "source": "/api/atlas/bookmarks",
+      "destination": "https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-bookmarks"
+    },
+    {
+      "source": "/api/atlas/state",
+      "destination": "https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-state"
+    },
+    {
+      "source": "/api/atlas/media",
+      "destination": "https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media"
+    },
+    {
+      "source": "/api/fandom-image",
+      "destination": "https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/data/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    }
+  ]
+}

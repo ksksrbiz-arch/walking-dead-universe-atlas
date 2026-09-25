@@ -1,0 +1,318 @@
+{
+  "version": 1,
+  "source": "curated episode-level relationship evidence",
+  "updatedAt": "2026-09-19",
+  "connections": {
+    "rick-jadis-crm": {
+      "episodeIds": [
+        "twd-s09-e05"
+      ],
+      "basis": "Rick's disappearance/CRM extraction storyline",
+      "evidenceKind": "direct"
+    },
+    "morgan-twd-ftwd": {
+      "episodeIds": [
+        "ftwd-s04-e01"
+      ],
+      "basis": "Morgan's Fear debut and continuation",
+      "evidenceKind": "direct"
+    },
+    "daryl-europe": {
+      "episodeIds": [
+        "daryl-s01-e01"
+      ],
+      "basis": "Daryl's France storyline begins",
+      "evidenceKind": "direct"
+    },
+    "carol-daryl": {
+      "episodeIds": [
+        "twd-s01-e03"
+      ],
+      "basis": "Carol and Daryl are both episode-level character entities",
+      "evidenceKind": "co-presence"
+    },
+    "maggie-negan": {
+      "episodeIds": [
+        "dead-s01-e01"
+      ],
+      "basis": "Maggie and Negan are both central episode-level characters in Dead City",
+      "evidenceKind": "co-presence"
+    },
+    "rick-michonne": {
+      "episodeIds": [
+        "twd-s03-e01"
+      ],
+      "basis": "Rick and Michonne are both episode-level character entities",
+      "evidenceKind": "co-presence"
+    },
+    "dwight-fear": {
+      "episodeIds": [
+        "ftwd-s05-e03"
+      ],
+      "basis": "Dwight's Fear debut",
+      "evidenceKind": "direct"
+    },
+    "sherry-fear": {
+      "episodeIds": [
+        "ftwd-s06-e03"
+      ],
+      "basis": "Sherry's Fear storyline",
+      "evidenceKind": "direct"
+    },
+    "jadis-world-beyond": {
+      "episodeIds": [
+        "wb-s02-e05"
+      ],
+      "basis": "Jadis/Anne appears in World Beyond",
+      "evidenceKind": "direct"
+    },
+    "jadis-owl": {
+      "episodeIds": [
+        "owl-s01-e02"
+      ],
+      "basis": "Jadis/Anne returns in The Ones Who Live",
+      "evidenceKind": "direct"
+    },
+    "michonne-owl": {
+      "episodeIds": [
+        "owl-s01-e01"
+      ],
+      "basis": "Michonne's Ones Who Live storyline begins",
+      "evidenceKind": "direct"
+    },
+    "maggie-dead-city": {
+      "episodeIds": [
+        "dead-s01-e01"
+      ],
+      "basis": "Maggie's Dead City storyline begins",
+      "evidenceKind": "direct"
+    },
+    "negan-dead-city": {
+      "episodeIds": [
+        "dead-s01-e01"
+      ],
+      "basis": "Negan's Dead City storyline begins",
+      "evidenceKind": "direct"
+    },
+    "alpha-tales": {
+      "episodeIds": [
+        "tales-s01-e03"
+      ],
+      "basis": "Tales Episode 3 is the Dee/Alpha origin story",
+      "evidenceKind": "direct"
+    },
+    "lydia-tales": {
+      "episodeIds": [
+        "tales-s01-e03"
+      ],
+      "basis": "Lydia appears in the Dee/Alpha story",
+      "evidenceKind": "direct"
+    },
+    "jenner-world-beyond": {
+      "episodeIds": [
+        "wb-s02-e10"
+      ],
+      "basis": "Jenner appears through archived video",
+      "evidenceKind": "direct"
+    },
+    "jenner-variant-lore": {
+      "episodeIds": [
+        "twd-s01-e06"
+      ],
+      "basis": "Jenner's CDC research anchors the early outbreak lore",
+      "evidenceKind": "direct"
+    },
+    "campus-omaha": {
+      "episodeIds": [
+        "wb-s01-e01"
+      ],
+      "basis": "Campus Colony and Omaha are both represented in the World Beyond opening geography/history",
+      "evidenceKind": "curated-context"
+    },
+    "crm-portland": {
+      "episodeIds": [
+        "wb-s02-e01"
+      ],
+      "basis": "Portland enters the episode-level World Beyond geography/history index",
+      "evidenceKind": "curated-context"
+    },
+    "commonwealth-twd": {
+      "episodeIds": [
+        "twd-s11-e01"
+      ],
+      "basis": "Commonwealth becomes part of the late TWD episode geography",
+      "evidenceKind": "curated-context"
+    },
+    "crm-omaha": {
+      "episodeIds": [
+        "wb-s02-e04"
+      ],
+      "basis": "Felix explicitly confronts Huck over the CRM's responsibility for the destruction of the Campus Colony and Omaha.",
+      "evidenceKind": "direct",
+      "sourcePages": [
+        "https://www.amc.com/blogs/the-walking-dead-world-beyond-q-and-a-nico-tortorella-on-felix-s-superhero-training--1043701"
+      ]
+    },
+    "burazi-dead-city": {
+      "episodeIds": [
+        "dead-s01-e04"
+      ],
+      "basis": "AMC identifies Episode 4 as the battle between Maggie and the Croat's Burazi at Madison Square Garden.",
+      "evidenceKind": "direct",
+      "sourcePages": [
+        "https://www.amc.com/blogs/the-walking-dead-universe-turns-to-the-big-city--1064220"
+      ]
+    },
+    "new-babylon-dead-city": {
+      "episodeIds": [
+        "dead-s01-e01"
+      ],
+      "basis": "Episode 1 introduces Armstrong, a New Babylon marshal who follows Negan into Manhattan.",
+      "evidenceKind": "direct",
+      "sourcePages": [
+        "https://www.amc.com/shows/the-walking-dead-dead-city/episodes/season-1-old-acquaintances--1063092",
+        "https://www.amc.com/blogs/the-walking-dead-dead-city-q-and-a-gaius-charles-on-armstrong-s-commitment-to-law-and-order--1063306"
+      ]
+    },
+    "rick-lori": {
+      "episodeIds": [
+        "twd-s01-e01"
+      ],
+      "basis": "Rick reunites with Lori and Carl in the season 1 premiere",
+      "evidenceKind": "direct"
+    },
+    "abraham-eugene": {
+      "episodeIds": [
+        "twd-s04-e10"
+      ],
+      "basis": "Abraham's group forms around escorting Eugene in \"Inmates\"",
+      "evidenceKind": "direct"
+    },
+    "tyreese-sasha": {
+      "episodeIds": [
+        "twd-s03-e08"
+      ],
+      "basis": "Tyreese and Sasha are both episode-level character entities in \"Made to Suffer\"",
+      "evidenceKind": "co-presence"
+    },
+    "daryl-beth": {
+      "episodeIds": [
+        "twd-s04-e13"
+      ],
+      "basis": "Daryl and Beth's survival arc in \"Alone\"",
+      "evidenceKind": "direct"
+    },
+    "eugene-rosita": {
+      "episodeIds": [
+        "twd-s04-e10"
+      ],
+      "basis": "Eugene and Rosita are both episode-level character entities in \"Inmates\"",
+      "evidenceKind": "co-presence"
+    },
+    "andrea-dale": {
+      "episodeIds": [
+        "twd-s01-e02"
+      ],
+      "basis": "Andrea and Dale are both episode-level character entities in \"Guts\", Andrea's actual TV debut (not the premiere)",
+      "evidenceKind": "co-presence"
+    },
+    "connie-kelly": {
+      "episodeIds": [
+        "twd-s09-e10"
+      ],
+      "basis": "Connie and Kelly are both episode-level character entities in \"Omega\"",
+      "evidenceKind": "co-presence"
+    },
+    "magna-yumiko": {
+      "episodeIds": [
+        "twd-s09-e10"
+      ],
+      "basis": "Magna and Yumiko are both episode-level character entities in \"Omega\"",
+      "evidenceKind": "co-presence"
+    },
+    "madison-travis": {
+      "episodeIds": [
+        "ftwd-s01-e01"
+      ],
+      "basis": "Madison and Travis are introduced together in the Fear pilot",
+      "evidenceKind": "direct"
+    },
+    "alicia-nick": {
+      "episodeIds": [
+        "ftwd-s01-e01"
+      ],
+      "basis": "Alicia and Nick are both episode-level character entities in the Fear pilot",
+      "evidenceKind": "co-presence"
+    },
+    "strand-madison": {
+      "episodeIds": [
+        "ftwd-s01-e04"
+      ],
+      "basis": "Strand's debut and early alliance with Madison in \"Not Fade Away\"",
+      "evidenceKind": "direct"
+    },
+    "daniel-ofelia": {
+      "episodeIds": [
+        "ftwd-s01-e01"
+      ],
+      "basis": "Daniel and Ofelia are both episode-level character entities in the Fear pilot",
+      "evidenceKind": "co-presence"
+    },
+    "isabelle-laurent": {
+      "episodeIds": [
+        "daryl-s01-e01"
+      ],
+      "basis": "Isabelle and Laurent are introduced together in the Daryl Dixon premiere",
+      "evidenceKind": "direct"
+    },
+    "daryl-quinn": {
+      "episodeIds": [
+        "daryl-s01-e04"
+      ],
+      "basis": "Daryl and Quinn's negotiation in \"La Dame de Fer\"",
+      "evidenceKind": "direct"
+    },
+    "elton-silas": {
+      "episodeIds": [
+        "wb-s01-e01"
+      ],
+      "basis": "Elton and Silas are both episode-level character entities in \"Brave\"",
+      "evidenceKind": "co-presence"
+    },
+    "felix-huck": {
+      "episodeIds": [
+        "wb-s01-e01"
+      ],
+      "basis": "Felix and Huck are both episode-level character entities in \"Brave\"",
+      "evidenceKind": "co-presence"
+    },
+    "thorne-beale": {
+      "episodeIds": [
+        "owl-s01-e01"
+      ],
+      "basis": "Thorne and Beale are both episode-level character entities in \"Years\"",
+      "evidenceKind": "co-presence"
+    },
+    "negan-ginny": {
+      "episodeIds": [
+        "dead-s01-e01"
+      ],
+      "basis": "Ginny's introduction living with Negan in \"Old Acquaintances\"",
+      "evidenceKind": "direct"
+    },
+    "perlie-maggie": {
+      "episodeIds": [
+        "dead-s01-e01"
+      ],
+      "basis": "Perlie and Maggie are both episode-level character entities in \"Old Acquaintances\"",
+      "evidenceKind": "co-presence"
+    },
+    "gregory-maggie": {
+      "episodeIds": [
+        "twd-s07-e05"
+      ],
+      "basis": "Gregory and Maggie's leadership conflict in \"Go Getters\"",
+      "evidenceKind": "direct"
+    }
+  }
+}

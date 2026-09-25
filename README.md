@@ -4,30 +4,26 @@ A mobile-first, data-driven atlas for the television **Walking Dead Universe (TW
 
 ## Current architecture
 
-The application is now being migrated from the original standalone prototype to:
+The application is deployed through **Vercel** with GitHub as the source of truth. The Netlify runtime/API layer has been removed from the repo; a Cloudflare Pages mirror still exists as a dashboard-side integration outside this repo's config.
 
 - **React**
 - **TypeScript**
 - **Vite**
-- **Cloudflare Pages**
+- **Vercel**
 - normalized JSON data registries
-
-Cloudflare's React (Vite) preset uses `npm run build` and `dist` as the build directory.
 
 ## Current application
 
-The React shell now provides:
+The React app provides:
 
-- mobile-first map workspace
-- responsive tablet layout
-- universe-year control
-- series filtering
-- location selection
-- timeline view
-- people/relationship view foundation
-- watch-guide foundation
-- normalized series, season, location, event, character, community and faction data
-- initial data-reference validation
+- **Map** — full-bleed dark world map with series-coloured markers, clusters that zoom on tap, a draggable bottom sheet, and a time scrubber with per-series activity for every universe year
+- **Timeline** — series×year heatmap you scrub with a thumb, and all 363 episodes in story order grouped by year
+- **People** — characters (sorted by prominence), communities, factions and documented links
+- **Watch** — chronological watch tracker: progress ring, one-tap "up next", per-series progress, watched state on every episode list (stored in the browser)
+- Detail pages for places, episodes, characters, groups and links with back navigation
+- Global search (`/`), keyboard support, safe-area and reduced-motion aware, phone/tablet/desktop/landscape layouts
+
+UI design rules: `context/references/ui-design-system.md`. Audit and rationale: `docs/UI_AUDIT_AND_REDESIGN_2026-09.md`.
 
 ## Data architecture
 
@@ -65,16 +61,32 @@ Each timeline/geographic entity can carry certainty metadata:
 - `announced`
 - `unknown`
 
-The Atlas deliberately avoids inventing exact dates or fictional travel routes where the source material does not establish them.
+The Atlas deliberately avoids inventing exact dates or fictional travel routes where the source material does not establish them. Character journeys are built only from episode appearances and episode places in story order; see `context/references/journeys-and-sharing.md`.
 
-## Build
+## Journeys & sharing
 
-For Cloudflare Pages:
+Pick a character (People tab, a character page, or "Trace a journey" on the map) to see their route in story order: play it back, step stop by stop with the evidence episodes for every leg, compare up to three characters and where their paths crossed, and turn on spoiler-safe mode to limit everything to episodes you've marked watched. Every journey step, place, episode and character has a shareable link (`/j/…`, `/p/…`, `/e/…`, `/c/…`) with a generated preview card.
+
+## Build & checks
+
+```
+npm run typecheck     # TypeScript over src/
+npm run build         # production build
+npm run audit:atlas   # data/graph integrity
+npm run test:journeys # journey model invariants (story order, evidence, spoiler-safe, crossings)
+npm run test:share    # share pages + OG preview PNGs (run after build)
+npm run test:ui       # browser regression: run `npx playwright install chromium` once, then start `vite preview` (see scripts/ui-smoke.mjs)
+npm run media:manifest # verify every image resolves through the live delivery path (0 broken required)
+npm run media:resize   # regenerate local WebP variants for AMC images (their CDN cannot resize)
+npm run enrich:fandom-entity-galleries # refresh per-entity Fandom galleries (public/data/fandom-galleries)
+```
+
+For Vercel:
 
 - Production branch: `main`
-- Framework preset: **React (Vite)**
+- Framework: **Vite**
 - Build command: `npm run build`
-- Build directory: `dist`
+- Output directory: `dist`
 - Root directory: `/`
 
 ## Roadmap

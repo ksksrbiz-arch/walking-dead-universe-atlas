@@ -14,8 +14,10 @@ import webisodes from "../data/webisodes.json";
 import universeEvents from "../data/universeEvents.json";
 import characterEpisodes from "../data/characterEpisodes.json";
 import locationEpisodes from "../data/locationEpisodes.json";
+import connectionEpisodes from "../data/connectionEpisodes.json";
+import sources from "../data/sources.json";
 
-export const atlasData={series,seasons,seasonMeta,locations,events,universeEvents,characters,communities,factions,connections,watchOrder,episodes,webisodes,media,characterEpisodes,locationEpisodes};
+export const atlasData={series,seasons,seasonMeta,locations,events,universeEvents,characters,communities,factions,connections,watchOrder,episodes,webisodes,media,characterEpisodes,locationEpisodes,connectionEpisodes,sources};
 export type SeriesKey="TWD"|"FTWD"|"TALES"|"WB"|"OWL"|"DARYL"|"DEAD"|"MORE_TALES";
 export type Location=typeof locations[number];
 export type Event=typeof events[number];

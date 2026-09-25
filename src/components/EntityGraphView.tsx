@@ -1,32 +1,162 @@
-import {useMemo,useState} from "react";
+import {useEffect,useMemo,useState} from "react";
 import {atlasData} from "../data";
-import {buildEntityGraph} from "../lib/entityGraph";
+import {entityGraph as graph} from "../lib/entityGraph";
+import {connectionById} from "../lib/lookup";
+import {connectionCategoryLabel} from "../lib/atlasHelpers";
+import {atlasImageUrl,resolveCharacterImage,onAtlasImageError} from "../lib/media";
+import AtlasIcon,{type AtlasIconName} from "./AtlasIcon";
 
-type Props={onCharacter:(id:string)=>void;onLocation:(id:string)=>void};
+type Props={
+ onCharacter:(id:string)=>void;
+ onLocation:(id:string)=>void;
+ onEpisode?:(id:string)=>void;
+ onConnection?:(id:string)=>void;
+ onCommunity?:(id:string)=>void;
+ onFaction?:(id:string)=>void;
+ defaultCollapsed?:boolean;
+ root?:string;
+ heading?:string;
+};
+type Filter="ALL"|"character"|"location"|"community"|"faction"|"series"|"episode"|"connection";
 
-export default function EntityGraphView({onCharacter,onLocation}:Props){
- const graph=useMemo(()=>buildEntityGraph(),[]);
- const [root,setRoot]=useState<string>("character:michonne");
+const labels:Record<string,string>={
+ character:"PEOPLE",location:"PLACES",community:"COMMUNITIES",faction:"FACTIONS",
+ series:"SERIES",episode:"EPISODES",connection:"LINKS"
+};
+
+function labelFor(kind:string,id:string){
+ const pools:any={
+  episode:atlasData.episodes,location:atlasData.locations,character:atlasData.characters,
+  community:atlasData.communities,faction:atlasData.factions,series:atlasData.series,connection:atlasData.connections
+ };
+ const item=pools[kind]?.find((x:any)=>x.id===id);
+ if(kind==="episode")return item?.title||id;
+ return item?.name||item?.title||item?.label||id;
+}
+
+function iconForKind(kind:string):AtlasIconName{
+ if(kind==="character")return "character";
+ if(kind==="location")return "location-link";
+ if(kind==="community")return "community";
+ if(kind==="faction")return "faction";
+ if(kind==="series")return "series";
+ if(kind==="episode")return "episode";
+ return "connection";
+}
+function iconForEdge(type:string):AtlasIconName{
+ if(type==="cross-series")return "cross-series";
+ if(type.includes("character-character"))return "character-link";
+ if(type.includes("character-location"))return "location-link";
+ if(type==="lore")return "lore";
+ if(type.includes("community")||type.includes("EPISODE_CONTEXT"))return "community-link";
+ if(type.includes("EPISODE_GEOGRAPHY"))return "location-link";
+ return "connection";
+}
+
+function confidenceLabel(value:string){
+ return value==="confirmed"?"CONFIRMED":value==="source-derived"?"SOURCE-DERIVED":"APPROXIMATE";
+}
+
+export default function EntityGraphView({onCharacter,onLocation,onEpisode,onConnection,onCommunity,onFaction,defaultCollapsed=false,root:rootProp,heading}:Props){
+ const [root,setRoot]=useState<string>(rootProp??"character:michonne");
+ useEffect(()=>{if(rootProp!==undefined)setRoot(rootProp)},[rootProp]);
+ const [filter,setFilter]=useState<Filter>("ALL");
+ const [categoryFilter,setCategoryFilter]=useState<string>("ALL");
+ const [collapsed,setCollapsed]=useState(defaultCollapsed);
  const rootNode=graph.nodes.get(root);
  const edges=rootNode?graph.adjacency.get(root)||[]:[];
- const related=edges.map(edge=>{
-   const other=edge.from.kind===rootNode?.kind&&edge.from.id===rootNode?.id?edge.to:edge.from;
-   return {edge,other};
- }).filter(x=>x.other.id!==rootNode?.id);
- const title=rootNode?(
-   rootNode.kind==="character"?atlasData.characters.find((x:any)=>x.id===rootNode.id)?.name:
-   rootNode.kind==="location"?atlasData.locations.find((x:any)=>x.id===rootNode.id)?.name:
-   rootNode.kind==="series"?atlasData.series.find((x:any)=>x.id===rootNode.id)?.name:rootNode.id
- ):"Universe";
- const select=(kind:string,id:string)=>{setRoot(kind+":"+id);if(kind==="character")onCharacter(id);if(kind==="location")onLocation(id)};
- return <section className="entityGraph" aria-label="Universe relationship graph">
-   <div className="entityGraphHead"><div><small>RELATIONSHIP GRAPH</small><b>{title||"Universe"}</b></div><span>{related.length} connected</span></div>
-   <div className="entityGraphNodes">
-    {related.slice(0,18).map(({edge,other})=>{
-      const label=other.kind==="character"?atlasData.characters.find((x:any)=>x.id===other.id)?.name:other.kind==="location"?atlasData.locations.find((x:any)=>x.id===other.id)?.name:other.id;
-      return <button key={edge.id} onClick={()=>select(other.kind,other.id)}><i>{other.kind}</i><b>{label||other.id}</b><small>{edge.type.replaceAll("_"," ")} · {edge.confidence}</small></button>
-    })}
-    {!related.length&&<p className="muted">No indexed relationships for this entity yet.</p>}
+ const related=useMemo(()=>{
+   const grouped=new Map<string,{other:any;edges:any[]}>();
+   for(const edge of edges){
+     const other=edge.from.kind===rootNode?.kind&&edge.from.id===rootNode?.id?edge.to:edge.from;
+     if(other.id===rootNode?.id)continue;
+     const k=other.kind+":"+other.id;
+     const existing=grouped.get(k);
+     if(existing)existing.edges.push(edge); else grouped.set(k,{other,edges:[edge]});
+   }
+   // A connection's category (family/affiliation/conflict/crossover, see
+   // data/README.md) rides on the direct endpoint-to-endpoint edge's
+   // evidenceId, which is the connection's own id when the edge came from a
+   // real documented connection rather than an episode-context bridge.
+   return [...grouped.values()].map(g=>({...g,category:g.edges.map((e:any)=>connectionById.get(e.evidenceId)?.category).find(Boolean) as string|undefined}));
+ },[edges,rootNode]);
+ const kindFiltered=filter==="ALL"?related:related.filter(x=>x.other.kind===filter);
+ const categoryCounts=kindFiltered.reduce<Record<string,number>>((acc,x)=>{
+   if(x.category)acc[x.category]=(acc[x.category]||0)+1;
+   return acc;
+ },{});
+ const visible=categoryFilter==="ALL"?kindFiltered:kindFiltered.filter(x=>x.category===categoryFilter);
+ const counts=related.reduce<Record<string,number>>((acc,x)=>{
+   acc[x.other.kind]=(acc[x.other.kind]||0)+1;
+   return acc;
+ },{});
+ const title=rootNode?labelFor(rootNode.kind,rootNode.id):"Universe";
+
+ const select=(kind:string,id:string)=>{
+   setRoot(kind+":"+id);
+   setFilter("ALL");
+   setCategoryFilter("ALL");
+   setCollapsed(false);
+   if(kind==="character")onCharacter(id);
+   if(kind==="location")onLocation(id);
+   if(kind==="episode")onEpisode?.(id);
+   if(kind==="connection")onConnection?.(id);
+   if(kind==="community")onCommunity?.(id);
+   if(kind==="faction")onFaction?.(id);
+ };
+
+ return <section className={"entityGraph"+(collapsed?" isCollapsed":"")} aria-label="Universe relationship graph">
+   <div className="entityGraphHead">
+    <div>
+      <small>{heading||"RELATIONSHIP GRAPH"}</small>
+      <b>{title||"Universe"}</b>
+      <span className="entityGraphSub">{rootNode?.kind||"entity"} · {related.length} indexed relationships</span>
+    </div>
+    <div className="entityGraphHeadAction">
+      <span className="entityGraphCount">{related.length} RELATIONSHIPS</span>
+      <button className="entityGraphToggle" onClick={()=>setCollapsed(v=>!v)} aria-expanded={!collapsed} aria-label={collapsed?"Expand relationship graph":"Collapse relationship graph"}>
+        {collapsed?"SHOW":"HIDE"}
+      </button>
+    </div>
    </div>
+
+   {!collapsed&&related.length>0&&<div className="entityGraphFilters" aria-label="Relationship filters" role="group">
+    <button className={filter==="ALL"?"active":""} onClick={()=>{setFilter("ALL");setCategoryFilter("ALL")}} aria-pressed={filter==="ALL"}>ALL <b>{related.length}</b></button>
+    {Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)).map(([kind,count])=>
+      <button key={kind} className={filter===kind?"active":""} onClick={()=>{setFilter(kind as Filter);setCategoryFilter("ALL")}} aria-pressed={filter===kind}>
+        {labels[kind]||kind.toUpperCase()} <b>{count}</b>
+      </button>
+    )}
+   </div>}
+
+   {!collapsed&&Object.keys(categoryCounts).length>0&&<div className="entityGraphFilters entityGraphCategoryFilters" aria-label="Relationship category filters" role="group">
+    <button className={categoryFilter==="ALL"?"active":""} onClick={()=>setCategoryFilter("ALL")} aria-pressed={categoryFilter==="ALL"}>ALL TYPES <b>{kindFiltered.length}</b></button>
+    {Object.entries(categoryCounts).sort(([a],[b])=>a.localeCompare(b)).map(([category,count])=>
+      <button key={category} className={categoryFilter===category?"active":""} onClick={()=>setCategoryFilter(category)} aria-pressed={categoryFilter===category}>
+        {connectionCategoryLabel(category).toUpperCase()} <b>{count}</b>
+      </button>
+    )}
+   </div>}
+
+   {!collapsed&&<div className="entityGraphNodes">
+    {visible.slice(0,18).map(({edges:edgeList,other})=>{
+      const primary=edgeList[0];
+      const text=labelFor(other.kind,other.id);
+      const episode=other.kind==="episode"?atlasData.episodes.find((e:any)=>e.id===other.id):null;
+      const types=[...new Set(edgeList.map((edge:any)=>edge.type.replaceAll("_"," ")))];
+      const evidence=edgeList.filter((edge:any)=>edge.evidenceId).length;
+      const characterRecord=other.kind==="character"?atlasData.characters.find((c:any)=>c.id===other.id) as any:null;
+      const portrait=characterRecord?resolveCharacterImage(characterRecord.id,characterRecord.name,characterRecord.seriesIds).image:"";
+      return <button key={other.kind+":"+other.id} className={"entityGraphNode kind-"+other.kind} onClick={()=>select(other.kind,other.id)}>
+       <span className="entityGraphNodeTop"><i><AtlasIcon name={iconForKind(other.kind)} />{labels[other.kind]||other.kind.toUpperCase()}</i><em><AtlasIcon name={iconForEdge(primary.type)} />{confidenceLabel(primary.confidence)}</em></span>
+       <b>{portrait&&<img className="entityGraphNodeAvatar" src={atlasImageUrl(portrait,80)} onError={e=>onAtlasImageError(e,portrait)} loading="lazy" decoding="async" alt=""/>}{!portrait&&<AtlasIcon name={iconForEdge(primary.type)} />}{text}</b>
+       {episode
+         ? <small>{episode.seriesId?.toUpperCase()} · S{String(episode.seasonId).slice(-2)}E{String(episode.episodeNumber).padStart(2,"0")} · {episode.timelineStart??"?"}{edgeList.length>1?" · "+edgeList.length+" indexed links":""}</small>
+         : <small>{types.slice(0,2).join(" · ")}{types.length>2?" · +"+(types.length-2)+" types":""}{evidence?" · "+evidence+" episode evidence"+(evidence===1?"":"s"):""}{primary.to.kind==="connection"||primary.from.kind==="connection"?" · DOCUMENTED LINK":""}</small>}
+      </button>;
+    })}
+    {!visible.length&&<p className="muted">No indexed relationships in this category.</p>}
+    {visible.length>18&&<div className="entityGraphMore">Showing 18 of {visible.length} related entities</div>}
+   </div>}
  </section>;
 }

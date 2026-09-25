@@ -25,6 +25,7 @@ const SITEMAPS = [
   `${BASE}/sitemap/sitemap.xml`
 ];
 const MANIFEST = "data/episodeMedia.json";
+const MEDIA = "data/media.json";
 
 const SERIES_SLUGS = {
   twd: "the-walking-dead",
@@ -63,6 +64,9 @@ const SLUG_ALIASES = {
 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const REQUEST_RETRIES = Number(process.env.AMC_REQUEST_RETRIES || 3);
+const REQUEST_DELAY_MS = Number(process.env.AMC_REQUEST_DELAY_MS || 75);
+
 
 function stripHtml(value = "") {
   return value
@@ -216,22 +220,53 @@ function extractImage(html) {
 }
 
 async function fetchText(url) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 12000);
-  const response = await fetch(url, {
-    headers: {
-      "user-agent": "TWDU-Atlas-media-ingestor/1.0",
-      accept: "text/html,application/xml,text/xml;q=0.9,*/*;q=0.8"
-    },
-    signal: controller.signal
-  });
-  clearTimeout(timeout);
-
-  if (!response.ok) {
-    throw new Error(`${response.status} ${response.statusText}`);
+  let lastError = null;
+  for (let attempt = 1; attempt <= REQUEST_RETRIES; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "user-agent": "TWDU-Atlas-media-ingestor/2.0",
+          accept: "text/html,application/xml,text/xml;q=0.9,*/*;q=0.8"
+        },
+        signal: controller.signal
+      });
+      if (!response.ok) {
+        lastError = new Error(response.status + " " + response.statusText);
+        const retryable = response.status === 408 || response.status === 425 || response.status === 429 || response.status >= 500;
+        if (!retryable || attempt === REQUEST_RETRIES) break;
+        await sleep(Math.min(5000, 500 * 2 ** (attempt - 1)));
+        continue;
+      }
+      return await response.text();
+    } catch (error) {
+      lastError = error;
+      if (attempt < REQUEST_RETRIES) await sleep(Math.min(5000, 500 * 2 ** (attempt - 1)));
+    } finally {
+      clearTimeout(timeout);
+    }
   }
-
-  return response.text();
+  throw lastError || new Error("AMC request failed");
+}
+function applySeriesFallbacks(manifest, media) {
+  let fallbackCount = 0;
+  for (const [id, episode] of Object.entries(manifest.episodes)) {
+    if (episode.status === "verified" && episode.image) continue;
+    const series = media.series?.[episode.seriesId];
+    if (!series?.keyArt) continue;
+    manifest.episodes[id] = {
+      ...episode,
+      status: "fallback",
+      kind: "series-key-art-fallback",
+      image: series.keyArt,
+      sourcePage: series.sourcePage,
+      source: "amc-series-art",
+      fallbackForEpisode: true
+    };
+    fallbackCount++;
+  }
+  return fallbackCount;
 }
 
 function findManifestEpisode(manifest, id) {
@@ -244,6 +279,7 @@ function findManifestEpisode(manifest, id) {
 
 async function main() {
   const manifest = JSON.parse(await readFile(MANIFEST, "utf8"));
+  const media = JSON.parse(await readFile(MEDIA, "utf8"));
   const urlsSet = new Set();
 
   for (const url of await discoverSeriesPageUrls()) urlsSet.add(url);
@@ -298,7 +334,7 @@ async function main() {
           verified++;
         }
 
-        await sleep(75);
+        await sleep(REQUEST_DELAY_MS);
       } catch (error) {
         failed++;
         console.warn("Media fetch failed:", url, error?.message || error);
@@ -307,6 +343,8 @@ async function main() {
   });
 
   await Promise.all(workers);
+
+  const fallbacks = applySeriesFallbacks(manifest, media);
 
   manifest.updatedAt = new Date().toISOString();
   manifest.coverage = Object.keys(manifest.episodes).length;
@@ -317,7 +355,7 @@ async function main() {
   await writeFile(MANIFEST, JSON.stringify(manifest, null, 2) + "\n");
 
   console.log(
-    `Matched ${matched}; verified this run ${verified}; failed ${failed}; total verified now ${manifest.verified}/${manifest.coverage}.`
+    `Matched ${matched}; verified this run ${verified}; fallbacks applied ${fallbacks}; failed ${failed}; available ${manifest.available}/${manifest.coverage}; verified episode assets ${manifest.verified}/${manifest.coverage}.`
   );
 }
 

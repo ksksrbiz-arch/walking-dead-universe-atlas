@@ -1,0 +1,19 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      npm_and_yarn:
+        patterns:
+          - "*"
+    ignore:
+      # @vercel/og 1.x does a dynamic require("fs") that Node's native ESM
+      # loader can't support — Vercel runs api/og.ts this way (no bundler),
+      # so 1.x is a hard production 500 (FUNCTION_INVOCATION_FAILED,
+      # "Dynamic require of \"fs\" is not supported"), confirmed against a
+      # real deployment. Patch releases within 0.11.x (security fixes
+      # included) are still allowed. See context/references/journeys-and-sharing.md.
+      - dependency-name: "@vercel/og"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]

@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "entityTypes": [
+    "series",
+    "season",
+    "episode",
+    "character",
+    "location",
+    "community",
+    "faction",
+    "event",
+    "connection"
+  ],
+  "matchPolicy": {
+    "exactCanonicalId": 1,
+    "externalId": 1,
+    "normalizedName": 0.92,
+    "alias": 0.88,
+    "namePlusSeries": 0.96,
+    "namePlusType": 0.95,
+    "fuzzyName": 0.72
+  },
+  "autoAcceptThreshold": 0.97,
+  "reviewThreshold": 0.72,
+  "rejectBelow": 0.72,
+  "fieldPolicy": {
+    "canonical": "Canonical Atlas data wins unless a higher-priority source provides stronger evidence and the change is explicitly reviewed.",
+    "enrichment": "New fields may be proposed automatically when they do not conflict with canonical fields.",
+    "relationships": "Relationships require source evidence and must be reversible.",
+    "coordinates": "Never convert unknown coordinates to 0,0. Unknown coordinates remain null and are excluded from map rendering.",
+    "chronology": "External chronology is advisory until validated against existing chronology and source evidence."
+  },
+  "provenance": {
+    "required": [
+      "sourceId",
+      "sourceUrl",
+      "retrievedAt",
+      "sourceRecordId"
+    ],
+    "retainRawPayload": true,
+    "retainHash": true
+  }
+}
