@@ -1,6 +1,6 @@
 import type {CSSProperties} from "react";
 
-type Props={enabled:boolean;year:number;project:(lat:number,lng:number)=>{x:number;y:number};onSelect:()=>void};
+type Props={enabled:boolean;year:number;project?:(lat:number,lng:number)=>{x:number;y:number};onSelect:()=>void};
 
 /**
  * M1 regional horde overlay. Coordinates are projected from a real geographic
@@ -12,17 +12,17 @@ export default function HordeLayer({enabled,year,project,onSelect}:Props){
 
  // Keep the prototype in the southeastern US, starting near Atlanta and
  // moving gradually northeast as the universe-year scrubber advances.
- const elapsed=Math.max(0,Math.min(16,year-2010));
+ const projectPoint=project??((latitude:number,longitude:number)=>({x:500+longitude*(476/180),y:300-latitude*(278/90)}));\n const elapsed=Math.max(0,Math.min(16,year-2010));
  const lat=33.75+elapsed*0.24;
  const lng=-84.39+elapsed*0.32;
- const center=project(lat,lng);
- const west=project(lat-0.75,lng-2.4);
- const east=project(lat+0.75,lng+2.4);
+ const center=projectPoint(lat,lng);
+ const west=projectPoint(lat-0.75,lng-2.4);
+ const east=projectPoint(lat+0.75,lng+2.4);
  const x=center.x,y=center.y;
  const dx=east.x-west.x,dy=east.y-west.y;
- const routeStart=project(lat-1.1,lng-3.8);
- const routeMid=project(lat+0.2,lng-1.6);
- const routeEnd=project(lat+1.2,lng+2.6);
+ const routeStart=projectPoint(lat-1.1,lng-3.8);
+ const routeMid=projectPoint(lat+0.2,lng-1.6);
+ const routeEnd=projectPoint(lat+1.2,lng+2.6);
  const walkers=Array.from({length:52},(_,i)=>({
   x:Math.sin(i*12.9898)*Math.max(8,Math.abs(dx)*0.075)+(i%7-3)*2.4,
   y:Math.cos(i*7.233)*Math.max(6,Math.abs(dx)*0.045)+(Math.floor(i/7)-3)*1.8,
