@@ -1,4 +1,4 @@
-import { readBlobJson, cachedJson, json } from "../_lib/vercel-atlas.ts";
+import { readBlobJson, cachedJson, json } from "../_lib/vercel-atlas";
 
 export default async function handler(req: Request) {
   if (req.method !== "GET") return new Response("Method Not Allowed", { status: 405, headers: { Allow: "GET" } });
@@ -15,7 +15,6 @@ export default async function handler(req: Request) {
       const collection = await readBlobJson<Record<string, unknown>>(type + ".json");
       return collection?.[id] ?? null;
     }, 600);
-
     if (!entity) return json({ ok: false, error: "Entity not found" }, { status: 404 });
     return json({ ok: true, type, id, entity });
   } catch (error) {
