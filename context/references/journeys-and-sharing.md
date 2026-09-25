@@ -63,13 +63,14 @@ Header (faces, share, exit) → player → stats (single) or per-person rows (co
 
 ## Preview cards (server)
 - `src/lib/shareIndex.ts`: `buildShareIndex()` computes names, stats, journey stop coordinates, legs and beat ranks, and Fandom preview images (resized, `format=original` so they arrive as JPEG/PNG). `vite.config.ts` writes it to `dist/share-index.json` (≈225 KB) with 1:110m land.
-- `api/_lib/atlas-share.ts` (must live under `api/` — Vercel's Node function bundler does not trace/include a sibling module outside `api/`, which is exactly the bug that took `/api/og` and `/api/share` down in production before this was caught): loads the index (local `dist/` first, then the deployment's `/share-index.json`), then:
+- `api/og.ts` and `api/share.ts` each carry their own copy of the loader/resolver logic below — **duplicated on purpose, not imported.** Vercel runs every `api/*.ts` file individually; empirically its build does not reliably make a module imported from elsewhere under `api/` available at runtime (confirmed for a top-level `lib/`, an `api/_lib/` helper, and a plain sibling re-export — all threw `ERR_MODULE_NOT_FOUND` in production while working fine locally, since `tsc`/esbuild resolve across files and Vercel's actual runtime doesn't). `npm run check:api-imports` (`scripts/check-api-imports.mjs`) enforces this: no `api/*.ts` file may import another local file, and every one is actually `import()`-ed with plain Node (the same way Vercel runs them) to catch a syntax construct too — this is also how a stray backslash in `api/health.ts`'s regex literal, invisible to `tsc`, was caught. The shared logic itself:
+  - loads the index (local `dist/` first, then the deployment's `/share-index.json`), then:
   - `resolveCard`: unknown ids → null
   - `shareHtml`: OG/Twitter meta, canonical URL, meta refresh + `location.replace`, everything HTML-escaped
   - `cardElement`: Satori tree built with `h()`. Single children are passed unwrapped; Satori demands `display:flex` for any children array.
   - `imageData`: 3.5 s timeout, JPEG/PNG/GIF only, else no image
 - `api/share.ts`: HTML. Unknown → 302 to `/`.
-- `api/og.ts`: 1200×630 PNG via `@vercel/og` **~0.11** (1.0.x fails to load its harfbuzz wasm outside Vercel's bundler). Cached 1 day at the browser, 7 days at the edge.
+- `api/og.ts`: 1200×630 PNG via `@vercel/og` **^0.11** (pinned — confirmed against a real deployment, not just locally: `@vercel/og` 1.x does a dynamic `require("fs")` that Node's native ESM loader can't support, and Vercel runs `api/*.ts` this way with no bundling step, so 1.x is a hard `FUNCTION_INVOCATION_FAILED` in production. `.github/dependabot.yml` blocks Dependabot from bumping past 0.11.x for this package; if it ever proposes an upgrade anyway, verify against a real deployment — see api/og.ts's header comment and the self-contained-api-file rule above — before merging it, the way #53/#57/#59 didn't). Cached 1 day at the browser, 7 days at the edge.
 - `vercel.json` rewrites `/j/:ids`, `/p/:id`, `/e/:id`, `/c/:id` → `/api/share?kind=…&id=…`.
 - Functions never import atlas data directly. Node ESM JSON imports without import attributes are not safe in unbundled functions, so the data arrives through the index.
 
