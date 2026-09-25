@@ -78,7 +78,7 @@ These commands create diagnostic/candidate files under data/enrichment/. They do
 
 ## Deployment trigger
 
-This branch uses Netlify deploy previews for enrichment validation; pushing a new commit to the branch triggers the configured preview build.
+This repo deploys through Vercel; pushing a new commit triggers a preview build for enrichment validation. (Historical note: this pipeline originally validated against Netlify deploy previews before the Netlify runtime was removed from the repo.)
 
 ## Media delivery — what is actually live
 
