@@ -159,6 +159,8 @@ export default function App(){
  const mapSvgRef=useRef<SVGSVGElement|null>(null);
  const mapWorldRef=useRef<SVGGElement|null>(null);
  const raf=useRef<number|null>(null);
+ const visual=useRef({x:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_X:0,y:typeof window!=="undefined"&&window.innerWidth<700?MOBILE_HOME_Y:0,zoom:1});
+ const [isMobileMap,setIsMobileMap]=useState(()=>typeof window!=="undefined"&&window.innerWidth<700);
  const flight=useRef<number|null>(null);
  const visual=useRef({x:0,y:0,zoom:1});
  const didAutoHome=useRef(false);
@@ -850,6 +852,26 @@ export default function App(){
     {bigDock?<AtlasTimelineDock year={year} onYearChange={onYearScrub} series={series} onEpisode={id=>showEpisodeOnMap(id)} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>:scrubber}
    </div>}
 
+    {!isMobileMap&&<AtlasTimelineDock year={year} onYearChange={y=>{setPlaying(false);setYear(y)}} series={series} onEpisode={selectAtlasEpisode} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>}
+
+    {isMobileMap&&view==="map"&&!selectedLocation&&!selectedCharacter&&<MobileTimeBar year={year} playing={playing} onYearChange={y=>{setPlaying(false);setYear(y)}} onTogglePlaying={()=>setPlaying(v=>!v)}/>}
+
+    <div className={`timeMachine ${sheet==="open"?"sheetOpen":""}`}>
+      <div className="timeMachineHead"><div><small>UNIVERSE TIME</small><b>{year}</b></div><button onClick={()=>setPlaying(v=>!v)} aria-label={playing?"Pause chronology":"Play chronology"}><Icon name={playing?"pause":"play"}/></button></div>
+      <input aria-label="Universe year" type="range" min="2010" max="2027" value={year} onChange={e=>{setPlaying(false);setYear(Number(e.target.value))}}/>
+      <div className="timeScale"><span>2010 · OUTBREAK</span><span>2014</span><span>2018</span><span>2022</span><span>2027</span></div>
+    </div>
+
+    {searchOpen&&<div className="searchOverlay"><div className="searchOverlayHead"><b>SEARCH THE ATLAS</b><button onClick={()=>setSearchOpen(false)} aria-label="Close search"><Icon name="close"/></button></div><div className="searchOverlayInput"><Icon name="search"/><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="Place, person, episode, faction…"/>{query&&<button onClick={()=>setQuery("")}><Icon name="close"/></button>}</div>{query&&<div className="searchOverlayResults">{searchResults.length?searchResults.map(r=><button key={r.kind+r.id} onClick={()=>{if(r.kind==="location"){const l=atlasData.locations.find(x=>x.id===r.id);if(l)selectLocation(l)}else if(r.kind==="episode")selectEpisode(r.id);else if(r.kind==="character")selectCharacter(r.id);else{setView("people");setSheet("open")}setQuery("");setSearchOpen(false)}}><span className="resultIcon">{r.kind==="episode"?"EP":r.kind.slice(0,2).toUpperCase()}</span><span className="resultText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron"/></button>):<div className="emptySearch">No matching atlas records.</div>}</div>}</div>}
+
+    <section className={`contentPanel ${sheet} ${selectedLoc||selectedEp||selectedCharacter?"hasDetail":""}`}>
+      <button className="panelGrab" onClick={()=>setSheet(v=>v==="open"?"peek":"open")} aria-label="Toggle information panel"><span/></button>
+      <div className={`panelHeader ${selectedLoc||selectedEp||selectedCharacter?"detailHeader":""}`}>
+       <div><small>{selectedLoc?SERIES_BY_ID[selectedLoc.seriesId]?.name:selectedEp?SERIES_BY_ID[selectedEp.seriesId]?.name:view==="map"?"ATLAS":"TWDU ATLAS"}</small><h2>{selectedLoc?.name||selectedEp?.title||((selectedCharacter&&atlasData.characters.find((x:any)=>x.id===selectedCharacter)?.name)||null)||(view==="map"?`${year} · ${mapYearCount} mapped`:view==="timeline"?"Chronology":"Field guide")}</h2></div>
+       {(selectedLoc||selectedEp||selectedCharacter)&&<button className="closePanel" onClick={()=>{setSelectedLocation(null);setSelectedEpisode(null);setSelectedCharacter(null)}}><Icon name="close"/></button>}
+      </div>
+      {selectedLoc?<LocationDetail location={selectedLoc} onEpisode={selectEpisode}/>:selectedEp?<EpisodeDetail episode={selectedEp} onLocation={selectLocation} onEpisode={selectEpisode}/>:selectedCharacter?<CharacterDetail characterId={selectedCharacter} onEpisode={selectEpisode} onLocation={selectLocation}/>:view==="map"?<MapContent locations={locations} onSelect={selectLocation}/>:view==="timeline"?<TimelineContent episodes={episodes} onEpisode={selectEpisode}/>:view==="people"?<PeopleContent onCharacter={selectCharacter} onLocation={id=>{const l=atlasData.locations.find(x=>x.id===id);if(l)selectLocation(l)}}/>:<GuideContent errors={dataErrors}/>}
+    </section>
    {clusterIds&&<div className="popover clusterSheet" role="dialog" aria-labelledby="cluster-title">
     <header><b id="cluster-title">{clusterIds.length} places here</b><button className="iconBtn ghost" onClick={()=>setClusterIds(null)} aria-label="Close"><Icon name="close"/></button></header>
     <div className="stack">{clusterIds.map(id=>{const l=locationById.get(id);if(!l)return null;return <button key={id} className="row placeRow" style={{"--c":seriesColor(l.seriesId)} as CSSProperties} onClick={()=>{setClusterIds(null);openLocation(id)}}><span className="placeGlyph"><AtlasIcon name={locationIconName(l.type)}/></span><span className="rowText"><small>{SERIES_BY_ID[l.seriesId]?.short} · {prettyType(l.type)} · {l.year}</small><b>{l.name}</b></span><Icon name="chevron" className="rowChevron"/></button>})}</div>
@@ -889,3 +911,33 @@ export default function App(){
  </div>
  </AtlasContext.Provider>;
 }
+
+function CharacterDetail({characterId,onEpisode,onLocation}:{characterId:string;onEpisode:(id:string)=>void;onLocation:(l:Location)=>void}){
+ const character=atlasData.characters.find((x:any)=>x.id===characterId) as any;
+ if(!character)return null;
+ const eps=getCharacterEpisodeIds(characterId).map(id=>atlasData.episodes.find((e:any)=>e.id===id)).filter(Boolean).sort((a:any,b:any)=>Number(a.timelineStart??a.timelineEnd??9999)-Number(b.timelineStart??b.timelineEnd??9999));
+ const locations=[...new Set(eps.flatMap((e:any)=>e.locationIds??[]))].map(id=>atlasData.locations.find(l=>l.id===id)).filter(Boolean) as Location[];
+ const links=atlasData.connections.filter((x:any)=>x.fromId===characterId||x.toId===characterId);
+ const neighborhood=getEntityNeighborhood("character",characterId).slice(0,16);
+ const graphLabel=(ref:{kind:string;id:string})=>{const pools:any={episode:atlasData.episodes,location:atlasData.locations,character:atlasData.characters,community:atlasData.communities,faction:atlasData.factions,connection:atlasData.connections,series:atlasData.series,season:atlasData.seasons};return pools[ref.kind]?.find((x:any)=>x.id===ref.id)?.name||pools[ref.kind]?.find((x:any)=>x.id===ref.id)?.title||ref.id};
+ return <div className="contentScroll">
+  <div className="entityHero"><div className="entityHeroCopy"><span>CHARACTER · {(character.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")}</span><h3>{character.name}</h3><p>{character.certainty||"tracked"} · {eps.length} linked episodes</p></div></div>
+  <div className="detailGrid"><div><small>EPISODES</small><b>{eps.length}</b></div><div><small>LOCATIONS</small><b>{locations.length}</b></div><div><small>SERIES</small><b>{(character.seriesIds||[]).length}</b></div><div><small>LINKS</small><b>{links.length}</b></div></div>
+  <div className="sectionTitle">CHARACTER JOURNEY <span>{eps.length}</span></div>
+  {eps.length?<div className="timelineList characterJourney">{eps.map((e:any)=><button key={e.id} onClick={()=>onEpisode(e.id)}><strong>{e.timelineStart??"?"}</strong><div><small>{SERIES_BY_ID[e.seriesId]?.short} · S{String(e.seasonId).slice(-2)}E{String(e.episodeNumber).padStart(2,"0")}</small><b>{e.title}</b><span>{(e.locationIds||[]).length} locations · {e.certainty}</span></div></button>)}</div>:<p className="muted">No episode-level character links have been recorded yet.</p>}
+  <div className="sectionTitle">GEOGRAPHY <span>{locations.length}</span></div>
+  <div className="miniTags locationLinks">{locations.map(l=><button key={l.id} onClick={()=>onLocation(l)}><Icon name="pin"/>{l.name}</button>)}</div>
+  {links.length>0&&<><div className="sectionTitle">CONNECTIONS <span>{links.length}</span></div><div className="connectionLinks">{links.map((x:any)=><article key={x.id}><small>{x.type}</small><b>{x.label}</b><span>{x.fromId} ↔ {x.toId} · {x.certainty}</span></article>)}</div></>}
+  {neighborhood.length>0&&<><div className="sectionTitle">ENTITY GRAPH <span>{neighborhood.length}</span></div><div className="connectionLinks graphLinks">{neighborhood.map((x:any,i:number)=><article key={x.ref.kind+x.ref.id+i}><small>{x.type} · {x.ref.kind.toUpperCase()}</small><b>{graphLabel(x.ref)}</b><span>{x.confidence}</span></article>)}</div></>}
+ </div>;
+}
+
+function PeopleContent({onCharacter,onLocation}:{onCharacter:(id:string)=>void;onLocation:(id:string)=>void}){return <div className="contentScroll">
+ <div className="peopleHero"><div><small>PEOPLE INDEX</small><b>{atlasData.characters.length} tracked characters</b></div><span>{atlasData.connections.length} known connections</span></div><EntityGraphView onCharacter={onCharacter} onLocation={onLocation}/>
+ <div className="sectionTitle">CHARACTERS <span>{atlasData.characters.length}</span></div>
+ <div className="peopleGrid">{atlasData.characters.map(c=>{const cm=(atlasData as any).media?.characters?.[c.id];return <button className="entityCard characterCard" key={c.id} onClick={()=>onCharacter(c.id)}>{cm?.image&&<img src={atlasImageUrl(cm.image,640)} onError={e=>onAtlasImageError(e,cm.image)} srcSet={atlasImageSrcSet(cm.image,[320,480,640])} sizes="45vw" loading="lazy" decoding="async" alt="" className="characterArt"/>}<span><small>CHARACTER</small><b>{c.name}</b><em>{(c.seriesIds||[]).map((id:string)=>SERIES_BY_ID[id]?.short).filter(Boolean).join(" · ")||c.certainty}</em></span><Icon name="chevron"/></button>})}</div>
+ <div className="sectionTitle">FACTIONS <span>{atlasData.factions.length}</span></div><div className="miniTags">{atlasData.factions.map(f=><span key={f.id}>{f.name}</span>)}</div>
+ <div className="sectionTitle">CROSS-SERIES CONNECTIONS <span>{atlasData.connections.length}</span></div><div className="timelineList">{atlasData.connections.map((c:any)=><article key={c.id}><strong>↔</strong><div><small>{c.type}</small><b>{c.label}</b><span>{c.fromId} → {c.toId} · {c.certainty}</span></div></article>)}</div>
+ </div>}
+
+function GuideContent({errors}:{errors:string[]}){const episodeCount=atlasData.seasonMeta.reduce((n:any,x:any)=>n+x.episodeCount,0);const art=(atlasData as any).media?.series?.twd?.keyArt;return <div className="contentScroll"><div className="guideHero">{art&&<img src={atlasImageUrl(art,1200)} onError={e=>onAtlasImageError(e,art)} srcSet={atlasImageSrcSet(art)} sizes="(max-width: 699px) 94vw, 470px" loading="eager" decoding="async" fetchPriority="high" alt="" className="guideArt"/>}<div className="guideHeroCopy"><span>ATLAS ENGINE</span><h3>A living field guide to the entire TV universe.</h3><p>Geography, chronology, people and connections are rendered from the same normalized data layer.</p></div></div><div className="guideStats"><div><b>{atlasData.series.length}</b><span>SERIES</span></div><div><b>{atlasData.seasons.length}</b><span>SEASONS</span></div><div><b>{atlasData.locations.length}</b><span>LOCATIONS</span></div><div><b>{episodeCount}</b><span>EPISODES</span></div></div><div className="mediaCoverage"><div><small>MEDIA INGESTION</small><b>{Object.values((episodeMedia as any).episodes||{}).filter((m:any)=>m.status==="verified").length} / {episodeCount}</b></div><span>official episode assets verified · ingestion runs incrementally at build time</span><i style={{width:`${Math.round(Object.values((episodeMedia as any).episodes||{}).filter((m:any)=>m.status==="verified").length/episodeCount*100)}%`}}/></div><div className="guideStats"><div><b>{Object.values((atlasData as any).locationEpisodes.episodesByLocation||{}).filter((x:any)=>x.length).length}</b><span>LOCATIONS LINKED</span></div><div><b>{episodeCount-Object.values((episodeMedia as any).episodes||{}).filter((m:any)=>m.status==="verified").length}</b><span>MEDIA PENDING</span></div><div><b>LIVE</b><span>BROWSER METRICS</span></div><div><b>LIVE</b><span>GESTURE TELEMETRY</span></div></div><div className="sectionTitle">ENTITY GRAPH <span>{entityGraph.nodes.size} nodes · {entityGraph.edges.length} edges</span></div><div className="guideStats"><div><b>{Object.keys((atlasData as any).characterEpisodes.episodesByCharacter||{}).length}</b><span>CHARACTER INDEXES</span></div><div><b>{Object.keys((atlasData as any).locationEpisodes.episodesByLocation||{}).length}</b><span>LOCATION INDEXES</span></div><div><b>{entityGraph.edges.filter(e=>e.type==="FEATURES").length}</b><span>CHARACTER EDGES</span></div><div><b>{entityGraph.edges.filter(e=>e.type==="OCCURS_AT").length}</b><span>LOCATION EDGES</span></div></div><div className="sectionTitle">WATCH ORDER <span>{atlasData.watchOrder.filter((x:any)=>x.type!=="note").length} segments</span></div><div className="watchOrder">{atlasData.watchOrder.filter((x:any)=>x.type!=="note").map((x:any,i)=><article key={x.id}><strong>{String(i+1).padStart(2,"0")}</strong><div><small>{SERIES_BY_ID[x.seriesId]?.name}</small><b>{x.startSeason===x.endSeason?"Season "+x.startSeason:"Seasons "+x.startSeason+"–"+x.endSeason}</b><span>{x.certainty} · series-level scaffold</span></div></article>)}</div><article className="statusCard"><small>DATA VALIDATION</small><b>{errors.length?"REVIEW REFERENCES":"REGISTRY HEALTHY"}</b><span>{errors.length?errors.join(" · "):"Core IDs and references pass the atlas validator."}</span></article></div>}
