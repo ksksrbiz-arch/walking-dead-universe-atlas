@@ -10101,9 +10101,7 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [
-      "new-york-city"
-    ],
+    "locationIds": [],
     "characterIds": [
       "jennifer-mallick",
       "hope-bennett",
@@ -10128,7 +10126,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "perimeter"
+      "omaha",
+      "campus-colony"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10209,7 +10208,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "albany-new-york"
+      "perimeter"
     ],
     "characterIds": [
       "jennifer-mallick",
@@ -10240,7 +10239,8 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "albany-new-york"
+      "civic-republic-research-facility",
+      "perimeter"
     ],
     "characterIds": [
       "jadis-stokes",

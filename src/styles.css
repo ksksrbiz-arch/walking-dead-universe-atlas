@@ -762,7 +762,11 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .hordeSelectable{pointer-events:all;cursor:pointer;outline:none}
 .hordeSelectable:focus-visible{filter:drop-shadow(0 0 5px var(--accent-2))}
 .hordeGlow{fill:rgba(217,80,42,.09);stroke:rgba(217,80,42,.25);stroke-width:1;vector-effect:non-scaling-stroke}
-.hordeWalker{fill:#d9d0b9;stroke:#d9d0b9;stroke-width:.8;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;animation:hordeWalk var(--walk-duration,1.5s) ease-in-out var(--walk-delay,0s) infinite alternate}
+.hordeWalker{fill:#d9d0b9;animation:hordeBob var(--walk-duration,1.5s) ease-in-out var(--walk-delay,0s) infinite}
+.hordeWalker line{stroke:#d9d0b9;stroke-width:.8;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.hordeLegBack,.hordeLegFront{transform-origin:0px 6px;animation-duration:var(--walk-duration,1.5s);animation-delay:var(--walk-delay,0s);animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+.hordeLegBack{animation-name:hordeLegSwingA}
+.hordeLegFront{animation-name:hordeLegSwingB}
 .hordePulse{fill:none;stroke:var(--accent-2);stroke-width:1.5;vector-effect:non-scaling-stroke;animation:hordePulse 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
 .hordeTag{font:700 8px var(--font);letter-spacing:.08em;fill:#f2a18a;paint-order:stroke;stroke:#0a0d0c;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
 .hordeSubTag{font:600 6.5px var(--font);fill:#d8c9bb;paint-order:stroke;stroke:#0a0d0c;stroke-width:2.5px;stroke-linejoin:round;pointer-events:none}
@@ -770,9 +774,14 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .hordeDossier .stack{padding:12px;gap:8px}
 .hordeDossier p{margin:0;font-size:12px;color:var(--text-2)}
 .hordeDossier small{color:var(--text-3)}
-@keyframes hordeWalk{from{translate:-1px -1px;rotate:-9deg}to{translate:1px 1px;rotate:9deg}}
+/* A real walk cycle: the two legs swing opposite each other (scissor gait) around
+   the hip, and the body bobs twice per stride — both loop back to their exact
+   starting state each cycle, so nothing snaps or rubber-bands in place. */
+@keyframes hordeLegSwingA{0%{rotate:-24deg}50%{rotate:24deg}100%{rotate:-24deg}}
+@keyframes hordeLegSwingB{0%{rotate:24deg}50%{rotate:-24deg}100%{rotate:24deg}}
+@keyframes hordeBob{0%{translate:0 0}25%{translate:0 -.6px}50%{translate:0 0}75%{translate:0 -.6px}100%{translate:0 0}}
 @keyframes hordePulse{0%{opacity:.75;scale:.8}100%{opacity:0;scale:2.5}}
-@media(prefers-reduced-motion:reduce){.hordeWalker,.hordePulse{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.hordeWalker,.hordeLegBack,.hordeLegFront,.hordePulse{animation:none!important}}
 
 /* Touch targets: the design system requires >=44px for anything tappable. The phone/tablet sheet layout gets 44px
    chips (the 36px pills stay on the pointer-driven panel layout). Scroll containers clip a bigger hit area, so the
