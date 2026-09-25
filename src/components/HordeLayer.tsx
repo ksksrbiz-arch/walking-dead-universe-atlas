@@ -12,7 +12,8 @@ export default function HordeLayer({enabled,year,project,onSelect}:Props){
 
  // Keep the prototype in the southeastern US, starting near Atlanta and
  // moving gradually northeast as the universe-year scrubber advances.
- const projectPoint=project??((latitude:number,longitude:number)=>({x:500+longitude*(476/180),y:300-latitude*(278/90)}));\n const elapsed=Math.max(0,Math.min(16,year-2010));
+ const projectPoint=project??((latitude:number,longitude:number)=>({x:500+longitude*(476/180),y:300-latitude*(278/90)}));
+ const elapsed=Math.max(0,Math.min(16,year-2010));
  const lat=33.75+elapsed*0.24;
  const lng=-84.39+elapsed*0.32;
  const center=projectPoint(lat,lng);
