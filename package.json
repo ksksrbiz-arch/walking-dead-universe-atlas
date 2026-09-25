@@ -45,7 +45,8 @@
     "enrich:fandom-entity-galleries": "node scripts/ingest-fandom-entity-galleries.mjs",
     "test:seo": "node scripts/check-seo.mjs",
     "build:brand-assets": "node scripts/build-brand-assets.mjs",
-    "test:media-worker": "node --test workers/atlas-media-proxy/test/index.test.mjs"
+    "test:media-worker": "node --test workers/atlas-media-proxy/test/index.test.mjs",
+    "test:chronology": "node scripts/test-chronology.mjs"
   },
   "dependencies": {
     "@cublya/world-atlas": "^3.0.0-beta.1",
