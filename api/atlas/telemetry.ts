@@ -1,1 +1,1 @@
-export { POST } from "../telemetry.ts";
+export { POST } from "../telemetry";
