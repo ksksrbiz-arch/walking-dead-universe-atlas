@@ -1,13 +1,21 @@
 import type {CSSProperties} from "react";
 
-type Props={enabled:boolean;year:number;project?:(lat:number,lng:number)=>{x:number;y:number};onSelect:()=>void};
+type Props={enabled:boolean;year:number;zoom:number;project?:(lat:number,lng:number)=>{x:number;y:number};onSelect:()=>void};
 
 /**
  * M1 regional horde overlay. Coordinates are projected from a real geographic
  * anchor so the simulation remains attached to the map during pan and zoom.
  * The herd route and its movement are illustrative, not canon.
+ *
+ * `.mapWorld` (the parent group) applies `scale(zoom)` directly; markers and
+ * journey avatars counter that with their own `scale(1/zoom)` so icons stay a
+ * constant screen size instead of growing with the map. The walker glyphs,
+ * the selection pulse, and both labels need the same treatment — the glow
+ * ellipse and the trail path are left in map coordinates on purpose, since
+ * they represent the herd's real geographic footprint and should look bigger
+ * as you zoom into that area, same as the map itself.
  */
-export default function HordeLayer({enabled,year,project,onSelect}:Props){
+export default function HordeLayer({enabled,year,zoom,project,onSelect}:Props){
  if(!enabled)return null;
 
  // Keep the prototype in the southeastern US, starting near Atlanta and
@@ -24,6 +32,7 @@ export default function HordeLayer({enabled,year,project,onSelect}:Props){
  const routeStart=projectPoint(lat-1.1,lng-3.8);
  const routeMid=projectPoint(lat+0.2,lng-1.6);
  const routeEnd=projectPoint(lat+1.2,lng+2.6);
+ const inv=1/zoom;
  const walkers=Array.from({length:52},(_,i)=>({
   x:Math.sin(i*12.9898)*Math.max(8,Math.abs(dx)*0.075)+(i%7-3)*2.4,
   y:Math.cos(i*7.233)*Math.max(6,Math.abs(dx)*0.045)+(Math.floor(i/7)-3)*1.8,
@@ -34,12 +43,12 @@ export default function HordeLayer({enabled,year,project,onSelect}:Props){
   <path className="hordeTrail" d={`M ${routeStart.x} ${routeStart.y} Q ${routeMid.x} ${routeMid.y} ${x} ${y} T ${routeEnd.x} ${routeEnd.y}`}/>
   <g className="hordeSelectable" role="button" tabIndex={0} aria-label="Open simulated horde dossier" onClick={onSelect} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();onSelect()}}}>
    <ellipse className="hordeGlow" cx={x} cy={y} rx={Math.max(24,Math.abs(dx)*0.13)} ry={Math.max(18,Math.abs(dx)*0.085)}/>
-   {walkers.map((w,i)=><g key={i} className="hordeWalker" style={{"--walk-delay":w.delay+"s","--walk-duration":w.duration+"s"} as CSSProperties} transform={`translate(${x+w.x} ${y+w.y})`}>
+   {walkers.map((w,i)=><g key={i} className="hordeWalker" style={{"--walk-delay":w.delay+"s","--walk-duration":w.duration+"s"} as CSSProperties} transform={`translate(${x+w.x} ${y+w.y}) scale(${inv})`}>
     <circle r={i%8===0?3.5:2.8}/><path d="M0 3v6m0-3-2.6 2.6M0 6l2.6 2.6"/>
    </g>)}
-   <circle className="hordePulse" cx={x} cy={y} r="12"/>
-   <text className="hordeTag" x={x+30} y={y-25}>SIMULATED HERD · M1</text>
-   <text className="hordeSubTag" x={x+30} y={y-11}>Illustrative route · not canon</text>
+   <g transform={`translate(${x} ${y}) scale(${inv})`}><circle className="hordePulse" r="12"/></g>
+   <g transform={`translate(${x} ${y}) scale(${inv})`}><text className="hordeTag" x="30" y="-25">SIMULATED HERD · M1</text></g>
+   <g transform={`translate(${x} ${y}) scale(${inv})`}><text className="hordeSubTag" x="30" y="-11">Illustrative route · not canon</text></g>
   </g>
  </g>;
 }
