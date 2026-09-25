@@ -4,7 +4,7 @@ A mobile-first, data-driven atlas for the television **Walking Dead Universe (TW
 
 ## Current architecture
 
-The application is now deployed through **Vercel** with GitHub as the source of truth. The existing Netlify runtime/API layer remains temporarily available during the migration.
+The application is deployed through **Vercel** with GitHub as the source of truth. The Netlify runtime/API layer has been removed from the repo; a Cloudflare Pages mirror still exists as a dashboard-side integration outside this repo's config.
 
 - **React**
 - **TypeScript**

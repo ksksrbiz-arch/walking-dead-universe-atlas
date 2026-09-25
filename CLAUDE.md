@@ -13,6 +13,7 @@ Hard rules for every task are in `AGENTS.md` (map transform contract, 363-episod
 | Product direction / new modes | `docs/ATLAS_ARCHITECTURE.md` | — |
 | Why the UI looks the way it does | `docs/UI_AUDIT_AND_REDESIGN_2026-09.md` | — |
 | Media / Fandom enrichment | `docs/DATA_ENRICHMENT_ARCHITECTURE.md` | — |
+| Scheduled/automated ingestion (Vercel cron, Blob-backed data) | `context/references/scheduled-ingestion.md` | — |
 | Journeys, deep links, share previews | `context/references/journeys-and-sharing.md`, `src/lib/journeys.ts` | `context/workflows/map-change/CONTEXT.md` (map layers) |
 
 ## Do not load unless the task is about them
@@ -21,7 +22,7 @@ Hard rules for every task are in `AGENTS.md` (map transform contract, 363-episod
 |---|---|
 | `data/enrichment/fandom-canonical.json` (455 KB) | Read through `src/lib/atlasHelpers.ts` / `views/details/shared.tsx` |
 | `package-lock.json`, `dist/` | Generated |
-| `api/`, `netlify/`, `workers/` | Backend/media delivery — except `api/share.ts`, `api/og.ts` for share-link work (each file is self-contained; see the note in journeys-and-sharing.md) |
+| `api/`, `workers/` | Backend/media delivery — except `api/share.ts`, `api/og.ts` for share-link work (each file is self-contained; see the note in journeys-and-sharing.md) |
 | `scripts/*enrich*`, `scripts/*fandom*` | Ingestion pipeline |
 
 ## Source map (UI)
