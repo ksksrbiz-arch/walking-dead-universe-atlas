@@ -876,7 +876,7 @@ export default function App(){
    {/* Top bar */}
    <header className="topbar" ref={topbarRef} data-map-chrome="top">
     <button className="brand" onClick={()=>{goView("map")}} aria-label="TWDU Atlas home"><span className="brandMark" aria-hidden="true"><Icon name="skull"/></span><span className="brandText"><b>TWDU Atlas</b><small>Walking Dead Universe</small></span></button>
-    <button className="searchTrigger" onClick={()=>setSearchOpen(true)} aria-label="Search the atlas"><Icon name="search"/><span>Search people, places, episodes</span><kbd>/</kbd></button>
+    <button className="searchTrigger" onClick={()=>setSearchOpen(true)} aria-label="Search the atlas"><Icon name="search"/><span className="long">Search people, places, episodes</span><span className="short">Search the atlas</span><kbd>/</kbd></button>
     {isPanel&&<nav className="tabs tabsTop" aria-label="Atlas sections">{TABS.map(t=><button key={t.view} className={view===t.view?"active":""} aria-current={view===t.view?"page":undefined} onClick={()=>goView(t.view)}><Icon name={t.icon}/><span className="tabLabel">{t.label}</span></button>)}</nav>}
     <button className="yearChip" onClick={()=>goView("timeline")} aria-label={`Universe year ${year}, ${era.title}. Open timeline`}><b>{year}</b><span>{era.short}</span></button>
    </header>

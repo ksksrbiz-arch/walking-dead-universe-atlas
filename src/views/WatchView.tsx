@@ -41,13 +41,13 @@ export default function WatchView({errors}:{errors:string[]}){
    </div>
   </div>:<p className="empty celebrate">Every tracked episode{series?" in this series":""} is watched. Survivor status: confirmed.</p>}
 
-  <Section title="By series">
+  <Section level={2} title="By series">
    <div className="seriesProgress">{bySeries.map(s=><button key={s.meta.id} className={series===s.meta.id?"active":""} aria-pressed={series===s.meta.id} onClick={()=>setSeries(v=>v===s.meta.id?null:s.meta.id)} style={{"--c":s.meta.color} as CSSProperties}>
     <span className="spLabel"><i/>{s.meta.short}</span><span className="spBar"><i style={{width:(s.done/s.total*100)+"%"}}/></span><small>{s.done}/{s.total}</small>
    </button>)}</div>
   </Section>
 
-  <Section title={series?`${seriesShort(series)} in story order`:"Full story order"} count={rows.length} action={<div className="segmented small" role="group">{(["todo","all","done"] as Filter[]).map(f=><button key={f} className={filter===f?"active":""} aria-pressed={filter===f} onClick={()=>setFilter(f)}>{f==="todo"?"To watch":f==="all"?"All":"Watched"}</button>)}</div>}>
+  <Section level={2} title={series?`${seriesShort(series)} in story order`:"Full story order"} count={rows.length} action={<div className="segmented small" role="group">{(["todo","all","done"] as Filter[]).map(f=><button key={f} className={filter===f?"active":""} aria-pressed={filter===f} onClick={()=>setFilter(f)}>{f==="todo"?"To watch":f==="all"?"All":"Watched"}</button>)}</div>}>
    <div className="stack watchList" ref={listRef}>{rows.map(e=>{const ep=episodeById.get(e.id) as any;return <div key={e.id} className={"row watchRow"+(watched.has(e.id)?" isWatched":"")} style={{"--c":seriesColor(e.seriesId)} as CSSProperties}>
     <span className="seq">{e.sequence}</span>
     <button className="rowMain" onClick={()=>openEpisode(e.id)}><span className="rowThumb small"><Icon name="film"/><AtlasImage src={episodeImage(ep)} width={160} sizes="56px"/></span><span className="rowText"><small><span className="dot"/>{seriesShort(e.seriesId)} · {episodeCode(ep)} · {storyRange(ep)}{e.chronologyStatus!=="anchored"?" · "+e.chronologyStatus.replace("-"," "):""}</small><b>{e.title}</b></span></button>
@@ -66,7 +66,7 @@ function AboutAtlas({errors}:{errors:string[]}){
   const rows=SERIES_KEYS.map(k=>{const eps=episodes.filter(e=>e.seriesId===META[k].id);const available=eps.filter(e=>episodeMediaRecord(e.id)?.image).length;const verified=eps.filter(e=>episodeMediaRecord(e.id)?.status==="verified").length;return {meta:META[k],total:eps.length,available,verified}}).filter(r=>r.total);
   return {rows,available:rows.reduce((n,r)=>n+r.available,0),verified:rows.reduce((n,r)=>n+r.verified,0)};
  },[episodes]);
- return <Section title="About this atlas" collapsible defaultOpen={false} id="about">
+ return <Section level={2} title="About this atlas" collapsible defaultOpen={false} id="about">
   <div className="stats">
    <div><b>{atlasData.series.length}</b><small>Series</small></div>
    <div><b>{episodes.length}</b><small>Episodes</small></div>
@@ -74,7 +74,7 @@ function AboutAtlas({errors}:{errors:string[]}){
    <div><b>{atlasData.characters.length}</b><small>Characters</small></div>
   </div>
   <div className={"healthCard"+(errors.length?" warn":"")}><Icon name={errors.length?"info":"check"}/><span><b>{errors.length?"References need review":"Registry healthy"}</b><small>{errors.length?errors.slice(0,4).join(" · ")+(errors.length>4?` · +${errors.length-4} more`:""):"Every core id and relationship passes the atlas validator."}</small></span></div>
-  <h4 className="subhead">How to read it</h4>
+  <h3 className="subhead">How to read it</h3>
   <ul className="bullets">
    <li><b>Story year</b> is when an episode happens in-universe; air dates are tracked separately.</li>
    <li><b>Confirmed</b>, <b>source-derived</b> and <b>approximate</b> labels are kept — nothing is flattened into false precision.</li>

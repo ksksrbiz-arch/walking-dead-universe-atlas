@@ -85,7 +85,7 @@ export default function TimelineView(){
     <div className="stack">{g.episodes.map(e=><EpisodeRow key={e.id} episode={e}/>)}</div>
    </section>)}
   </div>
-  {webisodes?.series?.length>0&&<Section title="Webisodes & specials" count={webisodes.totalEpisodes} collapsible defaultOpen={false}>
+  {webisodes?.series?.length>0&&<Section level={2} title="Webisodes & specials" count={webisodes.totalEpisodes} collapsible defaultOpen={false}>
    <div className="stack">{webisodes.series.map((w:any)=><div className="row staticRow" key={w.id} style={{"--c":seriesColor(w.seriesId)} as CSSProperties}><span className="yearBadge">{w.releaseStart?.slice(0,4)||"?"}</span><span className="rowText"><small>{SERIES_BY_ID[w.seriesId]?.short||w.seriesId} · {w.episodeCount} parts · release order</small><b>{w.title}</b></span></div>)}</div>
    <p className="note"><Icon name="info"/><span>Webisodes stay a release-order layer; exact in-universe dates are not available for every installment.</span></p>
   </Section>}

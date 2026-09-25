@@ -36,14 +36,16 @@ export function Credit({src,page}:{src?:string;page?:string}){
   :<span className="mediaCredit">Image: {credit.label}</span>;
 }
 
-export function Section({title,count,children,action,collapsible=false,defaultOpen=true,id}:{title:string;count?:number|string;children:ReactNode;action?:ReactNode;collapsible?:boolean;defaultOpen?:boolean;id?:string}){
+// `level`: h3 by default (detail pages sit under an h2 hero); views whose page title is an h1 (map overview, timeline, watch, journey) pass level={2} so headings never skip a level.
+export function Section({title,count,children,action,collapsible=false,defaultOpen=true,id,level=3}:{title:string;count?:number|string;children:ReactNode;action?:ReactNode;collapsible?:boolean;defaultOpen?:boolean;id?:string;level?:2|3}){
+ const Heading=(level===2?"h2":"h3") as "h2"|"h3";
  const [open,setOpen]=useState(defaultOpen);
  const head=<><span className="sectionTitleText">{title}</span>{count!=null&&<span className="sectionCount">{count}</span>}</>;
  return <section className={"section"+(collapsible&&!open?" isClosed":"")} id={id}>
   <header className="sectionHead">
    {collapsible
-    ?<button className="sectionToggle" onClick={()=>setOpen(v=>!v)} aria-expanded={open}>{head}<Icon name="chevronDown" className="sectionChevron"/></button>
-    :<h3 className="sectionTitle">{head}</h3>}
+    ?<Heading className="sectionHeading"><button className="sectionToggle" onClick={()=>setOpen(v=>!v)} aria-expanded={open}>{head}<Icon name="chevronDown" className="sectionChevron"/></button></Heading>
+    :<Heading className="sectionTitle">{head}</Heading>}
    {action}
   </header>
   {(!collapsible||open)&&<div className="sectionBody">{children}</div>}
