@@ -13,6 +13,7 @@ Hard rules for every task are in `AGENTS.md` (map transform contract, 363-episod
 | Product direction / new modes | `docs/ATLAS_ARCHITECTURE.md` | — |
 | Why the UI looks the way it does | `docs/UI_AUDIT_AND_REDESIGN_2026-09.md` | — |
 | Media / Fandom enrichment | `docs/DATA_ENRICHMENT_ARCHITECTURE.md` | — |
+| Scheduled/automated ingestion (Vercel cron, Blob-backed data) | `context/references/scheduled-ingestion.md` | — |
 | Journeys, deep links, share previews | `context/references/journeys-and-sharing.md`, `src/lib/journeys.ts` | `context/workflows/map-change/CONTEXT.md` (map layers) |
 
 ## Do not load unless the task is about them
