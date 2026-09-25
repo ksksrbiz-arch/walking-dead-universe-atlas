@@ -44,7 +44,8 @@
     "media:resize": "node scripts/resize-amc-media.mjs",
     "enrich:fandom-entity-galleries": "node scripts/ingest-fandom-entity-galleries.mjs",
     "test:seo": "node scripts/check-seo.mjs",
-    "build:brand-assets": "node scripts/build-brand-assets.mjs"
+    "build:brand-assets": "node scripts/build-brand-assets.mjs",
+    "test:media-worker": "node --test workers/atlas-media-proxy/test/index.test.mjs"
   },
   "dependencies": {
     "@cublya/world-atlas": "^3.0.0-beta.1",
