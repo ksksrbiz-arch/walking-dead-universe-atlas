@@ -750,3 +750,22 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .pairFaces{display:flex}
 .pairFaces .portrait+.portrait{margin-left:-26px;box-shadow:0 0 0 2px var(--surface)}
 .journeyPair small{color:var(--accent-2);font-weight:700}
+
+
+/* ---- Living World / M1 simulated horde ---------------------------------- */
+.hordeLayer{pointer-events:none}
+.hordeTrail{fill:none;stroke:rgba(217,80,42,.52);stroke-width:2.4;stroke-dasharray:5 7;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 4px rgba(217,80,42,.35))}
+.hordeSelectable{pointer-events:all;cursor:pointer;outline:none}
+.hordeSelectable:focus-visible{filter:drop-shadow(0 0 5px var(--accent-2))}
+.hordeGlow{fill:rgba(217,80,42,.09);stroke:rgba(217,80,42,.25);stroke-width:1;vector-effect:non-scaling-stroke}
+.hordeWalker{fill:#d9d0b9;stroke:#d9d0b9;stroke-width:.8;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;animation:hordeWalk var(--walk-duration,1.5s) ease-in-out var(--walk-delay,0s) infinite alternate}
+.hordePulse{fill:none;stroke:var(--accent-2);stroke-width:1.5;vector-effect:non-scaling-stroke;animation:hordePulse 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.hordeTag{font:700 8px var(--font);letter-spacing:.08em;fill:#f2a18a;paint-order:stroke;stroke:#0a0d0c;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.hordeSubTag{font:600 6.5px var(--font);fill:#d8c9bb;paint-order:stroke;stroke:#0a0d0c;stroke-width:2.5px;stroke-linejoin:round;pointer-events:none}
+.hordeDossier{right:58px;top:100px;width:min(340px,calc(100vw - 32px));z-index:20}
+.hordeDossier .stack{padding:12px;gap:8px}
+.hordeDossier p{margin:0;font-size:12px;color:var(--text-2)}
+.hordeDossier small{color:var(--text-3)}
+@keyframes hordeWalk{from{translate:-1px -1px;rotate:-9deg}to{translate:1px 1px;rotate:9deg}}
+@keyframes hordePulse{0%{opacity:.75;scale:.8}100%{opacity:0;scale:2.5}}
+@media(prefers-reduced-motion:reduce){.hordeWalker,.hordePulse{animation:none!important}}
