@@ -142,7 +142,8 @@ export default {
             "x-content-type-options": "nosniff",
             "content-security-policy": "default-src 'none'; sandbox",
             "x-atlas-media-source": finalUrl.hostname,
-            // Edge cache status of the upstream subrequest (HIT once the image is warm at this colo).
+            // Edge status of the upstream subrequest when this response was built. It is stored with the cached copy, so it keeps
+            // saying MISS on later hits: read cf-cache-status for the real edge status.
             "x-atlas-media-cache": upstream.headers.get("cf-cache-status") || "MISS",
           },
         });

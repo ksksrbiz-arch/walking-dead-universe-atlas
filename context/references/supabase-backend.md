@@ -53,22 +53,36 @@ After any change, check from the deployed site's origin (CORS allows it) that:
 4. Security advisor shows no `WARN` (only the 5 INFO `rls_enabled_no_policy`).
 5. In SQL: `has_function_privilege('anon','public.atlas_upsert_telemetry(jsonb,bigint)','execute')` is **false**.
 
-## Caching (`atlas-media`) - verified 2026-09-25
-Every image the app shows from Fandom/AMC is one Supabase invocation per load per visitor (about 13k/day at audit
-time, mostly automated test traffic). The `/api/atlas/media` Vercel rewrite in `vercel.json` looks like a way to get CDN
-caching, but it **does not cache**: Supabase's edge adds a fresh `Set-Cookie: __cf_bm=...` to every response and Vercel
-does not cache responses that set cookies. Three plain requests to production all returned `x-vercel-cache: MISS`, so
-routing the browser through that rewrite would only add a hop. Do not switch `MEDIA_PROXY` to it without re-testing.
+## Image delivery and caching - live 2026-09-25
+The browser loads Fandom/AMC art through the **Cloudflare Worker** `walking-dead-atlas-media`
+(`https://walking-dead-atlas-media.skdev-371.workers.dev`, source `workers/atlas-media-proxy`), wired in by the Vercel
+env var `VITE_ATLAS_MEDIA_PROXY` (production + preview, read at build time by `src/lib/media.ts`). Supabase `atlas-media`
+stays deployed as the fallback: remove the env var and redeploy to switch back.
 
-The real fix is already in the repo but **not deployed**: `workers/atlas-media-proxy` (Cloudflare Worker
-`walking-dead-atlas-media`; it uses the Workers cache and reports `x-atlas-media-cache: HIT|MISS`). To use it:
-`cd workers/atlas-media-proxy && npx wrangler deploy`, then set `VITE_ATLAS_MEDIA_PROXY` on the Vercel project to the
-worker URL and redeploy. Before that, port this function's hardening to the worker (it currently accepts any `image/*`
-including SVG and follows redirects blindly), and re-check `x-atlas-media-cache: HIT` on a second request.
+Why not the Supabase function or a Vercel rewrite: Supabase's edge adds a fresh `Set-Cookie: __cf_bm=...` to every
+response and Vercel does not cache responses that set cookies, so the `/api/atlas/media` rewrite returned
+`x-vercel-cache: MISS` on every request (tested on production, 3/3) and each image load cost a function invocation.
+
+How the worker caches (both layers work on `*.workers.dev`; the classic Cache API `caches.default` does not, so it is not used):
+1. **Workers Caching** (`[cache] enabled = true` in `wrangler.toml`): honours the `Cache-Control` we return (30 days) and serves
+   hits without running the Worker.
+2. **Subrequest caching** (`cf.cacheEverything`, per-status TTLs): the upstream image stays cached at the edge.
+Verified live: first request `cf-cache-status: MISS`, next requests `HIT`, no `Set-Cookie`. Read **`cf-cache-status`** for the
+real edge status; `x-atlas-media-cache` is baked into the stored response, so it keeps saying `MISS` on cached copies.
+Failures are not cached for long (404 for 60 s, everything else `no-store`).
+
+Same hardening as the Supabase function: allow-listed https hosts only, raster types only (no SVG), every redirect hop
+re-validated, 12 MB cap, `nosniff` + sandboxing CSP, static/vignette host fallback.
+
+Operate it (needs a Cloudflare login on the machine; `npx wrangler login` opens an OAuth consent page):
+- Deploy: `cd workers/atlas-media-proxy && npx wrangler deploy` (account `skdev@1commercesolutions.com`, workers.dev subdomain `skdev-371`).
+- Test: `npm run test:media-worker` (11 tests, stubbed fetch, no network).
+- Verify after any change: request one image twice and expect `cf-cache-status: HIT`; a non-allow-listed host must return 403.
+- Changing the worker URL means updating `VITE_ATLAS_MEDIA_PROXY` and redeploying Vercel (it is baked into the bundle).
 
 ## Known gaps / not done
-- **No rate limiting** on any public function (Edge Functions have no built-in limiter). Until the worker above is
-  deployed, watch invocation counts against the plan quota.
+- **No rate limiting** on any public function (Supabase Edge Functions and the Worker have no built-in limiter). Cached
+  image hits are free of Worker invocations, but the Workers free plan has a daily request cap; watch it if traffic grows.
 - `fandom-image` is still deployed but **unused** (`vercel.json` maps `/api/fandom-image` to `atlas-media`). Its source is
   not vendored. Remove it with `supabase functions delete fandom-image --project-ref qflqfvoxdzkibpzfrwop`.
 - `atlas-media` cannot be called with `HEAD` (405).
