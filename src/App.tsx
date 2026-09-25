@@ -21,6 +21,7 @@ import {META,SERIES_KEYS,SERIES_BY_ID,seriesColor} from "./lib/series";
 import {characterById,connectionById,communityById,episodeById,factionById,locationById,entityName} from "./lib/lookup";
 import {JOURNEY_COLORS,beatForYear,beatYear,buildBeats,buildJourney,parseJourneyIds,positionsAt} from "./lib/journeys";
 import {JourneyAvatars,JourneyRoutes} from "./components/JourneyLayer";
+import HordeLayer from "./components/HordeLayer";
 import JourneyPanel,{JourneyPlayer} from "./views/JourneyPanel";
 import type {JourneyControls} from "./views/JourneyPanel";
 import {MAP_LAYERS,MAP_LAYER_LABELS,clamp,hasMapCoordinates,locationIconName,locationMapLayer,prettyType} from "./lib/atlasHelpers";
@@ -112,6 +113,8 @@ export default function App(){
  // ---- Core atlas state ------------------------------------------------------
  const [series,setSeries]=useState<SeriesKey|"ALL">("ALL");
  const [mapLayer,setMapLayer]=useState<MapLayer>("ALL");
+ const [hordeEnabled,setHordeEnabled]=useState(false);
+ const [hordeSelected,setHordeSelected]=useState(false);
  const [year,setYearState]=useState(2010);
  const [playing,setPlaying]=useState(false);
  const focusCtl=useAtlasFocusController();
@@ -770,6 +773,7 @@ export default function App(){
      <MapBackground/>
      <g ref={mapWorldRef} className="mapWorld">
       <MapGeography/>
+      <HordeLayer enabled={hordeEnabled} year={year} onSelect={()=>setHordeSelected(true)}/>
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       {journeyActive&&<JourneyRoutes journeys={journeys} positions={journeyPositions} project={project} cursorKey={journeyCursor}/>}
       <g className="markers">{markerGroups.map(group=>{
@@ -829,7 +833,17 @@ export default function App(){
     <button className="iconBtn" onClick={resetMap} aria-label="Reset map to home"><Icon name="locate"/></button>
     {layersOpen&&<div className="popover layersPopover" role="dialog" aria-label="Map layers">
      <small>Show on map</small>
+     <button className={hordeEnabled?"active":""} aria-pressed={hordeEnabled} onClick={()=>{setHordeEnabled(v=>!v);setLayersOpen(false);if(hordeEnabled)setHordeSelected(false)}}><span>Living World · simulated horde</span><b>{hordeEnabled?"On":"Off"}</b>{hordeEnabled&&<Icon name="check"/>}</button>
      {MAP_LAYERS.map(layer=><button key={layer} className={mapLayer===layer?"active":""} aria-pressed={mapLayer===layer} onClick={()=>{setMapLayer(layer);setLayersOpen(false)}}><span>{MAP_LAYER_LABELS[layer]}</span><b>{layerCounts[layer]??0}</b>{mapLayer===layer&&<Icon name="check"/>}</button>)}
+    </div>}
+    {hordeSelected&&hordeEnabled&&<div className="popover hordeDossier" role="dialog" aria-label="Simulated horde dossier">
+     <header><b>Simulated Horde · M1</b><button className="iconBtn ghost" onClick={()=>setHordeSelected(false)} aria-label="Close horde dossier"><Icon name="close"/></button></header>
+     <div className="stack">
+      <p><strong>Illustrative regional movement</strong></p>
+      <p>This moving group is a visual simulation for testing the Living World layer. Its route, location, and walker count are not canonical Walking Dead data.</p>
+      <small>Timeline year: {year} · Status: simulated</small>
+      <button className="row" onClick={()=>{setHordeEnabled(false);setHordeSelected(false)}}>Turn off Living World layer</button>
+     </div>
     </div>}
    </div>
    {isPanel&&<div className={"dock"+(bigDock?"":" dockMini")} data-map-chrome="bottom">
