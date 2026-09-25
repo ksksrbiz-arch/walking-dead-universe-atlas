@@ -10294,9 +10294,7 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [
-      "portland"
-    ],
+    "locationIds": [],
     "characterIds": [
       "jadis-stokes",
       "jennifer-mallick",
@@ -10322,9 +10320,7 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [
-      "portland"
-    ],
+    "locationIds": [],
     "characterIds": [
       "jadis-stokes",
       "jennifer-mallick",
@@ -10350,9 +10346,7 @@
     "timelineEnd": 2020,
     "timelinePrecision": "year",
     "certainty": "approximate",
-    "locationIds": [
-      "portland"
-    ],
+    "locationIds": [],
     "characterIds": [
       "jadis-stokes",
       "jennifer-mallick",
