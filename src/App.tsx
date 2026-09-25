@@ -166,8 +166,18 @@ export default function App(){
 
  const setYear=useCallback((y:number)=>setYearState(clamp(Math.round(y),UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR)),[]);
 
- useEffect(()=>{initAtlasPerformance();void getRuntimeMeta().then(meta=>{if(meta)trackAtlasMetric("runtime-ready",1,{version:String(meta.version??"unknown"),episodes:Number(meta.counts?.episodes??0),characters:Number(meta.counts?.characters??0),locations:Number(meta.counts?.locations??0)})})},[]);
- useEffect(()=>setDataErrors(validateAtlasData()),[]);
+ useEffect(()=>{
+  const reveal=()=>document.body.classList.remove("atlas-booting");
+  const frame=window.requestAnimationFrame(reveal);
+  initAtlasPerformance();
+  void getRuntimeMeta().then(meta=>{if(meta)trackAtlasMetric("runtime-ready",1,{version:String(meta.version??"unknown"),episodes:Number(meta.counts?.episodes??0),characters:Number(meta.counts?.characters??0),locations:Number(meta.counts?.locations??0)})});
+  return()=>window.cancelAnimationFrame(frame);
+ },[]);
+ useEffect(()=>{
+  const validate=()=>setDataErrors(validateAtlasData());
+  if("requestIdleCallback" in window){const id=window.requestIdleCallback(validate,{timeout:1200});return()=>window.cancelIdleCallback(id)}
+  const id=globalThis.setTimeout(validate,0);return()=>globalThis.clearTimeout(id);
+ },[]);
  useEffect(()=>{
   const onResize=()=>{setLayout(prev=>{const next=readLayout();return prev.panel===next.panel&&prev.touch===next.touch?prev:next});setViewport({w:window.innerWidth,h:window.innerHeight})};
   window.addEventListener("resize",onResize);return()=>window.removeEventListener("resize",onResize);
