@@ -92,6 +92,7 @@ export default async function handler(req: Request) {
     if (!validBlobUrl(blob.url)) return new Response("Invalid media origin", { status: 502 });
     const response = await get(blob.url, { access: "private" });
     if (!response) return new Response("Media not found", { status: 404 });
+    if (!response.stream) return new Response("Media body unavailable", { status: 502 });
     const reader = response.stream.getReader();
     const chunks: Uint8Array[] = [];
     let total = 0;
