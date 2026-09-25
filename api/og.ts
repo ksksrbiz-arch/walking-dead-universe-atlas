@@ -6,6 +6,14 @@ import { feature } from "topojson-client";
 
 // 1200×630 preview card for a share link (see api/share.ts).
 //
+// package.json pins @vercel/og to ^0.11 — DO NOT let this move to 1.x.
+// 1.x does a dynamic require("fs") that Node's native ESM loader can't
+// support, and this function runs exactly that way in production (no
+// bundling step), so 1.x is a hard FUNCTION_INVOCATION_FAILED. Confirmed
+// against a real deployment, twice (#53 bumped it, #57/#59 had to revert
+// it back). .github/dependabot.yml blocks the automatic bump; if anyone
+// proposes it manually, verify against a real deployment first.
+//
 // Self-contained on purpose (duplicated with api/share.ts, which needs the
 // same loadShareIndex/requestOrigin/resolveCard): Vercel runs api/*.ts files
 // individually and its tracer does not reliably include a sibling module

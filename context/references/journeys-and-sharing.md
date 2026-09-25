@@ -70,7 +70,7 @@ Header (faces, share, exit) → player → stats (single) or per-person rows (co
   - `cardElement`: Satori tree built with `h()`. Single children are passed unwrapped; Satori demands `display:flex` for any children array.
   - `imageData`: 3.5 s timeout, JPEG/PNG/GIF only, else no image
 - `api/share.ts`: HTML. Unknown → 302 to `/`.
-- `api/og.ts`: 1200×630 PNG via `@vercel/og` **~0.11** (1.0.x fails to load its harfbuzz wasm outside Vercel's bundler). Cached 1 day at the browser, 7 days at the edge.
+- `api/og.ts`: 1200×630 PNG via `@vercel/og` **^0.11** (pinned — confirmed against a real deployment, not just locally: `@vercel/og` 1.x does a dynamic `require("fs")` that Node's native ESM loader can't support, and Vercel runs `api/*.ts` this way with no bundling step, so 1.x is a hard `FUNCTION_INVOCATION_FAILED` in production. `.github/dependabot.yml` blocks Dependabot from bumping past 0.11.x for this package; if it ever proposes an upgrade anyway, verify against a real deployment — see api/og.ts's header comment and the self-contained-api-file rule above — before merging it, the way #53/#57/#59 didn't). Cached 1 day at the browser, 7 days at the edge.
 - `vercel.json` rewrites `/j/:ids`, `/p/:id`, `/e/:id`, `/c/:id` → `/api/share?kind=…&id=…`.
 - Functions never import atlas data directly. Node ESM JSON imports without import attributes are not safe in unbundled functions, so the data arrives through the index.
 
