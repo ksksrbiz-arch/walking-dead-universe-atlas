@@ -21,7 +21,7 @@ Hard rules for every task are in `AGENTS.md` (map transform contract, 363-episod
 |---|---|
 | `data/enrichment/fandom-canonical.json` (455 KB) | Read through `src/lib/atlasHelpers.ts` / `views/details/shared.tsx` |
 | `package-lock.json`, `dist/` | Generated |
-| `api/`, `netlify/`, `workers/`, `lib/` | Backend/media delivery — except `api/share.ts`, `api/og.ts`, `lib/atlas-share.ts` for share-link work |
+| `api/`, `netlify/`, `workers/` | Backend/media delivery — except `api/share.ts`, `api/og.ts`, `api/_lib/atlas-share.ts` for share-link work |
 | `scripts/*enrich*`, `scripts/*fandom*` | Ingestion pipeline |
 
 ## Source map (UI)

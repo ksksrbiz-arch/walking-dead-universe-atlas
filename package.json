@@ -41,6 +41,7 @@
     "test:ui": "node scripts/ui-smoke.mjs",
     "test:journeys": "node scripts/test-journeys.mjs",
     "test:share": "node scripts/test-share.mjs",
+    "check:api-imports": "node scripts/check-api-imports.mjs",
     "media:resize": "node scripts/resize-amc-media.mjs",
     "enrich:fandom-entity-galleries": "node scripts/ingest-fandom-entity-galleries.mjs"
   },
