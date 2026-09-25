@@ -42,7 +42,9 @@
     "test:share": "node scripts/test-share.mjs",
     "check:api-imports": "node scripts/check-api-imports.mjs",
     "media:resize": "node scripts/resize-amc-media.mjs",
-    "enrich:fandom-entity-galleries": "node scripts/ingest-fandom-entity-galleries.mjs"
+    "enrich:fandom-entity-galleries": "node scripts/ingest-fandom-entity-galleries.mjs",
+    "test:seo": "node scripts/check-seo.mjs",
+    "build:brand-assets": "node scripts/build-brand-assets.mjs"
   },
   "dependencies": {
     "@cublya/world-atlas": "^3.0.0-beta.1",

@@ -40,11 +40,12 @@ what unblocks the rest — so it doesn't get silently rebuilt or lost.
   2026-09-25 (`CRON_SECRET`, `FANDOM_SYNC_ENDPOINT`/`TOKEN`, `MEDIA_SYNC_ENDPOINT`/`TOKEN`,
   `BLOB_READ_WRITE_TOKEN` — none set). The two cron jobs had been firing daily since
   deploy and doing nothing (401/503 no-ops).
-- **The Supabase project the ingestion path depends on (`qflqfvoxdzkibpzfrwop`) is new
-  and not yet connected to Claude's tooling** — it isn't one of the projects visible
-  via the Supabase MCP connection in this environment. Its edge functions' actual
-  contracts (what `fandom-sync`/`atlas-media` really do, where they persist results)
-  haven't been verified from this session.
+- **Supabase contracts are now verified (2026-09-25)** — see `supabase-backend.md`. Two
+  facts that change this plan: `fandom-sync` persists to the Supabase table
+  `fandom_entity_cache` (not Blob) *and* returns the records, and it now **requires a bearer
+  token** (`FANDOM_SYNC_TOKEN`, or the service role key). `api/cron/fandom-sync.ts` already
+  sends that bearer, but its body has **no entities**, so even authenticated it would be
+  a no-op until it sends `entities`.
 
 ## 2026-09-25: crons disabled
 
@@ -59,14 +60,14 @@ an actual deployed preview first).
 
 ## What actually finishing this needs
 
-1. Connect the `qflqfvoxdzkibpzfrwop` Supabase project to Claude's Supabase tooling
-   (or otherwise share what its edge functions do) so the ingestion contract can be
-   verified instead of guessed at.
+1. ~~Verify the Supabase edge function contracts~~ — done, documented in `supabase-backend.md`.
 2. Configure real Vercel env vars for the project: `CRON_SECRET`, `FANDOM_SYNC_ENDPOINT`,
-   `FANDOM_SYNC_TOKEN`, `MEDIA_SYNC_ENDPOINT`, `MEDIA_SYNC_TOKEN`, `BLOB_READ_WRITE_TOKEN`.
-3. Decide (once #1 is answered) whether the Supabase edge function writes results to
-   Blob directly, or whether `api/cron/*.ts` needs to read the dispatch response and
-   persist it to Blob itself — right now it discards it either way.
+   `FANDOM_SYNC_TOKEN` (the same value must be set as a Supabase function secret),
+   `MEDIA_SYNC_ENDPOINT`, `MEDIA_SYNC_TOKEN`, `BLOB_READ_WRITE_TOKEN`.
+3. Decide whether results should also land in Blob: the edge function already stores them in
+   `fandom_entity_cache` and returns them, but `api/cron/*.ts` discards the response and sends
+   no entities. Either make the cron send entities and persist the response, or drop the cron
+   and keep the manual `sync:fandom:supabase` script.
 4. Switch `src/data.ts` / `src/lib/media.ts` / `src/views/details/shared.tsx` from
    static JSON imports to runtime fetches against `/api/entity`, `/api/search`,
    `/api/media` — this is real frontend work (async data loading, loading/error

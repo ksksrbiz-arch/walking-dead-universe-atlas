@@ -1,0 +1,23 @@
+# Supabase project qflqfvoxdzkibpzfrwop (us-west-1). Deploy with the Supabase CLI:
+#   supabase functions deploy <name> --project-ref qflqfvoxdzkibpzfrwop
+# All functions run with verify_jwt = false because the browser calls them without a user
+# session; each one enforces its own limits (or, for fandom-sync, its own bearer check).
+# Details: context/references/supabase-backend.md
+
+project_id = "qflqfvoxdzkibpzfrwop"
+
+[functions.atlas-bookmarks]
+verify_jwt = false
+
+[functions.atlas-state]
+verify_jwt = false
+
+[functions.atlas-telemetry]
+verify_jwt = false
+
+[functions.atlas-media]
+verify_jwt = false
+
+# Not public: requires `Authorization: Bearer <FANDOM_SYNC_TOKEN | service role key>` (checked in code).
+[functions.fandom-sync]
+verify_jwt = false
