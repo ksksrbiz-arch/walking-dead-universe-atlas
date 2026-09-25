@@ -14,6 +14,8 @@ Hard rules for every task are in `AGENTS.md` (map transform contract, 363-episod
 | Why the UI looks the way it does | `docs/UI_AUDIT_AND_REDESIGN_2026-09.md` | — |
 | Media / Fandom enrichment | `docs/DATA_ENRICHMENT_ARCHITECTURE.md` | — |
 | Scheduled/automated ingestion (Vercel cron, Blob-backed data) | `context/references/scheduled-ingestion.md` | — |
+| Supabase edge functions, tables, access model, security | `context/references/supabase-backend.md`, `supabase/` | — |
+| SEO / share metadata / crawler files | `context/references/seo-and-share-metadata.md` | — |
 | Journeys, deep links, share previews | `context/references/journeys-and-sharing.md`, `src/lib/journeys.ts` | `context/workflows/map-change/CONTEXT.md` (map layers) |
 
 ## Do not load unless the task is about them
@@ -23,6 +25,7 @@ Hard rules for every task are in `AGENTS.md` (map transform contract, 363-episod
 | `data/enrichment/fandom-canonical.json` (455 KB) | Read through `src/lib/atlasHelpers.ts` / `views/details/shared.tsx` |
 | `package-lock.json`, `dist/` | Generated |
 | `api/`, `workers/` | Backend/media delivery — except `api/share.ts`, `api/og.ts` for share-link work (each file is self-contained; see the note in journeys-and-sharing.md) |
+| `supabase/functions/*` | Deployed edge functions; only for backend tasks (contracts live in `supabase-backend.md`) |
 | `scripts/*enrich*`, `scripts/*fandom*` | Ingestion pipeline |
 
 ## Source map (UI)
@@ -43,4 +46,4 @@ src/views/details/          Episode/Location/Character/Group/Connection detail
 
 ## Commands
 
-`npm run typecheck` · `npm run build` · `npm run audit:atlas` · `npm run media:manifest` (after media edits) · `npm run test:journeys` · `npm run test:share` (after build) · `npm run check:api-imports` (after any `api/*.ts` edit — every function must be self-contained, see journeys-and-sharing.md) · `npm run test:ui` (needs a running `vite preview` on :4173 and Playwright — see script header)
+`npm run typecheck` · `npm run build` · `npm run audit:atlas` · `npm run media:manifest` (after media edits) · `npm run test:journeys` · `npm run test:share` (after build) · `npm run test:seo` (after build; head metadata + crawler files) · `npm run check:api-imports` (after any `api/*.ts` edit — every function must be self-contained, see journeys-and-sharing.md) · `npm run test:ui` (needs a running `vite preview` on :4173 and Playwright — see script header)

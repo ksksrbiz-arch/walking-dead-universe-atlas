@@ -14,9 +14,16 @@ for(const [key,path] of Object.entries(files)){
   const rows=JSON.parse(await readFile(path,"utf8"));
   entities[key]=rows.map(row=>({id:row.id,name:row.name||row.title})).filter(x=>x.id&&x.name).slice(0,MAX_PER_TYPE);
 }
+// The edge function is not public (2026-09-25): it needs FANDOM_SYNC_TOKEN, or the project's
+// service role key as a fallback. See context/references/supabase-backend.md.
+const TOKEN=process.env.FANDOM_SYNC_TOKEN||process.env.SUPABASE_SERVICE_ROLE_KEY;
+if(!TOKEN){
+  console.error("Set FANDOM_SYNC_TOKEN (or SUPABASE_SERVICE_ROLE_KEY) - the fandom-sync edge function requires a bearer token.");
+  process.exit(1);
+}
 const res=await fetch(ENDPOINT,{
   method:"POST",
-  headers:{"content-type":"application/json"},
+  headers:{"content-type":"application/json",authorization:"Bearer "+TOKEN},
   body:JSON.stringify({entities,options:{batchSize:BATCH_SIZE}}),
   signal:AbortSignal.timeout(110000)
 });

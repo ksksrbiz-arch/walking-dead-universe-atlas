@@ -1,0 +1,14 @@
+{
+  "name": "Walking Dead Universe Atlas",
+  "short_name": "TWDU Atlas",
+  "description": "Chronology, geography and connections across the Walking Dead Universe.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0d0c",
+  "theme_color": "#0a0d0c",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

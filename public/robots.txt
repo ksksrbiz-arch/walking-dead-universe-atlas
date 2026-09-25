@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://walking-dead-universe-atlas.vercel.app/sitemap.xml
