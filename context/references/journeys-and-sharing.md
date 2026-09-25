@@ -63,7 +63,7 @@ Header (faces, share, exit) → player → stats (single) or per-person rows (co
 
 ## Preview cards (server)
 - `src/lib/shareIndex.ts`: `buildShareIndex()` computes names, stats, journey stop coordinates, legs and beat ranks, and Fandom preview images (resized, `format=original` so they arrive as JPEG/PNG). `vite.config.ts` writes it to `dist/share-index.json` (≈225 KB) with 1:110m land.
-- `lib/atlas-share.ts`: loads the index (local `dist/` first, then the deployment's `/share-index.json`), then:
+- `api/_lib/atlas-share.ts` (must live under `api/` — Vercel's Node function bundler does not trace/include a sibling module outside `api/`, which is exactly the bug that took `/api/og` and `/api/share` down in production before this was caught): loads the index (local `dist/` first, then the deployment's `/share-index.json`), then:
   - `resolveCard`: unknown ids → null
   - `shareHtml`: OG/Twitter meta, canonical URL, meta refresh + `location.replace`, everything HTML-escaped
   - `cardElement`: Satori tree built with `h()`. Single children are passed unwrapped; Satori demands `display:flex` for any children array.
