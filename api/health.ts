@@ -32,7 +32,7 @@ export async function GET(req: Request) {
 
   try {
     const result = await list({ prefix: "twdu-atlas-data/", limit: 1000 });
-    const available = new Set(result.blobs.map(blob => blob.pathname.replace(/^twdu-atlas-data\\//, "")));
+    const available = new Set(result.blobs.map(blob => blob.pathname.replace(/^twdu-atlas-data\//, "")));
     const missing = REQUIRED_DATA.filter(name => !available.has(name));
 
     return Response.json(

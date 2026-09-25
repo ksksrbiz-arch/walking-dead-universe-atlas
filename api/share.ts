@@ -1,4 +1,4 @@
-import { loadShareIndex, requestOrigin, resolveCard, shareHtml } from "./_lib/atlas-share";
+import { loadShareIndex, requestOrigin, resolveCard, shareHtml } from "./_lib/atlas-share.ts";
 
 // /j/:ids, /p/:id, /e/:id, /c/:id (vercel.json rewrites) → a tiny HTML page
 // whose meta tags give chat apps and social sites a rich preview, then sends

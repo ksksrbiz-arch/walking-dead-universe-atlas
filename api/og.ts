@@ -1,5 +1,5 @@
 import { ImageResponse } from "@vercel/og";
-import { cardElement, loadShareIndex, requestOrigin, resolveCard } from "./_lib/atlas-share";
+import { cardElement, loadShareIndex, requestOrigin, resolveCard } from "./_lib/atlas-share.ts";
 
 // 1200×630 preview card for a share link (see api/share.ts).
 export async function GET(req: Request) {
