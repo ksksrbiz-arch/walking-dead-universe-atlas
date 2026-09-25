@@ -1,8 +1,9 @@
 import {atlasData} from "../data";
+import {getAnchorYearBounds,normalizeTemporalAnchor,compareTemporalAnchors} from "./temporalEngine";
 
 export type ChronologyItem={
  id:string;
- kind:"episode"|"event"|"universe-event";
+ kind:"episode"|"event"|"universe-event"|"webisode";
  seriesId:string;
  seasonId?:string;
  episodeNumber?:number;
@@ -17,6 +18,11 @@ export type ChronologyItem={
  factionIds?:string[];
  connectionIds?:string[];
  sources?:string[];
+ // Position in the untouched data/episodes.json array (season/episode-number
+ // order), preserved through buildChronology's own start/end/title sort so
+ // buildEpisodeWatchOrder's same-anchor tie-break has something meaningful to
+ // fall back on instead of that sort's incidental alphabetical-by-title order.
+ catalogIndex?:number;
 };
 
 // atlasData is static after load, so the built (and sorted) chronology never changes
@@ -27,11 +33,12 @@ let chronologyCache:ChronologyItem[]|null=null;
 export function buildChronology(){
  if(chronologyCache)return chronologyCache;
  const episodes=(atlasData as any).episodes ?? [];
- const episodeItems:ChronologyItem[]=episodes.map((e:any)=>({
+ const episodeItems:ChronologyItem[]=episodes.map((e:any,catalogIndex:number)=>({
   id:e.id,kind:"episode",seriesId:e.seriesId,seasonId:e.seasonId,episodeNumber:e.episodeNumber,
   title:e.title,start:e.timelineStart ?? e.timelineEnd ?? e.airDate?.slice(0,4) ?? 0,
   end:e.timelineEnd ?? e.timelineStart ?? e.airDate?.slice(0,4) ?? 0,
-  precision:e.timelinePrecision ?? "unknown",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[]
+  precision:e.timelinePrecision ?? "unknown",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[],
+  catalogIndex
  }));
  const eventItems:ChronologyItem[]=atlasData.events.map((e:any)=>({
   id:e.id,kind:"event",seriesId:e.seriesId,title:e.title,start:e.year,end:e.year,
@@ -41,7 +48,7 @@ export function buildChronology(){
   id:e.id,kind:"universe-event",seriesId:e.seriesId,title:e.title,start:Number(e.year),end:Number(e.year),
   precision:e.date?"day":"year",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[]
  }));
- chronologyCache=[...episodeItems,...eventItems,...universeEventItems].sort((a,b)=>a.start-b.start||a.end-b.end||a.title.localeCompare(b.title));
+ chronologyCache=[...episodeItems,...eventItems,...universeEventItems].sort((a,b)=>(a.start||Infinity)-(b.start||Infinity)||(a.end||Infinity)-(b.end||Infinity)||a.title.localeCompare(b.title));
  return chronologyCache;
 }
 
@@ -60,8 +67,9 @@ export function getSeriesWatchOrder(){
 // bar, and any mini-timeline embedded in an entity detail panel. Defining it once here
 // means a future chronology correction that pushes the latest year further only needs
 // updating in one place, instead of the three-plus hardcoded copies this replaced.
-export const UNIVERSE_MIN_YEAR=2010;
-export const UNIVERSE_MAX_YEAR=2028;
+const yearBounds=getAnchorYearBounds(buildChronology().filter(x=>x.start>0));
+export const UNIVERSE_MIN_YEAR=Math.min(2010,yearBounds.min);
+export const UNIVERSE_MAX_YEAR=Math.max(2028,yearBounds.max);
 export function yearToPercent(year:number,min=UNIVERSE_MIN_YEAR,max=UNIVERSE_MAX_YEAR){
  return ((Math.max(min,Math.min(max,year))-min)/(max-min))*100;
 }
@@ -88,39 +96,20 @@ export type EpisodeWatchOrderItem=ChronologyItem & {
  orderingBasis:"timeline-anchor"|"timeline-window";
 };
 
-const seasonNumberBySeasonId=new Map((atlasData.seasons as any[]).map(s=>[s.id,s.season]));
-
-// Many episodes only carry year-level timeline precision (an entire season, or even
-// several consecutive seasons, sharing one approximate year), so sorting purely on
-// start/end left large same-year clusters ordered by nothing but title text — season 2
-// could sort ahead of season 1's pilot, and cross-series ties resolved alphabetically
-// rather than by the curated cross-series sequence. watchOrder.json's series-level
-// scaffold exists specifically to break those ties (its own note says episode-level
-// chronology should still win whenever it actually differs); this was previously wired
-// up (getSeriesWatchOrder) but never consulted by the actual episode ordering.
-function scaffoldIndex(seriesId:string,seasonNumber:number|undefined):number{
- if(seasonNumber==null)return Infinity;
- const scaffold=getSeriesWatchOrder();
- const index=scaffold.findIndex((w:any)=>w.seriesId===seriesId&&seasonNumber>=w.startSeason&&seasonNumber<=w.endSeason);
- return index===-1?Infinity:index;
-}
-
-const resolveStart=(e:any):number=>Number(e.start??e.timelineStart??e.timelineEnd??9999);
-const resolveEnd=(e:any):number=>Number(e.end??e.timelineEnd??e.timelineStart??9999);
-
 // Shared by every place in the app that lists a character's/group's/year's
 // episodes and needs them in genuine story order, not just "same approximate
 // year, whatever order the source data happened to be in" — accepts either a
 // raw episodes.json record (timelineStart/timelineEnd) or a ChronologyItem
 // (start/end).
 export function compareEpisodesChronologically(a:any,b:any):number{
- const seasonA=seasonNumberBySeasonId.get(a.seasonId||""),seasonB=seasonNumberBySeasonId.get(b.seasonId||"");
- return resolveStart(a)-resolveStart(b)
-  ||resolveEnd(a)-resolveEnd(b)
-  ||scaffoldIndex(a.seriesId,seasonA)-scaffoldIndex(b.seriesId,seasonB)
-  ||(seasonA??Infinity)-(seasonB??Infinity)
-  ||(a.episodeNumber??Infinity)-(b.episodeNumber??Infinity)
-  ||String(a.title||"").localeCompare(String(b.title||""));
+ const anchorA=normalizeTemporalAnchor(a),anchorB=normalizeTemporalAnchor(b);
+ const temporal=compareTemporalAnchors(anchorA,anchorB);
+ // Only disjoint known intervals establish order. Overlapping/unknown anchors
+ // are not "resolved" by a season scaffold; preserve catalog order deterministically.
+ if(temporal==="before")return -1;
+ if(temporal==="after")return 1;
+ return (a.catalogIndex??Infinity)-(b.catalogIndex??Infinity)
+  ||String(a.id||"").localeCompare(String(b.id||""));
 }
 
 let watchOrderCache:EpisodeWatchOrderItem[]|null=null;
@@ -135,11 +124,18 @@ export function buildEpisodeWatchOrder(){
   return {
    ...item,
    sequence:index+1,
-   chronologyStatus:unknown?"unknown":sameWindow?"shared-year":"anchored",
+   chronologyStatus:unknown?"unknown":sameWindow||item.precision!=="day"?"shared-year":"anchored",
    orderingBasis:item.precision==="year"?"timeline-window":"timeline-anchor"
   } as EpisodeWatchOrderItem;
  });
  return watchOrderCache;
+}
+
+/** Webisodes are watchable extras, kept out of the in-universe timeline unless story anchors are sourced. */
+export type WebisodeWatchItem={id:string;seriesId:string;title:string;episodeCount:number;releaseStart:string;releaseEnd:string;kind:"webisode";orderingBasis:"release-window";chronologyStatus:"unanchored"};
+export function getWebisodeWatchOrder(seriesId?:string):WebisodeWatchItem[]{
+ const groups=(atlasData as any).webisodes?.series??[];
+ return groups.filter((item:any)=>!seriesId||item.seriesId===seriesId).map((item:any)=>({...item,kind:"webisode",orderingBasis:"release-window",chronologyStatus:"unanchored"}));
 }
 
 export function getEpisodeWatchOrder(seriesId?:string){
