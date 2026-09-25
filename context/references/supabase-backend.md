@@ -18,10 +18,10 @@ All six were deployed with `verify_jwt = false`: browsers call them with no user
 
 | Function | Who calls it | Method / contract | Limits / auth |
 |---|---|---|---|
-| `atlas-media` | Browser, via same-origin `/api/atlas/media` (see `src/lib/media.ts`) | `GET ?url=<encoded image URL>` returns the image | https + allow-listed hosts only (Fandom/wikia, AMC CDN); raster types only (avif/webp/jpeg/png/gif, **no SVG**); 12 MB cap; every redirect hop re-validated (max 3); `s-maxage=604800` so the CDN can cache |
+| `atlas-media` | Browser, directly (`MEDIA_PROXY` in `src/lib/media.ts`) | `GET ?url=<encoded image URL>` returns the image | https + allow-listed hosts only (Fandom/wikia, AMC CDN); raster types only (avif/webp/jpeg/png/gif, **no SVG**); 12 MB cap; every redirect hop re-validated (max 3). Sends `s-maxage`, but see "Caching" below |
 | `atlas-telemetry` | Browser (`src/lib/performance.ts`, `sendBeacon`) | `POST {metrics:[{name,value}]}`, 1-40 metrics | name < 80 chars, finite value; calls `atlas_upsert_telemetry` |
-| `atlas-state` | Browser, via `/api/atlas/state` | `GET/PUT ?session=<16-128 char id>` | 32 KB body cap; session id is the only key |
-| `atlas-bookmarks` | Browser, via `/api/atlas/bookmarks` | `GET/POST/DELETE` | 16 KB body, 4 KB metadata, 500 bookmarks/session (429 beyond) |
+| `atlas-state` | Nothing yet (planned: `/api/atlas/state` rewrite) | `GET/PUT ?session=<16-128 char id>` | 32 KB body cap; session id is the only key |
+| `atlas-bookmarks` | Nothing yet (planned: `/api/atlas/bookmarks` rewrite) | `GET/POST/DELETE` | 16 KB body, 4 KB metadata, 500 bookmarks/session (429 beyond) |
 | `fandom-sync` | `scripts/sync-fandom-supabase.mjs` (manual), `api/cron/fandom-sync.ts` (unregistered) | `POST {entities:{characters,locations,episodes}, options}` | **Bearer required**: `FANDOM_SYNC_TOKEN` or the service role key (401 otherwise). Max 300 entities/type, concurrency <= 8 |
 
 `atlas-state` and `atlas-bookmarks` hold 0 rows and **nothing in `src/`, `api/` or `scripts/` calls them** (only the
@@ -53,10 +53,22 @@ After any change, check from the deployed site's origin (CORS allows it) that:
 4. Security advisor shows no `WARN` (only the 5 INFO `rls_enabled_no_policy`).
 5. In SQL: `has_function_privilege('anon','public.atlas_upsert_telemetry(jsonb,bigint)','execute')` is **false**.
 
+## Caching (`atlas-media`) - verified 2026-09-25
+Every image the app shows from Fandom/AMC is one Supabase invocation per load per visitor (about 13k/day at audit
+time, mostly automated test traffic). The `/api/atlas/media` Vercel rewrite in `vercel.json` looks like a way to get CDN
+caching, but it **does not cache**: Supabase's edge adds a fresh `Set-Cookie: __cf_bm=...` to every response and Vercel
+does not cache responses that set cookies. Three plain requests to production all returned `x-vercel-cache: MISS`, so
+routing the browser through that rewrite would only add a hop. Do not switch `MEDIA_PROXY` to it without re-testing.
+
+The real fix is already in the repo but **not deployed**: `workers/atlas-media-proxy` (Cloudflare Worker
+`walking-dead-atlas-media`; it uses the Workers cache and reports `x-atlas-media-cache: HIT|MISS`). To use it:
+`cd workers/atlas-media-proxy && npx wrangler deploy`, then set `VITE_ATLAS_MEDIA_PROXY` on the Vercel project to the
+worker URL and redeploy. Before that, port this function's hardening to the worker (it currently accepts any `image/*`
+including SVG and follows redirects blindly), and re-check `x-atlas-media-cache: HIT` on a second request.
+
 ## Known gaps / not done
-- **No rate limiting** on any public function (Edge Functions have no built-in limiter). `atlas-media` relies on CDN
-  caching to keep invocations down; watch invocation counts (about 13k/day at audit time, mostly automated
-  test traffic) against the plan quota.
+- **No rate limiting** on any public function (Edge Functions have no built-in limiter). Until the worker above is
+  deployed, watch invocation counts against the plan quota.
 - `fandom-image` is still deployed but **unused** (`vercel.json` maps `/api/fandom-image` to `atlas-media`). Its source is
   not vendored. Remove it with `supabase functions delete fandom-image --project-ref qflqfvoxdzkibpzfrwop`.
 - `atlas-media` cannot be called with `HEAD` (405).

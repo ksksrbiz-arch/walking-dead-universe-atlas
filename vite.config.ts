@@ -17,18 +17,6 @@ function shareIndex(): Plugin {
   };
 }
 
-// Production serves /api/atlas/media through a vercel.json rewrite to the Supabase image proxy
-// (so the Vercel CDN can cache it); dev and `vite preview` need the same route.
-const mediaProxy = {
-  "/api/atlas/media": {
-    target: "https://qflqfvoxdzkibpzfrwop.supabase.co",
-    changeOrigin: true,
-    rewrite: (path: string) => path.replace(/^\/api\/atlas\/media/, "/functions/v1/atlas-media"),
-  },
-};
-
 export default defineConfig({
   plugins: [react(), shareIndex()],
-  server: { proxy: mediaProxy },
-  preview: { proxy: mediaProxy },
 });

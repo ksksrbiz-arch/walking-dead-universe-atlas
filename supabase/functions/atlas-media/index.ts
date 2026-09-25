@@ -1,8 +1,10 @@
 // Image proxy for Fandom/AMC art. Public, GET-only, allow-listed hosts.
 // Hardening (2026-09-25): raster image types only (no SVG), and every redirect hop is
 // re-validated against the allow-list instead of being followed blindly.
-// Browsers reach this through the same-origin Vercel rewrite /api/atlas/media so the Vercel CDN
-// can cache the (immutable) responses; see context/references/supabase-backend.md.
+// Browsers call this directly (src/lib/media.ts). Responses carry s-maxage, but Supabase's edge adds a
+// Set-Cookie (__cf_bm) to every response, so putting the Vercel rewrite /api/atlas/media in front of it does
+// NOT get CDN-cached (verified 2026-09-25: repeated x-vercel-cache: MISS). For real edge caching use the
+// Cloudflare Worker in workers/atlas-media-proxy; see context/references/supabase-backend.md.
 const ALLOWED_HOSTS = new Set([
   "static.wikia.nocookie.net",
   "vignette.wikia.nocookie.net",

@@ -6,11 +6,6 @@ import {observeImageError} from "./performance";
 
 // `?.`: this module is also bundled into the share/OG function (no Vite env there).
 const MEDIA_PROXY=import.meta.env?.VITE_ATLAS_MEDIA_PROXY||"https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-media";
-// In the browser, go through the same-origin rewrite (vercel.json: /api/atlas/media -> the Supabase
-// function; vite.config.ts proxies it in dev/preview). Same bytes, but Vercel's CDN can now cache them
-// (the function sends s-maxage), so repeat loads never reach Supabase. Node callers (share/OG function,
-// build scripts) and an explicit VITE_ATLAS_MEDIA_PROXY keep the absolute URL.
-const MEDIA_PROXY_BASE=typeof window!=="undefined"&&!import.meta.env?.VITE_ATLAS_MEDIA_PROXY?"/api/atlas/media":MEDIA_PROXY;
 // source URL -> locally generated resized copies. A plain string is a single
 // local file (legacy cache-amc-media output); an object maps width -> path
 // (media:resize output, used for AMC sources whose CDN cannot resize).
@@ -98,7 +93,9 @@ function localVariants(source:string):[number,string][]{
 }
 
 function proxied(source:string){
-  return MEDIA_PROXY_BASE+"?"+new URLSearchParams({url:source}).toString();
+  const url=new URL(MEDIA_PROXY);
+  url.searchParams.set("url",source);
+  return url.toString();
 }
 
 export function atlasImageUrl(source:string|undefined|null,width=1200,_quality=78){
