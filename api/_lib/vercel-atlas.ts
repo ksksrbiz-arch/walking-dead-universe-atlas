@@ -46,5 +46,7 @@ export async function readBlobJson<T>(pathname: string): Promise<T | null> {
   if (!blob) return null;
   const result = await get(blob.url, { access: "private" });
   if (!result) return null;
-  return JSON.parse(await result.text()) as T;
+  if (!result.stream) return null;
+  const body = await new Response(result.stream).text();
+  return JSON.parse(body) as T;
 }
