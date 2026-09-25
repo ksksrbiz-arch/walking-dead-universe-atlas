@@ -1,5 +1,5 @@
 import {atlasData} from "../data";
-import {getAnchorYearBounds,normalizeTemporalAnchor,compareTemporalAnchors} from "./temporalEngine";
+import {getAnchorYearBounds,normalizeTemporalAnchor} from "./temporalEngine";
 
 export type ChronologyItem={
  id:string;
@@ -103,13 +103,21 @@ export type EpisodeWatchOrderItem=ChronologyItem & {
 // (start/end).
 export function compareEpisodesChronologically(a:any,b:any):number{
  const anchorA=normalizeTemporalAnchor(a),anchorB=normalizeTemporalAnchor(b);
- const temporal=compareTemporalAnchors(anchorA,anchorB);
- // Only disjoint known intervals establish order. Overlapping/unknown anchors
- // are not "resolved" by a season scaffold; preserve catalog order deterministically.
- if(temporal==="before")return -1;
- if(temporal==="after")return 1;
- return (a.catalogIndex??Infinity)-(b.catalogIndex??Infinity)
-  ||String(a.id||"").localeCompare(String(b.id||""));
+ const knownA=anchorA.start!=null&&anchorA.end!=null,knownB=anchorB.start!=null&&anchorB.end!=null;
+ // Unanchored episodes ("we don't know when") never invent a position: they sort after every dated one.
+ if(knownA!==knownB)return knownA?-1:1;
+ if(knownA&&knownB){
+  // Total order: earliest possible date, then earliest possible end. Disjoint intervals therefore keep their
+  // true order, and same-window episodes fall through to catalog order below (S1 stays e01..e06).
+  // The earlier "overlaps => catalog order" pairwise rule was NOT transitive: one wide window (e.g. TOWL
+  // 2014-2022) or one unanchored episode acts as a bridge, so the sort could list 2021 episodes after 2023
+  // ones (44 reversed pairs in the 363-episode watch order). See scripts/test-chronology.mjs.
+  if(anchorA.start!==anchorB.start)return (anchorA.start as number)<(anchorB.start as number)?-1:1;
+  if(anchorA.end!==anchorB.end)return (anchorA.end as number)<(anchorB.end as number)?-1:1;
+ }
+ const indexA=a.catalogIndex??Infinity,indexB=b.catalogIndex??Infinity;
+ if(indexA!==indexB)return indexA<indexB?-1:1;
+ return String(a.id||"").localeCompare(String(b.id||""));
 }
 
 let watchOrderCache:EpisodeWatchOrderItem[]|null=null;

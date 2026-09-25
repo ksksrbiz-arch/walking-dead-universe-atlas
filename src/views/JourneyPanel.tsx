@@ -134,14 +134,14 @@ function Crossings({c}:{c:JourneyControls}){
  const together=crossings.filter(x=>x.together),apart=crossings.filter(x=>!x.together);
  const pair=(x:{a:number;b:number})=><span className="pairDots"><i className="jdot" style={{"--jc":JOURNEY_COLORS[x.a]} as CSSProperties}/><i className="jdot" style={{"--jc":JOURNEY_COLORS[x.b]} as CSSProperties}/></span>;
  return <>
-  <Section title="Crossed paths" count={together.length}>
+  <Section level={2} title="Crossed paths" count={together.length}>
    {together.length?<ShowMore items={together} limit={5} render={x=><button key={x.a+"-"+x.b+x.location.id} className="row crossingRow" onClick={()=>openLocation(x.location.id)}>
     {pair(x)}
     <span className="rowText"><small>{c.journeys[x.a].name.split(" ")[0]} & {c.journeys[x.b].name.split(" ")[0]} · together</small><b>{x.location.name}</b><em>{x.episodeIds.length} shared episode{x.episodeIds.length===1?"":"s"} · first {epLabel(x.episodeIds[0])}</em></span>
     <Icon name="chevron" className="rowChevron"/>
    </button>}/>:<p className="empty">No shared episodes at a mapped place{c.spoilerSafe?" in what you've watched":""}.</p>}
   </Section>
-  {apart.length>0&&<Section title="Same ground, different times" count={apart.length} collapsible defaultOpen={false}>
+  {apart.length>0&&<Section level={2} title="Same ground, different times" count={apart.length} collapsible defaultOpen={false}>
    <ShowMore items={apart} limit={6} render={x=><button key={x.a+"-"+x.b+x.location.id} className="row crossingRow" onClick={()=>openLocation(x.location.id)}>
     {pair(x)}<span className="rowText"><small>{c.journeys[x.a].name.split(" ")[0]} & {c.journeys[x.b].name.split(" ")[0]} · never in the same episode</small><b>{x.location.name}</b></span><Icon name="chevron" className="rowChevron"/>
    </button>}/>
@@ -186,7 +186,7 @@ export default function JourneyPanel({c,showPlayer}:{c:JourneyControls;showPlaye
   </label>
 
   {empty?<Note icon="eyeOff">{c.spoilerSafe?"Nothing on this journey is marked watched yet. Mark episodes as watched (or turn off spoiler-safe) to reveal it.":"No mapped places recorded for this journey yet."}</Note>:<>
-   <Section title={single?"Now":"At this step"}>
+   <Section level={2} title={single?"Now":"At this step"}>
     <div className="stack">
      {journeys.map((j,ji)=>{
       const at=c.positions[ji],stop=j.stops[at];
@@ -199,7 +199,7 @@ export default function JourneyPanel({c,showPlayer}:{c:JourneyControls;showPlaye
 
    <Crossings c={c}/>
 
-   <Section title="Every stop" count={listJourney?.stops.length}>
+   <Section level={2} title="Every stop" count={listJourney?.stops.length}>
     {journeys.length>1&&<div className="segmented" role="tablist">{journeys.map((j,ji)=><button key={j.characterId} role="tab" aria-selected={listFor===ji} className={listFor===ji?"active":""} onClick={()=>setListFor(ji)}>{j.name.split(" ")[0]}</button>)}</div>}
     {listJourney&&<ShowMore items={listJourney.stops} limit={8} label="Show all stops" render={s=>{const ji=journeys.indexOf(listJourney);const current=c.positions[ji]===s.index;const chapterStart=s.from==null||listJourney.stops[s.from]?.chapter!==s.chapter;return <button key={s.index} className={"row stopRow"+(current?" isCurrent":"")+(s.index>c.positions[ji]?" isAhead":"")+(chapterStart&&s.index>0?" newChapter":"")} style={{"--jc":JOURNEY_COLORS[ji]} as CSSProperties} onClick={()=>c.onStop(ji,s.index)} aria-current={current?"step":undefined}>
      <span className="stopNum">{s.place}</span>

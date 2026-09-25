@@ -45,7 +45,8 @@
     "enrich:fandom-entity-galleries": "node scripts/ingest-fandom-entity-galleries.mjs",
     "test:seo": "node scripts/check-seo.mjs",
     "build:brand-assets": "node scripts/build-brand-assets.mjs",
-    "test:media-worker": "node --test workers/atlas-media-proxy/test/index.test.mjs"
+    "test:media-worker": "node --test workers/atlas-media-proxy/test/index.test.mjs",
+    "test:chronology": "node scripts/test-chronology.mjs"
   },
   "dependencies": {
     "@cublya/world-atlas": "^3.0.0-beta.1",
@@ -66,8 +67,12 @@
     "@types/react-dom": "^19.3.0",
     "@types/topojson-client": "^3.1.5",
     "@vitejs/plugin-react": "^6.1.1",
+    "esbuild": "^0.28.2",
     "playwright": "^1.63.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.0"
+  },
+  "overrides": {
+    "sharp": "0.35.4"
   }
 }

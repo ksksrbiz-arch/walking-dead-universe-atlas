@@ -46,4 +46,4 @@ src/views/details/          Episode/Location/Character/Group/Connection detail
 
 ## Commands
 
-`npm run typecheck` · `npm run build` · `npm run audit:atlas` · `npm run media:manifest` (after media edits) · `npm run test:journeys` · `npm run test:share` (after build) · `npm run test:seo` (after build; head metadata + crawler files) · `npm run check:api-imports` (after any `api/*.ts` edit — every function must be self-contained, see journeys-and-sharing.md) · `npm run test:ui` (needs a running `vite preview` on :4173 and Playwright — see script header)
+`npm run typecheck` · `npm run build` · `npm run audit:atlas` · `npm run media:manifest` (after media edits) · `npm run test:journeys` · `npm run test:chronology` (story order) · `npm run test:share` (after build) · `npm run test:seo` (after build; head metadata + crawler files) · `npm run check:api-imports` (after any `api/*.ts` edit — every function must be self-contained, see journeys-and-sharing.md) · `npm run test:ui` (needs a running `vite preview` on :4173 and Playwright — see script header)

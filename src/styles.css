@@ -121,6 +121,8 @@ body:not(.atlas-booting) .bootScreen{opacity:0;visibility:hidden;pointer-events:
 .brandText small{display:block;margin-top:3px;font-size:11px;color:var(--text-3)}
 .searchTrigger{flex:1;min-width:0;display:flex;align-items:center;gap:10px;height:44px;padding:0 14px;border-radius:22px;background:var(--glass);border:1px solid var(--line);color:var(--text-3);font-size:15px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .searchTrigger span{flex:1;min-width:0;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.searchTrigger .short{display:none}
+@media (max-width:520px){.searchTrigger .long{display:none}.searchTrigger .short{display:block}}
 .searchTrigger kbd{display:none;font:600 12px var(--font);border:1px solid var(--line-2);border-radius:6px;padding:1px 7px;color:var(--text-3)}
 .yearChip{flex:none;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px;height:44px;padding:0 12px;border-radius:14px;background:var(--glass);border:1px solid var(--line);line-height:1;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .yearChip b{font:700 21px/1 var(--display);letter-spacing:.02em}
@@ -242,6 +244,8 @@ body:not(.atlas-booting) .bootScreen{opacity:0;visibility:hidden;pointer-events:
 .sectionHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;min-height:28px}
 .sectionTitle,.sectionToggle{display:flex;align-items:center;gap:8px;margin:0;font-size:15px;font-weight:700;letter-spacing:.005em;color:var(--text)}
 .sectionToggle{flex:1;background:none;border:0;padding:8px 0;min-height:44px;text-align:left}
+.sectionHeading{flex:1;display:flex;margin:0;font:inherit;min-width:0}
+.sectionHeading .sectionToggle{width:100%}
 .sectionChevron{margin-left:auto;width:18px;height:18px;color:var(--text-3);transition:transform .2s var(--ease)}
 .section.isClosed .sectionChevron{transform:rotate(-90deg)}
 .section.isClosed .sectionHead{margin-bottom:0;border-bottom:1px solid var(--line)}
@@ -769,3 +773,8 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 @keyframes hordeWalk{from{translate:-1px -1px;rotate:-9deg}to{translate:1px 1px;rotate:9deg}}
 @keyframes hordePulse{0%{opacity:.75;scale:.8}100%{opacity:0;scale:2.5}}
 @media(prefers-reduced-motion:reduce){.hordeWalker,.hordePulse{animation:none!important}}
+
+/* Touch targets: the design system requires >=44px for anything tappable. The phone/tablet sheet layout gets 44px
+   chips (the 36px pills stay on the pointer-driven panel layout). Scroll containers clip a bigger hit area, so the
+   chips themselves grow. */
+.layout-sheet .seriesRow button,.layout-sheet .filterRow button,.layout-sheet .compareAdd,.layout-sheet .entityGraphToggle{height:44px;border-radius:22px}

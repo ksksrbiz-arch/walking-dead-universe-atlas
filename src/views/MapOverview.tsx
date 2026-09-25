@@ -17,7 +17,7 @@ function JourneyStrip(){
  const {startJourney}=useAtlas();
  const top=useMemo(()=>journeyCandidates().slice(0,12),[]);
  const pair=["daryl-dixon","carol-peletier"].filter(id=>characterById.has(id));
- return <Section title="Trace a journey">
+ return <Section level={2} title="Trace a journey">
   <div className="portraitStrip journeyStrip">
    {pair.length===2&&<button onClick={()=>startJourney(pair)} className="journeyPair" aria-label="Compare Daryl and Carol's journeys">
     <span className="pairFaces">{pair.map(id=><PortraitImage key={id} id={id} name={(characterById.get(id) as any).name} size="md"/>)}</span>
@@ -57,12 +57,12 @@ export default function MapOverview({year,seriesId,locations,onOpenTimeline}:{ye
    <b>{era.title}</b>
    <span>{active.length} episode{active.length===1?"":"s"} · {mapped.length} places on the map{fresh.length?` · ${fresh.length} new`:""}</span>
   </div>
-  <Section title={`Happening in ${year}`} count={active.length} action={active.length>0?<button className="textBtn" onClick={onOpenTimeline}>Timeline<Icon name="chevron"/></button>:undefined}>
+  <Section level={2} title={`Happening in ${year}`} count={active.length} action={active.length>0?<button className="textBtn" onClick={onOpenTimeline}>Timeline<Icon name="chevron"/></button>:undefined}>
    {active.length?<div className="carousel">{active.slice(0,24).map(e=><EpisodeCard key={e.id} episode={e}/>)}</div>:<p className="empty">No episodes are anchored to {year}. Drag the year to explore.</p>}
   </Section>
   <JourneyStrip/>
-  {fresh.length>0&&<Section title={`New in ${year}`} count={fresh.length}><ShowMore items={fresh} limit={6} render={l=><PlaceRow key={l.id} location={l} isNew/>}/></Section>}
-  {older.length>0&&<Section title="Already on the map" count={older.length}><ShowMore items={older} limit={fresh.length?4:8} render={l=><PlaceRow key={l.id} location={l}/>}/></Section>}
-  {unplaced.length>0&&<Section title="Not placed on map" count={unplaced.length} collapsible defaultOpen={false}><div className="stack">{unplaced.map(l=><PlaceRow key={l.id} location={l} note="Coordinates unknown — not guessed"/>)}</div></Section>}
+  {fresh.length>0&&<Section level={2} title={`New in ${year}`} count={fresh.length}><ShowMore items={fresh} limit={6} render={l=><PlaceRow key={l.id} location={l} isNew/>}/></Section>}
+  {older.length>0&&<Section level={2} title="Already on the map" count={older.length}><ShowMore items={older} limit={fresh.length?4:8} render={l=><PlaceRow key={l.id} location={l}/>}/></Section>}
+  {unplaced.length>0&&<Section level={2} title="Not placed on map" count={unplaced.length} collapsible defaultOpen={false}><div className="stack">{unplaced.map(l=><PlaceRow key={l.id} location={l} note="Coordinates unknown — not guessed"/>)}</div></Section>}
  </div>;
 }
