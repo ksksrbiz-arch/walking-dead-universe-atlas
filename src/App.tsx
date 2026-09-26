@@ -1,4 +1,4 @@
-import {memo,useCallback,useEffect,useLayoutEffect,useMemo,useRef,useState} from "react";
+import {Suspense,lazy,memo,useCallback,useEffect,useLayoutEffect,useMemo,useRef,useState} from "react";
 import type {CSSProperties} from "react";
 import {geoEqualEarth,geoPath} from "d3-geo";
 import {feature} from "topojson-client";
@@ -31,18 +31,24 @@ import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Icon from "./components/Icon";
 import type {IconName} from "./components/Icon";
-import SearchOverlay from "./components/SearchOverlay";
 import type {SearchKind} from "./components/SearchOverlay";
 import TimeScrubber from "./components/TimeScrubber";
 import MapOverview from "./views/MapOverview";
-import TimelineView from "./views/TimelineView";
-import PeopleView from "./views/PeopleView";
-import WatchView from "./views/WatchView";
-import EpisodeDetail from "./views/details/EpisodeDetail";
-import LocationDetail from "./views/details/LocationDetail";
-import CharacterDetail from "./views/details/CharacterDetail";
-import GroupDetail from "./views/details/GroupDetail";
-import ConnectionDetail from "./views/details/ConnectionDetail";
+
+// Lazy: none of these are needed for the first paint of the default map
+// view, and several (the detail views, People, Search) drag in
+// views/details/shared.tsx's 455 KB fandom-canonical.json plus Lightbox and
+// the relationship graph. Splitting them out keeps that weight off the
+// critical path instead of blocking input on initial load.
+const SearchOverlay=lazy(()=>import("./components/SearchOverlay"));
+const TimelineView=lazy(()=>import("./views/TimelineView"));
+const PeopleView=lazy(()=>import("./views/PeopleView"));
+const WatchView=lazy(()=>import("./views/WatchView"));
+const EpisodeDetail=lazy(()=>import("./views/details/EpisodeDetail"));
+const LocationDetail=lazy(()=>import("./views/details/LocationDetail"));
+const CharacterDetail=lazy(()=>import("./views/details/CharacterDetail"));
+const GroupDetail=lazy(()=>import("./views/details/GroupDetail"));
+const ConnectionDetail=lazy(()=>import("./views/details/ConnectionDetail"));
 
 type View="map"|"timeline"|"people"|"watch";
 type Snap="peek"|"half"|"full";
@@ -92,8 +98,15 @@ const readLayout=()=>{
 // other host falls back to index.html and they are read here).
 type DeepLink={journey?:string[];at?:number;kind?:AtlasFocusKind;id?:string};
 const SHARE_PATHS:Record<string,AtlasFocusKind>={p:"location",e:"episode",c:"character"};
-const QUERY_KEYS:Partial<Record<AtlasFocusKind,string>>={location:"place",episode:"ep",character:"who"};
+const QUERY_KEYS:Partial<Record<AtlasFocusKind,string>>={location:"place",episode:"ep",character:"who",connection:"link",community:"community",faction:"faction"};
 const decodePathPart=(value:string)=>{try{return decodeURIComponent(value)}catch{return value}};
+// Map (/) has no path of its own — Timeline/People/Watch each get a real,
+// bookmarkable/shareable path so browser reload and direct navigation work,
+// with vercel.json rewriting each one to index.html for the SPA.
+const VIEW_TO_PATH:Record<View,string>={map:"/",timeline:"/timeline",people:"/people",watch:"/watch"};
+const PATH_TO_VIEW:Record<string,View>={"/timeline":"timeline","/people":"people","/watch":"watch"};
+const readInitialView=():View=>typeof window==="undefined"?"map":PATH_TO_VIEW[window.location.pathname]??"map";
+const VIEW_TITLE:Record<View,string>={map:"TWDU Atlas — Walking Dead Universe map & timeline",timeline:"Chronology · TWDU Atlas",people:"People index · TWDU Atlas",watch:"Watch progress · TWDU Atlas"};
 function readDeepLink():DeepLink{
  if(typeof window==="undefined")return {};
  const u=new URL(window.location.href);
@@ -119,7 +132,7 @@ export default function App(){
  const [playing,setPlaying]=useState(false);
  const focusCtl=useAtlasFocusController();
  const {focus,selectedLocation,selectedEpisode,selectedConnection,setFocus,clearFocus}=focusCtl;
- const [view,setView]=useState<View>("map");
+ const [view,setView]=useState<View>(readInitialView);
  const [navStack,setNavStack]=useState<NavEntry[]>([]);
  const [journeyIds,setJourneyIds]=useState<string[]>([]);
  // Playback position as a story rank (not a beat index) so it survives adding a
@@ -529,19 +542,26 @@ export default function App(){
 
  const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,startJourney,showConnectionOnMap,setYear,jumpToTimelineYear,year,watched,toggleWatched,resetWatched,followed,toggleFollowed};
 
+ // Per-view tab title. Independent of the deep-link gate below on purpose: a
+ // direct load of /people (no map involved) must still get the right title,
+ // not wait on the map's own home-framing sequence to release deepLink.current.
+ useEffect(()=>{
+  const title=VIEW_TITLE[view];
+  if(title&&document.title!==title)document.title=title;
+ },[view]);
  // ---- URL state (deep links in, shareable state out) --------------------------
  useEffect(()=>{
   if(deepLink.current)return; // not applied yet — don't clobber the incoming link
   const u=new URL(window.location.href);
   for(const k of ["j","at","place","ep","who"])u.searchParams.delete(k);
-  if(/^\/(j|p|e|c)\//.test(u.pathname))u.pathname="/";
+  u.pathname=VIEW_TO_PATH[view]??"/";
   if(journeyActive){
    u.searchParams.set("j",journeyIds.join(","));
    if(journeyCursor<beats.length-1&&beats[journeyCursor])u.searchParams.set("at",String(Math.round(beats[journeyCursor].rank*100)));
   }else if(focus&&QUERY_KEYS[focus.kind])u.searchParams.set(QUERY_KEYS[focus.kind]!,focus.id);
   const next=u.pathname+u.search+u.hash;
   if(next!==window.location.pathname+window.location.search+window.location.hash){try{window.history.replaceState(window.history.state,"",next)}catch{}}
- },[journeyActive,journeyIds,journeyCursor,beats,focus]);
+ },[view,journeyActive,journeyIds,journeyCursor,beats,focus]);
  const applyDeepLink=()=>{
   const link=deepLink.current;deepLink.current=null;if(!link)return;
   if(link.journey?.length){startJourney(link.journey,{rank:link.at});return}
@@ -549,6 +569,9 @@ export default function App(){
   if(link.kind==="location"&&locationById.has(link.id))openLocation(link.id);
   else if(link.kind==="episode"&&episodeById.has(link.id))showEpisodeOnMap(link.id);
   else if(link.kind==="character"&&characterById.has(link.id))openCharacter(link.id);
+  else if(link.kind==="connection"&&connectionById.has(link.id))openConnection(link.id);
+  else if(link.kind==="community"&&communityById.has(link.id))openCommunity(link.id);
+  else if(link.kind==="faction"&&factionById.has(link.id))openFaction(link.id);
  };
 
  // ---- Browser back closes overlays / walks the detail stack -------------------
@@ -559,6 +582,7 @@ export default function App(){
  const backHandler=useRef<()=>void>(()=>{});
  backHandler.current=()=>{
   historyArmed.current=false;
+  setView(PATH_TO_VIEW[window.location.pathname]??"map");
   if(searchOpen)setSearchOpen(false);
   else if(clusterIds)setClusterIds(null);
   else if(focus)goBack();
@@ -868,7 +892,7 @@ export default function App(){
     </header>
     <div className="sheetBody" ref={sheetBodyRef}>
      <ErrorBoundary key={focus?focus.kind+focus.id:view} onReset={()=>{closeDetail();goView("map")}}>
-      {detail||page}
+      <Suspense fallback={<p className="empty">Loading…</p>}>{detail||page}</Suspense>
      </ErrorBoundary>
     </div>
    </section>
@@ -885,7 +909,7 @@ export default function App(){
   {!isPanel&&<nav className="tabbar" ref={tabbarRef} aria-label="Atlas sections">{TABS.map(t=><button key={t.view} className={view===t.view?"active":""} aria-current={view===t.view?"page":undefined} onClick={()=>goView(t.view)}><Icon name={t.icon}/><span>{t.label}</span>{t.view==="watch"&&watched.size>0&&<em>{watchedPct}%</em>}</button>)}</nav>}
 
   {toast&&<div className="toast" role="status">{toast}</div>}
-  {searchOpen&&<SearchOverlay onClose={()=>setSearchOpen(false)} onPick={onSearchPick}/>}
+  {searchOpen&&<Suspense fallback={<div className="searchOverlay" role="dialog" aria-modal="true" aria-label="Search the atlas"><div className="searchScrim"/><div className="searchPanel"/></div>}><SearchOverlay onClose={()=>setSearchOpen(false)} onPick={onSearchPick}/></Suspense>}
  </div>
  </AtlasContext.Provider>;
 }

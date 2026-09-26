@@ -54,8 +54,10 @@ Header (faces, share, exit) → player → stats (single) or per-person rows (co
 | URL | Opens |
 |---|---|
 | `/?j=a,b&at=<rank×100>` | Journey (compare with `,`/`+`); `at` omitted = end |
-| `/?place=` · `/?ep=` · `/?who=` | Location / episode (on map) / character |
+| `/?place=` · `/?ep=` · `/?who=` | Location / episode (on map) / character — get a short share path too (below) |
+| `/?link=` · `/?community=` · `/?faction=` | Connection / community / faction — query-param only, no short share path or OG card (unlike location/episode/character) |
 | `/j/a+b?at=` · `/p/:id` · `/e/:id` · `/c/:id` | Short share paths (Vercel: preview HTML → redirect; elsewhere the SPA fallback reads them and normalises the URL) |
+| `/timeline` · `/people` · `/watch` | The three non-map views (Map is `/`) — see `seo-and-share-metadata.md` |
 
 - `readDeepLink()` runs once and is applied after the first home framing.
 - A `replaceState` effect keeps the URL in step with journey/focus, so reload and copy-paste reproduce the view.

@@ -20,6 +20,18 @@
       "destination": "/api/share?kind=c&id=:id"
     },
     {
+      "source": "/timeline",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/people",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/watch",
+      "destination": "/index.html"
+    },
+    {
       "source": "/api/atlas/bookmarks",
       "destination": "https://qflqfvoxdzkibpzfrwop.supabase.co/functions/v1/atlas-bookmarks"
     },

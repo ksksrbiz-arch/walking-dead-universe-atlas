@@ -8,7 +8,8 @@ import {characterEpisodeCounts} from "../lib/lookup";
 import {getGroupEpisodeIds} from "../lib/entityGraph";
 import {prettyType} from "../lib/atlasHelpers";
 import {seriesColor} from "../lib/series";
-import {ConnectionRow,PortraitImage} from "./details/shared";
+import {ConnectionRow} from "./details/shared";
+import {PortraitImage} from "./details/portrait";
 
 type Tab="people"|"groups"|"links";
 

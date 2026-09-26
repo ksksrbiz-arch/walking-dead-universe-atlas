@@ -7,7 +7,8 @@ import {connectionById,entityName,episodesFor,locationsFor} from "../../lib/look
 import {resolveConnectionEndpoint} from "../../lib/entityGraph";
 import {connectionTypeLabel,hasMapCoordinates} from "../../lib/atlasHelpers";
 import {seriesColor} from "../../lib/series";
-import {GraphSection,PortraitImage} from "./shared";
+import {GraphSection} from "./shared";
+import {PortraitImage} from "./portrait";
 
 const KIND_ICON={character:"person",location:"pin",community:"people",faction:"flag",series:"film"} as const;
 
