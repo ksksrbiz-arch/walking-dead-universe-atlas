@@ -94,6 +94,13 @@ type DeepLink={journey?:string[];at?:number;kind?:AtlasFocusKind;id?:string};
 const SHARE_PATHS:Record<string,AtlasFocusKind>={p:"location",e:"episode",c:"character"};
 const QUERY_KEYS:Partial<Record<AtlasFocusKind,string>>={location:"place",episode:"ep",character:"who"};
 const decodePathPart=(value:string)=>{try{return decodeURIComponent(value)}catch{return value}};
+// Map (/) has no path of its own — Timeline/People/Watch each get a real,
+// bookmarkable/shareable path so browser reload and direct navigation work,
+// with vercel.json rewriting each one to index.html for the SPA.
+const VIEW_TO_PATH:Record<View,string>={map:"/",timeline:"/timeline",people:"/people",watch:"/watch"};
+const PATH_TO_VIEW:Record<string,View>={"/timeline":"timeline","/people":"people","/watch":"watch"};
+const readInitialView=():View=>typeof window==="undefined"?"map":PATH_TO_VIEW[window.location.pathname]??"map";
+const VIEW_TITLE:Record<View,string>={map:"TWDU Atlas — Walking Dead Universe map & timeline",timeline:"Chronology · TWDU Atlas",people:"People index · TWDU Atlas",watch:"Watch progress · TWDU Atlas"};
 function readDeepLink():DeepLink{
  if(typeof window==="undefined")return {};
  const u=new URL(window.location.href);
@@ -119,7 +126,7 @@ export default function App(){
  const [playing,setPlaying]=useState(false);
  const focusCtl=useAtlasFocusController();
  const {focus,selectedLocation,selectedEpisode,selectedConnection,setFocus,clearFocus}=focusCtl;
- const [view,setView]=useState<View>("map");
+ const [view,setView]=useState<View>(readInitialView);
  const [navStack,setNavStack]=useState<NavEntry[]>([]);
  const [journeyIds,setJourneyIds]=useState<string[]>([]);
  // Playback position as a story rank (not a beat index) so it survives adding a
@@ -529,19 +536,26 @@ export default function App(){
 
  const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,startJourney,showConnectionOnMap,setYear,jumpToTimelineYear,year,watched,toggleWatched,resetWatched,followed,toggleFollowed};
 
+ // Per-view tab title. Independent of the deep-link gate below on purpose: a
+ // direct load of /people (no map involved) must still get the right title,
+ // not wait on the map's own home-framing sequence to release deepLink.current.
+ useEffect(()=>{
+  const title=VIEW_TITLE[view];
+  if(title&&document.title!==title)document.title=title;
+ },[view]);
  // ---- URL state (deep links in, shareable state out) --------------------------
  useEffect(()=>{
   if(deepLink.current)return; // not applied yet — don't clobber the incoming link
   const u=new URL(window.location.href);
   for(const k of ["j","at","place","ep","who"])u.searchParams.delete(k);
-  if(/^\/(j|p|e|c)\//.test(u.pathname))u.pathname="/";
+  u.pathname=VIEW_TO_PATH[view]??"/";
   if(journeyActive){
    u.searchParams.set("j",journeyIds.join(","));
    if(journeyCursor<beats.length-1&&beats[journeyCursor])u.searchParams.set("at",String(Math.round(beats[journeyCursor].rank*100)));
   }else if(focus&&QUERY_KEYS[focus.kind])u.searchParams.set(QUERY_KEYS[focus.kind]!,focus.id);
   const next=u.pathname+u.search+u.hash;
   if(next!==window.location.pathname+window.location.search+window.location.hash){try{window.history.replaceState(window.history.state,"",next)}catch{}}
- },[journeyActive,journeyIds,journeyCursor,beats,focus]);
+ },[view,journeyActive,journeyIds,journeyCursor,beats,focus]);
  const applyDeepLink=()=>{
   const link=deepLink.current;deepLink.current=null;if(!link)return;
   if(link.journey?.length){startJourney(link.journey,{rank:link.at});return}

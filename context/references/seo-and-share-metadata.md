@@ -9,6 +9,14 @@ SPA on one domain (`https://walking-dead-universe-atlas.vercel.app`); there is n
 | `/` (home) | `index.html` (static) | `public/og-home.jpg`, a static 1200x630 card |
 | `/j/…`, `/p/:id`, `/e/:id`, `/c/:id` (share links) | `api/share.ts` (HTML) + `api/og.ts` (dynamic PNG) | Per-entity card. See `journeys-and-sharing.md` |
 
+## View routes
+`/timeline`, `/people`, `/watch` are real, bookmarkable/reloadable paths for the three non-map views (Map stays `/`).
+`vercel.json` rewrites each to `index.html`; `App.tsx` reads the initial view from `location.pathname` on mount
+(`readInitialView`/`PATH_TO_VIEW`) and keeps pathname + `document.title` in sync with `view` afterward
+(`VIEW_TO_PATH`/`VIEW_TITLE`). This gives each view its own title and a real URL that survives reload or a direct
+link — it does **not** make these pages independently crawlable (still one client-rendered shell; see "Deliberately
+not done" below) or change what a share link's OG card shows.
+
 `api/og.ts` has no "home" kind and is deliberately fragile (unbundled Vercel function, `@vercel/og` pinned to 0.11), so the
 home card is a committed static asset instead of a new API branch.
 
@@ -36,5 +44,4 @@ or reviews are claimed), and a `<noscript>` note.
   and their canonical points at the app URL. Search engines therefore see one indexable page (`/`). Ranking for individual
   characters, places or episodes would need prerendered/SSR pages (one per entity: hundreds of pages) or a static snapshot mode. That
   is real infrastructure; weigh it against traffic before building.
-- **Per-view titles.** Views (Map/Timeline/People/Watch) are app state, not routes, so the title does not change per view.
 - **Analytics-grade tracking.** Only anonymous performance aggregates are collected (`supabase-backend.md`).
