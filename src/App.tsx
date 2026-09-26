@@ -576,6 +576,7 @@ export default function App(){
  const backHandler=useRef<()=>void>(()=>{});
  backHandler.current=()=>{
   historyArmed.current=false;
+  setView(PATH_TO_VIEW[window.location.pathname]??"map");
   if(searchOpen)setSearchOpen(false);
   else if(clusterIds)setClusterIds(null);
   else if(focus)goBack();
