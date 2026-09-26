@@ -3950,9 +3950,9 @@
     "episodeNumber": 2,
     "title": "Gone",
     "airDate": "2024-03-03",
-    "timelineStart": 2021,
+    "timelineStart": 2022,
     "timelineEnd": 2022,
-    "timelinePrecision": "range",
+    "timelinePrecision": "year",
     "certainty": "confirmed",
     "locationIds": [
       "philadelphia",
@@ -3967,7 +3967,8 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-owl"
+      "source-epguides-owl",
+      "source-timelinetwd-owl"
     ]
   },
   {
@@ -4135,9 +4136,9 @@
     "episodeNumber": 3,
     "title": "Dee",
     "airDate": "2022-08-28",
-    "timelineStart": 2012,
+    "timelineStart": 2013,
     "timelineEnd": 2013,
-    "timelinePrecision": "range",
+    "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
       "brookes-steamboat",
@@ -4151,7 +4152,8 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-tales"
+      "source-epguides-tales",
+      "source-timelinetwd-dee"
     ]
   },
   {

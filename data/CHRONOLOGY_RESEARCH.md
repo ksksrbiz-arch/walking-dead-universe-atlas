@@ -33,6 +33,15 @@ Re-verified against https://www.timelinetwd.com/the-walking-dead-universe-locati
 
 Known gap: `grady-memorial`, `oceanside`, `cumberland`, `clark-home`, `mexico-baja`, `truck-stop`, `campus-colony`, `philadelphia-crm`, and `marseille` are not yet wired into any episode's `locationIds` (only some are covered by curated historical associations in `locationEpisodes.json`). Their `year` values are researched but not yet episode-anchored; backfilling that linkage is future work.
 
+## 2026-09-26 follow-up: the wide/unanchored episodes
+
+Six episodes carry an unusually wide `timelineStart`–`timelineEnd` window, plus one (`tales-s01-e06` "La Doña") that's fully unanchored on purpose — the wiki's published timeline doesn't cover it at all, and nothing else invents a date for it; that one stays unanchored, not a gap to close. Checked each of the six against `timelinetwd.com` (a day-by-day fan chronology already used as a cross-reference above) and per-episode dedicated pages where they exist:
+
+- **Fixed, with a real source:** `tales-s01-e03` "Dee" (2012–2013 range → 2013, per a dedicated timelinetwd.com page dating the riverboat events to September 17–18, 2013) and `owl-s01-e02` "Gone" (2021–2022 → 2022, per timelinetwd's Ones Who Live page, which dates the whole episode to Jan 30–Feb 1 2022 — consistent with the already-correct 2022 anchors on the episodes immediately before and after it).
+- **Left as-is, likely already correct:** `owl-s01-e01` "Years" (2014–2022) and `owl-s01-e06` "The Last Time" (2022–2023) plausibly reflect real in-episode flashback/epilogue spans (Years opens with Jadis-recruits-Rick material near the 2014 bridge; the finale's epilogue is a deliberate one-year-later jump) rather than a research gap — narrowing them needs someone to actually confirm what's on screen, not another secondary-source search.
+- **Left as-is after a contradiction, not confirmed:** a timelinetwd fetch for `twd-s11-e24` "Rest in Peace" claimed the finale's main battle is July 2021 — but that's *before* the season's own established September 2021 start (see above) and contradicts every episode immediately before it (`twd-s11-e20` through `e23`, all already 2022). That's very likely an error in that one fetch, not real data, so the existing 2022–2023 range was left untouched rather than overwritten on a single contradicted source.
+- **Not re-checked:** `dead-s02-e02` "Another Shitty Lesson" — no dedicated timeline page found; left as-is (2027–2028).
+
 ## Data policy
 
 - airDate is release metadata and is never treated as in-universe chronology.

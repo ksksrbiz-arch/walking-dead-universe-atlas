@@ -1,5 +1,19 @@
 [
   {
+    "id": "source-timelinetwd-owl",
+    "title": "Timeline TWD — The Ones Who Live chronological timeline",
+    "type": "chronology",
+    "url": "https://www.timelinetwd.com/the-walking-dead-the-ones-who-live-timeline/?lang=en",
+    "note": "Fan-maintained day-by-day chronology giving specific dates for each S1 episode: Years (Jan 28 2022), Gone (Jan 30 - Feb 1 2022), Bye (Feb 2 2022), What We (Mar 6-8 2022), Become (Mar 9-16 2022), The Last Time (Sep 4 2022)."
+  },
+  {
+    "id": "source-timelinetwd-dee",
+    "title": "Timeline TWD — Tales of the Walking Dead calendar: Dee",
+    "type": "chronology",
+    "url": "https://www.timelinetwd.com/tales-of-twd-calendar-dee-html/?lang=en",
+    "note": "Fan-maintained day-by-day TWD chronology, already used as a cross-reference source in data/CHRONOLOGY_RESEARCH.md. Dates the riverboat events of \"Dee\" to September 17-18, 2013."
+  },
+  {
     "id": "natural-earth-110m",
     "title": "Natural Earth 1:110m Admin 0 Countries",
     "type": "geography",
