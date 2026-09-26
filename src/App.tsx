@@ -1,4 +1,4 @@
-import {memo,useCallback,useEffect,useLayoutEffect,useMemo,useRef,useState} from "react";
+import {Suspense,lazy,memo,useCallback,useEffect,useLayoutEffect,useMemo,useRef,useState} from "react";
 import type {CSSProperties} from "react";
 import {geoEqualEarth,geoPath} from "d3-geo";
 import {feature} from "topojson-client";
@@ -31,18 +31,24 @@ import AtlasTimelineDock from "./components/AtlasTimelineDock";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Icon from "./components/Icon";
 import type {IconName} from "./components/Icon";
-import SearchOverlay from "./components/SearchOverlay";
 import type {SearchKind} from "./components/SearchOverlay";
 import TimeScrubber from "./components/TimeScrubber";
 import MapOverview from "./views/MapOverview";
-import TimelineView from "./views/TimelineView";
-import PeopleView from "./views/PeopleView";
-import WatchView from "./views/WatchView";
-import EpisodeDetail from "./views/details/EpisodeDetail";
-import LocationDetail from "./views/details/LocationDetail";
-import CharacterDetail from "./views/details/CharacterDetail";
-import GroupDetail from "./views/details/GroupDetail";
-import ConnectionDetail from "./views/details/ConnectionDetail";
+
+// Lazy: none of these are needed for the first paint of the default map
+// view, and several (the detail views, People, Search) drag in
+// views/details/shared.tsx's 455 KB fandom-canonical.json plus Lightbox and
+// the relationship graph. Splitting them out keeps that weight off the
+// critical path instead of blocking input on initial load.
+const SearchOverlay=lazy(()=>import("./components/SearchOverlay"));
+const TimelineView=lazy(()=>import("./views/TimelineView"));
+const PeopleView=lazy(()=>import("./views/PeopleView"));
+const WatchView=lazy(()=>import("./views/WatchView"));
+const EpisodeDetail=lazy(()=>import("./views/details/EpisodeDetail"));
+const LocationDetail=lazy(()=>import("./views/details/LocationDetail"));
+const CharacterDetail=lazy(()=>import("./views/details/CharacterDetail"));
+const GroupDetail=lazy(()=>import("./views/details/GroupDetail"));
+const ConnectionDetail=lazy(()=>import("./views/details/ConnectionDetail"));
 
 type View="map"|"timeline"|"people"|"watch";
 type Snap="peek"|"half"|"full";
@@ -886,7 +892,7 @@ export default function App(){
     </header>
     <div className="sheetBody" ref={sheetBodyRef}>
      <ErrorBoundary key={focus?focus.kind+focus.id:view} onReset={()=>{closeDetail();goView("map")}}>
-      {detail||page}
+      <Suspense fallback={<p className="empty">Loading…</p>}>{detail||page}</Suspense>
      </ErrorBoundary>
     </div>
    </section>
@@ -903,7 +909,7 @@ export default function App(){
   {!isPanel&&<nav className="tabbar" ref={tabbarRef} aria-label="Atlas sections">{TABS.map(t=><button key={t.view} className={view===t.view?"active":""} aria-current={view===t.view?"page":undefined} onClick={()=>goView(t.view)}><Icon name={t.icon}/><span>{t.label}</span>{t.view==="watch"&&watched.size>0&&<em>{watchedPct}%</em>}</button>)}</nav>}
 
   {toast&&<div className="toast" role="status">{toast}</div>}
-  {searchOpen&&<SearchOverlay onClose={()=>setSearchOpen(false)} onPick={onSearchPick}/>}
+  {searchOpen&&<Suspense fallback={<div className="searchOverlay" role="dialog" aria-modal="true" aria-label="Search the atlas"><div className="searchScrim"/><div className="searchPanel"/></div>}><SearchOverlay onClose={()=>setSearchOpen(false)} onPick={onSearchPick}/></Suspense>}
  </div>
  </AtlasContext.Provider>;
 }

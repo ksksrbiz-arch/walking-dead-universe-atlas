@@ -9,7 +9,7 @@ import {episodeImage,hasMapCoordinates} from "../lib/atlasHelpers";
 import {seriesColor,seriesShort} from "../lib/series";
 import type {Location} from "../data";
 import {journeyCandidates} from "../lib/journeys";
-import {PortraitImage} from "./details/shared";
+import {PortraitImage} from "./details/portrait";
 
 // Entry point to journeys from the home sheet: the most-travelled characters,
 // plus one ready-made comparison.

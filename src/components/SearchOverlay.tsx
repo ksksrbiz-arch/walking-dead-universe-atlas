@@ -6,7 +6,7 @@ import {atlasData} from "../data";
 import {characterEpisodeCounts,episodeCode,locationEpisodeCounts,locationById,characterById} from "../lib/lookup";
 import {seriesColor,seriesShort} from "../lib/series";
 import {prettyType} from "../lib/atlasHelpers";
-import {PortraitImage} from "../views/details/shared";
+import {PortraitImage} from "../views/details/portrait";
 
 export type SearchKind="location"|"character"|"community"|"faction"|"episode";
 type Result={kind:SearchKind;id:string;title:string;meta:string;color?:string};

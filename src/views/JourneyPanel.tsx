@@ -8,7 +8,7 @@ import type {Journey,JourneyBeat,JourneyStop} from "../lib/journeys";
 import {episodeById,episodeCode} from "../lib/lookup";
 import {clamp,locationImage,prettyType} from "../lib/atlasHelpers";
 import {seriesShort} from "../lib/series";
-import {PortraitImage} from "./details/shared";
+import {PortraitImage} from "./details/portrait";
 
 export type JourneyControls={
  journeys:Journey[];
