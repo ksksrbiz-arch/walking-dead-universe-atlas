@@ -92,7 +92,7 @@ const readLayout=()=>{
 // other host falls back to index.html and they are read here).
 type DeepLink={journey?:string[];at?:number;kind?:AtlasFocusKind;id?:string};
 const SHARE_PATHS:Record<string,AtlasFocusKind>={p:"location",e:"episode",c:"character"};
-const QUERY_KEYS:Partial<Record<AtlasFocusKind,string>>={location:"place",episode:"ep",character:"who"};
+const QUERY_KEYS:Partial<Record<AtlasFocusKind,string>>={location:"place",episode:"ep",character:"who",connection:"link",community:"community",faction:"faction"};
 const decodePathPart=(value:string)=>{try{return decodeURIComponent(value)}catch{return value}};
 // Map (/) has no path of its own — Timeline/People/Watch each get a real,
 // bookmarkable/shareable path so browser reload and direct navigation work,
@@ -563,6 +563,9 @@ export default function App(){
   if(link.kind==="location"&&locationById.has(link.id))openLocation(link.id);
   else if(link.kind==="episode"&&episodeById.has(link.id))showEpisodeOnMap(link.id);
   else if(link.kind==="character"&&characterById.has(link.id))openCharacter(link.id);
+  else if(link.kind==="connection"&&connectionById.has(link.id))openConnection(link.id);
+  else if(link.kind==="community"&&communityById.has(link.id))openCommunity(link.id);
+  else if(link.kind==="faction"&&factionById.has(link.id))openFaction(link.id);
  };
 
  // ---- Browser back closes overlays / walks the detail stack -------------------
