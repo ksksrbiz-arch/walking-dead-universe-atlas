@@ -187,6 +187,7 @@ export default function App(){
  const historyArmed=useRef(false);
  const sheetBodyRef=useRef<HTMLDivElement|null>(null);
  const restoreScroll=useRef<number|null>(null);
+ const sectionScroll=useRef<Partial<Record<View,number>>>({});
 
  const setYear=useCallback((y:number)=>setYearState(clamp(Math.round(y),UNIVERSE_MIN_YEAR,UNIVERSE_MAX_YEAR)),[]);
 
@@ -381,6 +382,7 @@ export default function App(){
 
  // ---- Navigation -------------------------------------------------------------
  const navigate=(kind:AtlasFocusKind,id:string,targetView:View=view)=>{
+  if(!focus)sectionScroll.current[view]=sheetBodyRef.current?.scrollTop??0;
   setNavStack(stack=>{
    const top:NavEntry={view,focus,scroll:sheetBodyRef.current?.scrollTop??0};
    if(focus?.kind===kind&&focus.id===id&&view===targetView)return stack;
@@ -403,8 +405,8 @@ export default function App(){
   const el=sheetBodyRef.current;if(!el)return;
   el.scrollTop=restoreScroll.current??0;restoreScroll.current=null;
  },[view,focus?.kind,focus?.id]);
- const closeDetail=()=>{clearFocus();setNavStack([]);if(view==="map")setSnap("peek")};
- const goView=(v:View)=>{setView(v);clearFocus();setNavStack([]);setSearchOpen(false);setClusterIds(null);setLayersOpen(false);if(v==="map")setSnap("peek")};
+ const closeDetail=()=>{restoreScroll.current=sectionScroll.current[view]??0;clearFocus();setNavStack([]);if(view==="map")setSnap("peek")};
+ const goView=(v:View)=>{if(!focus)sectionScroll.current[view]=sheetBodyRef.current?.scrollTop??0;restoreScroll.current=v===view&&!focus?0:sectionScroll.current[v]??0;setView(v);clearFocus();setNavStack([]);setSearchOpen(false);setClusterIds(null);setLayersOpen(false);if(v==="map")setSnap("peek");if(v===view&&!focus&&sheetBodyRef.current)sheetBodyRef.current.scrollTop=0};
  const jumpToTimelineYear=(y:number)=>{setYear(y);goView("timeline")};
  const ensureVisible=(l:Location)=>{
   if(seriesId&&l.seriesId!==seriesId)setSeries("ALL");
@@ -781,7 +783,7 @@ export default function App(){
   const d=sheetDrag.current;sheetDrag.current=null;if(!d||!sheetRef.current)return;
   sheetRef.current.style.transition="";sheetRef.current.style.height="";
   const order:Snap[]=["peek","half","full"];const i=order.indexOf(snap);const dy=e.clientY-d.y;
-  if(!d.moved){setSnap(snap==="peek"?"half":"peek");return}
+  if(!d.moved){setSnap(snap==="peek"?"half":snap==="half"?"full":"peek");return}
   if(dy<-50)setSnap(order[Math.min(2,i+(dy<-260?2:1))]);else if(dy>50)setSnap(order[Math.max(0,i-(dy>260?2:1))]);
  };
 
@@ -920,7 +922,7 @@ export default function App(){
     <header className="sheetHead" onPointerDown={sheetDown} onPointerMove={sheetMove} onPointerUp={sheetUp} onPointerCancel={sheetUp}>
      {!isPanel&&view==="map"&&<button className="grabber" onClick={e=>{if(e.detail===0)setSnap(s=>s==="peek"?"half":s==="half"?"full":"peek")}} aria-label={snap==="full"?"Collapse panel":"Expand panel"}><span/></button>}
      {hasDetail?<div className="detailBar">
-      {navStack.length>0?<button className="iconBtn ghost" onClick={goBack} aria-label="Back"><Icon name="back"/></button>:<span className="detailBarSpacer"/>}
+      <button className="iconBtn ghost" onClick={goBack} aria-label={navStack.length?"Back":"Back to "+(TABS.find(t=>t.view===view)?.label??"Map")}><Icon name="back"/></button>
       <div className="detailBarTitle"><small>{FOCUS_LABEL[focus!.kind]}</small><b>{focusTitle}</b></div>
       {QUERY_KEYS[focus!.kind]&&<button className="iconBtn ghost" onClick={()=>void shareCurrent()} aria-label="Share"><Icon name="share"/></button>}
       <button className="iconBtn ghost" onClick={closeDetail} aria-label="Close details"><Icon name="close"/></button>
