@@ -1,5 +1,7 @@
 # UI Design System (reference)
 
+Navigation retains each section's list scroll position when switching sections or closing details. Reselecting the active section returns its list to the top. Every detail has a Back control, including directly opened links. The phone sheet handle has a 44px touch target and cycles peek, half, full on tap or keyboard activation; dragging remains available.
+
 Living contract for the Atlas interface. Tokens live at the top of `src/styles.css`; components in `src/components/ui.tsx`. Background and rationale: `docs/UI_AUDIT_AND_REDESIGN_2026-09.md`.
 
 ## Tokens

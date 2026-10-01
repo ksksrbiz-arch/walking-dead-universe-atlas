@@ -38,6 +38,7 @@
     "media:fill-locations": "node scripts/fill-location-fandom-images.mjs",
     "typecheck": "tsc --noEmit -p .",
     "test:ui": "node scripts/ui-smoke.mjs",
+    "test:navigation": "node scripts/test-navigation.mjs",
     "test:journeys": "node scripts/test-journeys.mjs",
     "test:share": "node scripts/test-share.mjs",
     "check:api-imports": "node scripts/check-api-imports.mjs",

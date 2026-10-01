@@ -202,7 +202,7 @@ body:not(.atlas-booting) .bootScreen{opacity:0;visibility:hidden;pointer-events:
 .sheet{position:absolute;z-index:35;display:flex;flex-direction:column;background:var(--surface);--sheet-bg:var(--surface)}
 .sheetHead{flex:none;padding:0 16px}
 .sheetBody{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 16px 28px}
-.grabber{display:flex;justify-content:center;align-items:center;width:100%;height:24px;background:none;border:0;padding:0}
+.grabber{display:flex;justify-content:center;align-items:center;width:100%;height:44px;background:none;border:0;padding:0}
 .grabber span{width:40px;height:5px;border-radius:3px;background:var(--line-2)}
 .detailBar{display:flex;align-items:center;gap:6px;padding:4px 0 8px}
 .detailBarSpacer{width:44px;flex:none}
