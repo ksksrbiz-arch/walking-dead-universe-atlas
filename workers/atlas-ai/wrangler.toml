@@ -1,0 +1,25 @@
+name = "walking-dead-atlas-ai"
+main = "dist/index.mjs"
+account_id = "371afa6149061390a094cfbf8a184aff"
+compatibility_date = "2026-09-30"
+workers_dev = true
+
+[build]
+command = "node ../../scripts/build-atlas-ai.mjs"
+
+[ai]
+binding = "AI"
+
+[vars]
+ALLOWED_ORIGINS = "https://walking-dead-universe-atlas.vercel.app,https://walking-dead-universe-atlas-skaggs-projects.vercel.app,https://walking-dead-universe-atlas.pages.dev"
+
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1001"
+simple = { limit = 6, period = 60 }
+
+[observability]
+enabled = true
+
+# Store ATLAS_TASK_TOKEN with wrangler secret put; never commit it.
+# Mistral's provider key lives in AI Gateway under the default alias.

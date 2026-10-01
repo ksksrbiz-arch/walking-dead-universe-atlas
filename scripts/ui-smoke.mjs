@@ -116,7 +116,7 @@ if(target){
 // 6. Markers stay attached to geography: a known place projects to the same
 // screen point as its marker after pan+zoom.
 await page.keyboard.press("Escape");
-await page.click(".searchTrigger");await page.waitForTimeout(150);await page.keyboard.type("Alexandria");await page.keyboard.press("Enter");await page.waitForTimeout(1100);
+await page.click(".searchTrigger");await page.locator(".searchBar input").fill("Alexandria");await page.locator(".searchGroup .row").first().waitFor();await page.locator(".searchBar input").press("Enter");await page.waitForTimeout(1100);
 const pinned=await page.evaluate(()=>{const m=document.querySelector("[data-location-id='alexandria']");if(!m)return null;const r=m.querySelector(".markerBody").getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2}});
 const vis=await page.evaluate(()=>{const sheet=document.querySelector(".sheet").getBoundingClientRect();return {bottom:sheet.top}});
 check("selected place is framed above the sheet",!!pinned&&pinned.y>100&&pinned.y<vis.bottom,JSON.stringify(pinned));
@@ -146,7 +146,7 @@ const moved=before&&after?{dx:after.x-before.x,dy:after.y-before.y}:null;
 check("selected marker stays attached to its projected position when the map pans",!!moved&&Math.abs(moved.dx-40)<1.5&&Math.abs(moved.dy-30)<1.5,JSON.stringify(moved));
 
 // Picking a search result hands focus to the panel showing it.
-await page.click(".searchTrigger");await page.waitForTimeout(150);await page.keyboard.type("Hilltop");await page.keyboard.press("Enter");await page.waitForTimeout(500);
+await page.click(".searchTrigger");await page.locator(".searchBar input").fill("Hilltop");await page.locator(".searchGroup .row").first().waitFor();await page.locator(".searchBar input").press("Enter");await page.waitForTimeout(500);
 const focusOnSheet=await page.evaluate(()=>document.activeElement?.classList.contains("sheet")&&!document.querySelector(".searchOverlay"));
 check("picking a search result moves focus to the opened panel",focusOnSheet);
 await page.keyboard.press("Escape");await page.waitForTimeout(300);
