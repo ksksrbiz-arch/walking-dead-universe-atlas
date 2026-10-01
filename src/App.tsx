@@ -573,7 +573,7 @@ export default function App(){
  useEffect(()=>{
   if(deepLink.current)return; // not applied yet — don't clobber the incoming link
   const u=new URL(window.location.href);
-  for(const k of ["j","at","place","ep","who"])u.searchParams.delete(k);
+  for(const k of ["j","at",...Object.values(QUERY_KEYS)])if(k)u.searchParams.delete(k);
   u.pathname=VIEW_TO_PATH[view]??"/";
   if(journeyActive){
    u.searchParams.set("j",journeyIds.join(","));
