@@ -9,7 +9,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "marseille"
     ],
@@ -25,7 +25,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -38,7 +46,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "agen"
     ],
@@ -50,7 +58,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -63,7 +79,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "paris"
     ],
@@ -75,7 +91,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -88,7 +112,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "paris"
     ],
@@ -101,7 +125,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -114,7 +146,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "paris"
     ],
@@ -126,7 +158,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -139,7 +179,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "mont-saint-michel",
       "le-havre"
@@ -152,7 +192,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -165,7 +213,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "france"
     ],
@@ -178,7 +226,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -191,7 +247,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "paris"
     ],
@@ -204,7 +260,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -217,7 +281,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "paris"
     ],
@@ -230,7 +294,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -243,7 +315,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "paris"
     ],
@@ -256,7 +328,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -269,7 +349,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "paris"
     ],
@@ -282,7 +362,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -295,7 +383,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "france"
     ],
@@ -308,7 +396,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -321,7 +417,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "london"
     ],
@@ -334,7 +430,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -347,7 +451,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "galicia"
     ],
@@ -359,7 +463,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -372,7 +484,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "galicia"
     ],
@@ -384,7 +496,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -397,7 +517,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "spain"
     ],
@@ -409,7 +529,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -422,7 +550,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "spain"
     ],
@@ -435,7 +563,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -448,7 +584,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "barcelona"
     ],
@@ -461,7 +597,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -474,7 +618,7 @@
     "timelineStart": 2023,
     "timelineEnd": 2023,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "seville"
     ],
@@ -487,7 +631,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-daryl"
+      "source-epguides-daryl",
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-daryl-timeline"
     ]
   },
   {
@@ -500,7 +652,7 @@
     "timelineStart": 2027,
     "timelineEnd": 2027,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan-island"
     ],
@@ -518,7 +670,15 @@
     ],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
     ]
   },
   {
@@ -531,7 +691,7 @@
     "timelineStart": 2027,
     "timelineEnd": 2027,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan"
     ],
@@ -544,7 +704,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
     ]
   },
   {
@@ -557,7 +725,7 @@
     "timelineStart": 2027,
     "timelineEnd": 2027,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan"
     ],
@@ -569,7 +737,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
     ]
   },
   {
@@ -582,7 +758,7 @@
     "timelineStart": 2027,
     "timelineEnd": 2027,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan"
     ],
@@ -597,7 +773,15 @@
     ],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
     ]
   },
   {
@@ -610,7 +794,7 @@
     "timelineStart": 2027,
     "timelineEnd": 2027,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan",
       "madison-square-garden"
@@ -624,7 +808,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
     ]
   },
   {
@@ -637,7 +829,7 @@
     "timelineStart": 2027,
     "timelineEnd": 2027,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan",
       "new-babylon"
@@ -651,7 +843,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-dead-timeline"
     ]
   },
   {
@@ -934,10 +1134,10 @@
     "episodeNumber": 1,
     "title": "Trillium",
     "airDate": "2026-07-26",
-    "timelineStart": 2028,
-    "timelineEnd": 2028,
-    "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "timelineStart": null,
+    "timelineEnd": null,
+    "timelinePrecision": "unknown",
+    "certainty": "unknown",
     "locationIds": [
       "manhattan",
       "new-babylon"
@@ -951,8 +1151,13 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
-    ]
+      "source-epguides-dead",
+      "source-amcplus-dead-episodes"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [],
+    "chronologyNote": "The episode listing and broadcast date are known. A reliable main-story year has not been established in the reviewed sources, so this episode remains undated. Its release year does not determine its story year."
   },
   {
     "id": "dead-s03-e02",
@@ -961,10 +1166,10 @@
     "episodeNumber": 2,
     "title": "Haven",
     "airDate": "2026-08-02",
-    "timelineStart": 2028,
-    "timelineEnd": 2028,
-    "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "timelineStart": null,
+    "timelineEnd": null,
+    "timelinePrecision": "unknown",
+    "certainty": "unknown",
     "locationIds": [
       "manhattan"
     ],
@@ -977,8 +1182,13 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
-    ]
+      "source-epguides-dead",
+      "source-amcplus-dead-episodes"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [],
+    "chronologyNote": "The episode listing and broadcast date are known. A reliable main-story year has not been established in the reviewed sources, so this episode remains undated. Its release year does not determine its story year."
   },
   {
     "id": "dead-s03-e03",
@@ -987,10 +1197,10 @@
     "episodeNumber": 3,
     "title": "Emigrants",
     "airDate": "2026-08-09",
-    "timelineStart": 2028,
-    "timelineEnd": 2028,
-    "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "timelineStart": null,
+    "timelineEnd": null,
+    "timelinePrecision": "unknown",
+    "certainty": "unknown",
     "locationIds": [
       "manhattan"
     ],
@@ -1003,8 +1213,13 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
-    ]
+      "source-epguides-dead",
+      "source-amcplus-dead-episodes"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [],
+    "chronologyNote": "The episode listing and broadcast date are known. A reliable main-story year has not been established in the reviewed sources, so this episode remains undated. Its release year does not determine its story year."
   },
   {
     "id": "dead-s03-e04",
@@ -1013,10 +1228,10 @@
     "episodeNumber": 4,
     "title": "Found / Lost",
     "airDate": "2026-08-16",
-    "timelineStart": 2028,
-    "timelineEnd": 2028,
-    "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "timelineStart": null,
+    "timelineEnd": null,
+    "timelinePrecision": "unknown",
+    "certainty": "unknown",
     "locationIds": [
       "manhattan"
     ],
@@ -1029,8 +1244,13 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
-    ]
+      "source-epguides-dead",
+      "source-amcplus-dead-episodes"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [],
+    "chronologyNote": "The episode listing and broadcast date are known. A reliable main-story year has not been established in the reviewed sources, so this episode remains undated. Its release year does not determine its story year."
   },
   {
     "id": "dead-s03-e05",
@@ -1039,10 +1259,10 @@
     "episodeNumber": 5,
     "title": "Imperialis",
     "airDate": "2026-08-23",
-    "timelineStart": 2028,
-    "timelineEnd": 2028,
-    "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "timelineStart": null,
+    "timelineEnd": null,
+    "timelinePrecision": "unknown",
+    "certainty": "unknown",
     "locationIds": [
       "manhattan"
     ],
@@ -1055,8 +1275,13 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
-    ]
+      "source-epguides-dead",
+      "source-amcplus-dead-episodes"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [],
+    "chronologyNote": "The episode listing and broadcast date are known. A reliable main-story year has not been established in the reviewed sources, so this episode remains undated. Its release year does not determine its story year."
   },
   {
     "id": "dead-s03-e06",
@@ -1065,10 +1290,10 @@
     "episodeNumber": 6,
     "title": "Genesis",
     "airDate": "2026-08-30",
-    "timelineStart": 2028,
-    "timelineEnd": 2028,
-    "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "timelineStart": null,
+    "timelineEnd": null,
+    "timelinePrecision": "unknown",
+    "certainty": "unknown",
     "locationIds": [
       "manhattan"
     ],
@@ -1081,8 +1306,13 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
-    ]
+      "source-epguides-dead",
+      "source-amcplus-dead-episodes"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [],
+    "chronologyNote": "The episode listing and broadcast date are known. A reliable main-story year has not been established in the reviewed sources, so this episode remains undated. Its release year does not determine its story year."
   },
   {
     "id": "dead-s03-e07",
@@ -1091,10 +1321,10 @@
     "episodeNumber": 7,
     "title": "Hourglass",
     "airDate": "2026-09-06",
-    "timelineStart": 2028,
-    "timelineEnd": 2028,
-    "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "timelineStart": null,
+    "timelineEnd": null,
+    "timelinePrecision": "unknown",
+    "certainty": "unknown",
     "locationIds": [
       "manhattan"
     ],
@@ -1107,8 +1337,13 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
-    ]
+      "source-epguides-dead",
+      "source-amcplus-dead-episodes"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [],
+    "chronologyNote": "The episode listing and broadcast date are known. A reliable main-story year has not been established in the reviewed sources, so this episode remains undated. Its release year does not determine its story year."
   },
   {
     "id": "dead-s03-e08",
@@ -1117,10 +1352,10 @@
     "episodeNumber": 8,
     "title": "Tenebrae",
     "airDate": "2026-09-13",
-    "timelineStart": 2028,
-    "timelineEnd": 2028,
-    "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "timelineStart": null,
+    "timelineEnd": null,
+    "timelinePrecision": "unknown",
+    "certainty": "unknown",
     "locationIds": [
       "manhattan"
     ],
@@ -1133,8 +1368,13 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
-    ]
+      "source-epguides-dead",
+      "source-amcplus-dead-episodes"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [],
+    "chronologyNote": "The episode listing and broadcast date are known. A reliable main-story year has not been established in the reviewed sources, so this episode remains undated. Its release year does not determine its story year."
   },
   {
     "id": "ftwd-s01-e01",
@@ -8106,7 +8346,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8131,7 +8371,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8144,7 +8392,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8169,7 +8417,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8182,7 +8438,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8204,7 +8460,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8217,7 +8481,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8241,7 +8505,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8254,7 +8526,7 @@
     "timelineStart": 2014,
     "timelineEnd": 2014,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8281,8 +8553,17 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
-    ]
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyNote": "The bridge story is approximately 2014. The closing six-year jump introduces the later story around 2020; the episode is placed by the bridge story it concludes."
   },
   {
     "id": "twd-s09-e06",
@@ -8294,7 +8575,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8314,7 +8595,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8327,7 +8616,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8344,7 +8633,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8357,7 +8654,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8376,7 +8673,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8389,7 +8694,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8409,7 +8714,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8422,7 +8735,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8442,7 +8755,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8455,7 +8776,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8473,7 +8794,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8486,7 +8815,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8506,7 +8835,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8519,7 +8856,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8535,7 +8872,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8548,7 +8893,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8567,8 +8912,17 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
-    ]
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyNote": "Main story: approximately 2020. Michonne’s earlier encounter with Jocelyn is a flashback around 2014."
   },
   {
     "id": "twd-s09-e15",
@@ -8580,7 +8934,7 @@
     "timelineStart": 2020,
     "timelineEnd": 2020,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8601,7 +8955,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8614,7 +8976,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "hilltop",
@@ -8636,7 +8998,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8649,7 +9019,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8670,7 +9040,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8683,7 +9061,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8698,7 +9076,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8711,7 +9097,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8732,7 +9118,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8745,7 +9139,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8765,7 +9159,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8778,7 +9180,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8793,7 +9195,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8806,7 +9216,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8822,7 +9232,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8835,7 +9253,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8852,7 +9270,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8865,7 +9291,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8884,7 +9310,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8897,7 +9331,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8912,7 +9346,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8925,7 +9367,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8942,7 +9384,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8955,7 +9405,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -8974,7 +9424,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -8987,7 +9445,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "alexandria",
       "whisperer-woods"
@@ -9006,7 +9464,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9019,7 +9485,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "bloodsworth-island"
     ],
@@ -9040,7 +9506,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9053,7 +9527,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "rural-virginia",
       "mid-atlantic-city"
@@ -9071,7 +9545,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9084,7 +9566,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "rural-virginia",
       "mid-atlantic-city"
@@ -9102,7 +9584,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9115,7 +9605,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "rural-virginia-hospital"
     ],
@@ -9135,7 +9625,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9148,7 +9646,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "rural-virginia"
     ],
@@ -9165,7 +9663,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9178,7 +9684,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "rural-virginia"
     ],
@@ -9191,8 +9697,17 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
-    ]
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyNote": "Main story: approximately 2021. Daryl’s years searching for Rick and his earlier relationship with Leah are flashbacks."
   },
   {
     "id": "twd-s10-e19",
@@ -9204,7 +9719,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "rural-virginia"
     ],
@@ -9215,7 +9730,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9228,7 +9751,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "west-virginia-train-yard"
     ],
@@ -9239,7 +9762,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9252,7 +9783,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "rural-virginia"
     ],
@@ -9264,7 +9795,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9277,7 +9816,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "rural-virginia"
     ],
@@ -9294,8 +9833,17 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
-    ]
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyNote": "Main story: approximately 2021. Negan and Lucille’s earlier life and the origins of his bat are flashbacks."
   },
   {
     "id": "twd-s11-e01",
@@ -9307,7 +9855,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "washington-dc-subway"
     ],
@@ -9328,7 +9876,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9341,7 +9897,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "washington-dc-subway"
     ],
@@ -9356,7 +9912,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9369,7 +9933,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "reapers-war"
     ],
@@ -9388,7 +9952,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9401,7 +9973,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "reapers-war"
     ],
@@ -9412,7 +9984,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9425,7 +10005,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "reapers-war",
       "commonwealth-ohio"
@@ -9445,7 +10025,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9458,7 +10046,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "reapers-war"
     ],
@@ -9474,7 +10062,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9487,7 +10083,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "reapers-war",
       "commonwealth-ohio"
@@ -9503,7 +10099,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9516,7 +10120,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "reapers-war"
     ],
@@ -9535,7 +10139,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9548,7 +10160,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9567,7 +10179,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9580,7 +10200,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9597,7 +10217,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9610,7 +10238,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9622,7 +10250,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
@@ -9635,7 +10271,7 @@
     "timelineStart": 2021,
     "timelineEnd": 2021,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio",
       "rural-virginia"
@@ -9653,7 +10289,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
+    ],
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologyBasis": "main-story",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-tv-timeline"
     ]
   },
   {
