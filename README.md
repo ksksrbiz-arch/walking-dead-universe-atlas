@@ -22,6 +22,7 @@ The React app provides:
 - **Watch** — chronological watch tracker: progress ring, one-tap "up next", per-series progress, watched state on every episode list (stored in the browser)
 - Detail pages for places, episodes, characters, groups and links with back navigation
 - Global search (`/`), keyboard support, safe-area and reduced-motion aware, phone/tablet/desktop/landscape layouts
+- Ask Atlas in search: Mistral answers grounded in checked-in records, with supporting entity links. Private maintenance tasks and the shared $10 rolling AI budget are documented in [docs/ATLAS_AI_GATEWAY.md](docs/ATLAS_AI_GATEWAY.md).
 
 UI design rules: `context/references/ui-design-system.md`. Audit and rationale: `docs/UI_AUDIT_AND_REDESIGN_2026-09.md`.
 
@@ -130,3 +131,5 @@ For Vercel:
 - mobile/tablet optimization
 
 This is a fan reference project and is not affiliated with AMC Networks or the creators of The Walking Dead.
+
+

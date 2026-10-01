@@ -544,8 +544,14 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .searchBar>.icon{margin-left:6px;color:var(--text-3)}
 .searchBar input{flex:1;min-width:0;height:48px;background:none;border:0;outline:none;font-size:17px}
 .searchBar input::placeholder{color:var(--text-3)}
-.searchBody{flex:1;overflow-y:auto;padding:4px 16px calc(24px + var(--safe-bottom))}
+.searchBody{flex:1;overflow-y:auto;padding:4px 16px calc(24px + var(--safe-bottom));width:100%;max-width:792px;margin-inline:auto}
 .searchGroup .row{min-height:56px}
+.atlasAI{padding:12px 0 16px;border-bottom:1px solid var(--line)}
+.atlasAIHead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.atlasAIHead .subhead{margin:0}
+.atlasAIAnswer{font-size:15px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--text)}
+.atlasAIError{color:var(--warn);font-size:14px;line-height:1.5}
+.atlasAI .note{font-size:12px;line-height:1.5;margin-bottom:0}
 
 /* ---- Relationship graph, mini timeline, dock (legacy components) ------------ */
 .entityGraph{border:1px solid var(--line);border-radius:16px;background:var(--surface-2);overflow:hidden}
@@ -787,3 +793,5 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
    chips (the 36px pills stay on the pointer-driven panel layout). Scroll containers clip a bigger hit area, so the
    chips themselves grow. */
 .layout-sheet .seriesRow button,.layout-sheet .filterRow button,.layout-sheet .compareAdd,.layout-sheet .entityGraphToggle{height:44px;border-radius:22px}
+
+

@@ -1,6 +1,7 @@
 import {useEffect,useMemo,useRef,useState} from "react";
 import type {CSSProperties} from "react";
 import Icon from "./Icon";
+import AskAtlas from "./AskAtlas";
 import type {IconName} from "./Icon";
 import {atlasData} from "../data";
 import {characterEpisodeCounts,episodeCode,locationEpisodeCounts,locationById,characterById} from "../lib/lookup";
@@ -8,7 +9,7 @@ import {seriesColor,seriesShort} from "../lib/series";
 import {prettyType} from "../lib/atlasHelpers";
 import {PortraitImage} from "../views/details/portrait";
 
-export type SearchKind="location"|"character"|"community"|"faction"|"episode";
+export type SearchKind="location"|"character"|"community"|"faction"|"episode"|"connection";
 type Result={kind:SearchKind;id:string;title:string;meta:string;color?:string};
 
 const GROUPS:{kind:SearchKind;label:string;icon:IconName}[]=[
@@ -71,18 +72,19 @@ export default function SearchOverlay({onClose,onPick}:{onClose:()=>void;onPick:
   <div className="searchPanel" ref={panel}>
    <div className="searchBar">
     <Icon name="search"/>
-    <input ref={input} autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder="People, places, episodes, factions" aria-label="Search the atlas" enterKeyHint="search" onKeyDown={e=>{if(e.key==="Enter"&&!e.nativeEvent.isComposing&&e.keyCode!==229&&results[0]){e.preventDefault();pick(results[0].kind,results[0].id)}}}/>
+    <input ref={input} autoFocus value={query} maxLength={600} onChange={e=>setQuery(e.target.value)} placeholder="Search or ask about the universe" aria-label="Search the atlas" enterKeyHint="search" onKeyDown={e=>{if(e.key==="Enter"&&!e.nativeEvent.isComposing&&e.keyCode!==229&&results[0]){e.preventDefault();pick(results[0].kind,results[0].id)}}}/>
     {query&&<button className="iconBtn ghost" onClick={()=>{setQuery("");input.current?.focus()}} aria-label="Clear search"><Icon name="close"/></button>}
     <button className="textBtn" onClick={onClose}>Cancel</button>
    </div>
    <div className="searchBody" aria-live="polite">
+    {q&&<AskAtlas question={query} onPick={pick}/>}
     {!q&&<>
      <h2 className="subhead">Most featured people</h2>
      <div className="chipList">{popular.people.map(c=><button key={c.id} className="linkChip" style={{"--c":seriesColor(c.seriesIds?.[0])} as CSSProperties} onClick={()=>pick("character",c.id)}><Icon name="person"/>{c.name}</button>)}</div>
      <h2 className="subhead">Most visited places</h2>
      <div className="chipList">{popular.places.map(l=><button key={l.id} className="linkChip" style={{"--c":seriesColor(l.seriesId)} as CSSProperties} onClick={()=>pick("location",l.id)}><Icon name="pin"/>{l.name}</button>)}</div>
     </>}
-    {q&&!results.length&&<p className="empty">Nothing matches "{query}". Try a name, a place, or an episode title.</p>}
+    {q&&!results.length&&<p className="empty">No exact name or title matches for "{query}".</p>}
     {q&&GROUPS.map(g=>{const items=results.filter(r=>r.kind===g.kind).slice(0,g.kind==="episode"?8:6);if(!items.length)return null;return <section key={g.kind} className="searchGroup">
      <h2 className="subhead">{g.label}</h2>
      <div className="stack">{items.map(r=><button key={r.kind+r.id} className="row" style={{"--c":r.color||"#9aa6a1"} as CSSProperties} onClick={()=>pick(r.kind,r.id)}>{r.kind==="character"?<PortraitImage id={r.id} name={r.title} size="sm"/>:<span className="linkGlyph"><Icon name={g.icon}/></span>}<span className="rowText"><b>{r.title}</b><small>{r.meta}</small></span><Icon name="chevron" className="rowChevron"/></button>)}</div>
@@ -91,3 +93,5 @@ export default function SearchOverlay({onClose,onPick}:{onClose:()=>void;onPick:
   </div>
  </div>;
 }
+
+

@@ -535,7 +535,7 @@ export default function App(){
  const openCommunity=(id:string)=>navigate("community",id);
  const openFaction=(id:string)=>navigate("faction",id);
  const onSearchPick=(kind:SearchKind,id:string)=>{
-  if(kind==="location")openLocation(id);else if(kind==="episode")openEpisode(id);else if(kind==="character")openCharacter(id);else if(kind==="community")openCommunity(id);else openFaction(id);
+  if(kind==="location")openLocation(id);else if(kind==="episode")openEpisode(id);else if(kind==="character")openCharacter(id);else if(kind==="community")openCommunity(id);else if(kind==="connection")openConnection(id);else openFaction(id);
   // Hand keyboard/screen-reader focus to the panel that now shows the result.
   requestAnimationFrame(()=>sheetRef.current?.focus({preventScroll:true}));
  };
@@ -913,3 +913,5 @@ export default function App(){
  </div>
  </AtlasContext.Provider>;
 }
+
+
