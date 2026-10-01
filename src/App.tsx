@@ -22,6 +22,7 @@ import {characterById,connectionById,communityById,episodeById,factionById,locat
 import {JOURNEY_COLORS,beatForYear,beatYear,buildBeats,buildJourney,parseJourneyIds,positionsAt} from "./lib/journeys";
 import {JourneyAvatars,JourneyRoutes} from "./components/JourneyLayer";
 import HordeLayer from "./components/HordeLayer";
+import {hordes,availablePhases,hordeLocation,phaseYear} from "./lib/hordes";
 import JourneyPanel,{JourneyPlayer} from "./views/JourneyPanel";
 import type {JourneyControls} from "./views/JourneyPanel";
 import {MAP_LAYERS,MAP_LAYER_LABELS,clamp,hasMapCoordinates,locationIconName,locationMapLayer,prettyType} from "./lib/atlasHelpers";
@@ -128,6 +129,8 @@ export default function App(){
  const [mapLayer,setMapLayer]=useState<MapLayer>("ALL");
  const [hordeEnabled,setHordeEnabled]=useState(false);
  const [hordeSelected,setHordeSelected]=useState(false);
+ const [hordeId,setHordeId]=useState(hordes[0].id);
+ const [hordePhase,setHordePhase]=useState(0);
  const [year,setYearState]=useState(2010);
  const [playing,setPlaying]=useState(false);
  const focusCtl=useAtlasFocusController();
@@ -144,6 +147,10 @@ export default function App(){
  const deepLink=useRef<DeepLink|null>(readDeepLink());
  const journeyFrame=useRef<"all"|"step"|null>(null);
  const {watched,toggleWatched,resetWatched}=useWatchProgress();
+ const activeHorde=hordes.find(h=>h.id===hordeId)!;
+ const hordeAvailable=availablePhases(activeHorde,year,series==="ALL"?undefined:META[series].id,spoilerSafe?watched:undefined);
+ const hordeVisible=new Set(hordeAvailable.map(p=>p.index));
+ const effectiveHordePhase=hordeVisible.has(hordePhase)?hordePhase:(hordeAvailable[0]?.index??-1);
  const {followed,toggleFollowed}=useFollowedCharacters();
  const [dataErrors,setDataErrors]=useState<string[]>([]);
  const [layout,setLayout]=useState(readLayout);
@@ -168,7 +175,7 @@ export default function App(){
  const gestureDistance=useRef(0);
  const pointers=useRef(new Map<number,{x:number;y:number}>());
  const pinch=useRef<{distance:number;zoom:number;x:number;y:number;midX:number;midY:number}|null>(null);
- const tapTarget=useRef<{kind:"location"|"cluster";value:string}|null>(null);
+ const tapTarget=useRef<{kind:"location"|"cluster"|"horde";value:string}|null>(null);
  const mapSvgRef=useRef<SVGSVGElement|null>(null);
  const mapWorldRef=useRef<SVGGElement|null>(null);
  const raf=useRef<number|null>(null);
@@ -600,17 +607,18 @@ export default function App(){
   if(e.key==="Escape"){
    if(searchOpen){e.preventDefault();setSearchOpen(false);return}
    if(layersOpen){setLayersOpen(false);return}
+   if(hordeSelected){e.preventDefault();setHordeSelected(false);return}
    if(clusterIds){e.preventDefault();setClusterIds(null);return}
    if(focus){e.preventDefault();closeDetail();return}
    if(journeyActive){exitJourney();return}
   }
-  if(tag==="INPUT"||tag==="TEXTAREA"||(e.target as HTMLElement)?.isContentEditable)return;
+  if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT"||(e.target as HTMLElement)?.isContentEditable)return;
   if(e.key==="/"){e.preventDefault();setSearchOpen(true);return}
   if(view!=="map")return;
   if(e.key==="+"||e.key==="=")setZoomValue(visual.current.zoom+.5);
   if(e.key==="-"||e.key==="_")setZoomValue(visual.current.zoom-.5);
   if(e.key==="0")resetMap();
-  if(e.key===" "&&tag!=="BUTTON"){e.preventDefault();if(journeyActive)toggleJourneyPlay();else setPlaying(v=>!v)}
+  if(e.key===" "&&tag!=="BUTTON"&&(e.target as HTMLElement)?.getAttribute("role")!=="button"){e.preventDefault();if(journeyActive)toggleJourneyPlay();else setPlaying(v=>!v)}
   if(journeyActive&&!focus&&(e.target as HTMLElement)?.getAttribute?.("role")!=="slider"){
    if(e.key==="ArrowRight"||e.key==="]"){e.preventDefault();setJourneyPlaying(false);stepJourney(journeyCursor+1)}
    if(e.key==="ArrowLeft"||e.key==="["){e.preventDefault();setJourneyPlaying(false);stepJourney(journeyCursor-1)}
@@ -662,8 +670,8 @@ export default function App(){
   // Pointer capture retargets later events to the SVG, so resolve what was
   // touched now and act on it at release if the gesture did not move.
   if(pointers.current.size===0){
-   const hit=(e.target as Element).closest?.("[data-location-id],[data-cluster-ids]");
-   tapTarget.current=hit?(hit.getAttribute("data-location-id")?{kind:"location",value:hit.getAttribute("data-location-id")!}:{kind:"cluster",value:hit.getAttribute("data-cluster-ids")!}):null;
+   const hit=(e.target as Element).closest?.("[data-horde-id],[data-location-id],[data-cluster-ids]");
+   tapTarget.current=hit?.hasAttribute("data-horde-id")?{kind:"horde",value:hit.getAttribute("data-horde-id")!}:hit?(hit.getAttribute("data-location-id")?{kind:"location",value:hit.getAttribute("data-location-id")!}:{kind:"cluster",value:hit.getAttribute("data-cluster-ids")!}):null;
   }else tapTarget.current=null;
   e.currentTarget.setPointerCapture?.(e.pointerId);
   pointers.current.set(e.pointerId,{x:e.clientX,y:e.clientY});
@@ -724,7 +732,8 @@ export default function App(){
    setPan({x:final.x,y:final.y});setZoom(final.zoom);setIsDragging(false);
    const tap=tapTarget.current;tapTarget.current=null;
    if(!drag.current.moved&&tap){
-    if(tap.kind==="location")openLocation(tap.value);
+    if(tap.kind==="horde")setHordeSelected(true);
+    else if(tap.kind==="location")openLocation(tap.value);
     else openCluster(tap.value.split(","));
    }else if(!drag.current.moved&&!tap&&!isPanel&&view==="map"&&snap!=="peek")setSnap("peek");
   }
@@ -791,13 +800,14 @@ export default function App(){
    <div className="mapSurface" aria-hidden={view!=="map"&&!isPanel}>
     <svg ref={mapSvgRef} viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className={isDragging?"dragging":""} onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} onWheel={wheel}>
      <defs>
+      <clipPath id="horde-land"><path d={worldLandD}/></clipPath>
       <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#15211f"/><stop offset=".55" stopColor="#101a19"/><stop offset="1" stopColor="#0b1212"/></linearGradient>
       <radialGradient id="oceanGlow" cx=".35" cy=".4" r=".75"><stop offset="0" stopColor="#2a3f3b" stopOpacity=".55"/><stop offset="1" stopColor="#0b1212" stopOpacity="0"/></radialGradient>
      </defs>
      <MapBackground/>
      <g ref={mapWorldRef} className="mapWorld">
       <MapGeography/>
-      <HordeLayer enabled={hordeEnabled} year={year} zoom={zoom} project={project} onSelect={()=>setHordeSelected(true)}/>
+
       {zoom>1.12&&<g className="mapLabels"><text x="184" y="350">NORTH AMERICA</text><text x="557" y="150">EUROPE</text><text x="782" y="360">ASIA</text></g>}
       {journeyActive&&<JourneyRoutes journeys={journeys} positions={journeyPositions} project={project} cursorKey={journeyCursor}/>}
       <g className="markers">{markerGroups.map(group=>{
@@ -834,6 +844,7 @@ export default function App(){
        </g>;
       })}</g>
       {journeyActive&&<JourneyAvatars journeys={journeys} positions={journeyPositions} project={project} zoom={zoom}/>}
+      <HordeLayer horde={hordeEnabled?activeHorde:null} phaseIndex={effectiveHordePhase} visible={hordeVisible} zoom={zoom} project={project} onSelect={()=>setHordeSelected(true)}/>
      </g>
     </svg>
    </div>
@@ -857,19 +868,28 @@ export default function App(){
     <button className="iconBtn" onClick={resetMap} aria-label="Reset map to home"><Icon name="locate"/></button>
     {layersOpen&&<div className="popover layersPopover" role="dialog" aria-label="Map layers">
      <small>Show on map</small>
-     <button className={hordeEnabled?"active":""} aria-pressed={hordeEnabled} onClick={()=>{setHordeEnabled(v=>!v);setLayersOpen(false);if(hordeEnabled)setHordeSelected(false)}}><span>Living World · simulated horde</span><b>{hordeEnabled?"On":"Off"}</b>{hordeEnabled&&<Icon name="check"/>}</button>
+     <button className={hordeEnabled?"active":""} aria-pressed={hordeEnabled} onClick={()=>{setHordeEnabled(v=>!v);setLayersOpen(false);setHordeSelected(!hordeEnabled)}}><span>Walker herds</span><b>{hordeEnabled?"On":"Off"}</b>{hordeEnabled&&<Icon name="check"/>}</button>
      {MAP_LAYERS.map(layer=><button key={layer} className={mapLayer===layer?"active":""} aria-pressed={mapLayer===layer} onClick={()=>{setMapLayer(layer);setLayersOpen(false)}}><span>{MAP_LAYER_LABELS[layer]}</span><b>{layerCounts[layer]??0}</b>{mapLayer===layer&&<Icon name="check"/>}</button>)}
     </div>}
-    {hordeSelected&&hordeEnabled&&<div className="popover hordeDossier" role="dialog" aria-label="Simulated horde dossier">
-     <header><b>Simulated Horde · M1</b><button className="iconBtn ghost" onClick={()=>setHordeSelected(false)} aria-label="Close horde dossier"><Icon name="close"/></button></header>
-     <div className="stack">
-      <p><strong>Illustrative regional movement</strong></p>
-      <p>This moving group is a visual simulation for testing the Living World layer. Its route, location, and walker count are not canonical Walking Dead data.</p>
-      <small>Timeline year: {year} · Status: simulated</small>
-      <button className="row" onClick={()=>{setHordeEnabled(false);setHordeSelected(false)}}>Turn off Living World layer</button>
-     </div>
-    </div>}
+
    </div>
+
+   {hordeEnabled&&<button className="hordeReopen" onClick={()=>setHordeSelected(v=>!v)}>Walker herds</button>}
+   {hordeSelected&&hordeEnabled&&<section className="popover hordeDossier" data-map-chrome={isPanel?"right":"bottom"} aria-label="Walker herd events">
+    <header><b>Walker herds</b><button className="iconBtn ghost" onClick={()=>setHordeSelected(false)} aria-label="Close herd events"><Icon name="close"/></button></header>
+    <div className="stack">
+     <label>Herd<select value={hordeId} onChange={e=>{setHordeId(e.target.value);setHordePhase(0)}}>{hordes.map(h=><option key={h.id} value={h.id}>{h.name}</option>)}</select></label>
+     {!spoilerSafe&&<p>{activeHorde.summary}</p>}
+     {hordeAvailable.length===0?<><p>No recorded events for this year, series, or watched episodes.</p><button onClick={()=>{setSeries("TWD");setYear(phaseYear(activeHorde.phases[0])??year)}}>Go to recorded year</button></>:<>
+      <div className="hordeSteps">{hordeAvailable.map(({phase,index})=><button key={phase.id} aria-pressed={effectiveHordePhase===index} onClick={()=>{setHordePhase(index);const loc=hordeLocation(phase);if(loc)focusMapOn([loc.id],"fit")}}>{phase.label}</button>)}</div>
+      <b>{activeHorde.phases[effectiveHordePhase].label}</b><p>{activeHorde.phases[effectiveHordePhase].description}</p>
+      <small>Drawn by: {activeHorde.phases[effectiveHordePhase].driver} · {activeHorde.phases[effectiveHordePhase].status}</small>
+      {!hordeLocation(activeHorde.phases[effectiveHordePhase])&&<p>Exact location unknown — no map pin.</p>}
+      <a href={activeHorde.sources[activeHorde.phases[effectiveHordePhase].sourceIndex].url} target="_blank" rel="noreferrer">Read event evidence on Fandom ↗</a>
+     </>}
+     <small>Episode order, not continuous tracking. Existing map locations are approximate. Dashed lines connect recorded places; the precise route is unknown. Walker symbols do not represent population.</small>
+    </div>
+   </section>}
    {isPanel&&<div className={"dock"+(bigDock?"":" dockMini")} data-map-chrome="bottom">
     {bigDock?<AtlasTimelineDock year={year} onYearChange={onYearScrub} series={series} onEpisode={id=>showEpisodeOnMap(id)} selectedEpisode={selectedEpisode} playing={playing} onTogglePlaying={()=>setPlaying(v=>!v)} onConnections={()=>goView("people")}/>:scrubber}
    </div>}

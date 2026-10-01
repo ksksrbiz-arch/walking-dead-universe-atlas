@@ -52,7 +52,9 @@
     "test:ai-ui": "node scripts/test-atlas-ai-ui.mjs",
     "ai:task": "node scripts/atlas-ai-task.mjs",
     "test:resilience": "node scripts/test-resilience.mjs",
-    "test:lightbox": "node scripts/test-lightbox-ui.mjs"
+    "test:lightbox": "node scripts/test-lightbox-ui.mjs",
+    "test:hordes": "node scripts/test-hordes.mjs",
+    "test:horde-ui": "node scripts/test-horde-ui.mjs"
   },
   "dependencies": {
     "@cublya/world-atlas": "^3.0.0-beta.1",
