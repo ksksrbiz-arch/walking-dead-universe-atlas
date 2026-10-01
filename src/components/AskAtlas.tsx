@@ -47,5 +47,3 @@ export default function AskAtlas({question,onPick}:{question:string;onPick:(kind
   <p className="note">AI answers use Atlas records and may include spoilers. Check the supporting records for sources and uncertainty.</p>
  </section>;
 }
-
-

@@ -18,5 +18,3 @@ const result=await response.json();
 if(!response.ok){console.error(result.error||"Atlas AI task failed.");process.exit(1);}
 const output=JSON.stringify(result,null,2)+"\n";
 if(options["--output"])await writeFile(resolve(options["--output"]),output);else process.stdout.write(output);
-
-

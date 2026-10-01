@@ -239,5 +239,3 @@ await browser.close();
 const failed=results.filter(r=>!r.ok);
 console.log(`\n${results.length-failed.length}/${results.length} checks passed`);
 process.exit(failed.length?1:0);
-
-

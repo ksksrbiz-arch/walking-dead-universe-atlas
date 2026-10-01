@@ -58,5 +58,3 @@ try{
  assert.deepEqual(errors,[]);
  console.log("PASS no browser errors, no requests on typing, budget fallback, and cancellation");
 }finally{await browser.close();}
-
-

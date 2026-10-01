@@ -69,5 +69,3 @@ The browser defaults to the deployed Worker. `VITE_ATLAS_AI_ENDPOINT` can overri
 - Browser checks at 390×844, 820×1180, 1440×900, 844×390 cover explicit requests, linked entities, normal search, budget fallback, cancellation, overflow, and runtime errors.
 - The existing 40-check UI regression suite passes; its two search interactions now wait for the lazily loaded input/results rather than assuming a 150 ms chunk load.
 - Live Mistral classification, entity extraction, enrichment and text document processing succeeded. Costs are tracked in this gateway.
-
-

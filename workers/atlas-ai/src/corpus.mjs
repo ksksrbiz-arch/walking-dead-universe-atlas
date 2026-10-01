@@ -46,5 +46,3 @@ export function retrieve(question){
  return selected;
 }
 export const corpusVersion=typeof ATLAS_DATA_REVISION==="string"?ATLAS_DATA_REVISION:"local";
-
-

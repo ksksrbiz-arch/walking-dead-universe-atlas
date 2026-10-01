@@ -131,5 +131,3 @@ For Vercel:
 - mobile/tablet optimization
 
 This is a fan reference project and is not affiliated with AMC Networks or the creators of The Walking Dead.
-
-

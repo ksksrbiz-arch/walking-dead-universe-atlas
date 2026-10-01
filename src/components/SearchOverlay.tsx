@@ -93,5 +93,3 @@ export default function SearchOverlay({onClose,onPick}:{onClose:()=>void;onPick:
   </div>
  </div>;
 }
-
-

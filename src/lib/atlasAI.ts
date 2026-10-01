@@ -8,5 +8,3 @@ export async function askAtlas(question:string,signal:AbortSignal):Promise<Atlas
  if(typeof result.answer!=="string"||!Array.isArray(result.citations))throw new Error("Atlas AI returned an invalid answer.");
  return result;
 }
-
-

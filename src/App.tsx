@@ -913,5 +913,3 @@ export default function App(){
  </div>
  </AtlasContext.Provider>;
 }
-
-

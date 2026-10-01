@@ -793,5 +793,3 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
    chips (the 36px pills stay on the pointer-driven panel layout). Scroll containers clip a bigger hit area, so the
    chips themselves grow. */
 .layout-sheet .seriesRow button,.layout-sheet .filterRow button,.layout-sheet .compareAdd,.layout-sheet .entityGraphToggle{height:44px;border-radius:22px}
-
-

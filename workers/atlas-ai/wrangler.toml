@@ -23,5 +23,3 @@ enabled = true
 
 # Store ATLAS_TASK_TOKEN with wrangler secret put; never commit it.
 # Mistral's provider key lives in AI Gateway under the default alias.
-
-

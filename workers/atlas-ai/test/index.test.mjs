@@ -83,5 +83,3 @@ test("provider malformed/empty JSON is rejected",async()=>{
 test("retrieval keeps uncertain chronology and cannot invent a new entity",()=>{
  const evidence=retrieve("The Ones Who Live Years Rick Grimes");assert.ok(evidence.some(x=>x.id==="owl-s01-e01"));assert.deepEqual(retrieve("zzzzqwxxyz"),[]);
 });
-
-
