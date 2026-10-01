@@ -793,3 +793,11 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
    chips (the 36px pills stay on the pointer-driven panel layout). Scroll containers clip a bigger hit area, so the
    chips themselves grow. */
 .layout-sheet .seriesRow button,.layout-sheet .filterRow button,.layout-sheet .compareAdd,.layout-sheet .entityGraphToggle{height:44px;border-radius:22px}
+.hordeReopen{position:absolute;right:16px;top:180px;z-index:12;min-height:44px}
+.hordeDossier{position:absolute;right:76px;top:90px;max-height:65dvh;overflow:auto;z-index:50}
+.hordeDossier select{display:block;width:100%;font-size:16px;min-height:44px}
+.hordeSteps{display:flex;flex-wrap:wrap;gap:6px}
+.hordeSteps button{min-height:44px;flex:1;font-size:12px}
+.hordeSteps button[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
+.hordeDossier a{min-height:44px;display:flex;align-items:center}
+@media(max-width:767px){.hordeDossier{top:auto;bottom:140px;right:12px;left:12px;width:auto;max-height:45dvh}.hordeReopen{right:12px;top:180px}}
