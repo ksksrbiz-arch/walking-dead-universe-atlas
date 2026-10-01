@@ -237,6 +237,17 @@ await page.goto(url("?ep=dead-s03-e01"),{waitUntil:"networkidle"}).catch(()=>{})
 check("undated episode detail keeps its story year unknown",await page.getByText("Main story year ?",{exact:true}).count()===1);
 const headerYear=await page.locator(".yearChip b").textContent();
 check("undated episode does not move the map to its broadcast year",headerYear==="2010",String(headerYear));
+for(const [key,id] of [["community","alexandria"],["faction","crm"],["link","rick-jadis-crm"]]){
+ await page.goto(url(`?${key}=${id}&audit=keep`),{waitUntil:"networkidle"}).catch(()=>{});
+ await page.locator(".detailBarTitle b").waitFor();
+ await page.getByRole("button",{name:"Close details",exact:true}).click();await page.waitForTimeout(300);
+ const query=new URL(page.url()).searchParams;
+ check(`closing ${key} clears its deep link and preserves unrelated query state`,!query.has(key)&&query.get("audit")==="keep");
+ await page.reload({waitUntil:"networkidle"}).catch(()=>{});await page.waitForTimeout(600);
+ check(`reloading after closing ${key} does not reopen the detail`,await page.locator(".detailBarTitle b").count()===0);
+}
+await page.goto(url("?community=alexandria&faction=crm"),{waitUntil:"networkidle"}).catch(()=>{});await page.locator(".detailBarTitle b").waitFor();
+check("canonical detail URL removes competing focus keys",new URL(page.url()).searchParams.has("community")&&!new URL(page.url()).searchParams.has("faction"));
 check("no runtime errors",!errors.length,errors.join(" | "));
 
 await browser.close();
