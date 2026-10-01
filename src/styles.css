@@ -762,20 +762,22 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
 .journeyPair small{color:var(--accent-2);font-weight:700}
 
 
-/* ---- Living World / M1 simulated horde ---------------------------------- */
+/* Recorded herds: decorative motion stays local to the sourced event pin. */
 .hordeLayer{pointer-events:none}
 .hordeTrail{fill:none;stroke:rgba(217,80,42,.52);stroke-width:2.4;stroke-dasharray:5 7;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 4px rgba(217,80,42,.35))}
 .hordeSelectable{pointer-events:all;cursor:pointer;outline:none}
 .hordeSelectable:focus-visible{filter:drop-shadow(0 0 5px var(--accent-2))}
 .hordeGlow{fill:rgba(217,80,42,.09);stroke:rgba(217,80,42,.25);stroke-width:1;vector-effect:non-scaling-stroke}
-.hordeWalker{fill:#d9d0b9;animation:hordeBob var(--walk-duration,1.5s) ease-in-out var(--walk-delay,0s) infinite}
-.hordeWalker line{stroke:#d9d0b9;stroke-width:.8;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.hordeShadow{fill:rgba(0,0,0,.4)}
+.hordeShuffle{animation:hordeShuffle var(--shuffle-duration,6s) ease-in-out var(--walk-delay,0s) infinite}
+.hordeWalker{fill:#e6ae85;animation:hordeBob var(--walk-duration,2s) ease-in-out var(--walk-delay,0s) infinite}
+.hordeWalker path{stroke:#e6ae85;stroke-width:.85;stroke-linecap:round;fill:none}
 .hordeLegBack,.hordeLegFront{transform-origin:0px 6px;animation-duration:var(--walk-duration,1.5s);animation-delay:var(--walk-delay,0s);animation-iteration-count:infinite;animation-timing-function:ease-in-out}
 .hordeLegBack{animation-name:hordeLegSwingA}
 .hordeLegFront{animation-name:hordeLegSwingB}
-.hordePulse{fill:none;stroke:var(--accent-2);stroke-width:1.5;vector-effect:non-scaling-stroke;animation:hordePulse 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.hordeSelectable:not([data-horde-status=cleared]) .hordeGlow{animation:hordePresence 5s ease-in-out infinite}
+.hordeSelectable[data-horde-status=cleared] .hordeGlow{fill:rgba(124,196,154,.08);stroke:var(--good)}
 .hordeTag{font:700 10px var(--font);letter-spacing:.04em;fill:#f2a18a;paint-order:stroke;stroke:#0a0d0c;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
-.hordeSubTag{font:600 6.5px var(--font);fill:#d8c9bb;paint-order:stroke;stroke:#0a0d0c;stroke-width:2.5px;stroke-linejoin:round;pointer-events:none}
 .hordeDossier{right:58px;top:100px;width:min(340px,calc(100vw - 32px));z-index:20}
 .hordeDossier .stack{padding:12px;gap:8px}
 .hordeDossier p{margin:0;font-size:12px;color:var(--text-2)}
@@ -785,9 +787,10 @@ button.row:active,a.row:active,.rowMain:active{background:var(--surface-3)}
    starting state each cycle, so nothing snaps or rubber-bands in place. */
 @keyframes hordeLegSwingA{0%{rotate:-24deg}50%{rotate:24deg}100%{rotate:-24deg}}
 @keyframes hordeLegSwingB{0%{rotate:24deg}50%{rotate:-24deg}100%{rotate:24deg}}
-@keyframes hordeBob{0%{translate:0 0}25%{translate:0 -.6px}50%{translate:0 0}75%{translate:0 -.6px}100%{translate:0 0}}
-@keyframes hordePulse{0%{opacity:.75;scale:.8}100%{opacity:0;scale:2.5}}
-@media(prefers-reduced-motion:reduce){.hordeWalker,.hordeLegBack,.hordeLegFront,.hordePulse{animation:none!important}}
+@keyframes hordeBob{0%,50%,100%{translate:0 0;rotate:-3deg}25%,75%{translate:0 -.6px;rotate:3deg}}
+@keyframes hordeShuffle{0%,100%{translate:-1px 0}50%{translate:1px -.5px}}
+@keyframes hordePresence{0%,100%{opacity:.6}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.hordeShuffle,.hordeWalker,.hordeLegBack,.hordeLegFront,.hordeGlow{animation:none!important}}
 
 /* Touch targets: the design system requires >=44px for anything tappable. The phone/tablet sheet layout gets 44px
    chips (the 36px pills stay on the pointer-driven panel layout). Scroll containers clip a bigger hit area, so the

@@ -47,4 +47,6 @@ The fullscreen `Lightbox` renders through a portal into `document.body`, above t
 `AtlasContext` (`src/lib/atlasContext.ts`) exposes `open*`, `show*OnMap`, year and watch state. Opening an entity pushes the previous `{view, focus, scroll}` onto the back stack; Back restores view, focus and scroll; ✕ clears the stack. Places always open on the map; other entities open in the current tab. A journey is a map mode, not a focus: `startJourney` pushes the stack and shows `JourneyPanel` while no detail is open; ✕ on the panel / Esc / browser Back leave it. The URL mirrors journey and focus state (`?j=`, `?place=`, `?ep=`, `?who=`).
 
 ## Motion
+
+Recorded herd markers use staggered SVG walk cycles and a bounded local shuffle, with slower gathering and faster overrunning motion. These decorative cycles do not represent a migration route or travel speed. Cleared events have no walkers or ambient animation. Reduced motion stops every herd animation; event pins and schematic recorded-place traces remain fixed to the map.
 Sheet height 300ms `--ease`; map flights 520ms ease-in-out (skipped under reduced motion); marker pulse only for places new in the current year and the selection; the latest journey leg draws in (0.9s) and the avatar hops to its new stop. `prefers-reduced-motion` disables all animation.
