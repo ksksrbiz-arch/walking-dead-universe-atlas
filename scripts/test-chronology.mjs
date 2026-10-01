@@ -75,6 +75,11 @@ check("every non-anthology season lists its episodes in episode-number order", s
 
 // 5. Known regressions from the audit.
 const before = (a, b) => index.get(a) < index.get(b);
+check("The Ones Who Live follows the Commonwealth finale",before("twd-s11-e24","owl-s01-e01"));
+check("Fear's final season precedes the final Commonwealth arc",before("ftwd-s08-e12","twd-s11-e13"));
+check("Years uses the main story rather than the earliest flashback",order.find(e=>e.id==="owl-s01-e01").start===2022);
+check("Dead City season two begins in 2028",order.filter(e=>e.seasonId==="dead-s02").every(e=>e.start===2028&&e.end===2028));
+check("Undated episodes stay undated in timeline visualizations",C.buildChronology().filter(e=>e.kind==="episode"&&e.precision==="unknown").every(e=>e.start===0&&e.end===0));
 check("TWD S9E16 comes before Daryl Dixon S1E1 (2021 vs 2023)", before("twd-s09-e16", "daryl-s01-e01"));
 check("TWD S10 and S11 come before Daryl Dixon S1E1", before("twd-s10-e05", "daryl-s01-e01") && before("twd-s11-e10", "daryl-s01-e01"));
 check("TWD S1E1 is first-year, before Fear S1E1", before("twd-s01-e01", "ftwd-s01-e01") || anchor(order.find((e) => e.id === "twd-s01-e01")).start <= anchor(order.find((e) => e.id === "ftwd-s01-e01")).start);

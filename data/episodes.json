@@ -661,10 +661,10 @@
     "episodeNumber": 1,
     "title": "Power Equals Power",
     "airDate": "2025-05-04",
-    "timelineStart": 2027,
-    "timelineEnd": 2027,
+    "timelineStart": 2028,
+    "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "bricks"
     ],
@@ -677,7 +677,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
+    ],
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -687,10 +695,10 @@
     "episodeNumber": 2,
     "title": "Another Shitty Lesson",
     "airDate": "2025-05-11",
-    "timelineStart": 2027,
+    "timelineStart": 2028,
     "timelineEnd": 2028,
-    "timelinePrecision": "range",
-    "certainty": "confirmed",
+    "timelinePrecision": "year",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan"
     ],
@@ -703,7 +711,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
+    ],
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -716,7 +732,7 @@
     "timelineStart": 2028,
     "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan"
     ],
@@ -729,7 +745,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
+    ],
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -742,7 +766,7 @@
     "timelineStart": 2028,
     "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan"
     ],
@@ -755,7 +779,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
+    ],
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -768,7 +800,7 @@
     "timelineStart": 2028,
     "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan",
       "central-park"
@@ -782,7 +814,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
+    ],
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -795,7 +835,7 @@
     "timelineStart": 2028,
     "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan"
     ],
@@ -808,7 +848,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
+    ],
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -821,7 +869,7 @@
     "timelineStart": 2028,
     "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan"
     ],
@@ -834,7 +882,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
+    ],
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -847,7 +903,7 @@
     "timelineStart": 2028,
     "timelineEnd": 2028,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "manhattan"
     ],
@@ -860,7 +916,15 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-dead"
+      "source-epguides-dead",
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
+    ],
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-dead-timeline",
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3602,7 +3666,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 300,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3631,7 +3702,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 301,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3658,7 +3736,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 302,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3687,7 +3772,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 303,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3716,7 +3808,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 304,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3745,7 +3844,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 305,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3773,7 +3879,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 306,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3800,7 +3913,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 307,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3828,7 +3948,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 308,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3856,7 +3983,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 309,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3884,7 +4018,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 310,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3912,7 +4053,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-ftwd"
+      "source-epguides-ftwd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 311,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -3922,10 +4070,10 @@
     "episodeNumber": 1,
     "title": "Years",
     "airDate": "2024-02-25",
-    "timelineStart": 2014,
+    "timelineStart": 2022,
     "timelineEnd": 2022,
-    "timelinePrecision": "range",
-    "certainty": "confirmed",
+    "timelinePrecision": "year",
+    "certainty": "approximate",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -3940,8 +4088,18 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-owl"
-    ]
+      "source-epguides-owl",
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyOrder": 324,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyNote": "Main story: approximately 2022. The opening revisits Rick’s captivity around 2019, five years after the bridge; those earlier scenes do not place this whole episode in 2014."
   },
   {
     "id": "owl-s01-e02",
@@ -3953,7 +4111,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -3968,8 +4126,18 @@
     "connectionIds": [],
     "sources": [
       "source-epguides-owl",
-      "source-timelinetwd-owl"
-    ]
+      "source-timelinetwd-owl",
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyOrder": 325,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyNote": "Main story: approximately 2022. Michonne’s journey includes earlier events around 2021 and an extended recovery before her reunion with Rick."
   },
   {
     "id": "owl-s01-e03",
@@ -3981,7 +4149,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -3995,8 +4163,18 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-owl"
-    ]
+      "source-epguides-owl",
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyOrder": 326,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyNote": "Main story: approximately 2022, continuing the reunion and CRM story."
   },
   {
     "id": "owl-s01-e04",
@@ -4008,7 +4186,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -4021,8 +4199,18 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-owl"
-    ]
+      "source-epguides-owl",
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyOrder": 327,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyNote": "Main story: approximately 2022, continuing Rick and Michonne’s escape."
   },
   {
     "id": "owl-s01-e05",
@@ -4034,7 +4222,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -4050,8 +4238,18 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-owl"
-    ]
+      "source-epguides-owl",
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyOrder": 328,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyNote": "Main story: approximately 2022. Jadis and Gabriel’s earlier meetings are flashbacks, not the episode’s main placement."
   },
   {
     "id": "owl-s01-e06",
@@ -4061,9 +4259,9 @@
     "title": "The Last Time",
     "airDate": "2024-03-31",
     "timelineStart": 2022,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "confirmed",
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
     "locationIds": [
       "philadelphia",
       "civic-republic"
@@ -4079,8 +4277,18 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-owl"
-    ]
+      "source-epguides-owl",
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyOrder": 329,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order",
+      "source-fandom-owl-timeline"
+    ],
+    "chronologyNote": "Main story: approximately 2022. The later family reunion belongs to the following year in the fan timeline; it is an epilogue rather than the start of this episode."
   },
   {
     "id": "tales-s01-e01",
@@ -9458,7 +9666,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "riverbend"
     ],
@@ -9473,7 +9681,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 312,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9486,7 +9701,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "riverbend"
     ],
@@ -9504,7 +9719,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 313,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9517,7 +9739,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio",
       "rural-virginia"
@@ -9536,7 +9758,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 314,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9549,7 +9778,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio",
       "rural-virginia"
@@ -9567,7 +9796,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 315,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9580,7 +9816,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9606,7 +9842,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 316,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9619,7 +9862,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9643,7 +9886,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 317,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9656,7 +9906,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9677,7 +9927,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 318,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9690,7 +9947,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9705,7 +9962,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 319,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9718,7 +9982,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "ohio-virginia-wilds"
     ],
@@ -9741,7 +10005,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 320,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9754,7 +10025,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9776,7 +10047,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 321,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9789,7 +10067,7 @@
     "timelineStart": 2022,
     "timelineEnd": 2022,
     "timelinePrecision": "year",
-    "certainty": "confirmed",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9809,7 +10087,14 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 322,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
     ]
   },
   {
@@ -9820,9 +10105,9 @@
     "title": "Rest in Peace",
     "airDate": "2022-11-20",
     "timelineStart": 2022,
-    "timelineEnd": 2023,
-    "timelinePrecision": "range",
-    "certainty": "confirmed",
+    "timelineEnd": 2022,
+    "timelinePrecision": "year",
+    "certainty": "approximate",
     "locationIds": [
       "commonwealth-ohio"
     ],
@@ -9849,8 +10134,16 @@
     "factionIds": [],
     "connectionIds": [],
     "sources": [
-      "source-epguides-twd"
-    ]
+      "source-epguides-twd",
+      "source-fandom-episode-order"
+    ],
+    "chronologyOrder": 323,
+    "chronologyBasis": "main-story",
+    "chronologyCheckedAt": "2026-10-01",
+    "chronologySources": [
+      "source-fandom-episode-order"
+    ],
+    "chronologyNote": "Main story: approximately 2022. The one-year-later epilogue is placed in 2023; this episode is ordered by the Commonwealth story it concludes."
   },
   {
     "id": "wb-s01-e01",

@@ -23,6 +23,7 @@ export type ChronologyItem={
  // buildEpisodeWatchOrder's same-anchor tie-break has something meaningful to
  // fall back on instead of that sort's incidental alphabetical-by-title order.
  catalogIndex?:number;
+ chronologyOrder?:number;
 };
 
 // atlasData is static after load, so the built (and sorted) chronology never changes
@@ -33,13 +34,15 @@ let chronologyCache:ChronologyItem[]|null=null;
 export function buildChronology(){
  if(chronologyCache)return chronologyCache;
  const episodes=(atlasData as any).episodes ?? [];
- const episodeItems:ChronologyItem[]=episodes.map((e:any,catalogIndex:number)=>({
+ const episodeItems:ChronologyItem[]=episodes.map((e:any,catalogIndex:number)=>{
+ const anchor=normalizeTemporalAnchor(e);
+ return ({
   id:e.id,kind:"episode",seriesId:e.seriesId,seasonId:e.seasonId,episodeNumber:e.episodeNumber,
-  title:e.title,start:e.timelineStart ?? e.timelineEnd ?? e.airDate?.slice(0,4) ?? 0,
-  end:e.timelineEnd ?? e.timelineStart ?? e.airDate?.slice(0,4) ?? 0,
+  title:e.title,start:anchor.start??0,
+  end:anchor.end??0,
   precision:e.timelinePrecision ?? "unknown",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[],
-  catalogIndex
- }));
+  catalogIndex,chronologyOrder:e.chronologyOrder
+ });});
  const eventItems:ChronologyItem[]=atlasData.events.map((e:any)=>({
   id:e.id,kind:"event",seriesId:e.seriesId,title:e.title,start:e.year,end:e.year,
   precision:e.precision ?? "year",certainty:e.certainty ?? "unknown",locationIds:e.locationIds??[],characterIds:e.characterIds??[],communityIds:e.communityIds??[],factionIds:e.factionIds??[],connectionIds:e.connectionIds??[],sources:e.sources??[]
@@ -115,6 +118,9 @@ export function compareEpisodesChronologically(a:any,b:any):number{
   // ones (44 reversed pairs in the 363-episode watch order). See scripts/test-chronology.mjs.
   if(anchorA.start!==anchorB.start)return (anchorA.start as number)<(anchorB.start as number)?-1:1;
   if(anchorA.end!==anchorB.end)return (anchorA.end as number)<(anchorB.end as number)?-1:1;
+  // Sourced main-story order resolves shared-year ties without comparing overlapping intervals.
+  const rankA=a.chronologyOrder??Infinity,rankB=b.chronologyOrder??Infinity;
+  if(rankA!==rankB)return rankA<rankB?-1:1;
  }
  const indexA=a.catalogIndex??episodeCatalogIndex.get(a.id)??Infinity,indexB=b.catalogIndex??episodeCatalogIndex.get(b.id)??Infinity;
  if(indexA!==indexB)return indexA<indexB?-1:1;
