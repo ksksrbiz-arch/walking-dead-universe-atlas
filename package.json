@@ -54,7 +54,9 @@
     "test:resilience": "node scripts/test-resilience.mjs",
     "test:lightbox": "node scripts/test-lightbox-ui.mjs",
     "test:hordes": "node scripts/test-hordes.mjs",
-    "test:horde-ui": "node scripts/test-horde-ui.mjs"
+    "test:horde-ui": "node scripts/test-horde-ui.mjs",
+    "test:progress": "node scripts/test-progress.mjs",
+    "test:progress-ui": "node scripts/test-progress-ui.mjs"
   },
   "dependencies": {
     "@cublya/world-atlas": "^3.0.0-beta.1",

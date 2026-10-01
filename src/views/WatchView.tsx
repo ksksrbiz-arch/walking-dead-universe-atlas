@@ -8,11 +8,31 @@ import {buildEpisodeWatchOrder} from "../lib/chronology";
 import {episodeById,episodeCode,storyRange} from "../lib/lookup";
 import {episodeImage,episodeMediaRecord,seriesKeyArt} from "../lib/atlasHelpers";
 import {META,SERIES_KEYS,seriesColor,seriesShort} from "../lib/series";
+import {createProgressBackup,parseProgressBackup,MAX_BACKUP_BYTES} from "../lib/progressBackup";
 
 type Filter="todo"|"all"|"done";
 
 export default function WatchView({errors}:{errors:string[]}){
- const {watched,toggleWatched,resetWatched,openEpisode}=useAtlas();
+ const {watched,followed,toggleWatched,resetWatched,openEpisode,importProgress}=useAtlas();
+ const [backupStatus,setBackupStatus]=useState("");
+ const [importing,setImporting]=useState(false);
+ const backupInput=useRef<HTMLInputElement>(null);
+ const exportBackup=()=>{
+  try{
+   const blob=new Blob([JSON.stringify(createProgressBackup(watched,followed),null,2)],{type:"application/json"});
+   const url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download=`atlas-progress-${new Date().toISOString().slice(0,10)}.json`;document.body.append(link);link.click();link.remove();window.setTimeout(()=>URL.revokeObjectURL(url),10000);setBackupStatus("Backup downloaded. Keep it to restore your progress in another browser.");
+  }catch{setBackupStatus("The backup could not be downloaded. Please try again.")}
+ };
+ const readBackup=async(file:File)=>{
+  setImporting(true);setBackupStatus("");
+  try{
+   if(file.size>MAX_BACKUP_BYTES)throw new Error("The backup is too large (maximum 128 KB).");
+   const backup=parseProgressBackup(await file.text());
+   const newWatched=backup.watched.filter(id=>!watched.has(id)).length,newFollowed=backup.followed.filter(id=>!followed.has(id)).length;
+   importProgress(backup);setLastMarked(null);setBackupStatus(`Added ${newWatched} watched episodes and ${newFollowed} followed characters. Existing progress was kept.`);
+  }catch(error){setBackupStatus(error instanceof Error?error.message:"The backup could not be imported.")}
+  finally{setImporting(false);if(backupInput.current)backupInput.current.value=""}
+ };
  const order=useMemo(()=>buildEpisodeWatchOrder(),[]);
  const [filter,setFilter]=useState<Filter>("todo");
  const [series,setSeries]=useState<string|null>(null);
@@ -47,6 +67,12 @@ export default function WatchView({errors}:{errors:string[]}){
    </button>)}</div>
   </Section>
 
+  <Section level={2} title="Keep your progress" collapsible defaultOpen={false} id="progress-backup">
+   <div className="upNextActions"><button className="btn" onClick={exportBackup}>Download backup</button><button className="btn" disabled={importing} onClick={()=>backupInput.current?.click()}>{importing?"Importing…":"Import backup"}</button></div>
+   <input ref={backupInput} type="file" accept="application/json,.json" hidden aria-label="Atlas progress backup" onChange={e=>{const file=e.target.files?.[0];if(file)void readBackup(file)}}/>
+   <p className="note">Backups include watched episodes and followed characters. Imports add to this browser's progress without removing anything.</p>
+   <p role="status" aria-live="polite">{backupStatus}</p>
+  </Section>
   <Section level={2} title={series?`${seriesShort(series)} in story order`:"Full story order"} count={rows.length} action={<div className="segmented small" role="group">{(["todo","all","done"] as Filter[]).map(f=><button key={f} className={filter===f?"active":""} aria-pressed={filter===f} onClick={()=>setFilter(f)}>{f==="todo"?"To watch":f==="all"?"All":"Watched"}</button>)}</div>}>
    <div className="stack watchList" ref={listRef}>{rows.map(e=>{const ep=episodeById.get(e.id) as any;return <div key={e.id} className={"row watchRow"+(watched.has(e.id)?" isWatched":"")} style={{"--c":seriesColor(e.seriesId)} as CSSProperties}>
     <span className="seq">{e.sequence}</span>

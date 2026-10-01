@@ -32,6 +32,16 @@ function stub(plan) {
   return calls;
 }
 const call = (path, method = "GET") => worker.fetch(new Request("https://media.test/" + path, { method }));
+test("oversized unadvertised streams stop reading and cancel immediately",async()=>{
+ let produced=0,cancelled=false;
+ stub({[AMC]:()=>new Response(new ReadableStream({pull(c){produced++;c.enqueue(bytes(1024*1024));if(produced===30)c.close()},cancel(){cancelled=true}}),{headers:{"content-type":"image/png","content-length":"1"}})});
+ const res=await proxy(AMC);assert.equal(res.status,413);assert.equal(cancelled,true);assert.ok(produced<=14,`Read ${produced} chunks instead of stopping at the limit`);assert.equal(res.headers.get("cache-control"),"no-store");
+});
+test("one timeout signal covers redirects and body download",async(t)=>{
+ t.mock.timers.enable({apis:['setTimeout']});let received;
+ stub({[AMC]:(init)=>{received=init.signal;return new Response(new ReadableStream({start(c){init.signal.addEventListener('abort',()=>c.error(new Error('download timed out')))}}),{headers:{"content-type":"image/jpeg"}})}});
+ const pending=proxy(AMC);await Promise.resolve();await Promise.resolve();t.mock.timers.tick(15000);const res=await pending;assert.equal(received.aborted,true);assert.equal(res.status,502);assert.equal(res.headers.get('cache-control'),'no-store');
+});
 const proxy = (source, method) => call("?url=" + encodeURIComponent(source), method);
 test.afterEach(() => {
   globalThis.fetch = realFetch;
