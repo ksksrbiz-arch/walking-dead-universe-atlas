@@ -146,13 +146,13 @@ export default function App(){
  const [toast,setToast]=useState<string|null>(null);
  const deepLink=useRef<DeepLink|null>(readDeepLink());
  const journeyFrame=useRef<"all"|"step"|null>(null);
- const {watched,toggleWatched,resetWatched}=useWatchProgress();
+ const {watched,toggleWatched,resetWatched,mergeWatched}=useWatchProgress();
  const hordeChoices=selectableHordes(spoilerSafe?watched:undefined);
  const activeHorde=hordeChoices.find(h=>h.id===hordeId)??hordeChoices[0]??hordes[0];
  const hordeAvailable=availablePhases(activeHorde,year,series==="ALL"?undefined:META[series].id,spoilerSafe?watched:undefined);
  const hordeVisible=new Set(hordeAvailable.map(p=>p.index));
  const effectiveHordePhase=hordeVisible.has(hordePhase)?hordePhase:(hordeAvailable[0]?.index??-1);
- const {followed,toggleFollowed}=useFollowedCharacters();
+ const {followed,toggleFollowed,mergeFollowed}=useFollowedCharacters();
  const [dataErrors,setDataErrors]=useState<string[]>([]);
  const [layout,setLayout]=useState(readLayout);
  const isPanel=layout.panel,isMobileMap=layout.touch;
@@ -560,7 +560,7 @@ export default function App(){
   requestAnimationFrame(()=>sheetRef.current?.focus({preventScroll:true}));
  };
 
- const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,startJourney,showConnectionOnMap,setYear,jumpToTimelineYear,year,watched,toggleWatched,resetWatched,followed,toggleFollowed};
+ const actions:AtlasActions={openEpisode,openLocation,openCharacter,openConnection,openCommunity,openFaction,showEpisodeOnMap,showLocationOnMap:openLocation,showCharacterJourney,startJourney,showConnectionOnMap,setYear,jumpToTimelineYear,year,watched,toggleWatched,resetWatched,followed,toggleFollowed,importProgress:backup=>{mergeWatched(backup.watched);mergeFollowed(backup.followed)}};
 
  // Per-view tab title. Independent of the deep-link gate below on purpose: a
  // direct load of /people (no map involved) must still get the right title,

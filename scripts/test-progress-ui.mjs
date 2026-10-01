@@ -1,0 +1,13 @@
+import {chromium} from 'playwright';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
+const browser=await chromium.launch();
+try{for(const viewport of [{width:390,height:844},{width:820,height:1180},{width:1440,height:900},{width:844,height:390}]){
+ const page=await browser.newPage({viewport});await page.route(/supabase|wikia|amcn|_vercel|vercel-insights/,r=>r.abort());
+ await page.addInitScript(()=>{if(!localStorage.getItem('progress-test-seeded')){localStorage.setItem('twdu-atlas-watched-episodes',JSON.stringify(['twd-s01-e01']));localStorage.setItem('twdu-atlas-followed-characters',JSON.stringify(['rick-grimes']));localStorage.setItem('progress-test-seeded','1')}});
+ await page.goto(process.env.ATLAS_URL||'http://127.0.0.1:4173/',{waitUntil:'domcontentloaded'});await page.getByRole('button',{name:/^Watch/}).click();await page.getByRole('button',{name:'Keep your progress',exact:true}).click();
+ const downloadEvent=page.waitForEvent('download');await page.getByRole('button',{name:'Download backup'}).click();const download=await downloadEvent;const backup=JSON.parse(await readFile(await download.path(),'utf8'));assert.deepEqual(backup.watched,['twd-s01-e01']);assert.deepEqual(backup.followed,['rick-grimes']);
+ const file={...backup,watched:['twd-s01-e02'],followed:['daryl-dixon']};const input=page.getByLabel('Atlas progress backup');await input.setInputFiles({name:'progress.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(file))});await page.getByRole('status').filter({hasText:'Added 1 watched episodes and 1 followed characters'}).waitFor();
+ const state=()=>page.evaluate(()=>({watched:JSON.parse(localStorage.getItem('twdu-atlas-watched-episodes')),followed:JSON.parse(localStorage.getItem('twdu-atlas-followed-characters'))}));const merged=await state();assert.deepEqual(merged.watched,['twd-s01-e01','twd-s01-e02']);assert.deepEqual(merged.followed,['rick-grimes','daryl-dixon']);
+ await input.setInputFiles({name:'invalid.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({...file,followed:['not-an-atlas-character']}))});await page.getByRole('status').filter({hasText:'invalid character IDs'}).waitFor();assert.deepEqual(await state(),merged);
+ await page.reload({waitUntil:'domcontentloaded'});assert.deepEqual(await state(),merged);await page.getByRole('button',{name:/^Watch/}).click();await page.getByRole('button',{name:'Keep your progress',exact:true}).click();
+ await page.screenshot({path:`work-progress-${viewport.width}x${viewport.height}.png`});await page.close();console.log(`Backup download, merge, invalid import and persistence passed at ${viewport.width}×${viewport.height}.`);
+}}finally{await browser.close()}

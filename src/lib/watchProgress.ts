@@ -33,5 +33,6 @@ export function useWatchProgress(){
 
  const resetWatched=useCallback(()=>setWatched(new Set()),[]);
 
- return {watched,toggleWatched,resetWatched};
+ const mergeWatched=useCallback((ids:string[])=>setWatched(prev=>new Set([...prev,...ids])),[]);
+ return {watched,toggleWatched,resetWatched,mergeWatched};
 }

@@ -1,0 +1,9 @@
+# Progress portability and bounded media downloads
+
+Watch tracker includes a collapsible Keep your progress section above the episode list. Downloads contain a versioned JSON document with watched episode and followed character IDs. Import validates the format, version, timestamp, known registry IDs, list bounds and 128 KB file limit before applying either collection. IDs are deduplicated. Imports merge into current progress, never replace it, and reset the up-next undo action to avoid undoing a prior action after a restore. Preferences and secrets are excluded. This is a manual transfer between browsers; account-based sync remains separate backend scaffolding.
+
+`src/lib/progressBackup.ts` owns the document contract. Browser state hooks apply merged collections through AtlasContext so views update immediately and existing localStorage persistence handles reloads. Browser regressions cover actual downloads, invalid imports, merges and persistence at four layouts. Storage can still be cleared by browser settings; users should keep a downloaded backup.
+
+The Cloudflare media worker now reads image bodies incrementally and cancels as soon as the actual bytes exceed its existing 12 MB cap, including streams with absent or dishonest Content-Length headers. The total fetch/redirect/body operation has a 15-second timeout shared across fallback hosts. Only bounded, complete raster images receive the existing long-lived cache headers; timeout and size errors are not cached. This bounds retained image data rather than buffering an unrestricted upstream response. It does not change the separate Supabase media implementation.
+
+Validation: `npm run test:progress`, `npm run test:progress-ui`, `npm run test:media-worker`, typecheck, production build and the existing map/UI suite. The UI tests use mocked remote media and do not spend AI tokens.

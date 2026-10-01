@@ -30,5 +30,6 @@ export function useFollowedCharacters(){
   });
  },[]);
 
- return {followed,toggleFollowed};
+ const mergeFollowed=useCallback((ids:string[])=>setFollowed(prev=>new Set([...prev,...ids])),[]);
+ return {followed,toggleFollowed,mergeFollowed};
 }

@@ -26,6 +26,19 @@ const MAX_BYTES = 12 * 1024 * 1024;
 const MIN_BYTES = 512;
 const MAX_REDIRECTS = 3;
 const IMAGE_TTL = 30 * 24 * 60 * 60; // 30 days: art filenames are revision-stamped, so content is effectively immutable
+const REQUEST_TIMEOUT_MS = 15000;
+
+// Retain at most MAX_BYTES, even when the upstream omits or lies about its length.
+async function readBounded(body) {
+ const reader=body.getReader(),chunks=[];let total=0;
+ try{
+  while(true){const {done,value}=await reader.read();if(done)break;total+=value.byteLength;
+   if(total>MAX_BYTES){void reader.cancel().catch(()=>{});const error=new Error("Image exceeds 12 MB limit");error.status=413;throw error}
+   chunks.push(value);
+  }
+ }finally{reader.releaseLock()}
+ const bytes=new Uint8Array(total);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength}return bytes;
+}
 
 const corsHeaders = () => ({
   "access-control-allow-origin": "*",
@@ -88,11 +101,16 @@ export default {
 
     let lastStatus = 502;
     let lastError = "Upstream image unavailable";
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),REQUEST_TIMEOUT_MS);
 
+    try {
     for (const candidate of candidateUrls(target)) {
+      if(controller.signal.aborted)break;
       try {
         const fandom = candidate.hostname.toLowerCase().endsWith(".wikia.nocookie.net");
         const { response: upstream, finalUrl } = await fetchAllowed(candidate, {
+          signal:controller.signal,
           headers: {
             "user-agent": "TWDU-Atlas-Media/1.0",
             accept: "image/avif,image/webp,image/jpeg,image/png,image/gif,*/*;q=0.8",
@@ -124,8 +142,7 @@ export default {
           return reply("Image exceeds 12 MB limit", 413);
         }
 
-        const body = await upstream.arrayBuffer();
-        if (body.byteLength > MAX_BYTES) return reply("Image exceeds 12 MB limit", 413);
+        const body = await readBounded(upstream.body);
         if (body.byteLength < MIN_BYTES) {
           lastStatus = 502;
           lastError = "Image response is unexpectedly small";
@@ -148,6 +165,7 @@ export default {
           },
         });
       } catch (error) {
+        if(error?.status===413)return reply("Image exceeds 12 MB limit",413,{"cache-control":"no-store"});
         lastError = error instanceof Error ? error.message : "Upstream image request failed";
       }
     }
@@ -156,5 +174,6 @@ export default {
     return reply(lastError, lastStatus === 404 ? 404 : lastStatus === 415 ? 415 : lastStatus === 413 ? 413 : 502, {
       "cache-control": lastStatus === 404 ? "public, max-age=60" : "no-store",
     });
+    } finally {clearTimeout(timeout)}
   },
 };

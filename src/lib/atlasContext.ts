@@ -22,6 +22,7 @@ export type AtlasActions={
  resetWatched:()=>void;
  followed:Set<string>;
  toggleFollowed:(id:string)=>void;
+ importProgress:(backup:{watched:string[];followed:string[]})=>void;
 };
 
 export const AtlasContext=createContext<AtlasActions|null>(null);
