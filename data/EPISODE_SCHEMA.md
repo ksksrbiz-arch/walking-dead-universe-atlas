@@ -28,3 +28,5 @@ Unknown chronology requires null timelineStart/timelineEnd, unknown precision an
 Reviewed placements may include chronologyBasis (main-story), chronologySources (IDs of chronology sources also listed in sources), chronologyCheckedAt, chronologyNote (flashbacks/epilogues or evidence limits), and chronologyOrder (a sourced integer sequence resolving matching-year ties). Fan calendar interpretations use approximate certainty. Release indexes alone do not establish story chronology.
 
 For anthology episodes, the event layer will allow each episode to be positioned independently rather than forcing the entire anthology into one chronological block.
+
+Optional appearanceTypes maps character IDs to archive or flashback for explicitly reviewed appearances. These remain discoverable episode appearances but are excluded from main-story journey evidence. Optional characterLocationIds overrides episode-level places for a specific character; an empty list means no main-location association is established. Overrides must reference a listed character and a subset of locationIds.

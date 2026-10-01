@@ -85,7 +85,7 @@ export type JourneyOptions={
 };
 
 export function buildJourney(characterId:string,options:JourneyOptions={}):Journey{
- const all=getCharacterEpisodeIds(characterId).map(id=>episodeById.get(id)).filter(Boolean) as any[];
+ const all=getCharacterEpisodeIds(characterId).map(id=>episodeById.get(id)).filter(e=>e&&!["archive","flashback"].includes((e as any).appearanceTypes?.[characterId])) as any[];
  all.sort((a,b)=>episodeRank(a.id)-episodeRank(b.id)||compareEpisodesChronologically(a,b));
  const only=options.onlyEpisodes;
  const eps=only?all.filter(e=>only.has(e.id)):all;
@@ -100,7 +100,7 @@ export function buildJourney(characterId:string,options:JourneyOptions={}):Journ
   if(y1!=null)s.endYear=s.endYear==null?y1:Math.max(s.endYear,y1);
  };
  for(const e of eps){
-  const locs=[...new Set((e.locationIds??[]) as string[])].map(id=>locationById.get(id)).filter(isPlaced);
+  const locs=[...new Set((e.characterLocationIds?.[characterId]??e.locationIds??[]) as string[])].map(id=>locationById.get(id)).filter(isPlaced);
   if(!locs.length){unplaced++;continue}
   const continuing=locs.some(l=>active.has(l.id));
   const origins=[...active.values()];

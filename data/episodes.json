@@ -4316,7 +4316,8 @@
     "certainty": "approximate",
     "locationIds": [
       "philadelphia",
-      "civic-republic"
+      "civic-republic",
+      "cascadia-fob"
     ],
     "characterIds": [
       "rick-grimes",
@@ -4330,7 +4331,8 @@
     "sources": [
       "source-epguides-owl",
       "source-fandom-episode-order",
-      "source-fandom-owl-timeline"
+      "source-fandom-owl-timeline",
+      "source-fandom-owl-cascadia"
     ],
     "chronologyOrder": 324,
     "chronologyBasis": "main-story",
@@ -4392,7 +4394,8 @@
     "certainty": "approximate",
     "locationIds": [
       "philadelphia",
-      "civic-republic"
+      "civic-republic",
+      "cascadia-fob"
     ],
     "characterIds": [
       "rick-grimes",
@@ -4405,7 +4408,8 @@
     "sources": [
       "source-epguides-owl",
       "source-fandom-episode-order",
-      "source-fandom-owl-timeline"
+      "source-fandom-owl-timeline",
+      "source-fandom-owl-cascadia"
     ],
     "chronologyOrder": 326,
     "chronologyBasis": "main-story",
@@ -4428,8 +4432,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "philadelphia",
-      "civic-republic"
+      "greenwood"
     ],
     "characterIds": [
       "rick-grimes",
@@ -4441,7 +4444,8 @@
     "sources": [
       "source-epguides-owl",
       "source-fandom-episode-order",
-      "source-fandom-owl-timeline"
+      "source-fandom-owl-timeline",
+      "source-fandom-owl-greenwood"
     ],
     "chronologyOrder": 327,
     "chronologyBasis": "main-story",
@@ -4464,8 +4468,7 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "philadelphia",
-      "civic-republic"
+      "yellowstone"
     ],
     "characterIds": [
       "rick-grimes",
@@ -4480,7 +4483,9 @@
     "sources": [
       "source-epguides-owl",
       "source-fandom-episode-order",
-      "source-fandom-owl-timeline"
+      "source-fandom-owl-timeline",
+      "source-fandom-owl-yellowstone",
+      "source-fandom-owl-become"
     ],
     "chronologyOrder": 328,
     "chronologyBasis": "main-story",
@@ -4489,7 +4494,14 @@
       "source-fandom-episode-order",
       "source-fandom-owl-timeline"
     ],
-    "chronologyNote": "Main story: approximately 2022. Jadis and Gabriel’s earlier meetings are flashbacks, not the episode’s main placement."
+    "chronologyNote": "Main story: approximately 2022. Jadis and Gabriel’s earlier meetings are flashbacks, not the episode’s main placement.",
+    "appearanceTypes": {
+      "jennifer-mallick": "archive"
+    },
+    "characterLocationIds": {
+      "gabriel-stokes": []
+    },
+    "appearanceNote": "Jennifer appears in archive footage. Gabriel’s separate scenes and flashbacks do not establish his presence in Yellowstone; no travel there is inferred."
   },
   {
     "id": "owl-s01-e06",
@@ -4503,15 +4515,16 @@
     "timelinePrecision": "year",
     "certainty": "approximate",
     "locationIds": [
-      "philadelphia",
-      "civic-republic"
+      "cascadia-fob"
     ],
     "characterIds": [
       "rick-grimes",
       "michonne",
       "jadis-stokes",
       "judith-grimes",
-      "samuel-abbott"
+      "samuel-abbott",
+      "jonathan-beale",
+      "pearl-thorne"
     ],
     "communityIds": [],
     "factionIds": [],
@@ -4519,7 +4532,9 @@
     "sources": [
       "source-epguides-owl",
       "source-fandom-episode-order",
-      "source-fandom-owl-timeline"
+      "source-fandom-owl-timeline",
+      "source-fandom-owl-cascadia",
+      "source-fandom-owl-finale"
     ],
     "chronologyOrder": 329,
     "chronologyBasis": "main-story",
@@ -4528,7 +4543,15 @@
       "source-fandom-episode-order",
       "source-fandom-owl-timeline"
     ],
-    "chronologyNote": "Main story: approximately 2022. The later family reunion belongs to the following year in the fan timeline; it is an epilogue rather than the start of this episode."
+    "chronologyNote": "Main story: approximately 2022. The later family reunion belongs to the following year in the fan timeline; it is an epilogue rather than the start of this episode.",
+    "appearanceTypes": {
+      "jadis-stokes": "flashback",
+      "samuel-abbott": "archive"
+    },
+    "characterLocationIds": {
+      "judith-grimes": []
+    },
+    "appearanceNote": "Jadis appears in a flashback and Samuel in archive footage. Judith appears in the later family reunion, not at Cascadia. These appearances do not establish travel to the base."
   },
   {
     "id": "tales-s01-e01",

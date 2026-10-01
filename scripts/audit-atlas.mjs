@@ -39,6 +39,10 @@ if(ambiguous.length)warn.push(`Cross-kind entity ID collisions require typed end
 
 const reverseCharacter=new Map(); const reverseLocation=new Map();
 for(const e of episodes){
+  for(const [id,type] of Object.entries(e.appearanceTypes??{}))if(!e.characterIds?.includes(id)||!["archive","flashback"].includes(type))fail.push(`Episode ${e.id}: invalid appearance type for ${id}`);
+  for(const [id,places] of Object.entries(e.characterLocationIds??{})){
+    if(!e.characterIds?.includes(id)||!Array.isArray(places)||places.some(p=>!e.locationIds?.includes(p)))fail.push(`Episode ${e.id}: invalid character location evidence for ${id}`);
+  }
   for(const id of e.sources??[])if(!sourceById.has(id))fail.push(`Episode ${e.id}: unknown source ${id}`);
   for(const id of e.chronologySources??[])if(sourceById.get(id)?.type!=="chronology"||!e.sources?.includes(id))fail.push(`Episode ${e.id}: invalid chronology evidence ${id}`);
   if(e.chronologyOrder!=null&&(!Number.isInteger(e.chronologyOrder)||!e.chronologySources?.length))fail.push(`Episode ${e.id}: chronology order requires an integer and evidence`);

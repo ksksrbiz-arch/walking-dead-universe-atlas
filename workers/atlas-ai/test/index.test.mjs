@@ -1,7 +1,7 @@
 import {test} from "node:test";
 import assert from "node:assert/strict";
 import worker,{GATEWAY,MODEL} from "../src/index.mjs";
-import {retrieve} from "../src/corpus.mjs";
+import {retrieve,records} from "../src/corpus.mjs";
 const ORIGIN="https://walking-dead-universe-atlas.vercel.app";
 function setup({status=200,output,rate=true}={}){
  const calls=[];
@@ -16,7 +16,7 @@ function setup({status=200,output,rate=true}={}){
 const request=(path,body,{admin=false,origin=ORIGIN,method="POST"}={})=>new Request("https://atlas.example"+path,{method,headers:{"Content-Type":"application/json",...(origin?{Origin:origin}:{}),...(admin?{Authorization:"Bearer test-admin-token"}:{})},...(method==="POST"?{body:JSON.stringify(body)}:{})});
 test("health does not spend inference or reveal credentials",async()=>{
  const {env,calls}=setup();const r=await worker.fetch(request("/health",null,{method:"GET"}),env);
- assert.equal(r.status,200);assert.equal((await r.json()).records,637);assert.equal(calls.length,0);
+ assert.equal(r.status,200);assert.equal((await r.json()).records,records.length);assert.equal(calls.length,0);
 });
 test("public requests are scoped to Atlas origins",async()=>{
  const {env,calls}=setup();

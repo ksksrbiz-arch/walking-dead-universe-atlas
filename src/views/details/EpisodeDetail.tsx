@@ -28,6 +28,8 @@ export default function EpisodeDetail({id}:{id:string}){
  const locations=locationsFor(episode.locationIds??[]);
  const mapped=locations.filter(hasMapCoordinates);
  const characters=(episode.characterIds??[]).map((cid:string)=>characterById.get(cid)).filter(Boolean) as any[];
+ const remembered=characters.filter(c=>["archive","flashback"].includes(episode.appearanceTypes?.[c.id]));
+ const present=characters.filter(c=>!remembered.includes(c));
  const connectionIds=getEpisodeConnectionIds(id);
  const sources=(episode.sources??[]).map((sid:string)=>sourceById.get(sid)).filter(Boolean) as any[];
  const airDate=episode.airDate?new Date(episode.airDate+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}):null;
@@ -52,7 +54,9 @@ export default function EpisodeDetail({id}:{id:string}){
   </nav>
 
   {locations.length>0&&<Section title="Where it happens" count={locations.length}><PlaceChips locations={locations}/></Section>}
-  {characters.length>0&&<Section title="Who's in it" count={characters.length}><PortraitStrip characters={characters}/></Section>}
+  {present.length>0&&<Section title="Who's in it" count={present.length}><PortraitStrip characters={present}/></Section>}
+  {remembered.length>0&&<Section title="Flashbacks and archive footage" count={remembered.length}><PortraitStrip characters={remembered}/></Section>}
+  {episode.appearanceNote&&<Note>{episode.appearanceNote}</Note>}
   <ConnectionList ids={connectionIds}/>
   <Gallery title="Stills" items={photos.items} loading={photos.loading} onOpen={i=>lightbox.open(photos.items,i)}/>
   <WikiSection entityType="episodes" entityId={id}/>
