@@ -14,7 +14,6 @@ try{
   await panel.getByRole('button',{name:'The farm is overrun',exact:true}).click();
   assert.match(await page.locator('[data-horde-id]').getAttribute('aria-label'),/farm is overrun/);
   await panel.locator('select').selectOption('quarry-herd');
-  await panel.getByRole('button',{name:'Go to recorded year'}).click();
   assert.equal(await page.locator('[data-horde-id]').count(),0,'Unknown quarry must not leave old pin');
   await panel.getByRole('button',{name:'Alexandria surrounded',exact:true}).click();
   assert.equal(await page.locator('[data-horde-id]').count(),1);
@@ -33,4 +32,13 @@ try{
   }
   assert.deepEqual(errors,[]);await page.close();console.log(`Herd controls and unknown/cleared locations passed at ${width}px.`);
  }
+ const safe=await browser.newPage({viewport:{width:390,height:844}});
+ await safe.addInitScript(()=>localStorage.setItem('twdu-atlas-spoiler-safe','1'));
+ await safe.goto('http://127.0.0.1:4173/',{waitUntil:'domcontentloaded'});
+ await safe.getByRole('button',{name:'Map layers',exact:true}).click();await safe.getByRole('button',{name:/Walker herds/}).click();
+ const safePanel=safe.getByRole('region',{name:'Walker herd events'});
+ assert.equal(await safePanel.locator('select').count(),0);
+ assert.equal(await safe.locator('[data-horde-id]').count(),0);
+ assert.doesNotMatch(await safePanel.textContent(),/Whisperer|Quarry|Atlanta/);
+ await safe.close();console.log('Spoiler-safe hides unwatched herd identities and coordinates.');
 }finally{await browser.close()}
