@@ -22,7 +22,7 @@ import {characterById,connectionById,communityById,episodeById,factionById,locat
 import {JOURNEY_COLORS,beatForYear,beatYear,buildBeats,buildJourney,parseJourneyIds,positionsAt} from "./lib/journeys";
 import {JourneyAvatars,JourneyRoutes} from "./components/JourneyLayer";
 import HordeLayer from "./components/HordeLayer";
-import {hordes,availablePhases,hordeLocation,phaseYear} from "./lib/hordes";
+import {hordes,availablePhases,hordeLocation,phaseYear,selectableHordes,firstAvailablePhase} from "./lib/hordes";
 import JourneyPanel,{JourneyPlayer} from "./views/JourneyPanel";
 import type {JourneyControls} from "./views/JourneyPanel";
 import {MAP_LAYERS,MAP_LAYER_LABELS,clamp,hasMapCoordinates,locationIconName,locationMapLayer,prettyType} from "./lib/atlasHelpers";
@@ -147,7 +147,8 @@ export default function App(){
  const deepLink=useRef<DeepLink|null>(readDeepLink());
  const journeyFrame=useRef<"all"|"step"|null>(null);
  const {watched,toggleWatched,resetWatched}=useWatchProgress();
- const activeHorde=hordes.find(h=>h.id===hordeId)!;
+ const hordeChoices=selectableHordes(spoilerSafe?watched:undefined);
+ const activeHorde=hordeChoices.find(h=>h.id===hordeId)??hordeChoices[0]??hordes[0];
  const hordeAvailable=availablePhases(activeHorde,year,series==="ALL"?undefined:META[series].id,spoilerSafe?watched:undefined);
  const hordeVisible=new Set(hordeAvailable.map(p=>p.index));
  const effectiveHordePhase=hordeVisible.has(hordePhase)?hordePhase:(hordeAvailable[0]?.index??-1);
@@ -506,6 +507,18 @@ export default function App(){
   setPlaying(false);setYear(y);
   if(journeyActive){setJourneyPlaying(false);stepJourney(beatForYear(journeys,beats,y))}
  };
+ const selectHordePhase=(index:number)=>{
+  setPlaying(false);setHordePhase(index);
+  const loc=hordeLocation(activeHorde.phases[index]);
+  if(loc)setFocusRequest({ids:[loc.id],mode:"fit",token:performance.now()});
+ };
+ const selectHorde=(id:string)=>{
+  const herd=hordeChoices.find(h=>h.id===id);if(!herd)return;
+  const index=firstAvailablePhase(herd,spoilerSafe?watched:undefined);if(index<0)return;
+  setHordeId(id);setHordePhase(index);setSeries("TWD");onYearScrub(phaseYear(herd.phases[index])??year);
+  const loc=hordeLocation(herd.phases[index]);
+  if(loc)setFocusRequest({ids:[loc.id],mode:"fit",token:performance.now()});
+ };
  const showToast=(msg:string)=>{setToast(msg);window.setTimeout(()=>setToast(t=>t===msg?null:t),2600)};
  const shareCurrent=async()=>{
   let path=window.location.pathname+window.location.search,title="TWDU Atlas";
@@ -844,7 +857,7 @@ export default function App(){
        </g>;
       })}</g>
       {journeyActive&&<JourneyAvatars journeys={journeys} positions={journeyPositions} project={project} zoom={zoom}/>}
-      <HordeLayer horde={hordeEnabled?activeHorde:null} phaseIndex={effectiveHordePhase} visible={hordeVisible} zoom={zoom} project={project} onSelect={()=>setHordeSelected(true)}/>
+      <HordeLayer horde={hordeEnabled&&hordeChoices.length?activeHorde:null} phaseIndex={effectiveHordePhase} visible={hordeVisible} zoom={zoom} project={project} onSelect={()=>setHordeSelected(true)}/>
      </g>
     </svg>
    </div>
@@ -874,18 +887,21 @@ export default function App(){
 
    </div>
 
-   {hordeEnabled&&<button className="hordeReopen" onClick={()=>setHordeSelected(v=>!v)}>Walker herds</button>}
-   {hordeSelected&&hordeEnabled&&<section className="popover hordeDossier" data-map-chrome={isPanel?"right":"bottom"} aria-label="Walker herd events">
+   {hordeEnabled&&(view==="map"||isPanel)&&<button className="hordeReopen" aria-expanded={hordeSelected} aria-controls="herd-events" onClick={()=>setHordeSelected(v=>!v)}>Walker herds</button>}
+   {hordeSelected&&hordeEnabled&&(view==="map"||isPanel)&&<section id="herd-events" className="popover hordeDossier" data-map-chrome={isPanel?"right":"bottom"} aria-label="Walker herd events">
     <header><b>Walker herds</b><button className="iconBtn ghost" onClick={()=>setHordeSelected(false)} aria-label="Close herd events"><Icon name="close"/></button></header>
     <div className="stack">
-     <label>Herd<select value={hordeId} onChange={e=>{setHordeId(e.target.value);setHordePhase(0)}}>{hordes.map(h=><option key={h.id} value={h.id}>{h.name}</option>)}</select></label>
+     {hordeChoices.length===0?<p>No watched herd events yet. Mark supporting episodes watched to reveal their herds.</p>:<>
+     <label>Herd<select value={activeHorde.id} onChange={e=>selectHorde(e.target.value)}>{hordeChoices.map(h=><option key={h.id} value={h.id}>{h.name}</option>)}</select></label>
      {!spoilerSafe&&<p>{activeHorde.summary}</p>}
-     {hordeAvailable.length===0?<><p>No recorded events for this year, series, or watched episodes.</p><button onClick={()=>{setSeries("TWD");setYear(phaseYear(activeHorde.phases[0])??year)}}>Go to recorded year</button></>:<>
-      <div className="hordeSteps">{hordeAvailable.map(({phase,index})=><button key={phase.id} aria-pressed={effectiveHordePhase===index} onClick={()=>{setHordePhase(index);const loc=hordeLocation(phase);if(loc)focusMapOn([loc.id],"fit")}}>{phase.label}</button>)}</div>
+     {hordeAvailable.length===0?<><p>No recorded events for this year or series.</p><button onClick={()=>selectHorde(activeHorde.id)}>Go to recorded year</button></>:<>
+      <div className="hordeSteps">{hordeAvailable.map(({phase,index})=><button key={phase.id} aria-pressed={effectiveHordePhase===index} onClick={()=>selectHordePhase(index)}>{phase.label}</button>)}</div>
       <b>{activeHorde.phases[effectiveHordePhase].label}</b><p>{activeHorde.phases[effectiveHordePhase].description}</p>
       <small>Drawn by: {activeHorde.phases[effectiveHordePhase].driver} · {activeHorde.phases[effectiveHordePhase].status}</small>
       {!hordeLocation(activeHorde.phases[effectiveHordePhase])&&<p>Exact location unknown — no map pin.</p>}
       <a href={activeHorde.sources[activeHorde.phases[effectiveHordePhase].sourceIndex].url} target="_blank" rel="noreferrer">Read event evidence on Fandom ↗</a>
+      <button className="row" onClick={()=>{setHordeSelected(false);openEpisode(activeHorde.phases[effectiveHordePhase].episodeId)}}>Open supporting episode</button>
+     </>}
      </>}
      <small>Episode order, not continuous tracking. Existing map locations are approximate. Dashed lines connect recorded places; the precise route is unknown. Walker symbols do not represent population.</small>
     </div>

@@ -8,7 +8,9 @@ const dir=mkdtempSync(join(tmpdir(),'atlas-herds-'));
 try{
  const out=join(dir,'herds.mjs');
  await build({entryPoints:['src/lib/hordes.ts'],bundle:true,platform:'node',format:'esm',outfile:out});
- const {hordes,availablePhases,phaseYear,hordeLocation,hordeTrace}=await import(pathToFileURL(out).href);
+ const {hordes,availablePhases,phaseYear,hordeLocation,hordeTrace,selectableHordes,firstAvailablePhase}=await import(pathToFileURL(out).href);
+ assert.equal(selectableHordes(new Set()).length,0);
+ const watched=new Set(['twd-s06-e09']);assert.deepEqual(selectableHordes(watched).map(h=>h.id),['quarry-herd']);assert.equal(firstAvailablePhase(hordes[1],watched),3,'Jump to watched anchor, not unwatched first episode');
  for(const herd of hordes){
   assert.equal(new Set(herd.phases.map(p=>p.id)).size,herd.phases.length);
   for(const phase of herd.phases){assert.notEqual(phaseYear(phase),null);assert.ok(herd.sources[phase.sourceIndex].url.startsWith('https://walkingdead.fandom.com/'));if(phase.locationId)assert.ok(hordeLocation(phase));}
