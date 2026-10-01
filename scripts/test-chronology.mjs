@@ -84,5 +84,11 @@ const unanchored = order.filter((e) => !known(e));
 const firstUnanchored = order.findIndex((e) => !known(e));
 check("unanchored episodes are last", unanchored.length === 0 || order.slice(firstUnanchored).every((e) => !known(e)), unanchored.map((e) => e.id).join(","));
 
+const rawEpisodes=JSON.parse(readFileSync(new URL("../data/episodes.json",import.meta.url),"utf8"));
+check("raw detail episodes match the watch guide story order",[...rawEpisodes].reverse().sort(cmp).map(e=>e.id).join(",")===order.map(e=>e.id).join(","));
+check("broadcast dates never replace story years",anchor({timelineStart:2010,timelineEnd:2011,timelinePrecision:"range",airDate:"2024-02-25"}).start===2010);
+check("broadcast dates alone do not invent story anchors",anchor({airDate:"2024-02-25"}).start===null);
+check("explicit story dates retain day precision",anchor({date:"2010-08-27"}).precision==="day");
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

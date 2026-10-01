@@ -1,5 +1,6 @@
-import {useEffect,useRef,useState} from "react";
+import {useEffect,useLayoutEffect,useRef,useState} from "react";
 import type {PointerEvent as ReactPointerEvent} from "react";
+import {createPortal} from "react-dom";
 import Icon from "./Icon";
 import {atlasImageSrcSet,atlasImageUrl,atlasImagePlaceholder,mediaCredit,onAtlasImageError} from "../lib/media";
 
@@ -11,11 +12,24 @@ export default function Lightbox({items,start,onClose}:{items:LightboxItem[];sta
  const [index,setIndex]=useState(start);
  const [loadedSrc,setLoadedSrc]=useState<string|null>(null);
  const closeRef=useRef<HTMLButtonElement|null>(null);
+ const dialogRef=useRef<HTMLDivElement|null>(null);
  const opener=useRef<HTMLElement|null>(typeof document!=="undefined"?document.activeElement as HTMLElement:null);
  const drag=useRef<{x:number;y:number}|null>(null);
  const item=items[index];
  const go=(d:number)=>setIndex(i=>(i+d+items.length)%items.length);
- useEffect(()=>{closeRef.current?.focus();const prev=opener.current;const o=document.body.style.overflow;document.body.style.overflow="hidden";return()=>{document.body.style.overflow=o;prev?.focus?.()}},[]);
+ useEffect(()=>{
+  closeRef.current?.focus();
+  const prev=opener.current,overflow=document.body.style.overflow;
+  const root=document.getElementById("root"),wasInert=root?.inert??false;
+  document.body.style.overflow="hidden";
+  if(root)root.inert=true;
+  return()=>{document.body.style.overflow=overflow;if(root)root.inert=wasInert;if(prev?.isConnected)prev.focus()};
+ },[]);
+ useLayoutEffect(()=>{
+  // A photo can replace its source link with plain credit text. Keep focus
+  // inside the viewer when the formerly focused link disappears.
+  if(!dialogRef.current?.contains(document.activeElement))closeRef.current?.focus();
+ },[index]);
  useEffect(()=>{
   // Preload neighbours so swiping feels instant.
   for(const d of [1,-1]){const n=items[(index+d+items.length)%items.length];if(n){const img=new Image();img.src=atlasImageUrl(n.src,1600)}}
@@ -24,7 +38,12 @@ export default function Lightbox({items,start,onClose}:{items:LightboxItem[];sta
   if(e.key==="Escape"){e.stopPropagation();onClose()}
   else if(e.key==="ArrowRight"){e.preventDefault();go(1)}
   else if(e.key==="ArrowLeft"){e.preventDefault();go(-1)}
-  else if(e.key==="Tab"){e.preventDefault();closeRef.current?.focus()}
+  else if(e.key==="Tab"){
+   const controls=[...dialogRef.current!.querySelectorAll<HTMLElement>("button:not([disabled]),a[href]")].filter(el=>el.getClientRects().length>0);
+   const first=controls[0],last=controls[controls.length-1];
+   if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus()}
+   else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus()}
+  }
  };
  const down=(e:ReactPointerEvent)=>{drag.current={x:e.clientX,y:e.clientY}};
  const up=(e:ReactPointerEvent)=>{const d=drag.current;drag.current=null;if(!d)return;const dx=e.clientX-d.x,dy=e.clientY-d.y;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))go(dx<0?1:-1);else if(dy>90)onClose()};
@@ -32,7 +51,9 @@ export default function Lightbox({items,start,onClose}:{items:LightboxItem[];sta
  const loaded=loadedSrc===item.src;
  const credit=mediaCredit(item.src,item.page);
  const lqip=atlasImagePlaceholder(item.src);
- return <div className="lightbox" role="dialog" aria-modal="true" aria-label={`Image ${index+1} of ${items.length}: ${item.title}`} onKeyDown={onKey}>
+ // Escape the sheet's stacking context so its header and the app navigation
+ // cannot cover the viewer's close button or receive clicks behind it.
+ return createPortal(<div ref={dialogRef} className="lightbox" role="dialog" aria-modal="true" aria-label={`Image ${index+1} of ${items.length}: ${item.title}`} onKeyDown={onKey}>
   <div className="lightboxStage" onPointerDown={down} onPointerUp={up} onPointerCancel={()=>{drag.current=null}}>
    {lqip&&!loaded&&<img className="lightboxLqip" src={lqip} alt="" aria-hidden="true"/>}
    <img key={item.src} className={"lightboxImg"+(loaded?" isLoaded":"")} src={atlasImageUrl(item.src,1600)} srcSet={atlasImageSrcSet(item.src,[800,1200,1600,2200])} sizes="100vw" alt={item.title} ref={img=>{if(img?.complete&&img.naturalWidth>0&&loadedSrc!==item.src)setLoadedSrc(item.src)}} onLoad={()=>setLoadedSrc(item.src)} onError={e=>onAtlasImageError(e,item.src)} draggable={false}/>
@@ -49,5 +70,5 @@ export default function Lightbox({items,start,onClose}:{items:LightboxItem[];sta
    <b>{item.title}</b>{item.meta&&<small>{item.meta}</small>}
    {credit&&(credit.href?<a href={credit.href} target="_blank" rel="noreferrer">Image: {credit.label}<Icon name="external"/></a>:<span>Image: {credit.label}</span>)}
   </footer>
- </div>;
+ </div>,document.body);
 }

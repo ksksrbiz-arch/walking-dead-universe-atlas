@@ -101,6 +101,7 @@ export type EpisodeWatchOrderItem=ChronologyItem & {
 // year, whatever order the source data happened to be in" — accepts either a
 // raw episodes.json record (timelineStart/timelineEnd) or a ChronologyItem
 // (start/end).
+const episodeCatalogIndex=new Map(atlasData.episodes.map((episode,index)=>[episode.id,index]));
 export function compareEpisodesChronologically(a:any,b:any):number{
  const anchorA=normalizeTemporalAnchor(a),anchorB=normalizeTemporalAnchor(b);
  const knownA=anchorA.start!=null&&anchorA.end!=null,knownB=anchorB.start!=null&&anchorB.end!=null;
@@ -115,7 +116,7 @@ export function compareEpisodesChronologically(a:any,b:any):number{
   if(anchorA.start!==anchorB.start)return (anchorA.start as number)<(anchorB.start as number)?-1:1;
   if(anchorA.end!==anchorB.end)return (anchorA.end as number)<(anchorB.end as number)?-1:1;
  }
- const indexA=a.catalogIndex??Infinity,indexB=b.catalogIndex??Infinity;
+ const indexA=a.catalogIndex??episodeCatalogIndex.get(a.id)??Infinity,indexB=b.catalogIndex??episodeCatalogIndex.get(b.id)??Infinity;
  if(indexA!==indexB)return indexA<indexB?-1:1;
  return String(a.id||"").localeCompare(String(b.id||""));
 }
