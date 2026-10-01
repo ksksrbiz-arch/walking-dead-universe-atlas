@@ -34,7 +34,7 @@ export default function EpisodeDetail({id}:{id:string}){
  return <div className="detail">
   <Hero image={image} creditPage={page} onImage={()=>lightbox.open(photos.items,0)} accent={meta?.color} icon="film" kicker={<><span className="dot" style={{background:seriesColor(episode.seriesId)} as CSSProperties}/>{meta?.name} · {episodeCode(episode)}</>} title={episode.title}>
    <div className="chipRow">
-    <Chip icon="clock">Story year {storyRange(episode)}</Chip>
+    <Chip icon="clock">{episode.chronologyBasis==="main-story"?"Main story year":"Story year"} {storyRange(episode)}</Chip>
     {airDate&&<Chip>Aired {airDate}</Chip>}
     <Chip tone={certaintyTone(episode.certainty)}>{episode.certainty}</Chip>
    </div>
@@ -43,6 +43,7 @@ export default function EpisodeDetail({id}:{id:string}){
    <WatchToggle id={id} title={episode.title}/>
    <button className="btn" disabled={!mapped.length} onClick={()=>showEpisodeOnMap(id)}><Icon name="map"/>{mapped.length?`Show ${mapped.length} on map`:"No mapped places"}</button>
   </ActionBar>
+  {episode.chronologyNote&&<Note>{episode.chronologyNote}</Note>}
 
   <nav className="storyNav" aria-label="Story order">
    {prev?<button onClick={()=>openEpisode(prev.id)}><Icon name="back"/><span><small>Before · {seriesShort(prev.seriesId)} {episodeCode(prev)}{watched.has(prev.id)?" ✓":""}</small><b>{prev.title}</b></span></button>:<span/>}

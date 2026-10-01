@@ -20,6 +20,7 @@ const locationEpisodes=read("locationEpisodes.json");
 const media=read("episodeMedia.json");
 const connections=read("connections.json");
 const connectionEpisodes=read("connectionEpisodes.json");
+const sourceById=new Map(read("sources.json").map(s=>[s.id,s]));
 
 const fail=[]; const warn=[]; const info=[];
 const duplicate=(items)=>{const seen=new Set(),dupes=[];for(const x of items){if(seen.has(x.id))dupes.push(x.id);seen.add(x.id)}return [...new Set(dupes)]};
@@ -38,6 +39,9 @@ if(ambiguous.length)warn.push(`Cross-kind entity ID collisions require typed end
 
 const reverseCharacter=new Map(); const reverseLocation=new Map();
 for(const e of episodes){
+  for(const id of e.sources??[])if(!sourceById.has(id))fail.push(`Episode ${e.id}: unknown source ${id}`);
+  for(const id of e.chronologySources??[])if(sourceById.get(id)?.type!=="chronology"||!e.sources?.includes(id))fail.push(`Episode ${e.id}: invalid chronology evidence ${id}`);
+  if(e.chronologyOrder!=null&&(!Number.isInteger(e.chronologyOrder)||!e.chronologySources?.length))fail.push(`Episode ${e.id}: chronology order requires an integer and evidence`);
   if(!sets.series.has(e.seriesId))fail.push(`Episode ${e.id}: missing series ${e.seriesId}`);
   if(!sets.seasons.has(e.seasonId))fail.push(`Episode ${e.id}: missing season ${e.seasonId}`);
   else if(seasonById.get(e.seasonId).seriesId!==e.seriesId)fail.push(`Episode ${e.id}: season ${e.seasonId} belongs to ${seasonById.get(e.seasonId).seriesId}, not ${e.seriesId}`);
@@ -54,6 +58,9 @@ for(const e of episodes){
   for(const id of e.characterIds??[]){if(!reverseCharacter.has(id))reverseCharacter.set(id,new Set());reverseCharacter.get(id).add(e.id)}
   for(const id of e.locationIds??[]){if(!reverseLocation.has(id))reverseLocation.set(id,new Set());reverseLocation.get(id).add(e.id)}
 }
+
+const unsupportedConfirmed=episodes.filter(e=>e.certainty==="confirmed"&&!(e.sources??[]).some(id=>sourceById.get(id)?.type==="chronology"));
+if(unsupportedConfirmed.length)warn.push(`${unsupportedConfirmed.length} confirmed episode placements lack a chronology source and require accuracy review.`);
 
 for(const s of seasons){if(!sets.series.has(s.seriesId))fail.push(`Season ${s.id}: missing series ${s.seriesId}`);if(!Number.isInteger(s.season)||s.season<1)fail.push(`Season ${s.id}: invalid season number`)}
 const metaBySeason=new Map(seasonMeta.map(x=>[x.seasonId,x]));

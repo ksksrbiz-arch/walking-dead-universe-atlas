@@ -4,7 +4,7 @@
     "title": "Timeline TWD — The Ones Who Live chronological timeline",
     "type": "chronology",
     "url": "https://www.timelinetwd.com/the-walking-dead-the-ones-who-live-timeline/?lang=en",
-    "note": "Fan-maintained day-by-day chronology giving specific dates for each S1 episode: Years (Jan 28 2022), Gone (Jan 30 - Feb 1 2022), Bye (Feb 2 2022), What We (Mar 6-8 2022), Become (Mar 9-16 2022), The Last Time (Sep 4 2022)."
+    "note": "Fan-maintained day-by-day chronology giving specific dates for each S1 episode: Years (Jan 28 2022), Gone (Jan 30 - Feb 1 2022), Bye (Feb 2 2022), What We (Mar 6-8 2022), Become (Mar 9-16 2022), The Last Time (Sep 4 2022). Its precise calendar interpretation differs from Walking Dead Wiki; the atlas retains approximate years rather than treating those day-level dates as confirmed."
   },
   {
     "id": "source-timelinetwd-dee",
@@ -138,5 +138,26 @@
     "type": "universe-index",
     "url": "https://walkingdead.fandom.com/wiki/The_Walking_Dead_%28Webisodes%29",
     "note": "Webisode series, episode counts and release windows."
+  },
+  {
+    "id": "source-fandom-episode-order",
+    "title": "Walking Dead Wiki — Chronological Episode Order",
+    "type": "chronology",
+    "url": "https://walkingdead.fandom.com/wiki/Chronological_Episode_Order",
+    "note": "Fan-maintained chronology checked 2026-10-01. Calendar years are inferred, not confirmed on-screen dates. Episode order follows the main forward narrative rather than the earliest flashback."
+  },
+  {
+    "id": "source-fandom-owl-timeline",
+    "title": "Walking Dead Wiki — The Ones Who Live Timeline",
+    "type": "chronology",
+    "url": "https://walkingdead.fandom.com/wiki/The_Ones_Who_Live_Timeline",
+    "note": "Fan-maintained chronology checked 2026-10-01. Calendar years are inferred, not confirmed on-screen dates. Episode order follows the main forward narrative rather than the earliest flashback."
+  },
+  {
+    "id": "source-fandom-dead-timeline",
+    "title": "Walking Dead Wiki — Dead City Timeline",
+    "type": "chronology",
+    "url": "https://walkingdead.fandom.com/wiki/Dead_City_Timeline",
+    "note": "Fan-maintained chronology checked 2026-10-01. Calendar years are inferred, not confirmed on-screen dates. Episode order follows the main forward narrative rather than the earliest flashback."
   }
 ]
