@@ -180,5 +180,40 @@
     "type": "episode-index",
     "url": "https://www.amcplus.com/shows/the-walking-dead-dead-city/episodes--1075269",
     "note": "Official episode listings establish release information, not an in-universe calendar year. Checked 2026-10-01."
+  },
+  {
+    "id": "source-fandom-owl-greenwood",
+    "title": "Walking Dead Wiki — Greenwood",
+    "type": "episode-location-evidence",
+    "url": "https://walkingdead.fandom.com/wiki/Greenwood",
+    "note": "Episode appearance evidence reviewed 2026-10-01; appearances in archive footage or separate scenes do not establish travel to the episode’s main setting."
+  },
+  {
+    "id": "source-fandom-owl-yellowstone",
+    "title": "Walking Dead Wiki — Yellowstone National Park",
+    "type": "episode-location-evidence",
+    "url": "https://walkingdead.fandom.com/wiki/Yellowstone_National_Park",
+    "note": "Episode appearance evidence reviewed 2026-10-01; appearances in archive footage or separate scenes do not establish travel to the episode’s main setting."
+  },
+  {
+    "id": "source-fandom-owl-cascadia",
+    "title": "Walking Dead Wiki — Cascadia Forward Operating Base",
+    "type": "episode-location-evidence",
+    "url": "https://walkingdead.fandom.com/wiki/Cascadia_Forward_Operating_Base",
+    "note": "Episode appearance evidence reviewed 2026-10-01; appearances in archive footage or separate scenes do not establish travel to the episode’s main setting."
+  },
+  {
+    "id": "source-fandom-owl-become",
+    "title": "Walking Dead Wiki — Become episode and cast guide",
+    "type": "episode-location-evidence",
+    "url": "https://walkingdead.fandom.com/wiki/Become",
+    "note": "Episode appearance evidence reviewed 2026-10-01; appearances in archive footage or separate scenes do not establish travel to the episode’s main setting."
+  },
+  {
+    "id": "source-fandom-owl-finale",
+    "title": "Walking Dead Wiki — The Last Time episode and cast guide",
+    "type": "episode-location-evidence",
+    "url": "https://walkingdead.fandom.com/wiki/The_Last_Time",
+    "note": "Episode appearance evidence reviewed 2026-10-01; appearances in archive footage or separate scenes do not establish travel to the episode’s main setting."
   }
 ]

@@ -6,6 +6,7 @@ Journeys are the atlas's "follow a character" mode: routes on the map, story-ord
 - The atlas has **no travel data**. A journey is derived only from: the episodes a character appears in (`getCharacterEpisodeIds`), those episodes' `locationIds`, and in-universe story order (`buildEpisodeWatchOrder`).
 - A leg means "next recorded place". It is drawn as an arc from the **nearest place the character was just recorded at**. Distances are labelled **straight-line km**. Never draw roads, invent waypoints, or add dates.
 - Episode place lists are episode-level. The panel note says so: not every place in an episode necessarily involves this character.
+- Reviewed archive/flashback appearances are excluded from main-story journeys. characterLocationIds overrides episode-level places where evidence separates a character's scenes; an empty override prevents assigning the episode's main setting to that character.
 - Unplaced locations (`(0,0)` / non-finite) are skipped (`isPlaced`). A journey never routes through them.
 
 ## Model — `src/lib/journeys.ts` (pure: no React/DOM/`import.meta`)

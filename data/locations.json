@@ -1228,5 +1228,47 @@
     "lat": 0,
     "lng": 0,
     "certainty": "unknown"
+  },
+  {
+    "id": "greenwood",
+    "name": "Greenwood",
+    "seriesId": "owl",
+    "year": 2022,
+    "type": "safe-zone",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown",
+    "sources": [
+      "source-fandom-owl-greenwood"
+    ],
+    "note": "Fictional high-rise settlement in Wyoming. Exact geographic coordinates are unverified."
+  },
+  {
+    "id": "yellowstone",
+    "name": "Yellowstone National Park",
+    "seriesId": "owl",
+    "year": 2022,
+    "type": "park",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown",
+    "sources": [
+      "source-fandom-owl-yellowstone"
+    ],
+    "note": "The episode establishes the park, not a precise scene coordinate within its large area."
+  },
+  {
+    "id": "cascadia-fob",
+    "name": "Cascadia Forward Operating Base",
+    "seriesId": "owl",
+    "year": 2022,
+    "type": "military-base",
+    "lat": 0,
+    "lng": 0,
+    "certainty": "unknown",
+    "sources": [
+      "source-fandom-owl-cascadia"
+    ],
+    "note": "A former college in the Cascades. Its precise location and state are unverified."
   }
 ]

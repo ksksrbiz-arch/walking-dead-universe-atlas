@@ -390,20 +390,14 @@
       "ftwd-s08-e12"
     ],
     "philadelphia": [
-      "owl-s01-e01",
       "owl-s01-e02",
-      "owl-s01-e03",
-      "owl-s01-e04",
-      "owl-s01-e05",
-      "owl-s01-e06"
+      "owl-s01-e01",
+      "owl-s01-e03"
     ],
     "civic-republic": [
-      "owl-s01-e01",
       "owl-s01-e02",
-      "owl-s01-e03",
-      "owl-s01-e04",
-      "owl-s01-e05",
-      "owl-s01-e06"
+      "owl-s01-e01",
+      "owl-s01-e03"
     ],
     "ohio-roadtrip": [
       "tales-s01-e01"
@@ -884,6 +878,17 @@
     "civic-republic-research-facility": [
       "wb-s02-e05",
       "wb-s02-e10"
+    ],
+    "cascadia-fob": [
+      "owl-s01-e01",
+      "owl-s01-e03",
+      "owl-s01-e06"
+    ],
+    "greenwood": [
+      "owl-s01-e04"
+    ],
+    "yellowstone": [
+      "owl-s01-e05"
     ]
   }
 }

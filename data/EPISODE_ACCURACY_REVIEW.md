@@ -14,6 +14,8 @@ The follow-up pass reviewed all 83 remaining confirmed placements without chrono
 
 Unknown story years no longer acquire a broadcast year when timeline items are built.
 
+The subsequent location/appearance pass corrects The Ones Who Live's blanket Philadelphia links: Greenwood for What We, Yellowstone for Become, and Cascadia for the finale; Cascadia is also recorded in Years and Bye. New locations remain unplaced until precise story geography is substantiated. Character appearances in archive footage or flashbacks no longer create contemporary journey stops. Gabriel's separate scenes and Judith's later reunion do not inherit Yellowstone or Cascadia as their location. Finale appearances for Beale and Thorne and reverse indexes are restored. This is a focused review, not complete cast or geography verification for every episode.
+
 Optional episode fields: chronologyBasis (main-story), chronologyOrder (sourced sequence within matching temporal anchors), chronologySources (chronology source IDs), chronologyCheckedAt, and chronologyNote. Air dates remain independent. Relationship indexes require no regeneration because no cast or location relationships changed.
 
 Sources: https://walkingdead.fandom.com/wiki/Chronological_Episode_Order, https://walkingdead.fandom.com/wiki/The_Ones_Who_Live_Timeline, https://walkingdead.fandom.com/wiki/Dead_City_Timeline.

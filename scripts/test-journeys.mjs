@@ -18,6 +18,14 @@ let failed=0,passed=0;
 const check=(name,ok,detail="")=>{if(ok){passed++;console.log("  ok  "+name)}else{failed++;console.log("  FAIL "+name+(detail?" — "+detail:""))}};
 
 check("dataset is 363 episodes",J.episodeCount===363,String(J.episodeCount));
+check("What We records Greenwood rather than Philadelphia",J.episodeLocations("owl-s01-e04").join(",")==="greenwood");
+check("Become records Yellowstone rather than Philadelphia",J.episodeLocations("owl-s01-e05").join(",")==="yellowstone");
+check("The finale records Cascadia rather than Philadelphia",J.episodeLocations("owl-s01-e06").join(",")==="cascadia-fob");
+check("Jennifer's archive footage does not create a Yellowstone journey",!J.buildJourney("jennifer-mallick").episodeIds.includes("owl-s01-e05"));
+check("Samuel's archive footage does not create a Cascadia journey",!J.buildJourney("samuel-abbott").episodeIds.includes("owl-s01-e06"));
+check("Jadis' finale flashback does not create a later journey stop",!J.buildJourney("jadis-stokes").episodeIds.includes("owl-s01-e06"));
+check("Gabriel's separate scenes do not assign him the main episode location",J.buildJourney("gabriel-stokes",{onlyEpisodes:new Set(["owl-s01-e05"])}).stops.length===0);
+check("Judith's reunion does not place her at the CRM base",J.buildJourney("judith-grimes",{onlyEpisodes:new Set(["owl-s01-e06"])}).stops.length===0);
 
 const daryl=J.buildJourney("daryl-dixon");
 check("Daryl has a multi-stop journey",daryl.stops.length>5,String(daryl.stops.length));

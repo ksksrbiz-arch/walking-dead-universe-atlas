@@ -1862,10 +1862,12 @@
       "ftwd-s01-e04"
     ],
     "pearl-thorne": [
-      "owl-s01-e01"
+      "owl-s01-e01",
+      "owl-s01-e06"
     ],
     "jonathan-beale": [
-      "owl-s01-e01"
+      "owl-s01-e01",
+      "owl-s01-e06"
     ],
     "mason-beale": [
       "wb-s02-e02",
@@ -1972,5 +1974,5 @@
       "daryl-s01-e01"
     ]
   },
-  "updatedAt": "2026-09-22"
+  "updatedAt": "2026-10-01"
 }
