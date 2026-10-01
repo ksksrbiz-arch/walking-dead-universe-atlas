@@ -40,6 +40,8 @@ Rules:
 - One primary (accent) button per screen.
 
 ## Navigation
+The fullscreen `Lightbox` renders through a portal into `document.body`, above the sheet and navigation stacking contexts. While open it makes `#root` inert, cycles keyboard focus through visible viewer controls, preserves focus when a photo's credit link disappears, and restores the opener on dismissal. Keep these guarantees when editing galleries; run `npm run test:lightbox` against the preview server.
+
 `AtlasContext` (`src/lib/atlasContext.ts`) exposes `open*`, `show*OnMap`, year and watch state. Opening an entity pushes the previous `{view, focus, scroll}` onto the back stack; Back restores view, focus and scroll; ✕ clears the stack. Places always open on the map; other entities open in the current tab. A journey is a map mode, not a focus: `startJourney` pushes the stack and shows `JourneyPanel` while no detail is open; ✕ on the panel / Esc / browser Back leave it. The URL mirrors journey and focus state (`?j=`, `?place=`, `?ep=`, `?who=`).
 
 ## Motion

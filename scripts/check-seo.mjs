@@ -5,8 +5,9 @@
 // episode count quoted in the copy matches the dataset. See context/references/seo-and-share-metadata.md.
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const dist = new URL("../dist/", import.meta.url).pathname;
+const dist = fileURLToPath(new URL("../dist/", import.meta.url));
 const failures = [];
 const check = (ok, message) => {
   if (!ok) failures.push(message);
