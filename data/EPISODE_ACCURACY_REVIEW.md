@@ -8,7 +8,9 @@ Walking Dead Wiki's Chronological Episode Order places Fear season eight, the fi
 
 Dead City season two's opening records incorrectly began in 2027; the reviewed season is approximately 2028.
 
-Fan-maintained calendars disagree on exact dates. Reviewed years are labeled approximate. Episode indexes establish titles and broadcast dates, not story chronology. Existing unreviewed confirmed labels still require further source review.
+Fan-maintained calendars disagree on exact dates. Reviewed years are labeled approximate. Episode indexes establish titles and broadcast dates, not story chronology.
+
+The follow-up pass reviewed all 83 remaining confirmed placements without chronology evidence. Seventy-five match the approximate fan chronology and now carry chronology references and approximate certainty. The eight Dead City season-three listings are retained but undated: the available release sources do not establish their story year. No episode remains labeled confirmed without a chronology source; that structural check does not certify all scenes or exact dates.
 
 Unknown story years no longer acquire a broadcast year when timeline items are built.
 

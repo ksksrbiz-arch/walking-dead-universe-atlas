@@ -233,6 +233,10 @@ check("/j/<id> share path opens the journey and normalises the URL",/Daryl Dixon
 await page.goto(url("?place=alexandria"),{waitUntil:"networkidle"}).catch(()=>{});await page.waitForTimeout(1200);
 const placeTitle=await page.evaluate(()=>document.querySelector(".detailBarTitle b")?.textContent||"");
 check("?place= deep link opens that place",placeTitle==="Alexandria",placeTitle);
+await page.goto(url("?ep=dead-s03-e01"),{waitUntil:"networkidle"}).catch(()=>{});await page.waitForTimeout(1200);
+check("undated episode detail keeps its story year unknown",await page.getByText("Main story year ?",{exact:true}).count()===1);
+const headerYear=await page.locator(".yearChip b").textContent();
+check("undated episode does not move the map to its broadcast year",headerYear==="2010",String(headerYear));
 check("no runtime errors",!errors.length,errors.join(" | "));
 
 await browser.close();

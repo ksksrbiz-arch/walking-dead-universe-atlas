@@ -69,7 +69,8 @@
     "airStart": "2018-10-07",
     "airEnd": "2019-03-31",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "twd-s10",
@@ -77,7 +78,8 @@
     "airStart": "2019-10-06",
     "airEnd": "2021-04-04",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "twd-s11",
@@ -85,7 +87,8 @@
     "airStart": "2021-08-15",
     "airEnd": "2022-11-20",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "ftwd-s01",
@@ -149,7 +152,8 @@
     "airStart": "2023-05-14",
     "airEnd": "2023-11-19",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "tales-s01",
@@ -181,7 +185,8 @@
     "airStart": "2024-02-25",
     "airEnd": "2024-03-31",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "daryl-s01",
@@ -189,7 +194,8 @@
     "airStart": "2023-09-10",
     "airEnd": "2023-10-15",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "daryl-s02",
@@ -197,7 +203,8 @@
     "airStart": "2024-09-29",
     "airEnd": "2024-11-03",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "daryl-s03",
@@ -205,7 +212,8 @@
     "airStart": "2025-09-07",
     "airEnd": "2025-10-19",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "dead-s01",
@@ -213,7 +221,8 @@
     "airStart": "2023-06-15",
     "airEnd": "2023-07-20",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "dead-s02",
@@ -221,7 +230,8 @@
     "airStart": "2025-05-04",
     "airEnd": "2025-06-22",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "reviewed approximate main-story years; flashbacks and epilogues explained separately",
+    "chronologyCheckedAt": "2026-10-01"
   },
   {
     "seasonId": "dead-s03",
@@ -229,6 +239,7 @@
     "airStart": "2026-07-26",
     "airEnd": "2026-09-13",
     "episodeRegistry": "index-only",
-    "chronologyStatus": "awaiting detailed episode timeline anchors"
+    "chronologyStatus": "story chronology unverified; release listings retained",
+    "chronologyCheckedAt": "2026-10-01"
   }
 ]

@@ -412,7 +412,7 @@ export default function App(){
   if(journeyActive&&!journeyLocationIds.has(l.id))exitJourney(false);
 
  };
- const episodeYear=(id:string)=>{const e=episodeById.get(id) as any;const y=Number(e?.timelineStart??e?.timelineEnd??e?.airDate?.slice(0,4));return Number.isFinite(y)&&y>0?y:null};
+ const episodeYear=(id:string)=>{const e=episodeById.get(id) as any;if(e?.timelinePrecision==="unknown")return null;const y=Number(e?.timelineStart??e?.timelineEnd);return Number.isFinite(y)&&y>0?y:null};
 
  const openLocation=(id:string)=>{
   const l=locationById.get(id);if(!l)return;

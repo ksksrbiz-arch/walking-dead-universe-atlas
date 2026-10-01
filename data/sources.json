@@ -159,5 +159,26 @@
     "type": "chronology",
     "url": "https://walkingdead.fandom.com/wiki/Dead_City_Timeline",
     "note": "Fan-maintained chronology checked 2026-10-01. Calendar years are inferred, not confirmed on-screen dates. Episode order follows the main forward narrative rather than the earliest flashback."
+  },
+  {
+    "id": "source-fandom-tv-timeline",
+    "title": "Walking Dead Wiki — TV Series Timeline",
+    "type": "chronology",
+    "url": "https://walkingdead.fandom.com/wiki/TV_Series_Timeline",
+    "note": "Fan-maintained calendar reviewed 2026-10-01. Supports the 2014 / 2020 / 2021 season-nine split and approximately 2021 for season ten and the first twelve episodes of season eleven. Exact calendar dates differ between fan interpretations."
+  },
+  {
+    "id": "source-fandom-daryl-timeline",
+    "title": "Walking Dead Wiki — Daryl Series Timeline",
+    "type": "chronology",
+    "url": "https://walkingdead.fandom.com/wiki/Daryl_Series_Timeline",
+    "note": "Fan-maintained main-story chronology beginning approximately 2023; earlier scenes are flashbacks. Reviewed alongside Chronological Episode Order for seasons one through three on 2026-10-01."
+  },
+  {
+    "id": "source-amcplus-dead-episodes",
+    "title": "AMC+ — Dead City episodes",
+    "type": "episode-index",
+    "url": "https://www.amcplus.com/shows/the-walking-dead-dead-city/episodes--1075269",
+    "note": "Official episode listings establish release information, not an in-universe calendar year. Checked 2026-10-01."
   }
 ]

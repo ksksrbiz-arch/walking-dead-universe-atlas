@@ -48,7 +48,9 @@ for(const e of episodes){
   if(!e.title?.trim())fail.push(`Episode ${e.id}: missing title`);
   if(!/^\d{4}-\d{2}-\d{2}$/.test(e.airDate||""))fail.push(`Episode ${e.id}: invalid airDate ${e.airDate}`);
   const start=Number(e.timelineStart??e.timelineEnd), end=Number(e.timelineEnd??e.timelineStart);
-  if(!Number.isFinite(start)||!Number.isFinite(end))fail.push(`Episode ${e.id}: missing timeline bounds`);
+  if(e.timelinePrecision==="unknown"){
+    if(e.timelineStart!=null||e.timelineEnd!=null||e.certainty!=="unknown")fail.push(`Episode ${e.id}: unknown chronology must have null bounds and unknown certainty`);
+  }else if(e.timelineStart==null&&e.timelineEnd==null||!Number.isFinite(start)||!Number.isFinite(end)||start<=0||end<=0)fail.push(`Episode ${e.id}: missing timeline bounds`);
   else if(end<start)fail.push(`Episode ${e.id}: timeline inversion`);
   for(const [field,set,label] of [["characterIds",sets.characters,"character"],["locationIds",sets.locations,"location"],["communityIds",sets.communities,"community"],["factionIds",sets.factions,"faction"],["connectionIds",sets.connections,"connection"]]){
     const list=e[field]??[]; const d=duplicate(list.map(id=>({id})));
@@ -96,7 +98,7 @@ for(const l of locations){if(!sets.series.has(l.seriesId))fail.push(`Location ${
 for(const l of locations){
   const linkedEpisodes=episodes.filter(e=>(e.locationIds??[]).includes(l.id));
   if(linkedEpisodes.length){
-    const earliest=Math.min(...linkedEpisodes.map(e=>Number(e.timelineStart??e.timelineEnd)).filter(Number.isFinite));
+    const earliest=Math.min(...linkedEpisodes.filter(e=>e.timelinePrecision!=="unknown").map(e=>Number(e.timelineStart??e.timelineEnd)).filter(y=>Number.isFinite(y)&&y>0));
     if(Number.isFinite(earliest)&&Number(l.year)>earliest)fail.push(`Location ${l.id}: year ${l.year} is later than earliest linked episode chronology ${earliest}`);
   }
 }

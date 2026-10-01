@@ -23,4 +23,8 @@ Each episode should use:
 
 Chronology is deliberately modeled separately from air date. An episode's release date is not automatically its in-universe date.
 
+Unknown chronology requires null timelineStart/timelineEnd, unknown precision and unknown certainty. Do not reuse a release year or extrapolate a previous season.
+
+Reviewed placements may include chronologyBasis (main-story), chronologySources (IDs of chronology sources also listed in sources), chronologyCheckedAt, chronologyNote (flashbacks/epilogues or evidence limits), and chronologyOrder (a sourced integer sequence resolving matching-year ties). Fan calendar interpretations use approximate certainty. Release indexes alone do not establish story chronology.
+
 For anthology episodes, the event layer will allow each episode to be positioned independently rather than forcing the entire anthology into one chronological block.
