@@ -1,4 +1,4 @@
-# The Walking Dead Universe Atlas
+[![Architecture diagram of ksksrbiz-arch/walking-dead-universe-atlas](https://gitdiagram.com/ksksrbiz-arch/walking-dead-universe-atlas/diagram.png)](https://gitdiagram.com/ksksrbiz-arch/walking-dead-universe-atlas?utm_source=readme&utm_medium=picture)# The Walking Dead Universe Atlas
 
 A mobile-first, data-driven atlas for the television **Walking Dead Universe (TWDU)**.
 
