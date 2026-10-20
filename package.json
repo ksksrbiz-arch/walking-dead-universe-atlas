@@ -82,7 +82,7 @@
     "esbuild": "^0.28.2",
     "playwright": "^1.63.0",
     "typescript": "^7.0.2",
-    "vite": "^8.3.0"
+    "vite": "^8.3.4"
   },
   "overrides": {
     "sharp": "0.35.4"
