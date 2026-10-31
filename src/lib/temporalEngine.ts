@@ -20,7 +20,9 @@ export function normalizeTemporalAnchor(record:any):TemporalAnchor {
  // "we don't know" into false precision is exactly what AGENTS.md's data
  // policy forbids.
  if(precision==="unknown")return {start:null,end:null,precision:"unknown",label:"Unanchored",valid:true};
- const date=record?.date??record?.airDate;
+ // Broadcast dates are not in-universe evidence. Only an explicit story date
+ // can refine a timeline anchor to day precision.
+ const date=record?.date;
  if(date&&isValidIsoDate(date)){
   const t=Date.parse(date+"T00:00:00.000Z");
   const d=new Date(t),year=d.getUTCFullYear(),daysInYear=(Date.UTC(year+1,0,1)-Date.UTC(year,0,1))/DAY;

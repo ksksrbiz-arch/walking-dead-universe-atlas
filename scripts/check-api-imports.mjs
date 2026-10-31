@@ -22,10 +22,10 @@
 // imports every api/*.ts file with plain Node, the same way Vercel runs them.
 // Run: npm run check:api-imports
 import {readFile, readdir} from "node:fs/promises";
-import {join, relative, resolve} from "node:path";
-import {pathToFileURL} from "node:url";
+import {join, relative} from "node:path";
+import {fileURLToPath, pathToFileURL} from "node:url";
 
-const ROOT = resolve(new URL("../", import.meta.url).pathname);
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const API_DIR = join(ROOT, "api");
 
 async function* walk(dir) {

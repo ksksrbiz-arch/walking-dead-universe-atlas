@@ -136,9 +136,9 @@ async function main() {
   const candidates = await readJson("fandom-atlas-candidates.json");
   const pages = await readJson("fandom-page-enrichment.json");
   const canonical = {
-    characters: await readJson(new URL("../characters.json", DIR).pathname),
-    locations: await readJson(new URL("../locations.json", DIR).pathname),
-    episodes: await readJson(new URL("../episodes.json", DIR).pathname)
+    characters: await readJson(new URL("../characters.json", DIR)),
+    locations: await readJson(new URL("../locations.json", DIR)),
+    episodes: await readJson(new URL("../episodes.json", DIR))
   };
 
   const entities = ["characters", "locations", "episodes"];
