@@ -7,4 +7,6 @@ dist/
 .env.*
 !.env.example
 vite.config.local.mjs
+.dev.vars
+workers/atlas-ai/dist/
 
