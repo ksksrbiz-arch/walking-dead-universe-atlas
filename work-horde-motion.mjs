@@ -1,0 +1,11 @@
+import {chromium} from 'playwright';
+const browser=await chromium.launch();
+const page=await browser.newPage({viewport:{width:390,height:844}});
+await page.route(/supabase|wikia|amcn|_vercel|vercel-insights/,r=>r.abort());
+await page.goto('http://localhost:4173/');
+await page.getByRole('button',{name:'Map layers',exact:true}).click();
+await page.getByRole('button',{name:/Walker herds/}).click();
+await page.getByRole('button',{name:'Close herd events'}).click();
+await page.screenshot({path:'work-horde-motion.png'});
+console.log(await page.locator('[data-horde-id]').boundingBox());
+await browser.close();
